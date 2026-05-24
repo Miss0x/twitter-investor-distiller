@@ -1,0 +1,39 @@
+# 数据采集
+playwright==1.40.0
+
+requests==2.31.0
+beautifulsoup4==4.12.2
+APScheduler==3.10.4
+
+# 数据存储
+sqlalchemy==2.0.23
+alembic==1.13.1
+
+# 向量化与检索
+openai==1.6.1
+chromadb==0.4.22
+langchain==0.1.0
+langchain-openai==0.0.2
+sentence-transformers==2.2.2
+
+# AI 对话
+langchain-community==0.0.10
+
+# 接口层
+python-telegram-bot==20.7
+fastapi==0.109.0
+uvicorn==0.25.0
+streamlit==1.29.0
+gradio==4.13.0
+
+# 工具
+python-dotenv==1.0.0
+pyyaml==6.0.1
+loguru==0.7.2
+pydantic==2.5.3
+httpx==0.26.0
+
+# 开发工具
+pytest==7.4.3
+black==23.12.1
+flake8==7.0.0

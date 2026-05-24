@@ -1,0 +1,851 @@
+[
+  {
+    "topic": "操作记录",
+    "mentioned_stocks": [
+      "TSLA"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "中性",
+    "confidence": "medium",
+    "reasoning_chain": "文本表述为“今天没有动”，说明当日未实际操作；但“设了5%的特斯拉在330”显示已有对TSLA的限价/预设买入计划，偏向等待回调后的布局而非立即表达强烈看多或看空。",
+    "action_hint": "观望",
+    "key_quote": "今天没有动，但设了5%的特斯拉在330",
+    "image_analysis": null,
+    "tweet_id": 581,
+    "twitter_id": "1924558271546839236",
+    "text": "恩，今天没有动，但设了5%的特斯拉在330",
+    "created_at": "2025-05-19T20:10:23"
+  },
+  {
+    "topic": "操作记录",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "无明确方向",
+    "confidence": "low",
+    "reasoning_chain": "推文仅表示某个设置或操作是“根据今天低位设的”，缺乏具体标的、市场观点和完整上下文，更像是在描述当日交易参数或止损/挂单位置的设定，属于操作层面的简短记录，无法明确判断其看多或看空倾向。",
+    "action_hint": "无",
+    "key_quote": "就是根据今天低位设的",
+    "image_analysis": null,
+    "tweet_id": 579,
+    "twitter_id": "1924563042714406932",
+    "text": "就是根据今天低位设的",
+    "created_at": "2025-05-19T20:29:20"
+  },
+  {
+    "topic": "投资策略",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "中性",
+    "confidence": "high",
+    "reasoning_chain": "推文核心并非分析具体个股、行业或加密资产，而是转述一位市场观察者对顶部和底部形成机制的判断。内容强调“见顶是过程，见底是事件”这一交易认知，属于市场节奏与拐点识别的方法论总结。虽提到此前对下跌、反弹和后续回调的预测，但当前推文没有给出明确的当下方向性判断，也没有直接提出交易指令，因此整体归类为投资策略，立场为中性。",
+    "action_hint": "观望",
+    "key_quote": "见顶是过程，见底是事件，终身受用的。",
+    "image_analysis": null,
+    "tweet_id": 578,
+    "twitter_id": "1924564218549780731",
+    "text": "谁还记得前段时间老外社区里的神，可颂哥 \n@jam_croissant\n ，4月份下跌前他给了下跌的点位，然后给了市场会反弹回去的路径，再给了夏天后可能还有回调的预测。很多人可能比较关注他预测的点位，我更认同的是他的一句话：见顶是过程，见底是事件，终身受用的。",
+    "created_at": "2025-05-19T20:34:01"
+  },
+  {
+    "topic": "招聘/人脉",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [
+      "稳定币"
+    ],
+    "mentioned_sectors": [],
+    "stance": "无明确方向",
+    "confidence": "high",
+    "reasoning_chain": "推文内容是在寻找对稳定币和币圈赚钱模式非常了解的人，并邀请连线交流，核心是寻求行业人脉与专业交流机会，而非表达对某个标的的买卖观点或市场判断。",
+    "action_hint": "无",
+    "key_quote": "有没有币圈非常了解稳定币的大佬，和未来赚钱的模式，邀请做个连线，请联系我，谢谢",
+    "image_analysis": null,
+    "tweet_id": 577,
+    "twitter_id": "1924564850639876409",
+    "text": "有没有币圈非常了解稳定币的大佬，和未来赚钱的模式，邀请做个连线，请联系我，谢谢",
+    "created_at": "2025-05-19T20:36:31"
+  },
+  {
+    "topic": "宏观分析",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "中性",
+    "confidence": "medium",
+    "reasoning_chain": "推文核心在于讨论市场情绪与价格、事件之间的关系，并引用中美政策风险消息作为例子；作者没有明确给出买卖方向，只是在提醒不要被短期价格波动和事件叙事牵着走，因此更偏宏观情绪观察而非明确交易观点。",
+    "action_hint": "观望",
+    "key_quote": "市场里面很多人的情绪是被价格带着走，而非事件，事件只是用来说服自己跟着价格走",
+    "image_analysis": null,
+    "tweet_id": 576,
+    "twitter_id": "1924647604261912901",
+    "text": "如果下跌的时候这类消息令我们恐惧，为何现在就忽略了？\n说明市场里面很多人的情绪是被价格带着走，而非事件，事件只是用来说服自己跟着价格走",
+    "created_at": "2025-05-20T02:05:21"
+  },
+  {
+    "topic": "加密货币",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [
+      "USDC",
+      "USDT"
+    ],
+    "mentioned_sectors": [
+      "稳定币",
+      "加密货币",
+      "金融科技"
+    ],
+    "stance": "看多",
+    "confidence": "high",
+    "reasoning_chain": "推文核心观点是《GENIUS法案》已通过，说明美国稳定币监管框架正逐步明确；作者进一步基于对Circle上市文件的研究，认为合规稳定币必须以美元和美债作为担保，因此更看好USDC这类符合监管、能与传统金融体系融合并获得政府接受的稳定币模式；同时明确否定USDT依赖投资回报的长期可持续性，认为其发展空间和监管适配性较弱。因此整体上对USDC及合规稳定币赛道偏多，对USDT相对偏空。",
+    "action_hint": "观望",
+    "key_quote": "usdc才是正轨，真正可以和传统金融结合，政府接受，潜在市场更大",
+    "image_analysis": "图片为一篇相关新闻截图，标题为“参议院民主党分裂，稳定币之争进入白热化阶段”，配图是一位女性政客手持麦克风发言，图注提到参议员Kirsten Gillibrand出席华盛顿特区区块链峰会，强调美国参议院围绕稳定币法案的政治博弈与监管进展。",
+    "tweet_id": 575,
+    "twitter_id": "1924652160085586296",
+    "text": "猫叔总结的很好，这个法案已经通过了。\n研究circle的上市文件快2周了，稳定币必须用美金和美债做担保，usdt这种走不远，而且目光短浅，靠投资回报不是长期的模式。usdc才是正轨，真正可以和传统金融结合，政府接受，潜在市场更大",
+    "created_at": "2025-05-20T02:23:27"
+  },
+  {
+    "topic": "投资策略",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "中性",
+    "confidence": "medium",
+    "reasoning_chain": "推文核心在讨论交易纪律与仓位管理，而非明确看多或看空某个标的。作者认为如果第一仓开在1900而价格走到2700，说明入场位置判断有误，按其交易逻辑应当止损；但同时也承认不同交易者思路不同，因此整体是对交易方法的反思与评价，不构成明确方向判断。",
+    "action_hint": "观望",
+    "key_quote": "从交易角度看，我觉得如果第一仓开在1900，价格却到了2700，说明第一仓的位置是错的，应该要止损",
+    "image_analysis": null,
+    "tweet_id": 574,
+    "twitter_id": "1924653994850328871",
+    "text": "虽然你骂我是，但我还是希望你是对的\n不过有一说一，从交易角度看，我觉得如果第一仓开在1900，价格却到了2700，说明第一仓的位置是错的，应该要止损，这点是我不理解的，不过可每个人的思路不同吧",
+    "created_at": "2025-05-20T02:30:45"
+  },
+  {
+    "topic": "宏观分析",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看空",
+    "confidence": "medium",
+    "reasoning_chain": "推文明确主张“除了美金以外不应持有任何资产”，本质上是对非美元资产（如股票、债券、商品、加密货币、非美货币等）统一持谨慎或悲观态度，同时看好美元现金的相对安全性与流动性，属于典型的避险/美元偏多的宏观表达。但未给出具体宏观数据、时间维度或资产类别细分，因此置信度中等。",
+    "action_hint": "卖出",
+    "key_quote": "不应该拥有除了美金以外的任何资产",
+    "image_analysis": null,
+    "tweet_id": 573,
+    "twitter_id": "1924654183984054729",
+    "text": "不应该拥有除了美金以外的任何资产",
+    "created_at": "2025-05-20T02:31:30"
+  },
+  {
+    "topic": "投资策略",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "中性",
+    "confidence": "low",
+    "reasoning_chain": "文本仅提到“数据、参与度、恐慌贪婪指数”，属于对市场情绪与参与度的观察，没有明确指向具体标的或明确买卖判断，因此判断为中性且偏信息分享/策略观察。",
+    "action_hint": "观望",
+    "key_quote": "看数据，参与度，恐慌贪婪指数",
+    "image_analysis": null,
+    "tweet_id": 572,
+    "twitter_id": "1924656369120006303",
+    "text": "看数据，参与度，恐慌贪婪指数",
+    "created_at": "2025-05-20T02:40:11"
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "CIRCLE",
+      "贝莱德"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "稳定币",
+      "金融科技"
+    ],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "推文核心在于解读CIRCLE上市报告中的合作条款：贝莱德承诺未来4年不发行自有稳定币，被解读为对CIRCLE稳定币业务的背书与排他性支持。这会强化市场对CIRCLE竞争壁垒和合作价值的预期，因此偏利多CIRCLE相关标的；但属于对文件内容的主观解读，实际影响仍需结合合同细节与业务落地验证。",
+    "action_hint": "买入",
+    "key_quote": "贝莱德为CIRCLE背书，且是贝莱德的唯一认证",
+    "image_analysis": null,
+    "tweet_id": 570,
+    "twitter_id": "1924677284910244177",
+    "text": "在CIRCLE的上市报告里，贝莱德和CIRCLE签约说了未来不会发布自己的稳定币！合约4年\n这已经说明了一切了，贝莱德为CIRCLE背书，且是贝莱德的唯一认证",
+    "created_at": "2025-05-20T04:03:18"
+  },
+  {
+    "topic": "行业研判",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "金融",
+      "稳定币"
+    ],
+    "stance": "中性",
+    "confidence": "medium",
+    "reasoning_chain": "推文讨论贝莱德为何选择与Circle合作而非自己发起，核心是稳定币/加密金融领域的商业模式与信任问题；内容偏行业与竞争格局分析，没有明确给出对某只标的或市场的多空判断，因此归为中性。",
+    "action_hint": "观望",
+    "key_quote": "那为啥贝莱德不发而选择和CIRCLE合作呢？我觉得应该有先行者优势和这些传统的大机构发，反而有信任问题",
+    "image_analysis": null,
+    "tweet_id": 569,
+    "twitter_id": "1924678511601607125",
+    "text": "那为啥贝莱德不发而选择和CIRCLE合作呢？\n我觉得应该有先行者优势和这些传统的大机构发，反而有信任问题，你怎么看？",
+    "created_at": "2025-05-20T04:08:10"
+  },
+  {
+    "topic": "加密货币",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [
+      "稳定币"
+    ],
+    "mentioned_sectors": [
+      "加密货币",
+      "传统金融"
+    ],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "推文认为稳定币的未来在于走向更广泛的主流应用，并明确指出其可能对传统金融形成威胁；同时强调“出圈”的前提是合规，说明作者对稳定币长期发展持积极态度，但短期实现路径取决于监管进展，因此整体偏多但带有条件约束。",
+    "action_hint": "持有",
+    "key_quote": "我觉得稳定币的未来在出圈，威胁传统金融，要出圈就得先合规",
+    "image_analysis": null,
+    "tweet_id": 568,
+    "twitter_id": "1924678830003724328",
+    "text": "我觉得稳定币的未来在出圈，威胁传统金融，要出圈就得先合规",
+    "created_at": "2025-05-20T04:09:26"
+  },
+  {
+    "topic": "投资策略",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "观望",
+    "confidence": "low",
+    "reasoning_chain": "推文是在询问一种“无论什么情况下都买入”策略在历史上的上涨概率，属于对交易策略有效性的探讨，而非明确表达对某个标的、行业或市场方向的判断。未提及具体资产，也没有给出结论性观点，因此整体倾向于策略研究与观望。",
+    "action_hint": "观望",
+    "key_quote": "有没有统计过像这种任何情况下都会买时历史上涨的概率",
+    "image_analysis": null,
+    "tweet_id": 567,
+    "twitter_id": "1924679965557006559",
+    "text": "有没有统计过像这种任何情况下都会买时历史上涨的概率",
+    "created_at": "2025-05-20T04:13:57"
+  },
+  {
+    "topic": "信息分享",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [
+      "稳定币"
+    ],
+    "mentioned_sectors": [
+      "加密货币"
+    ],
+    "stance": "中性",
+    "confidence": "high",
+    "reasoning_chain": "推文内容是邀请多位人士在周五晚间就稳定币的现状和未来进行交流，并面向传统金融做科普，属于主题讨论/信息分享，不包含明确的买卖观点或对市场方向的判断。",
+    "action_hint": "无",
+    "key_quote": "聊聊稳定币的现状和未来，给传统金融的科普科普",
+    "image_analysis": null,
+    "tweet_id": 565,
+    "twitter_id": "1924873028585832802",
+    "text": "@phyrexni\n \n@taowang1\n \n@0xtodd\n \n@cmdefi\n \n@qinbafrank\n \n@TiezhuCrypto\n \n各位大佬，周五23日，北京时间晚上8-10点有空吗？\n聊聊稳定币的现状和未来，给传统金融的科普科普",
+    "created_at": "2025-05-20T17:01:07"
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "NVDA",
+      "AMD"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "半导体",
+      "AI PC"
+    ],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "推文通过反问指出，英伟达进入AI PC并不一定削弱AMD，反而被解读为对AMD既有路线的验证；同时认为头部厂商入场会扩大整体市场蛋糕，类似AMD当年追赶GPU过程中行业需求被进一步做大。因此整体倾向于认为AMD所处方向受益于行业扩容，偏正面解读。",
+    "action_hint": "持有",
+    "key_quote": "不是恰恰证明amd的路线正确，整块蛋糕会更大吗",
+    "image_analysis": null,
+    "tweet_id": 562,
+    "twitter_id": "1925367414566330547",
+    "text": "为何英伟达进入ai pc会对amd造成威胁？不是恰恰证明amd的路线正确，整块蛋糕会更大吗，就像AMD追赶gpu",
+    "created_at": "2025-05-22T01:45:37"
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "METAPLANET"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "比特币概念股"
+    ],
+    "stance": "看空",
+    "confidence": "high",
+    "reasoning_chain": "推文直接否定METAPLANET后续表现，认为其最终会回吐涨幅、回到起点；并用“聪明资金抄那么小的标的吗”质疑大资金参与逻辑，核心观点是该标的体量小、缺乏持续承接，偏向认为上涨不可持续，因此判断为明显看空。",
+    "action_hint": "卖出",
+    "key_quote": "METAPLANET只有一个结果，哪里来哪里去，聪明资金抄那么小的标的吗？",
+    "image_analysis": null,
+    "tweet_id": 558,
+    "twitter_id": "1925381099754000501",
+    "text": "METAPLANET只有一个结果，哪里来哪里去，聪明资金抄那么小的标的吗？",
+    "created_at": "2025-05-22T02:40:00"
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "MSTR",
+      "IBIT"
+    ],
+    "mentioned_crypto": [
+      "BTC"
+    ],
+    "mentioned_sectors": [
+      "比特币概念股",
+      "加密货币ETF"
+    ],
+    "stance": "看空",
+    "confidence": "high",
+    "reasoning_chain": "推文核心是在反驳此前对MSTR的看多逻辑。作者指出，相关观点在随后两个月已被市场证明不正确，且MSTR之后出现约50%的较大回撤，说明其风险和波动显著高于BTC本身。作者进一步强调“BTC上涨”并不能自然推导出“应买入MSTR”，如果只是为了表达对BTC的看多，更直接的替代工具是IBIT而非MSTR。因此整体态度是偏空MSTR、偏质疑其作为BTC替代标的的投资价值。",
+    "action_hint": "观望",
+    "key_quote": "BTC涨对MSTR不是坏消息和用来看多BTC没关系啊，还是说因为BTC可以涨，所以买MSTR也不错？那为何不买IBIT呢",
+    "image_analysis": null,
+    "tweet_id": 557,
+    "twitter_id": "1925381890405532028",
+    "text": "11月份倪大就持有形同的观点，起码之后两个月证明并不正确，而且之后几个月MSTR回调幅度达到50%\nBTC涨对MSTR不是坏消息和用来看多BTC没关系啊，还是说因为BTC可以涨，所以买MSTR也不错？那为何不买IBIT呢",
+    "created_at": "2025-05-22T02:43:09"
+  },
+  {
+    "topic": "操作记录",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "中性",
+    "confidence": "low",
+    "reasoning_chain": "推文仅提到“复仇交易”，属于交易心态/操作方式的泛讨论，没有明确标的、方向或市场判断，因此无法归入个股、行业或宏观观点；语气偏调侃，整体不构成明确看多或看空信号。",
+    "action_hint": "观望",
+    "key_quote": "复仇交易，可以，哈哈",
+    "image_analysis": null,
+    "tweet_id": 556,
+    "twitter_id": "1925395429417468327",
+    "text": "复仇交易，可以，哈哈",
+    "created_at": "2025-05-22T03:36:57"
+  },
+  {
+    "topic": "信息分享",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "中性",
+    "confidence": "high",
+    "reasoning_chain": "推文内容仅为活动/直播邀请，强调时间和阵容，并无对具体资产、行业或市场方向的分析与判断，因此归类为信息分享；由于没有任何投资观点，方向判断为中性。",
+    "action_hint": "观望",
+    "key_quote": "阵容很强，记得来听，一起学习",
+    "image_analysis": null,
+    "tweet_id": 554,
+    "twitter_id": "1925402652982018387",
+    "text": "美东周五早上8点，中国晚上8点，阵容很强，记得来听，一起学习",
+    "created_at": "2025-05-22T04:05:39"
+  },
+  {
+    "topic": "招聘/人脉",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "无明确方向",
+    "confidence": "high",
+    "reasoning_chain": "内容是在询问邮件和是否在群里，并给出邮箱联系方式，属于沟通/联络信息，不涉及任何标的、行业、宏观判断或交易观点。",
+    "action_hint": "无",
+    "key_quote": "我没看到你邮件啊，在群了吗？INVESTMENTTALKJUN@GMAIL.COM",
+    "image_analysis": null,
+    "tweet_id": 553,
+    "twitter_id": "1925407195862032882",
+    "text": "我没看到你邮件啊，在群了吗？INVESTMENTTALKJUN@GMAIL.COM",
+    "created_at": "2025-05-22T04:23:42"
+  },
+  {
+    "topic": "宏观分析",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "中性",
+    "confidence": "medium",
+    "reasoning_chain": "文本讨论的是美联储政策、长债收益率与美股之间的关系，核心观点是否定“长债上涨必然利好股市”的简单逻辑。作者认为这轮交易逻辑若并非基于经济增速乐观，则可能反映对财政赤字的担忧，因此对美股未必构成明确利好，整体偏谨慎而非明确看多或看空。",
+    "action_hint": "观望",
+    "key_quote": "我可能不这么看。",
+    "image_analysis": null,
+    "tweet_id": 551,
+    "twitter_id": "1925426348383756703",
+    "text": "简单来说你认为美联储如果不动，长债上涨会利好股市吗？我可能不这么看。\n另外现在和23年还不一样，这轮背后的交易逻辑并看不到是市场对于经济增速的乐观，如果是，那利好股市。如果不是对经济乐观，那就是对财政赤字悲观，这个角度很难说对美股一定是利好。",
+    "created_at": "2025-05-22T05:39:48"
+  },
+  {
+    "topic": "加密货币",
+    "mentioned_stocks": [
+      "IBIT",
+      "MARA"
+    ],
+    "mentioned_crypto": [
+      "BTC"
+    ],
+    "mentioned_sectors": [
+      "加密货币ETF",
+      "比特币矿业"
+    ],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "推文核心观点是相较于矿股等其他加密相关标的，IBIT更具确定性，认为多数其他标的投资者甚至处于亏损状态，而持有IBIT“只要有耐心就能赚钱”。这体现出对比特币现货ETF路径的偏好，以及对矿股表现疲弱的相对否定。由于表述偏经验判断、缺少数据支撑，置信度评为中等。",
+    "action_hint": "买入",
+    "key_quote": "ibit是只要有耐心就能赚钱",
+    "image_analysis": null,
+    "tweet_id": 550,
+    "twitter_id": "1925432299471929446",
+    "text": "所以ibit才是正道，其他的标的都是凭本事，甚至大多人是亏钱的。ibit是只要有耐心就能赚钱",
+    "created_at": "2025-05-22T06:03:27"
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "PLTR",
+      "TSLA",
+      "COST",
+      "NVDA",
+      "GOOG"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "人工智能",
+      "汽车",
+      "消费零售",
+      "半导体",
+      "互联网平台"
+    ],
+    "stance": "观望",
+    "confidence": "medium",
+    "reasoning_chain": "推文核心是在比较五只高关注度个股的估值与未来10年持有回报，并未给出作者自己的明确选择。引用内容突出P/E差异，隐含讨论估值高低与长期收益的关系，但主推文仅以“你们选啥”发问，属于开放式征询观点，不构成明确看多或看空表态。因此更适合归类为个股比较型讨论，方向上以观望为主。",
+    "action_hint": "观望",
+    "key_quote": "Choose one and hold for 10 years",
+    "image_analysis": null,
+    "tweet_id": 549,
+    "twitter_id": "1925434043551686845",
+    "text": "好问题，你们选啥？",
+    "created_at": "2025-05-22T06:10:23"
+  },
+  {
+    "topic": "投资策略",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看空",
+    "confidence": "high",
+    "reasoning_chain": "文本明确表达“准备找机会做空”，属于典型看空表述；未提及具体标的，因此无法归属到个股或行业层面。",
+    "action_hint": "卖出",
+    "key_quote": "关注了，准备找机会做空",
+    "image_analysis": null,
+    "tweet_id": 548,
+    "twitter_id": "1925434549791584282",
+    "text": "关注了，准备找机会做空",
+    "created_at": "2025-05-22T06:12:24"
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "MSTX",
+      "MSTR"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看空",
+    "confidence": "medium",
+    "reasoning_chain": "推文指出MSTX是2倍ETF，存在杠杆磨损，并判断其“大概率永远不会破新高”；同时补充MSTR自身也尚未突破新高，整体表达对该标的/相关交易工具后市偏悲观。",
+    "action_hint": "卖出",
+    "key_quote": "MSTX是2倍ETF，有磨损，大概率永远不会破新高。另外MSTR都没破新高呢",
+    "image_analysis": null,
+    "tweet_id": 547,
+    "twitter_id": "1925461712238440859",
+    "text": "MSTX是2倍ETF，有磨损，大概率永远不会破新高\n另外MSTR都没破新高呢",
+    "created_at": "2025-05-22T08:00:20"
+  },
+  {
+    "topic": "投资策略",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "无明确方向",
+    "confidence": "low",
+    "reasoning_chain": "文本未指明具体标的，只有对“10年”“1000”的模糊评论，带有调侃语气，无法判断明确看多或看空，只能归为泛化的投资态度表达。",
+    "action_hint": "观望",
+    "key_quote": "10年呢，1000悲观了，哈哈哈",
+    "image_analysis": null,
+    "tweet_id": 546,
+    "twitter_id": "1925461962739052756",
+    "text": "10年呢，1000悲观了，哈哈哈",
+    "created_at": "2025-05-22T08:01:19"
+  },
+  {
+    "topic": "宏观分析",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "中性",
+    "confidence": "medium",
+    "reasoning_chain": "内容围绕关税政策对市场的影响展开，核心判断是：关于关税的负面消息可能会继续增多，但市场此前对关税的乐观预期已经较充分定价，因此短期不构成明确单边交易信号。同时提到市场正在寻找新的主线，说明作者更偏向观察宏观叙事切换，而非明确看多或看空。",
+    "action_hint": "观望",
+    "key_quote": "市场正在寻找下一个故事线",
+    "image_analysis": null,
+    "tweet_id": 541,
+    "twitter_id": "1925939107823227281",
+    "text": "前天的视频：关于关税这一块接下去的影响我个人认为很多的消息可能更加偏向于负面或者说市场对于关税的乐观已经非常充分的定价。\n市场正在寻找下一个故事线",
+    "created_at": "2025-05-23T15:37:20"
+  },
+  {
+    "topic": "加密货币",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [
+      "BTC"
+    ],
+    "mentioned_sectors": [],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "“大饼”是中文加密圈对比特币（BTC）的常见昵称；“我的信仰只有李哥和大饼”表达了对相关人物及比特币的强烈认同与长期看好态度，虽未给出具体交易计划，但情绪明显偏多。",
+    "action_hint": "持有",
+    "key_quote": "我的信仰只有李哥和大饼",
+    "image_analysis": null,
+    "tweet_id": 539,
+    "twitter_id": "1926127937780068667",
+    "text": "我的信仰只有李哥和大饼",
+    "created_at": "2025-05-24T04:07:40"
+  },
+  {
+    "topic": "宏观分析",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "无明确方向",
+    "confidence": "low",
+    "reasoning_chain": "推文仅表达作者对TRUFLATION这一指标/数据源的个人偏好较低，没有给出对市场、资产或方向性的明确判断，也未包含具体交易观点，因此归类为宏观相关的信息表达，但整体缺乏可执行投资信号。",
+    "action_hint": "无",
+    "key_quote": "你太误会我了，我最不喜欢看的就是TRUFLATION",
+    "image_analysis": null,
+    "tweet_id": 537,
+    "twitter_id": "1926479574440747430",
+    "text": "你太误会我了，我最不喜欢看的就是TRUFLATION",
+    "created_at": "2025-05-25T03:24:57"
+  },
+  {
+    "topic": "加密货币",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [
+      "BTC"
+    ],
+    "mentioned_sectors": [],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "推文提出中国可在不放开链上自由流通的前提下，开放类似‘纸比特币’的投资渠道，核心含义是为加密资产引入受监管的投资入口，并认为这与外汇管制并不矛盾。该表述整体偏向支持加密资产作为可投资标的，利好比特币等主流加密货币的合规化投资预期，但未涉及明确时点、政策依据或具体交易建议，因此置信度为中等。",
+    "action_hint": "观望",
+    "key_quote": "中国开放币圈可以仅限投资渠道，类似纸比特币，和外汇管制不冲突",
+    "image_analysis": null,
+    "tweet_id": 536,
+    "twitter_id": "1926812898560544840",
+    "text": "中国开放币圈可以仅限投资渠道，类似纸比特币，和外汇管制不冲突",
+    "created_at": "2025-05-26T01:29:28"
+  },
+  {
+    "topic": "加密货币",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "中性",
+    "confidence": "high",
+    "reasoning_chain": "推文核心是“Not your key, not your coin”，强调加密资产自托管/私钥控制的重要性，属于加密领域的观点分享，不涉及具体标的涨跌判断，也没有明确买卖指引。",
+    "action_hint": "无",
+    "key_quote": "Not your key, not your coin",
+    "image_analysis": null,
+    "tweet_id": 535,
+    "twitter_id": "1926824838678622584",
+    "text": "Not your key, not your coin",
+    "created_at": "2025-05-26T02:16:54"
+  },
+  {
+    "topic": "招聘/人脉",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "金融",
+      "加密货币",
+      "宏观"
+    ],
+    "stance": "无明确方向",
+    "confidence": "high",
+    "reasoning_chain": "内容核心是转发求职信息，介绍候选人的教育背景、实习经历、求职方向与签证情况，目的是寻求人脉对接与岗位机会，不包含对市场、行业、个股或币种的价格判断，也没有交易建议。",
+    "action_hint": "无",
+    "key_quote": "目前在找宏观/crypto二级投研的机会，希望能长期实习留用，有香港工作签证。",
+    "image_analysis": null,
+    "tweet_id": 534,
+    "twitter_id": "1926826262250602681",
+    "text": "“帮一个小兄弟转发找工作的需求：本硕就读于某top5学校金融专业，实习经历包括外资投行、私募并购基金与家办的crypto投研，目前在找宏观/crypto二级投研的机会，希望能长期实习留用，有香港工作签证。如果有朋友有需求的可以DM我看简历”",
+    "created_at": "2025-05-26T02:22:34"
+  },
+  {
+    "topic": "宏观分析",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "中性",
+    "confidence": "high",
+    "reasoning_chain": "推文是在询问当前市场最大的担忧是什么，并回顾此前对PE下跌、EPS下跌或熊市开启的担心已被市场走势“打脸”。内容属于对整体市场风险与后续关注点的讨论，没有明确表达看多或看空观点。",
+    "action_hint": "观望",
+    "key_quote": "那么接下去我们需要注意什么？",
+    "image_analysis": null,
+    "tweet_id": 533,
+    "twitter_id": "1927227964782973370",
+    "text": "Hello, 你们现在对市场最大的担心是什么？\n一个月前担心PE下跌接下来还有EPS下跌或者什么熊市开启的思路暂时都被打脸，没人记得了，那么接下去我们需要注意什么？",
+    "created_at": "2025-05-27T04:58:47"
+  },
+  {
+    "topic": "宏观分析",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "消费者信心",
+      "宏观经济"
+    ],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "推文围绕美国消费者信心指数展开，指出4月数据接近疫情低点，反映当时市场对关税和美股的恐慌；而5月数据出现大幅反弹，说明居民预期和风险偏好明显修复。消费者信心改善通常被视为经济活动和市场情绪回暖的先行信号，因此整体偏向宏观情绪改善的利多解读。但推文未直接给出资产配置或交易标的，结论更多是情绪与周期层面的偏多判断。",
+    "action_hint": "观望",
+    "key_quote": "5月份大幅反弹，4月份公布的数据接近疫情低点，匹配了当时大家对于关税和美股的恐慌",
+    "image_analysis": "图片为Conference Board消费者信心指数月线图，时间跨度约2019年至2025年。曲线显示2020年疫情期间显著下探，随后震荡恢复；2025年初再次快速回落至约90附近，最新值反弹至约98，印证推文所述5月消费者信心大幅反弹。",
+    "tweet_id": 529,
+    "twitter_id": "1927391669424373784",
+    "text": "今天的一组消费者信心指数，一个月公布一次，5月份大幅反弹，4月份公布的数据接近疫情低点，匹配了当时大家对于关税和美股的恐慌",
+    "created_at": "2025-05-27T15:49:17"
+  },
+  {
+    "topic": "宏观分析",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "观望",
+    "confidence": "medium",
+    "reasoning_chain": "推文仅表达“市场沉闷”，属于对整体市场情绪的描述，没有提及具体标的、行业或明确方向性观点，因此判断为宏观层面的情绪/状态反馈，立场偏观望而非看多或看空。",
+    "action_hint": "观望",
+    "key_quote": "这段时间好寂寞，市场沉闷得狠",
+    "image_analysis": null,
+    "tweet_id": 528,
+    "twitter_id": "1927414010741194838",
+    "text": "这段时间好寂寞，市场沉闷得狠",
+    "created_at": "2025-05-27T17:18:04"
+  },
+  {
+    "topic": "信息分享",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "中性",
+    "confidence": "high",
+    "reasoning_chain": "内容主要讨论加拿大税务中亏损抵税的处理方式，属于税务信息交流与答复，并未涉及任何具体标的、行业判断或交易观点，因此不构成投资方向判断。",
+    "action_hint": "无",
+    "key_quote": "从加拿大税务来说，年内的亏损可以计入当年抵税用途 跨年的税务还真不知道怎么处理。",
+    "image_analysis": "null",
+    "tweet_id": 527,
+    "twitter_id": "1927416368946635036",
+    "text": "专业人士来回答国内税务问题。\n从加拿大税务来说，年内的亏损可以计入当年抵税用途\n跨年的税务还真不知道怎么处理。",
+    "created_at": "2025-05-27T17:27:26"
+  },
+  {
+    "topic": "投资策略",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "观望",
+    "confidence": "low",
+    "reasoning_chain": "推文未提及具体个股、加密货币或行业，仅表达作者当前情绪，并提到“这段时间可以研究研究板块”，说明其更偏向于阶段性观察与研究，而非明确交易表态；“李哥在关注啥”体现出参考他人关注方向的意图，但没有给出具体投资结论，因此整体判断为观望。",
+    "action_hint": "观望",
+    "key_quote": "这段时间可以研究研究板块，李哥在关注啥",
+    "image_analysis": null,
+    "tweet_id": 526,
+    "twitter_id": "1927416597351690346",
+    "text": "我觉得我是犯贱了\n这段时间可以研究研究板块，李哥在关注啥",
+    "created_at": "2025-05-27T17:28:21"
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "CRM",
+      "INFA"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "企业软件",
+      "SaaS"
+    ],
+    "stance": "看空",
+    "confidence": "high",
+    "reasoning_chain": "推文围绕Salesforce（CRM）以80亿美元收购Informatica展开，核心观点是公司长期依赖并购驱动增长。作者指出：1）2022年因加息和市场环境恶化，并购放缓；2）2023-2024年公司转向利润优先，EPS增速提升，带来股价反弹；3）但随着营收增速重新跌破10%，公司又在2024年底重启大规模并购。作者将这一过程描述为反复循环，隐含含义是内生增长不足、增长质量依赖外部收购、当前重启并购并非强势扩张而是增长放缓下的被动选择，因此整体偏负面。",
+    "action_hint": "减仓",
+    "key_quote": "然后在24年底再次打开了下一轮的收购潮，因为营收增速已经回到了10%以下。如此反复循环。。。",
+    "image_analysis": "图片为彭博CRM长期股价图，标注了历年重要收购节点，包括ExactTarget、Demandware、Tableau、Slack以及最新的Informatica，并手写“do not buy below 70”等注释，用来说明Salesforce历史上多次通过并购推动阶段性叙事与股价表现。",
+    "tweet_id": 525,
+    "twitter_id": "1927456438307131617",
+    "text": "$CRM\n SALESFORCE 80亿收购INFORMATICA。\n一家一路靠收购过来的公司。22年因为加息关系，市场不好，没有大收购。23，24年因为短期公司内部改变策略，注重盈利，EPS增速大增，所以股价大幅反弹，且收购停止。然后在24年底再次打开了下一轮的收购潮，因为营收增速已经回到了10%以下。如此反复循环。。。",
+    "created_at": "2025-05-27T20:06:39"
+  },
+  {
+    "topic": "信息分享",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "中性",
+    "confidence": "low",
+    "reasoning_chain": "文本未提及具体标的或交易观点，只是在说明某个定义标准，核心含义是“80以内就是中性”，因此判断为中性信息说明而非明确投资判断。",
+    "action_hint": "观望",
+    "key_quote": "80以内就是中性",
+    "image_analysis": null,
+    "tweet_id": 524,
+    "twitter_id": "1927677845691609569",
+    "text": "没有，请看定义，80以内就是中性",
+    "created_at": "2025-05-28T10:46:27"
+  },
+  {
+    "topic": "宏观分析",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "无明确方向",
+    "confidence": "low",
+    "reasoning_chain": "推文仅有“我感觉美股”，缺少具体观点、标的、方向或理由，无法判断看多看空；只能识别为对美股的泛泛表达。",
+    "action_hint": "无",
+    "key_quote": "我感觉美股",
+    "image_analysis": "null",
+    "tweet_id": 523,
+    "twitter_id": "1927678691980493055",
+    "text": "我感觉美股",
+    "created_at": "2025-05-28T10:49:49"
+  },
+  {
+    "topic": "加密货币",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [
+      "BTC",
+      "NFT"
+    ],
+    "mentioned_sectors": [
+      "区块链",
+      "加密货币"
+    ],
+    "stance": "看多",
+    "confidence": "high",
+    "reasoning_chain": "推文核心观点是代际偏好变化将推动资产类别更替：年轻人更倾向于美股、加密货币和NFT，而非传统A股或黄金；作者进一步明确表达对比特币和区块链长期前景的乐观，认为随着传统金融中偏好黄金的人群退出历史舞台，BTC将获得主导地位。这属于基于代际迁移和用户结构变化的长期看多逻辑，方向明确且措辞强烈。",
+    "action_hint": "持有",
+    "key_quote": "我认为比特币和区块链也是这样，等那群tradFi的黄金拥护者都挂了，就是BTC 的天下了，熬死他们",
+    "image_analysis": null,
+    "tweet_id": 520,
+    "twitter_id": "1927682810740932878",
+    "text": "投资美股是现在年轻人用什么，那这个就是未来。我认为比特币和区块链也是这样，等那群tradFi的黄金拥护者都挂了，就是BTC 的天下了，熬死他们",
+    "created_at": "2025-05-28T11:06:11"
+  },
+  {
+    "topic": "宏观分析",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "美股"
+    ],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "推文核心是在回顾4月市场极度悲观时，少数KOL没有继续渲染“还要跌20%-30%”的恐慌，而是提示回购将开启，暗示后续资金面可能改善。作者进一步用“sell in May go away”反讽市场情绪，认为如果真的离场，可能错过后续上涨机会。虽然引用推文中包含对美股后续风险的谨慎判断，并提醒不要贸然重仓做空，但主贴整体是在肯定逆市场悲观情绪、看好随后行情修复，因此偏多头解读。",
+    "action_hint": "持有",
+    "key_quote": "如果你真的go away，那的确money也和你go away。",
+    "image_analysis": "图片为一张深色主题的社交媒体截图，内容讨论2025年4月下旬市场情绪、回购开启、历史上跌破布林线后的修复，以及美股大盘走势K线图。图中文字强调当时多数人极度悲观，但也提到‘不要直接重仓空进去，这里还时机未到’，整体偏向对市场阶段性修复的观察。",
+    "tweet_id": 517,
+    "twitter_id": "1927937333988380856",
+    "text": "今天在外出差，就借用交易之刃的帖子做个总结，少有的在4月份不fud市场说还要跌20%，30%的KOL ，并且我记得当时他还发了很多接下去buybacks的开启，也许很多人已经忘了当时市场有多悲观，进入5月份之前很多人说sell in May go away。如果你真的go away，那的确money也和你go away。",
+    "created_at": "2025-05-29T03:57:34"
+  },
+  {
+    "topic": "加密货币",
+    "mentioned_stocks": [
+      "Circle"
+    ],
+    "mentioned_crypto": [
+      "USDC"
+    ],
+    "mentioned_sectors": [
+      "金融科技"
+    ],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "推文引用了BlackRock将收购Circle IPO 10%股份的利好消息，原作者明确表示“I will buy as well”，表明其对Circle/USDC相关资产偏向买入，整体情绪偏多。",
+    "action_hint": "买入",
+    "key_quote": "I will buy as well",
+    "image_analysis": null,
+    "tweet_id": 515,
+    "twitter_id": "1928162697574518925",
+    "text": "I will buy as well",
+    "created_at": "2025-05-29T18:53:05"
+  },
+  {
+    "topic": "加密货币",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [
+      "ETH",
+      "BTC"
+    ],
+    "mentioned_sectors": [
+      "加密货币",
+      "质押",
+      "大宗商品"
+    ],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "推文围绕SEC关于PoS质押不构成证券的表述展开，作者进一步将ETH类资产类比为债券/大宗商品，并明确提到“下一波降息将会利好以太这类标的”，整体偏向对ETH及加密资产的乐观判断；同时提及BTC对标黄金，强化其作为避险资产的定位。",
+    "action_hint": "买入",
+    "key_quote": "下一波降息将会利好以太这类标的。",
+    "image_analysis": null,
+    "tweet_id": 513,
+    "twitter_id": "1928265778702283151",
+    "text": "从以太不是证券开始就没有了所谓的“监管”，现在以太的质押也不是证券，那就变成了有利率的大宗商品？哈哈哈。下一波降息将会利好以太这类标的。\n比特币对标黄金\n以太对标债券",
+    "created_at": "2025-05-30T01:42:41"
+  },
+  {
+    "topic": "投资策略",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "中性",
+    "confidence": "medium",
+    "reasoning_chain": "推文仅表达“对冲波动”的一般性投资理念，没有提及具体标的或明确买卖倾向；核心含义是通过对冲降低风险，因此更偏向策略分享而非方向判断。",
+    "action_hint": "观望",
+    "key_quote": "你可以对冲掉波动",
+    "image_analysis": null,
+    "tweet_id": 512,
+    "twitter_id": "1928267398118801699",
+    "text": "你可以对冲掉波动",
+    "created_at": "2025-05-30T01:49:07"
+  },
+  {
+    "topic": "加密货币",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [
+      "ETH"
+    ],
+    "mentioned_sectors": [
+      "稳定币",
+      "区块链"
+    ],
+    "stance": "观望",
+    "confidence": "medium",
+    "reasoning_chain": "推文围绕稳定币与以太坊（ETH）的适配性及利好逻辑展开，核心观点是“并不非常确定稳定币是否明显利好以太坊”，并进一步指出机构间使用与不同场景下的链选择可能不同，说明作者对ETH受益路径持保留态度，没有给出明确看多或看空判断，更偏向等待更多场景验证的观望立场。",
+    "action_hint": "观望",
+    "key_quote": "稳定币用以太合适吗，我不是非常确定稳定币对以太的利好逻辑，机构之间也许会用，不同场景可能链的选择不一样",
+    "image_analysis": null,
+    "tweet_id": 511,
+    "twitter_id": "1928467628575600889",
+    "text": "稳定币用以太合适吗，我不是非常确定稳定币对以太的利好逻辑，机构之间也许会用，不同场景可能链的选择不一样",
+    "created_at": "2025-05-30T15:04:46"
+  }
+]

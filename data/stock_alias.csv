@@ -1,0 +1,97 @@
+# 股票别名映射 (后处理补漏用)
+# 格式: alias,ticker,notes
+# LLM 应已在 prompt 中转换，此表只处理漏网之鱼
+# 每跑一轮分析后，人工过一遍去重股票列表，把没识别对的加进来
+贝莱德,BLK,中文名
+特斯拉,TSLA,中文名
+英伟达,NVDA,中文名
+谷歌,GOOG,中文名
+CIRCLE,CIRCLE,大小写归一化
+Circle,CIRCLE,大小写归一化
+circle,CIRCLE,大小写归一化
+Metaplanet,3350.T,东京交易所
+METAPLANET,3350.T,东京交易所
+MSTX,MSTX,ETF不是个股
+IBIT,IBIT,ETF不是个股
+USDC,,稳定币(不是股票)
+USDT,,稳定币(不是股票)
+# --- 中文名 → 美股代码 ---
+亚马逊,AMZN,中文名
+亚麻,AMZN,口语化
+微软,MSFT,中文名
+英特尔,INTC,中文名
+美光,MU,中文名
+台积电,TSM,中文名
+阿斯麦,ASML,中文名
+沃尔玛,WMT,中文名
+迈威尔,MRVL,口语化
+# --- 公司全名/口语 → ticker ---
+亚马逊(AMZN),AMZN,含括号
+ZOOM,ZM,公司名
+Zoom,ZM,大小写
+VISTRA ENERGY,VST,公司全名
+ROBINHOOD,HOOD,公司名
+MASTERCARD,MA,公司名
+STRIPE,,未上市
+ANTHROPIC,,未上市
+FIREFLY,,未上市(Adobe)
+SPACEX,,未上市
+NEOCLOUD,,未上市或退市
+TIKTOK,,未上市
+字节跳动,,未上市
+长江存储,,未上市中国企业
+长鑫存储,,未上市中国企业
+SK海力士,,韩国上市公司
+房利美(FANNIE MAE/FNMA),FNMA,含括号
+标普500指数,SPX,指数
+皇家加勒比,RCL,中文名
+皇家加勒比邮轮,RCL,中文名
+电力股,,太模糊跳过
+# --- 已知补充 ---
+标普,SPX,简称
+纳指,NDX,简称
+# --- 第三轮补漏 ---
+700META,META,前缀错误
+BWX TECHNOLOGIES,BWXT,公司全名
+戴尔,DELL,中文名
+ROCKET LAB,RKLB,公司名
+ANDURIL,,未上市军工
+苹果(AAPL),AAPL,含括号
+BLACKROCK,BLK,公司名
+^GSPC,SPX,Yahoo格式
+S&P 500,SPX,英文
+BULLISH,,不是股票
+COINBASE,COIN,公司名
+长江,,太模糊跳过
+高通,QCOM,中文名
+谷歌(GOOGL),GOOGL,含括号
+ZOOM (ZM),ZM,含括号
+纳斯达克综合指数,NDX,指数
+纳斯达克100,NDX,指数
+CIRCLE,,未上市
+3350.T,3350.T,东京交易所(补格式)
+
+3677,,人工跳过
+BLOCK,,人工跳过
+ADOBE,ADBE,人工修正
+CRC,CRCL,人工修正
+CXMT,,人工跳过
+HYNIX,,人工跳过
+INTEL,INTC,人工修正
+IXIC,,纳斯达克综合指数(非个股无需行情)
+.IXIC,,同上
+SPX,,标普500指数(非个股无需行情)
+.INX,,同上
+# --- 加密相关但实为美股 ---
+MSTR,MSTR,微策略(美股)
+COIN,COIN,Coinbase(美股)
+KLA,KLAC,人工修正
+MAG3,,人工跳过
+SMIC,,人工跳过
+SNAM,,人工跳过
+SS,,人工跳过
+TESLA,TSLA,人工修正
+TSMC,,人工跳过
+COIN,COIN,人工修正
+VISA,V,人工修正
+YMTC,,人工跳过

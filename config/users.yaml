@@ -1,0 +1,16 @@
+# 监控的 Twitter/X 用户列表
+
+users:
+  - username: "TJ_Research"
+    display_name: "TJ_Research"
+    description: "用户首批重点关注的投资研究账号，具体风格待采集后自动画像。"
+    enabled: true
+    priority: 1
+
+# 使用说明：
+# 1. username: Twitter/X 用户名（不含 @）
+# 2. display_name: 显示名称，用于 AI 回答时引用
+# 3. description: 用户投资风格描述，可先粗略填写，后续由采集数据自动画像
+# 4. enabled: 是否启用监控
+# 5. priority: 优先级，影响采集顺序和 AI 回答时的权重
+

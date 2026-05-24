@@ -1,0 +1,73 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+
+# 虚拟环境
+venv/
+env/
+.venv
+
+# 环境变量 (含 API key)
+.env
+.env.local
+config/pipeline.yaml
+
+# 数据 — 保留结构文件，排除数据库/媒体/临时文件
+data/raw/
+data/processed/
+data/media/
+data/diagnostics/
+data/vector_db/
+data/*.db
+data/*.db-*
+data/*.bak*
+data/cookies.json
+data/backfill_state.json
+data/prices.json
+data/crypto_prices.json
+!data/.gitkeep
+
+# 向量数据库
+*.chroma/
+
+# 媒体文件
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.mp4
+*.mov
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# 操作系统
+.DS_Store
+Thumbs.db
+
+# 测试
+.pytest_cache/
+.coverage
+htmlcov/
+
+# 临时文件
+*.log
+*.tmp
+temp/
+tmp/
+
+# Docker
+docker-compose.override.yml
+
+# WorkBuddy 工作区
+.workbuddy/

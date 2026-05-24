@@ -1,0 +1,26 @@
+version: "3.9"
+
+services:
+  app:
+    image: python:3.11-slim
+    working_dir: /app
+    volumes:
+      - ./:/app
+    env_file:
+      - ./config/.env
+    command: bash -lc "pip install -r requirements.txt && python -m src.interfaces.web_api"
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+
+  web:
+    image: python:3.11-slim
+    working_dir: /app
+    volumes:
+      - ./:/app
+    env_file:
+      - ./config/.env
+    command: bash -lc "pip install -r requirements.txt && streamlit run src/interfaces/web_ui.py --server.address=0.0.0.0 --server.port=8501"
+    ports:
+      - "8501:8501"
+    restart: unless-stopped
