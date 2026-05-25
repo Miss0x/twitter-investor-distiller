@@ -77,7 +77,8 @@ def main():
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
     for fp in sorted(PIPELINE_DIR.glob("*_analyzed_cleaned.json")):
-        username = fp.stem.split("_")[0]
+        tag = fp.stem  # dearbaibabybus_2025-01_analyzed_cleaned
+        username = tag.split("_")[0]
         if username == "TJ":
             username = "TJ_Research"
 
@@ -97,7 +98,7 @@ def main():
             threshold = kl_values[min(idx, len(kl_values) - 1)]
         else:
             threshold = 1.0
-        print(f"{username}: 基线 {len(data)//2} 条, KL阈值(95%ile)={threshold:.2f}")
+        print(f"{tag}: 基线 {len(data)//2} 条, KL阈值(95%ile)={threshold:.2f}")
         results = sliding_window_kl(data, baseline, threshold)
 
         # 统计异常
@@ -115,7 +116,7 @@ def main():
                 print(f"      topics: {topics_str}")
                 print(f"      stances: {stances_str}")
 
-        out_path = OUTPUT_DIR / f"{username}_anomaly.json"
+        out_path = OUTPUT_DIR / f"{tag}_anomaly.json"
         out_path.write_text(json.dumps(results, ensure_ascii=False, indent=2), encoding="utf-8")
 
     print(f"\n已写入: {OUTPUT_DIR}")

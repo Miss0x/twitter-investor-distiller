@@ -892,11 +892,11 @@ def _render_insights_tab() -> None:
     anom_dir = _Path("data/anomaly")
     if anom_dir.exists():
         for fp in sorted(anom_dir.glob("*_anomaly.json")):
-            username = fp.stem.replace("_anomaly", "")
+            tag = fp.stem.replace("_anomaly", "")
             data = _json.loads(fp.read_text(encoding="utf-8"))
             anomalies = [r for r in data if r["anomaly"]][-3:]
             if anomalies:
-                with st.expander(f"{username}: {len(anomalies)} 条异常（最近）"):
+                with st.expander(f"{tag}: {len(anomalies)} 条异常（最近）"):
                     for a in anomalies:
                         st.text(f"{a['window_start']}~{a['window_end']} KL={a['kl_avg']:.2f}")
                         st.caption(f"topics: {', '.join(a['topics'][:3])}")
