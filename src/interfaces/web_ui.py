@@ -567,6 +567,9 @@ def _render_dashboard(health_ok: bool, jobs: list[dict[str, Any]], active_job_pa
         st.warning("API 不可用，请检查服务是否启动")
         return
 
+    # ── 准确率面板 ──
+    _render_accuracy_panel()
+
     # ── 统计卡片 ──
     from collections import Counter
     status_counts = Counter(j.get("status") for j in jobs)
@@ -761,6 +764,75 @@ def render_pipeline_section() -> None:
                 with st.expander(f"✅ 已完成 ({len(ft)} 只)", expanded=False):
                     st.caption(", ".join(ft[:100]))
         except ApiError: pass
+
+
+def _render_accuracy_panel() -> None:
+    """📊 准确率回溯面板 — Phase 1 #2 模块"""
+    from pathlib import Path as _Path
+    import json as _json
+
+    st.subheader("📊 分析师准确率")
+
+    acc_files = list(_Path("data/accuracy").glob("*_accuracy.json"))
+    if not acc_files:
+        st.caption("暂无准确率数据，运行 python scripts/backtest_accuracy.py 生成")
+        return
+
+    # 读取
+    all_data = []
+    for fp in acc_files:
+        d = _json.loads(fp.read_text(encoding="utf-8"))
+        all_data.append(d)
+
+    # 总览表
+    overview_rows = []
+    for d in all_data:
+        r30 = d["returns_30d"]
+        overview_rows.append({
+            "分析师": d["username"],
+            "信号数": d["total_signals"],
+            "30日胜率": f"{r30['win_rate']*100:.0f}%",
+            "30日均收益": f"{r30['avg_return']*100:+.1f}%",
+            "夏普比率": r30["sharpe"],
+            "最大盈利": f"{r30['max_return']*100:+.0f}%",
+            "最大亏损": f"{r30['min_return']*100:+.0f}%",
+        })
+    st.dataframe(overview_rows, use_container_width=True, hide_index=True)
+
+    # 每位分析师展开详情
+    for d in all_data:
+        with st.expander(f"{d['username']} — 板块 & 股票详情"):
+            # 按板块
+            if d.get("by_topic"):
+                st.markdown("**按板块（Topic）**")
+                topic_rows = []
+                for topic, stats in sorted(d["by_topic"].items(), key=lambda x: x[1].get("avg_return") or -99, reverse=True):
+                    if stats["count"]:
+                        topic_rows.append({
+                            "板块": topic,
+                            "信号数": stats["count"],
+                            "胜率": f"{stats['win_rate']*100:.0f}%",
+                            "均收益": f"{stats['avg_return']*100:+.1f}%",
+                            "夏普": stats.get("sharpe", 0),
+                        })
+                if topic_rows:
+                    st.dataframe(topic_rows, use_container_width=True, hide_index=True)
+
+            # 按股票
+            st.markdown("**按股票 TOP 10**")
+            stock_rows = []
+            for ticker, stats in sorted(d["by_stock"].items(), key=lambda x: x[1]["returns_30d"].get("avg_return") or -99, reverse=True)[:10]:
+                r30s = stats["returns_30d"]
+                if r30s["count"]:
+                    stock_rows.append({
+                        "股票": ticker,
+                        "信号": r30s["count"],
+                        "胜率": f"{r30s['win_rate']*100:.0f}%",
+                        "均收益": f"{r30s['avg_return']*100:+.1f}%",
+                    })
+            if stock_rows:
+                st.dataframe(stock_rows, use_container_width=True, hide_index=True)
+
 
 if __name__ == "__main__":
     main()

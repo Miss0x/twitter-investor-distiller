@@ -1,0 +1,1228 @@
+{
+  "username": "dearbaibabybus",
+  "total_signals": 65,
+  "returns_7d": {
+    "count": 110,
+    "win_rate": 0.4909,
+    "avg_return": 0.0021,
+    "sharpe": 0.06,
+    "max_return": 0.5302,
+    "min_return": -0.1826
+  },
+  "returns_30d": {
+    "count": 82,
+    "win_rate": 0.4512,
+    "avg_return": 0.0182,
+    "sharpe": 0.19,
+    "max_return": 1.4708,
+    "min_return": -0.4447
+  },
+  "by_stock": {
+    "UNH": {
+      "signals": 8,
+      "returns_7d": {
+        "count": 4,
+        "win_rate": 0.25,
+        "avg_return": -0.0125,
+        "sharpe": -0.9,
+        "max_return": 0.0468,
+        "min_return": -0.0661
+      },
+      "returns_30d": {
+        "count": 4,
+        "win_rate": 0.75,
+        "avg_return": 0.0443,
+        "sharpe": 2.76,
+        "max_return": 0.1014,
+        "min_return": -0.0261
+      }
+    },
+    "ELV": {
+      "signals": 4,
+      "returns_7d": {
+        "count": 2,
+        "win_rate": 1.0,
+        "avg_return": 0.0576,
+        "sharpe": 3.93,
+        "max_return": 0.1001,
+        "min_return": 0.0151
+      },
+      "returns_30d": {
+        "count": 2,
+        "win_rate": 1.0,
+        "avg_return": 0.0386,
+        "sharpe": 3.07,
+        "max_return": 0.075,
+        "min_return": 0.0022
+      }
+    },
+    "CNC": {
+      "signals": 6,
+      "returns_7d": {
+        "count": 3,
+        "win_rate": 1.0,
+        "avg_return": 0.0388,
+        "sharpe": 2.23,
+        "max_return": 0.1102,
+        "min_return": 0.0031
+      },
+      "returns_30d": {
+        "count": 3,
+        "win_rate": 0.6667,
+        "avg_return": 0.0483,
+        "sharpe": 2.03,
+        "max_return": 0.0969,
+        "min_return": -0.0491
+      }
+    },
+    "UVXY": {
+      "signals": 2,
+      "returns_7d": {
+        "count": 1,
+        "win_rate": 0.0,
+        "avg_return": -0.0791,
+        "sharpe": 0,
+        "max_return": -0.0791,
+        "min_return": -0.0791
+      },
+      "returns_30d": {
+        "count": 1,
+        "win_rate": 0.0,
+        "avg_return": -0.1436,
+        "sharpe": 0,
+        "max_return": -0.1436,
+        "min_return": -0.1436
+      }
+    },
+    "QQQ": {
+      "signals": 2,
+      "returns_7d": {
+        "count": 1,
+        "win_rate": 0.0,
+        "avg_return": -0.0118,
+        "sharpe": 0,
+        "max_return": -0.0118,
+        "min_return": -0.0118
+      },
+      "returns_30d": {
+        "count": 1,
+        "win_rate": 1.0,
+        "avg_return": 0.0244,
+        "sharpe": 0,
+        "max_return": 0.0244,
+        "min_return": 0.0244
+      }
+    },
+    "AMD": {
+      "signals": 4,
+      "returns_7d": {
+        "count": 2,
+        "win_rate": 0.5,
+        "avg_return": 0.0064,
+        "sharpe": 1.24,
+        "max_return": 0.0212,
+        "min_return": -0.0085
+      },
+      "returns_30d": {
+        "count": 2,
+        "win_rate": 1.0,
+        "avg_return": 0.5019,
+        "sharpe": 68.0,
+        "max_return": 0.5233,
+        "min_return": 0.4805
+      }
+    },
+    "CRWV": {
+      "signals": 4,
+      "returns_7d": {
+        "count": 2,
+        "win_rate": 1.0,
+        "avg_return": 0.0563,
+        "sharpe": 3.43,
+        "max_return": 0.1038,
+        "min_return": 0.0088
+      },
+      "returns_30d": {
+        "count": 2,
+        "win_rate": 0.5,
+        "avg_return": -0.1561,
+        "sharpe": -1.57,
+        "max_return": 0.1325,
+        "min_return": -0.4447
+      }
+    },
+    "NVDA": {
+      "signals": 6,
+      "returns_7d": {
+        "count": 3,
+        "win_rate": 0.3333,
+        "avg_return": -0.0316,
+        "sharpe": -3.17,
+        "max_return": 0.0082,
+        "min_return": -0.0596
+      },
+      "returns_30d": {
+        "count": 3,
+        "win_rate": 0.6667,
+        "avg_return": 0.0567,
+        "sharpe": 2.29,
+        "max_return": 0.1529,
+        "min_return": -0.0193
+      }
+    },
+    "VST": {
+      "signals": 16,
+      "returns_7d": {
+        "count": 8,
+        "win_rate": 0.25,
+        "avg_return": -0.0258,
+        "sharpe": -3.28,
+        "max_return": 0.0067,
+        "min_return": -0.0654
+      },
+      "returns_30d": {
+        "count": 8,
+        "win_rate": 0.125,
+        "avg_return": -0.0614,
+        "sharpe": -3.89,
+        "max_return": 0.0235,
+        "min_return": -0.1307
+      }
+    },
+    "ET": {
+      "signals": 2,
+      "returns_7d": {
+        "count": 1,
+        "win_rate": 0.0,
+        "avg_return": -0.0281,
+        "sharpe": 0,
+        "max_return": -0.0281,
+        "min_return": -0.0281
+      },
+      "returns_30d": {
+        "count": 1,
+        "win_rate": 0.0,
+        "avg_return": -0.0287,
+        "sharpe": 0,
+        "max_return": -0.0287,
+        "min_return": -0.0287
+      }
+    },
+    "AMDL": {
+      "signals": 2,
+      "returns_7d": {
+        "count": 1,
+        "win_rate": 1.0,
+        "avg_return": 0.5302,
+        "sharpe": 0,
+        "max_return": 0.5302,
+        "min_return": 0.5302
+      },
+      "returns_30d": {
+        "count": 1,
+        "win_rate": 1.0,
+        "avg_return": 1.4708,
+        "sharpe": 0,
+        "max_return": 1.4708,
+        "min_return": 1.4708
+      }
+    },
+    "RGTI": {
+      "signals": 2,
+      "returns_7d": {
+        "count": 1,
+        "win_rate": 1.0,
+        "avg_return": 0.0739,
+        "sharpe": 0,
+        "max_return": 0.0739,
+        "min_return": 0.0739
+      },
+      "returns_30d": {
+        "count": 1,
+        "win_rate": 0.0,
+        "avg_return": -0.329,
+        "sharpe": 0,
+        "max_return": -0.329,
+        "min_return": -0.329
+      }
+    },
+    "AMZN": {
+      "signals": 15,
+      "returns_7d": {
+        "count": 8,
+        "win_rate": 0.875,
+        "avg_return": 0.0828,
+        "sharpe": 5.66,
+        "max_return": 0.1191,
+        "min_return": -0.0244
+      },
+      "returns_30d": {
+        "count": 7,
+        "win_rate": 0.8571,
+        "avg_return": 0.0259,
+        "sharpe": 3.56,
+        "max_return": 0.0494,
+        "min_return": -0.003
+      }
+    },
+    "BA": {
+      "signals": 4,
+      "returns_7d": {
+        "count": 2,
+        "win_rate": 0.0,
+        "avg_return": -0.0833,
+        "sharpe": -28.2,
+        "max_return": -0.0747,
+        "min_return": -0.0918
+      },
+      "returns_30d": {
+        "count": 2,
+        "win_rate": 0.0,
+        "avg_return": -0.1529,
+        "sharpe": -11.71,
+        "max_return": -0.1151,
+        "min_return": -0.1908
+      }
+    },
+    "RCAT": {
+      "signals": 2,
+      "returns_7d": {
+        "count": 1,
+        "win_rate": 1.0,
+        "avg_return": 0.009,
+        "sharpe": 0,
+        "max_return": 0.009,
+        "min_return": 0.009
+      },
+      "returns_30d": {
+        "count": 1,
+        "win_rate": 0.0,
+        "avg_return": -0.3516,
+        "sharpe": 0,
+        "max_return": -0.3516,
+        "min_return": -0.3516
+      }
+    },
+    "DLR": {
+      "signals": 2,
+      "returns_7d": {
+        "count": 1,
+        "win_rate": 0.0,
+        "avg_return": -0.0495,
+        "sharpe": 0,
+        "max_return": -0.0495,
+        "min_return": -0.0495
+      },
+      "returns_30d": {
+        "count": 1,
+        "win_rate": 0.0,
+        "avg_return": -0.1131,
+        "sharpe": 0,
+        "max_return": -0.1131,
+        "min_return": -0.1131
+      }
+    },
+    "MP": {
+      "signals": 2,
+      "returns_7d": {
+        "count": 1,
+        "win_rate": 0.0,
+        "avg_return": -0.109,
+        "sharpe": 0,
+        "max_return": -0.109,
+        "min_return": -0.109
+      },
+      "returns_30d": {
+        "count": 1,
+        "win_rate": 0.0,
+        "avg_return": -0.1662,
+        "sharpe": 0,
+        "max_return": -0.1662,
+        "min_return": -0.1662
+      }
+    },
+    "DHI": {
+      "signals": 2,
+      "returns_7d": {
+        "count": 1,
+        "win_rate": 0.0,
+        "avg_return": -0.0562,
+        "sharpe": 0,
+        "max_return": -0.0562,
+        "min_return": -0.0562
+      },
+      "returns_30d": {
+        "count": 1,
+        "win_rate": 0.0,
+        "avg_return": -0.0752,
+        "sharpe": 0,
+        "max_return": -0.0752,
+        "min_return": -0.0752
+      }
+    },
+    "LMND": {
+      "signals": 2,
+      "returns_7d": {
+        "count": 1,
+        "win_rate": 1.0,
+        "avg_return": 0.1523,
+        "sharpe": 0,
+        "max_return": 0.1523,
+        "min_return": 0.1523
+      },
+      "returns_30d": {
+        "count": 1,
+        "win_rate": 1.0,
+        "avg_return": 0.4001,
+        "sharpe": 0,
+        "max_return": 0.4001,
+        "min_return": 0.4001
+      }
+    },
+    "OKLO": {
+      "signals": 6,
+      "returns_7d": {
+        "count": 3,
+        "win_rate": 0.3333,
+        "avg_return": 0.052,
+        "sharpe": 0.73,
+        "max_return": 0.3348,
+        "min_return": -0.1547
+      },
+      "returns_30d": {
+        "count": 3,
+        "win_rate": 0.3333,
+        "avg_return": -0.1678,
+        "sharpe": -1.86,
+        "max_return": 0.2013,
+        "min_return": -0.3629
+      }
+    },
+    "SOXS": {
+      "signals": 4,
+      "returns_7d": {
+        "count": 2,
+        "win_rate": 0.0,
+        "avg_return": -0.0791,
+        "sharpe": -8.08,
+        "max_return": -0.0508,
+        "min_return": -0.1075
+      },
+      "returns_30d": {
+        "count": 2,
+        "win_rate": 0.5,
+        "avg_return": -0.0107,
+        "sharpe": -0.39,
+        "max_return": 0.0699,
+        "min_return": -0.0914
+      }
+    },
+    "ANGX": {
+      "signals": 2,
+      "returns_7d": {
+        "count": 1,
+        "win_rate": 0.0,
+        "avg_return": -0.063,
+        "sharpe": 0,
+        "max_return": -0.063,
+        "min_return": -0.063
+      },
+      "returns_30d": {
+        "count": 1,
+        "win_rate": 0.0,
+        "avg_return": -0.3031,
+        "sharpe": 0,
+        "max_return": -0.3031,
+        "min_return": -0.3031
+      }
+    },
+    "INTC": {
+      "signals": 4,
+      "returns_7d": {
+        "count": 2,
+        "win_rate": 0.5,
+        "avg_return": -0.014,
+        "sharpe": -0.69,
+        "max_return": 0.0447,
+        "min_return": -0.0727
+      },
+      "returns_30d": {
+        "count": 2,
+        "win_rate": 0.0,
+        "avg_return": -0.0344,
+        "sharpe": -3.25,
+        "max_return": -0.0037,
+        "min_return": -0.065
+      }
+    },
+    "GOOG": {
+      "signals": 3,
+      "returns_7d": {
+        "count": 2,
+        "win_rate": 1.0,
+        "avg_return": 0.0277,
+        "sharpe": 3.23,
+        "max_return": 0.0526,
+        "min_return": 0.0028
+      },
+      "returns_30d": {
+        "count": 1,
+        "win_rate": 1.0,
+        "avg_return": 0.1798,
+        "sharpe": 0,
+        "max_return": 0.1798,
+        "min_return": 0.1798
+      }
+    },
+    "RCL": {
+      "signals": 4,
+      "returns_7d": {
+        "count": 2,
+        "win_rate": 0.0,
+        "avg_return": -0.127,
+        "sharpe": -65.97,
+        "max_return": -0.1214,
+        "min_return": -0.1326
+      },
+      "returns_30d": {
+        "count": 2,
+        "win_rate": 0.0,
+        "avg_return": -0.1307,
+        "sharpe": -9.57,
+        "max_return": -0.0911,
+        "min_return": -0.1703
+      }
+    },
+    "CPNG": {
+      "signals": 3,
+      "returns_7d": {
+        "count": 2,
+        "win_rate": 0.5,
+        "avg_return": -0.0221,
+        "sharpe": -2.16,
+        "max_return": 0.0076,
+        "min_return": -0.0518
+      },
+      "returns_30d": {
+        "count": 1,
+        "win_rate": 0.0,
+        "avg_return": -0.1213,
+        "sharpe": 0,
+        "max_return": -0.1213,
+        "min_return": -0.1213
+      }
+    },
+    "XLY": {
+      "signals": 2,
+      "returns_7d": {
+        "count": 1,
+        "win_rate": 1.0,
+        "avg_return": 0.0046,
+        "sharpe": 0,
+        "max_return": 0.0046,
+        "min_return": 0.0046
+      },
+      "returns_30d": {
+        "count": 1,
+        "win_rate": 0.0,
+        "avg_return": -0.0252,
+        "sharpe": 0,
+        "max_return": -0.0252,
+        "min_return": -0.0252
+      }
+    },
+    "TSLA": {
+      "signals": 4,
+      "returns_7d": {
+        "count": 3,
+        "win_rate": 0.3333,
+        "avg_return": -0.0334,
+        "sharpe": -1.99,
+        "max_return": 0.0353,
+        "min_return": -0.0677
+      },
+      "returns_30d": {
+        "count": 1,
+        "win_rate": 0.0,
+        "avg_return": -0.0571,
+        "sharpe": 0,
+        "max_return": -0.0571,
+        "min_return": -0.0571
+      }
+    },
+    "MSTR": {
+      "signals": 2,
+      "returns_7d": {
+        "count": 1,
+        "win_rate": 0.0,
+        "avg_return": -0.1047,
+        "sharpe": 0,
+        "max_return": -0.1047,
+        "min_return": -0.1047
+      },
+      "returns_30d": {
+        "count": 1,
+        "win_rate": 0.0,
+        "avg_return": -0.4059,
+        "sharpe": 0,
+        "max_return": -0.4059,
+        "min_return": -0.4059
+      }
+    },
+    "CRCL": {
+      "signals": 4,
+      "returns_7d": {
+        "count": 2,
+        "win_rate": 0.0,
+        "avg_return": -0.1452,
+        "sharpe": -11.24,
+        "max_return": -0.1078,
+        "min_return": -0.1826
+      },
+      "returns_30d": {
+        "count": 2,
+        "win_rate": 0.5,
+        "avg_return": 0.0455,
+        "sharpe": 0.29,
+        "max_return": 0.5038,
+        "min_return": -0.4128
+      }
+    },
+    "META": {
+      "signals": 11,
+      "returns_7d": {
+        "count": 6,
+        "win_rate": 0.0,
+        "avg_return": -0.0733,
+        "sharpe": -4.79,
+        "max_return": -0.0006,
+        "min_return": -0.154
+      },
+      "returns_30d": {
+        "count": 5,
+        "win_rate": 0.0,
+        "avg_return": -0.0583,
+        "sharpe": -4.24,
+        "max_return": -0.0384,
+        "min_return": -0.138
+      }
+    },
+    "POWR": {
+      "signals": 2,
+      "returns_7d": {
+        "count": 1,
+        "win_rate": 1.0,
+        "avg_return": 0.0025,
+        "sharpe": 0,
+        "max_return": 0.0025,
+        "min_return": 0.0025
+      },
+      "returns_30d": {
+        "count": 1,
+        "win_rate": 1.0,
+        "avg_return": 0.0387,
+        "sharpe": 0,
+        "max_return": 0.0387,
+        "min_return": 0.0387
+      }
+    },
+    "ETN": {
+      "signals": 2,
+      "returns_7d": {
+        "count": 1,
+        "win_rate": 1.0,
+        "avg_return": 0.0025,
+        "sharpe": 0,
+        "max_return": 0.0025,
+        "min_return": 0.0025
+      },
+      "returns_30d": {
+        "count": 1,
+        "win_rate": 1.0,
+        "avg_return": 0.0805,
+        "sharpe": 0,
+        "max_return": 0.0805,
+        "min_return": 0.0805
+      }
+    },
+    "FSLR": {
+      "signals": 2,
+      "returns_7d": {
+        "count": 1,
+        "win_rate": 1.0,
+        "avg_return": 0.014,
+        "sharpe": 0,
+        "max_return": 0.014,
+        "min_return": 0.014
+      },
+      "returns_30d": {
+        "count": 1,
+        "win_rate": 0.0,
+        "avg_return": -0.0702,
+        "sharpe": 0,
+        "max_return": -0.0702,
+        "min_return": -0.0702
+      }
+    },
+    "UUUU": {
+      "signals": 2,
+      "returns_7d": {
+        "count": 1,
+        "win_rate": 1.0,
+        "avg_return": 0.2256,
+        "sharpe": 0,
+        "max_return": 0.2256,
+        "min_return": 0.2256
+      },
+      "returns_30d": {
+        "count": 1,
+        "win_rate": 1.0,
+        "avg_return": 0.8394,
+        "sharpe": 0,
+        "max_return": 0.8394,
+        "min_return": 0.8394
+      }
+    },
+    "UEC": {
+      "signals": 2,
+      "returns_7d": {
+        "count": 1,
+        "win_rate": 1.0,
+        "avg_return": 0.1467,
+        "sharpe": 0,
+        "max_return": 0.1467,
+        "min_return": 0.1467
+      },
+      "returns_30d": {
+        "count": 1,
+        "win_rate": 1.0,
+        "avg_return": 0.6508,
+        "sharpe": 0,
+        "max_return": 0.6508,
+        "min_return": 0.6508
+      }
+    },
+    "SMR": {
+      "signals": 2,
+      "returns_7d": {
+        "count": 1,
+        "win_rate": 1.0,
+        "avg_return": 0.297,
+        "sharpe": 0,
+        "max_return": 0.297,
+        "min_return": 0.297
+      },
+      "returns_30d": {
+        "count": 1,
+        "win_rate": 1.0,
+        "avg_return": 0.4144,
+        "sharpe": 0,
+        "max_return": 0.4144,
+        "min_return": 0.4144
+      }
+    },
+    "ORCL": {
+      "signals": 3,
+      "returns_7d": {
+        "count": 2,
+        "win_rate": 0.0,
+        "avg_return": -0.0215,
+        "sharpe": -8.62,
+        "max_return": -0.0143,
+        "min_return": -0.0287
+      },
+      "returns_30d": {
+        "count": 1,
+        "win_rate": 0.0,
+        "avg_return": -0.1156,
+        "sharpe": 0,
+        "max_return": -0.1156,
+        "min_return": -0.1156
+      }
+    },
+    "SOXX": {
+      "signals": 2,
+      "returns_7d": {
+        "count": 1,
+        "win_rate": 1.0,
+        "avg_return": 0.0064,
+        "sharpe": 0,
+        "max_return": 0.0064,
+        "min_return": 0.0064
+      },
+      "returns_30d": {
+        "count": 1,
+        "win_rate": 1.0,
+        "avg_return": 0.0166,
+        "sharpe": 0,
+        "max_return": 0.0166,
+        "min_return": 0.0166
+      }
+    },
+    "JPM": {
+      "signals": 2,
+      "returns_7d": {
+        "count": 1,
+        "win_rate": 1.0,
+        "avg_return": 0.054,
+        "sharpe": 0,
+        "max_return": 0.054,
+        "min_return": 0.054
+      },
+      "returns_30d": {
+        "count": 1,
+        "win_rate": 0.0,
+        "avg_return": -0.0272,
+        "sharpe": 0,
+        "max_return": -0.0272,
+        "min_return": -0.0272
+      }
+    },
+    "SOFI": {
+      "signals": 2,
+      "returns_7d": {
+        "count": 1,
+        "win_rate": 0.0,
+        "avg_return": -0.0855,
+        "sharpe": 0,
+        "max_return": -0.0855,
+        "min_return": -0.0855
+      },
+      "returns_30d": {
+        "count": 1,
+        "win_rate": 0.0,
+        "avg_return": -0.1938,
+        "sharpe": 0,
+        "max_return": -0.1938,
+        "min_return": -0.1938
+      }
+    },
+    "COIN": {
+      "signals": 2,
+      "returns_7d": {
+        "count": 1,
+        "win_rate": 0.0,
+        "avg_return": -0.1521,
+        "sharpe": 0,
+        "max_return": -0.1521,
+        "min_return": -0.1521
+      },
+      "returns_30d": {
+        "count": 1,
+        "win_rate": 0.0,
+        "avg_return": -0.0488,
+        "sharpe": 0,
+        "max_return": -0.0488,
+        "min_return": -0.0488
+      }
+    },
+    "HOOD": {
+      "signals": 4,
+      "returns_7d": {
+        "count": 3,
+        "win_rate": 0.0,
+        "avg_return": -0.0908,
+        "sharpe": -4.86,
+        "max_return": -0.0525,
+        "min_return": -0.1675
+      },
+      "returns_30d": {
+        "count": 1,
+        "win_rate": 0.0,
+        "avg_return": -0.2081,
+        "sharpe": 0,
+        "max_return": -0.2081,
+        "min_return": -0.2081
+      }
+    },
+    "ZM": {
+      "signals": 8,
+      "returns_7d": {
+        "count": 4,
+        "win_rate": 1.0,
+        "avg_return": 0.0481,
+        "sharpe": 0,
+        "max_return": 0.0481,
+        "min_return": 0.0481
+      },
+      "returns_30d": {
+        "count": 4,
+        "win_rate": 1.0,
+        "avg_return": 0.0641,
+        "sharpe": 0,
+        "max_return": 0.0641,
+        "min_return": 0.0641
+      }
+    },
+    "AVGO": {
+      "signals": 4,
+      "returns_7d": {
+        "count": 3,
+        "win_rate": 0.0,
+        "avg_return": -0.0579,
+        "sharpe": -6.39,
+        "max_return": -0.026,
+        "min_return": -0.0902
+      },
+      "returns_30d": {
+        "count": 1,
+        "win_rate": 1.0,
+        "avg_return": 0.3105,
+        "sharpe": 0,
+        "max_return": 0.3105,
+        "min_return": 0.3105
+      }
+    },
+    "TSM": {
+      "signals": 1,
+      "returns_7d": {
+        "count": 1,
+        "win_rate": 1.0,
+        "avg_return": 0.0652,
+        "sharpe": 0,
+        "max_return": 0.0652,
+        "min_return": 0.0652
+      },
+      "returns_30d": {
+        "count": 0,
+        "win_rate": null,
+        "avg_return": null,
+        "sharpe": null,
+        "max_return": null,
+        "min_return": null
+      }
+    },
+    "VG": {
+      "signals": 1,
+      "returns_7d": {
+        "count": 1,
+        "win_rate": 0.0,
+        "avg_return": -0.0881,
+        "sharpe": 0,
+        "max_return": -0.0881,
+        "min_return": -0.0881
+      },
+      "returns_30d": {
+        "count": 0,
+        "win_rate": null,
+        "avg_return": null,
+        "sharpe": null,
+        "max_return": null,
+        "min_return": null
+      }
+    },
+    "GOOGL": {
+      "signals": 1,
+      "returns_7d": {
+        "count": 1,
+        "win_rate": 1.0,
+        "avg_return": 0.0008,
+        "sharpe": 0,
+        "max_return": 0.0008,
+        "min_return": 0.0008
+      },
+      "returns_30d": {
+        "count": 0,
+        "win_rate": null,
+        "avg_return": null,
+        "sharpe": null,
+        "max_return": null,
+        "min_return": null
+      }
+    },
+    "MSFT": {
+      "signals": 1,
+      "returns_7d": {
+        "count": 1,
+        "win_rate": 1.0,
+        "avg_return": 0.0237,
+        "sharpe": 0,
+        "max_return": 0.0237,
+        "min_return": 0.0237
+      },
+      "returns_30d": {
+        "count": 0,
+        "win_rate": null,
+        "avg_return": null,
+        "sharpe": null,
+        "max_return": null,
+        "min_return": null
+      }
+    },
+    "MRVL": {
+      "signals": 3,
+      "returns_7d": {
+        "count": 3,
+        "win_rate": 1.0,
+        "avg_return": 0.0753,
+        "sharpe": 8.12,
+        "max_return": 0.1099,
+        "min_return": 0.0444
+      },
+      "returns_30d": {
+        "count": 0,
+        "win_rate": null,
+        "avg_return": null,
+        "sharpe": null,
+        "max_return": null,
+        "min_return": null
+      }
+    },
+    "AAOI": {
+      "signals": 1,
+      "returns_7d": {
+        "count": 1,
+        "win_rate": 0.0,
+        "avg_return": -0.09,
+        "sharpe": 0,
+        "max_return": -0.09,
+        "min_return": -0.09
+      },
+      "returns_30d": {
+        "count": 0,
+        "win_rate": null,
+        "avg_return": null,
+        "sharpe": null,
+        "max_return": null,
+        "min_return": null
+      }
+    },
+    "NBIS": {
+      "signals": 1,
+      "returns_7d": {
+        "count": 1,
+        "win_rate": 1.0,
+        "avg_return": 0.104,
+        "sharpe": 0,
+        "max_return": 0.104,
+        "min_return": 0.104
+      },
+      "returns_30d": {
+        "count": 0,
+        "win_rate": null,
+        "avg_return": null,
+        "sharpe": null,
+        "max_return": null,
+        "min_return": null
+      }
+    },
+    "AMPX": {
+      "signals": 1,
+      "returns_7d": {
+        "count": 1,
+        "win_rate": 0.0,
+        "avg_return": -0.1779,
+        "sharpe": 0,
+        "max_return": -0.1779,
+        "min_return": -0.1779
+      },
+      "returns_30d": {
+        "count": 0,
+        "win_rate": null,
+        "avg_return": null,
+        "sharpe": null,
+        "max_return": null,
+        "min_return": null
+      }
+    },
+    "PL": {
+      "signals": 1,
+      "returns_7d": {
+        "count": 1,
+        "win_rate": 1.0,
+        "avg_return": 0.0224,
+        "sharpe": 0,
+        "max_return": 0.0224,
+        "min_return": 0.0224
+      },
+      "returns_30d": {
+        "count": 0,
+        "win_rate": null,
+        "avg_return": null,
+        "sharpe": null,
+        "max_return": null,
+        "min_return": null
+      }
+    },
+    "RKLB": {
+      "signals": 1,
+      "returns_7d": {
+        "count": 1,
+        "win_rate": 1.0,
+        "avg_return": 0.0829,
+        "sharpe": 0,
+        "max_return": 0.0829,
+        "min_return": 0.0829
+      },
+      "returns_30d": {
+        "count": 0,
+        "win_rate": null,
+        "avg_return": null,
+        "sharpe": null,
+        "max_return": null,
+        "min_return": null
+      }
+    },
+    "GLW": {
+      "signals": 1,
+      "returns_7d": {
+        "count": 1,
+        "win_rate": 0.0,
+        "avg_return": -0.113,
+        "sharpe": 0,
+        "max_return": -0.113,
+        "min_return": -0.113
+      },
+      "returns_30d": {
+        "count": 0,
+        "win_rate": null,
+        "avg_return": null,
+        "sharpe": null,
+        "max_return": null,
+        "min_return": null
+      }
+    },
+    "FLY": {
+      "signals": 1,
+      "returns_7d": {
+        "count": 1,
+        "win_rate": 1.0,
+        "avg_return": 0.0827,
+        "sharpe": 0,
+        "max_return": 0.0827,
+        "min_return": 0.0827
+      },
+      "returns_30d": {
+        "count": 0,
+        "win_rate": null,
+        "avg_return": null,
+        "sharpe": null,
+        "max_return": null,
+        "min_return": null
+      }
+    },
+    "VELO": {
+      "signals": 1,
+      "returns_7d": {
+        "count": 1,
+        "win_rate": 1.0,
+        "avg_return": 0.2084,
+        "sharpe": 0,
+        "max_return": 0.2084,
+        "min_return": 0.2084
+      },
+      "returns_30d": {
+        "count": 0,
+        "win_rate": null,
+        "avg_return": null,
+        "sharpe": null,
+        "max_return": null,
+        "min_return": null
+      }
+    },
+    "OUST": {
+      "signals": 1,
+      "returns_7d": {
+        "count": 1,
+        "win_rate": 1.0,
+        "avg_return": 0.0967,
+        "sharpe": 0,
+        "max_return": 0.0967,
+        "min_return": 0.0967
+      },
+      "returns_30d": {
+        "count": 0,
+        "win_rate": null,
+        "avg_return": null,
+        "sharpe": null,
+        "max_return": null,
+        "min_return": null
+      }
+    },
+    "MU": {
+      "signals": 1,
+      "returns_7d": {
+        "count": 1,
+        "win_rate": 0.0,
+        "avg_return": -0.0885,
+        "sharpe": 0,
+        "max_return": -0.0885,
+        "min_return": -0.0885
+      },
+      "returns_30d": {
+        "count": 0,
+        "win_rate": null,
+        "avg_return": null,
+        "sharpe": null,
+        "max_return": null,
+        "min_return": null
+      }
+    }
+  },
+  "by_topic": {
+    "个股分析": {
+      "count": 44,
+      "win_rate": 0.4773,
+      "avg_return": 0.0068,
+      "sharpe": 0.1,
+      "max_return": 0.5233,
+      "min_return": -0.4128
+    },
+    "投资策略": {
+      "count": 2,
+      "win_rate": 0.5,
+      "avg_return": -0.0596,
+      "sharpe": -2.06,
+      "max_return": 0.0244,
+      "min_return": -0.1436
+    },
+    "操作记录": {
+      "count": 29,
+      "win_rate": 0.3103,
+      "avg_return": -0.0231,
+      "sharpe": -0.21,
+      "max_return": 1.4708,
+      "min_return": -0.4447
+    },
+    "行业研判": {
+      "count": 7,
+      "win_rate": 0.8571,
+      "avg_return": 0.2824,
+      "sharpe": 2.49,
+      "max_return": 0.8394,
+      "min_return": -0.0702
+    }
+  },
+  "by_month": {
+    "2025-05": {
+      "signals": 1
+    },
+    "2025-08": {
+      "signals": 6
+    },
+    "2025-09": {
+      "signals": 12
+    },
+    "2025-10": {
+      "signals": 42
+    },
+    "2025-12": {
+      "signals": 9
+    },
+    "2026-01": {
+      "signals": 8
+    },
+    "2026-02": {
+      "signals": 5
+    },
+    "2026-03": {
+      "signals": 2
+    },
+    "2026-04": {
+      "signals": 2
+    },
+    "2026-05": {
+      "signals": 41
+    }
+  }
+}

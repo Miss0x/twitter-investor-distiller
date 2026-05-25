@@ -1,29 +1,21 @@
-# 抓取等待时间配置
-# 根据网络情况调节：快节点用 "fast"，慢节点用 "slow"，不稳定用 "patient"
-
-profiles:
-  fast:
-    page_ready_timeout_seconds: 60
-    settle_after_scroll_ms: 1200
-    max_scroll_rounds: 80
-    no_new_items_limit: 5
-  slow:
-    page_ready_timeout_seconds: 180
-    settle_after_scroll_ms: 3000
-    max_scroll_rounds: 120
-    no_new_items_limit: 8
-  patient:
-    page_ready_timeout_seconds: 300
-    settle_after_scroll_ms: 5000
-    max_scroll_rounds: 200
-    no_new_items_limit: 12
-
-# 当前生效的配置（Streamlit 侧边栏可实时修改）
 active:
-  page_ready_timeout_seconds: 180
-  settle_after_scroll_ms: 3000
   max_scroll_rounds: 200
   no_new_items_limit: 10
-  # 抓取起点日期
-  minimum_created_at: "2025-01-01"
-  history_from: "2025-01-01"
+  page_ready_timeout_seconds: 180
+  settle_after_scroll_ms: 3000
+profiles:
+  fast:
+    max_scroll_rounds: 80
+    no_new_items_limit: 5
+    page_ready_timeout_seconds: 60
+    settle_after_scroll_ms: 1200
+  patient:
+    max_scroll_rounds: 200
+    no_new_items_limit: 12
+    page_ready_timeout_seconds: 300
+    settle_after_scroll_ms: 5000
+  slow:
+    max_scroll_rounds: 120
+    no_new_items_limit: 8
+    page_ready_timeout_seconds: 180
+    settle_after_scroll_ms: 3000
