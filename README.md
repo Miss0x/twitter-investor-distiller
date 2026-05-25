@@ -1,19 +1,21 @@
-# Twitter 用户蒸馏 AI 助手
+# Twitter 用户蒸馏 — AI 投资研究助手
 
-采集精选 X/Twitter 投资者的发言和上下文，通过大模型分析 → 清洗校准 → 多时间窗口投资画像生成。
+采集精选 X/Twitter 投资者的发言和上下文 → 大模型分析 → 多维信号量化 → 板块角色代入选股 → 实时预警推送。
 
 ## 当前状态
 
-- 数据采集：浏览器真人化抓取，1872 条推文入库
-- 分析流水线：过滤 → 深度分析 → 清洗校准 → 多窗口画像
-- 股价数据：96 只美股已拉取，Polygon.io API
-- 加密货币：22 币种行情，Polygon.io + CoinMarketCap
-- 控制台：Streamlit Web UI + FastAPI 任务队列
+- **数据采集**：浏览器真人化抓取，1136 条推文已分析
+- **13 大模块**：准确率回溯、信号量化、多信号联动、板块轮动、情绪时间线、角色代入选股、实时触发、异常检测、预警系统、关联网络、基本面快照、持仓叠加、完整控制台
+- **行业分类**：145 只美股标准 Sector/Industry 映射（Technology/Semiconductors 等 13 大类 59 子类）
+- **控制台**：Streamlit Web UI + FastAPI，含 daemon 开关、Telegram 配置、角色代入、持仓顾问
+- **画像系统**：9 维度 → 10 维度（新增仓位管理与 Beta 调节），多时间窗口（1月/3月/半年/1年/全量）
 
 ## 采集目标
 
-- **@TJ_Research**：686+46 条已分析（2025-01 + 2025-05）
-- **@dearbaibabybus**：404 条已分析（原 @frankyluan）
+| 分析师 | 推文数 | 画像 |
+|--------|--------|------|
+| **@TJ_Research** | 732 条 | 进攻型趋势投资者，降 beta 聚焦盈利确定性 |
+| **@dearbaibabybus** | 404 条 | AI 主战场的成长波段主动交易者 |
 
 ## 快速开始
 
@@ -30,38 +32,100 @@ python -m uvicorn src.interfaces.web_api:app --host 0.0.0.0 --port 8000
 python -m streamlit run src/interfaces/web_ui.py --server.port 8501
 ```
 
+浏览器打开 `http://localhost:8501` 进入仪表盘。
+
+## 13 模块体系
+
+### Phase 1 — 地基
+| # | 模块 | 产出 |
+|---|------|------|
+| #2 | 准确率回溯 | TJ 30日夏普 0.79, deba 半导体 62% 胜率（按板块/股票/月份三维分组） |
+| #11 | 基本面快照 | 104 只美股 PE/ROE/营收增速/负债率（westock-data 免费数据源） |
+
+### Phase 2 — 信号
+| # | 模块 | 产出 |
+|---|------|------|
+| #1 | 信号量化 | 1136 条推文 0-100 分（stance × 贝叶斯校准置信度 × K线共振） |
+| #4 | 多信号联动 | 205 只股票共识分，31 只双人覆盖，META 97 分 🔥 |
+
+### Phase 3 — 智能
+| # | 模块 | 产出 |
+|---|------|------|
+| #8 | 板块轮动 | 周聚合滚动 Z-score，deba 2月加密→3月宏观→5月全面活跃 |
+| #9 | 情绪时间线 | 271 个(股票,分析师) stance 时序，CRCL × TJ 36 点最多 |
+| #7 | 角色代入选股 | 标准行业分类下拉 → 实时价格 → LLM 选股方案（一键生成） |
+
+### Phase 4 — 实时
+| # | 模块 | 产出 |
+|---|------|------|
+| #3 | 实时触发 | 仪表盘一键 daemon，30 秒轮询，日预算 20 条，断点续传 |
+| #10 | 异常检测 | KL 散度 + 95% 分位动态阈值，主数据集 FPR 5.8%/8.7% |
+| #5 | 预警 | Telegram Bot 配置面板，token 注入即用 |
+| #12 | 关联网络 | 353 条互动边，推荐 PhyrexNi（被引 15 次） |
+
+### Phase 5 — 个性
+| # | 模块 | 产出 |
+|---|------|------|
+| #13 | 持仓叠加 | 文字/CSV/截图三种输入 → 多模态 LLM 持仓分析 |
+| #6 | 完整控制台 | 三标签页：抓取仪表盘 + 分析流水线 + 信号与洞察 |
+
 ## 流水线架构
 
 ```
-爬虫(DB) → 过滤(filter) → 深度分析(analyze) → 清洗校准(clean) → 画像(portrait)
-                                      ↓
-                                股价拉取(fetch_price)
-                                加密货币(fetch_crypto)
+爬虫(DB) → 过滤(filter) → 深度分析(analyze) → 清洗校准(clean)
+    │                           │
+    │                    ┌───────┼───────┬───────┬──────┐
+    ▼                    ▼       ▼       ▼       ▼      ▼
+实时触发(#3)        信号(#1)  联动(#4) 轮动(#8) 时间线(#9) 异常(#10)
+    │                    │       │       │       │      │
+    └────────────────────┴───┬───┴───────┴───────┴──────┘
+                             ▼
+                    画像(portrait) → 角色代入(#7) → 选股方案
+                             │
+                    持仓叠加(#13) → 多模态 LLM → Telegram(#5)
 ```
+
+## 控制台功能
+
+- **📊 抓取仪表盘**：实时监控 daemon（启停 + 今日任务计数）、Telegram 配置、准确率面板
+- **⚙️ 分析流水线**：任务队列、过滤/分析/清洗/画像状态、日志
+- **📡 信号与洞察**：角色代入选股（行业下拉 + 实时价格）、持仓顾问（多模态）、共识 TOP10、板块轮动、异常检测、信源推荐
 
 ## 项目结构
 
 ```
 src/
-├── crawler/         # 浏览器抓取、媒体下载、进度跟踪
+├── crawler/         # 浏览器抓取、媒体下载
 ├── interfaces/      # FastAPI (web_api)、Streamlit (web_ui)
-├── pipeline/        # 任务执行器 (task_executor)
-├── storage/         # SQLite ORM、媒体管理
-├── ai/              # LLM 客户端、Prompts
-├── vectorization/   # 向量化与 RAG（待接入）
+├── pipeline/        # 任务执行器 (task_executor)、画像 prompt
+├── storage/         # SQLite ORM
+├── ai/              # LLM 客户端
 └── utils/           # 日志、环境变量
-config/              # pipeline.yaml、timing.yaml、users.yaml
-scripts/             # 工具脚本（bootstrap、clean_analysis、fetch_prices 等）
-data/                # SQLite DB、prices.json、stock_alias.csv、pipeline/ 分析结果
+scripts/             # 13 模块脚本 + 工具脚本
+data/
+├── pipeline/        # analyzed_cleaned、portrait
+├── accuracy/        # 准确率统计
+├── consensus/       # 多信号联动
+├── rotation/        # 板块轮动
+├── timeline/        # 情绪时间线
+├── anomaly/         # 异常检测
+├── network/         # 关联网络
+├── sector_map.json  # 145 只美股行业分类
+├── fundamental_cache.json  # 基本面快照
+├── stock_alias.csv  # 股票别名映射
+└── telegram_config.json    # Telegram 配置（需手动填入 token）
 ```
 
-## 关键数据文件
+## 验收指标
 
-| 文件 | 说明 |
-|------|------|
-| `data/pipeline/*_filtered.json` | 过滤结果（投资相关判断） |
-| `data/pipeline/*_analyzed.json` | 深度分析结果（11 字段） |
-| `data/pipeline/*_analyzed_cleaned.json` | 清洗校准版（stock_details、crypto_details） |
-| `data/stock_alias.csv` | 股票别名映射（人工修正累积） |
-| `data/prices.json` | Polygon 股价日线 |
-| `data/crypto_prices.json` | 加密货币行情 |
+| 指标 | 目标 | 实际 |
+|------|------|------|
+| 信号覆盖 | ≥ 80% | 95% (1076/1136) |
+| 准确率样本 | ≥ 30 条 | TJ 41, deba 82 |
+| 异常 FPR | < 10% | 5.8%/8.7% |
+| 信号范围 | 0-100 | 0-96 |
+| PE 覆盖 | ≥ 50 只 | 104 只 |
+
+## License
+
+MIT
