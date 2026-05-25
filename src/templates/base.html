@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Twitter Investor Distiller</title>
+<style>
+  :root {
+    --bg-primary: #ffffff; --bg-secondary: #f5f5f5; --bg-tertiary: #fafafa;
+    --text-primary: #1a1a1a; --text-secondary: #666666; --text-tertiary: #999999;
+    --text-success: #1D9E75; --text-warning: #EF9F27; --text-info: #378ADD; --text-danger: #E24B4A;
+    --border-primary: rgba(0,0,0,0.2); --border-secondary: rgba(0,0,0,0.12); --border-tertiary: rgba(0,0,0,0.07);
+    --radius-md: 8px; --radius-lg: 12px;
+    --font: system-ui, -apple-system, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font); font-size: 13px; color: var(--text-primary); background: var(--bg-tertiary); line-height: 1.6; }
+  .app { max-width: 960px; margin: 0 auto; padding: 20px 24px; }
+  .header { margin-bottom: 20px; }
+  .header h1 { font-size: 16px; font-weight: 500; }
+  .header p { font-size: 12px; color: var(--text-secondary); }
+  .tabs { display: flex; gap: 0; margin-bottom: 20px; border-bottom: 0.5px solid var(--border-tertiary); }
+  .tab { padding: 8px 16px; font-size: 13px; color: var(--text-secondary); border: none; background: none; cursor: pointer; border-bottom: 2px solid transparent; transition: all .15s; }
+  .tab:hover { color: var(--text-primary); }
+  .tab.active { color: var(--text-primary); font-weight: 500; border-bottom-color: var(--text-primary); }
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+  .grid { display: grid; gap: 12px; }
+  .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .card { background: var(--bg-primary); border: 0.5px solid var(--border-tertiary); border-radius: var(--radius-lg); padding: 14px 16px; }
+  .card-title { font-size: 13px; font-weight: 500; margin-bottom: 10px; color: var(--text-primary); }
+  .metric { background: var(--bg-secondary); border-radius: var(--radius-md); padding: 12px; }
+  .metric-label { font-size: 11px; color: var(--text-secondary); }
+  .metric-value { font-size: 20px; font-weight: 500; margin-top: 2px; }
+  .metric-sub { font-size: 11px; color: var(--text-tertiary); margin-top: 2px; }
+  table.data { width: 100%; border-collapse: collapse; font-size: 12px; }
+  table.data th, table.data td { padding: 6px 10px; text-align: left; }
+  table.data th { background: var(--bg-secondary); color: var(--text-secondary); font-weight: 400; font-size: 11px; }
+  table.data td { border-top: 0.5px solid var(--border-tertiary); }
+  .btn { font-size: 12px; padding: 5px 14px; border: 0.5px solid var(--border-secondary); border-radius: var(--radius-md); background: var(--bg-primary); cursor: pointer; font-family: var(--font); }
+  .btn:hover { border-color: var(--border-primary); }
+  .btn-primary { border-color: var(--text-primary); font-weight: 500; }
+  .btn-danger { border-color: var(--text-danger); color: var(--text-danger); }
+  input, select, textarea { font-size: 13px; padding: 6px 10px; border: 0.5px solid var(--border-tertiary); border-radius: var(--radius-md); font-family: var(--font); background: var(--bg-primary); }
+  input:focus, select:focus { outline: none; border-color: var(--border-primary); }
+  select { width: 100%; }
+  .status-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; }
+  .status-dot.ok { background: var(--text-success); }
+  .status-dot.warn { background: var(--text-warning); }
+  .status-dot.err { background: var(--text-danger); }
+  .tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; }
+  .tag-ok { background: rgba(29,158,117,0.1); color: var(--text-success); }
+  .tag-warn { background: rgba(239,159,39,0.1); color: var(--text-warning); }
+  .flex { display: flex; align-items: center; gap: 8px; }
+  .flex-between { display: flex; justify-content: space-between; align-items: center; }
+  .text-secondary { color: var(--text-secondary); font-size: 12px; }
+  .mt-sm { margin-top: 8px; }
+  .mt-md { margin-top: 16px; }
+  .mb-sm { margin-bottom: 8px; }
+  .mb-md { margin-bottom: 16px; }
+</style>
+</head>
+<body>
+<div class="app">
+<div class="header">
+  <h1>Twitter Investor Distiller</h1>
+  <p>抓取 → 分析 → 画像 → 信号</p>
+</div>
+<div class="tabs">
+  <button class="tab active" onclick="switchTab('dashboard')">抓取仪表盘</button>
+  <button class="tab" onclick="switchTab('pipeline')">分析流水线</button>
+  <button class="tab" onclick="switchTab('insights')">信号与洞察</button>
+</div>
+<div id="tab-dashboard" class="tab-content active"></div>
+<div id="tab-pipeline" class="tab-content"></div>
+<div id="tab-insights" class="tab-content"></div>
+</div>
+<script>
+const CARD_ORDER = {
+  dashboard: ["system_status","daemon","telegram","accuracy","job_management"],
+  pipeline: ["pipeline"],
+  insights: ["role_picker","portfolio","consensus","rotation","anomaly","network"]
+};
+
+function switchTab(tab) {
+  document.querySelectorAll('.tab').forEach((t,i) => {
+    t.classList.toggle('active', t.textContent.includes({dashboard:'抓取',pipeline:'分析',insights:'洞察'}[tab]));
+  });
+  document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+  loadCards(tab);
+}
+
+async function loadCards(tab) {
+  const container = document.getElementById('tab-' + tab);
+  const names = CARD_ORDER[tab] || [];
+  container.innerHTML = names.length ? names.map(n => '<div id="card-'+n+'" class="card" style="margin-bottom:12px"><div class="flex"><div class="status-dot ok"></div><span class="text-secondary">加载中...</span></div></div>').join('') : '';
+  
+  for (const name of names) {
+    try {
+      const resp = await fetch('/cards/' + name);
+      const html = await resp.text();
+      document.getElementById('card-' + name).innerHTML = html;
+    } catch (e) {
+      document.getElementById('card-' + name).innerHTML = '<div class="flex"><div class="status-dot err"></div><span class="text-secondary">加载失败: ' + name + '</span></div>';
+    }
+  }
+}
+
+// 自动刷新
+const REFRESH_MAP = {};
+async function autoRefresh() {
+  const activeTab = document.querySelector('.tab-content.active');
+  if (!activeTab) return;
+  const names = CARD_ORDER[activeTab.id.replace('tab-','')] || [];
+  for (const name of names) {
+    if (REFRESH_MAP[name] && REFRESH_MAP[name] > 0 && Date.now() - (REFRESH_MAP[name + '_ts'] || 0) > REFRESH_MAP[name] * 1000) {
+      try {
+        const resp = await fetch('/cards/' + name);
+        document.getElementById('card-' + name).innerHTML = await resp.text();
+      } catch(e) {}
+      REFRESH_MAP[name + '_ts'] = Date.now();
+    }
+  }
+}
+
+// 初始加载
+document.addEventListener('DOMContentLoaded', () => {
+  fetch('/cards/meta').then(r => r.json()).then(cards => {
+    cards.forEach(c => { REFRESH_MAP[c.name] = c.refresh; REFRESH_MAP[c.name + '_ts'] = Date.now(); });
+    loadCards('dashboard');
+    setInterval(autoRefresh, 5000);
+  });
+});
+</script>
+</body>
+</html>

@@ -615,6 +615,42 @@ def seed_tasks() -> dict:
         session.close()
 
 
+# ══════ 卡片模块化 API ══════
+
+from src.cards import CARDS, get_card  # noqa: E402
+
+
+@app.get("/cards/meta")
+async def cards_meta():
+    """返回所有已注册卡片元数据。"""
+    return [c.to_dict() for c in CARDS]
+
+
+@app.get("/cards/{name}")
+async def card_data(name: str):
+    """返回单个卡片渲染后的 HTML 片段。"""
+    card = get_card(name)
+    if card is None:
+        raise HTTPException(status_code=404, detail=f"Card '{name}' not found")
+    try:
+        data = card.get_data()
+        html = card.render(data)
+        return HTMLResponse(content=html)
+    except Exception as e:
+        return HTMLResponse(content=f'<div class="card"><div class="flex"><div class="status-dot err"></div><span class="text-secondary">{name}: {e}</span></div></div>')
+
+
+from fastapi.responses import HTMLResponse  # noqa: E402
+
+
+@app.get("/", response_class=HTMLResponse)
+async def serve_dashboard():
+    """服务模块化仪表盘主页。"""
+    from src.cards.base import TEMPLATE_DIR
+    base = TEMPLATE_DIR.parent / "templates" / "base.html"
+    return HTMLResponse(content=base.read_text(encoding="utf-8"))
+
+
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)
