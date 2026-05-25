@@ -50,6 +50,8 @@
   .status-dot.ok { background: var(--text-success); }
   .status-dot.warn { background: var(--text-warning); }
   .status-dot.err { background: var(--text-danger); }
+  .spinner { width: 14px; height: 14px; border: 2px solid var(--border-tertiary); border-top-color: var(--text-primary); border-radius: 50%; animation: spin .6s linear infinite; margin-right: 6px; }
+  @keyframes spin { to { transform: rotate(360deg); } }
   .tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; }
   .tag-ok { background: rgba(29,158,117,0.1); color: var(--text-success); }
   .tag-warn { background: rgba(239,159,39,0.1); color: var(--text-warning); }
@@ -84,9 +86,15 @@ const CARD_ORDER = {
   insights: ["role_picker","portfolio","consensus","rotation","anomaly","network"]
 };
 
+const cache = {};         // 卡片 HTML 缓存
+const REFRESH_MAP = {};   // 刷新间隔
+const LAST_FETCH = {};    // 上次拉取时间戳
+const STALE_MS = 2000;    // 2 秒内不重复从服务端拉
+
 function switchTab(tab) {
-  document.querySelectorAll('.tab').forEach((t,i) => {
-    t.classList.toggle('active', t.textContent.includes({dashboard:'抓取',pipeline:'分析',insights:'洞察'}[tab]));
+  const labels = {dashboard:'抓取', pipeline:'分析', insights:'洞察'};
+  document.querySelectorAll('.tab').forEach(t => {
+    t.classList.toggle('active', t.textContent.includes(labels[tab]));
   });
   document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
   document.getElementById('tab-' + tab).classList.add('active');
@@ -96,43 +104,91 @@ function switchTab(tab) {
 async function loadCards(tab) {
   const container = document.getElementById('tab-' + tab);
   const names = CARD_ORDER[tab] || [];
-  container.innerHTML = names.length ? names.map(n => '<div id="card-'+n+'" class="card" style="margin-bottom:12px"><div class="flex"><div class="status-dot ok"></div><span class="text-secondary">加载中...</span></div></div>').join('') : '';
   
-  for (const name of names) {
-    try {
-      const resp = await fetch('/cards/' + name);
-      const html = await resp.text();
-      document.getElementById('card-' + name).innerHTML = html;
-    } catch (e) {
-      document.getElementById('card-' + name).innerHTML = '<div class="flex"><div class="status-dot err"></div><span class="text-secondary">加载失败: ' + name + '</span></div>';
-    }
-  }
-}
+  container.innerHTML = names.map(n =>
+    '<div id="card-'+n+'" class="card" style="margin-bottom:12px">' +
+    '<div class="flex"><div class="spinner"></div><span class="text-secondary">加载中...</span></div>' +
+    '</div>'
+  ).join('');
 
-// 自动刷新
-const REFRESH_MAP = {};
-async function autoRefresh() {
-  const activeTab = document.querySelector('.tab-content.active');
-  if (!activeTab) return;
-  const names = CARD_ORDER[activeTab.id.replace('tab-','')] || [];
-  for (const name of names) {
-    if (REFRESH_MAP[name] && REFRESH_MAP[name] > 0 && Date.now() - (REFRESH_MAP[name + '_ts'] || 0) > REFRESH_MAP[name] * 1000) {
+  const now = Date.now();
+  const toFetch = names.filter(n => !cache[n] || (now - (LAST_FETCH[n] || 0)) > STALE_MS);
+
+  // 并行拉取
+  const promises = names.map(async (name) => {
+    if (toFetch.includes(name)) {
       try {
         const resp = await fetch('/cards/' + name);
-        document.getElementById('card-' + name).innerHTML = await resp.text();
-      } catch(e) {}
-      REFRESH_MAP[name + '_ts'] = Date.now();
+        const html = await resp.text();
+        cache[name] = html;
+        LAST_FETCH[name] = Date.now();
+      } catch (e) {
+        cache[name] = '<div class="flex"><div class="status-dot err"></div><span class="text-secondary">加载失败</span></div>';
+      }
     }
+    // 从缓存渲染
+    const el = document.getElementById('card-' + name);
+    if (el) el.outerHTML = cache[name];
+  });
+
+  await Promise.all(promises);
+  attachButtons();  // 重新绑定 daemon 按钮事件
+}
+
+// 后台自动刷新（仅活跃 tab）
+async function autoRefresh() {
+  const active = document.querySelector('.tab-content.active');
+  if (!active) return;
+  const names = CARD_ORDER[active.id.replace('tab-','')] || [];
+  const now = Date.now();
+  for (const name of names) {
+    const interval = (REFRESH_MAP[name] || 0) * 1000;
+    if (interval > 0 && now - (LAST_FETCH[name] || 0) > interval) {
+      try {
+        const resp = await fetch('/cards/' + name);
+        cache[name] = await resp.text();
+        LAST_FETCH[name] = Date.now();
+        const el = document.getElementById('card-' + name);
+        if (el) el.outerHTML = cache[name];
+      } catch(e) {}
+    }
+  }
+  attachButtons();
+}
+
+function attachButtons() {
+  // daemon 启停按钮
+  const db = document.querySelector('#card-daemon button');
+  if (db) {
+    db.onclick = async () => {
+      db.disabled = true;
+      try {
+        await fetch('/cards/daemon/action', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({action: 'toggle'})
+        });
+      } catch(e) {}
+      // 主动刷新 daemon 卡片
+      const now = Date.now();
+      LAST_FETCH.daemon = 0;
+      try {
+        const resp = await fetch('/cards/daemon');
+        cache.daemon = await resp.text();
+        LAST_FETCH.daemon = Date.now();
+        const el = document.getElementById('card-daemon');
+        if (el) el.outerHTML = cache.daemon;
+      } catch(e) {}
+      db.disabled = false;
+    };
   }
 }
 
-// 初始加载
-document.addEventListener('DOMContentLoaded', () => {
-  fetch('/cards/meta').then(r => r.json()).then(cards => {
-    cards.forEach(c => { REFRESH_MAP[c.name] = c.refresh; REFRESH_MAP[c.name + '_ts'] = Date.now(); });
-    loadCards('dashboard');
-    setInterval(autoRefresh, 5000);
-  });
+// 启动
+fetch('/cards/meta').then(r => r.json()).then(cards => {
+  cards.forEach(c => { REFRESH_MAP[c.name] = c.refresh; });
+  loadCards('dashboard');
+  setInterval(autoRefresh, 5000);
 });
 </script>
 </body>

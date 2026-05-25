@@ -618,6 +618,24 @@ def seed_tasks() -> dict:
 # ══════ 卡片模块化 API ══════
 
 from src.cards import CARDS, get_card  # noqa: E402
+import time as _time  # noqa: E402
+
+# 服务端缓存：{name: (html, expire_ts)}
+_card_cache: dict[str, tuple[str, float]] = {}
+_CACHE_TTL = 2  # 秒
+
+
+def _get_cached_card_html(name: str) -> str | None:
+    now = _time.time()
+    if name in _card_cache:
+        html, expire = _card_cache[name]
+        if now < expire:
+            return html
+    return None
+
+
+def _set_cached_card_html(name: str, html: str) -> None:
+    _card_cache[name] = (html, _time.time() + _CACHE_TTL)
 
 
 @app.get("/cards/meta")
@@ -628,13 +646,19 @@ async def cards_meta():
 
 @app.get("/cards/{name}")
 async def card_data(name: str):
-    """返回单个卡片渲染后的 HTML 片段。"""
+    """返回单个卡片渲染后的 HTML 片段（2秒服务端缓存）。"""
+    cached = _get_cached_card_html(name)
+    if cached is not None:
+        return HTMLResponse(content=cached)
+
     card = get_card(name)
     if card is None:
         raise HTTPException(status_code=404, detail=f"Card '{name}' not found")
     try:
         data = card.get_data()
         html = card.render(data)
+        _set_cached_card_html(name, html)
+        return HTMLResponse(content=html)
         return HTMLResponse(content=html)
     except Exception as e:
         return HTMLResponse(content=f'<div class="card"><div class="flex"><div class="status-dot err"></div><span class="text-secondary">{name}: {e}</span></div></div>')
