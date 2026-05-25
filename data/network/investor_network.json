@@ -1,0 +1,1190 @@
+{
+  "nodes": [
+    "0xTodd",
+    "0xVeryBigOrange",
+    "2237783583lw",
+    "@0xhaoup",
+    "@CyberQI",
+    "@Million75mil",
+    "@Ryan76589177",
+    "@RyanWan37879639",
+    "@Teslawins180477",
+    "@_Chansonan",
+    "@dearbaibabybus",
+    "@thcaroline2233",
+    "AirdropAlchemis",
+    "ArtofSpecuycky",
+    "BTC_Alert_",
+    "BTC__Sunny",
+    "BTV_CN",
+    "Balder13946731",
+    "Bill29823155011",
+    "Bitwux",
+    "BreakingAlert_",
+    "CGasparino",
+    "Cato_KT",
+    "ChunxinJi",
+    "Corsica267",
+    "CryptoPainter",
+    "Cws_super",
+    "Cyc1ing1313",
+    "CycleStudies",
+    "FindingYourEdg",
+    "Franktradinglog",
+    "FreightWaves",
+    "IEObserve",
+    "IamRamenPanda",
+    "JDVance1996",
+    "JackFarley96",
+    "Janus00117",
+    "JasonZX",
+    "Kenntnis22",
+    "KobeissiLetter",
+    "KotlinerBTC",
+    "LeonardG54535",
+    "Leooo2099",
+    "MenthorQpro",
+    "Musiclover2000A",
+    "NPC888666",
+    "Nathan38628356",
+    "NickTimiraos",
+    "OwenJin12",
+    "PhyrexNi",
+    "Planckbot",
+    "PurrAlpha88",
+    "RHouseResearch",
+    "Ryan76589177",
+    "S7i5FV0JOz6sV3A",
+    "STANLEES4",
+    "ShanghaoJin",
+    "SleepNotPayTax",
+    "SmartCatMeow",
+    "SoldierMusk",
+    "SpencerHakimian",
+    "Stanleysobest",
+    "StockSavvyShay",
+    "TJ_Research",
+    "TaNGSoFT",
+    "TechCrunch",
+    "TheLongInvest",
+    "TheMarathon8320",
+    "TiezhuCrypto",
+    "Trader_S18",
+    "TrendSpider",
+    "Unclestocknotes",
+    "WAKANDA4EVA666",
+    "WSTAnalystApe",
+    "WangNextDoor2",
+    "WatcherGuru",
+    "WhitePine009",
+    "WizardTraderX",
+    "WorldCapitalAI",
+    "_Chansonan",
+    "_FORAB",
+    "aaibbd",
+    "agintender",
+    "ajs6888",
+    "aleabitoreddit",
+    "andongmao146314",
+    "arkham",
+    "arny_trezzi",
+    "bboczeng",
+    "binancezh",
+    "bunnyxy0704",
+    "caiziboshi",
+    "chamath",
+    "ciarasabri39780",
+    "cloud377033",
+    "cnfinancewatch",
+    "codingandexp",
+    "couragetoact1",
+    "cristiangh",
+    "cyrilxuq",
+    "dampedspring",
+    "dearbaibabybus",
+    "derekli2470",
+    "diyas_1989",
+    "dongdongdo89001",
+    "dongxiaojie99",
+    "drsanbai",
+    "dw_2772",
+    "dylan522p",
+    "elonmusk",
+    "financialjuice",
+    "frankyluan",
+    "frwtweyrey91045",
+    "ftfinancenews",
+    "garconch12",
+    "gongatian1",
+    "great_martis",
+    "han_jia61033",
+    "hazenlee",
+    "hbbbb111",
+    "hgsjshsgsh",
+    "hhjjjFinFin",
+    "himself65",
+    "hungjng69679118",
+    "iPaulCanada",
+    "iamai_omni",
+    "jackie_oct",
+    "jason_chen998",
+    "jiangjiangjohn",
+    "joedhammer",
+    "josephwang",
+    "karpathy",
+    "kik8964",
+    "labubu_trader",
+    "lidangzzz",
+    "liutengjiao",
+    "lixiangbtc",
+    "luckyfa59808041",
+    "majia84314310",
+    "mario4thenorth",
+    "mb_ghalibaf",
+    "mingchikuo",
+    "mrzhang58251041",
+    "munster_gene",
+    "nickshirleyy",
+    "octopusycc",
+    "pakpakchicken",
+    "raystark1229",
+    "satyanadella",
+    "sharkhh",
+    "simon91895623",
+    "sky05162412",
+    "skyneal2021",
+    "stocktalkjay",
+    "swh16888",
+    "tanwenhao1805",
+    "thcaroline2233",
+    "theFloridaBird",
+    "tig88411109",
+    "tj_research",
+    "tnglxn4",
+    "tommyto31797993",
+    "tradergokux",
+    "ttshidao",
+    "usakes_zhang",
+    "usd666666",
+    "wallen97754394",
+    "web3annie",
+    "whyyoutouzhele",
+    "williamlab",
+    "wufantouzi",
+    "xjjskanx",
+    "xzzzjpl",
+    "yao30059829",
+    "yeetmayas",
+    "yifaer_chen",
+    "yiqifacai",
+    "yoshug8",
+    "yuyy614893671",
+    "zerohedge"
+  ],
+  "edges": [
+    {
+      "from": "TJ_Research",
+      "to": "mingchikuo",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "TheLongInvest",
+      "weight": 1
+    },
+    {
+      "from": "TJ_Research",
+      "to": "WSTAnalystApe",
+      "weight": 1
+    },
+    {
+      "from": "TJ_Research",
+      "to": "skyneal2021",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "Ryan76589177",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "yeetmayas",
+      "weight": 1
+    },
+    {
+      "from": "TJ_Research",
+      "to": "dampedspring",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "financialjuice",
+      "weight": 2
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "xzzzjpl",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "Franktradinglog",
+      "weight": 2
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "dongxiaojie99",
+      "weight": 1
+    },
+    {
+      "from": "TJ_Research",
+      "to": "0xTodd",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "diyas_1989",
+      "weight": 4
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "kik8964",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "SleepNotPayTax",
+      "weight": 1
+    },
+    {
+      "from": "TJ_Research",
+      "to": "dylan522p",
+      "weight": 2
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "raystark1229",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "tj_research",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "KobeissiLetter",
+      "weight": 1
+    },
+    {
+      "from": "TJ_Research",
+      "to": "FreightWaves",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "IamRamenPanda",
+      "weight": 1
+    },
+    {
+      "from": "TJ_Research",
+      "to": "chamath",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "@CyberQI",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "Leooo2099",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "@RyanWan37879639",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "WizardTraderX",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "Musiclover2000A",
+      "weight": 1
+    },
+    {
+      "from": "TJ_Research",
+      "to": "mb_ghalibaf",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "STANLEES4",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "whyyoutouzhele",
+      "weight": 1
+    },
+    {
+      "from": "TJ_Research",
+      "to": "hazenlee",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "BTC__Sunny",
+      "weight": 1
+    },
+    {
+      "from": "TJ_Research",
+      "to": "ChunxinJi",
+      "weight": 1
+    },
+    {
+      "from": "TJ_Research",
+      "to": "WatcherGuru",
+      "weight": 4
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "Bill29823155011",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "hhjjjFinFin",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "dw_2772",
+      "weight": 2
+    },
+    {
+      "from": "TJ_Research",
+      "to": "zerohedge",
+      "weight": 2
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "tradergokux",
+      "weight": 1
+    },
+    {
+      "from": "TJ_Research",
+      "to": "munster_gene",
+      "weight": 2
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "TrendSpider",
+      "weight": 1
+    },
+    {
+      "from": "TJ_Research",
+      "to": "jason_chen998",
+      "weight": 1
+    },
+    {
+      "from": "TJ_Research",
+      "to": "karpathy",
+      "weight": 1
+    },
+    {
+      "from": "TJ_Research",
+      "to": "han_jia61033",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "garconch12",
+      "weight": 2
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "yoshug8",
+      "weight": 2
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "@Teslawins180477",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "usd666666",
+      "weight": 1
+    },
+    {
+      "from": "TJ_Research",
+      "to": "TJ_Research",
+      "weight": 34
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "joedhammer",
+      "weight": 1
+    },
+    {
+      "from": "TJ_Research",
+      "to": "binancezh",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "_FORAB",
+      "weight": 1
+    },
+    {
+      "from": "TJ_Research",
+      "to": "jackie_oct",
+      "weight": 1
+    },
+    {
+      "from": "TJ_Research",
+      "to": "0xVeryBigOrange",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "yao30059829",
+      "weight": 2
+    },
+    {
+      "from": "TJ_Research",
+      "to": "FindingYourEdg",
+      "weight": 1
+    },
+    {
+      "from": "TJ_Research",
+      "to": "cloud377033",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "tig88411109",
+      "weight": 2
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "sky05162412",
+      "weight": 1
+    },
+    {
+      "from": "TJ_Research",
+      "to": "AirdropAlchemis",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "NickTimiraos",
+      "weight": 1
+    },
+    {
+      "from": "TJ_Research",
+      "to": "aleabitoreddit",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "wallen97754394",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "swh16888",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "LeonardG54535",
+      "weight": 1
+    },
+    {
+      "from": "TJ_Research",
+      "to": "ArtofSpecuycky",
+      "weight": 1
+    },
+    {
+      "from": "TJ_Research",
+      "to": "williamlab",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "ttshidao",
+      "weight": 1
+    },
+    {
+      "from": "TJ_Research",
+      "to": "luckyfa59808041",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "jiangjiangjohn",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "JDVance1996",
+      "weight": 1
+    },
+    {
+      "from": "TJ_Research",
+      "to": "tnglxn4",
+      "weight": 1
+    },
+    {
+      "from": "TJ_Research",
+      "to": "great_martis",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "hungjng69679118",
+      "weight": 1
+    },
+    {
+      "from": "TJ_Research",
+      "to": "CGasparino",
+      "weight": 1
+    },
+    {
+      "from": "TJ_Research",
+      "to": "PhyrexNi",
+      "weight": 15
+    },
+    {
+      "from": "TJ_Research",
+      "to": "mario4thenorth",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "Balder13946731",
+      "weight": 3
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "sharkhh",
+      "weight": 1
+    },
+    {
+      "from": "TJ_Research",
+      "to": "Stanleysobest",
+      "weight": 1
+    },
+    {
+      "from": "TJ_Research",
+      "to": "BTV_CN",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "andongmao146314",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "Unclestocknotes",
+      "weight": 1
+    },
+    {
+      "from": "TJ_Research",
+      "to": "CycleStudies",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "frankyluan",
+      "weight": 3
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "PurrAlpha88",
+      "weight": 3
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "cristiangh",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "yifaer_chen",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "aaibbd",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "TaNGSoFT",
+      "weight": 1
+    },
+    {
+      "from": "TJ_Research",
+      "to": "pakpakchicken",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "tommyto31797993",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "web3annie",
+      "weight": 1
+    },
+    {
+      "from": "TJ_Research",
+      "to": "TheMarathon8320",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "codingandexp",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "frwtweyrey91045",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "2237783583lw",
+      "weight": 1
+    },
+    {
+      "from": "TJ_Research",
+      "to": "caiziboshi",
+      "weight": 1
+    },
+    {
+      "from": "TJ_Research",
+      "to": "tj_research",
+      "weight": 5
+    },
+    {
+      "from": "TJ_Research",
+      "to": "lixiangbtc",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "SoldierMusk",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "Corsica267",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "iamai_omni",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "iPaulCanada",
+      "weight": 1
+    },
+    {
+      "from": "TJ_Research",
+      "to": "Kenntnis22",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "octopusycc",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "ciarasabri39780",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "bboczeng",
+      "weight": 4
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "@0xhaoup",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "Planckbot",
+      "weight": 1
+    },
+    {
+      "from": "TJ_Research",
+      "to": "Nathan38628356",
+      "weight": 1
+    },
+    {
+      "from": "TJ_Research",
+      "to": "yiqifacai",
+      "weight": 1
+    },
+    {
+      "from": "TJ_Research",
+      "to": "ajs6888",
+      "weight": 1
+    },
+    {
+      "from": "TJ_Research",
+      "to": "SpencerHakimian",
+      "weight": 1
+    },
+    {
+      "from": "TJ_Research",
+      "to": "wufantouzi",
+      "weight": 1
+    },
+    {
+      "from": "TJ_Research",
+      "to": "CryptoPainter",
+      "weight": 1
+    },
+    {
+      "from": "TJ_Research",
+      "to": "OwenJin12",
+      "weight": 1
+    },
+    {
+      "from": "TJ_Research",
+      "to": "himself65",
+      "weight": 2
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "couragetoact1",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "nickshirleyy",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "StockSavvyShay",
+      "weight": 2
+    },
+    {
+      "from": "TJ_Research",
+      "to": "MenthorQpro",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "hgsjshsgsh",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "BreakingAlert_",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "simon91895623",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "@Million75mil",
+      "weight": 1
+    },
+    {
+      "from": "TJ_Research",
+      "to": "ftfinancenews",
+      "weight": 1
+    },
+    {
+      "from": "TJ_Research",
+      "to": "josephwang",
+      "weight": 1
+    },
+    {
+      "from": "TJ_Research",
+      "to": "Cato_KT",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "cnfinancewatch",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "Trader_S18",
+      "weight": 1
+    },
+    {
+      "from": "TJ_Research",
+      "to": "agintender",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "labubu_trader",
+      "weight": 3
+    },
+    {
+      "from": "TJ_Research",
+      "to": "JackFarley96",
+      "weight": 1
+    },
+    {
+      "from": "TJ_Research",
+      "to": "TiezhuCrypto",
+      "weight": 1
+    },
+    {
+      "from": "TJ_Research",
+      "to": "elonmusk",
+      "weight": 1
+    },
+    {
+      "from": "TJ_Research",
+      "to": "NickTimiraos",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "WorldCapitalAI",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "mrzhang58251041",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "_Chansonan",
+      "weight": 1
+    },
+    {
+      "from": "TJ_Research",
+      "to": "cyrilxuq",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "@Ryan76589177",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "drsanbai",
+      "weight": 1
+    },
+    {
+      "from": "TJ_Research",
+      "to": "Bitwux",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "dearbaibabybus",
+      "weight": 78
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "dongdongdo89001",
+      "weight": 1
+    },
+    {
+      "from": "TJ_Research",
+      "to": "KobeissiLetter",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "@thcaroline2233",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "IEObserve",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "yuyy614893671",
+      "weight": 2
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "ShanghaoJin",
+      "weight": 3
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "NPC888666",
+      "weight": 1
+    },
+    {
+      "from": "TJ_Research",
+      "to": "arkham",
+      "weight": 1
+    },
+    {
+      "from": "TJ_Research",
+      "to": "BTC_Alert_",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "lidangzzz",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "Janus00117",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "WhitePine009",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "S7i5FV0JOz6sV3A",
+      "weight": 1
+    },
+    {
+      "from": "TJ_Research",
+      "to": "TechCrunch",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "@dearbaibabybus",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "JasonZX",
+      "weight": 2
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "WangNextDoor2",
+      "weight": 1
+    },
+    {
+      "from": "TJ_Research",
+      "to": "liutengjiao",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "TJ_Research",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "thcaroline2233",
+      "weight": 2
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "majia84314310",
+      "weight": 1
+    },
+    {
+      "from": "TJ_Research",
+      "to": "satyanadella",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "theFloridaBird",
+      "weight": 1
+    },
+    {
+      "from": "TJ_Research",
+      "to": "tanwenhao1805",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "Cyc1ing1313",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "@_Chansonan",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "bunnyxy0704",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "derekli2470",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "xjjskanx",
+      "weight": 3
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "WAKANDA4EVA666",
+      "weight": 1
+    },
+    {
+      "from": "TJ_Research",
+      "to": "arny_trezzi",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "stocktalkjay",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "ArtofSpecuycky",
+      "weight": 2
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "himself65",
+      "weight": 2
+    },
+    {
+      "from": "TJ_Research",
+      "to": "gongatian1",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "hbbbb111",
+      "weight": 1
+    },
+    {
+      "from": "TJ_Research",
+      "to": "SmartCatMeow",
+      "weight": 2
+    },
+    {
+      "from": "TJ_Research",
+      "to": "RHouseResearch",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "Cws_super",
+      "weight": 1
+    },
+    {
+      "from": "TJ_Research",
+      "to": "usakes_zhang",
+      "weight": 1
+    },
+    {
+      "from": "dearbaibabybus",
+      "to": "KotlinerBTC",
+      "weight": 1
+    }
+  ],
+  "in_degree": {
+    "dearbaibabybus": 78,
+    "TJ_Research": 35,
+    "PhyrexNi": 15,
+    "tj_research": 6,
+    "diyas_1989": 4,
+    "WatcherGuru": 4,
+    "bboczeng": 4,
+    "himself65": 4,
+    "ArtofSpecuycky": 3,
+    "Balder13946731": 3,
+    "frankyluan": 3,
+    "PurrAlpha88": 3,
+    "labubu_trader": 3,
+    "ShanghaoJin": 3,
+    "xjjskanx": 3,
+    "financialjuice": 2,
+    "Franktradinglog": 2,
+    "dylan522p": 2,
+    "KobeissiLetter": 2,
+    "dw_2772": 2,
+    "zerohedge": 2,
+    "munster_gene": 2,
+    "garconch12": 2,
+    "yoshug8": 2,
+    "yao30059829": 2,
+    "tig88411109": 2,
+    "NickTimiraos": 2,
+    "StockSavvyShay": 2,
+    "yuyy614893671": 2,
+    "JasonZX": 2
+  },
+  "recommendations": [
+    {
+      "user": "PhyrexNi",
+      "in_degree": 15
+    },
+    {
+      "user": "tj_research",
+      "in_degree": 6
+    },
+    {
+      "user": "WatcherGuru",
+      "in_degree": 4
+    },
+    {
+      "user": "diyas_1989",
+      "in_degree": 4
+    },
+    {
+      "user": "bboczeng",
+      "in_degree": 4
+    },
+    {
+      "user": "himself65",
+      "in_degree": 4
+    },
+    {
+      "user": "ArtofSpecuycky",
+      "in_degree": 3
+    },
+    {
+      "user": "Balder13946731",
+      "in_degree": 3
+    },
+    {
+      "user": "frankyluan",
+      "in_degree": 3
+    },
+    {
+      "user": "labubu_trader",
+      "in_degree": 3
+    }
+  ]
+}
