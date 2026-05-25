@@ -4,6 +4,7 @@ from __future__ import annotations
 import json
 import sys
 import subprocess
+import textwrap
 import time
 from contextlib import suppress
 from pathlib import Path
@@ -1179,7 +1180,7 @@ while True:
         session = db.get_session()
         today = time.strftime('%Y-%m-%d')
     except Exception as e:
-        print(f'[DAEMON] {e}')
+        print('[DAEMON] ' + str(e))
         session.rollback()
         break
 """)
