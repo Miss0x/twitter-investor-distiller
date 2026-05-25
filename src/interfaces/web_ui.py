@@ -1314,6 +1314,7 @@ def _send_telegram(token: str, chat_id: str, message: str) -> bool:
 def _get_sector_options() -> dict[str, list[str]]:
     """从 sector_map.json 构建板块选项。按 industry 细分类分组。"""
     import json as _j
+    from pathlib import Path as _P
     from collections import defaultdict as _dd
 
     sp = _P("data/sector_map.json")
