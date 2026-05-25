@@ -1143,47 +1143,7 @@ def _render_daemon_control() -> None:
     with col1:
         if st.session_state.daemon_proc is None:
             if st.button("▶️ 启动实时监控", type="primary"):
-                daemon_path = _Path("scripts/auto_scheduler.py")
-                script = f"""
-import sys; sys.path.insert(0, '.')
-from src.storage.database import db
-from src.storage.models import Tweet, PipelineTask
-import json, time
-
-db.init_db()
-session = db.get_session()
-last_id = 0
-state_file = _Path("data/auto_scheduler_state.json")
-if state_file.exists():
-    last_id = _json.loads(state_file.read_text()).get('last_id', 0)
-budget = 20
-today = _time.strftime('%Y-%m-%d')
-
-while True:
-    try:
-        new_tweets = session.query(Tweet).filter(Tweet.id > last_id, Tweet.text != None, Tweet.text != '').order_by(Tweet.id).all()
-        today_count = session.query(PipelineTask).filter(PipelineTask.task_type == 'analyze', PipelineTask.created_at >= today).count()
-        for tw in new_tweets:
-            if today_count >= budget: break
-            existing = session.query(PipelineTask).filter(PipelineTask.task_type == 'filter', PipelineTask.payload.contains(str(tw.id))).first()
-            if existing: continue
-            t = PipelineTask(task_type='filter', status='pending', payload=json.dumps({{'action': 'filter_single', 'tweet_id': tw.id}}))
-            session.add(t); today_count += 1
-        if new_tweets:
-            session.commit()
-            last_id = new_tweets[-1].id
-            state_file.write_text(json.dumps({{'last_id': last_id, 'updated': _time.strftime('%Y-%m-%d %H:%M:%S')}}))
-        session.close()
-        _time.sleep(30)
-        session = db.get_session()
-        today = _time.strftime('%Y-%m-%d')
-    except Exception as e:
-        print(f'DAEMON_ERR: {e}')
-        session.rollback()
-        break
-"""
-                # 用 subprocess 启动内联脚本
-                import textwrap
+                # daemon 内联脚本
                 inline = textwrap.dedent(f"""
 import sys, json, time
 from pathlib import Path
