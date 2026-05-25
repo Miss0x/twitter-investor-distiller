@@ -619,6 +619,7 @@ def seed_tasks() -> dict:
 
 from src.cards import CARDS, get_card  # noqa: E402
 import time as _time  # noqa: E402
+from fastapi.responses import HTMLResponse  # noqa: E402
 
 # 服务端缓存：{name: (html, expire_ts)}
 _card_cache: dict[str, tuple[str, float]] = {}
@@ -664,7 +665,65 @@ async def card_data(name: str):
         return HTMLResponse(content=f'<div class="card"><div class="flex"><div class="status-dot err"></div><span class="text-secondary">{name}: {e}</span></div></div>')
 
 
-from fastapi.responses import HTMLResponse  # noqa: E402
+@app.post("/cards/{name}/action")
+async def card_action(name: str, payload: dict = None):
+    """处理卡片交互动作（如 daemon toggle）。"""
+    if name == "daemon" and payload and payload.get("action") == "toggle":
+        try:
+            import subprocess, sys, textwrap, time
+            from pathlib import Path
+            from src.cards import get_card
+            card = get_card("daemon")
+            proc = getattr(card, "_proc", None)
+            if proc and proc.poll() is None:
+                proc.terminate()
+                card._proc = None
+            else:
+                inline = textwrap.dedent(f"""
+                import sys, json, time
+                from pathlib import Path
+                sys.path.insert(0, r'{Path.cwd()}')
+                from src.storage.database import db
+                from src.storage.models import Tweet, PipelineTask
+                db.init_db()
+                session = db.get_session()
+                last_id = 0
+                state = Path('data/auto_scheduler_state.json')
+                if state.exists():
+                    last_id = json.loads(state.read_text()).get('last_id', 0)
+                budget = 20
+                today = time.strftime('%Y-%m-%d')
+                while True:
+                    try:
+                        new_tweets = session.query(Tweet).filter(Tweet.id > last_id, Tweet.text != None, Tweet.text != '').order_by(Tweet.id).all()
+                        today_count = session.query(PipelineTask).filter(PipelineTask.task_type == 'analyze', PipelineTask.created_at >= today).count()
+                        for tw in new_tweets:
+                            if today_count >= budget: break
+                            if session.query(PipelineTask).filter(PipelineTask.task_type == 'filter', PipelineTask.payload.contains(str(tw.id))).first(): continue
+                            t = PipelineTask(task_type='filter', status='pending', payload=json.dumps({{'action': 'filter_single', 'tweet_id': tw.id}}))
+                            session.add(t); today_count += 1
+                        if new_tweets:
+                            session.commit()
+                            last_id = new_tweets[-1].id
+                            state.write_text(json.dumps({{'last_id': last_id, 'updated': time.strftime('%Y-%m-%d %H:%M:%S')}}))
+                        session.close()
+                        time.sleep(30)
+                        session = db.get_session()
+                        today = time.strftime('%Y-%m-%d')
+                    except Exception as exc:
+                        print('[DAEMON] ' + str(exc))
+                        session.rollback()
+                        break
+                """)
+                proc = subprocess.Popen([sys.executable, "-c", inline], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+                card._proc = proc
+            _card_cache.pop("daemon", None)
+            return {"ok": True}
+        except Exception as e:
+            return {"ok": False, "error": str(e)}
+    return {"ok": False, "error": "unknown action"}
+
+
 
 
 @app.get("/", response_class=HTMLResponse)
