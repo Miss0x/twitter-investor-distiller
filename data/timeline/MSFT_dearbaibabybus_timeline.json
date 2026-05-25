@@ -1,0 +1,38 @@
+[
+  {
+    "date": "2025-10-29",
+    "stance": "看空",
+    "stance_val": 0,
+    "action_hint": "减仓",
+    "signal_score": 47.9,
+    "text": "给老子笑死了 在亚马逊里面挨打。meta msft 扑街 亚马逊跟着抖。基本面不如他们俩是吧。",
+    "tweet_id": 1516
+  },
+  {
+    "date": "2026-01-30",
+    "stance": "看空",
+    "stance_val": 0,
+    "action_hint": "减仓",
+    "signal_score": 45.3,
+    "text": "除了nvda 剩下的没什么看头吧。nvda无疑是低估了。问题是 很多都非常高估 市场是nv涨 还是一起一起先跌呢。msft是不是没拿到更多卡 nvda是不是没有在本季度疯狂出货。所以 dip是布局机会 现在 很中性 甚至我看跌了。这个新主席",
+    "tweet_id": 1672
+  },
+  {
+    "date": "2026-05-12",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "买入",
+    "signal_score": 78.1,
+    "text": "所以我才要买orcl。这燃料堆的比山还高。只要证明 ai需求没问题 gpu利用率高 oci增速没问题 资本开支不失控 都暴涨 燃料太多了。cds回落 eps上修 pe扩张 直接原地起飞 200bps 个人认为太夸张了 80bps还差不多 有",
+    "tweet_id": 1812
+  },
+  {
+    "date": "2026-05-21",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "买入",
+    "signal_score": 64.4,
+    "text": "纳斯达克指数基金最牛逼的其实是他的淘汰机制\n\n普通人买了最省心\n\n假设你只买纳指七姐妹\n\n看起来比纳指收益高\n\n但几年之后可能就会有企业掉队，甚至死掉\n\n冷知识：20年前的纳指七姐妹，现在只有微软一家还在姐妹中",
+    "tweet_id": 1778
+  }
+]

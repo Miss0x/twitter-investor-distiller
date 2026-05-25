@@ -1,0 +1,38 @@
+[
+  {
+    "date": "2025-09-15",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "观望",
+    "signal_score": 81.2,
+    "text": "这个股价做空crwv 确实自杀了 用不了几天就投降了。饭碗被砸了",
+    "tweet_id": 1481
+  },
+  {
+    "date": "2025-09-15",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "持有",
+    "signal_score": 81.2,
+    "text": "If you can hold a short position in crwv for three weeks, I will have great admiration for you.",
+    "tweet_id": 1479
+  },
+  {
+    "date": "2025-09-17",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "买入",
+    "signal_score": 81.2,
+    "text": "好巧 我也进了 crwv 哈 开盘大跌买的",
+    "tweet_id": 1475
+  },
+  {
+    "date": "2025-10-24",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "买入",
+    "signal_score": 85.2,
+    "text": "昨晚连夜做多 amzn vst ba rcat dlr mp dhi、lmnd oklo昨天就做多了 对冲我的soxs，等 一货车股票。持续关注crwv 等他们骂街割肉。",
+    "tweet_id": 1581
+  }
+]

@@ -1,0 +1,65 @@
+[
+  {
+    "date": "2025-05-15",
+    "stance": "看空",
+    "stance_val": 0,
+    "action_hint": "卖出",
+    "signal_score": 48.6,
+    "text": "做空avgo！",
+    "tweet_id": 1349
+  },
+  {
+    "date": "2025-08-29",
+    "stance": "看空",
+    "stance_val": 0,
+    "action_hint": "减仓",
+    "signal_score": 0.0,
+    "text": "$MRVL\n 一度被捧成跟 \n$AVGO\n 和 \n$NVDA\n 抢蛋糕的人，这个指引直接稀碎了。\n\n很可能最后的结果就是这波AI，95%的相关公司都没赚到钱，只剩那5%躺赢，这种吸血效应对整体经济的影响可想而知。",
+    "tweet_id": 1419
+  },
+  {
+    "date": "2026-03-23",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "买入",
+    "signal_score": 48.9,
+    "text": "电力又要涨了。然后我个人很看好avgo。nvda不比多说 但是风口我更爱avgo",
+    "tweet_id": 1743
+  },
+  {
+    "date": "2026-05-14",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "买入",
+    "signal_score": 92.5,
+    "text": "$AVGO\n 是AI芯片的龙头。但历史告诉你，真正暴富的人买的是龙二  \n$MRVL\n \n\n先说一个关于半导体行业的反直觉规律：\n在一个严重缺货的市场里，获利最大的往往不是龙头，而是那个追赶中的龙二。（Herman老师分析intel观点我觉",
+    "tweet_id": 1424
+  },
+  {
+    "date": "2026-05-15",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "买入",
+    "signal_score": 73.4,
+    "text": "方向是对的，AI光化是物理必然。\n但几个细节需要纠偏：\nNVL72机架光占比远低于20%。GB200最大的工程亮点恰恰是机架内Scale-Up用无源铜缆，省下20kW功耗。这是Jensen亲自在GTC讲过的事。光的战场在跨机架，不在机架内。",
+    "tweet_id": 1425
+  },
+  {
+    "date": "2026-05-16",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "买入",
+    "signal_score": 62.3,
+    "text": "爱了 德鲁肯米勒 就得干avgo 我最爱avgo！",
+    "tweet_id": 276
+  },
+  {
+    "date": "2026-05-16",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "观望",
+    "signal_score": 65.2,
+    "text": "$MRVL\n \n\n说重点，在DSP接近垄断 \n\n\n$AVGO\n 在交换机芯片、CPO研发垄断\n\nCPO方面的领军。\n\n\n$GLW\n 可以看。",
+    "tweet_id": 1426
+  }
+]

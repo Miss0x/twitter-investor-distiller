@@ -1,0 +1,20 @@
+[
+  {
+    "date": "2026-05-19",
+    "stance": "中性",
+    "stance_val": 0,
+    "action_hint": "观望",
+    "signal_score": 27.2,
+    "text": "$AAOI\n is not junk any more. \nAs \n@ShanghaoJin\n said Dr Lin is just over communicating and over promising. But he never ",
+    "tweet_id": 1429
+  },
+  {
+    "date": "2026-05-21",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "买入",
+    "signal_score": 95.8,
+    "text": "如果你平时看盘的时间不多，喜欢做持有数周左右的波段交易。\n\n我的建议是现阶段重点关注半导体板块即可。\n\n其他的板块也有不错的选择，但半导体整体来说拥有目前最强的趋势，和最多的流动性。无论你买均线回踩还是压力位突破，胜率和盈亏比都比别的板块高",
+    "tweet_id": 1427
+  }
+]

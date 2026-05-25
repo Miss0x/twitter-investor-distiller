@@ -1,0 +1,20 @@
+[
+  {
+    "date": "2026-05-13",
+    "stance": "观望",
+    "stance_val": 0,
+    "action_hint": "观望",
+    "signal_score": 0.0,
+    "text": "悠着点吧 杀进270多好。",
+    "tweet_id": 1794
+  },
+  {
+    "date": "2026-05-15",
+    "stance": "看空",
+    "stance_val": 0,
+    "action_hint": "观望",
+    "signal_score": 41.3,
+    "text": "纯韭菜。巴菲特时代结束了。菜到抠脚。追涨谷歌 清仓amzn unh 割肉dpz。amzn unh的上涨一点没吃到。估计已经不是本人操作了。",
+    "tweet_id": 283
+  }
+]

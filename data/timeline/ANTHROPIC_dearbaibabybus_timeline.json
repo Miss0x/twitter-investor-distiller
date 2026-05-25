@@ -1,0 +1,20 @@
+[
+  {
+    "date": "2026-02-27",
+    "stance": "观望",
+    "stance_val": 0,
+    "action_hint": "观望",
+    "signal_score": 0.0,
+    "text": "zoom还有8B现金 22减掉8 14。现在股权就是4B。也就是 zoom 这公司10B。如果再跌跌。是吧。anthropic 翻几倍不是问题 这价钱。所以zoom如果下20B 值得买。你等anthropic上市 估计万亿起步了。",
+    "tweet_id": 1695
+  },
+  {
+    "date": "2026-02-27",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "买入",
+    "signal_score": 32.5,
+    "text": "业务在垃圾不是也赚钱 只不过自己没故事 但是手里的股权 是金山。它手里股权最后至少值几十B。现在买zoom股票相当于 投anthropic万亿市值 送你一个zoom。你赚的就是zoom这个。如果能继续大跌 那就太棒了。杀进20B 不是送钱？",
+    "tweet_id": 1694
+  }
+]

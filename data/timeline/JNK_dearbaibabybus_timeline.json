@@ -1,0 +1,20 @@
+[
+  {
+    "date": "2025-04-07",
+    "stance": "看空",
+    "stance_val": 0,
+    "action_hint": "卖出",
+    "signal_score": 0.0,
+    "text": "并未出现反转信号 垃圾债还是被抛售 市场继续避险。继续等 看来4800 spx未必拦得住",
+    "tweet_id": 1318
+  },
+  {
+    "date": "2025-10-28",
+    "stance": "看空",
+    "stance_val": 0,
+    "action_hint": "观望",
+    "signal_score": 33.7,
+    "text": "jnk跌-0.1大盘必然冲高回落哈。没什么可说的 垃圾债就是神。",
+    "tweet_id": 1547
+  }
+]

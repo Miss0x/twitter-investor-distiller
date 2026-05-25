@@ -1,0 +1,65 @@
+[
+  {
+    "date": "2026-01-30",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "买入",
+    "signal_score": 78.4,
+    "text": "并非这样，而是你没买MU SNDK GLD，你就是菜，不配做分享这类的强盗逻辑，就和上次有人说你买UNH干嘛，放着CPU涨价不买",
+    "tweet_id": 1025
+  },
+  {
+    "date": "2026-04-24",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "买入",
+    "signal_score": 92.6,
+    "text": "左侧做空是送钱，NVDA, SNDK, MU，哪个不是被埋的？\n做对一次，最多发个截图秀一下，且都不敢上大仓位。\n即使通过小波段赚钱了，那为何不一路大仓位做多呢？趋势明显做错了。",
+    "tweet_id": 9
+  },
+  {
+    "date": "2026-05-08",
+    "stance": "中性",
+    "stance_val": 0,
+    "action_hint": "无",
+    "signal_score": 36.6,
+    "text": "不知道买什么，买了fang指数基金，结果中间指数还换进来美光",
+    "tweet_id": 198
+  },
+  {
+    "date": "2026-05-12",
+    "stance": "观望",
+    "stance_val": 0,
+    "action_hint": "观望",
+    "signal_score": 44.0,
+    "text": "昨天赚了8000U，出金了15WU\n\n昨日 \n$CRCL\n \n$MARA\n 财报，波动很大，我手里有差不多6400股  \n$CRCL\n ，一方面是为了应对盘前财报不及预期的下跌，同时保护自己的这些正股（至于为啥没买PUT保护，你别问），我分",
+    "tweet_id": 1134
+  },
+  {
+    "date": "2026-05-12",
+    "stance": "看空",
+    "stance_val": 0,
+    "action_hint": "观望",
+    "signal_score": 37.7,
+    "text": "我今天占卜了美光年，月走势，我觉得那位老师说的有道理的，目前炒作太过了",
+    "tweet_id": 172
+  },
+  {
+    "date": "2026-05-12",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "无",
+    "signal_score": 96.2,
+    "text": "1）HBM特殊之处在于跟先进封装的紧密结合，MU/SS/Hynix是完全照着NVDA/GOOG的GPU/TPU需求提供HBM，所以HBM生意可以有20-30倍PE的定价，而CXMT/YMTC要跟Huawei/寒武纪搭伙，天然全面落后，HBM",
+    "tweet_id": 173
+  },
+  {
+    "date": "2026-05-13",
+    "stance": "观望",
+    "stance_val": 0,
+    "action_hint": "观望",
+    "signal_score": 35.4,
+    "text": "为什么你总是拿不住大肉，却能扛住巨大的亏损\n\n昨晚CPI数据出来，4月同比3.8%，创2023年以来新高。\n\n纳指、高通、英特尔、美光...全都在跌，不乏看到有人说这波结束了。\n\n结果今天不到24小时基本就涨回来了。",
+    "tweet_id": 73
+  }
+]

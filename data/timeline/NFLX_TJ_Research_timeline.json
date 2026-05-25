@@ -1,0 +1,20 @@
+[
+  {
+    "date": "2025-03-30",
+    "stance": "中性",
+    "stance_val": 0,
+    "action_hint": "观望",
+    "signal_score": 17.1,
+    "text": "YTD，罗素1000价值股ETF+0.6%，MAG7跌15.7%\n与其说关税导致的熊市，有没有可能只是板块轮动？年初很多机构都分享过的图（25年展望里我也聊过）：MAG7 EPS增速放缓，493会迎头赶上。\n疫情时候的恐慌和衰退：当时可是罗",
+    "tweet_id": 436
+  },
+  {
+    "date": "2026-05-15",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "加仓",
+    "signal_score": 33.0,
+    "text": "之前的 \n$now\n 仓位还没动，今天加仓降成本！\n另外观察 \n$NFLX",
+    "tweet_id": 79
+  }
+]

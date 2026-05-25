@@ -1,0 +1,56 @@
+[
+  {
+    "date": "2025-04-29",
+    "stance": "中性",
+    "stance_val": 0,
+    "action_hint": "持有",
+    "signal_score": 39.4,
+    "text": "这一波美股的下跌到反弹，从4月2日收盘算起，QQQ点位476，现在差不多也是476。除非我们在下跌之前是20-30%的正股，那么继续拿着20-30%的仓位到现在不亏不赚，不然如果在下跌中不断地交筹码，现在还继续保持低仓位等回调的，那已经错过",
+    "tweet_id": 501
+  },
+  {
+    "date": "2026-02-04",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "加仓",
+    "signal_score": 24.8,
+    "text": "给大家一点信心，纳指的估值，比标普健康很多，26倍，不算高了。上次高点是上年的10月29日，也就是成长股价值股开始轮动的时候。\n如果现在手里BETA低于1或很低的，慢慢可以用QQQ加回来了，没突发事件，下限24倍，再下去10%不到，不认为会",
+    "tweet_id": 1
+  },
+  {
+    "date": "2026-05-08",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "持有",
+    "signal_score": 81.4,
+    "text": "我信仰不够坚定，听了geopoli的谗言到660就停了没有把我的weekly QQQ滚下去。我自罚",
+    "tweet_id": 184
+  },
+  {
+    "date": "2026-05-15",
+    "stance": "无明确方向",
+    "stance_val": 0,
+    "action_hint": "减仓|观望",
+    "signal_score": 0.0,
+    "text": "纳指估值30X。两个策略： 1. 继续每往上涨2%，减X仓位。或者 2. 超买的大仓位标的做适当的移动止盈 接下去是我认为RSP会走得比SPY好的日子。 龔阿天 (@gongatian1) 想問看看桃總的參考指標裡 qqq forward ",
+    "tweet_id": 58
+  },
+  {
+    "date": "2026-05-15",
+    "stance": "无明确方向",
+    "stance_val": 0,
+    "action_hint": "无",
+    "signal_score": 38.6,
+    "text": "Qqq不是纳指",
+    "tweet_id": 1251
+  },
+  {
+    "date": "2026-05-22",
+    "stance": "中性",
+    "stance_val": 0,
+    "action_hint": "观望",
+    "signal_score": 29.4,
+    "text": "怪不得。上次我用koyfin qqq的forward pe对比你的纳斯达克指数forward pe差距巨大",
+    "tweet_id": 1826
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "date": "2026-01-31",
+    "stance": "无明确方向",
+    "stance_val": 0,
+    "action_hint": "无",
+    "signal_score": 36.5,
+    "text": "谷歌财报后嘛",
+    "tweet_id": 1684
+  },
+  {
+    "date": "2026-05-12",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "买入",
+    "signal_score": 78.1,
+    "text": "所以我才要买orcl。这燃料堆的比山还高。只要证明 ai需求没问题 gpu利用率高 oci增速没问题 资本开支不失控 都暴涨 燃料太多了。cds回落 eps上修 pe扩张 直接原地起飞 200bps 个人认为太夸张了 80bps还差不多 有",
+    "tweet_id": 1812
+  },
+  {
+    "date": "2026-05-15",
+    "stance": "看空",
+    "stance_val": 0,
+    "action_hint": "观望",
+    "signal_score": 41.3,
+    "text": "纯韭菜。巴菲特时代结束了。菜到抠脚。追涨谷歌 清仓amzn unh 割肉dpz。amzn unh的上涨一点没吃到。估计已经不是本人操作了。",
+    "tweet_id": 283
+  }
+]

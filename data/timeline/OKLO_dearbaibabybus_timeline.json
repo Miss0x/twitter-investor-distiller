@@ -1,0 +1,74 @@
+[
+  {
+    "date": "2025-10-23",
+    "stance": "中性",
+    "stance_val": 0,
+    "action_hint": "观望",
+    "signal_score": 26.5,
+    "text": "太刺激了。比亚马逊page都刺激。这组合太屌了。他们iren本钱是6块多 24年 我看着他们在那边捡。我真没想到给炒到这价钱 哈哈哈",
+    "tweet_id": 1596
+  },
+  {
+    "date": "2025-10-24",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "买入",
+    "signal_score": 85.2,
+    "text": "昨晚连夜做多 amzn vst ba rcat dlr mp dhi、lmnd oklo昨天就做多了 对冲我的soxs，等 一货车股票。持续关注crwv 等他们骂街割肉。",
+    "tweet_id": 1581
+  },
+  {
+    "date": "2025-10-28",
+    "stance": "中性",
+    "stance_val": 0,
+    "action_hint": "观望",
+    "signal_score": 18.5,
+    "text": "smr突破了。oklo在休息。smr洗太干净了 oklo 好难。",
+    "tweet_id": 1549
+  },
+  {
+    "date": "2025-10-29",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "买入",
+    "signal_score": 51.8,
+    "text": "i love oklo ！",
+    "tweet_id": 1529
+  },
+  {
+    "date": "2025-10-30",
+    "stance": "看空",
+    "stance_val": 0,
+    "action_hint": "观望",
+    "signal_score": 11.6,
+    "text": "怎么回事 跌了？中美又干起来了？哪位政治专家解答一下。呜呜呜我的oklo 我的 vst 我的meta。",
+    "tweet_id": 1511
+  },
+  {
+    "date": "2025-12-30",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "买入",
+    "signal_score": 27.3,
+    "text": "买个oklo 末日 玩玩。极端末日 明天必须涨。",
+    "tweet_id": 1634
+  },
+  {
+    "date": "2025-12-30",
+    "stance": "观望",
+    "stance_val": 0,
+    "action_hint": "观望",
+    "signal_score": 0.0,
+    "text": "留意oklo吧 我末日玩完了。有的时候能不能赚钱买个末日就知道 你今天买进去都不赚钱 那你就是被套了。",
+    "tweet_id": 1627
+  },
+  {
+    "date": "2026-01-30",
+    "stance": "中性",
+    "stance_val": 0,
+    "action_hint": "观望",
+    "signal_score": 0.0,
+    "text": "蓝筹股 大权重不适合两倍etf 你一定是吃亏的，甚至最后跑得跟正股差不多，年波动率其实都是有一定范畴的。这些都有算法，什么适合两倍 oklo smr这种 来时天地皆同力 去时狗几把都不是。太适合了",
+    "tweet_id": 1657
+  }
+]

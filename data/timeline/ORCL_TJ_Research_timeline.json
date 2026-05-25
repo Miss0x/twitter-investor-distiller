@@ -1,0 +1,29 @@
+[
+  {
+    "date": "2025-12-17",
+    "stance": "中性",
+    "stance_val": 0,
+    "action_hint": "观望",
+    "signal_score": 0.0,
+    "text": "$AMZN\n 投100亿给OpenAI\n变向为Oracle背书？",
+    "tweet_id": 965
+  },
+  {
+    "date": "2025-12-18",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "无",
+    "signal_score": 63.4,
+    "text": "我的“分析员”说：微软，甲骨文等等通通延迟，而亚马逊的执行力堪称完美",
+    "tweet_id": 931
+  },
+  {
+    "date": "2025-12-19",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "无",
+    "signal_score": 54.8,
+    "text": "有时间坐下来详细地看了下字节跳动卖美国TIKTOK的合作方案，昨天的X确实不准确，做一个更新：\n1. 成立了独立的合资公司（公司J），公司J的控股权：字节跳动19.9%，美国财团80%，其中甲骨文15%\n2. 字节跳动保留了广告，营销，电商",
+    "tweet_id": 920
+  }
+]

@@ -1,0 +1,47 @@
+[
+  {
+    "date": "2025-09-15",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "买入",
+    "signal_score": 81.5,
+    "text": "放过unh吧 求你了。不过应该炒amd。我准备这周开始干了。",
+    "tweet_id": 1483
+  },
+  {
+    "date": "2025-09-15",
+    "stance": "无明确方向",
+    "stance_val": 0,
+    "action_hint": "观望",
+    "signal_score": 10.0,
+    "text": "先买去买完再研究。涨了牛逼 跌了傻逼",
+    "tweet_id": 1482
+  },
+  {
+    "date": "2025-09-18",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "买入",
+    "signal_score": 48.9,
+    "text": "这不明显 amd 捡钱机会来了。",
+    "tweet_id": 1474
+  },
+  {
+    "date": "2025-10-30",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "观望",
+    "signal_score": 67.2,
+    "text": "我有点fomo amd了 卧槽。她出了多少啊。日了狗 她不会b飞了吧。",
+    "tweet_id": 1492
+  },
+  {
+    "date": "2026-05-21",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "买入",
+    "signal_score": 95.8,
+    "text": "如果你平时看盘的时间不多，喜欢做持有数周左右的波段交易。\n\n我的建议是现阶段重点关注半导体板块即可。\n\n其他的板块也有不错的选择，但半导体整体来说拥有目前最强的趋势，和最多的流动性。无论你买均线回踩还是压力位突破，胜率和盈亏比都比别的板块高",
+    "tweet_id": 1427
+  }
+]

@@ -1,0 +1,47 @@
+[
+  {
+    "date": "2025-10-22",
+    "stance": "看空",
+    "stance_val": 0,
+    "action_hint": "卖出",
+    "signal_score": 8.5,
+    "text": "短线见顶了。没什么可说的 先看6500-6450。soxs 这做空 盈亏比极好。不服可以打我4块止损。我觉得你手里没有子弹。",
+    "tweet_id": 1615
+  },
+  {
+    "date": "2025-10-24",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "观望",
+    "signal_score": 36.1,
+    "text": "完蛋了 彻底认亏出局别在牛市做空！太傻逼了。soxs 认亏出局。爆亏几个点 人生滑铁卢。上证新高了。美股肯定马上刷新新高。呜呜呜",
+    "tweet_id": 1588
+  },
+  {
+    "date": "2025-10-24",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "买入",
+    "signal_score": 85.2,
+    "text": "昨晚连夜做多 amzn vst ba rcat dlr mp dhi、lmnd oklo昨天就做多了 对冲我的soxs，等 一货车股票。持续关注crwv 等他们骂街割肉。",
+    "tweet_id": 1581
+  },
+  {
+    "date": "2026-01-30",
+    "stance": "看空",
+    "stance_val": 0,
+    "action_hint": "买入",
+    "signal_score": 33.5,
+    "text": "买个彩票。看看二月份soxx会不会死妈。",
+    "tweet_id": 1674
+  },
+  {
+    "date": "2026-04-29",
+    "stance": "观望",
+    "stance_val": 0,
+    "action_hint": "观望",
+    "signal_score": 5.2,
+    "text": "soxs吧哈哈哈。开玩笑。我有点担心 市场后续剧烈动荡 我反正啥也不买。对vst有一点点动心 但是可以等 抄佩洛西的底。",
+    "tweet_id": 1759
+  }
+]

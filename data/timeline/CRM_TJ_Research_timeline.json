@@ -1,0 +1,47 @@
+[
+  {
+    "date": "2025-05-27",
+    "stance": "看空",
+    "stance_val": 0,
+    "action_hint": "观望",
+    "signal_score": 10.6,
+    "text": "$CRM\n SALESFORCE 80亿收购INFORMATICA。\n一家一路靠收购过来的公司。22年因为加息关系，市场不好，没有大收购。23，24年因为短期公司内部改变策略，注重盈利，EPS增速大增，所以股价大幅反弹，且收购停止。然后在2",
+    "tweet_id": 525
+  },
+  {
+    "date": "2025-05-27",
+    "stance": "看空",
+    "stance_val": 0,
+    "action_hint": "减仓",
+    "signal_score": 18.7,
+    "text": "$CRM\n SALESFORCE 80亿收购INFORMATICA。\n一家一路靠收购过来的公司。22年因为加息关系，市场不好，没有大收购。23，24年因为短期公司内部改变策略，注重盈利，EPS增速大增，所以股价大幅反弹，且收购停止。然后在2",
+    "tweet_id": 525
+  },
+  {
+    "date": "2025-08-28",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "无",
+    "signal_score": 73.9,
+    "text": "Crm没跟上吗？感觉他们雇那么多销售卖agent，营收不会差啊",
+    "tweet_id": 732
+  },
+  {
+    "date": "2026-02-24",
+    "stance": "中性",
+    "stance_val": 0,
+    "action_hint": "无",
+    "signal_score": 0.0,
+    "text": "看了刚刚ANTHROPIC的新品发布，问了CLAUDE，“你和CRM合作，谁赚得更多？”他的回答如下，他的回答其实和 \n$CRM\n 管理层的看法是一致的，底层模型是COMMODITY，可被替换。的确现在CLAUDE暂时走在了前面。\n----",
+    "tweet_id": 1121
+  },
+  {
+    "date": "2026-05-15",
+    "stance": "观望",
+    "stance_val": 0,
+    "action_hint": "观望",
+    "signal_score": 13.1,
+    "text": "刚刚又和一家基金做完REVIEW，令人叹息。\n背景：\n1. 过去一年跑输标尺16%\n2. 22年11月我视频分享过他们加仓UBER，很多人当时非常不理解，结果证明他们是对的，关注基本面，而不是宏观\n3. 25年4月份关税时没有任何操作\n所以",
+    "tweet_id": 51
+  }
+]

@@ -1,0 +1,38 @@
+[
+  {
+    "date": "2025-03-30",
+    "stance": "无明确方向",
+    "stance_val": 0,
+    "action_hint": "无",
+    "signal_score": 25.0,
+    "text": "罗素1000价值ETF和罗素2000不是一个东西",
+    "tweet_id": 435
+  },
+  {
+    "date": "2025-03-30",
+    "stance": "中性",
+    "stance_val": 0,
+    "action_hint": "无",
+    "signal_score": 16.9,
+    "text": "罗素1000价值ETF，看看里面的持仓，和罗素2000不是一个东西：",
+    "tweet_id": 433
+  },
+  {
+    "date": "2025-10-30",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "持有",
+    "signal_score": 81.5,
+    "text": "DIA IWM RSP都是绿的，dia还涨的不错……怕毛线",
+    "tweet_id": 846
+  },
+  {
+    "date": "2025-11-28",
+    "stance": "观望",
+    "stance_val": 0,
+    "action_hint": "观望",
+    "signal_score": 39.1,
+    "text": "保留一些iwm仓位，是可以的吧？虽然也是指数，但不是spy可以吗？",
+    "tweet_id": 904
+  }
+]

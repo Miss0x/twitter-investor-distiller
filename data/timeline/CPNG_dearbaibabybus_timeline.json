@@ -1,0 +1,29 @@
+[
+  {
+    "date": "2025-10-27",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "买入",
+    "signal_score": 47.7,
+    "text": "cpng在洗盘 我建议 有跌就买 主力炒家前两天在里面了。",
+    "tweet_id": 1568
+  },
+  {
+    "date": "2026-05-14",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "买入",
+    "signal_score": 28.6,
+    "text": "有 cpng吧。我就说了 这是一个 特朗普交易 只是X上这些人不懂。爱莫能助。",
+    "tweet_id": 292
+  },
+  {
+    "date": "2026-05-16",
+    "stance": "看空",
+    "stance_val": 0,
+    "action_hint": "卖出",
+    "signal_score": 0.0,
+    "text": "他好像把cpng清仓了",
+    "tweet_id": 294
+  }
+]

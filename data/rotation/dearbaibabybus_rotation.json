@@ -1,0 +1,398 @@
+[
+  {
+    "week": "2025-06",
+    "topic": "个股分析",
+    "count": 1,
+    "z_score": -0.58
+  },
+  {
+    "week": "2025-06",
+    "topic": "加密货币",
+    "count": 0,
+    "z_score": -0.58
+  },
+  {
+    "week": "2025-06",
+    "topic": "宏观分析",
+    "count": 2,
+    "z_score": -0.72
+  },
+  {
+    "week": "2025-06",
+    "topic": "投资策略",
+    "count": 5,
+    "z_score": 1.18
+  },
+  {
+    "week": "2025-06",
+    "topic": "操作记录",
+    "count": 3,
+    "z_score": 1.0
+  },
+  {
+    "week": "2025-06",
+    "topic": "行业研判",
+    "count": 0,
+    "z_score": 0.0
+  },
+  {
+    "week": "2025-07",
+    "topic": "个股分析",
+    "count": 0,
+    "z_score": -0.85
+  },
+  {
+    "week": "2025-07",
+    "topic": "加密货币",
+    "count": 0,
+    "z_score": -0.58
+  },
+  {
+    "week": "2025-07",
+    "topic": "宏观分析",
+    "count": 1,
+    "z_score": -1.0
+  },
+  {
+    "week": "2025-07",
+    "topic": "投资策略",
+    "count": 0,
+    "z_score": -1.17
+  },
+  {
+    "week": "2025-07",
+    "topic": "操作记录",
+    "count": 0,
+    "z_score": -1.0
+  },
+  {
+    "week": "2025-07",
+    "topic": "行业研判",
+    "count": 0,
+    "z_score": 0.0
+  },
+  {
+    "week": "2025-08",
+    "topic": "个股分析",
+    "count": 8,
+    "z_score": 1.27
+  },
+  {
+    "week": "2025-08",
+    "topic": "加密货币",
+    "count": 0,
+    "z_score": -0.58
+  },
+  {
+    "week": "2025-08",
+    "topic": "宏观分析",
+    "count": 6,
+    "z_score": 1.69
+  },
+  {
+    "week": "2025-08",
+    "topic": "投资策略",
+    "count": 2,
+    "z_score": -0.28
+  },
+  {
+    "week": "2025-08",
+    "topic": "操作记录",
+    "count": 1,
+    "z_score": -0.58
+  },
+  {
+    "week": "2025-08",
+    "topic": "行业研判",
+    "count": 1,
+    "z_score": 1.73
+  },
+  {
+    "week": "2025-09",
+    "topic": "个股分析",
+    "count": 7,
+    "z_score": 0.85
+  },
+  {
+    "week": "2025-09",
+    "topic": "加密货币",
+    "count": 4,
+    "z_score": 1.73
+  },
+  {
+    "week": "2025-09",
+    "topic": "宏观分析",
+    "count": 1,
+    "z_score": -0.73
+  },
+  {
+    "week": "2025-09",
+    "topic": "投资策略",
+    "count": 0,
+    "z_score": -0.86
+  },
+  {
+    "week": "2025-09",
+    "topic": "操作记录",
+    "count": 9,
+    "z_score": 1.65
+  },
+  {
+    "week": "2025-09",
+    "topic": "行业研判",
+    "count": 1,
+    "z_score": 1.0
+  },
+  {
+    "week": "2025-10",
+    "topic": "个股分析",
+    "count": 44,
+    "z_score": 1.7
+  },
+  {
+    "week": "2025-10",
+    "topic": "加密货币",
+    "count": 1,
+    "z_score": -0.15
+  },
+  {
+    "week": "2025-10",
+    "topic": "宏观分析",
+    "count": 7,
+    "z_score": 1.17
+  },
+  {
+    "week": "2025-10",
+    "topic": "投资策略",
+    "count": 13,
+    "z_score": 1.71
+  },
+  {
+    "week": "2025-10",
+    "topic": "操作记录",
+    "count": 20,
+    "z_score": 1.56
+  },
+  {
+    "week": "2025-10",
+    "topic": "行业研判",
+    "count": 0,
+    "z_score": -1.0
+  },
+  {
+    "week": "2025-12",
+    "topic": "个股分析",
+    "count": 6,
+    "z_score": -0.64
+  },
+  {
+    "week": "2025-12",
+    "topic": "加密货币",
+    "count": 1,
+    "z_score": -0.33
+  },
+  {
+    "week": "2025-12",
+    "topic": "宏观分析",
+    "count": 1,
+    "z_score": -0.99
+  },
+  {
+    "week": "2025-12",
+    "topic": "投资策略",
+    "count": 4,
+    "z_score": -0.15
+  },
+  {
+    "week": "2025-12",
+    "topic": "操作记录",
+    "count": 4,
+    "z_score": -0.62
+  },
+  {
+    "week": "2025-12",
+    "topic": "行业研判",
+    "count": 1,
+    "z_score": 0.58
+  },
+  {
+    "week": "2026-01",
+    "topic": "个股分析",
+    "count": 5,
+    "z_score": -0.64
+  },
+  {
+    "week": "2026-01",
+    "topic": "加密货币",
+    "count": 0,
+    "z_score": -1.0
+  },
+  {
+    "week": "2026-01",
+    "topic": "宏观分析",
+    "count": 5,
+    "z_score": 0.58
+  },
+  {
+    "week": "2026-01",
+    "topic": "投资策略",
+    "count": 6,
+    "z_score": 0.05
+  },
+  {
+    "week": "2026-01",
+    "topic": "操作记录",
+    "count": 3,
+    "z_score": -0.89
+  },
+  {
+    "week": "2026-01",
+    "topic": "行业研判",
+    "count": 4,
+    "z_score": 1.67
+  },
+  {
+    "week": "2026-02",
+    "topic": "个股分析",
+    "count": 12,
+    "z_score": -0.3
+  },
+  {
+    "week": "2026-02",
+    "topic": "加密货币",
+    "count": 2,
+    "z_score": 1.41
+  },
+  {
+    "week": "2026-02",
+    "topic": "宏观分析",
+    "count": 0,
+    "z_score": -1.14
+  },
+  {
+    "week": "2026-02",
+    "topic": "投资策略",
+    "count": 2,
+    "z_score": -1.03
+  },
+  {
+    "week": "2026-02",
+    "topic": "操作记录",
+    "count": 0,
+    "z_score": -0.87
+  },
+  {
+    "week": "2026-02",
+    "topic": "行业研判",
+    "count": 2,
+    "z_score": 0.17
+  },
+  {
+    "week": "2026-03",
+    "topic": "个股分析",
+    "count": 2,
+    "z_score": -1.17
+  },
+  {
+    "week": "2026-03",
+    "topic": "加密货币",
+    "count": 0,
+    "z_score": -0.9
+  },
+  {
+    "week": "2026-03",
+    "topic": "宏观分析",
+    "count": 4,
+    "z_score": 0.73
+  },
+  {
+    "week": "2026-03",
+    "topic": "投资策略",
+    "count": 1,
+    "z_score": -1.17
+  },
+  {
+    "week": "2026-03",
+    "topic": "操作记录",
+    "count": 2,
+    "z_score": -0.17
+  },
+  {
+    "week": "2026-03",
+    "topic": "行业研判",
+    "count": 2,
+    "z_score": -0.23
+  },
+  {
+    "week": "2026-04",
+    "topic": "个股分析",
+    "count": 2,
+    "z_score": -0.8
+  },
+  {
+    "week": "2026-04",
+    "topic": "加密货币",
+    "count": 0,
+    "z_score": -0.58
+  },
+  {
+    "week": "2026-04",
+    "topic": "宏观分析",
+    "count": 3,
+    "z_score": 0.0
+  },
+  {
+    "week": "2026-04",
+    "topic": "投资策略",
+    "count": 5,
+    "z_score": 0.73
+  },
+  {
+    "week": "2026-04",
+    "topic": "操作记录",
+    "count": 1,
+    "z_score": -0.45
+  },
+  {
+    "week": "2026-04",
+    "topic": "行业研判",
+    "count": 1,
+    "z_score": -1.15
+  },
+  {
+    "week": "2026-05",
+    "topic": "个股分析",
+    "count": 31,
+    "z_score": 1.63
+  },
+  {
+    "week": "2026-05",
+    "topic": "加密货币",
+    "count": 4,
+    "z_score": 1.51
+  },
+  {
+    "week": "2026-05",
+    "topic": "宏观分析",
+    "count": 24,
+    "z_score": 1.71
+  },
+  {
+    "week": "2026-05",
+    "topic": "投资策略",
+    "count": 14,
+    "z_score": 1.66
+  },
+  {
+    "week": "2026-05",
+    "topic": "操作记录",
+    "count": 7,
+    "z_score": 1.67
+  },
+  {
+    "week": "2026-05",
+    "topic": "行业研判",
+    "count": 3,
+    "z_score": 1.41
+  }
+]

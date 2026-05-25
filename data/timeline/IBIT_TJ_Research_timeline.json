@@ -1,0 +1,38 @@
+[
+  {
+    "date": "2025-05-22",
+    "stance": "看空",
+    "stance_val": 0,
+    "action_hint": "卖出",
+    "signal_score": 18.6,
+    "text": "11月份倪大就持有形同的观点，起码之后两个月证明并不正确，而且之后几个月MSTR回调幅度达到50%\nBTC涨对MSTR不是坏消息和用来看多BTC没关系啊，还是说因为BTC可以涨，所以买MSTR也不错？那为何不买IBIT呢",
+    "tweet_id": 557
+  },
+  {
+    "date": "2025-05-22",
+    "stance": "看空",
+    "stance_val": 0,
+    "action_hint": "观望",
+    "signal_score": 26.7,
+    "text": "11月份倪大就持有形同的观点，起码之后两个月证明并不正确，而且之后几个月MSTR回调幅度达到50%\nBTC涨对MSTR不是坏消息和用来看多BTC没关系啊，还是说因为BTC可以涨，所以买MSTR也不错？那为何不买IBIT呢",
+    "tweet_id": 557
+  },
+  {
+    "date": "2025-05-22",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "买入",
+    "signal_score": 89.6,
+    "text": "所以ibit才是正道，其他的标的都是凭本事，甚至大多人是亏钱的。ibit是只要有耐心就能赚钱",
+    "tweet_id": 550
+  },
+  {
+    "date": "2025-05-22",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "买入",
+    "signal_score": 84.8,
+    "text": "所以ibit才是正道，其他的标的都是凭本事，甚至大多人是亏钱的。ibit是只要有耐心就能赚钱",
+    "tweet_id": 550
+  }
+]

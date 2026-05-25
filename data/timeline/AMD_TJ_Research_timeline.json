@@ -1,0 +1,29 @@
+[
+  {
+    "date": "2025-05-22",
+    "stance": "中性",
+    "stance_val": 0,
+    "action_hint": "观望",
+    "signal_score": 34.4,
+    "text": "为何英伟达进入ai pc会对amd造成威胁？不是恰恰证明amd的路线正确，整块蛋糕会更大吗，就像AMD追赶gpu",
+    "tweet_id": 562
+  },
+  {
+    "date": "2025-05-22",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "持有",
+    "signal_score": 72.4,
+    "text": "为何英伟达进入ai pc会对amd造成威胁？不是恰恰证明amd的路线正确，整块蛋糕会更大吗，就像AMD追赶gpu",
+    "tweet_id": 562
+  },
+  {
+    "date": "2026-05-10",
+    "stance": "无明确方向",
+    "stance_val": 0,
+    "action_hint": "无",
+    "signal_score": 18.1,
+    "text": "远期P/E是现在价格和远期盈利的结果。\nFORWARD P/E = PRICE / FORWARD EPS\n不是P/E越低越便宜，而是P/E越低，EPS增速越快，哪天P/E大幅上涨（要不就是EPS预期放缓，要不就是情绪面溢价），就是要跑的时",
+    "tweet_id": 112
+  }
+]

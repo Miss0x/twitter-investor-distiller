@@ -1,0 +1,29 @@
+[
+  {
+    "date": "2026-01-30",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "买入",
+    "signal_score": 78.4,
+    "text": "并非这样，而是你没买MU SNDK GLD，你就是菜，不配做分享这类的强盗逻辑，就和上次有人说你买UNH干嘛，放着CPU涨价不买",
+    "tweet_id": 1025
+  },
+  {
+    "date": "2026-04-24",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "买入",
+    "signal_score": 92.6,
+    "text": "左侧做空是送钱，NVDA, SNDK, MU，哪个不是被埋的？\n做对一次，最多发个截图秀一下，且都不敢上大仓位。\n即使通过小波段赚钱了，那为何不一路大仓位做多呢？趋势明显做错了。",
+    "tweet_id": 9
+  },
+  {
+    "date": "2026-05-12",
+    "stance": "看空",
+    "stance_val": 0,
+    "action_hint": "观望",
+    "signal_score": 37.7,
+    "text": "我今天占卜了美光年，月走势，我觉得那位老师说的有道理的，目前炒作太过了",
+    "tweet_id": 172
+  }
+]

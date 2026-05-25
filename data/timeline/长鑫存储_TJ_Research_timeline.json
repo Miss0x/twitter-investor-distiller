@@ -1,0 +1,29 @@
+[
+  {
+    "date": "2026-05-12",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "无",
+    "signal_score": 54.8,
+    "text": "这里面其实有俩问题：长鑫在Dram层面的技术，没有长江存储在Nand领域的技术领先，如果放开设备管控，长江在NAND领域很快就能干翻三星之流，长鑫还差点。",
+    "tweet_id": 106
+  },
+  {
+    "date": "2026-05-12",
+    "stance": "中性",
+    "stance_val": 0,
+    "action_hint": "无",
+    "signal_score": 26.2,
+    "text": "NAND 那条线长江 232 层已经 sample 出来，三星 V9 286 层 / SK 海力士 321 层差距没那么大。DRAM 这条卡 HBM 是关键，长鑫连 1z 都没量产，TSV 封装和 PVD 涂胶设备国内连试制都没跑通。短期一",
+    "tweet_id": 137
+  },
+  {
+    "date": "2026-05-12",
+    "stance": "看空",
+    "stance_val": 0,
+    "action_hint": "无",
+    "signal_score": 11.4,
+    "text": "长鑫没韩国专利授权，也没法产hbm",
+    "tweet_id": 160
+  }
+]

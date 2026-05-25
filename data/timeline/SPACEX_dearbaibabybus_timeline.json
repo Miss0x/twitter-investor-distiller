@@ -1,0 +1,38 @@
+[
+  {
+    "date": "2026-05-21",
+    "stance": "观望",
+    "stance_val": 0,
+    "action_hint": "观望",
+    "signal_score": 17.9,
+    "text": "我把firefly全部換成RDW和VOYG了，您覺得如何？\n雖然直接發射市場潛力很大，但擔心未來spacex和 lab利用技術優勢變為成本優勢，把Firefly 這類第三梯隊壓死",
+    "tweet_id": 1431
+  },
+  {
+    "date": "2026-05-21",
+    "stance": "看空",
+    "stance_val": 0,
+    "action_hint": "减仓",
+    "signal_score": 11.2,
+    "text": "。。。不担心通胀和6月份spacex IPO的抽血吗？",
+    "tweet_id": 1435
+  },
+  {
+    "date": "2026-05-21",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "观望",
+    "signal_score": 54.6,
+    "text": "两家都不错，都有成长空间\n\n但我不担心spacex，竞争现在就有 又不是没有，但fly仍然增长飞快",
+    "tweet_id": 1432
+  },
+  {
+    "date": "2026-05-21",
+    "stance": "看空",
+    "stance_val": 0,
+    "action_hint": "减仓",
+    "signal_score": 17.9,
+    "text": "谢谢指教。\n我的认识是：目前firefly 的太空发射主要核心是轻便快速响应军方要求，但成本没有优势（载重不够且没法回收）。从技术上spacex或者 lab要增加火箭快速发射响应业务并非难事。\nFirefly 营收增长很大比例来源于国防订单",
+    "tweet_id": 1446
+  }
+]

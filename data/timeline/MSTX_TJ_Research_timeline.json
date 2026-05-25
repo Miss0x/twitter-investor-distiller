@@ -1,0 +1,29 @@
+[
+  {
+    "date": "2025-02-25",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "买入",
+    "signal_score": 54.8,
+    "text": "早上買入了MSTX 比MSTR香。MSTR已經進入超賣區間了",
+    "tweet_id": 415
+  },
+  {
+    "date": "2025-05-22",
+    "stance": "看空",
+    "stance_val": 0,
+    "action_hint": "卖出",
+    "signal_score": 22.9,
+    "text": "MSTX是2倍ETF，有磨损，大概率永远不会破新高\n另外MSTR都没破新高呢",
+    "tweet_id": 547
+  },
+  {
+    "date": "2025-05-22",
+    "stance": "看空",
+    "stance_val": 0,
+    "action_hint": "卖出",
+    "signal_score": 14.8,
+    "text": "MSTX是2倍ETF，有磨损，大概率永远不会破新高\n另外MSTR都没破新高呢",
+    "tweet_id": 547
+  }
+]

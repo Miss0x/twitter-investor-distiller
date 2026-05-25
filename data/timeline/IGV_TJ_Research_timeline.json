@@ -1,0 +1,29 @@
+[
+  {
+    "date": "2026-02-24",
+    "stance": "观望",
+    "stance_val": 0,
+    "action_hint": "观望",
+    "signal_score": 0.0,
+    "text": "That's literally what I said and felt, waiting to see \n$igv\n making its bottom",
+    "tweet_id": 1117
+  },
+  {
+    "date": "2026-02-24",
+    "stance": "观望",
+    "stance_val": 0,
+    "action_hint": "观望",
+    "signal_score": 0.0,
+    "text": "昨天晚上刷到很多X说今天ANTHROPIC新闻发布会，看看又有哪些软件要被杀跌，如果今天是 \n$IGV\n 的低点，这就有意思了，因为这表明了昨天市场的情绪面是多么的悲观。",
+    "tweet_id": 1116
+  },
+  {
+    "date": "2026-05-15",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "买入",
+    "signal_score": 90.7,
+    "text": "我刚发完看好现在做多 $IGV，做空 $SMH的文章就看到了talk君的文章。",
+    "tweet_id": 336
+  }
+]

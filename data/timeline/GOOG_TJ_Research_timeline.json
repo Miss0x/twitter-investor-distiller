@@ -1,0 +1,83 @@
+[
+  {
+    "date": "2025-03-30",
+    "stance": "中性",
+    "stance_val": 0,
+    "action_hint": "观望",
+    "signal_score": 17.1,
+    "text": "YTD，罗素1000价值股ETF+0.6%，MAG7跌15.7%\n与其说关税导致的熊市，有没有可能只是板块轮动？年初很多机构都分享过的图（25年展望里我也聊过）：MAG7 EPS增速放缓，493会迎头赶上。\n疫情时候的恐慌和衰退：当时可是罗",
+    "tweet_id": 436
+  },
+  {
+    "date": "2025-05-22",
+    "stance": "观望",
+    "stance_val": 0,
+    "action_hint": "观望",
+    "signal_score": 23.6,
+    "text": "好问题，你们选啥？",
+    "tweet_id": 549
+  },
+  {
+    "date": "2025-10-30",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "观望",
+    "signal_score": 84.8,
+    "text": "卖了谷歌和微软的put，刚刚下单。",
+    "tweet_id": 863
+  },
+  {
+    "date": "2025-10-30",
+    "stance": "中性",
+    "stance_val": 0,
+    "action_hint": "观望",
+    "signal_score": 0.0,
+    "text": "“META不要抄底”\n”MSFT要不要换仓去GOOG“\n“GOOG要不要减仓”\n在我看来都是好问题，又都是不好的问题\n因为所有的标的都是一个RISK/REWARD\n首先要问的是这家公司基本面好不好\n然后是机遇和风险（RISK/REWARD）",
+    "tweet_id": 804
+  },
+  {
+    "date": "2026-05-08",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "持有",
+    "signal_score": 94.0,
+    "text": "感謝小桃，從你開始講大科技估值很便宜時我就買了goog、amzn、msft的leaps，除了微軟現在獲利都翻倍了，前天把amzn跟goog部分獲利，十分感謝。\n希望微軟趕快硬起來",
+    "tweet_id": 189
+  },
+  {
+    "date": "2026-05-12",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "无",
+    "signal_score": 96.2,
+    "text": "1）HBM特殊之处在于跟先进封装的紧密结合，MU/SS/Hynix是完全照着NVDA/GOOG的GPU/TPU需求提供HBM，所以HBM生意可以有20-30倍PE的定价，而CXMT/YMTC要跟Huawei/寒武纪搭伙，天然全面落后，HBM",
+    "tweet_id": 173
+  },
+  {
+    "date": "2026-05-15",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "持有",
+    "signal_score": 81.5,
+    "text": "今天账户跌1.24%，英伟达真厉害，不知道大空头现在作何感想，还有前段时间做空NEOCLOUD的🤣\n剩下三个不争气的MAG3，加油哦，把指数带到更高去。今天没视频，比较忙。明天盘后会有13F，看看一季度机构，大佬都干了啥，估计很多卖微软，买",
+    "tweet_id": 59
+  },
+  {
+    "date": "2026-05-19",
+    "stance": "中性",
+    "stance_val": 0,
+    "action_hint": "无",
+    "signal_score": 28.1,
+    "text": "段永平的Q1持仓也出来了，我观察到几个亮点：\n\n和但斌一样，也入了稳定币 \n$CRCL\n\n\n买了巴菲特刚清仓的 \n$UNH\n\n\n还小买了5个AI相关 \n$PLTR\n \n$CRWD\n \n$SNPS\n \n$SNOW\n \n$INOD\n\n\n大幅增持",
+    "tweet_id": 1129
+  },
+  {
+    "date": "2026-05-19",
+    "stance": "中性",
+    "stance_val": 0,
+    "action_hint": "无",
+    "signal_score": 19.3,
+    "text": "段永平的 13F 出来了，有点意思\n\n- 终于建仓了 \n$TSLA\n , 建仓价 371，大概率是 sell put 进来的。而且量不小 6.34%，一下子成为了 top5 仓位\n- 买了一点点 \n$CRCL\n , 0.1%, 不知道是哪位",
+    "tweet_id": 1123
+  }
+]

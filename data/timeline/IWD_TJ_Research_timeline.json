@@ -1,0 +1,20 @@
+[
+  {
+    "date": "2025-03-30",
+    "stance": "无明确方向",
+    "stance_val": 0,
+    "action_hint": "无",
+    "signal_score": 25.0,
+    "text": "罗素1000价值ETF和罗素2000不是一个东西",
+    "tweet_id": 435
+  },
+  {
+    "date": "2025-03-30",
+    "stance": "中性",
+    "stance_val": 0,
+    "action_hint": "无",
+    "signal_score": 16.9,
+    "text": "罗素1000价值ETF，看看里面的持仓，和罗素2000不是一个东西：",
+    "tweet_id": 433
+  }
+]

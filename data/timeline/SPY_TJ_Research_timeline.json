@@ -1,0 +1,65 @@
+[
+  {
+    "date": "2025-08-28",
+    "stance": "无明确方向",
+    "stance_val": 0,
+    "action_hint": "无",
+    "signal_score": 30.7,
+    "text": "SPY",
+    "tweet_id": 730
+  },
+  {
+    "date": "2025-08-30",
+    "stance": "中性",
+    "stance_val": 0,
+    "action_hint": "观望",
+    "signal_score": 19.8,
+    "text": "如果人家满仓spy呢，风险高吗，看标的，看人",
+    "tweet_id": 695
+  },
+  {
+    "date": "2025-10-30",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "无",
+    "signal_score": 67.9,
+    "text": "spy 跌了0.34%都不算回调吧",
+    "tweet_id": 847
+  },
+  {
+    "date": "2025-11-27",
+    "stance": "中性",
+    "stance_val": 0,
+    "action_hint": "观望",
+    "signal_score": 32.9,
+    "text": "我觉得我看懂你说的降beta： \n25年SPY 15% 的回报一部分来自盈利增长，一部分来自multiple 升高。\n你降beta 并不是说26年你不看好市场，而是你仍然看好盈利增长，但不确认是否还有multiple 升高。所以你持仓的调整",
+    "tweet_id": 903
+  },
+  {
+    "date": "2025-11-28",
+    "stance": "观望",
+    "stance_val": 0,
+    "action_hint": "观望",
+    "signal_score": 39.1,
+    "text": "保留一些iwm仓位，是可以的吧？虽然也是指数，但不是spy可以吗？",
+    "tweet_id": 904
+  },
+  {
+    "date": "2026-01-30",
+    "stance": "中性",
+    "stance_val": 0,
+    "action_hint": "观望",
+    "signal_score": 21.8,
+    "text": "有些人你注定没法一起走下去，因为大家理解完全不同。\n一月份到现在账户没涨没跌，跑输了标普，我的目标从来不是每周，每月都跑赢标普，今年的目标就是标普15%的话我也15%。自己去把握和衡量吧。\n看到这类流言我挺释怀的，分享出来供大家参考",
+    "tweet_id": 1027
+  },
+  {
+    "date": "2026-05-15",
+    "stance": "无明确方向",
+    "stance_val": 0,
+    "action_hint": "减仓|观望",
+    "signal_score": 0.0,
+    "text": "纳指估值30X。两个策略： 1. 继续每往上涨2%，减X仓位。或者 2. 超买的大仓位标的做适当的移动止盈 接下去是我认为RSP会走得比SPY好的日子。 龔阿天 (@gongatian1) 想問看看桃總的參考指標裡 qqq forward ",
+    "tweet_id": 58
+  }
+]

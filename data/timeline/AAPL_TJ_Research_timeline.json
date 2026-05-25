@@ -1,0 +1,101 @@
+[
+  {
+    "date": "2025-01-28",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "观望",
+    "signal_score": 51.4,
+    "text": "3/（1）我很认同，这应该也是为何昨天苹果涨得原因或者背后的交易逻辑吧",
+    "tweet_id": 368
+  },
+  {
+    "date": "2025-03-30",
+    "stance": "中性",
+    "stance_val": 0,
+    "action_hint": "观望",
+    "signal_score": 17.1,
+    "text": "YTD，罗素1000价值股ETF+0.6%，MAG7跌15.7%\n与其说关税导致的熊市，有没有可能只是板块轮动？年初很多机构都分享过的图（25年展望里我也聊过）：MAG7 EPS增速放缓，493会迎头赶上。\n疫情时候的恐慌和衰退：当时可是罗",
+    "tweet_id": 436
+  },
+  {
+    "date": "2025-10-30",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "持有",
+    "signal_score": 24.8,
+    "text": "是，的确不一样，当时是被动的营收增速放缓（受苹果牵制）+主动的元宇宙投资\n这次营收不受影响+主动的AI 科研",
+    "tweet_id": 808
+  },
+  {
+    "date": "2026-02-26",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "持有",
+    "signal_score": 62.7,
+    "text": "未来有一天，年底或者明年，苹果加入AI推理，到时看看是不是还担心没人买算力，没人买芯片了。这个世界上口袋最深的那位还在厚积薄发（场外观战）呢。",
+    "tweet_id": 1079
+  },
+  {
+    "date": "2026-02-27",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "持有",
+    "signal_score": 79.4,
+    "text": "两个月，终于转正了，YTD 1.2%。在价值股强，大科技弱大形势下，不容易。\n正贡献：GE CRCL AAPL\n负贡献：几乎其他所有\n手里拿着大科技，从来没如此安心过",
+    "tweet_id": 1061
+  },
+  {
+    "date": "2026-03-27",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "买入",
+    "signal_score": 26.2,
+    "text": "BUY MORE!\n苹果今天宣布将会允许SIRI和所有大模型整合，怎么理解？\n1. 苹果内部自研模型解决最基本用户需求\n2. 智商不够的，通过和GEMINI合作的模型在私云上运行，保护用户数据\n3. SIRI现在只和CHATGPT合作，未来",
+    "tweet_id": 1199
+  },
+  {
+    "date": "2026-05-12",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "持有",
+    "signal_score": 84.0,
+    "text": "炒多了山寨，把我格局炒小了。\n\n利好兑现我就想着止盈避险 。\n\n懂哥跟我说美股不需要谈避险。\n\n118卖飞了 \n$crcl\n\n\n现在131了，不至于气的锤jb，也很伤心。\n\n\n@MSX_CN\n 麦通在美区上线了app store\n\n也有中文",
+    "tweet_id": 1139
+  },
+  {
+    "date": "2026-05-15",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "持有",
+    "signal_score": 79.7,
+    "text": "所以很多时候别嫌老狗走得慢，那是因为老狗稳：AAPL",
+    "tweet_id": 55
+  },
+  {
+    "date": "2026-05-15",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "持有",
+    "signal_score": 83.0,
+    "text": "即使有老狗和巨软的加持，还是架不住英特尔的小瀑布😂。-2.8% 投资TALK君 (@TJ_Research) 所以很多时候别嫌老狗走得慢，那是因为老狗稳：AAPL — https://nitter.net/TJ_Research/statu",
+    "tweet_id": 54
+  },
+  {
+    "date": "2026-05-19",
+    "stance": "中性",
+    "stance_val": 0,
+    "action_hint": "无",
+    "signal_score": 28.1,
+    "text": "段永平的Q1持仓也出来了，我观察到几个亮点：\n\n和但斌一样，也入了稳定币 \n$CRCL\n\n\n买了巴菲特刚清仓的 \n$UNH\n\n\n还小买了5个AI相关 \n$PLTR\n \n$CRWD\n \n$SNPS\n \n$SNOW\n \n$INOD\n\n\n大幅增持",
+    "tweet_id": 1129
+  },
+  {
+    "date": "2026-05-19",
+    "stance": "中性",
+    "stance_val": 0,
+    "action_hint": "无",
+    "signal_score": 19.3,
+    "text": "段永平的 13F 出来了，有点意思\n\n- 终于建仓了 \n$TSLA\n , 建仓价 371，大概率是 sell put 进来的。而且量不小 6.34%，一下子成为了 top5 仓位\n- 买了一点点 \n$CRCL\n , 0.1%, 不知道是哪位",
+    "tweet_id": 1123
+  }
+]

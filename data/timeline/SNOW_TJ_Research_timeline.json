@@ -1,0 +1,29 @@
+[
+  {
+    "date": "2026-05-19",
+    "stance": "中性",
+    "stance_val": 0,
+    "action_hint": "无",
+    "signal_score": 28.1,
+    "text": "段永平的Q1持仓也出来了，我观察到几个亮点：\n\n和但斌一样，也入了稳定币 \n$CRCL\n\n\n买了巴菲特刚清仓的 \n$UNH\n\n\n还小买了5个AI相关 \n$PLTR\n \n$CRWD\n \n$SNPS\n \n$SNOW\n \n$INOD\n\n\n大幅增持",
+    "tweet_id": 1129
+  },
+  {
+    "date": "2026-05-19",
+    "stance": "中性",
+    "stance_val": 0,
+    "action_hint": "无",
+    "signal_score": 19.3,
+    "text": "段永平的 13F 出来了，有点意思\n\n- 终于建仓了 \n$TSLA\n , 建仓价 371，大概率是 sell put 进来的。而且量不小 6.34%，一下子成为了 top5 仓位\n- 买了一点点 \n$CRCL\n , 0.1%, 不知道是哪位",
+    "tweet_id": 1123
+  },
+  {
+    "date": "2026-05-20",
+    "stance": "看空",
+    "stance_val": 0,
+    "action_hint": "无",
+    "signal_score": 41.4,
+    "text": "SpaceX一年营收190亿，亏损26亿。现在收购了XAI，有了ANTHROPIC的订单，预计一年营收150亿，收购来的一个数据中心营收就将近SpaceX的75%。所以接下去财报营收增速会很好看，但是收购来的数据中心就值最多市值700亿，营",
+    "tweet_id": 64
+  }
+]

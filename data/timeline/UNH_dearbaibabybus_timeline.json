@@ -1,0 +1,92 @@
+[
+  {
+    "date": "2025-05-17",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "买入",
+    "signal_score": 37.2,
+    "text": "unh 没事 无需大惊小怪。基本面依旧牛逼 股价杀过头了",
+    "tweet_id": 1348
+  },
+  {
+    "date": "2025-08-17",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "买入",
+    "signal_score": 87.9,
+    "text": "直接elv cnc unh 据我了解 中期选举 之前川普会taco 医保政策 因为这个政策对红州选票受到伤害，医保公司可以涨价 最关键一个 估值已经完全定价所有利空了。",
+    "tweet_id": 1418
+  },
+  {
+    "date": "2025-08-27",
+    "stance": "看空",
+    "stance_val": 0,
+    "action_hint": "观望",
+    "signal_score": 28.4,
+    "text": "I hope unh can going down. My plenty of bullets.",
+    "tweet_id": 1403
+  },
+  {
+    "date": "2025-09-15",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "买入",
+    "signal_score": 81.5,
+    "text": "放过unh吧 求你了。不过应该炒amd。我准备这周开始干了。",
+    "tweet_id": 1483
+  },
+  {
+    "date": "2025-09-26",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "买入",
+    "signal_score": 67.3,
+    "text": "又他妈“taco”了？医保你也taco吧。买了不少unh cnc elv",
+    "tweet_id": 1452
+  },
+  {
+    "date": "2026-04-29",
+    "stance": "看空",
+    "stance_val": 0,
+    "action_hint": "减仓",
+    "signal_score": 0.0,
+    "text": "垃圾 企业文化很狼性 算是唯一亮点 业务都是一坨大便 巴菲特永远不会买这种公司去 商业模式不行。又不能保证不被告 或者拿到各种药授权。来是一阵风 去时全合理。减肥药的周期结束了。买的话就是lly 其他不用看了。药你要么特别懂要么就别碰 每一",
+    "tweet_id": 1768
+  },
+  {
+    "date": "2026-05-15",
+    "stance": "看空",
+    "stance_val": 0,
+    "action_hint": "观望",
+    "signal_score": 41.3,
+    "text": "纯韭菜。巴菲特时代结束了。菜到抠脚。追涨谷歌 清仓amzn unh 割肉dpz。amzn unh的上涨一点没吃到。估计已经不是本人操作了。",
+    "tweet_id": 283
+  },
+  {
+    "date": "2026-05-15",
+    "stance": "看空",
+    "stance_val": 0,
+    "action_hint": "卖出",
+    "signal_score": 40.1,
+    "text": "去年就不做了。已经是阿贝尔了。我只能说拉完了。伯克希尔哈撒韦一定会出现至暗时刻 巴菲特的这点家底不够他割肉的。卖掉unh amzn v ma 买入梅西百货。差评拉满了。",
+    "tweet_id": 282
+  },
+  {
+    "date": "2026-05-15",
+    "stance": "看空",
+    "stance_val": 0,
+    "action_hint": "观望",
+    "signal_score": 31.6,
+    "text": "最关键成本在350左右。我还说巴菲特就该给unh买下来。没想到清仓了。我要笑话一辈子了。",
+    "tweet_id": 281
+  },
+  {
+    "date": "2026-05-16",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "持有",
+    "signal_score": 55.2,
+    "text": "190多清仓 \n$AMZN\n , 260多清仓 \n$UNH\n 的话，那可以写进韭菜教科书了",
+    "tweet_id": 305
+  }
+]

@@ -1,0 +1,20 @@
+[
+  {
+    "date": "2025-05-30",
+    "stance": "观望",
+    "stance_val": 0,
+    "action_hint": "观望",
+    "signal_score": 0.0,
+    "text": "估值合理偏低估 等待长线建仓的机会。跌破105的话就好极了 希望fed别让我失望。",
+    "tweet_id": 1325
+  },
+  {
+    "date": "2025-10-24",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "买入",
+    "signal_score": 85.2,
+    "text": "昨晚连夜做多 amzn vst ba rcat dlr mp dhi、lmnd oklo昨天就做多了 对冲我的soxs，等 一货车股票。持续关注crwv 等他们骂街割肉。",
+    "tweet_id": 1581
+  }
+]

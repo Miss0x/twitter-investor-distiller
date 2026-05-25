@@ -1,0 +1,92 @@
+[
+  {
+    "date": "2025-09-26",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "买入",
+    "signal_score": 81.4,
+    "text": "英特尔保守一点，三年再翻倍，3200亿。。。",
+    "tweet_id": 767
+  },
+  {
+    "date": "2025-11-28",
+    "stance": "中性",
+    "stance_val": 0,
+    "action_hint": "观望",
+    "signal_score": 5.0,
+    "text": "周三加的SOXS，降的BETA，英伟达成功被干下来，但是被自己英特尔的ALPHA干爆了",
+    "tweet_id": 873
+  },
+  {
+    "date": "2026-01-30",
+    "stance": "中性",
+    "stance_val": 0,
+    "action_hint": "观望",
+    "signal_score": 21.8,
+    "text": "有些人你注定没法一起走下去，因为大家理解完全不同。\n一月份到现在账户没涨没跌，跑输了标普，我的目标从来不是每周，每月都跑赢标普，今年的目标就是标普15%的话我也15%。自己去把握和衡量吧。\n看到这类流言我挺释怀的，分享出来供大家参考",
+    "tweet_id": 1027
+  },
+  {
+    "date": "2026-01-30",
+    "stance": "中性",
+    "stance_val": 0,
+    "action_hint": "持有",
+    "signal_score": 18.8,
+    "text": "GE成本130\nINTC 成本22.6\nMSFT成本464",
+    "tweet_id": 1026
+  },
+  {
+    "date": "2026-04-24",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "持有",
+    "signal_score": 96.2,
+    "text": "刚听完英特尔财报，我知道最近涨太凶了，很多人拿不住了，但希望你有时间去听听陈立武的发言。\n我追踪上百家公司里让我最安心的两家公司的管理层是台积电和阿斯麦，纯个人感受。今天听完之后，我愿意把陈立武放进去。\n1. 客户至上（台积电的风格）\n2.",
+    "tweet_id": 18
+  },
+  {
+    "date": "2026-04-24",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "无",
+    "signal_score": 81.4,
+    "text": "Intel盘后大涨，这次电话会非常值得看。CEO Lip-Bu Tan讲Intel如何重新回到AI时代的牌桌上？\n\n他把重点放在两个位置。第一，AI从训练走向推理和agent以后，CPU的价值会重新被市场看见。第二，Intel Foundr",
+    "tweet_id": 17
+  },
+  {
+    "date": "2026-05-10",
+    "stance": "无明确方向",
+    "stance_val": 0,
+    "action_hint": "无",
+    "signal_score": 18.1,
+    "text": "远期P/E是现在价格和远期盈利的结果。\nFORWARD P/E = PRICE / FORWARD EPS\n不是P/E越低越便宜，而是P/E越低，EPS增速越快，哪天P/E大幅上涨（要不就是EPS预期放缓，要不就是情绪面溢价），就是要跑的时",
+    "tweet_id": 112
+  },
+  {
+    "date": "2026-05-12",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "无",
+    "signal_score": 75.2,
+    "text": "聊一下Intel的EMIB-T，这个技术可能在未来两年改变先进封装的竞争格局。",
+    "tweet_id": 101
+  },
+  {
+    "date": "2026-05-13",
+    "stance": "观望",
+    "stance_val": 0,
+    "action_hint": "观望",
+    "signal_score": 35.4,
+    "text": "为什么你总是拿不住大肉，却能扛住巨大的亏损\n\n昨晚CPI数据出来，4月同比3.8%，创2023年以来新高。\n\n纳指、高通、英特尔、美光...全都在跌，不乏看到有人说这波结束了。\n\n结果今天不到24小时基本就涨回来了。",
+    "tweet_id": 73
+  },
+  {
+    "date": "2026-05-15",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "持有",
+    "signal_score": 83.0,
+    "text": "即使有老狗和巨软的加持，还是架不住英特尔的小瀑布😂。-2.8% 投资TALK君 (@TJ_Research) 所以很多时候别嫌老狗走得慢，那是因为老狗稳：AAPL — https://nitter.net/TJ_Research/statu",
+    "tweet_id": 54
+  }
+]

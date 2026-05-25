@@ -1,0 +1,119 @@
+[
+  {
+    "date": "2025-10-29",
+    "stance": "看空",
+    "stance_val": 0,
+    "action_hint": "观望",
+    "signal_score": 41.2,
+    "text": "bye meta。",
+    "tweet_id": 1523
+  },
+  {
+    "date": "2025-10-29",
+    "stance": "观望",
+    "stance_val": 0,
+    "action_hint": "观望",
+    "signal_score": 36.5,
+    "text": "700meta 抄底吗",
+    "tweet_id": 1521
+  },
+  {
+    "date": "2025-10-29",
+    "stance": "观望",
+    "stance_val": 0,
+    "action_hint": "观望",
+    "signal_score": 41.2,
+    "text": "猫姐准备抄底meta吗",
+    "tweet_id": 1520
+  },
+  {
+    "date": "2025-10-29",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "买入",
+    "signal_score": 89.1,
+    "text": "683.63买入了meta。买着玩",
+    "tweet_id": 1519
+  },
+  {
+    "date": "2025-10-29",
+    "stance": "看空",
+    "stance_val": 0,
+    "action_hint": "减仓",
+    "signal_score": 47.9,
+    "text": "给老子笑死了 在亚马逊里面挨打。meta msft 扑街 亚马逊跟着抖。基本面不如他们俩是吧。",
+    "tweet_id": 1516
+  },
+  {
+    "date": "2025-10-30",
+    "stance": "看空",
+    "stance_val": 0,
+    "action_hint": "观望",
+    "signal_score": 11.6,
+    "text": "怎么回事 跌了？中美又干起来了？哪位政治专家解答一下。呜呜呜我的oklo 我的 vst 我的meta。",
+    "tweet_id": 1511
+  },
+  {
+    "date": "2025-10-30",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "买入",
+    "signal_score": 29.1,
+    "text": "I lovvvvvvve. Meta 都骂meta的时候 买meta。",
+    "tweet_id": 1508
+  },
+  {
+    "date": "2025-10-30",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "买入",
+    "signal_score": 29.1,
+    "text": "buy！META！",
+    "tweet_id": 1506
+  },
+  {
+    "date": "2025-10-30",
+    "stance": "看空",
+    "stance_val": 0,
+    "action_hint": "观望",
+    "signal_score": 0.0,
+    "text": "让你们买meta 没让你们卖amzn  呜呜呜 两头挨打",
+    "tweet_id": 1505
+  },
+  {
+    "date": "2025-10-30",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "观望",
+    "signal_score": 24.6,
+    "text": "有人抄底meta的同时 大肆购买甲骨文哦。",
+    "tweet_id": 1502
+  },
+  {
+    "date": "2025-10-30",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "买入",
+    "signal_score": 67.9,
+    "text": "我重仓亚马逊。这个季度和下一个季度财报会很好 我其实吃不准 先买了。meta这季度是肯定不好 早知道。amzn55开了。这季度不行 就装死到下季度了 宁可被套不可踏空",
+    "tweet_id": 1501
+  },
+  {
+    "date": "2025-10-30",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "买入",
+    "signal_score": 67.9,
+    "text": "我是说amzn 这个季度或者下个季度很好 吃不准 先买了。被套不怕 meta这季度就是不行。",
+    "tweet_id": 1500
+  },
+  {
+    "date": "2026-05-12",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "买入",
+    "signal_score": 78.1,
+    "text": "所以我才要买orcl。这燃料堆的比山还高。只要证明 ai需求没问题 gpu利用率高 oci增速没问题 资本开支不失控 都暴涨 燃料太多了。cds回落 eps上修 pe扩张 直接原地起飞 200bps 个人认为太夸张了 80bps还差不多 有",
+    "tweet_id": 1812
+  }
+]

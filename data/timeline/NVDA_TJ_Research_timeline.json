@@ -1,0 +1,290 @@
+[
+  {
+    "date": "2025-02-25",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "买入",
+    "signal_score": 36.2,
+    "text": "3个月前，英伟达发财报，MSTR溢价3.4，马上英伟达又要发财报了，MSTR溢价1.5。过去一年左右的相对低位，现在买不香吗？\n留言区有人提醒我MARA的BTC持有量接近市值了，我去验证了一下，确实。只是需要注意因为挖矿公司有债务，所以EV",
+    "tweet_id": 400
+  },
+  {
+    "date": "2025-02-25",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "买入",
+    "signal_score": 28.1,
+    "text": "3个月前，英伟达发财报，MSTR溢价3.4，马上英伟达又要发财报了，MSTR溢价1.5。过去一年左右的相对低位，现在买不香吗？\n留言区有人提醒我MARA的BTC持有量接近市值了，我去验证了一下，确实。只是需要注意因为挖矿公司有债务，所以EV",
+    "tweet_id": 405
+  },
+  {
+    "date": "2025-02-26",
+    "stance": "看空",
+    "stance_val": 0,
+    "action_hint": "卖出/观望",
+    "signal_score": 14.5,
+    "text": "不会买英伟达，一个是上涨空间有限，最重要的是违反芯片制裁，早晚被制裁风险太大",
+    "tweet_id": 430
+  },
+  {
+    "date": "2025-02-26",
+    "stance": "中性",
+    "stance_val": 0,
+    "action_hint": "观望",
+    "signal_score": 0.0,
+    "text": "Absolutely! Evaluating MSTR's premium alongside NVIDIA's financials is crucial. With MARA's BTC holdings nearing market ",
+    "tweet_id": 429
+  },
+  {
+    "date": "2025-02-27",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "无",
+    "signal_score": 29.9,
+    "text": "现在英伟达下跌了6%，我看了下华尔街上调了3，4季度得EPS增速。原本26财年49%EPS增速，现在是52%，因为下半年MARGIN回升",
+    "tweet_id": 385
+  },
+  {
+    "date": "2025-03-28",
+    "stance": "中性",
+    "stance_val": 0,
+    "action_hint": "持有",
+    "signal_score": 0.0,
+    "text": "nvda我一路抄下来已经没钱了",
+    "tweet_id": 482
+  },
+  {
+    "date": "2025-03-29",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "持有",
+    "signal_score": 57.4,
+    "text": "80%TLSA，20%NVDA，静仓位 20%",
+    "tweet_id": 485
+  },
+  {
+    "date": "2025-04-29",
+    "stance": "观望",
+    "stance_val": 0,
+    "action_hint": "观望",
+    "signal_score": 20.9,
+    "text": "何时是好的进场点？拿英伟达，我自己的反例举个例子",
+    "tweet_id": 493
+  },
+  {
+    "date": "2025-05-22",
+    "stance": "中性",
+    "stance_val": 0,
+    "action_hint": "观望",
+    "signal_score": 34.4,
+    "text": "为何英伟达进入ai pc会对amd造成威胁？不是恰恰证明amd的路线正确，整块蛋糕会更大吗，就像AMD追赶gpu",
+    "tweet_id": 562
+  },
+  {
+    "date": "2025-05-22",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "持有",
+    "signal_score": 72.4,
+    "text": "为何英伟达进入ai pc会对amd造成威胁？不是恰恰证明amd的路线正确，整块蛋糕会更大吗，就像AMD追赶gpu",
+    "tweet_id": 562
+  },
+  {
+    "date": "2025-05-22",
+    "stance": "观望",
+    "stance_val": 0,
+    "action_hint": "观望",
+    "signal_score": 23.6,
+    "text": "好问题，你们选啥？",
+    "tweet_id": 549
+  },
+  {
+    "date": "2025-08-28",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "买入",
+    "signal_score": 62.9,
+    "text": "是我听错了还是屁股决定脑袋？为啥这次英伟达财报听完这么BULLISH？\n“4家大厂一年资本开支已经6000亿，我认为我们可以占据很大一部分的市场”+没有否认明年的50%AI增速\n市场现在预期明年增速30%...",
+    "tweet_id": 735
+  },
+  {
+    "date": "2025-08-28",
+    "stance": "中性",
+    "stance_val": 0,
+    "action_hint": "无",
+    "signal_score": 14.8,
+    "text": "华尔街的标题，我一脸黑人问号。写文章的是AI吧，准备两套文案，先看股价如何，再决定发哪套",
+    "tweet_id": 734
+  },
+  {
+    "date": "2025-08-28",
+    "stance": "看空",
+    "stance_val": 0,
+    "action_hint": "观望",
+    "signal_score": 14.8,
+    "text": "好的，今晚我视频的标题，英伟达暴雷",
+    "tweet_id": 733
+  },
+  {
+    "date": "2025-10-30",
+    "stance": "中性",
+    "stance_val": 0,
+    "action_hint": "无",
+    "signal_score": 41.4,
+    "text": "中美协议\n1. 中国购买大豆\n2. 中国购买英伟达芯片，瘦身版\n3. 美国降10%芬太尼，把总共关税从55%降到45%（25%是老关税，10%是新的全球反制关税，10%是芬太尼留下的关税）,后面又聊到了47%，差不多吧\n4. 签一年协议，每",
+    "tweet_id": 818
+  },
+  {
+    "date": "2025-10-30",
+    "stance": "中性",
+    "stance_val": 0,
+    "action_hint": "观望",
+    "signal_score": 41.4,
+    "text": "他说中国会和英伟达谈，川普是个裁判，但是没有谈到blackwell",
+    "tweet_id": 816
+  },
+  {
+    "date": "2025-10-30",
+    "stance": "看空",
+    "stance_val": 0,
+    "action_hint": "卖出",
+    "signal_score": 0.0,
+    "text": "我完全相反的看法，meta的变现已经反应在财报里了，可验证的结果。泡沫在msft背后的需求没了，或者订单延后，微软不怕是因为即使需求没了，大不了不买gpu了，把订单合约履行掉义务，数据中心的布局完全可以渡过周期。\n最大的影响会是英伟达",
+    "tweet_id": 805
+  },
+  {
+    "date": "2025-11-28",
+    "stance": "中性",
+    "stance_val": 0,
+    "action_hint": "观望",
+    "signal_score": 5.0,
+    "text": "周三加的SOXS，降的BETA，英伟达成功被干下来，但是被自己英特尔的ALPHA干爆了",
+    "tweet_id": 873
+  },
+  {
+    "date": "2026-02-25",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "持有",
+    "signal_score": 75.3,
+    "text": "按摩店仍然在靠送芯片合作就足够说明英伟达有绝对的定价权，至少暂时是这样",
+    "tweet_id": 1097
+  },
+  {
+    "date": "2026-02-26",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "无",
+    "signal_score": 49.2,
+    "text": "说两个非市场共识：\n英伟达的估值，起码定价了很多AI泡沫论。\n微软能把Copilot做好，切会成为非常成功的产品。",
+    "tweet_id": 1072
+  },
+  {
+    "date": "2026-03-27",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "观望",
+    "signal_score": 21.4,
+    "text": "等市场对英伟达更悲观些",
+    "tweet_id": 1190
+  },
+  {
+    "date": "2026-04-24",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "持有",
+    "signal_score": 92.6,
+    "text": "3月底：“英伟达便宜，博通便宜，微软便宜”(短期，中期，长期)\n现在：“纳指仍然便宜😂”（中期，长期）\nHOLD IT，留一些现金让你心态上好一点就够了。",
+    "tweet_id": 11
+  },
+  {
+    "date": "2026-04-24",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "买入",
+    "signal_score": 92.6,
+    "text": "左侧做空是送钱，NVDA, SNDK, MU，哪个不是被埋的？\n做对一次，最多发个截图秀一下，且都不敢上大仓位。\n即使通过小波段赚钱了，那为何不一路大仓位做多呢？趋势明显做错了。",
+    "tweet_id": 9
+  },
+  {
+    "date": "2026-04-25",
+    "stance": "中性",
+    "stance_val": 0,
+    "action_hint": "无",
+    "signal_score": 31.6,
+    "text": "比我做得好得很多。\n亏损离场的标的21年可太多了：比如TDOC（-75%）。OPEN最后亏得不多，波段做了很多，但那时很上头。很多小黑粉还会拿那些标的出来说，说明这几年确实聊资不多😂\n卖飞得也很多：23年初卖飞英伟达，卖飞META，25年卖",
+    "tweet_id": 8
+  },
+  {
+    "date": "2026-05-12",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "持有",
+    "signal_score": 84.0,
+    "text": "炒多了山寨，把我格局炒小了。\n\n利好兑现我就想着止盈避险 。\n\n懂哥跟我说美股不需要谈避险。\n\n118卖飞了 \n$crcl\n\n\n现在131了，不至于气的锤jb，也很伤心。\n\n\n@MSX_CN\n 麦通在美区上线了app store\n\n也有中文",
+    "tweet_id": 1139
+  },
+  {
+    "date": "2026-05-12",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "无",
+    "signal_score": 96.2,
+    "text": "1）HBM特殊之处在于跟先进封装的紧密结合，MU/SS/Hynix是完全照着NVDA/GOOG的GPU/TPU需求提供HBM，所以HBM生意可以有20-30倍PE的定价，而CXMT/YMTC要跟Huawei/寒武纪搭伙，天然全面落后，HBM",
+    "tweet_id": 173
+  },
+  {
+    "date": "2026-05-15",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "持有",
+    "signal_score": 81.5,
+    "text": "今天账户跌1.24%，英伟达真厉害，不知道大空头现在作何感想，还有前段时间做空NEOCLOUD的🤣\n剩下三个不争气的MAG3，加油哦，把指数带到更高去。今天没视频，比较忙。明天盘后会有13F，看看一季度机构，大佬都干了啥，估计很多卖微软，买",
+    "tweet_id": 59
+  },
+  {
+    "date": "2026-05-15",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "持有",
+    "signal_score": 74.9,
+    "text": "风水轮流转，所以别急，相信老黄的，应用才是AI的落地渠道",
+    "tweet_id": 1244
+  },
+  {
+    "date": "2026-05-15",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "买入",
+    "signal_score": 70.0,
+    "text": "昨天看到波音才卖了200架，感觉这波谈不到啥好结果，赶紧一件清仓NVDA正股。没想到今天就又给上车机会啦，哈哈。NVDL118买一些做一个短，还有两天的反弹的，高度就不知道了，多少有点赚的。",
+    "tweet_id": 94
+  },
+  {
+    "date": "2026-05-19",
+    "stance": "中性",
+    "stance_val": 0,
+    "action_hint": "无",
+    "signal_score": 28.1,
+    "text": "段永平的Q1持仓也出来了，我观察到几个亮点：\n\n和但斌一样，也入了稳定币 \n$CRCL\n\n\n买了巴菲特刚清仓的 \n$UNH\n\n\n还小买了5个AI相关 \n$PLTR\n \n$CRWD\n \n$SNPS\n \n$SNOW\n \n$INOD\n\n\n大幅增持",
+    "tweet_id": 1129
+  },
+  {
+    "date": "2026-05-19",
+    "stance": "中性",
+    "stance_val": 0,
+    "action_hint": "无",
+    "signal_score": 19.3,
+    "text": "段永平的 13F 出来了，有点意思\n\n- 终于建仓了 \n$TSLA\n , 建仓价 371，大概率是 sell put 进来的。而且量不小 6.34%，一下子成为了 top5 仓位\n- 买了一点点 \n$CRCL\n , 0.1%, 不知道是哪位",
+    "tweet_id": 1123
+  },
+  {
+    "date": "2026-05-21",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "买入",
+    "signal_score": 68.1,
+    "text": "大资金赌芯片股未来5年的上涨，比赌比特币上涨更值得。今天芯片股大部分起码至少还有2倍涨幅，选中赛道很重要",
+    "tweet_id": 621
+  }
+]

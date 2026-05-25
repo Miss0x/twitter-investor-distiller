@@ -1,0 +1,92 @@
+[
+  {
+    "date": "2025-07-30",
+    "stance": "看空",
+    "stance_val": 0,
+    "action_hint": "减仓",
+    "signal_score": 0.0,
+    "text": "花了几个小时才刚看懂 $UNH有多少业务，大美丽法案，V28，医疗费用上升对于每个业务的影响。然后再来看今天的财报，都看懂了\n1. MEDICAID和州政府谈涨价\n2. 通过对于产品的改进来应对26年V28带来的负面影响\n3. 因为医疗费用",
+    "tweet_id": 679
+  },
+  {
+    "date": "2025-07-30",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "持有",
+    "signal_score": 21.8,
+    "text": "有一个12亿美元的减值，还有就是医疗的赔付率大幅上升430个基点到89.4%，管理层说26年起eps开始恢复增长  \n\n我觉得除了医疗赔付率的上升对利润有影响，12亿美元的损失费用是偶发性的，其他方面也没有恶化，",
+    "tweet_id": 681
+  },
+  {
+    "date": "2025-07-30",
+    "stance": "看空",
+    "stance_val": 0,
+    "action_hint": "观望",
+    "signal_score": 0.0,
+    "text": "我不觉得司法案影响会很大，我觉得风险在\n1. 医疗费用还没有完全定价，比如第三季度财报继续下调全年EPS\n2. V28, 大美丽法案对于营收增速的影响没有完全计价",
+    "tweet_id": 678
+  },
+  {
+    "date": "2025-07-30",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "无",
+    "signal_score": 21.8,
+    "text": "关于UNH和医疗行业看到医疗费用的增加，很多人认为通胀反弹几乎板上钉钉，但可能恰恰与你们的想法相反。为何？\n因为医疗保费增速的计算方法是用保险公司的retained",
+    "tweet_id": 677
+  },
+  {
+    "date": "2025-07-30",
+    "stance": "看空",
+    "stance_val": 0,
+    "action_hint": "观望",
+    "signal_score": 0.0,
+    "text": "好几个 kol都说 optum 影响不会很大。其实 optum 影响也很大。optum 大概占 unh 40% revenue，其中一半的 home care主要都是 medicaid，很受 government budget 影响。unh",
+    "tweet_id": 680
+  },
+  {
+    "date": "2026-01-30",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "买入",
+    "signal_score": 78.4,
+    "text": "并非这样，而是你没买MU SNDK GLD，你就是菜，不配做分享这类的强盗逻辑，就和上次有人说你买UNH干嘛，放着CPU涨价不买",
+    "tweet_id": 1025
+  },
+  {
+    "date": "2026-05-14",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "建仓|加仓",
+    "signal_score": 41.5,
+    "text": "最近有人让我看 $MCD，就突然想到了 $UNH，25年上半年因为大跌，市场讨论度很高，因为问得人太多，然后我被逼着去看他们非常复杂的业务基本面，当时都没有CLAUDE，20小时花在一家公司身上。现在回看1月份的这条推判断丝毫不差，建仓点和",
+    "tweet_id": 62
+  },
+  {
+    "date": "2026-05-15",
+    "stance": "中性",
+    "stance_val": 0,
+    "action_hint": "无",
+    "signal_score": 43.3,
+    "text": "抄巴菲特的作业经常会抄沟里去😂有没有想过一个问题，巴菲特现在持仓里留下的也都是幸存者偏差，中间卖飞的（23年1季度的台积电）和看错卖掉的，都不在组合里了，剩下的确实都是牛逼的或者新买的，因为活下来了。 巴菲特的投资方式，心态，阅历值得借鉴和",
+    "tweet_id": 50
+  },
+  {
+    "date": "2026-05-19",
+    "stance": "中性",
+    "stance_val": 0,
+    "action_hint": "无",
+    "signal_score": 28.1,
+    "text": "段永平的Q1持仓也出来了，我观察到几个亮点：\n\n和但斌一样，也入了稳定币 \n$CRCL\n\n\n买了巴菲特刚清仓的 \n$UNH\n\n\n还小买了5个AI相关 \n$PLTR\n \n$CRWD\n \n$SNPS\n \n$SNOW\n \n$INOD\n\n\n大幅增持",
+    "tweet_id": 1129
+  },
+  {
+    "date": "2026-05-19",
+    "stance": "中性",
+    "stance_val": 0,
+    "action_hint": "无",
+    "signal_score": 19.3,
+    "text": "段永平的 13F 出来了，有点意思\n\n- 终于建仓了 \n$TSLA\n , 建仓价 371，大概率是 sell put 进来的。而且量不小 6.34%，一下子成为了 top5 仓位\n- 买了一点点 \n$CRCL\n , 0.1%, 不知道是哪位",
+    "tweet_id": 1123
+  }
+]

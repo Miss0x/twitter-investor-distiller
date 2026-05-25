@@ -1,0 +1,92 @@
+[
+  {
+    "date": "2025-02-25",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "买入",
+    "signal_score": 19.9,
+    "text": "小逃，这次btc假如想要看反弹的话买coin还是mstr好呀",
+    "tweet_id": 408
+  },
+  {
+    "date": "2025-02-25",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "买入",
+    "signal_score": 21.4,
+    "text": "前几天260我就想建仓coin 这几天大跌倒也刚好",
+    "tweet_id": 417
+  },
+  {
+    "date": "2025-12-05",
+    "stance": "看空",
+    "stance_val": 0,
+    "action_hint": "卖出",
+    "signal_score": 27.7,
+    "text": "不看好USDC发行方Cirle股价的原因。\n不同人有不同的政治倾向，我不喜欢crcl这种靠政策的吸血鬼。",
+    "tweet_id": 972
+  },
+  {
+    "date": "2025-12-05",
+    "stance": "观望",
+    "stance_val": 0,
+    "action_hint": "观望",
+    "signal_score": 3.6,
+    "text": "那coin的股票看好吗",
+    "tweet_id": 996
+  },
+  {
+    "date": "2025-12-06",
+    "stance": "中性",
+    "stance_val": 0,
+    "action_hint": "观望",
+    "signal_score": 12.4,
+    "text": "circle的目标是跨境支付基础设施、而不是coinbase炒币，未来coinbase的影响会变低",
+    "tweet_id": 1004
+  },
+  {
+    "date": "2026-02-24",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "无",
+    "signal_score": 58.1,
+    "text": "关于META下半年重启稳定币的计划，根据报道，他们将和STRIPE/BRIDGE合作，可能会发行自己的稳定币。\n可以理解为没有转账功能的微信加入了转账功能，差别在微信体系内转账的是人民币，所有场景都通用和接受，META所有APP内转账的是自",
+    "tweet_id": 1114
+  },
+  {
+    "date": "2026-02-25",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "无",
+    "signal_score": 61.0,
+    "text": "讲多一句，每每看到财报后根据价格走势去找理由的文章和新闻就会觉得很可笑，就像彭博新闻的机器人一样，不需要思考就能写出的文章。\n从投资者来说，更应该关注公司成长\n从交易者来讲， \n$COIN\n 财报低于预期不跌不是更应该关注吗？",
+    "tweet_id": 1096
+  },
+  {
+    "date": "2026-02-25",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "无",
+    "signal_score": 88.1,
+    "text": "过去两个季度你发现在CIRCLE自己平台上的USDC占比增加了，依赖COIN的比例没动。比起COIN，我更喜欢HOOD",
+    "tweet_id": 1086
+  },
+  {
+    "date": "2026-02-26",
+    "stance": "看空",
+    "stance_val": 0,
+    "action_hint": "观望",
+    "signal_score": 24.1,
+    "text": "因为你比了coin91%的最大回调和crcl的80%，我的意思是还可以再下跌50%，去到-90%",
+    "tweet_id": 1073
+  },
+  {
+    "date": "2026-05-12",
+    "stance": "观望",
+    "stance_val": 0,
+    "action_hint": "观望",
+    "signal_score": 44.0,
+    "text": "昨天赚了8000U，出金了15WU\n\n昨日 \n$CRCL\n \n$MARA\n 财报，波动很大，我手里有差不多6400股  \n$CRCL\n ，一方面是为了应对盘前财报不及预期的下跌，同时保护自己的这些正股（至于为啥没买PUT保护，你别问），我分",
+    "tweet_id": 1134
+  }
+]

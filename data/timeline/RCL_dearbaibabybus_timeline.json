@@ -1,0 +1,29 @@
+[
+  {
+    "date": "2025-10-27",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "买入",
+    "signal_score": 74.5,
+    "text": "一定要买rcl！一定要买 today一定要买。皇家加勒比！",
+    "tweet_id": 1571
+  },
+  {
+    "date": "2025-10-28",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "持有",
+    "signal_score": 29.1,
+    "text": "完蛋 翻船了。财报超预期 并上调指引 还是跌 sell the news了。继续拿喽。不可能被骗下船的。",
+    "tweet_id": 1554
+  },
+  {
+    "date": "2025-10-28",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "加仓",
+    "signal_score": 24.6,
+    "text": "牛逼不是吹的 火车不是推的。rcl不要怕 继续加 不要被吓死。",
+    "tweet_id": 1543
+  }
+]

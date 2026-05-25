@@ -1,0 +1,65 @@
+[
+  {
+    "date": "2025-02-25",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "买入",
+    "signal_score": 36.2,
+    "text": "3个月前，英伟达发财报，MSTR溢价3.4，马上英伟达又要发财报了，MSTR溢价1.5。过去一年左右的相对低位，现在买不香吗？\n留言区有人提醒我MARA的BTC持有量接近市值了，我去验证了一下，确实。只是需要注意因为挖矿公司有债务，所以EV",
+    "tweet_id": 400
+  },
+  {
+    "date": "2025-02-25",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "买入",
+    "signal_score": 28.1,
+    "text": "3个月前，英伟达发财报，MSTR溢价3.4，马上英伟达又要发财报了，MSTR溢价1.5。过去一年左右的相对低位，现在买不香吗？\n留言区有人提醒我MARA的BTC持有量接近市值了，我去验证了一下，确实。只是需要注意因为挖矿公司有债务，所以EV",
+    "tweet_id": 405
+  },
+  {
+    "date": "2025-02-25",
+    "stance": "观望",
+    "stance_val": 0,
+    "action_hint": "观望",
+    "signal_score": 0.0,
+    "text": "Mara vs. Riot 哪个好？",
+    "tweet_id": 424
+  },
+  {
+    "date": "2025-02-26",
+    "stance": "中性",
+    "stance_val": 0,
+    "action_hint": "观望",
+    "signal_score": 0.0,
+    "text": "Absolutely! Evaluating MSTR's premium alongside NVIDIA's financials is crucial. With MARA's BTC holdings nearing market ",
+    "tweet_id": 429
+  },
+  {
+    "date": "2025-02-26",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "无",
+    "signal_score": 21.4,
+    "text": "而且mara这次因为会计准则变化，财报会很好",
+    "tweet_id": 427
+  },
+  {
+    "date": "2025-05-22",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "买入",
+    "signal_score": 84.8,
+    "text": "所以ibit才是正道，其他的标的都是凭本事，甚至大多人是亏钱的。ibit是只要有耐心就能赚钱",
+    "tweet_id": 550
+  },
+  {
+    "date": "2026-05-12",
+    "stance": "观望",
+    "stance_val": 0,
+    "action_hint": "观望",
+    "signal_score": 44.0,
+    "text": "昨天赚了8000U，出金了15WU\n\n昨日 \n$CRCL\n \n$MARA\n 财报，波动很大，我手里有差不多6400股  \n$CRCL\n ，一方面是为了应对盘前财报不及预期的下跌，同时保护自己的这些正股（至于为啥没买PUT保护，你别问），我分",
+    "tweet_id": 1134
+  }
+]

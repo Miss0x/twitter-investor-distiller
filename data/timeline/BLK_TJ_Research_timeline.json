@@ -1,0 +1,29 @@
+[
+  {
+    "date": "2025-05-20",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "观望",
+    "signal_score": 54.8,
+    "text": "在CIRCLE的上市报告里，贝莱德和CIRCLE签约说了未来不会发布自己的稳定币！合约4年\n这已经说明了一切了，贝莱德为CIRCLE背书，且是贝莱德的唯一认证",
+    "tweet_id": 570
+  },
+  {
+    "date": "2025-05-20",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "买入",
+    "signal_score": 54.8,
+    "text": "在CIRCLE的上市报告里，贝莱德和CIRCLE签约说了未来不会发布自己的稳定币！合约4年\n这已经说明了一切了，贝莱德为CIRCLE背书，且是贝莱德的唯一认证",
+    "tweet_id": 570
+  },
+  {
+    "date": "2025-05-20",
+    "stance": "观望",
+    "stance_val": 0,
+    "action_hint": "观望",
+    "signal_score": 44.8,
+    "text": "那为啥贝莱德不发而选择和CIRCLE合作呢？\n我觉得应该有先行者优势和这些传统的大机构发，反而有信任问题，你怎么看？",
+    "tweet_id": 569
+  }
+]

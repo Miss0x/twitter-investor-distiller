@@ -1,0 +1,20 @@
+[
+  {
+    "date": "2025-08-17",
+    "stance": "看空",
+    "stance_val": 0,
+    "action_hint": "买入",
+    "signal_score": 0.0,
+    "text": "uvxy 可不够 我要put qqq 三个月那种。哈哈哈 这次怕是有人第一波暴跌就冲去了 然后第二波 直接跳楼",
+    "tweet_id": 1416
+  },
+  {
+    "date": "2026-05-19",
+    "stance": "观望",
+    "stance_val": 0,
+    "action_hint": "观望",
+    "signal_score": 22.5,
+    "text": "神，你的QQQ跑了吗？ 看回调到什么时候可以分享一下嘛",
+    "tweet_id": 314
+  }
+]

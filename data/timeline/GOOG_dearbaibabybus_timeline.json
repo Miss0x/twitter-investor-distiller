@@ -1,0 +1,65 @@
+[
+  {
+    "date": "2025-05-30",
+    "stance": "中性",
+    "stance_val": 0,
+    "action_hint": "观望",
+    "signal_score": 27.7,
+    "text": "90的nvda 你就卖了选择出局？ 不是说170谷歌是90nvda。",
+    "tweet_id": 1324
+  },
+  {
+    "date": "2025-06-04",
+    "stance": "观望",
+    "stance_val": 0,
+    "action_hint": "观望",
+    "signal_score": 18.8,
+    "text": "更合适的是谷歌。 市场完全错了。但是也没砸。等待一个机会",
+    "tweet_id": 1370
+  },
+  {
+    "date": "2025-10-25",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "买入",
+    "signal_score": 91.6,
+    "text": "买亚马逊。就是明天的谷歌。去年140干嘛的 年线不买。亚马逊下面就是年线 一样的",
+    "tweet_id": 1576
+  },
+  {
+    "date": "2025-10-28",
+    "stance": "观望",
+    "stance_val": 0,
+    "action_hint": "无",
+    "signal_score": 36.5,
+    "text": "谷歌。我就想听谷歌",
+    "tweet_id": 1538
+  },
+  {
+    "date": "2025-12-29",
+    "stance": "看空",
+    "stance_val": 0,
+    "action_hint": "观望",
+    "signal_score": 24.1,
+    "text": "别画了。不暴跌就不错了 这不是谷歌我肯定做空了。 我就这么说吧 这个比五万亿nvda还夸张 我认为谷歌股价已经有水分了。跌20%轻轻松松。说实话很想做空 X上一堆人 放空什么的都有 唱空谷歌的却不敢。我愿意做唱空谷歌第一人哈哈 但是不会去做",
+    "tweet_id": 1645
+  },
+  {
+    "date": "2026-05-12",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "加仓",
+    "signal_score": 73.2,
+    "text": "有一些股票下跌后是可以闭着眼睛放心抄底的，唯一的问题是补仓的点位是否较优\n\n\n$GOOG\n\n\n$MRVL\n\n\n$AAOI\n\n\n$NBIS\n\n\n$AMPX\n\n\n$PL\n\n\n$RKLB\n\n\n$GLW\n\n\n$FLY\n\n\n$VELO\n\n\n$OUST",
+    "tweet_id": 1430
+  },
+  {
+    "date": "2026-05-15",
+    "stance": "看空",
+    "stance_val": 0,
+    "action_hint": "观望",
+    "signal_score": 41.3,
+    "text": "纯韭菜。巴菲特时代结束了。菜到抠脚。追涨谷歌 清仓amzn unh 割肉dpz。amzn unh的上涨一点没吃到。估计已经不是本人操作了。",
+    "tweet_id": 283
+  }
+]

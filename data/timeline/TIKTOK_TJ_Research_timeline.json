@@ -1,0 +1,20 @@
+[
+  {
+    "date": "2025-12-19",
+    "stance": "无明确方向",
+    "stance_val": 0,
+    "action_hint": "无",
+    "signal_score": 11.4,
+    "text": "TIKTOK美国估值140亿美金！！！\n营收大概一年120亿美金，1倍的市销率。\n为啥中国要卖给美国？换了什么？",
+    "tweet_id": 928
+  },
+  {
+    "date": "2025-12-19",
+    "stance": "中性",
+    "stance_val": 0,
+    "action_hint": "无",
+    "signal_score": 18.1,
+    "text": "字节收20%营收作为licensing fee，加上根据19.9%剩余股权分盈利\n拿meta 40%的margin算，被分掉20%后，还有20%的利润，等于原本一家120亿营收，24亿盈利的公司，应该卖多少估值？\n如果grok数据源有问题，",
+    "tweet_id": 924
+  }
+]

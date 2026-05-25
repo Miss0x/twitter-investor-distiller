@@ -1,0 +1,20 @@
+[
+  {
+    "date": "2026-05-14",
+    "stance": "无明确方向",
+    "stance_val": 0,
+    "action_hint": "无",
+    "signal_score": 6.6,
+    "text": "周四上市的 $CBRS ，业务就不聊了，大家可以自己搜，或者看SEMI ANALYSIS 最新的文章…",
+    "tweet_id": 70
+  },
+  {
+    "date": "2026-05-14",
+    "stance": "看空",
+    "stance_val": 0,
+    "action_hint": "观望",
+    "signal_score": 13.2,
+    "text": "Not a fan of \n$CBRS\n, especially at ~$90B-100B MC valuations.\n\nBut I do like the company.\n\nThere’s a lot of short term v",
+    "tweet_id": 1132
+  }
+]

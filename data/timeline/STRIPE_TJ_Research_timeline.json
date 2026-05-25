@@ -1,0 +1,20 @@
+[
+  {
+    "date": "2026-02-24",
+    "stance": "看空",
+    "stance_val": 0,
+    "action_hint": "无",
+    "signal_score": 6.6,
+    "text": "如果是Stripe收购，我觉得价格可能不是太好，溢价20-30%？因为在同一个领域，等于买了他们的客户。还是说有我没看到的",
+    "tweet_id": 1113
+  },
+  {
+    "date": "2026-02-25",
+    "stance": "无明确方向",
+    "stance_val": 0,
+    "action_hint": "无",
+    "signal_score": 6.6,
+    "text": "3年？不知道，这个世界变化太快了，看管理层的执行力，就像电话会议聊到的，不是OPENCLAW的出现，没人会想到AGENT之间的支付，我看STRIPE也聊到了，我要去听听他们的年度总结",
+    "tweet_id": 1087
+  }
+]

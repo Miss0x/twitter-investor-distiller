@@ -1,0 +1,20 @@
+[
+  {
+    "date": "2025-10-30",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "持有",
+    "signal_score": 81.5,
+    "text": "DIA IWM RSP都是绿的，dia还涨的不错……怕毛线",
+    "tweet_id": 846
+  },
+  {
+    "date": "2026-05-15",
+    "stance": "无明确方向",
+    "stance_val": 0,
+    "action_hint": "减仓|观望",
+    "signal_score": 0.0,
+    "text": "纳指估值30X。两个策略： 1. 继续每往上涨2%，减X仓位。或者 2. 超买的大仓位标的做适当的移动止盈 接下去是我认为RSP会走得比SPY好的日子。 龔阿天 (@gongatian1) 想問看看桃總的參考指標裡 qqq forward ",
+    "tweet_id": 58
+  }
+]

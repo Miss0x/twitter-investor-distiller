@@ -1,0 +1,20 @@
+[
+  {
+    "date": "2026-02-24",
+    "stance": "中性",
+    "stance_val": 0,
+    "action_hint": "观望",
+    "signal_score": 0.0,
+    "text": "ADOBE的TO B会比市场的预期要好，TO C就会比较难了，最终故事线交易完之后看看估值是否合适了",
+    "tweet_id": 1115
+  },
+  {
+    "date": "2026-05-10",
+    "stance": "无明确方向",
+    "stance_val": 0,
+    "action_hint": "无",
+    "signal_score": 4.2,
+    "text": "我有聽，但是買了adbe",
+    "tweet_id": 203
+  }
+]

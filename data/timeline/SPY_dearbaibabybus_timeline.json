@@ -1,0 +1,20 @@
+[
+  {
+    "date": "2026-01-27",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "持有",
+    "signal_score": 81.9,
+    "text": "再次重申目标。btc28年 20万一枚 黄金5900。spy每年两位数上涨ytd。",
+    "tweet_id": 219
+  },
+  {
+    "date": "2026-05-09",
+    "stance": "无明确方向",
+    "stance_val": 0,
+    "action_hint": "无",
+    "signal_score": 49.1,
+    "text": "spy是啥",
+    "tweet_id": 237
+  }
+]

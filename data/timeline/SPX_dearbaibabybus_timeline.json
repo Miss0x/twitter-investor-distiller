@@ -1,0 +1,20 @@
+[
+  {
+    "date": "2025-04-10",
+    "stance": "看空",
+    "stance_val": 0,
+    "action_hint": "卖出",
+    "signal_score": 19.1,
+    "text": "熊市了 月线顶背离。美股彻底进入熊市 从四月开始。逢高做空吧。底部还很远。",
+    "tweet_id": 1307
+  },
+  {
+    "date": "2026-03-27",
+    "stance": "中性",
+    "stance_val": 0,
+    "action_hint": "观望",
+    "signal_score": 11.2,
+    "text": "主要是10Y。spx他其实无所谓的。",
+    "tweet_id": 1726
+  }
+]

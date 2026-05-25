@@ -1,0 +1,56 @@
+[
+  {
+    "date": "2025-10-30",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "观望",
+    "signal_score": 24.6,
+    "text": "有人抄底meta的同时 大肆购买甲骨文哦。",
+    "tweet_id": 1502
+  },
+  {
+    "date": "2025-12-29",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "买入",
+    "signal_score": 45.3,
+    "text": "很想买orcl 末日call",
+    "tweet_id": 1642
+  },
+  {
+    "date": "2025-12-30",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "持有",
+    "signal_score": 47.8,
+    "text": "多头胜！orcl涨了今天。",
+    "tweet_id": 1631
+  },
+  {
+    "date": "2026-05-12",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "买入",
+    "signal_score": 78.1,
+    "text": "所以我才要买orcl。这燃料堆的比山还高。只要证明 ai需求没问题 gpu利用率高 oci增速没问题 资本开支不失控 都暴涨 燃料太多了。cds回落 eps上修 pe扩张 直接原地起飞 200bps 个人认为太夸张了 80bps还差不多 有",
+    "tweet_id": 1812
+  },
+  {
+    "date": "2026-05-14",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "持有",
+    "signal_score": 84.9,
+    "text": "操 着“傻逼”跟我一个仓位。我都是orcl hood。",
+    "tweet_id": 293
+  },
+  {
+    "date": "2026-05-16",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "买入",
+    "signal_score": 84.6,
+    "text": "救星不应该是igv第一大股东 orcl吗 哈哈。能为igv扛大旗的男人。",
+    "tweet_id": 278
+  }
+]

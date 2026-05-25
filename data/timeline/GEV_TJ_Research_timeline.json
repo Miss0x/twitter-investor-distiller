@@ -1,0 +1,38 @@
+[
+  {
+    "date": "2025-08-27",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "减仓",
+    "signal_score": 64.5,
+    "text": "GE本来20多了，我减了5%，换了GEV",
+    "tweet_id": 739
+  },
+  {
+    "date": "2026-04-24",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "持有",
+    "signal_score": 84.8,
+    "text": "4x并不是终点，我还在懊悔GE拆分时果断卖了拆出来GEV，130，印象深刻，怪自己认知不够🤦",
+    "tweet_id": 19
+  },
+  {
+    "date": "2026-04-25",
+    "stance": "中性",
+    "stance_val": 0,
+    "action_hint": "无",
+    "signal_score": 31.6,
+    "text": "比我做得好得很多。\n亏损离场的标的21年可太多了：比如TDOC（-75%）。OPEN最后亏得不多，波段做了很多，但那时很上头。很多小黑粉还会拿那些标的出来说，说明这几年确实聊资不多😂\n卖飞得也很多：23年初卖飞英伟达，卖飞META，25年卖",
+    "tweet_id": 8
+  },
+  {
+    "date": "2026-05-12",
+    "stance": "观望",
+    "stance_val": 0,
+    "action_hint": "观望",
+    "signal_score": 44.0,
+    "text": "昨天赚了8000U，出金了15WU\n\n昨日 \n$CRCL\n \n$MARA\n 财报，波动很大，我手里有差不多6400股  \n$CRCL\n ，一方面是为了应对盘前财报不及预期的下跌，同时保护自己的这些正股（至于为啥没买PUT保护，你别问），我分",
+    "tweet_id": 1134
+  }
+]

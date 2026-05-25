@@ -1,0 +1,20 @@
+[
+  {
+    "date": "2025-11-28",
+    "stance": "中性",
+    "stance_val": 0,
+    "action_hint": "观望",
+    "signal_score": 5.0,
+    "text": "周三加的SOXS，降的BETA，英伟达成功被干下来，但是被自己英特尔的ALPHA干爆了",
+    "tweet_id": 873
+  },
+  {
+    "date": "2026-04-24",
+    "stance": "看多",
+    "stance_val": 1,
+    "action_hint": "买入",
+    "signal_score": 92.6,
+    "text": "左侧做空是送钱，NVDA, SNDK, MU，哪个不是被埋的？\n做对一次，最多发个截图秀一下，且都不敢上大仓位。\n即使通过小波段赚钱了，那为何不一路大仓位做多呢？趋势明显做错了。",
+    "tweet_id": 9
+  }
+]
