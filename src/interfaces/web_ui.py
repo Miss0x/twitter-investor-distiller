@@ -559,6 +559,8 @@ def main() -> None:
         _render_dashboard(health_ok, jobs, active_job_payload)
     with tab2:
         render_pipeline_section()
+    with tab3:
+        _render_insights_tab()
 
 
 def _render_dashboard(health_ok: bool, jobs: list[dict[str, Any]], active_job_payload: dict[str, Any]) -> None:
@@ -832,9 +834,6 @@ def _render_accuracy_panel() -> None:
                     })
             if stock_rows:
                 st.dataframe(stock_rows, use_container_width=True, hide_index=True)
-
-    with tab3:
-        _render_insights_tab()
 
 
 def _render_insights_tab() -> None:

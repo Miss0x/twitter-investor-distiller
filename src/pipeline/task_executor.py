@@ -288,12 +288,13 @@ def _generate_portrait(username: str) -> dict:
 ### 1. 投资哲学（200字）
 ### 2. 核心板块
 ### 3. 操作风格
-### 4. 风险偏好
-### 5. 决策框架
-### 6. 情绪特征
-### 7. 预测准确率（对照股价）
-### 8. 进化轨迹
-### 9. 一句话总结"""
+### 4. 仓位管理与Beta调节（重点分析：净仓位暴露范围、现金比例、降beta的触发条件、降beta时会切换到哪些防御板块或现金等价物、加仓/减仓的节奏和信号）
+### 5. 风险偏好
+### 6. 决策框架
+### 7. 情绪特征
+### 8. 预测准确率（对照股价）
+### 9. 进化轨迹
+### 10. 一句话总结"""
 
     report = chat(messages=[{"role": "user", "content": prompt}], role="analyzer", max_tokens=8192, temperature=0.5)
     out = Path(f"data/pipeline/{username}_portrait.md")
