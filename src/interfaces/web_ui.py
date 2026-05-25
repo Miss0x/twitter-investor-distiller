@@ -554,7 +554,7 @@ def main() -> None:
         st.caption("Twitter 用户蒸馏 · 抓取 → 分析 → 画像")
 
     # ── 主区域：双标签 ──
-    tab1, tab2 = st.tabs(["📊 抓取仪表盘", "⚙️ 分析流水线"])
+    tab1, tab2, tab3 = st.tabs(["📊 抓取仪表盘", "⚙️ 分析流水线", "📡 信号与洞察"])
     with tab1:
         _render_dashboard(health_ok, jobs, active_job_payload)
     with tab2:
@@ -832,6 +832,88 @@ def _render_accuracy_panel() -> None:
                     })
             if stock_rows:
                 st.dataframe(stock_rows, use_container_width=True, hide_index=True)
+
+    with tab3:
+        _render_insights_tab()
+
+
+def _render_insights_tab() -> None:
+    """📡 信号与洞察面板 — Phase 3-4-5 产出。"""
+    from pathlib import Path as _Path
+    import json as _json
+
+    # ── 最新共识 ──
+    st.subheader("📡 最新共识")
+    cons_dir = _Path("data/consensus")
+    if cons_dir.exists():
+        latest = []
+        for fp in cons_dir.glob("*_consensus.json"):
+            data = _json.loads(fp.read_text(encoding="utf-8"))
+            if data:
+                entry = data[-1]
+                entry["ticker"] = fp.stem.replace("_consensus", "")
+                latest.append(entry)
+        latest.sort(key=lambda x: x.get("consensus_score", 0), reverse=True)
+        rows = []
+        for e in latest[:10]:
+            multi = "🔥" if len(e.get("analysts_in_window", [])) >= 2 else ""
+            rows.append({
+                "股票": e["ticker"],
+                "共识分": e["consensus_score"],
+                "信号数": e.get("signal_count", 0),
+                "分析师": ", ".join(e.get("analysts_in_window", [])),
+                "联动": multi,
+            })
+        if rows:
+            st.dataframe(rows, use_container_width=True, hide_index=True)
+    else:
+        st.caption("运行 python scripts/compute_consensus.py 生成")
+
+    # ── 板块轮动 ──
+    st.subheader("🔥 板块轮动")
+    rot_dir = _Path("data/rotation")
+    if rot_dir.exists():
+        for fp in sorted(rot_dir.glob("*_rotation.json")):
+            username = fp.stem.replace("_rotation", "")
+            data = _json.loads(fp.read_text(encoding="utf-8"))
+            # 最新 4 周
+            weeks = sorted({r["week"] for r in data})
+            if weeks:
+                latest_week = weeks[-1]
+                hot = sorted([r for r in data if r["week"] == latest_week], key=lambda x: x["z_score"], reverse=True)[:5]
+                with st.expander(f"{username} — {latest_week}"):
+                    for r in hot:
+                        st.metric(r["topic"], f"{r['z_score']:+.1f}σ", f"提及 {r['count']} 次")
+    else:
+        st.caption("运行 python scripts/compute_rotation.py 生成")
+
+    # ── 异常检测 ──
+    st.subheader("⚠️ 最近异常")
+    anom_dir = _Path("data/anomaly")
+    if anom_dir.exists():
+        for fp in sorted(anom_dir.glob("*_anomaly.json")):
+            username = fp.stem.replace("_anomaly", "")
+            data = _json.loads(fp.read_text(encoding="utf-8"))
+            anomalies = [r for r in data if r["anomaly"]][-3:]
+            if anomalies:
+                with st.expander(f"{username}: {len(anomalies)} 条异常（最近）"):
+                    for a in anomalies:
+                        st.text(f"{a['window_start']}~{a['window_end']} KL={a['kl_avg']:.2f}")
+                        st.caption(f"topics: {', '.join(a['topics'][:3])}")
+    else:
+        st.caption("运行 python scripts/detect_anomaly.py 生成")
+
+    # ── 关联网络 ──
+    st.subheader("🕸️ 信源推荐")
+    net_path = _Path("data/network/investor_network.json")
+    if net_path.exists():
+        net = _json.loads(net_path.read_text(encoding="utf-8"))
+        recs = net.get("recommendations", [])[:5]
+        if recs:
+            for r in recs:
+                st.metric(r["user"], f"{r['in_degree']} 次被引用")
+    else:
+        st.caption("运行 python scripts/build_network.py 生成")
 
 
 if __name__ == "__main__":
