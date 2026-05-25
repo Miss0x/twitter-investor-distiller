@@ -24,7 +24,18 @@
         "verified": true
       }
     ],
-    "crypto_details": []
+    "crypto_details": [],
+    "signal_score": 34.9,
+    "signal_components": {
+      "stance_raw": 0.0,
+      "stance_score": 0.0,
+      "confidence_raw": 0.5,
+      "confidence_calibrated": 0.232,
+      "confidence_score": 23.0,
+      "resonance_z": 1.56,
+      "resonance_score": 156.0,
+      "multi_stock_score": 33.0
+    }
   },
   {
     "topic": "操作记录",
@@ -42,7 +53,18 @@
     "text": "就是根据今天低位设的",
     "created_at": "2025-05-19T20:29:20",
     "stock_details": [],
-    "crypto_details": []
+    "crypto_details": [],
+    "signal_score": 3.2,
+    "signal_components": {
+      "stance_raw": 0.0,
+      "stance_score": 0.0,
+      "confidence_raw": 0.2,
+      "confidence_calibrated": 0.093,
+      "confidence_score": 9.0,
+      "resonance_z": 0.0,
+      "resonance_score": 0.0,
+      "multi_stock_score": 0.0
+    }
   },
   {
     "topic": "投资策略",
@@ -60,7 +82,18 @@
     "text": "谁还记得前段时间老外社区里的神，可颂哥 \n@jam_croissant\n ，4月份下跌前他给了下跌的点位，然后给了市场会反弹回去的路径，再给了夏天后可能还有回调的预测。很多人可能比较关注他预测的点位，我更认同的是他的一句话：见顶是过程，见底是事件，终身受用的。",
     "created_at": "2025-05-19T20:34:01",
     "stock_details": [],
-    "crypto_details": []
+    "crypto_details": [],
+    "signal_score": 16.2,
+    "signal_components": {
+      "stance_raw": 0.0,
+      "stance_score": 0.0,
+      "confidence_raw": 1.0,
+      "confidence_calibrated": 0.463,
+      "confidence_score": 46.0,
+      "resonance_z": 0.0,
+      "resonance_score": 0.0,
+      "multi_stock_score": 0.0
+    }
   },
   {
     "topic": "招聘/人脉",
@@ -82,7 +115,18 @@
     "stock_details": [],
     "crypto_details": [
       "稳定币"
-    ]
+    ],
+    "signal_score": 16.2,
+    "signal_components": {
+      "stance_raw": 0.0,
+      "stance_score": 0.0,
+      "confidence_raw": 1.0,
+      "confidence_calibrated": 0.463,
+      "confidence_score": 46.0,
+      "resonance_z": 0.0,
+      "resonance_score": 0.0,
+      "multi_stock_score": 0.0
+    }
   },
   {
     "topic": "宏观分析",
@@ -100,7 +144,18 @@
     "text": "如果下跌的时候这类消息令我们恐惧，为何现在就忽略了？\n说明市场里面很多人的情绪是被价格带着走，而非事件，事件只是用来说服自己跟着价格走",
     "created_at": "2025-05-20T02:05:21",
     "stock_details": [],
-    "crypto_details": []
+    "crypto_details": [],
+    "signal_score": 8.1,
+    "signal_components": {
+      "stance_raw": 0.0,
+      "stance_score": 0.0,
+      "confidence_raw": 0.5,
+      "confidence_calibrated": 0.232,
+      "confidence_score": 23.0,
+      "resonance_z": 0.0,
+      "resonance_score": 0.0,
+      "multi_stock_score": 0.0
+    }
   },
   {
     "topic": "加密货币",
@@ -128,7 +183,18 @@
     "crypto_details": [
       "USDC",
       "USDT"
-    ]
+    ],
+    "signal_score": 56.2,
+    "signal_components": {
+      "stance_raw": 1.0,
+      "stance_score": 100.0,
+      "confidence_raw": 1.0,
+      "confidence_calibrated": 0.463,
+      "confidence_score": 46.0,
+      "resonance_z": 0.0,
+      "resonance_score": 0.0,
+      "multi_stock_score": 0.0
+    }
   },
   {
     "topic": "投资策略",
@@ -146,7 +212,18 @@
     "text": "虽然你骂我是，但我还是希望你是对的\n不过有一说一，从交易角度看，我觉得如果第一仓开在1900，价格却到了2700，说明第一仓的位置是错的，应该要止损，这点是我不理解的，不过可每个人的思路不同吧",
     "created_at": "2025-05-20T02:30:45",
     "stock_details": [],
-    "crypto_details": []
+    "crypto_details": [],
+    "signal_score": 8.1,
+    "signal_components": {
+      "stance_raw": 0.0,
+      "stance_score": 0.0,
+      "confidence_raw": 0.5,
+      "confidence_calibrated": 0.232,
+      "confidence_score": 23.0,
+      "resonance_z": 0.0,
+      "resonance_score": 0.0,
+      "multi_stock_score": 0.0
+    }
   },
   {
     "topic": "宏观分析",
@@ -164,7 +241,18 @@
     "text": "不应该拥有除了美金以外的任何资产",
     "created_at": "2025-05-20T02:31:30",
     "stock_details": [],
-    "crypto_details": []
+    "crypto_details": [],
+    "signal_score": 8.1,
+    "signal_components": {
+      "stance_raw": 0.0,
+      "stance_score": 0.0,
+      "confidence_raw": 0.5,
+      "confidence_calibrated": 0.232,
+      "confidence_score": 23.0,
+      "resonance_z": 0.0,
+      "resonance_score": 0.0,
+      "multi_stock_score": 0.0
+    }
   },
   {
     "topic": "投资策略",
@@ -182,7 +270,18 @@
     "text": "看数据，参与度，恐慌贪婪指数",
     "created_at": "2025-05-20T02:40:11",
     "stock_details": [],
-    "crypto_details": []
+    "crypto_details": [],
+    "signal_score": 3.2,
+    "signal_components": {
+      "stance_raw": 0.0,
+      "stance_score": 0.0,
+      "confidence_raw": 0.2,
+      "confidence_calibrated": 0.093,
+      "confidence_score": 9.0,
+      "resonance_z": 0.0,
+      "resonance_score": 0.0,
+      "multi_stock_score": 0.0
+    }
   },
   {
     "topic": "个股分析",
@@ -219,7 +318,18 @@
         "verified": true
       }
     ],
-    "crypto_details": []
+    "crypto_details": [],
+    "signal_score": 54.8,
+    "signal_components": {
+      "stance_raw": 1.0,
+      "stance_score": 100.0,
+      "confidence_raw": 0.5,
+      "confidence_calibrated": 0.232,
+      "confidence_score": 23.0,
+      "resonance_z": 0.0,
+      "resonance_score": 0.0,
+      "multi_stock_score": 67.0
+    }
   },
   {
     "topic": "行业研判",
@@ -240,7 +350,18 @@
     "text": "那为啥贝莱德不发而选择和CIRCLE合作呢？\n我觉得应该有先行者优势和这些传统的大机构发，反而有信任问题，你怎么看？",
     "created_at": "2025-05-20T04:08:10",
     "stock_details": [],
-    "crypto_details": []
+    "crypto_details": [],
+    "signal_score": 8.1,
+    "signal_components": {
+      "stance_raw": 0.0,
+      "stance_score": 0.0,
+      "confidence_raw": 0.5,
+      "confidence_calibrated": 0.232,
+      "confidence_score": 23.0,
+      "resonance_z": 0.0,
+      "resonance_score": 0.0,
+      "multi_stock_score": 0.0
+    }
   },
   {
     "topic": "加密货币",
@@ -265,7 +386,18 @@
     "stock_details": [],
     "crypto_details": [
       "稳定币"
-    ]
+    ],
+    "signal_score": 48.1,
+    "signal_components": {
+      "stance_raw": 1.0,
+      "stance_score": 100.0,
+      "confidence_raw": 0.5,
+      "confidence_calibrated": 0.232,
+      "confidence_score": 23.0,
+      "resonance_z": 0.0,
+      "resonance_score": 0.0,
+      "multi_stock_score": 0.0
+    }
   },
   {
     "topic": "投资策略",
@@ -283,7 +415,18 @@
     "text": "有没有统计过像这种任何情况下都会买时历史上涨的概率",
     "created_at": "2025-05-20T04:13:57",
     "stock_details": [],
-    "crypto_details": []
+    "crypto_details": [],
+    "signal_score": 3.2,
+    "signal_components": {
+      "stance_raw": 0.0,
+      "stance_score": 0.0,
+      "confidence_raw": 0.2,
+      "confidence_calibrated": 0.093,
+      "confidence_score": 9.0,
+      "resonance_z": 0.0,
+      "resonance_score": 0.0,
+      "multi_stock_score": 0.0
+    }
   },
   {
     "topic": "信息分享",
@@ -307,7 +450,18 @@
     "stock_details": [],
     "crypto_details": [
       "稳定币"
-    ]
+    ],
+    "signal_score": 16.2,
+    "signal_components": {
+      "stance_raw": 0.0,
+      "stance_score": 0.0,
+      "confidence_raw": 1.0,
+      "confidence_calibrated": 0.463,
+      "confidence_score": 46.0,
+      "resonance_z": 0.0,
+      "resonance_score": 0.0,
+      "multi_stock_score": 0.0
+    }
   },
   {
     "topic": "个股分析",
@@ -344,7 +498,18 @@
         "verified": true
       }
     ],
-    "crypto_details": []
+    "crypto_details": [],
+    "signal_score": 72.4,
+    "signal_components": {
+      "stance_raw": 1.0,
+      "stance_score": 100.0,
+      "confidence_raw": 0.5,
+      "confidence_calibrated": 0.232,
+      "confidence_score": 23.0,
+      "resonance_z": 1.17,
+      "resonance_score": 117.0,
+      "multi_stock_score": 67.0
+    }
   },
   {
     "topic": "个股分析",
@@ -373,7 +538,18 @@
         "verified": false
       }
     ],
-    "crypto_details": []
+    "crypto_details": [],
+    "signal_score": 19.6,
+    "signal_components": {
+      "stance_raw": 0.0,
+      "stance_score": 0.0,
+      "confidence_raw": 1.0,
+      "confidence_calibrated": 0.463,
+      "confidence_score": 46.0,
+      "resonance_z": 0.0,
+      "resonance_score": 0.0,
+      "multi_stock_score": 33.0
+    }
   },
   {
     "topic": "个股分析",
@@ -414,7 +590,18 @@
     ],
     "crypto_details": [
       "BTC"
-    ]
+    ],
+    "signal_score": 26.7,
+    "signal_components": {
+      "stance_raw": 0.0,
+      "stance_score": 0.0,
+      "confidence_raw": 1.0,
+      "confidence_calibrated": 0.463,
+      "confidence_score": 46.0,
+      "resonance_z": 0.25,
+      "resonance_score": 25.0,
+      "multi_stock_score": 67.0
+    }
   },
   {
     "topic": "操作记录",
@@ -432,7 +619,18 @@
     "text": "复仇交易，可以，哈哈",
     "created_at": "2025-05-22T03:36:57",
     "stock_details": [],
-    "crypto_details": []
+    "crypto_details": [],
+    "signal_score": 3.2,
+    "signal_components": {
+      "stance_raw": 0.0,
+      "stance_score": 0.0,
+      "confidence_raw": 0.2,
+      "confidence_calibrated": 0.093,
+      "confidence_score": 9.0,
+      "resonance_z": 0.0,
+      "resonance_score": 0.0,
+      "multi_stock_score": 0.0
+    }
   },
   {
     "topic": "信息分享",
@@ -450,7 +648,18 @@
     "text": "美东周五早上8点，中国晚上8点，阵容很强，记得来听，一起学习",
     "created_at": "2025-05-22T04:05:39",
     "stock_details": [],
-    "crypto_details": []
+    "crypto_details": [],
+    "signal_score": 16.2,
+    "signal_components": {
+      "stance_raw": 0.0,
+      "stance_score": 0.0,
+      "confidence_raw": 1.0,
+      "confidence_calibrated": 0.463,
+      "confidence_score": 46.0,
+      "resonance_z": 0.0,
+      "resonance_score": 0.0,
+      "multi_stock_score": 0.0
+    }
   },
   {
     "topic": "招聘/人脉",
@@ -468,7 +677,18 @@
     "text": "我没看到你邮件啊，在群了吗？INVESTMENTTALKJUN@GMAIL.COM",
     "created_at": "2025-05-22T04:23:42",
     "stock_details": [],
-    "crypto_details": []
+    "crypto_details": [],
+    "signal_score": 16.2,
+    "signal_components": {
+      "stance_raw": 0.0,
+      "stance_score": 0.0,
+      "confidence_raw": 1.0,
+      "confidence_calibrated": 0.463,
+      "confidence_score": 46.0,
+      "resonance_z": 0.0,
+      "resonance_score": 0.0,
+      "multi_stock_score": 0.0
+    }
   },
   {
     "topic": "宏观分析",
@@ -486,7 +706,18 @@
     "text": "简单来说你认为美联储如果不动，长债上涨会利好股市吗？我可能不这么看。\n另外现在和23年还不一样，这轮背后的交易逻辑并看不到是市场对于经济增速的乐观，如果是，那利好股市。如果不是对经济乐观，那就是对财政赤字悲观，这个角度很难说对美股一定是利好。",
     "created_at": "2025-05-22T05:39:48",
     "stock_details": [],
-    "crypto_details": []
+    "crypto_details": [],
+    "signal_score": 8.1,
+    "signal_components": {
+      "stance_raw": 0.0,
+      "stance_score": 0.0,
+      "confidence_raw": 0.5,
+      "confidence_calibrated": 0.232,
+      "confidence_score": 23.0,
+      "resonance_z": 0.0,
+      "resonance_score": 0.0,
+      "multi_stock_score": 0.0
+    }
   },
   {
     "topic": "加密货币",
@@ -527,7 +758,18 @@
     ],
     "crypto_details": [
       "BTC"
-    ]
+    ],
+    "signal_score": 84.8,
+    "signal_components": {
+      "stance_raw": 1.0,
+      "stance_score": 100.0,
+      "confidence_raw": 0.5,
+      "confidence_calibrated": 0.232,
+      "confidence_score": 23.0,
+      "resonance_z": 2.0,
+      "resonance_score": 200.0,
+      "multi_stock_score": 67.0
+    }
   },
   {
     "topic": "个股分析",
@@ -588,7 +830,18 @@
         "verified": true
       }
     ],
-    "crypto_details": []
+    "crypto_details": [],
+    "signal_score": 23.6,
+    "signal_components": {
+      "stance_raw": 0.0,
+      "stance_score": 0.0,
+      "confidence_raw": 0.5,
+      "confidence_calibrated": 0.232,
+      "confidence_score": 23.0,
+      "resonance_z": 0.36,
+      "resonance_score": 36.0,
+      "multi_stock_score": 100.0
+    }
   },
   {
     "topic": "投资策略",
@@ -606,7 +859,18 @@
     "text": "关注了，准备找机会做空",
     "created_at": "2025-05-22T06:12:24",
     "stock_details": [],
-    "crypto_details": []
+    "crypto_details": [],
+    "signal_score": 16.2,
+    "signal_components": {
+      "stance_raw": 0.0,
+      "stance_score": 0.0,
+      "confidence_raw": 1.0,
+      "confidence_calibrated": 0.463,
+      "confidence_score": 46.0,
+      "resonance_z": 0.0,
+      "resonance_score": 0.0,
+      "multi_stock_score": 0.0
+    }
   },
   {
     "topic": "个股分析",
@@ -640,7 +904,18 @@
         "verified": true
       }
     ],
-    "crypto_details": []
+    "crypto_details": [],
+    "signal_score": 14.8,
+    "signal_components": {
+      "stance_raw": 0.0,
+      "stance_score": 0.0,
+      "confidence_raw": 0.5,
+      "confidence_calibrated": 0.232,
+      "confidence_score": 23.0,
+      "resonance_z": 0.0,
+      "resonance_score": 0.0,
+      "multi_stock_score": 67.0
+    }
   },
   {
     "topic": "投资策略",
@@ -658,7 +933,18 @@
     "text": "10年呢，1000悲观了，哈哈哈",
     "created_at": "2025-05-22T08:01:19",
     "stock_details": [],
-    "crypto_details": []
+    "crypto_details": [],
+    "signal_score": 3.2,
+    "signal_components": {
+      "stance_raw": 0.0,
+      "stance_score": 0.0,
+      "confidence_raw": 0.2,
+      "confidence_calibrated": 0.093,
+      "confidence_score": 9.0,
+      "resonance_z": 0.0,
+      "resonance_score": 0.0,
+      "multi_stock_score": 0.0
+    }
   },
   {
     "topic": "宏观分析",
@@ -676,7 +962,18 @@
     "text": "前天的视频：关于关税这一块接下去的影响我个人认为很多的消息可能更加偏向于负面或者说市场对于关税的乐观已经非常充分的定价。\n市场正在寻找下一个故事线",
     "created_at": "2025-05-23T15:37:20",
     "stock_details": [],
-    "crypto_details": []
+    "crypto_details": [],
+    "signal_score": 8.1,
+    "signal_components": {
+      "stance_raw": 0.0,
+      "stance_score": 0.0,
+      "confidence_raw": 0.5,
+      "confidence_calibrated": 0.232,
+      "confidence_score": 23.0,
+      "resonance_z": 0.0,
+      "resonance_score": 0.0,
+      "multi_stock_score": 0.0
+    }
   },
   {
     "topic": "加密货币",
@@ -698,7 +995,18 @@
     "stock_details": [],
     "crypto_details": [
       "BTC"
-    ]
+    ],
+    "signal_score": 48.1,
+    "signal_components": {
+      "stance_raw": 1.0,
+      "stance_score": 100.0,
+      "confidence_raw": 0.5,
+      "confidence_calibrated": 0.232,
+      "confidence_score": 23.0,
+      "resonance_z": 0.0,
+      "resonance_score": 0.0,
+      "multi_stock_score": 0.0
+    }
   },
   {
     "topic": "宏观分析",
@@ -716,7 +1024,18 @@
     "text": "你太误会我了，我最不喜欢看的就是TRUFLATION",
     "created_at": "2025-05-25T03:24:57",
     "stock_details": [],
-    "crypto_details": []
+    "crypto_details": [],
+    "signal_score": 3.2,
+    "signal_components": {
+      "stance_raw": 0.0,
+      "stance_score": 0.0,
+      "confidence_raw": 0.2,
+      "confidence_calibrated": 0.093,
+      "confidence_score": 9.0,
+      "resonance_z": 0.0,
+      "resonance_score": 0.0,
+      "multi_stock_score": 0.0
+    }
   },
   {
     "topic": "加密货币",
@@ -738,7 +1057,18 @@
     "stock_details": [],
     "crypto_details": [
       "BTC"
-    ]
+    ],
+    "signal_score": 48.1,
+    "signal_components": {
+      "stance_raw": 1.0,
+      "stance_score": 100.0,
+      "confidence_raw": 0.5,
+      "confidence_calibrated": 0.232,
+      "confidence_score": 23.0,
+      "resonance_z": 0.0,
+      "resonance_score": 0.0,
+      "multi_stock_score": 0.0
+    }
   },
   {
     "topic": "加密货币",
@@ -756,7 +1086,18 @@
     "text": "Not your key, not your coin",
     "created_at": "2025-05-26T02:16:54",
     "stock_details": [],
-    "crypto_details": []
+    "crypto_details": [],
+    "signal_score": 16.2,
+    "signal_components": {
+      "stance_raw": 0.0,
+      "stance_score": 0.0,
+      "confidence_raw": 1.0,
+      "confidence_calibrated": 0.463,
+      "confidence_score": 46.0,
+      "resonance_z": 0.0,
+      "resonance_score": 0.0,
+      "multi_stock_score": 0.0
+    }
   },
   {
     "topic": "招聘/人脉",
@@ -778,7 +1119,18 @@
     "text": "“帮一个小兄弟转发找工作的需求：本硕就读于某top5学校金融专业，实习经历包括外资投行、私募并购基金与家办的crypto投研，目前在找宏观/crypto二级投研的机会，希望能长期实习留用，有香港工作签证。如果有朋友有需求的可以DM我看简历”",
     "created_at": "2025-05-26T02:22:34",
     "stock_details": [],
-    "crypto_details": []
+    "crypto_details": [],
+    "signal_score": 16.2,
+    "signal_components": {
+      "stance_raw": 0.0,
+      "stance_score": 0.0,
+      "confidence_raw": 1.0,
+      "confidence_calibrated": 0.463,
+      "confidence_score": 46.0,
+      "resonance_z": 0.0,
+      "resonance_score": 0.0,
+      "multi_stock_score": 0.0
+    }
   },
   {
     "topic": "宏观分析",
@@ -796,7 +1148,18 @@
     "text": "Hello, 你们现在对市场最大的担心是什么？\n一个月前担心PE下跌接下来还有EPS下跌或者什么熊市开启的思路暂时都被打脸，没人记得了，那么接下去我们需要注意什么？",
     "created_at": "2025-05-27T04:58:47",
     "stock_details": [],
-    "crypto_details": []
+    "crypto_details": [],
+    "signal_score": 16.2,
+    "signal_components": {
+      "stance_raw": 0.0,
+      "stance_score": 0.0,
+      "confidence_raw": 1.0,
+      "confidence_calibrated": 0.463,
+      "confidence_score": 46.0,
+      "resonance_z": 0.0,
+      "resonance_score": 0.0,
+      "multi_stock_score": 0.0
+    }
   },
   {
     "topic": "宏观分析",
@@ -817,7 +1180,18 @@
     "text": "今天的一组消费者信心指数，一个月公布一次，5月份大幅反弹，4月份公布的数据接近疫情低点，匹配了当时大家对于关税和美股的恐慌",
     "created_at": "2025-05-27T15:49:17",
     "stock_details": [],
-    "crypto_details": []
+    "crypto_details": [],
+    "signal_score": 48.1,
+    "signal_components": {
+      "stance_raw": 1.0,
+      "stance_score": 100.0,
+      "confidence_raw": 0.5,
+      "confidence_calibrated": 0.232,
+      "confidence_score": 23.0,
+      "resonance_z": 0.0,
+      "resonance_score": 0.0,
+      "multi_stock_score": 0.0
+    }
   },
   {
     "topic": "宏观分析",
@@ -835,7 +1209,18 @@
     "text": "这段时间好寂寞，市场沉闷得狠",
     "created_at": "2025-05-27T17:18:04",
     "stock_details": [],
-    "crypto_details": []
+    "crypto_details": [],
+    "signal_score": 8.1,
+    "signal_components": {
+      "stance_raw": 0.0,
+      "stance_score": 0.0,
+      "confidence_raw": 0.5,
+      "confidence_calibrated": 0.232,
+      "confidence_score": 23.0,
+      "resonance_z": 0.0,
+      "resonance_score": 0.0,
+      "multi_stock_score": 0.0
+    }
   },
   {
     "topic": "信息分享",
@@ -853,7 +1238,18 @@
     "text": "专业人士来回答国内税务问题。\n从加拿大税务来说，年内的亏损可以计入当年抵税用途\n跨年的税务还真不知道怎么处理。",
     "created_at": "2025-05-27T17:27:26",
     "stock_details": [],
-    "crypto_details": []
+    "crypto_details": [],
+    "signal_score": 16.2,
+    "signal_components": {
+      "stance_raw": 0.0,
+      "stance_score": 0.0,
+      "confidence_raw": 1.0,
+      "confidence_calibrated": 0.463,
+      "confidence_score": 46.0,
+      "resonance_z": 0.0,
+      "resonance_score": 0.0,
+      "multi_stock_score": 0.0
+    }
   },
   {
     "topic": "投资策略",
@@ -871,7 +1267,18 @@
     "text": "我觉得我是犯贱了\n这段时间可以研究研究板块，李哥在关注啥",
     "created_at": "2025-05-27T17:28:21",
     "stock_details": [],
-    "crypto_details": []
+    "crypto_details": [],
+    "signal_score": 3.2,
+    "signal_components": {
+      "stance_raw": 0.0,
+      "stance_score": 0.0,
+      "confidence_raw": 0.2,
+      "confidence_calibrated": 0.093,
+      "confidence_score": 9.0,
+      "resonance_z": 0.0,
+      "resonance_score": 0.0,
+      "multi_stock_score": 0.0
+    }
   },
   {
     "topic": "个股分析",
@@ -908,7 +1315,18 @@
         "verified": true
       }
     ],
-    "crypto_details": []
+    "crypto_details": [],
+    "signal_score": 18.7,
+    "signal_components": {
+      "stance_raw": 0.0,
+      "stance_score": 0.0,
+      "confidence_raw": 1.0,
+      "confidence_calibrated": 0.463,
+      "confidence_score": 46.0,
+      "resonance_z": -0.28,
+      "resonance_score": -28.0,
+      "multi_stock_score": 67.0
+    }
   },
   {
     "topic": "信息分享",
@@ -926,7 +1344,18 @@
     "text": "没有，请看定义，80以内就是中性",
     "created_at": "2025-05-28T10:46:27",
     "stock_details": [],
-    "crypto_details": []
+    "crypto_details": [],
+    "signal_score": 3.2,
+    "signal_components": {
+      "stance_raw": 0.0,
+      "stance_score": 0.0,
+      "confidence_raw": 0.2,
+      "confidence_calibrated": 0.093,
+      "confidence_score": 9.0,
+      "resonance_z": 0.0,
+      "resonance_score": 0.0,
+      "multi_stock_score": 0.0
+    }
   },
   {
     "topic": "宏观分析",
@@ -944,7 +1373,18 @@
     "text": "我感觉美股",
     "created_at": "2025-05-28T10:49:49",
     "stock_details": [],
-    "crypto_details": []
+    "crypto_details": [],
+    "signal_score": 3.2,
+    "signal_components": {
+      "stance_raw": 0.0,
+      "stance_score": 0.0,
+      "confidence_raw": 0.2,
+      "confidence_calibrated": 0.093,
+      "confidence_score": 9.0,
+      "resonance_z": 0.0,
+      "resonance_score": 0.0,
+      "multi_stock_score": 0.0
+    }
   },
   {
     "topic": "加密货币",
@@ -971,7 +1411,18 @@
     "crypto_details": [
       "BTC",
       "NFT"
-    ]
+    ],
+    "signal_score": 56.2,
+    "signal_components": {
+      "stance_raw": 1.0,
+      "stance_score": 100.0,
+      "confidence_raw": 1.0,
+      "confidence_calibrated": 0.463,
+      "confidence_score": 46.0,
+      "resonance_z": 0.0,
+      "resonance_score": 0.0,
+      "multi_stock_score": 0.0
+    }
   },
   {
     "topic": "宏观分析",
@@ -991,7 +1442,18 @@
     "text": "今天在外出差，就借用交易之刃的帖子做个总结，少有的在4月份不fud市场说还要跌20%，30%的KOL ，并且我记得当时他还发了很多接下去buybacks的开启，也许很多人已经忘了当时市场有多悲观，进入5月份之前很多人说sell in May go away。如果你真的go away，那的确money也和你go away。",
     "created_at": "2025-05-29T03:57:34",
     "stock_details": [],
-    "crypto_details": []
+    "crypto_details": [],
+    "signal_score": 48.1,
+    "signal_components": {
+      "stance_raw": 1.0,
+      "stance_score": 100.0,
+      "confidence_raw": 0.5,
+      "confidence_calibrated": 0.232,
+      "confidence_score": 23.0,
+      "resonance_z": 0.0,
+      "resonance_score": 0.0,
+      "multi_stock_score": 0.0
+    }
   },
   {
     "topic": "加密货币",
@@ -1024,7 +1486,18 @@
     ],
     "crypto_details": [
       "USDC"
-    ]
+    ],
+    "signal_score": 51.4,
+    "signal_components": {
+      "stance_raw": 1.0,
+      "stance_score": 100.0,
+      "confidence_raw": 0.5,
+      "confidence_calibrated": 0.232,
+      "confidence_score": 23.0,
+      "resonance_z": 0.0,
+      "resonance_score": 0.0,
+      "multi_stock_score": 33.0
+    }
   },
   {
     "topic": "加密货币",
@@ -1052,7 +1525,18 @@
     "crypto_details": [
       "ETH",
       "BTC"
-    ]
+    ],
+    "signal_score": 48.1,
+    "signal_components": {
+      "stance_raw": 1.0,
+      "stance_score": 100.0,
+      "confidence_raw": 0.5,
+      "confidence_calibrated": 0.232,
+      "confidence_score": 23.0,
+      "resonance_z": 0.0,
+      "resonance_score": 0.0,
+      "multi_stock_score": 0.0
+    }
   },
   {
     "topic": "投资策略",
@@ -1070,7 +1554,18 @@
     "text": "你可以对冲掉波动",
     "created_at": "2025-05-30T01:49:07",
     "stock_details": [],
-    "crypto_details": []
+    "crypto_details": [],
+    "signal_score": 8.1,
+    "signal_components": {
+      "stance_raw": 0.0,
+      "stance_score": 0.0,
+      "confidence_raw": 0.5,
+      "confidence_calibrated": 0.232,
+      "confidence_score": 23.0,
+      "resonance_z": 0.0,
+      "resonance_score": 0.0,
+      "multi_stock_score": 0.0
+    }
   },
   {
     "topic": "加密货币",
@@ -1095,6 +1590,17 @@
     "stock_details": [],
     "crypto_details": [
       "ETH"
-    ]
+    ],
+    "signal_score": 8.1,
+    "signal_components": {
+      "stance_raw": 0.0,
+      "stance_score": 0.0,
+      "confidence_raw": 0.5,
+      "confidence_calibrated": 0.232,
+      "confidence_score": 23.0,
+      "resonance_z": 0.0,
+      "resonance_score": 0.0,
+      "multi_stock_score": 0.0
+    }
   }
 ]
