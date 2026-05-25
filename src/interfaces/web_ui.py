@@ -841,6 +841,50 @@ def _render_insights_tab() -> None:
     from pathlib import Path as _Path
     import json as _json
 
+    # ── 角色代入选股 ──
+    st.subheader("🤖 角色代入选股")
+    col1, col2, col3 = st.columns([1, 1, 1])
+    with col1:
+        analyst = st.selectbox("分析师", ["TJ_Research", "dearbaibabybus"])
+    with col2:
+        sector = st.text_input("板块", value="AI 半导体", placeholder="AI 半导体 / 加密 / 医疗...")
+    with col3:
+        st.write("")  # 占位对齐
+        go = st.button("🚀 生成选股方案", type="primary")
+
+    if go:
+        with st.spinner(f"正在模拟 {analyst} 在 {sector} 板块的决策..."):
+            result = _run_role_picker(analyst, sector)
+            if result:
+                st.markdown(result)
+            else:
+                st.error("生成失败，检查 API 配置")
+
+    st.divider()
+
+    # ── 持仓建议 ──
+    st.subheader("💼 我的持仓顾问")
+    upload_method = st.radio("输入方式", ["📁 CSV 文件", "✏️ 文字输入", "📸 截图上传"], horizontal=True)
+
+    if upload_method == "📁 CSV 文件":
+        csv_file = st.file_uploader("上传持仓 CSV", type=["csv"])
+        if csv_file:
+            st.dataframe(_parse_csv(csv_file))
+            if st.button("🔍 分析持仓", key="csv_analyze"):
+                _run_portfolio_analyzer(csv_file.getvalue().decode(), None, None)
+    elif upload_method == "✏️ 文字输入":
+        text_input = st.text_area("输入持仓信息", height=150, placeholder="NVDA 100股 成本$110\nAVGO 50股 成本$320\n...")
+        if st.button("🔍 分析持仓", key="text_analyze") and text_input:
+            _run_portfolio_analyzer(text_input, None, None)
+    else:
+        img_file = st.file_uploader("上传持仓截图", type=["png", "jpg", "jpeg"])
+        if img_file:
+            st.image(img_file, width=300)
+            if st.button("🔍 分析截图", key="img_analyze"):
+                _run_portfolio_analyzer(None, img_file, None)
+
+    st.divider()
+
     # ── 最新共识 ──
     st.subheader("📡 最新共识")
     cons_dir = _Path("data/consensus")
@@ -913,6 +957,150 @@ def _render_insights_tab() -> None:
                 st.metric(r["user"], f"{r['in_degree']} 次被引用")
     else:
         st.caption("运行 python scripts/build_network.py 生成")
+
+
+def _run_role_picker(analyst: str, sector: str) -> str | None:
+    """调用 #7 角色代入：加载画像+基本面+K线，调 LLM 生成选股方案。"""
+    import json as _json
+    from pathlib import Path as _Path
+    from src.ai.llm_client import chat
+
+    # 加载画像
+    candidates = sorted(_Path("data/pipeline").glob(f"{analyst}*portrait.md"))
+    if not candidates:
+        short = analyst.split("_")[0]
+        candidates = sorted(_Path("data/pipeline").glob(f"{short}*portrait.md"))
+    portrait = candidates[-1].read_text(encoding="utf-8")[:3000] if candidates else "无画像"
+
+    # 加载该分析师提到的股票 + 基本面 + K线
+    fundamentals = {}
+    if _Path("data/fundamental_cache.json").exists():
+        fundamentals = _json.loads(_Path("data/fundamental_cache.json").read_text(encoding="utf-8"))
+    prices = {}
+    if _Path("data/prices.json").exists():
+        prices = _json.loads(_Path("data/prices.json").read_text(encoding="utf-8"))
+
+    # 收集板块内股票
+    search_terms = [t.strip().lower() for t in sector.replace("/", " ").split() if t.strip()]
+    tickers = set()
+    for fp in _Path("data/pipeline").glob(f"{analyst}*analyzed_cleaned.json"):
+        for r in _json.loads(fp.read_text(encoding="utf-8")):
+            sectors_str = " ".join(r.get("mentioned_sectors", [])).lower()
+            text = (r.get("text", "") or "").lower()
+            topic = (r.get("topic", "") or "").lower()
+            haystack = f"{sectors_str} {topic} {text}"
+            if any(term in haystack for term in search_terms):
+                for s in r.get("stock_details", []):
+                    t = s.get("ticker", "").upper()
+                    if t: tickers.add(t)
+
+    # 构建股票池表
+    stock_rows = []
+    for t in sorted(tickers)[:15]:
+        f = fundamentals.get(t, {})
+        bars = prices.get(t, {}).get("results", [])
+        lc = f"${bars[-1]['c']:.0f}" if bars else "?"
+        pe = f"{f.get('pe_ratio','?'):.0f}" if f.get('pe_ratio') else "?"
+        roe = f"{f.get('roe','?'):.0f}%" if f.get('roe') else "?"
+        chg = ""
+        if bars and len(bars) >= 22:
+            chg = f"{(bars[-1]['c']-bars[-22]['c'])/bars[-22]['c']*100:+.1f}%"
+        stock_rows.append(f"| {t} | {pe} | {roe} | {lc} | {chg} |")
+
+    stock_table = "| Ticker | PE | ROE | 价格 | 30日 |\n|--------|-----|-----|------|------|\n" + "\n".join(stock_rows)
+
+    prompt = f"""[Role]
+你是 {analyst} 的投资决策模拟器。以下是他的完整投资风格画像：
+
+{portrait}
+
+[Task]
+基于以上画像的投资框架，从以下 {sector} 板块股票池中选择 3-5 只最符合其理念的标的。
+说明理由（引用画像具体维度），分配仓位（总和 100%），给入场区间和止损。
+
+[Stock Pool]
+{stock_table}
+
+[Output]
+用中文 Markdown 格式，含选股表格和每只的 reasoning。"""
+
+    try:
+        return chat(messages=[{"role": "user", "content": prompt}], role="analyzer", max_tokens=4096, temperature=0.5)
+    except Exception as e:
+        return None
+
+
+def _parse_csv(uploaded_file):
+    """解析上传的 CSV 文件。"""
+    import pandas as _pd
+    import io as _io
+    return _pd.read_csv(_io.BytesIO(uploaded_file.getvalue() if hasattr(uploaded_file, 'getvalue') else uploaded_file))
+
+
+def _run_portfolio_analyzer(text: str | None, image_file, csv_bytes: bytes | None) -> None:
+    """调用 LLM 分析持仓。支持文字、CSV、截图三种输入。"""
+    import json as _json
+    from pathlib import Path as _Path
+    from src.ai.llm_client import chat
+    import streamlit as _st
+
+    # 加载基本面 + 信号 + 准确率
+    fundamentals = {}
+    if _Path("data/fundamental_cache.json").exists():
+        fundamentals = _json.loads(_Path("data/fundamental_cache.json").read_text(encoding="utf-8"))
+    prices = {}
+    if _Path("data/prices.json").exists():
+        prices = _json.loads(_Path("data/prices.json").read_text(encoding="utf-8"))
+
+    # 加载画像
+    portraits = []
+    for fp in sorted(_Path("data/pipeline").glob("*全量*portrait.md")):
+        username = fp.stem.replace("_全量_portrait", "")
+        portraits.append(f"## {username}\n{fp.read_text(encoding='utf-8')[:1500]}")
+
+    # 加载准确率
+    acc_text = ""
+    for fp in _Path("data/accuracy").glob("*.json"):
+        u = fp.stem.replace("_accuracy", "")
+        d = _json.loads(fp.read_text(encoding="utf-8"))
+        wr = d.get("returns_30d", {}).get("win_rate", "?")
+        acc_text += f"- {u}: 30日胜率 {wr*100:.0f}%\n" if isinstance(wr, (int, float)) else ""
+
+    portrait_text = "\n".join(portraits)
+
+    prompt = f"""你是投资顾问。基于以下分析师画像为他们分析我的持仓。
+
+[分析师画像]
+{portrait_text}
+
+[分析师准确率]
+{acc_text}
+
+[我的持仓说明]
+{text or "见截图"}
+
+请给出每只持仓股的分析师视角建议：
+1. 这只股票分析师怎么看（引用画像维度）
+2. 你的持仓情况和建议（仓位、成本、止损）
+3. 风险提示
+
+用中文 Markdown 格式输出。"""
+
+    with _st.spinner("正在分析持仓..."):
+        try:
+            messages = [{"role": "user", "content": prompt}]
+            if image_file is not None:
+                import base64 as _b64
+                img_bytes = image_file.getvalue()
+                img_b64 = _b64.b64encode(img_bytes).decode()
+                messages[0]["content"] = [
+                    {"type": "image_url", "image_url": {"url": f"data:image/jpeg;base64,{img_b64}"}},
+                    {"type": "text", "text": prompt},
+                ]
+            result = chat(messages=messages, role="analyzer", max_tokens=4096, temperature=0.5)
+            _st.markdown(result)
+        except Exception as e:
+            _st.error(f"分析失败: {e}")
 
 
 if __name__ == "__main__":
