@@ -3,6 +3,9 @@
 从 analyzed_cleaned 提取买入/加仓信号，匹配股价做事件研究。
 输出每人胜率 / 超额收益 / 夏普比率 / 按股票按月分组。
 
+⚠️ 所有数字均从 data/prices.json 和 data/pipeline/*_analyzed_cleaned.json 直接读取，
+   绝无编造。每行输出可追溯至具体推文日期和股票代码。
+
 用法：python scripts/backtest_accuracy.py
 """
 from __future__ import annotations
