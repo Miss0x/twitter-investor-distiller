@@ -31,10 +31,16 @@ def load_portfolio() -> set[str]:
 
 
 def send_telegram(message: str) -> bool:
-    token = os.environ.get("TELEGRAM_BOT_TOKEN", "")
-    chat_id = os.environ.get("TELEGRAM_CHAT_ID", "")
+    """从 data/telegram_config.json 读取配置并发送消息。"""
+    config_path = Path("data/telegram_config.json")
+    if not config_path.exists():
+        print(f"  [dry-run] 请先在网页端配置 Telegram → {message[:50]}")
+        return False
+    config = json.loads(config_path.read_text(encoding="utf-8"))
+    token = config.get("bot_token", "")
+    chat_id = config.get("chat_id", "")
     if not token or not chat_id:
-        print(f"  [dry-run] {message}")
+        print(f"  [dry-run] {message[:50]}")
         return False
     import urllib.request
     url = f"https://api.telegram.org/bot{token}/sendMessage"

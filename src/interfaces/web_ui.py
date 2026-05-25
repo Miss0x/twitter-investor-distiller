@@ -557,6 +557,10 @@ def main() -> None:
 
     # ── 实时监控 ──
     _render_daemon_control()
+
+    # ── Telegram 通知 ──
+    _render_telegram_config()
+
     st.divider()
 
     # ── 主区域 ──
@@ -1237,6 +1241,59 @@ while True:
         with st.expander("📋 日志", expanded=len(st.session_state.daemon_log) <= 3):
             for line in st.session_state.daemon_log[-10:]:
                 st.text(line)
+
+
+# ══════ Telegram 通知配置 ══════
+
+TELEGRAM_CONFIG_PATH = Path("data/telegram_config.json")
+
+
+def _render_telegram_config() -> None:
+    """Telegram Bot 配置面板 — Step 4 #5 预警模块。"""
+    import json as _json
+
+    # 加载已有配置
+    config = {}
+    if TELEGRAM_CONFIG_PATH.exists():
+        config = _json.loads(TELEGRAM_CONFIG_PATH.read_text(encoding="utf-8"))
+
+    with st.expander("🔔 Telegram 预警通知配置", expanded=not bool(config.get("bot_token"))):
+        col1, col2 = st.columns([2, 1])
+        with col1:
+            token = st.text_input("Bot Token", value=config.get("bot_token", ""), type="password",
+                                   placeholder="123456:ABC-DEF1234ghIkl...")
+        with col2:
+            chat_id = st.text_input("Chat ID", value=config.get("chat_id", ""),
+                                    placeholder="-1001234567890")
+
+        if st.button("💾 保存配置"):
+            new_config = {"bot_token": token, "chat_id": chat_id}
+            TELEGRAM_CONFIG_PATH.write_text(_json.dumps(new_config, ensure_ascii=False, indent=2), encoding="utf-8")
+            st.success("已保存 ✅")
+
+        if config.get("bot_token"):
+            st.caption(f"已配置 Bot: {config['bot_token'][:10]}... → Chat: {config.get('chat_id', '?')}")
+            if st.button("🧪 发送测试消息"):
+                msg = f"✅ 预警系统就绪\n时间: {time.strftime('%Y-%m-%d %H:%M:%S')}"
+                ok = _send_telegram(config["bot_token"], config["chat_id"], msg)
+                if ok:
+                    st.success("测试消息已发送")
+                else:
+                    st.error("发送失败，检查 Token/Chat ID")
+
+
+def _send_telegram(token: str, chat_id: str, message: str) -> bool:
+    """发送 Telegram 消息。返回是否成功。"""
+    try:
+        import urllib.request as _ur
+        import json as _json
+        url = f"https://api.telegram.org/bot{token}/sendMessage"
+        data = _json.dumps({"chat_id": chat_id, "text": message, "parse_mode": "HTML"}).encode()
+        req = _ur.Request(url, data=data, headers={"Content-Type": "application/json"})
+        _ur.urlopen(req, timeout=10)
+        return True
+    except Exception:
+        return False
 
 
 if __name__ == "__main__":
