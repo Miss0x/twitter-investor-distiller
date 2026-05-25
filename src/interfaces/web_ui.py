@@ -853,22 +853,37 @@ def _render_insights_tab() -> None:
 
     # ── 角色代入选股 ──
     st.subheader("🤖 角色代入选股")
-    col1, col2, col3 = st.columns([1, 1, 1])
+    col1, col2 = st.columns([1, 2])
     with col1:
         analyst = st.selectbox("分析师", ["TJ_Research", "dearbaibabybus"])
     with col2:
-        sector = st.text_input("板块", value="AI 半导体", placeholder="AI 半导体 / 加密 / 医疗...")
+        sectors = _get_sector_options()
+        sector = st.selectbox("行业板块（SIC 标准分类）", list(sectors.keys()),
+                              help="Polygon SIC 官方行业分类，无标签污染")
+
+    # 显示该行业的股票池
+    stocks_in_sector = sectors.get(sector, [])
+    st.caption(f"该行业共 {len(stocks_in_sector)} 只股票（分析师历史覆盖）")
+
+    col3, col4 = st.columns([3, 1])
     with col3:
-        st.write("")  # 占位对齐
-        go = st.button("🚀 生成选股方案", type="primary")
+        custom_stocks = st.text_input("手动加减股票（逗号分隔）", placeholder="如: LRCX,AMAT 或不想要某只写 -INTC")
+    with col4:
+        refresh = st.checkbox("🔄 实时价格", value=True, help="每次生成时拉取最新股价，不勾选用缓存")
+
+    go = st.button("🚀 生成选股方案", type="primary")
 
     if go:
-        with st.spinner(f"正在模拟 {analyst} 在 {sector} 板块的决策..."):
-            result = _run_role_picker(analyst, sector)
-            if result:
-                st.markdown(result)
-            else:
-                st.error("生成失败，检查 API 配置")
+        final_stocks = _build_stock_pool(stocks_in_sector, custom_stocks)
+        if not final_stocks:
+            st.warning("股票池为空，请选择行业或手动添加")
+        else:
+            with st.spinner(f"正在模拟 {analyst} 在 {sector} 的决策（{len(final_stocks)} 只股票）..."):
+                result = _run_role_picker_v2(analyst, sector, final_stocks, refresh)
+                if result:
+                    st.markdown(result)
+                else:
+                    st.error("生成失败，检查 API 配置")
 
     st.divider()
 
@@ -1294,6 +1309,134 @@ def _send_telegram(token: str, chat_id: str, message: str) -> bool:
         return True
     except Exception:
         return False
+
+
+def _get_sector_options() -> dict[str, list[str]]:
+    """从 sector_map.json 构建板块选项。按 industry 细分类分组。"""
+    import json as _j
+    from collections import defaultdict as _dd
+
+    sp = _P("data/sector_map.json")
+    if not sp.exists():
+        st.warning("请先创建 data/sector_map.json")
+        return {"未分类": []}
+
+    d = _j.loads(sp.read_text(encoding="utf-8"))
+    groups: dict[str, list[str]] = _dd(list)
+    for ticker, v in d.items():
+        sector = v.get("sector", "Other")
+        industry = v.get("industry", "Other")
+        label = f"{sector} / {industry}"
+        groups[label].append(ticker)
+
+    big_groups: dict[str, list[str]] = _dd(list)
+    for ticker, v in d.items():
+        big_groups[v.get("sector", "Other")].append(ticker)
+
+    result = {}
+    for k, v in sorted(groups.items(), key=lambda x: -len(x[1])):
+        if len(v) >= 3:
+            result[k] = sorted(v)
+    for k, v in sorted(big_groups.items(), key=lambda x: -len(x[1])):
+        if len(v) >= 3:
+            result[f"【大类】{k}"] = sorted(v)
+
+    return result
+
+
+def _build_stock_pool(sector_tickers: list[str], custom: str) -> list[str]:
+    """合并行业股票 + 手动加减。"""
+    pool = set(sector_tickers)
+    if custom:
+        for part in custom.replace("，", ",").split(","):
+            t = part.strip().upper()
+            if t.startswith("-"):
+                pool.discard(t[1:])
+            elif t:
+                pool.add(t)
+    return sorted(pool)
+
+
+def _run_role_picker_v2(analyst: str, sector: str, tickers: list[str], refresh_price: bool) -> str | None:
+    """调用 LLM 生成选股方案。"""
+    import json as _j
+    from pathlib import Path as _P
+    from src.ai.llm_client import chat
+    import subprocess as _sp
+
+    # 加载画像
+    candidates = sorted(_P("data/pipeline").glob(f"{analyst}*portrait.md"))
+    if not candidates:
+        short = analyst.split("_")[0]
+        candidates = sorted(_P("data/pipeline").glob(f"{short}*portrait.md"))
+    portrait = candidates[-1].read_text(encoding="utf-8")[:3000] if candidates else "无画像"
+
+    # 实时价格
+    prices = {}
+    if refresh_price:
+        westock_js = str(_P.home() / ".workbuddy/plugins/marketplaces/cb_teams_marketplace/plugins/finance-data/skills/westock-data/scripts/index.js")
+        for t in tickers[:25]:
+            try:
+                out = _sp.run(["node", westock_js, "quote", f"us{t}"], capture_output=True, text=True, timeout=10,
+                              cwd=_P(westock_js).parent).stdout
+                for line in out.split("\n"):
+                    line = line.strip()
+                    if not line.startswith("| us"):
+                        continue
+                    parts = [p.strip() for p in line.split("|")]
+                    if len(parts) >= 15:
+                        prices[t] = {"price": parts[6], "pe": parts[15], "chg": parts[9]}
+            except:
+                pass
+
+    # 基本面
+    fundamentals = {}
+    fp = _P("data/fundamental_cache.json")
+    if fp.exists():
+        fundamentals = _j.loads(fp.read_text(encoding="utf-8"))
+
+    # 加载准确率
+    acc_text = ""
+    for afp in _P("data/accuracy").glob("*.json"):
+        u = afp.stem.replace("_accuracy", "")
+        d = _j.loads(afp.read_text(encoding="utf-8"))
+        wr = d.get("returns_30d", {}).get("win_rate")
+        if wr is not None:
+            acc_text += f"- {u}: 30日胜率 {wr*100:.0f}%\n"
+
+    # 股票池表
+    rows = ["| Ticker | PE | ROE | 价格 | 涨跌 | 信号分 |"]
+    rows.append("|--------|-----|------|------|------|--------|")
+    for t in tickers[:25]:
+        f = fundamentals.get(t, {})
+        p = prices.get(t, {})
+        pe = f"{f.get('pe_ratio','?'):.0f}" if f.get('pe_ratio') else "?"
+        roe = f"{f.get('roe','?'):.0f}%" if f.get('roe') else "?"
+        price = p.get("price", "?")
+        chg = p.get("chg", "?")
+        rows.append(f"| {t} | {pe} | {roe} | {price} | {chg} | ? |")
+
+    prompt = f"""[Role]
+你是 {analyst} 的投资决策模拟器。以下是他最新画像：
+
+{portrait}
+
+[准确率]
+{acc_text}
+
+[Task]
+基于画像的投资框架，从 {sector} 行业股票池选 3-5 只最符合其理念的标的。
+说明理由（引用画像维度），分配仓位（总和100%），给入场区间止损。
+
+[{sector} 股票池]
+{chr(10).join(rows)}
+
+Output: 中文 Markdown。"""
+
+    try:
+        return chat(messages=[{"role": "user", "content": prompt}], role="analyzer", max_tokens=4096, temperature=0.5)
+    except Exception:
+        return None
 
 
 if __name__ == "__main__":

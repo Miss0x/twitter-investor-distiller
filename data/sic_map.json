@@ -1,0 +1,252 @@
+{
+  "AAOI": {
+    "sic": "3674",
+    "desc": "SEMICONDUCTORS & RELATED DEVICES",
+    "name": "Applied Optoelectronics, Inc."
+  },
+  "AKAM": {
+    "sic": "7389",
+    "desc": "SERVICES-BUSINESS SERVICES, NEC",
+    "name": "Akamai Technologies Inc"
+  },
+  "AMD": {
+    "sic": "3674",
+    "desc": "SEMICONDUCTORS & RELATED DEVICES",
+    "name": "Advanced Micro Devices"
+  },
+  "AMDL": {
+    "sic": null,
+    "desc": null,
+    "name": "GraniteShares 2x Long AMD Daily ETF"
+  },
+  "AMKR": {
+    "sic": "3674",
+    "desc": "SEMICONDUCTORS & RELATED DEVICES",
+    "name": "Amkor Technology Inc"
+  },
+  "AMPX": {
+    "sic": "3690",
+    "desc": "MISCELLANEOUS ELECTRICAL MACHINERY, EQUIPMENT & SUPPLIES",
+    "name": "Amprius Technologies, Inc."
+  },
+  "BMNR": {
+    "sic": "6199",
+    "desc": "FINANCE SERVICES",
+    "name": "BitMine Immersion Technologies, Inc."
+  },
+  "CRML": {
+    "sic": null,
+    "desc": null,
+    "name": "Critical Metals Corp. Ordinary Shares"
+  },
+  "CRWD": {
+    "sic": "7372",
+    "desc": "SERVICES-PREPACKAGED SOFTWARE",
+    "name": "CrowdStrike Holdings, Inc. Class A Common Stock"
+  },
+  "CRWV": {
+    "sic": "7372",
+    "desc": "SERVICES-PREPACKAGED SOFTWARE",
+    "name": "CoreWeave, Inc. Class A Common Stock"
+  },
+  "DASH": {
+    "sic": "7389",
+    "desc": "SERVICES-BUSINESS SERVICES, NEC",
+    "name": "DoorDash, Inc. Class A Common Stock"
+  },
+  "ETN": {
+    "sic": "3590",
+    "desc": "MISC INDUSTRIAL & COMMERCIAL MACHINERY & EQUIPMENT",
+    "name": "Eaton Corporation, plc Ordinary Shares"
+  },
+  "FIG": {
+    "sic": "7372",
+    "desc": "SERVICES-PREPACKAGED SOFTWARE",
+    "name": "Figma, Inc."
+  },
+  "FLY": {
+    "sic": "3760",
+    "desc": "GUIDED MISSILES & SPACE VEHICLES & PARTS",
+    "name": "Firefly Aerospace Inc. Common Stock"
+  },
+  "FNMA": {
+    "sic": null,
+    "desc": null,
+    "name": "FANNIE MAE"
+  },
+  "IGV": {
+    "sic": null,
+    "desc": null,
+    "name": "iShares Expanded Tech-Software Sector ETF"
+  },
+  "INOD": {
+    "sic": "7374",
+    "desc": "SERVICES-COMPUTER PROCESSING & DATA PREPARATION",
+    "name": "Innodata Inc."
+  },
+  "INTC": {
+    "sic": "3674",
+    "desc": "SEMICONDUCTORS & RELATED DEVICES",
+    "name": "Intel Corp"
+  },
+  "IREN": {
+    "sic": "6199",
+    "desc": "FINANCE SERVICES",
+    "name": "IREN Limited Ordinary Shares"
+  },
+  "KLAC": {
+    "sic": "3827",
+    "desc": "OPTICAL INSTRUMENTS & LENSES",
+    "name": "KLA Corporation Common Stock"
+  },
+  "LAC": {
+    "sic": "1000",
+    "desc": "METAL MINING",
+    "name": "Lithium Americas Corp."
+  },
+  "LEU": {
+    "sic": "1400",
+    "desc": "MINING & QUARRYING OF NONMETALLIC MINERALS (NO FUELS)",
+    "name": "Centrus Energy Corp."
+  },
+  "LLY": {
+    "sic": "2834",
+    "desc": "PHARMACEUTICAL PREPARATIONS",
+    "name": "Eli Lilly & Co."
+  },
+  "LMND": {
+    "sic": "6331",
+    "desc": "FIRE, MARINE & CASUALTY INSURANCE",
+    "name": "Lemonade, Inc."
+  },
+  "MU": {
+    "sic": "3674",
+    "desc": "SEMICONDUCTORS & RELATED DEVICES",
+    "name": "Micron Technology, Inc."
+  },
+  "MXL": {
+    "sic": "3674",
+    "desc": "SEMICONDUCTORS & RELATED DEVICES",
+    "name": "MaxLinear, Inc. Common Stock"
+  },
+  "NBIS": {
+    "sic": null,
+    "desc": null,
+    "name": "Nebius Group N.V. Class A Ordinary Shares"
+  },
+  "NFLX": {
+    "sic": "7841",
+    "desc": "SERVICES-VIDEO TAPE RENTAL",
+    "name": "NetFlix Inc"
+  },
+  "PANW": {
+    "sic": "3577",
+    "desc": "COMPUTER PERIPHERAL EQUIPMENT, NEC",
+    "name": "Palo Alto Networks, Inc. Common Stock"
+  },
+  "PDD": {
+    "sic": null,
+    "desc": null,
+    "name": "PDD Holdings Inc. American Depositary Shares"
+  },
+  "PEP": {
+    "sic": "2080",
+    "desc": "BEVERAGES",
+    "name": "PepsiCo, Inc."
+  },
+  "PL": {
+    "sic": "3663",
+    "desc": "RADIO & TV BROADCASTING & COMMUNICATIONS EQUIPMENT",
+    "name": "Planet Labs PBC"
+  },
+  "PLTR": {
+    "sic": "7372",
+    "desc": "SERVICES-PREPACKAGED SOFTWARE",
+    "name": "Palantir Technologies Inc. Class A Common Stock"
+  },
+  "RGTI": {
+    "sic": "7371",
+    "desc": "SERVICES-COMPUTER PROGRAMMING SERVICES",
+    "name": "Rigetti Computing, Inc. Common Stock"
+  },
+  "RIOT": {
+    "sic": "6199",
+    "desc": "FINANCE SERVICES",
+    "name": "Riot Platforms, Inc. Common Stock"
+  },
+  "RKLB": {
+    "sic": "3760",
+    "desc": "GUIDED MISSILES & SPACE VEHICLES & PARTS",
+    "name": "Rocket Lab Corporation Common Stock"
+  },
+  "RSP": {
+    "sic": null,
+    "desc": null,
+    "name": "Invesco S&P 500 Equal Weight ETF"
+  },
+  "SBET": {
+    "sic": "6199",
+    "desc": "FINANCE SERVICES",
+    "name": "Sharplink, Inc. Common Stock"
+  },
+  "SOXX": {
+    "sic": null,
+    "desc": null,
+    "name": "iShares Semiconductor ETF"
+  },
+  "SPY": {
+    "sic": null,
+    "desc": null,
+    "name": "State Street SPDR S&P 500 ETF Trust"
+  },
+  "SQQQ": {
+    "sic": null,
+    "desc": null,
+    "name": "ProShares UltraPro Short QQQ"
+  },
+  "UBER": {
+    "sic": "7389",
+    "desc": "SERVICES-BUSINESS SERVICES, NEC",
+    "name": "Uber Technologies, Inc."
+  },
+  "UEC": {
+    "sic": "1090",
+    "desc": "MISCELLANEOUS METAL ORES",
+    "name": "Uranium Energy Corp."
+  },
+  "UNH": {
+    "sic": "6324",
+    "desc": "HOSPITAL & MEDICAL SERVICE PLANS",
+    "name": "UNITEDHEALTH GROUP INCORPORATED (Delaware)"
+  },
+  "UPS": {
+    "sic": "4210",
+    "desc": "TRUCKING & COURIER SERVICES (NO AIR)",
+    "name": "United Parcel Service, Inc. Class B"
+  },
+  "URG": {
+    "sic": "1040",
+    "desc": "GOLD AND SILVER ORES",
+    "name": "Ur-Energy Inc."
+  },
+  "VOYG": {
+    "sic": "3760",
+    "desc": "GUIDED MISSILES & SPACE VEHICLES & PARTS",
+    "name": "Voyager Technologies, Inc."
+  },
+  "VST": {
+    "sic": "4911",
+    "desc": "ELECTRIC SERVICES",
+    "name": "Vistra Corp."
+  },
+  "WDAY": {
+    "sic": "7374",
+    "desc": "SERVICES-COMPUTER PROCESSING & DATA PREPARATION",
+    "name": "Workday, Inc. Class A Common Stock"
+  },
+  "WMT": {
+    "sic": "5331",
+    "desc": "RETAIL-VARIETY STORES",
+    "name": "Walmart Inc. Common Stock"
+  }
+}
