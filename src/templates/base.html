@@ -89,7 +89,6 @@ const CARD_ORDER = {
 const cache = {};         // 卡片 HTML 缓存
 const REFRESH_MAP = {};   // 刷新间隔
 const LAST_FETCH = {};    // 上次拉取时间戳
-const STALE_MS = 2000;    // 2 秒内不重复从服务端拉
 
 function switchTab(tab) {
   const labels = {dashboard:'抓取', pipeline:'分析', insights:'洞察'};
@@ -105,14 +104,23 @@ async function loadCards(tab) {
   const container = document.getElementById('tab-' + tab);
   const names = CARD_ORDER[tab] || [];
   
+  const hasCache = names.filter(n => !!cache[n]);
+
+  // 已缓存的直接渲染，无填充骨架
+  if (hasCache.length === names.length) {
+    container.innerHTML = names.map(n => cache[n]).join('');
+    attachButtons();
+    return;
+  }
+
+  // 部分缓存：显示已缓存的 + 骨架
   container.innerHTML = names.map(n =>
-    '<div id="card-'+n+'" class="card" style="margin-bottom:12px">' +
+    cache[n] || ('<div id="card-'+n+'" class="card" style="margin-bottom:12px">' +
     '<div class="flex"><div class="spinner"></div><span class="text-secondary">加载中...</span></div>' +
-    '</div>'
+    '</div>')
   ).join('');
 
-  const now = Date.now();
-  const toFetch = names.filter(n => !cache[n] || (now - (LAST_FETCH[n] || 0)) > STALE_MS);
+  const toFetch = names.filter(n => !cache[n]);
 
   // 并行拉取
   const promises = names.map(async (name) => {
