@@ -1,0 +1,22 @@
+[
+  {
+    "date": "2026-01-30",
+    "consensus_score": 27.9,
+    "analysts_in_window": [
+      "dearbaibabybus"
+    ],
+    "signal_count": 1,
+    "all_bullish": true,
+    "all_bearish": false
+  },
+  {
+    "date": "2026-04-28",
+    "consensus_score": 32.0,
+    "analysts_in_window": [
+      "dearbaibabybus"
+    ],
+    "signal_count": 1,
+    "all_bullish": false,
+    "all_bearish": true
+  }
+]

@@ -1,0 +1,22 @@
+[
+  {
+    "date": "2025-10-27",
+    "consensus_score": 42.7,
+    "analysts_in_window": [
+      "dearbaibabybus"
+    ],
+    "signal_count": 3,
+    "all_bullish": true,
+    "all_bearish": false
+  },
+  {
+    "date": "2025-10-28",
+    "consensus_score": 26.9,
+    "analysts_in_window": [
+      "dearbaibabybus"
+    ],
+    "signal_count": 2,
+    "all_bullish": true,
+    "all_bearish": false
+  }
+]

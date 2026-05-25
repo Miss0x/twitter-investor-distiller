@@ -1,0 +1,23 @@
+[
+  {
+    "date": "2026-05-15",
+    "consensus_score": 100,
+    "analysts_in_window": [
+      "TJ_Research",
+      "dearbaibabybus"
+    ],
+    "signal_count": 2,
+    "all_bullish": true,
+    "all_bearish": false
+  },
+  {
+    "date": "2026-05-16",
+    "consensus_score": 84.6,
+    "analysts_in_window": [
+      "dearbaibabybus"
+    ],
+    "signal_count": 1,
+    "all_bullish": true,
+    "all_bearish": false
+  }
+]

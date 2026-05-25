@@ -1,0 +1,22 @@
+[
+  {
+    "date": "2026-05-12",
+    "consensus_score": 50.2,
+    "analysts_in_window": [
+      "dearbaibabybus"
+    ],
+    "signal_count": 2,
+    "all_bullish": false,
+    "all_bearish": false
+  },
+  {
+    "date": "2026-05-19",
+    "consensus_score": 27.2,
+    "analysts_in_window": [
+      "dearbaibabybus"
+    ],
+    "signal_count": 1,
+    "all_bullish": false,
+    "all_bearish": false
+  }
+]

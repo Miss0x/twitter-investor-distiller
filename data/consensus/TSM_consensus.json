@@ -1,0 +1,63 @@
+[
+  {
+    "date": "2025-01-30",
+    "consensus_score": 11.4,
+    "analysts_in_window": [
+      "TJ_Research"
+    ],
+    "signal_count": 1,
+    "all_bullish": false,
+    "all_bearish": false
+  },
+  {
+    "date": "2026-04-24",
+    "consensus_score": 100,
+    "analysts_in_window": [
+      "TJ_Research",
+      "dearbaibabybus"
+    ],
+    "signal_count": 2,
+    "all_bullish": true,
+    "all_bearish": false
+  },
+  {
+    "date": "2026-04-29",
+    "consensus_score": 70.7,
+    "analysts_in_window": [
+      "dearbaibabybus"
+    ],
+    "signal_count": 1,
+    "all_bullish": true,
+    "all_bearish": false
+  },
+  {
+    "date": "2026-05-12",
+    "consensus_score": 37.6,
+    "analysts_in_window": [
+      "TJ_Research"
+    ],
+    "signal_count": 5,
+    "all_bullish": false,
+    "all_bearish": false
+  },
+  {
+    "date": "2026-05-15",
+    "consensus_score": 25.9,
+    "analysts_in_window": [
+      "TJ_Research"
+    ],
+    "signal_count": 4,
+    "all_bullish": false,
+    "all_bearish": false
+  },
+  {
+    "date": "2026-05-19",
+    "consensus_score": 23.7,
+    "analysts_in_window": [
+      "TJ_Research"
+    ],
+    "signal_count": 2,
+    "all_bullish": false,
+    "all_bearish": false
+  }
+]

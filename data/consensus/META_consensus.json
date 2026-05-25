@@ -1,0 +1,107 @@
+[
+  {
+    "date": "2025-01-30",
+    "consensus_score": 14.8,
+    "analysts_in_window": [
+      "TJ_Research"
+    ],
+    "signal_count": 1,
+    "all_bullish": false,
+    "all_bearish": true
+  },
+  {
+    "date": "2025-03-30",
+    "consensus_score": 17.1,
+    "analysts_in_window": [
+      "TJ_Research"
+    ],
+    "signal_count": 1,
+    "all_bullish": false,
+    "all_bearish": false
+  },
+  {
+    "date": "2025-10-29",
+    "consensus_score": 35.6,
+    "analysts_in_window": [
+      "TJ_Research",
+      "dearbaibabybus"
+    ],
+    "signal_count": 19,
+    "all_bullish": false,
+    "all_bearish": false
+  },
+  {
+    "date": "2025-10-30",
+    "consensus_score": 30.1,
+    "analysts_in_window": [
+      "TJ_Research",
+      "dearbaibabybus"
+    ],
+    "signal_count": 14,
+    "all_bullish": false,
+    "all_bearish": false
+  },
+  {
+    "date": "2025-12-19",
+    "consensus_score": 18.1,
+    "analysts_in_window": [
+      "TJ_Research"
+    ],
+    "signal_count": 1,
+    "all_bullish": false,
+    "all_bearish": false
+  },
+  {
+    "date": "2026-02-24",
+    "consensus_score": 58.1,
+    "analysts_in_window": [
+      "TJ_Research"
+    ],
+    "signal_count": 1,
+    "all_bullish": true,
+    "all_bearish": false
+  },
+  {
+    "date": "2026-04-25",
+    "consensus_score": 31.6,
+    "analysts_in_window": [
+      "TJ_Research"
+    ],
+    "signal_count": 1,
+    "all_bullish": false,
+    "all_bearish": false
+  },
+  {
+    "date": "2026-05-08",
+    "consensus_score": 56.9,
+    "analysts_in_window": [
+      "TJ_Research",
+      "dearbaibabybus"
+    ],
+    "signal_count": 4,
+    "all_bullish": false,
+    "all_bearish": false
+  },
+  {
+    "date": "2026-05-09",
+    "consensus_score": 57.2,
+    "analysts_in_window": [
+      "TJ_Research",
+      "dearbaibabybus"
+    ],
+    "signal_count": 3,
+    "all_bullish": false,
+    "all_bearish": false
+  },
+  {
+    "date": "2026-05-12",
+    "consensus_score": 97.3,
+    "analysts_in_window": [
+      "TJ_Research",
+      "dearbaibabybus"
+    ],
+    "signal_count": 2,
+    "all_bullish": true,
+    "all_bearish": false
+  }
+]

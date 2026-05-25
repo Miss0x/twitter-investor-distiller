@@ -1,0 +1,32 @@
+[
+  {
+    "date": "2025-10-26",
+    "consensus_score": 38.0,
+    "analysts_in_window": [
+      "dearbaibabybus"
+    ],
+    "signal_count": 1,
+    "all_bullish": false,
+    "all_bearish": false
+  },
+  {
+    "date": "2026-05-19",
+    "consensus_score": 29.6,
+    "analysts_in_window": [
+      "TJ_Research"
+    ],
+    "signal_count": 3,
+    "all_bullish": false,
+    "all_bearish": false
+  },
+  {
+    "date": "2026-05-20",
+    "consensus_score": 41.4,
+    "analysts_in_window": [
+      "TJ_Research"
+    ],
+    "signal_count": 1,
+    "all_bullish": false,
+    "all_bearish": true
+  }
+]

@@ -1,0 +1,22 @@
+[
+  {
+    "date": "2025-02-25",
+    "consensus_score": 54.8,
+    "analysts_in_window": [
+      "TJ_Research"
+    ],
+    "signal_count": 1,
+    "all_bullish": true,
+    "all_bearish": false
+  },
+  {
+    "date": "2025-05-22",
+    "consensus_score": 18.9,
+    "analysts_in_window": [
+      "TJ_Research"
+    ],
+    "signal_count": 2,
+    "all_bullish": false,
+    "all_bearish": true
+  }
+]
