@@ -2,6 +2,8 @@
 from __future__ import annotations
 
 import json
+import sys
+import subprocess
 import time
 from contextlib import suppress
 from pathlib import Path
@@ -553,7 +555,11 @@ def main() -> None:
     with c4:
         st.caption("Twitter 用户蒸馏 · 抓取 → 分析 → 画像")
 
-    # ── 主区域：双标签 ──
+    # ── 实时监控 ──
+    _render_daemon_control()
+    st.divider()
+
+    # ── 主区域 ──
     tab1, tab2, tab3 = st.tabs(["📊 抓取仪表盘", "⚙️ 分析流水线", "📡 信号与洞察"])
     with tab1:
         _render_dashboard(health_ok, jobs, active_job_payload)
@@ -1044,21 +1050,15 @@ def _run_portfolio_analyzer(text: str | None, image_file, csv_bytes: bytes | Non
     from src.ai.llm_client import chat
     import streamlit as _st
 
-    # 加载基本面 + 信号 + 准确率
     fundamentals = {}
     if _Path("data/fundamental_cache.json").exists():
         fundamentals = _json.loads(_Path("data/fundamental_cache.json").read_text(encoding="utf-8"))
-    prices = {}
-    if _Path("data/prices.json").exists():
-        prices = _json.loads(_Path("data/prices.json").read_text(encoding="utf-8"))
 
-    # 加载画像
     portraits = []
     for fp in sorted(_Path("data/pipeline").glob("*全量*portrait.md")):
         username = fp.stem.replace("_全量_portrait", "")
         portraits.append(f"## {username}\n{fp.read_text(encoding='utf-8')[:1500]}")
 
-    # 加载准确率
     acc_text = ""
     for fp in _Path("data/accuracy").glob("*.json"):
         u = fp.stem.replace("_accuracy", "")
@@ -1067,26 +1067,20 @@ def _run_portfolio_analyzer(text: str | None, image_file, csv_bytes: bytes | Non
         acc_text += f"- {u}: 30日胜率 {wr*100:.0f}%\n" if isinstance(wr, (int, float)) else ""
 
     portrait_text = "\n".join(portraits)
-
-    prompt = f"""你是投资顾问。基于以下分析师画像为他们分析我的持仓。
+    prompt = f"""你是投资顾问。基于以下分析师画像和准确率，分析我的持仓。
 
 [分析师画像]
 {portrait_text}
 
-[分析师准确率]
+[准确率]
 {acc_text}
 
-[我的持仓说明]
+[我的持仓]
 {text or "见截图"}
 
-请给出每只持仓股的分析师视角建议：
-1. 这只股票分析师怎么看（引用画像维度）
-2. 你的持仓情况和建议（仓位、成本、止损）
-3. 风险提示
+每只持仓股给出: 1) 分析师怎么看（引用画像）2) 建议（仓位/成本/止损）3) 风险提示。中文Markdown。"""
 
-用中文 Markdown 格式输出。"""
-
-    with _st.spinner("正在分析持仓..."):
+    with _st.spinner("正在分析..."):
         try:
             messages = [{"role": "user", "content": prompt}]
             if image_file is not None:
@@ -1101,6 +1095,148 @@ def _run_portfolio_analyzer(text: str | None, image_file, csv_bytes: bytes | Non
             _st.markdown(result)
         except Exception as e:
             _st.error(f"分析失败: {e}")
+
+
+# ══════ 实时监控 Daemon ══════
+
+def _render_daemon_control() -> None:
+    """实时触发开关 + 状态监控 — Step 3 #3 模块。"""
+    from pathlib import Path as _Path
+    import json as _json
+    import subprocess as _sp
+    import time as _time
+
+    if "daemon_script" not in st.session_state:
+        st.session_state.daemon_script = None
+        st.session_state.daemon_proc = None
+        st.session_state.daemon_log = []
+        st.session_state.daemon_started_at = None
+
+    col1, col2, col3, col4 = st.columns([1, 1, 1, 1])
+
+    # 如果进程还在跑，更新状态
+    if st.session_state.daemon_proc is not None:
+        poll = st.session_state.daemon_proc.poll()
+        if poll is not None:
+            st.session_state.daemon_proc = None
+            st.session_state.daemon_log.append(f"{_time.strftime('%H:%M:%S')} Daemon 已停止 (exit={poll})")
+
+    with col1:
+        if st.session_state.daemon_proc is None:
+            if st.button("▶️ 启动实时监控", type="primary"):
+                daemon_path = _Path("scripts/auto_scheduler.py")
+                script = f"""
+import sys; sys.path.insert(0, '.')
+from src.storage.database import db
+from src.storage.models import Tweet, PipelineTask
+import json, time
+
+db.init_db()
+session = db.get_session()
+last_id = 0
+state_file = _Path("data/auto_scheduler_state.json")
+if state_file.exists():
+    last_id = _json.loads(state_file.read_text()).get('last_id', 0)
+budget = 20
+today = _time.strftime('%Y-%m-%d')
+
+while True:
+    try:
+        new_tweets = session.query(Tweet).filter(Tweet.id > last_id, Tweet.text != None, Tweet.text != '').order_by(Tweet.id).all()
+        today_count = session.query(PipelineTask).filter(PipelineTask.task_type == 'analyze', PipelineTask.created_at >= today).count()
+        for tw in new_tweets:
+            if today_count >= budget: break
+            existing = session.query(PipelineTask).filter(PipelineTask.task_type == 'filter', PipelineTask.payload.contains(str(tw.id))).first()
+            if existing: continue
+            t = PipelineTask(task_type='filter', status='pending', payload=json.dumps({{'action': 'filter_single', 'tweet_id': tw.id}}))
+            session.add(t); today_count += 1
+        if new_tweets:
+            session.commit()
+            last_id = new_tweets[-1].id
+            state_file.write_text(json.dumps({{'last_id': last_id, 'updated': _time.strftime('%Y-%m-%d %H:%M:%S')}}))
+        session.close()
+        _time.sleep(30)
+        session = db.get_session()
+        today = _time.strftime('%Y-%m-%d')
+    except Exception as e:
+        print(f'DAEMON_ERR: {e}')
+        session.rollback()
+        break
+"""
+                # 用 subprocess 启动内联脚本
+                import textwrap
+                inline = textwrap.dedent(f"""
+import sys, json, time
+from pathlib import Path
+sys.path.insert(0, r'{_Path.cwd()}')
+from src.storage.database import db
+from src.storage.models import Tweet, PipelineTask
+
+db.init_db()
+session = db.get_session()
+last_id = 0
+state = Path('data/auto_scheduler_state.json')
+if state.exists():
+    last_id = json.loads(state.read_text()).get('last_id', 0)
+budget = 20
+today = time.strftime('%Y-%m-%d')
+
+while True:
+    try:
+        new_tweets = session.query(Tweet).filter(Tweet.id > last_id, Tweet.text != None, Tweet.text != '').order_by(Tweet.id).all()
+        today_count = session.query(PipelineTask).filter(PipelineTask.task_type == 'analyze', PipelineTask.created_at >= today).count()
+        for tw in new_tweets:
+            if today_count >= budget: break
+            existing = session.query(PipelineTask).filter(PipelineTask.task_type == 'filter', PipelineTask.payload.contains(str(tw.id))).first()
+            if existing: continue
+            t = PipelineTask(task_type='filter', status='pending', payload=json.dumps({{'action': 'filter_single', 'tweet_id': tw.id}}))
+            session.add(t); today_count += 1
+        if new_tweets:
+            session.commit()
+            last_id = new_tweets[-1].id
+            state.write_text(json.dumps({{'last_id': last_id, 'updated': time.strftime('%Y-%m-%d %H:%M:%S')}}))
+        session.close()
+        time.sleep(30)
+        session = db.get_session()
+        today = time.strftime('%Y-%m-%d')
+    except Exception as e:
+        print(f'[DAEMON] {e}')
+        session.rollback()
+        break
+""")
+                proc = subprocess.Popen([sys.executable, "-c", inline], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+                st.session_state.daemon_proc = proc
+                st.session_state.daemon_started_at = _time.strftime("%H:%M:%S")
+                st.session_state.daemon_log.append(f"{_time.strftime('%H:%M:%S')} Daemon 已启动 (PID={proc.pid})")
+
+    with col2:
+        if st.session_state.daemon_proc is not None:
+            if st.button("⏸️ 停止"):
+                st.session_state.daemon_proc.terminate()
+                st.session_state.daemon_proc = None
+                st.session_state.daemon_log.append(f"{_time.strftime('%H:%M:%S')} Daemon 手动停止")
+
+    with col3:
+        status = "🟢 运行中" if st.session_state.daemon_proc is not None else "⚫ 未启动"
+        st.metric("状态", status)
+
+    with col4:
+        # 显示今日已创建任务数
+        if st.session_state.daemon_proc is not None:
+            from src.storage.database import db as _db
+            from src.storage.models import PipelineTask as _PT
+            _db.init_db()
+            s = _db.get_session()
+            today = _time.strftime("%Y-%m-%d")
+            cnt = s.query(_PT).filter(_PT.task_type == "analyze", _PT.created_at >= today).count()
+            s.close()
+            st.metric("今日任务", f"{cnt}/20")
+
+    # 日志展开
+    if st.session_state.daemon_log:
+        with st.expander("📋 日志", expanded=len(st.session_state.daemon_log) <= 3):
+            for line in st.session_state.daemon_log[-10:]:
+                st.text(line)
 
 
 if __name__ == "__main__":
