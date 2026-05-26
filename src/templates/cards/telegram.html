@@ -1,0 +1,9 @@
+<div class="card-title">Telegram 通知</div>
+<div class="flex mb-sm"><div class="status-dot {% if configured %}ok{% else %}warn{% endif %}"></div><span style="font-size:14px;font-weight:500">{{ '已配置' if configured else '未配置' }}</span></div>
+<div class="text-secondary mb-sm" style="font-size:11px">{{ token_preview }} → Chat: {{ chat_id }}</div>
+<div class="flex" style="gap:8px">
+  <input id="tg_token" placeholder="Bot Token" style="flex:1;font-size:12px;padding:4px 8px" />
+  <input id="tg_chatid" placeholder="Chat ID" style="width:140px;font-size:12px;padding:4px 8px" />
+  <button class="btn" onclick="sendTestMsg()">测试</button>
+  <button class="btn" onclick="saveTelegram()">保存</button>
+</div>

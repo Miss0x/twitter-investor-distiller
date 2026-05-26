@@ -1,0 +1,12 @@
+<div class="flex-between">
+  <div>
+    <div class="card-title">实时 API 采集</div>
+    <div class="flex"><div class="status-dot {% if running %}ok{% endif %}"></div><span style="font-size:20px;font-weight:500">{{ '运行中' if running else '未启动' }}</span></div>
+    <div class="text-secondary" style="font-size:11px">twitterapi.io · 60s 轮转 · 备灾浏览器爬虫</div>
+  </div>
+  <div style="text-align:right">
+    <div class="metric-value">{{ today }} / {{ budget }}</div>
+    <div class="metric-label">今日拉取</div>
+  </div>
+  <button class="btn {% if running %}btn-danger{% else %}btn-primary{% endif %}" id="daemon-btn" onclick="toggleDaemon()">{{ '停止' if running else '启动' }}</button>
+</div>

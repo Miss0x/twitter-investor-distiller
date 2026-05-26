@@ -1,0 +1,7 @@
+<div class="card-title">情绪时间线</div>
+{% if charts %}
+{% for name, stem in charts.items() %}<div style="margin-bottom:4px"><a href="/timeline/{{ stem }}" target="_blank" style="font-size:12px">{{ name }}</a></div>{% endfor %}
+{% else %}
+<div class="text-secondary">暂无图表。运行信号量化 + timeline_chart.py 生成。</div>
+{% endif %}
+<div class="text-secondary mt-sm" style="font-size:11px">点击在新窗口打开交互图表</div>

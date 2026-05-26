@@ -193,6 +193,7 @@ class ScriptRunnerCard(Card):
     tab = "pipeline"
     endpoint = "/api/script_runner"
     refresh = 0
+    template = "script_runner.html"
 
     def get_data(self, **params) -> dict:
         scripts = {
@@ -206,28 +207,11 @@ class ScriptRunnerCard(Card):
             "基本面快照": {"file": "fetch_fundamentals.py", "desc": "PE/ROE/营收增速", "group": "data"},
             "分析清洗": {"file": "clean_analysis.py", "desc": "股票/币种代码校准", "group": "data"},
         }
-        return {"scripts": scripts}
-
-    def _render_html(self, data: dict) -> str:
+        # 转换为模板需要的 groups 格式
         groups = {}
-        for name, info in data["scripts"].items():
+        for name, info in scripts.items():
             groups.setdefault(info["group"], []).append((name, info))
-        group_labels = {"signal": "信号类", "analysis": "分析类", "viz": "图表类", "data": "数据类"}
-        html = '<div class="card-title flex-between">'
-        html += '<span>脚本工具箱 <span style="font-size:10px;color:var(--text-tertiary);font-weight:400">调试/手动触发</span></span>'
-        html += '<button class="btn" style="font-size:10px;padding:2px 8px" onclick="toggleScriptTools()" id="btn_toggle_tools">展开</button>'
-        html += '</div>'
-        html += '<div id="script_tools_body" style="display:none">'
-        for group, items in groups.items():
-            label = group_labels.get(group, group)
-            btns = "".join(
-                f'<button class="btn" onclick="runScript(\'{info["file"]}\')" style="margin:2px;font-size:11px" title="{info["desc"]}">{name}</button>'
-                for name, info in items
-            )
-            html += f'<div class="mb-sm"><span class="text-secondary" style="font-size:11px">{label}</span><br>{btns}</div>'
-        html += '<div id="sr_status" class="text-secondary mt-sm" style="font-size:11px"></div>'
-        html += '</div>'
-        return html
+        return {"groups": groups}
 
 
 @register
@@ -236,6 +220,7 @@ class TimelineCard(Card):
     tab = "insights"
     endpoint = "/api/timeline"
     refresh = 600
+    template = "timeline.html"
 
     def get_data(self, **params) -> dict:
         charts = {}
@@ -243,10 +228,3 @@ class TimelineCard(Card):
             name = fp.stem.replace("_timeline", "").replace("_", " ")
             charts[name] = fp.stem
         return {"charts": charts}
-
-    def _render_html(self, data: dict) -> str:
-        charts = data["charts"]
-        if not charts:
-            return '<div class="card-title">情绪时间线</div><div class="text-secondary">暂无图表。运行信号量化 + timeline_chart.py 生成。</div>'
-        links = "".join(f'<div style="margin-bottom:4px"><a href="/timeline/{stem}" target="_blank" style="font-size:12px">{name}</a></div>' for name, stem in charts.items())
-        return f'<div class="card-title">情绪时间线</div>{links}<div class="text-secondary mt-sm" style="font-size:11px">点击在新窗口打开交互图表</div>'

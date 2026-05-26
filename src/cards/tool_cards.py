@@ -11,6 +11,7 @@ class FetchControlCard(Card):
     tab = "dashboard"
     endpoint = "/api/fetch_control"
     refresh = 0
+    template = "fetch_control.html"
 
     def get_data(self, **params) -> dict:
         users = self._load_users()
@@ -25,40 +26,6 @@ class FetchControlCard(Card):
         if fp.exists():
             return json.loads(fp.read_text(encoding="utf-8"))
         return ["TJ_Research", "dearbaibabybus"]
-
-    def _render_html(self, data: dict) -> str:
-        presets = "".join(f'<button class="btn" onclick="setRange({json.dumps(p)})" style="margin:2px">{p}</button>' for p in data["presets"])
-        user_opts = "".join(f'<option>{u}</option>' for u in data["users"])
-        return f'''<div class="card-title">手动拉取控制</div>
-<div class="grid grid-2 mb-sm" style="gap:8px">
-  <div>
-    <div class="text-secondary mb-sm">目标用户</div>
-    <select id="fc_user">{user_opts}</select>
-  </div>
-  <div>
-    <div class="text-secondary mb-sm">时间范围</div>
-    <select id="fc_range">
-      <option value="0">仅最新（增量更新）</option>
-      <option value="1">1天</option>
-      <option value="3">3天</option>
-      <option value="7">7天</option>
-      <option value="30">30天</option>
-      <option value="90">90天</option>
-      <option value="180">180天</option>
-      <option value="365">365天</option>
-      <option value="-1">全部历史</option>
-    </select>
-  </div>
-</div>
-<div class="grid grid-2 mb-sm" style="gap:8px">
-  <input id="fc_from" type="date" style="font-size:12px;padding:4px 8px" placeholder="开始日期"/>
-  <input id="fc_to" type="date" style="font-size:12px;padding:4px 8px" placeholder="结束日期"/>
-</div>
-<div class="flex" style="gap:8px">
-  <input id="fc_pages" type="number" value="10" min="1" max="500" style="width:80px;font-size:12px;padding:4px 8px" title="最大页数"/>
-  <button class="btn btn-primary" onclick="fetchManually()">开始拉取</button>
-  <span id="fc_status" class="text-secondary" style="font-size:11px"></span>
-</div>'''
 
 
 @register
