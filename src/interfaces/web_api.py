@@ -8,6 +8,7 @@ from typing import Literal
 
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, Field
+from sqlalchemy import text
 
 from src.ai.chat_engine import ChatEngine
 from src.crawler.job_runner import JobRunner
@@ -175,7 +176,7 @@ def health() -> dict[str, str]:
     checks = {"status": "ok", "db": "ok"}
     try:
         s = db.get_session()
-        s.execute("SELECT 1")
+        s.execute(text("SELECT 1"))
         s.close()
     except Exception as e:
         checks["db"] = f"error: {e}"
