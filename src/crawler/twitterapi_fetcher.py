@@ -48,23 +48,21 @@ class TwitterAPIFetcher:
             existing = session.query(User).filter(User.username == username).first()
             if existing:
                 existing.display_name = user_data.get("name")
-                existing.followers = user_data.get("followers")
-                existing.following = user_data.get("following")
-                existing.bio = user_data.get("description")
-                existing.tweet_count = user_data.get("statusesCount")
-                existing.avatar = user_data.get("profilePicture")
+                existing.followers_count = user_data.get("followers", 0)
+                existing.following_count = user_data.get("following", 0)
+                existing.description = user_data.get("description")
+                existing.tweet_count = user_data.get("statusesCount", 0)
+                existing.profile_image_url = user_data.get("profilePicture")
                 existing.updated_at = datetime.now()
             else:
                 u = User(
                     username=username,
-                    twitter_id=user_data.get("id"),
                     display_name=user_data.get("name"),
-                    followers=user_data.get("followers"),
-                    following=user_data.get("following"),
-                    bio=user_data.get("description"),
-                    tweet_count=user_data.get("statusesCount"),
-                    avatar=user_data.get("profilePicture"),
-                    verified=user_data.get("isBlueVerified", False),
+                    followers_count=user_data.get("followers", 0),
+                    following_count=user_data.get("following", 0),
+                    description=user_data.get("description"),
+                    tweet_count=user_data.get("statusesCount", 0),
+                    profile_image_url=user_data.get("profilePicture"),
                 )
                 session.add(u)
             session.commit()

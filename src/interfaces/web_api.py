@@ -181,7 +181,12 @@ def health() -> dict[str, str]:
 
 
 @app.post("/chat", response_model=ChatResponse)
-def chat(request: ChatRequest) -> ChatResponse:
+def chat(request: ChatRequest, req: Request = None) -> ChatResponse:
+    # 简易 Token 认证
+    if config.dashboard_token:
+        token = (req.headers.get("authorization") or "").replace("Bearer ", "")
+        if token != config.dashboard_token:
+            raise HTTPException(status_code=401, detail="unauthorized")
     engine = ChatEngine()
     return ChatResponse(answer=engine.answer(request.question, top_k=request.top_k))
 
@@ -730,6 +735,7 @@ async def card_action(name: str, payload: dict = None):
                 
                 while True:
                     try:
+                        USERS = json.loads(Path('data/users.json').read_text(encoding='utf-8')) if Path('data/users.json').exists() else USERS
                         username = USERS[idx % len(USERS)]
                         st['user_idx'] = (idx + 1) % len(USERS)
                         st['updated'] = time.strftime('%Y-%m-%d %H:%M:%S')
@@ -737,7 +743,7 @@ async def card_action(name: str, payload: dict = None):
                         # 增量：从 DB 最后一条推文的时间之后拉取
                         last_ts = fetcher.get_last_tweet_ts(username)
                         db_cnt = fetcher.get_user_tweet_count(username)
-                        st['db_count_{{username}}'] = db_cnt
+                        st[f'db_count_{{username}}'] = db_cnt
                         
                         res = fetcher.fetch_tweets(username, max_pages=1, since_ts=last_ts)
                         new_cnt = res.get('total_new', 0)
@@ -764,7 +770,7 @@ async def card_action(name: str, payload: dict = None):
                         print('[DAEMON] ' + str(exc))
                         time.sleep(INTERVAL * 2)
                 """)
-                proc = subprocess.Popen([sys.executable, "-c", inline], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+                proc = subprocess.Popen([sys.executable, "-c", inline])
                 card._proc = proc
             _card_cache.pop("daemon", None)
             return {"ok": True}
@@ -841,7 +847,11 @@ async def serve_dashboard():
 @app.get("/timeline/{path:path}", response_class=HTMLResponse)
 async def serve_timeline(path: str):
     """服务 timeline 图表 HTML 文件。"""
-    fp = Path("data/timeline") / path
+    import os as _os
+    fp = (Path("data/timeline") / path).resolve()
+    allowed = Path("data/timeline").resolve()
+    if not str(fp).startswith(str(allowed)):
+        raise HTTPException(status_code=403, detail="forbidden")
     if fp.exists() and fp.suffix == ".html":
         return HTMLResponse(content=fp.read_text(encoding="utf-8"))
     raise HTTPException(status_code=404, detail="not found")
