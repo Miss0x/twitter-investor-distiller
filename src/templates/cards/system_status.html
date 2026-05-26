@@ -1,0 +1,11 @@
+<div class="card-title">系统状态</div>
+{% for name, value in [
+    ("数据库", tweets ~ "条"),
+    ("画像", portraits ~ "份"),
+    ("信号", signals ~ "条"),
+    ("分析文件", analyzed ~ "个")
+] %}
+<div class="flex-between" style="font-size:12px;margin-bottom:4px">
+  <span class="text-secondary">{{ name }}</span><span>{{ value }}</span>
+</div>
+{% endfor %}

@@ -33,15 +33,16 @@ class Card(ABC):
         ...
 
     def render(self, data: dict[str, Any]) -> str:
-        """渲染卡片 HTML。优先用 Jinja2 模板，否则用自带的 _render_html。"""
+        """渲染卡片 HTML。优先用 Jinja2 模板，否则用 _render_html。"""
         if self.template:
-            from pathlib import Path as _P
-            tpl_path = _P(__file__).parent.parent / "templates" / self.template
-            if tpl_path.exists():
+            try:
                 import jinja2
-                env = jinja2.Environment(loader=jinja2.FileSystemLoader(str(tpl_path.parent)))
+                tpl_dir = Path(__file__).parent.parent / "templates" / "cards"
+                env = jinja2.Environment(loader=jinja2.FileSystemLoader(str(tpl_dir)))
                 tpl = env.get_template(self.template)
                 return tpl.render(**data)
+            except Exception:
+                pass
         return self._render_html(data)
 
     def _render_html(self, data: dict[str, Any]) -> str:

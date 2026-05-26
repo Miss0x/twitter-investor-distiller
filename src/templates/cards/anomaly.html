@@ -1,0 +1,13 @@
+<div class="card-title">异常检测</div>
+{% if anomalies %}
+{% for tag, info in anomalies.items() %}
+<div class="flex-between" style="font-size:12px;margin-bottom:6px">
+  <span class="text-secondary">{{ tag }}</span>
+  <span style="color:var(--text-warning);font-size:11px">
+    KL {% for a in info.recent[:3] %}{{ "%.2f"|format(a.kl) }}{% if not loop.last %} / {% endif %}{% endfor %}
+  </span>
+</div>
+{% endfor %}
+{% else %}
+<div class="text-secondary">无异常</div>
+{% endif %}

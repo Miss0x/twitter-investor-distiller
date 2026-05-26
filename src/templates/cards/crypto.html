@@ -1,0 +1,10 @@
+<div class="card-title">加密货币行情</div>
+{% if coins %}
+<table class="data"><tr><th>币种</th><th style="text-align:right">价格 (USD)</th><th style="text-align:right">更新时间</th></tr>
+{% for ticker, c in coins.items()|sort %}
+<tr><td style="font-weight:500">{{ ticker }}</td><td style="text-align:right">${{ "%.2f"|format(c.price) }}</td><td style="text-align:right;font-size:11px">{{ c.get("time_str", "?") }}</td></tr>
+{% endfor %}
+</table>
+{% else %}
+<div class="text-secondary">暂无数据，请运行流水线 fetch_crypto</div>
+{% endif %}

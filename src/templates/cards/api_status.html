@@ -1,0 +1,12 @@
+<div class="card-title">API 采集状态</div>
+<div class="grid grid-3 mb-sm">
+  <div class="metric"><div class="metric-label">累计拉取</div><div class="metric-value">{{ total_fetched }}</div><div class="metric-sub">条推文</div></div>
+  <div class="metric"><div class="metric-label">监控用户</div><div class="metric-value">{{ users|length }}</div><div class="metric-sub">轮转采集</div></div>
+  <div class="metric"><div class="metric-label">上次更新</div><div class="metric-value" style="font-size:13px">{{ last_updated }}</div><div class="metric-sub">120s 间隔</div></div>
+</div>
+<table class="data"><tr><th>用户</th><th>进度游标</th><th>来源</th></tr>
+{% for u in users %}
+<tr><td style="font-weight:500">{{ u }}</td><td>{{ cursors.get(u, "首页") }}</td><td><span class="tag tag-ok">twitterapi.io</span></td></tr>
+{% endfor %}
+</table>
+<div class="text-secondary mt-sm" style="font-size:11px">主路径: twitterapi.io | 备灾: 浏览器爬虫</div>

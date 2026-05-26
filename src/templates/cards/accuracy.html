@@ -1,0 +1,6 @@
+<div class="card-title">准确率 (30日)</div>
+{% for user, a in analysts.items() %}
+<div style="font-size:12px;margin-bottom:6px">
+  <b>{{ user }}</b>: 胜率 {{ a.win_rate }}%, 夏普 {{ a.sharpe }}, {{ a.count }}条信号
+</div>
+{% endfor %}

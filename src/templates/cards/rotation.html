@@ -1,0 +1,9 @@
+<div class="card-title">板块轮动热点</div>
+{% for user, topics in rotation.items() %}
+{% for t in topics[:4] %}
+<div class="flex-between" style="font-size:12px;margin-bottom:4px">
+  <span>{{ user }} · {{ t.topic }}</span>
+  <span style="font-weight:500;color:var(--text-success)">{{ "%+.1f"|format(t.z) }}σ</span>
+</div>
+{% endfor %}
+{% endfor %}

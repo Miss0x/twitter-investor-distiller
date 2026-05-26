@@ -1,0 +1,8 @@
+<div class="card-title">信源推荐</div>
+{% for r in recs %}
+<div class="flex-between" style="font-size:12px;margin-bottom:4px">
+  <span style="font-weight:500">{{ r.user }}</span>
+  <span class="text-secondary">被引 {{ r.in_degree }}次</span>
+</div>
+{% endfor %}
+<div class="text-secondary mt-sm">{{ nodes }}节点, {{ edges }}边</div>

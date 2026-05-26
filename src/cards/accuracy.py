@@ -8,6 +8,7 @@ from src.cards import register
 @register
 class AccuracyCard(Card):
     name = "accuracy"
+    template = "accuracy.html"
     tab = "dashboard"
     endpoint = "/api/accuracy"
     refresh = 300
@@ -25,12 +26,3 @@ class AccuracyCard(Card):
                 "sharpe": r30.get("sharpe"),
             }
         return {"analysts": result}
-
-    def _render_html(self, data: dict) -> str:
-        analysts = data.get("analysts", {})
-        rows = "".join(
-            f'<div style="font-size:12px;margin-bottom:6px"><b>{u}</b>: 胜率 {a["win_rate"]}%, '
-            f'夏普 {a.get("sharpe", "?")}, {a["count"]}条信号</div>'
-            for u, a in analysts.items()
-        )
-        return f'<div class="card-title">准确率 (30日)</div>{rows}'
