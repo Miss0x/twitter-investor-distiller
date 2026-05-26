@@ -66,7 +66,8 @@ def _handle_role_picker(payload: dict) -> str:
                 parts = [p.strip() for p in line.split("|")]
                 if len(parts) >= 15:
                     prices[t] = {"price": parts[6], "pe": parts[15], "chg": parts[9]}
-        except: pass
+        except (subprocess.TimeoutExpired, subprocess.CalledProcessError, OSError, ValueError, IndexError):
+            pass
 
     # 建股票表
     rows = ["| Ticker | PE | 价格 | 涨跌 |"]
@@ -165,9 +166,11 @@ def _handle_pipeline_action(payload: dict) -> dict:
     action = payload.get("action", "")
     try:
         if action == "seed":
-            _sp.run(["python", "scripts/seed_tasks.py"], capture_output=True, text=True, cwd=Path.cwd(), timeout=30)
+            r = _sp.run(["python", "scripts/seed_tasks.py"], capture_output=True, text=True, cwd=Path.cwd(), timeout=30)
+            return {"ok": r.returncode == 0, "output": (r.stdout + r.stderr)[:300]} if r.returncode != 0 else {"ok": True}
         elif action == "filter_scan":
-            _sp.run(["python", "scripts/run_filter.py"], capture_output=True, text=True, cwd=Path.cwd(), timeout=30)
+            r = _sp.run(["python", "scripts/run_filter.py"], capture_output=True, text=True, cwd=Path.cwd(), timeout=30)
+            return {"ok": r.returncode == 0, "output": (r.stdout + r.stderr)[:300]} if r.returncode != 0 else {"ok": True}
         else:
             # 执行特定类型任务
             from src.pipeline.task_executor import execute_tasks
@@ -183,7 +186,7 @@ def _handle_script_run(payload: dict) -> dict:
     import subprocess as _sp
     from pathlib import Path
     script = payload.get("script", "")
-    if not script or "/" in script or ".." in script:
+    if not script or "/" in script or "\\" in script or ".." in script:
         return {"ok": False, "error": "invalid script name"}
     try:
         r = _sp.run(["python", f"scripts/{script}"], capture_output=True, text=True, cwd=Path.cwd(), timeout=90)

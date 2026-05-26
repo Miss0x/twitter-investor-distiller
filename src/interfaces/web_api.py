@@ -23,19 +23,22 @@ from fastapi import Request  # noqa: E402
 
 
 # ── 简易中间件：限流 ──
+import threading  # noqa: E402
 _rate_buckets: dict[str, list[float]] = {}
+_rate_lock = threading.Lock()
 
 
 @app.middleware("http")
 async def rate_limit_middleware(request: Request, call_next):
     ip = request.client.host if request.client else "unknown"
     now = _time.time()
-    bucket = _rate_buckets.setdefault(ip, [])
-    bucket[:] = [t for t in bucket if now - t < 60]
-    if len(bucket) >= config.rate_limit_per_minute:
-        from fastapi.responses import JSONResponse
-        return JSONResponse(status_code=429, content={"error": "rate limit exceeded"})
-    bucket.append(now)
+    with _rate_lock:
+        bucket = _rate_buckets.setdefault(ip, [])
+        bucket[:] = [t for t in bucket if now - t < 60]
+        if len(bucket) >= config.rate_limit_per_minute:
+            from fastapi.responses import JSONResponse
+            return JSONResponse(status_code=429, content={"error": "rate limit exceeded"})
+        bucket.append(now)
     return await call_next(request)
 job_service = CrawlJobService()
 job_runner = JobRunner(job_service=job_service)
@@ -171,7 +174,6 @@ def on_startup() -> None:
 def health() -> dict[str, str]:
     checks = {"status": "ok", "db": "ok"}
     try:
-        db.init_db()
         s = db.get_session()
         s.execute("SELECT 1")
         s.close()
@@ -330,8 +332,11 @@ def execute_selected(payload: dict) -> dict:
         return {"ok": False, "message": "未选择任务"}
     if is_running():
         return {"ok": False, "message": "已有任务在执行中"}
-    # 兼容前端传字符串 ID
-    task_ids = [int(x) for x in task_ids]
+    # 兼容前端传字符串 ID，安全转换
+    try:
+        task_ids = [int(x) for x in task_ids]
+    except (ValueError, TypeError):
+        return {"ok": False, "message": "非法任务ID"}
     session = db.get_session()
     try:
         valid_ids = session.query(PipelineTask.id).filter(
@@ -357,9 +362,10 @@ def skip_task(task_id: int) -> dict:
         old_ticker = json.loads(t.payload).get("ticker", "")
         t.status = "skipped"
         t.error_msg = (t.error_msg or "") + " [人工跳过]"
-        session.commit()
+        # CSV 写入放在 DB 提交之前，保证一致性
         if old_ticker:
             _save_alias(old_ticker, "", "人工跳过")
+        session.commit()
         return {"ok": True}
     finally:
         session.close()
