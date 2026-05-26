@@ -8,7 +8,10 @@ from src.cards import register
 @register
 class NetworkCard(Card):
     name = "network"
-    template = "network.html"; tab = "insights"; endpoint = "/api/network"; refresh = 3600
+    template = "network.html"
+    tab = "insights"
+    endpoint = "/api/network"
+    refresh = 3600
 
     def get_data(self, **params) -> dict:
         fp = Path("data/network/investor_network.json")

@@ -8,7 +8,10 @@ from src.cards import register
 @register
 class AnomalyCard(Card):
     name = "anomaly"
-    template = "anomaly.html"; tab = "insights"; endpoint = "/api/anomaly"; refresh = 600
+    template = "anomaly.html"
+    tab = "insights"
+    endpoint = "/api/anomaly"
+    refresh = 600
 
     def get_data(self, **params) -> dict:
         results = {}
