@@ -6,6 +6,7 @@
 from __future__ import annotations
 
 import json
+import os
 import time
 import requests
 from datetime import datetime
@@ -16,8 +17,22 @@ from src.storage.database import db
 from src.storage.models import Tweet, User
 
 API_BASE = "https://api.twitterapi.io"
-API_KEY = "new1_71d0cff271144374a4326ee5b0da43ba"
-HEADERS = {"X-API-Key": API_KEY}
+
+_HEADERS = None
+
+
+def _get_headers():
+    global _HEADERS
+    if _HEADERS is None:
+        key = os.getenv("TWITTERAPI_KEY", "")
+        if not key:
+            raise RuntimeError("TWITTERAPI_KEY 环境变量未设置")
+        _HEADERS = {"X-API-Key": key}
+    return _HEADERS
+
+
+HEADERS = property(lambda self: _get_headers())  # 兼容旧引用
+# 实际使用 _get_headers() 懒加载
 
 
 class TwitterAPIFetcher:
@@ -27,7 +42,7 @@ class TwitterAPIFetcher:
         db.init_db()
 
     def _get(self, endpoint: str, params: dict = None) -> dict:
-        r = requests.get(f"{API_BASE}{endpoint}", headers=HEADERS, params=params, timeout=15)
+        r = requests.get(f"{API_BASE}{endpoint}", headers=_get_headers(), params=params, timeout=15)
         r.raise_for_status()
         return r.json()
 
