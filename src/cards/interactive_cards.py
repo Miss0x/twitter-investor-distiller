@@ -1,6 +1,7 @@
 """Daemon + Telegram + 角色代入 + 持仓顾问 — 交互卡片"""
 import json, time
 from pathlib import Path
+from collections import defaultdict
 from src.cards.base import Card
 from src.cards import register
 
@@ -28,7 +29,7 @@ class DaemonCard(Card):
         return f'''<div class="flex-between">
   <div><div class="card-title">实时监控</div><div class="flex"><div class="status-dot {color}"></div><span style="font-size:20px;font-weight:500">{status}</span></div></div>
   <div style="text-align:right"><div class="metric-value">{data["today"]} / {data["budget"]}</div><div class="metric-label">今日任务</div></div>
-  <div><button class="btn {'btn-danger' if data['running'] else 'btn-primary'}" onclick="fetch('/cards/daemon/action',{{method:'POST',headers:{{'Content-Type':'application/json'}},body:JSON.stringify({{action:'toggle'}})}})">{'停止' if data['running'] else '启动'}</button></div>
+  <button class="btn {'btn-danger' if data['running'] else 'btn-primary'}" id="daemon-btn" onclick="toggleDaemon()">{'停止' if data['running'] else '启动'}</button>
 </div>'''
 
 
@@ -66,7 +67,6 @@ class RolePickerCard(Card):
         for ticker, v in d.items():
             label = f'{v.get("sector","Other")} / {v.get("industry","Other")}'
             groups[label].append(ticker)
-        from collections import defaultdict
         return {k: sorted(v) for k, v in sorted(groups.items(), key=lambda x: -len(x[1])) if len(v) >= 3}
 
     def _render_html(self, data: dict) -> str:

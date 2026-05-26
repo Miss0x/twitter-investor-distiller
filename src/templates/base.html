@@ -164,32 +164,25 @@ async function autoRefresh() {
   attachButtons();
 }
 
-function attachButtons() {
-  // daemon 启停按钮
-  const db = document.querySelector('#card-daemon button');
-  if (db) {
-    db.onclick = async () => {
-      db.disabled = true;
-      try {
-        await fetch('/cards/daemon/action', {
-          method: 'POST',
-          headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify({action: 'toggle'})
-        });
-      } catch(e) {}
-      // 主动刷新 daemon 卡片
-      const now = Date.now();
-      LAST_FETCH.daemon = 0;
-      try {
-        const resp = await fetch('/cards/daemon');
-        cache.daemon = await resp.text();
-        LAST_FETCH.daemon = Date.now();
-        const el = document.getElementById('card-daemon');
-        if (el) el.outerHTML = cache.daemon;
-      } catch(e) {}
-      db.disabled = false;
-    };
-  }
+function attachButtons() {}
+
+async function toggleDaemon() {
+  const btn = document.getElementById('daemon-btn');
+  if (!btn) return;
+  btn.disabled = true;
+  try {
+    await fetch('/cards/daemon/action', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({action: 'toggle'})
+    });
+  } catch(e) {}
+  try {
+    const resp = await fetch('/cards/daemon');
+    cache.daemon = await resp.text();
+    const el = document.getElementById('card-daemon');
+    if (el) el.outerHTML = cache.daemon;
+  } catch(e) {}
 }
 
 // 启动
