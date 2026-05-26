@@ -60,21 +60,7 @@ class TelegramCard(Card):
   <input id="tg_chatid" placeholder="Chat ID" style="width:140px;font-size:12px;padding:4px 8px" />
   <button class="btn" onclick="sendTestMsg()">测试</button>
   <button class="btn" onclick="saveTelegram()">保存</button>
-</div>
-<script>
-async function sendTestMsg(){{
-  var t=document.getElementById("tg_token").value,c=document.getElementById("tg_chatid").value;
-  if(!t||!c)return;
-  await fetch("/cards/telegram/action",{{method:"POST",headers:{{"Content-Type":"application/json"}},body:JSON.stringify({{token:t,chat_id:c,action:"test"}})}});
-  alert("测试消息已发送，请检查 Telegram");
-}}
-async function saveTelegram(){{
-  var t=document.getElementById("tg_token").value,c=document.getElementById("tg_chatid").value;
-  if(!t||!c)return;
-  await fetch("/cards/telegram/action",{{method:"POST",headers:{{"Content-Type":"application/json"}},body:JSON.stringify({{token:t,chat_id:c}})}});
-  location.reload();
-}}
-</script>'''
+</div>'''
 
 
 @register
@@ -115,21 +101,8 @@ class RolePickerCard(Card):
 </div>
 <div class="text-secondary mb-sm">手动加减 <input id="rp_custom" style="width:100%;margin-top:4px" placeholder="可选: LRCX, AMAT, -INTC" /></div>
 <div id="rp_pool" class="text-secondary" style="font-size:11px;word-break:break-all">池内: {first_stocks}</div>
-<div id="rp_result" style="margin-top:12px"></div>
-<script>
-var SECTORS = {json.dumps(sectors)};
-function updatePool(){{ var s=document.getElementById("rp_sector").value; var t=SECTORS[s]||[]; document.getElementById("rp_pool").innerText="池内: "+t.join(", "); }}
-async function generatePick(){{ 
-  var btn=event.target; btn.disabled=true; btn.innerText="生成中...";
-  document.getElementById("rp_result").innerHTML='<div class="flex"><div class="spinner"></div><span class="text-secondary">AI 思考中...</span></div>';
-  try{{
-    var r=await fetch("/cards/role_picker/action",{{method:"POST",headers:{{"Content-Type":"application/json"}},body:JSON.stringify({{analyst:document.getElementById("rp_analyst").value,sector:document.getElementById("rp_sector").value,custom:document.getElementById("rp_custom").value}})}});
-    var d=await r.json();
-    document.getElementById("rp_result").innerHTML=d.ok?d.html:'<div class="text-secondary">错误: '+d.error+"</div>";
-  }}catch(e){{document.getElementById("rp_result").innerHTML='<div class="text-secondary">网络错误</div>';}}
-  btn.disabled=false; btn.innerText="生成方案";
-}}
-</script>'''
+<div id="rp_sectors" style="display:none">{json.dumps(sectors)}</div></div>
+<div id="rp_result" style="margin-top:12px"></div>'''
 
 
 @register
@@ -156,18 +129,4 @@ class PortfolioCard(Card):
   <button class="btn btn-primary" onclick="analyzePortfolio()">分析持仓</button>
   <span class="text-secondary" style="font-size:11px">也支持上传图片/CSV</span>
 </div>
-<div id="pf_result" style="margin-top:12px"></div>
-<script>
-async function analyzePortfolio(){
-  var v=document.getElementById("pf_text").value;
-  if(!v.trim())return;
-  var btn=event.target; btn.disabled=true; btn.innerText="分析中...";
-  document.getElementById("pf_result").innerHTML='<div class="flex"><div class="spinner"></div><span class="text-secondary">AI 分析中...</span></div>';
-  try{
-    var r=await fetch("/cards/portfolio/action",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({text:v})});
-    var d=await r.json();
-    document.getElementById("pf_result").innerHTML=d.ok?d.html:'<div class="text-secondary">错误: '+d.error+"</div>";
-  }catch(e){document.getElementById("pf_result").innerHTML='<div class="text-secondary">网络错误</div>';}
-  btn.disabled=false; btn.innerText="分析持仓";
-}
-</script>'''
+<div id="pf_result" style="margin-top:12px"></div>'''

@@ -58,24 +58,7 @@ class FetchControlCard(Card):
   <input id="fc_pages" type="number" value="10" min="1" max="500" style="width:80px;font-size:12px;padding:4px 8px" title="最大页数"/>
   <button class="btn btn-primary" onclick="fetchManually()">开始拉取</button>
   <span id="fc_status" class="text-secondary" style="font-size:11px"></span>
-</div>
-<script>
-async function fetchManually(){{
-  var u=document.getElementById("fc_user").value;
-  var r=document.getElementById("fc_range").value;
-  var pages=document.getElementById("fc_pages").value;
-  var from=document.getElementById("fc_from").value;
-  var to=document.getElementById("fc_to").value;
-  var s=document.getElementById("fc_status");
-  s.innerText="拉取中...";
-  try{{
-    var resp=await fetch("/cards/fetch_control/action",{{method:"POST",headers:{{"Content-Type":"application/json"}},body:JSON.stringify({{user:u,range:r,pages:pages,from:from,to:to}})}});
-    var d=await resp.json();
-    s.innerText=d.ok?"完成: +"+d.total+"条":d.error;
-    setTimeout(()=>location.reload(),1000);
-  }}catch(e){{s.innerText="网络错误";}}
-}}
-</script>'''
+</div>'''
 
 
 @register
