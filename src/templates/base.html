@@ -144,7 +144,9 @@ async function loadCards(tab) {
   });
 
   await Promise.all(promises);
-  attachButtons();  // 重新绑定 daemon 按钮事件
+  // 流水线卡片初始加载：默认显示过滤筛选 tab
+  if (tab === 'pipeline') { setTimeout(function() { loadTypePE('filter'); }, 200); }
+  attachButtons();
 }
 
 // 后台自动刷新（仅活跃 tab）
@@ -189,7 +191,92 @@ async function toggleDaemon() {
   } catch(e) {}
 }
 
-// 启动
+// ── 流水线执行函数 ──
+var PE_ACTIVE = 'filter';
+
+function loadTypePE(t) {
+  PE_ACTIVE = t;
+  document.querySelectorAll('.pe-container').forEach(function(e) { e.style.display = 'none'; });
+  document.querySelectorAll('.pe-tab').forEach(function(e) { e.classList.remove('active'); });
+  var c = document.getElementById('pe-type-' + t);
+  if (c) c.style.display = 'block';
+  var tab = document.getElementById('tab-' + t);
+  if (tab) tab.classList.add('active');
+}
+
+function selectAllPE(t) {
+  document.querySelectorAll('.pe-cb-' + t).forEach(function(c) { c.checked = true; });
+}
+
+function clearAllPE(t) {
+  document.querySelectorAll('.pe-cb-' + t).forEach(function(c) { c.checked = false; });
+}
+
+async function execPipeline(t) {
+  var ids = [];
+  document.querySelectorAll('.pe-cb-' + t + ':checked').forEach(function(c) { ids.push(c.value); });
+  if (!ids.length) return;
+  var s = document.getElementById('pe-msg');
+  if (s) s.innerText = '执行中...';
+  try {
+    var r = await fetch('/pipeline/tasks/execute', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ task_ids: ids })
+    });
+    if (s) s.innerText = '已提交 ' + ids.length + ' 个';
+    setTimeout(function() { location.reload(); }, 2000);
+  } catch (e) {
+    if (s) s.innerText = '网络错误';
+  }
+}
+
+async function retryTaskPE(id) {
+  await fetch('/pipeline/tasks/' + id + '/retry', { method: 'POST' });
+  location.reload();
+}
+
+async function skipTaskPE(id) {
+  await fetch('/pipeline/tasks/' + id + '/skip', { method: 'POST' });
+  location.reload();
+}
+
+async function filterNewTweetsPE() {
+  var s = document.getElementById('pe-msg');
+  if (s) s.innerText = '扫描中...';
+  try {
+    await fetch('/pipeline/filter', { method: 'POST' });
+    if (s) s.innerText = '完成';
+  } catch (e) {
+    if (s) s.innerText = '失败';
+  }
+  setTimeout(function() { location.reload(); }, 1500);
+}
+
+async function seedTasksPE() {
+  await fetch('/pipeline/tasks/seed', { method: 'POST' });
+  location.reload();
+}
+
+async function genPortrait() {
+  var u = document.getElementById('pg_user').value;
+  var s = document.getElementById('pg_status');
+  if (s) s.innerText = '生成中...';
+  try {
+    var r = await fetch('/cards/portrait_generate/action', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ user: u })
+    });
+    var d = await r.json();
+    if (s) s.innerText = d.ok ? '完成' : '失败: ' + (d.error || '');
+    setTimeout(function() { location.reload(); }, 2000);
+  } catch (e) {
+    if (s) s.innerText = '网络错误';
+  }
+}
+
+// ── 启动 ──
 fetch('/cards/meta').then(r => r.json()).then(cards => {
   cards.forEach(c => { REFRESH_MAP[c.name] = c.refresh; });
   loadCards('dashboard');

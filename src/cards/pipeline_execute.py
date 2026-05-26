@@ -40,10 +40,15 @@ class PipelineExecuteCard(Card):
         groups = data.get("groups", {})
         running = data.get("running", False)
         progress = data.get("progress", {})
-        types = data.get("types", [])
+
+        type_names = {
+            "filter": "过滤筛选", "analyze": "推文分析", "fetch_price": "股价拉取",
+            "fetch_crypto": "加密货币", "portrait": "画像生成", "clean": "数据清洗",
+        }
+        types = list(type_names.keys())
 
         type_tabs = "".join(
-            f'<button class="tab pe-tab" onclick="loadType(\'{t}\')" id="tab-{t}">{t}</button>'
+            f'<button class="tab pe-tab" onclick="loadTypePE(\'{t}\')" id="tab-{t}">{type_names[t]}</button>'
             for t in types
         )
         status_bar = f'执行中: {progress.get("msg","")} ({progress.get("done",0)}/{progress.get("total",0)})' if running else "空闲"
@@ -55,7 +60,6 @@ class PipelineExecuteCard(Card):
             failed = [i for i in items if i["status"] == "failed"]
             done = [i for i in items if i["status"] == "done"]
 
-            # Pending tasks
             pending_rows = "".join(
                 f'<tr><td><input type="checkbox" value="{p["id"]}" class="pe-cb-{t}" /></td>'
                 f'<td style="font-size:11px">#{p["id"]}</td>'
@@ -63,20 +67,18 @@ class PipelineExecuteCard(Card):
                 for p in pending[:30]
             ) if pending else '<tr><td colspan="3" class="text-secondary">无待办</td></tr>'
 
-            # Failed tasks
             failed_rows = "".join(
                 f'<tr><td style="font-size:11px">#{f["id"]}</td>'
                 f'<td style="font-size:11px">{f.get("error_msg","?")[:50]}</td>'
-                f'<td><button class="btn" style="font-size:10px;padding:2px 6px" onclick="retryTask({f["id"]})">重试</button> '
-                f'<button class="btn" style="font-size:10px;padding:2px 6px" onclick="skipTask({f["id"]})">跳过</button></td></tr>'
+                f'<td><button class="btn" style="font-size:10px;padding:2px 6px" onclick="retryTaskPE({f["id"]})">重试</button> '
+                f'<button class="btn" style="font-size:10px;padding:2px 6px" onclick="skipTaskPE({f["id"]})">跳过</button></td></tr>'
                 for f in failed[:10]
             ) if failed else ''
 
-            counters = f'待办 {len(pending)} | 完成 {len(done)} | 失败 {len(failed)}'
             containers += f'''<div id="pe-type-{t}" class="pe-container" style="display:none">
-<div class="flex-between mb-sm"><span class="text-secondary" style="font-size:11px">{counters}</span>
-<span><button class="btn" style="font-size:10px;padding:2px 6px" onclick="selectAll('{t}')">全选</button>
-<button class="btn" style="font-size:10px;padding:2px 6px" onclick="clearAll('{t}')">取消</button>
+<div class="flex-between mb-sm"><span class="text-secondary" style="font-size:11px">待办 {len(pending)} | 完成 {len(done)} | 失败 {len(failed)}</span>
+<span><button class="btn" style="font-size:10px;padding:2px 6px" onclick="selectAllPE('{t}')">全选</button>
+<button class="btn" style="font-size:10px;padding:2px 6px" onclick="clearAllPE('{t}')">取消</button>
 <button class="btn" style="font-size:10px;padding:2px 6px" onclick="execPipeline('{t}')">▶ 执行选中</button></span></div>
 <table class="data"><tr><th style="width:24px"></th><th>ID</th><th>详情</th></tr>{pending_rows}</table>
 {f'<div class="mt-sm"><span class="text-secondary" style="font-size:11px">失败 ({len(failed)})</span><table class="data">{failed_rows}</table></div>' if failed else ''}
@@ -86,52 +88,12 @@ class PipelineExecuteCard(Card):
 <div class="flex-between mb-sm"><div class="flex"><div class="status-dot {"ok" if running else ""}"></div><span style="font-size:12px">{status_bar}</span></div></div>
 <div class="mb-sm" style="display:flex;gap:4px;flex-wrap:wrap">{type_tabs}</div>
 <div style="display:flex;gap:6px;margin-bottom:8px">
-  <button class="btn" onclick="filterNewTweets()" style="font-size:11px">🔍 扫描新推文</button>
-  <button class="btn" onclick="seedTasks()" style="font-size:11px">🌱 种子任务</button>
+  <button class="btn" onclick="filterNewTweetsPE()" style="font-size:11px">🔍 扫描新推文</button>
+  <button class="btn" onclick="seedTasksPE()" style="font-size:11px">🌱 种子任务</button>
   <span id="pe-msg" class="text-secondary" style="font-size:11px"></span>
 </div>
 {containers}
-<script>
-var PE_ACTIVE = 'filter';
-function loadType(t){{ 
-  PE_ACTIVE = t;
-  document.querySelectorAll('.pe-container').forEach(e=>e.style.display='none');
-  document.querySelectorAll('.pe-tab').forEach(e=>e.classList.remove('active'));
-  var c=document.getElementById('pe-type-'+t); if(c) c.style.display='block';
-  var tab=document.getElementById('tab-'+t); if(tab) tab.classList.add('active');
-}}
-function selectAll(t){{ document.querySelectorAll('.pe-cb-'+t).forEach(c=>c.checked=true); }}
-function clearAll(t){{ document.querySelectorAll('.pe-cb-'+t).forEach(c=>c.checked=false); }}
-async function execPipeline(t){{
-  var ids=[];
-  document.querySelectorAll('.pe-cb-'+t+':checked').forEach(c=>ids.push(c.value));
-  if(!ids.length)return;
-  var s=document.getElementById('pe-msg'); s.innerText='执行中...';
-  try{{
-    var r=await fetch('/pipeline/tasks/execute',{{method:'POST',headers:{{'Content-Type':'application/json'}},body:JSON.stringify({{task_ids:ids}})}});
-    s.innerText='已提交 '+ids.length+' 个任务';
-    setTimeout(()=>location.reload(),2000);
-  }}catch(e){{s.innerText='错误';}}
-}}
-async function retryTask(id){{
-  await fetch('/pipeline/tasks/'+id+'/retry',{{method:'POST'}});
-  location.reload();
-}}
-async function skipTask(id){{
-  await fetch('/pipeline/tasks/'+id+'/skip',{{method:'POST'}});
-  location.reload();
-}}
-async function filterNewTweets(){{
-  var s=document.getElementById('pe-msg'); s.innerText='扫描中...';
-  await fetch('/pipeline/filter',{{method:'POST'}});
-  s.innerText='完成'; setTimeout(()=>location.reload(),1500);
-}}
-async function seedTasks(){{
-  await fetch('/pipeline/tasks/seed',{{method:'POST'}});
-  location.reload();
-}}
-loadType('filter');
-</script>'''
+</div>'''
 
 
 def _format_label(task_type: str, payload: dict) -> str:
@@ -183,16 +145,4 @@ class PortraitGenerateCard(Card):
   <button class="btn btn-primary" onclick="genPortrait()">生成画像</button>
   <span id="pg_status" class="text-secondary" style="font-size:11px"></span>
 </div>
-<div class="text-secondary" style="font-size:11px">需先完成 analyze 任务。也可用流水线执行中的 portrait 类型批量生成。</div>
-<script>
-async function genPortrait(){{
-  var u=document.getElementById('pg_user').value;
-  var s=document.getElementById('pg_status'); s.innerText='生成中...';
-  try{{
-    var r=await fetch('/cards/portrait_generate/action',{{method:'POST',headers:{{'Content-Type':'application/json'}},body:JSON.stringify({{user:u}})}});
-    var d=await r.json();
-    s.innerText=d.ok?'完成':'失败: '+(d.error||'');
-    setTimeout(()=>location.reload(),2000);
-  }}catch(e){{s.innerText='网络错误';}}
-}}
-</script>'''
+<div class="text-secondary" style="font-size:11px">需先完成 analyze 任务。也可用流水线执行中的 portrait 类型批量生成。</div>'''
