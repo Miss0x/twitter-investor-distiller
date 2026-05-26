@@ -1,4 +1,5 @@
 """流水线执行 + 画像生成 — 完整交互卡片"""
+import json
 from src.cards.base import Card
 from src.cards import register
 
@@ -19,7 +20,7 @@ class PipelineExecuteCard(Card):
             tasks = s.query(PipelineTask).order_by(PipelineTask.id.desc()).limit(200).all()
             grouped = {}
             for t in tasks:
-                p = __import__('json').loads(t.payload) if t.payload else {}
+                p = json.loads(t.payload) if t.payload else {}
                 item = {"id": t.id, "task_type": t.task_type, "status": t.status,
                         "payload": p, "error_msg": t.error_msg,
                         "created_at": str(t.created_at)[:16] if t.created_at else ""}

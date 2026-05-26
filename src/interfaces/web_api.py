@@ -325,6 +325,8 @@ def execute_selected(payload: dict) -> dict:
         return {"ok": False, "message": "未选择任务"}
     if is_running():
         return {"ok": False, "message": "已有任务在执行中"}
+    # 兼容前端传字符串 ID
+    task_ids = [int(x) for x in task_ids]
     session = db.get_session()
     try:
         valid_ids = session.query(PipelineTask.id).filter(
