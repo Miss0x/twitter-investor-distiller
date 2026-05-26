@@ -302,7 +302,7 @@ import threading
 
 
 @app.get("/pipeline/tasks")
-def list_tasks(task_type: str | None = None, status: str | None = None) -> dict:
+def list_tasks(task_type: str | None = None, status: str | None = None, limit: int = 200, offset: int = 0) -> dict:
     session = db.get_session()
     try:
         q = session.query(PipelineTask)
@@ -310,7 +310,8 @@ def list_tasks(task_type: str | None = None, status: str | None = None) -> dict:
             q = q.filter(PipelineTask.task_type == task_type)
         if status:
             q = q.filter(PipelineTask.status == status)
-        tasks = q.order_by(PipelineTask.id).all()
+        total = q.count()
+        tasks = q.order_by(PipelineTask.id.desc()).limit(limit).offset(offset).all()
         return {
             "tasks": [
                 {"id": t.id, "task_type": t.task_type, "status": t.status,
@@ -704,7 +705,7 @@ async def card_data(name: str):
         _set_cached_card_html(name, html)
         return HTMLResponse(content=html)
     except Exception as e:
-        return HTMLResponse(content=f'<div class="card"><div class="flex"><div class="status-dot err"></div><span class="text-secondary">{name}: {e}</span></div></div>')
+        return HTMLResponse(content=f'<div class="card"><div class="flex"><div class="status-dot err"></div><span class="text-secondary">{name}: {str(e).replace("<","&lt;").replace(">","&gt;")}</span></div></div>')
 
 
 @app.post("/cards/{name}/action")

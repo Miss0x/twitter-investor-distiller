@@ -18,15 +18,18 @@ class ApiStatusCard(Card):
         st = json.loads(state.read_text()) if state.exists() else {}
         users_fp = Path("data/users.json")
         users = json.loads(users_fp.read_text(encoding="utf-8")) if users_fp.exists() else ["TJ_Research", "dearbaibabybus"]
-        # 从 DB 拿每个用户的推文数
+        # 从 DB 拿每个用户的推文数（单查询）
         user_counts = {}
         try:
             from src.storage.database import db
             db.init_db()
             s = db.get_session()
-            for u in users:
-                cnt = s.execute("SELECT COUNT(*) FROM tweets t JOIN users u ON t.user_id=u.id WHERE u.username=?", (u,)).fetchone()[0]
-                user_counts[u] = cnt
+            placeholders = ",".join(["?"] * len(users))
+            rows = s.execute(
+                f"SELECT u.username, COUNT(*) FROM tweets t JOIN users u ON t.user_id=u.id WHERE u.username IN ({placeholders}) GROUP BY u.username",
+                tuple(users)
+            ).fetchall()
+            user_counts = {row[0]: row[1] for row in rows}
             s.close()
         except:
             pass
