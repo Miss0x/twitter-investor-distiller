@@ -70,16 +70,46 @@ class TwitterAPIFetcher:
         finally:
             session.close()
 
-    def fetch_tweets(self, username: str, max_pages: int = 50, cursor: str = "") -> dict:
-        """拉取推文列表（带翻页），写入 DB。返回统计。"""
+    def get_last_tweet_ts(self, username: str) -> int:
+        """获取某用户最新一条推文的 UNIX 时间戳，用于增量拉取。"""
+        session = db.get_session()
+        try:
+            last = session.query(Tweet).filter(
+                Tweet.user.has(username=username)
+            ).order_by(Tweet.created_at_twitter.desc()).first()
+            if last and last.created_at_twitter:
+                return int(last.created_at_twitter.timestamp()) + 1
+            return 0
+        except Exception:
+            return 0
+        finally:
+            session.close()
+
+    def get_user_tweet_count(self, username: str) -> int:
+        """获取某用户在 DB 中的推文数。"""
+        session = db.get_session()
+        try:
+            return session.query(Tweet).join(User).filter(User.username == username).count()
+        except Exception:
+            return 0
+        finally:
+            session.close()
+
+    def fetch_tweets(self, username: str, max_pages: int = 50, cursor: str = "",
+                     since_ts: int = 0, until_ts: int = 0) -> dict:
+        """拉取推文列表（带翻页+时间范围），写入 DB。返回统计。"""
         total_new = 0
         pages = 0
 
+        query_parts = [f"from:{username}"]
+        if since_ts > 0:
+            query_parts.append(f"since_time:{since_ts}")
+        if until_ts > 0:
+            query_parts.append(f"until_time:{until_ts}")
+        base_query = " ".join(query_parts)
+
         for page in range(max_pages):
-            params = {
-                "query": f"from:{username}",
-                "queryType": "Latest",
-            }
+            params = {"query": base_query, "queryType": "Latest"}
             if cursor:
                 params["cursor"] = cursor
 

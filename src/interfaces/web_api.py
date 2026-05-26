@@ -683,38 +683,55 @@ async def card_action(name: str, payload: dict = None):
                 from pathlib import Path
                 sys.path.insert(0, r'{Path.cwd()}')
                 from src.crawler.twitterapi_fetcher import TwitterAPIFetcher
-                # 监控目标用户
+                from src.storage.database import db
+                from src.storage.models import PipelineTask
+                db.init_db()
+                
                 USERS = ['TJ_Research', 'dearbaibabybus']
-                BUDGET = 20
+                INTERVAL = 120
+                fetcher = TwitterAPIFetcher()
                 state = Path('data/auto_scheduler_state.json')
                 st = {{}}
                 if state.exists():
                     st = json.loads(state.read_text())
-                # 轮转抓取模式：每次只拉一个用户，轮流
                 idx = st.get('user_idx', 0)
-                fetcher = TwitterAPIFetcher()
                 today = time.strftime('%Y-%m-%d')
+                
                 while True:
                     try:
                         username = USERS[idx % len(USERS)]
                         st['user_idx'] = (idx + 1) % len(USERS)
                         st['updated'] = time.strftime('%Y-%m-%d %H:%M:%S')
-                        # 拉 1 页新推文
-                        cursor = st.get(f'cursor_{{username}}', '')
-                        res = fetcher.fetch_tweets(username, max_pages=1, cursor=cursor)
-                        if res.get('ok'):
-                            st[f'cursor_{{username}}'] = res.get('cursor', '')
-                            st['total_fetched'] = st.get('total_fetched', 0) + res.get('total_new', 0)
-                            print(f"[DAEMON] {{username}}: +{{res.get('total_new',0)}} tweets")
+                        
+                        # 增量：从 DB 最后一条推文的时间之后拉取
+                        last_ts = fetcher.get_last_tweet_ts(username)
+                        db_cnt = fetcher.get_user_tweet_count(username)
+                        st['db_count_{{username}}'] = db_cnt
+                        
+                        res = fetcher.fetch_tweets(username, max_pages=1, since_ts=last_ts)
+                        new_cnt = res.get('total_new', 0)
+                        if res.get('ok') and new_cnt > 0:
+                            st['total_fetched'] = st.get('total_fetched', 0) + new_cnt
+                            # 自动触发流水线: filter → analyze
+                            session = db.get_session()
+                            for i in range(new_cnt):
+                                t = PipelineTask(task_type='filter', status='pending', payload=json.dumps({{'action': 'filter_latest', 'user': username}}))
+                                session.add(t)
+                            session.commit()
+                            session.close()
+                            print(f"[DAEMON] {{username}}: +{{new_cnt}} tweets, pipeline triggered")
+                        elif new_cnt == 0 and res.get('ok'):
+                            print(f"[DAEMON] {{username}}: 无新推文 (last_ts={{last_ts}}, db={{db_cnt}})")
                         else:
                             print(f"[DAEMON] {{username}}: {{res.get('error','')}}")
+                        
                         state.write_text(json.dumps(st, ensure_ascii=False))
                         idx += 1
-                        time.sleep(60)  # 控制频率
+                        time.sleep(INTERVAL)
                         today = time.strftime('%Y-%m-%d')
                     except Exception as exc:
                         print('[DAEMON] ' + str(exc))
-                        time.sleep(120)
+                        time.sleep(INTERVAL * 2)
                 """)
                 proc = subprocess.Popen([sys.executable, "-c", inline], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
                 card._proc = proc
@@ -744,6 +761,12 @@ async def card_action(name: str, payload: dict = None):
         try:
             result = _handle_portfolio_analysis(payload)
             return {"ok": True, "html": result}
+        except Exception as e:
+            return {"ok": False, "error": str(e)}
+    if name == "fetch_control" and payload:
+        try:
+            result = _handle_fetch_control(payload)
+            return {'ok': True, 'total': result.get('total_new', 0)}
         except Exception as e:
             return {"ok": False, "error": str(e)}
     return {"ok": False, "error": "unknown action"}
@@ -878,6 +901,36 @@ def _handle_portfolio_analysis(payload: dict) -> str:
         return chat(messages=[{"role": "user", "content": prompt}], role="analyzer", max_tokens=4096, temperature=0.5)
     except Exception as e:
         return f"<div class='text-secondary'>LLM 调用失败: {e}</div>"
+
+
+def _handle_fetch_control(payload: dict) -> dict:
+    """处理手动拉取请求。"""
+    import time as _time
+    from src.crawler.twitterapi_fetcher import TwitterAPIFetcher
+
+    user = payload.get("user", "TJ_Research")
+    range_days = int(payload.get("range", 0))
+    pages = int(payload.get("pages", 10))
+    from_date = payload.get("from", "")
+    to_date = payload.get("to", "")
+
+    since_ts, until_ts = 0, 0
+
+    if from_date:
+        since_ts = int(_time.mktime(_time.strptime(from_date, "%Y-%m-%d")))
+    if to_date:
+        until_ts = int(_time.mktime(_time.strptime(to_date, "%Y-%m-%d"))) + 86400
+    elif range_days == -1:
+        since_ts = 0
+    elif range_days > 0:
+        since_ts = int(_time.time()) - range_days * 86400
+    else:
+        f = TwitterAPIFetcher()
+        since_ts = f.get_last_tweet_ts(user)
+
+    f = TwitterAPIFetcher()
+    return f.fetch_tweets(user, max_pages=pages, since_ts=since_ts, until_ts=until_ts)
+
 
 @app.get("/", response_class=HTMLResponse)
 async def serve_dashboard():
