@@ -1,4 +1,5 @@
 """流水线执行 + 画像生成 — 完整交互卡片"""
+import html
 import json
 from src.cards.base import Card
 from src.cards import register
@@ -121,16 +122,20 @@ def _enrich_tweet_texts(groups: dict) -> None:
     if not tweet_ids:
         return
 
-    # 批量 DB 查询
+    # 批量 DB 查询（分片，避免 SQLite 变量数超 999 限制）
     try:
         import sqlite3
         conn = sqlite3.connect("data/twitter_data.db")
-        placeholders = ",".join(["?"] * len(tweet_ids))
-        rows = conn.execute(
-            f"SELECT id, COALESCE(text,'') as text, COALESCE(user_id,'') as user_id FROM tweets WHERE id IN ({placeholders})",
-            tuple(tweet_ids)
-        ).fetchall()
-        text_map = {row[0]: {"text": row[1], "user_id": row[2]} for row in rows}
+        tweet_ids_list = list(tweet_ids)
+        text_map = {}
+        for start in range(0, len(tweet_ids_list), 900):
+            chunk = tweet_ids_list[start:start+900]
+            placeholders = ",".join(["?"] * len(chunk))
+            rows = conn.execute(
+                f"SELECT id, COALESCE(text,'') as text, COALESCE(user_id,'') as user_id FROM tweets WHERE id IN ({placeholders})",
+                tuple(chunk)
+            ).fetchall()
+            text_map.update({row[0]: {"text": row[1], "user_id": row[2]} for row in rows})
         conn.close()
     except Exception:
         return
@@ -152,7 +157,7 @@ def _format_label(task_type: str, payload: dict) -> str:
         txt = payload.get("_text", "")
         if txt:
             prefix = f'@{payload.get("_user","")} ' if payload.get("_user") else ""
-            return f'{prefix}{txt[:50]}{"..." if len(txt)>50 else ""}'
+            return f'{prefix}{html.escape(txt[:50])}{"..." if len(txt)>50 else ""}'
         # 没有文本则显示 action 中文名
         action = payload.get("action", "")
         action_labels = {
@@ -166,10 +171,10 @@ def _format_label(task_type: str, payload: dict) -> str:
         tid = payload.get("tweet_id", "")
         text = payload.get("_text", "") or payload.get("text", "") or ""
         if tid and text:
-            return f'#{tid} | {text[:50]}{"..." if len(text)>50 else ""}'
+            return f'#{tid} | {html.escape(text[:50])}{"..." if len(text)>50 else ""}'
         if tid:
             return f'分析 #{tid}'
-        return text[:50] if text else "分析任务"
+        return html.escape(text[:50]) if text else "分析任务"
     elif task_type == "fetch_price":
         ticker = payload.get("ticker", "") or payload.get("symbol", "")
         return ticker or "股价拉取"
@@ -190,7 +195,7 @@ def _format_label(task_type: str, payload: dict) -> str:
         return f'#{tid}'
     txt = payload.get("_text", "") or payload.get("text", "") or payload.get("msg", "")
     if txt:
-        return txt[:50]
+        return html.escape(txt[:50])
     return "任务"
 
 

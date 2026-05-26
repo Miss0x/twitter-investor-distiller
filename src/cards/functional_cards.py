@@ -1,9 +1,16 @@
 """流水线执行 + 资产代码 + 加密货币 + 脚本触发 + 情绪时间线 — 功能卡片"""
-import json, csv, time, subprocess, sys
+import json, csv, time
 from pathlib import Path
 from collections import Counter
 from src.cards.base import Card
 from src.cards import register
+
+
+def _esc_js(s: str) -> str:
+    """转义字符串用于 JS onclick 属性中，防注入。"""
+    return json.dumps(str(s))[1:-1].replace("'", "\\'")
+
+
 @register
 class AssetAliasCard(Card):
     name = "asset_alias"
@@ -48,8 +55,8 @@ class AssetAliasCard(Card):
   <td style="font-weight:500">{a["ticker"]}</td>
   <td style="font-size:11px;color:var(--text-secondary)">{a.get("type","")}</td>
   <td style="text-align:right">
-    <button class="btn" style="font-size:10px;padding:1px 6px" onclick="editAliasRow(\'{a["alias"]}\',\'{a["ticker"]}\',\'{a.get("type","")}\')">编辑</button>
-    <button class="btn btn-danger" style="font-size:10px;padding:1px 6px" onclick="deleteAlias(\'{a["alias"]}\')">删除</button>
+    <button class="btn" style="font-size:10px;padding:1px 6px" onclick="editAliasRow('{_esc_js(a["alias"])}','{_esc_js(a["ticker"])}','{_esc_js(a.get("type",""))}')">编辑</button>
+    <button class="btn btn-danger" style="font-size:10px;padding:1px 6px" onclick="deleteAlias('{_esc_js(a["alias"])}')">删除</button>
   </td></tr>'''
                 for a in confirmed[:50]
             )
@@ -64,8 +71,8 @@ class AssetAliasCard(Card):
   <td style="font-size:11px;font-weight:500">{a["alias"]}</td>
   <td style="font-size:11px;color:var(--text-secondary)">{a.get("type","")}</td>
   <td style="text-align:right">
-    <button class="btn" style="font-size:10px;padding:1px 6px" onclick="fillAliasForm(\'{a["alias"]}\',\'{a.get("type","")}\')">填代码</button>
-    <button class="btn btn-danger" style="font-size:10px;padding:1px 6px" onclick="deleteAlias(\'{a["alias"]}\')">删除</button>
+    <button class="btn" style="font-size:10px;padding:1px 6px" onclick="fillAliasForm('{_esc_js(a["alias"])}','{_esc_js(a.get("type",""))}')">填代码</button>
+    <button class="btn btn-danger" style="font-size:10px;padding:1px 6px" onclick="deleteAlias('{_esc_js(a["alias"])}')">删除</button>
   </td></tr>'''
                 for a in pending[:30]
             )

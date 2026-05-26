@@ -27,7 +27,7 @@ class FetchControlCard(Card):
         return ["TJ_Research", "dearbaibabybus"]
 
     def _render_html(self, data: dict) -> str:
-        presets = "".join(f'<button class="btn" onclick="setRange(\'{p}\')" style="margin:2px">{p}</button>' for p in data["presets"])
+        presets = "".join(f'<button class="btn" onclick="setRange({json.dumps(p)})" style="margin:2px">{p}</button>' for p in data["presets"])
         user_opts = "".join(f'<option>{u}</option>' for u in data["users"])
         return f'''<div class="card-title">手动拉取控制</div>
 <div class="grid grid-2 mb-sm" style="gap:8px">
@@ -139,7 +139,7 @@ class PortraitCard(Card):
         for p in portraits[:20]:
             mod_time = _tm.strftime("%m-%d %H:%M", _tm.localtime(p["modified_ts"]))
             window_class = "tag-ok" if p["window"] in ("全量", "1年", "6个月") else "tag-warn"
-            cards += f'''<div class="portrait-item" style="border:0.5px solid var(--border-tertiary);border-radius:var(--radius-md);padding:8px 10px;margin-bottom:6px;cursor:pointer" onclick="togglePortrait('{p["id"]}')">
+            cards += f'''<div class="portrait-item" style="border:0.5px solid var(--border-tertiary);border-radius:var(--radius-md);padding:8px 10px;margin-bottom:6px;cursor:pointer" onclick="togglePortrait({json.dumps(p["id"])})">
   <div class="flex-between">
     <span><span style="font-weight:500;font-size:12px">{p["username"]}</span>
       <span class="tag {window_class}" style="font-size:10px;margin-left:6px">{p["window"]}</span>

@@ -15,10 +15,11 @@ class SystemStatusCard(Card):
         from src.storage.models import Tweet
         db.init_db(); s = db.get_session()
         tweets = s.query(Tweet).count(); s.close()
-        pipeline = len(list(Path("data/pipeline").glob("*_analyzed_cleaned.json")))
+        analyzed_files = list(Path("data/pipeline").glob("*_analyzed_cleaned.json"))
+        pipeline = len(analyzed_files)
         portraits = len(list(Path("data/pipeline").glob("*portrait.md")))
         signals = 0
-        for fp in Path("data/pipeline").glob("*_analyzed_cleaned.json"):
+        for fp in analyzed_files:
             for r in json.loads(fp.read_text(encoding="utf-8")):
                 if r.get("signal_score"):
                     signals += 1

@@ -41,7 +41,8 @@ class TwitterAPIFetcher:
         data = self._get("/twitter/user/info", {"userName": username})
         user_data = data.get("data", {})
         if not user_data:
-            return {"ok": False, "error": data.get("message", "unknown")}
+            err = data.get("message") or data.get("error") or f"@{username} 不存在或API返回空"
+            return {"ok": False, "error": err}
 
         session = db.get_session()
         try:

@@ -246,7 +246,7 @@ def _generate_portrait(username: str) -> dict:
     # 解析组合名：
     # 格式A: TJ_Research_1个月 → user=TJ_Research, window=30
     # 格式B: TJ_Research_2026-01-01_2026-05-27 → user=TJ_Research, 日期范围
-    m = re.match(r"(.+?)_(1个月|3个月|6个月|1年|全量)", username)
+    m = re.match(r"(.+)_(1个月|3个月|6个月|1年|全量)$", username)
     use_date_range = False
     date_from = date_to = ""
     if m:
