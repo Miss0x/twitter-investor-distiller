@@ -1,3 +1,4 @@
+﻿TEMPLATE_DIR = Path(__file__).parent.parent / "templates"  # 模板根目录
 """卡片基类 — 所有模块化卡片的统一接口。
 
 每个卡片实现三个方法即可接入 dashboard：
@@ -16,7 +17,7 @@ from abc import ABC, abstractmethod
 from pathlib import Path
 from typing import Any
 
-TEMPLATE_DIR = Path(__file__).parent.parent.parent / "src" / "templates"
+TEMPLATE_DIR = Path(__file__).parent.parent / "templates"
 
 
 class Card(ABC):
@@ -58,3 +59,5 @@ class Card(ABC):
             "refresh": self.refresh,
             "has_actions": bool(self.actions),
         }
+
+

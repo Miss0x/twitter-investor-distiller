@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8">
@@ -156,7 +156,7 @@ async function loadCards(tab) {
 
   await Promise.all(promises);
   // 流水线卡片初始加载：默认显示过滤筛选 tab
-  if (tab === 'pipeline') { setTimeout(function() { loadTypePE('filter'); }, 200); }
+  if (tab === 'pipeline') { requestAnimationFrame(function() { loadTypePE('filter'); }); }
   attachButtons();
 }
 
@@ -428,3 +428,4 @@ fetch('/cards/meta').then(r => r.json()).then(cards => {
 </script>
 </body>
 </html>
+

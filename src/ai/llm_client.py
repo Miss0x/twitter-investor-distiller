@@ -1,4 +1,4 @@
-"""OpenAI 兼容 LLM 客户端（单例复用）。"""
+﻿"""OpenAI 兼容 LLM 客户端（单例复用）。"""
 from __future__ import annotations
 
 import base64
@@ -82,3 +82,4 @@ def chat_vision(
         temperature=model_cfg.get("temperature", 0.3),
     )
     return resp.choices[0].message.content or ""
+
