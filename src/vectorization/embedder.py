@@ -21,6 +21,11 @@ class HashEmbedder:
 
     def __init__(self, dimensions: int = 384) -> None:
         self.dimensions = dimensions
+        import logging
+        logging.getLogger(__name__).warning(
+            "HashEmbedder 已激活 — 生成伪随机向量，语义值为零。"
+            "生产环境请设置 OPENAI_API_KEY 使用 OpenAIEmbedder。"
+        )
 
     def embed_texts(self, texts: list[str]) -> list[list[float]]:
         return [self._embed_one(text) for text in texts]

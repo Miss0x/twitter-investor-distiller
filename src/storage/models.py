@@ -164,7 +164,7 @@ class CrawlLog(Base):
 
 
 class CrawlJob(Base):
-    """长周期抓取任务模型。"""
+    """[WIP] 长周期抓取任务模型 — 预留, 当前未使用。"""
 
     __tablename__ = "crawl_jobs"
 

@@ -16,6 +16,16 @@ from src.interfaces.job_service import CrawlJobService
 from src.storage.database import db
 from src.storage.models import CrawlJob, CrawlJobCheckpoint, CrawlJobMode, CrawlJobType
 
+# 单例 ChatEngine，避免每次请求重建
+_chat_engine: ChatEngine | None = None
+
+
+def _get_chat_engine() -> ChatEngine:
+    global _chat_engine
+    if _chat_engine is None:
+        _chat_engine = ChatEngine()
+    return _chat_engine
+
 app = FastAPI(title="Twitter 用户蒸馏 AI 助手")
 
 from src.config import config  # noqa: E402
@@ -190,7 +200,7 @@ def chat(request: ChatRequest, req: Request = None) -> ChatResponse:
         token = (req.headers.get("authorization") or "").replace("Bearer ", "")
         if token != config.dashboard_token:
             raise HTTPException(status_code=401, detail="unauthorized")
-    engine = ChatEngine()
+    engine = _get_chat_engine()
     return ChatResponse(answer=engine.answer(request.question, top_k=request.top_k))
 
 

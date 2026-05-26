@@ -8,7 +8,10 @@ from src.cards import register
 
 @register
 class DaemonCard(Card):
-    name = "daemon"; tab = "dashboard"; endpoint = "/api/daemon"; refresh = 5
+    name = "daemon"
+    tab = "dashboard"
+    endpoint = "/api/daemon"
+    refresh = 5
 
     def get_data(self, **params) -> dict:
         state = Path("data/auto_scheduler_state.json")
@@ -35,7 +38,9 @@ class DaemonCard(Card):
 
 @register
 class TelegramCard(Card):
-    name = "telegram"; tab = "dashboard"; endpoint = "/api/telegram"
+    name = "telegram"
+    tab = "dashboard"
+    endpoint = "/api/telegram"
 
     def get_data(self, **params) -> dict:
         fp = Path("data/telegram_config.json")
@@ -74,7 +79,9 @@ async function saveTelegram(){{
 
 @register
 class RolePickerCard(Card):
-    name = "role_picker"; tab = "insights"; endpoint = "/api/role_picker"
+    name = "role_picker"
+    tab = "insights"
+    endpoint = "/api/role_picker"
 
     def get_data(self, **params) -> dict:
         analysts = set()
@@ -127,7 +134,9 @@ async function generatePick(){{
 
 @register
 class PortfolioCard(Card):
-    name = "portfolio"; tab = "insights"; endpoint = "/api/portfolio"
+    name = "portfolio"
+    tab = "insights"
+    endpoint = "/api/portfolio"
 
     def get_data(self, **params) -> dict:
         acc = {}

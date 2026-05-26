@@ -56,6 +56,8 @@ class Config:
         self._loaded = True
 
     def __getattr__(self, name: str) -> Any:
+        if name.startswith("_"):
+            return super().__getattribute__(name)
         self._ensure_loaded()
         return super().__getattribute__(name)
 

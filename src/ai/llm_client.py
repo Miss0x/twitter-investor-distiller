@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import base64
+import time as _time
 from pathlib import Path
 
 import yaml
@@ -41,17 +42,26 @@ def chat(
     *,
     max_tokens: int | None = None,
     temperature: float | None = None,
+    max_retries: int = 3,
 ) -> str:
     cfg = _get_config()
     model_cfg = cfg.get("models", {}).get(role, {})
-    model_name = model_cfg.get("name", "claude-sonnet-4-6")
-    resp = _get_client().chat.completions.create(
-        model=model_name,
-        messages=messages,
-        max_tokens=max_tokens or model_cfg.get("max_tokens", 1024),
-        temperature=temperature if temperature is not None else model_cfg.get("temperature", 0.3),
-    )
-    return resp.choices[0].message.content or ""
+    model_name = model_cfg.get("name", "gpt-4o")
+    last_err = None
+    for attempt in range(max_retries):
+        try:
+            resp = _get_client().chat.completions.create(
+                model=model_name,
+                messages=messages,
+                max_tokens=max_tokens or model_cfg.get("max_tokens", 1024),
+                temperature=temperature if temperature is not None else model_cfg.get("temperature", 0.3),
+            )
+            return resp.choices[0].message.content or ""
+        except Exception as e:
+            last_err = e
+            if attempt < max_retries - 1:
+                _time.sleep(2 ** attempt)
+    raise last_err
 
 
 def encode_image(image_path: str | Path) -> str:

@@ -7,7 +7,10 @@ from src.cards import register
 
 @register
 class SystemStatusCard(Card):
-    name = "system_status"; tab = "dashboard"; endpoint = "/api/system_status"; refresh = 60
+    name = "system_status"
+    tab = "dashboard"
+    endpoint = "/api/system_status"
+    refresh = 60
     template = "system_status.html"
 
     def get_data(self, **params) -> dict:

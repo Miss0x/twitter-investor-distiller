@@ -8,7 +8,10 @@ from src.cards import register
 @register
 class RotationCard(Card):
     name = "rotation"
-    template = "rotation.html"; tab = "insights"; endpoint = "/api/rotation"; refresh = 600
+    template = "rotation.html"
+    tab = "insights"
+    endpoint = "/api/rotation"
+    refresh = 600
 
     def get_data(self, **params) -> dict:
         results = {}
