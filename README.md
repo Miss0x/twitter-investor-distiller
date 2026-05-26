@@ -1,130 +1,96 @@
-# Twitter 用户蒸馏 — AI 投资研究助手
+# Twitter Investor Distiller — AI 投资研究助手
 
-采集精选 X/Twitter 投资者的发言和上下文 → 大模型分析 → 多维信号量化 → 板块角色代入选股 → 实时预警推送。
+采集精选 X/Twitter 投资者的发言 → 大模型分析 → 多维信号量化 → 角色代入选股 → 实时预警。
 
-## 当前状态
+## 当前架构
 
-- **数据采集**：浏览器真人化抓取，1136 条推文已分析
-- **13 大模块**：准确率回溯、信号量化、多信号联动、板块轮动、情绪时间线、角色代入选股、实时触发、异常检测、预警系统、关联网络、基本面快照、持仓叠加、完整控制台
-- **行业分类**：145 只美股标准 Sector/Industry 映射（Technology/Semiconductors 等 13 大类 59 子类）
-- **控制台**：Streamlit Web UI + FastAPI，含 daemon 开关、Telegram 配置、角色代入、持仓顾问
-- **画像系统**：9 维度 → 10 维度（新增仓位管理与 Beta 调节），多时间窗口（1月/3月/半年/1年/全量）
+- **数据采集**: twitterapi.io API（主路径）+ 浏览器真人抓取（备灾）
+- **前端**: FastAPI + Jinja2 卡片模块化仪表盘，20 张独立卡片，4 个标签页
+- **后端**: SQLite + Chroma 向量库 + OpenAI 兼容 LLM
+- **入口**: Web 仪表盘 + Telegram Bot + FastAPI
 
 ## 采集目标
 
-| 分析师 | 推文数 | 画像 |
-|--------|--------|------|
-| **@TJ_Research** | 732 条 | 进攻型趋势投资者，降 beta 聚焦盈利确定性 |
-| **@dearbaibabybus** | 404 条 | AI 主战场的成长波段主动交易者 |
+| 分析师 | 画像 |
+|--------|------|
+| **@TJ_Research** | 宏观趋势型，准确率 46% |
+| **@dearbaibabybus** | 成长波段型，准确率 45% |
 
 ## 快速开始
 
 ```bash
 pip install -r requirements.txt
 
-# 初始化数据库
-python -m scripts.bootstrap
+# 配置 .env（复制 .env.example 并填入密钥）
+cp .env.example .env
 
-# 启动后端 API
+# 启动 Web 仪表盘
 python -m uvicorn src.interfaces.web_api:app --host 0.0.0.0 --port 8000
-
-# 启动前端控制台
-python -m streamlit run src/interfaces/web_ui.py --server.port 8501
 ```
 
-浏览器打开 `http://localhost:8501` 进入仪表盘。
+浏览器打开 `http://localhost:8000`。
 
-## 13 模块体系
+## 仪表盘标签页
 
-### Phase 1 — 地基
-| # | 模块 | 产出 |
-|---|------|------|
-| #2 | 准确率回溯 | TJ 30日夏普 0.79, deba 半导体 62% 胜率（按板块/股票/月份三维分组） |
-| #11 | 基本面快照 | 104 只美股 PE/ROE/营收增速/负债率（westock-data 免费数据源） |
-
-### Phase 2 — 信号
-| # | 模块 | 产出 |
-|---|------|------|
-| #1 | 信号量化 | 1136 条推文 0-100 分（stance × 贝叶斯校准置信度 × K线共振） |
-| #4 | 多信号联动 | 205 只股票共识分，31 只双人覆盖，META 97 分 🔥 |
-
-### Phase 3 — 智能
-| # | 模块 | 产出 |
-|---|------|------|
-| #8 | 板块轮动 | 周聚合滚动 Z-score，deba 2月加密→3月宏观→5月全面活跃 |
-| #9 | 情绪时间线 | 271 个(股票,分析师) stance 时序，CRCL × TJ 36 点最多 |
-| #7 | 角色代入选股 | 标准行业分类下拉 → 实时价格 → LLM 选股方案（一键生成） |
-
-### Phase 4 — 实时
-| # | 模块 | 产出 |
-|---|------|------|
-| #3 | 实时触发 | 仪表盘一键 daemon，30 秒轮询，日预算 20 条，断点续传 |
-| #10 | 异常检测 | KL 散度 + 95% 分位动态阈值，主数据集 FPR 5.8%/8.7% |
-| #5 | 预警 | Telegram Bot 配置面板，token 注入即用 |
-| #12 | 关联网络 | 353 条互动边，推荐 PhyrexNi（被引 15 次） |
-
-### Phase 5 — 个性
-| # | 模块 | 产出 |
-|---|------|------|
-| #13 | 持仓叠加 | 文字/CSV/截图三种输入 → 多模态 LLM 持仓分析 |
-| #6 | 完整控制台 | 三标签页：抓取仪表盘 + 分析流水线 + 信号与洞察 |
+| 标签页 | 卡片 |
+|--------|------|
+| **抓取仪表盘** | 系统状态、实时API采集、手动拉取、Telegram通知、准确率、API状态 |
+| **推文分析** | 流水线执行、资产代码库、脚本工具箱 |
+| **分析师画像** | 画像生成（时间窗口+日历）、画像浏览（点击展开） |
+| **信号与洞察** | 角色代入选股、持股顾问、共识TOP5、板块轮动、加密货币信号、异常检测、情绪时间线、信源推荐 |
 
 ## 流水线架构
 
 ```
-爬虫(DB) → 过滤(filter) → 深度分析(analyze) → 清洗校准(clean)
+API采集(DB) → 过滤(filter) → 深度分析(analyze) → 清洗校准(clean)
     │                           │
-    │                    ┌───────┼───────┬───────┬──────┐
-    ▼                    ▼       ▼       ▼       ▼      ▼
-实时触发(#3)        信号(#1)  联动(#4) 轮动(#8) 时间线(#9) 异常(#10)
-    │                    │       │       │       │      │
-    └────────────────────┴───┬───┴───────┴───────┴──────┘
-                             ▼
-                    画像(portrait) → 角色代入(#7) → 选股方案
-                             │
-                    持仓叠加(#13) → 多模态 LLM → Telegram(#5)
+    └───────────────┬───────────┼───────┬───────┬──────┐
+                    ▼           ▼       ▼       ▼      ▼
+               信号量化(#1)  联动(#4) 轮动(#8) 时间线(#9) 异常(#10)
+                    │           │       │       │      │
+                    └───────┬───┴───────┴───────┴──────┘
+                            ▼
+                   画像(portrait) → 角色代入(#7)
+                            │
+                   持仓顾问(#13) → Telegram(#5) → 实时推送
 ```
-
-## 控制台功能
-
-- **📊 抓取仪表盘**：实时监控 daemon（启停 + 今日任务计数）、Telegram 配置、准确率面板
-- **⚙️ 分析流水线**：任务队列、过滤/分析/清洗/画像状态、日志
-- **📡 信号与洞察**：角色代入选股（行业下拉 + 实时价格）、持仓顾问（多模态）、共识 TOP10、板块轮动、异常检测、信源推荐
 
 ## 项目结构
 
 ```
 src/
-├── crawler/         # 浏览器抓取、媒体下载
-├── interfaces/      # FastAPI (web_api)、Streamlit (web_ui)
-├── pipeline/        # 任务执行器 (task_executor)、画像 prompt
-├── storage/         # SQLite ORM
-├── ai/              # LLM 客户端
-└── utils/           # 日志、环境变量
-scripts/             # 13 模块脚本 + 工具脚本
+├── cards/            # 20 张卡片模块（一文件一功能）
+├── interfaces/       # FastAPI Web API + Telegram Bot
+├── crawler/          # twitterapi.io 数据抓取 + 浏览器备灾
+├── pipeline/         # 任务执行器（filter/analyze/clean/portrait）
+├── storage/          # SQLite ORM 模型
+├── ai/               # LLM 客户端 + ChatEngine + RAG
+├── vectorization/    # Chroma 向量存储 + 检索
+├── utils/            # 环境变量 + 日志
+└── config.py         # 统一配置单例
+
+scripts/              # 13 个分析脚本
 data/
-├── pipeline/        # analyzed_cleaned、portrait
-├── accuracy/        # 准确率统计
-├── consensus/       # 多信号联动
-├── rotation/        # 板块轮动
-├── timeline/        # 情绪时间线
-├── anomaly/         # 异常检测
-├── network/         # 关联网络
-├── sector_map.json  # 145 只美股行业分类
-├── fundamental_cache.json  # 基本面快照
-├── stock_alias.csv  # 股票别名映射
-└── telegram_config.json    # Telegram 配置（需手动填入 token）
+├── pipeline/         # 分析结果 + 画像
+├── accuracy/consensus/rotation/timeline/anomaly/network/
+├── users.json        # 监控用户列表
+├── stock_alias.csv   # 股票代码映射
+└── sector_map.json   # 行业分类
+
+legacy/               # 已废弃的旧代码归档
+templates/cards/      # Jinja2 卡片模板
 ```
 
 ## 验收指标
 
-| 指标 | 目标 | 实际 |
-|------|------|------|
-| 信号覆盖 | ≥ 80% | 95% (1076/1136) |
-| 准确率样本 | ≥ 30 条 | TJ 41, deba 82 |
-| 异常 FPR | < 10% | 5.8%/8.7% |
-| 信号范围 | 0-100 | 0-96 |
-| PE 覆盖 | ≥ 50 只 | 104 只 |
+| 指标 | 状态 |
+|------|------|
+| 信号覆盖 | 95% (1076/1136) |
+| 准确率样本 | TJ 41, deba 82 |
+| 异常 FPR | 5.8%/8.7% |
+| PE 覆盖 | 104 只美股 |
+| 卡片数量 | 20 张 |
+| 代码质量 | 64/72 审计项已修复 |
 
 ## License
 

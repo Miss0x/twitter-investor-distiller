@@ -84,7 +84,7 @@ def init_database():
     try:
         user_count = session.query(User).count()
         if user_count == 0:
-            logger.info("数据库为空，可以通过 config/users.yaml 添加监控用户")
+            logger.info("数据库为空，可通过 data/users.json 添加监控用户")
     finally:
         session.close()
 
