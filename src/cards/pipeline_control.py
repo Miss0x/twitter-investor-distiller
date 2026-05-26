@@ -1,7 +1,6 @@
-"""API 采集状态 + 推文分析"""
+"""API 采集状态"""
 import json
 from pathlib import Path
-from collections import Counter
 from src.cards.base import Card
 from src.cards import register
 
@@ -68,43 +67,3 @@ class ApiStatusCard(Card):
 </div>
 <span id="um_status" class="text-secondary" style="font-size:10px"></span>
 <div class="text-secondary mt-sm" style="font-size:11px">主路径: twitterapi.io | 备灾: 浏览器爬虫</div>'''
-
-
-@register
-class PipelineCard(Card):
-    name = "pipeline"
-    tab = "pipeline"
-    endpoint = "/api/pipeline_tasks"
-    refresh = 10
-
-    def get_data(self, **params) -> dict:
-        try:
-            from src.storage.database import db
-            from src.storage.models import PipelineTask
-            db.init_db()
-            s = db.get_session()
-            tasks = s.query(PipelineTask).order_by(PipelineTask.id.desc()).limit(50).all()
-            task_list = [{"id": t.id, "task_type": t.task_type, "status": t.status,
-                          "created_at": str(t.created_at)[:16] if t.created_at else ""} for t in tasks]
-            s.close()
-            return {"task_list": task_list, "total": len(task_list), "page": "pipeline"}
-        except Exception:
-            return {"task_list": [], "total": 0, "page": "pipeline"}
-
-    def _render_html(self, data: dict) -> str:
-        tasks = data.get("task_list", [])
-        total = data.get("total", 0)
-        if not tasks:
-            return '<div class="card-title">推文分析</div><div class="text-secondary">暂无待处理任务。启动实时 API 采集后会自动生成。</div>'
-        type_labels = {"filter":"过滤筛选","analyze":"推文分析","fetch_price":"股价拉取","fetch_crypto":"加密货币","portrait":"画像生成","clean":"数据清洗"}
-        status_labels = {"pending":"待处理","running":"执行中","done":"已完成","failed":"失败","skipped":"已跳过"}
-        stats = Counter(type_labels.get(t.get("task_type", ""), t.get("task_type", "?")) for t in tasks)
-        stat_html = " ".join(f'<span class="tag tag-ok">{k}: {v}</span>' for k, v in stats.most_common(4))
-        rows = "".join(
-            f'<tr><td><span style="font-weight:500">#{t.get("id","?")}</span></td>'
-            f'<td>{type_labels.get(t.get("task_type",""), t.get("task_type","?"))}</td>'
-            f'<td><span class="tag {"tag-warn" if t.get("status")=="pending" else "tag-ok"}">{status_labels.get(t.get("status",""), t.get("status","?"))}</span></td>'
-            f'<td style="font-size:11px">{t.get("created_at","")}</td></tr>'
-            for t in tasks[:15]
-        )
-        return f'<div class="card-title">推文分析</div><div class="mb-sm">{stat_html} <span class="text-secondary" style="font-size:11px">共 {total} 个</span></div><table class="data"><tr><th>ID</th><th>类型</th><th>状态</th><th>时间</th></tr>{rows}</table>'
