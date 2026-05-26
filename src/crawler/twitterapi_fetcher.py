@@ -6,7 +6,6 @@
 from __future__ import annotations
 
 import json
-import os
 import time
 import requests
 from datetime import datetime
@@ -15,24 +14,16 @@ from typing import Any
 
 from src.storage.database import db
 from src.storage.models import Tweet, User
+from src.config import config
 
 API_BASE = "https://api.twitterapi.io"
 
-_HEADERS = None
 
-
-def _get_headers():
-    global _HEADERS
-    if _HEADERS is None:
-        key = os.getenv("TWITTERAPI_KEY", "")
-        if not key:
-            raise RuntimeError("TWITTERAPI_KEY 环境变量未设置")
-        _HEADERS = {"X-API-Key": key}
-    return _HEADERS
-
-
-HEADERS = property(lambda self: _get_headers())  # 兼容旧引用
-# 实际使用 _get_headers() 懒加载
+def _headers():
+    key = config.twitterapi_key
+    if not key:
+        raise RuntimeError("TWITTERAPI_KEY 未在 .env 中设置")
+    return {"X-API-Key": key}
 
 
 class TwitterAPIFetcher:
@@ -42,12 +33,11 @@ class TwitterAPIFetcher:
         db.init_db()
 
     def _get(self, endpoint: str, params: dict = None) -> dict:
-        r = requests.get(f"{API_BASE}{endpoint}", headers=_get_headers(), params=params, timeout=15)
+        r = requests.get(f"{API_BASE}{endpoint}", headers=_headers(), params=params, timeout=15)
         r.raise_for_status()
         return r.json()
 
     def fetch_user_info(self, username: str) -> dict:
-        """获取用户资料并写入 DB。"""
         data = self._get("/twitter/user/info", {"userName": username})
         user_data = data.get("data", {})
         if not user_data:
@@ -86,7 +76,6 @@ class TwitterAPIFetcher:
             session.close()
 
     def get_last_tweet_ts(self, username: str) -> int:
-        """获取某用户最新一条推文的 UNIX 时间戳，用于增量拉取。"""
         session = db.get_session()
         try:
             last = session.query(Tweet).filter(
@@ -101,7 +90,6 @@ class TwitterAPIFetcher:
             session.close()
 
     def get_user_tweet_count(self, username: str) -> int:
-        """获取某用户在 DB 中的推文数。"""
         session = db.get_session()
         try:
             return session.query(Tweet).join(User).filter(User.username == username).count()
@@ -112,7 +100,6 @@ class TwitterAPIFetcher:
 
     def fetch_tweets(self, username: str, max_pages: int = 50, cursor: str = "",
                      since_ts: int = 0, until_ts: int = 0) -> dict:
-        """拉取推文列表（带翻页+时间范围），写入 DB。返回统计。"""
         total_new = 0
         pages = 0
 
@@ -147,69 +134,65 @@ class TwitterAPIFetcher:
         return {"ok": True, "pages": pages, "total_new": total_new, "cursor": cursor}
 
     def _save_tweets(self, username: str, api_tweets: list[dict]) -> int:
-        """将 API 推文写入 DB，去重。返回新入库数。"""
         session = db.get_session()
         saved = 0
+        try:
+            user = session.query(User).filter(User.username == username).first()
+            if not user:
+                user = User(username=username, display_name=username)
+                session.add(user)
+                session.flush()
 
-        # 确保用户存在
-        user = session.query(User).filter(User.username == username).first()
-        if not user:
-            user = User(username=username, display_name=username)
-            session.add(user)
-            session.flush()
+            for t in api_tweets:
+                tw_id = t.get("id")
+                if not tw_id:
+                    continue
+                if session.query(Tweet).filter(Tweet.tweet_id == tw_id).first():
+                    continue
 
-        for t in api_tweets:
-            tw_id = t.get("id")
-            if not tw_id:
-                continue
-            # 去重
-            existing = session.query(Tweet).filter(Tweet.tweet_id == tw_id).first()
-            if existing:
-                continue
+                qt = t.get("quoted_tweet")
+                rt = t.get("retweeted_tweet")
+                created = _parse_twitter_time(t.get("createdAt", ""))
 
-            # 处理 quoted tweet（引用）
-            qt = t.get("quoted_tweet")
-            # 处理 retweeted tweet（转发）
-            rt = t.get("retweeted_tweet")
+                tw = Tweet(
+                    tweet_id=tw_id,
+                    user_id=user.id,
+                    text=t.get("text", ""),
+                    created_at_twitter=created,
+                    is_reply=t.get("isReply", False),
+                    is_retweet=rt is not None,
+                    is_quote=qt is not None,
+                    replied_to_tweet_id=t.get("inReplyToId"),
+                    replied_to_user=t.get("inReplyToUsername"),
+                    quoted_tweet_id=qt.get("id") if qt else None,
+                    quoted_user=qt.get("author", {}).get("userName") if qt else None,
+                    quoted_text=qt.get("text") if qt else None,
+                    like_count=t.get("likeCount", 0),
+                    retweet_count=t.get("retweetCount", 0),
+                    reply_count=t.get("replyCount", 0),
+                    quote_count=t.get("quoteCount", 0),
+                    view_count=t.get("viewCount", 0),
+                    url=t.get("url", ""),
+                    extra_data={
+                        "bookmark_count": t.get("bookmarkCount", 0),
+                        "lang": t.get("lang", ""),
+                        "source": t.get("source", ""),
+                        "conversation_id": t.get("conversationId"),
+                    },
+                )
+                session.add(tw)
+                saved += 1
 
-            created = _parse_twitter_time(t.get("createdAt", ""))
-
-            tw = Tweet(
-                tweet_id=tw_id,
-                user_id=user.id,
-                text=t.get("text", ""),
-                created_at_twitter=created,
-                is_reply=t.get("isReply", False),
-                is_retweet=rt is not None,
-                is_quote=qt is not None,
-                replied_to_tweet_id=t.get("inReplyToId"),
-                replied_to_user=t.get("inReplyToUsername"),
-                quoted_tweet_id=qt.get("id") if qt else None,
-                quoted_user=qt.get("author", {}).get("userName") if qt else None,
-                quoted_text=qt.get("text") if qt else None,
-                like_count=t.get("likeCount", 0),
-                retweet_count=t.get("retweetCount", 0),
-                reply_count=t.get("replyCount", 0),
-                quote_count=t.get("quoteCount", 0),
-                view_count=t.get("viewCount", 0),
-                url=t.get("url", ""),
-                extra_data={
-                    "bookmark_count": t.get("bookmarkCount", 0),
-                    "lang": t.get("lang", ""),
-                    "source": t.get("source", ""),
-                    "conversation_id": t.get("conversationId"),
-                },
-            )
-            session.add(tw)
-            saved += 1
-
-        session.commit()
-        session.close()
-        return saved
+            session.commit()
+            return saved
+        except Exception:
+            session.rollback()
+            raise
+        finally:
+            session.close()
 
 
 def _parse_twitter_time(s: str) -> datetime:
-    """解析 'Tue May 26 06:37:31 +0000 2026' → datetime。"""
     if not s:
         return datetime.now()
     try:

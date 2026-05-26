@@ -16,6 +16,27 @@ from src.storage.database import db
 from src.storage.models import CrawlJob, CrawlJobCheckpoint, CrawlJobMode, CrawlJobType
 
 app = FastAPI(title="Twitter 用户蒸馏 AI 助手")
+
+from src.config import config  # noqa: E402
+import time as _time  # noqa: E402
+from fastapi import Request  # noqa: E402
+
+
+# ── 简易中间件：限流 ──
+_rate_buckets: dict[str, list[float]] = {}
+
+
+@app.middleware("http")
+async def rate_limit_middleware(request: Request, call_next):
+    ip = request.client.host if request.client else "unknown"
+    now = _time.time()
+    bucket = _rate_buckets.setdefault(ip, [])
+    bucket[:] = [t for t in bucket if now - t < 60]
+    if len(bucket) >= config.rate_limit_per_minute:
+        from fastapi.responses import JSONResponse
+        return JSONResponse(status_code=429, content={"error": "rate limit exceeded"})
+    bucket.append(now)
+    return await call_next(request)
 job_service = CrawlJobService()
 job_runner = JobRunner(job_service=job_service)
 
@@ -148,7 +169,15 @@ def on_startup() -> None:
 
 @app.get("/health")
 def health() -> dict[str, str]:
-    return {"status": "ok"}
+    checks = {"status": "ok", "db": "ok"}
+    try:
+        db.init_db()
+        s = db.get_session()
+        s.execute("SELECT 1")
+        s.close()
+    except Exception as e:
+        checks["db"] = f"error: {e}"
+    return checks
 
 
 @app.post("/chat", response_model=ChatResponse)
