@@ -552,11 +552,9 @@ async def card_action(name: str, payload: dict = None):
 
 
 
-from src.interfaces.card_actions import (  # noqa: E402
-    _handle_role_picker, _handle_portfolio_analysis,
-    _handle_fetch_control, _handle_pipeline_action, _handle_script_run,
-    _handle_portrait_generate, _handle_asset_alias, _handle_user_manage,
-)
+from src.interfaces.handlers_insights import _handle_role_picker, _handle_portfolio_analysis
+from src.interfaces.handlers_exec import _handle_fetch_control, _handle_pipeline_action, _handle_script_run
+from src.interfaces.handlers_data import _handle_asset_alias, _handle_portrait_generate, _handle_user_manage
 
 @app.get("/", response_class=HTMLResponse)
 async def serve_dashboard():
