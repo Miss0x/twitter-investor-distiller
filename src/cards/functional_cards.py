@@ -141,9 +141,11 @@ class CryptoCard(Card):
                 ).fetchone()[0]
                 if cnt > 0:
                     mentions[coin] = cnt
-            conn.close()
         except Exception:
             pass
+        finally:
+            try: conn.close()
+            except: pass
 
         return {"coins": latest, "mentions": mentions, "total_coins": len(latest)}
 

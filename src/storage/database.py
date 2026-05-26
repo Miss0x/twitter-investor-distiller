@@ -1,4 +1,4 @@
-"""数据库管理模块"""
+﻿"""数据库管理模块"""
 import os
 from pathlib import Path
 
@@ -52,7 +52,7 @@ class Database:
     def get_session(self) -> Session:
         """获取数据库会话"""
         if self.SessionLocal is None:
-            self.init_db()
+            raise RuntimeError("数据库未初始化，请先调用 db.init_db()")
         return self.SessionLocal()
 
     def close(self):
@@ -96,3 +96,4 @@ if __name__ == "__main__":
         init_database()
     else:
         print("使用方法: python database.py --init")
+

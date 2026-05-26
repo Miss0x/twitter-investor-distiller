@@ -83,7 +83,8 @@ class TwitterAPIFetcher:
             if last and last.created_at_twitter:
                 return int(last.created_at_twitter.timestamp()) + 1
             return 0
-        except Exception:
+        except Exception as e:
+            __import__('logging').warning(f"get_last_tweet_ts({username}) failed: {e}")
             return 0
         finally:
             session.close()
@@ -92,7 +93,8 @@ class TwitterAPIFetcher:
         session = db.get_session()
         try:
             return session.query(Tweet).join(User).filter(User.username == username).count()
-        except Exception:
+        except Exception as e:
+            __import__('logging').warning(f"get_user_tweet_count({username}) failed: {e}")
             return 0
         finally:
             session.close()
@@ -142,11 +144,18 @@ class TwitterAPIFetcher:
                 session.add(user)
                 session.flush()
 
+            # 批量查询已存在的 tweet_id，避免 N+1
+            api_ids = [t.get("id") for t in api_tweets if t.get("id")]
+            existing_ids = set()
+            for start in range(0, len(api_ids), 500):
+                chunk = api_ids[start:start+500]
+                existing_ids.update(
+                    row[0] for row in session.query(Tweet.tweet_id).filter(Tweet.tweet_id.in_(chunk)).all()
+                )
+
             for t in api_tweets:
                 tw_id = t.get("id")
-                if not tw_id:
-                    continue
-                if session.query(Tweet).filter(Tweet.tweet_id == tw_id).first():
+                if not tw_id or tw_id in existing_ids:
                     continue
 
                 qt = t.get("quoted_tweet")
