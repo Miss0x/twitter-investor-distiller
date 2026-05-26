@@ -124,7 +124,6 @@ async function loadCards(tab) {
   if (hasCache.length === names.length) {
     container.innerHTML = names.map(n => cache[n]).join('');
     reanimateScripts(container);
-    attachButtons();
     return;
   }
 
@@ -190,10 +189,7 @@ async function autoRefresh() {
     PIPELINE_EXECUTE_REFRESHED = false;
     setTimeout(function() { loadTypePE(PE_ACTIVE); }, 50);
   }
-  attachButtons();
 }
-
-function attachButtons() {}
 
 async function toggleDaemon() {
   const btn = document.getElementById('daemon-btn');

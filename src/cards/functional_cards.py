@@ -77,7 +77,7 @@ class AssetAliasCard(Card):
                 for a in pending[:30]
             )
         else:
-            pending_rows = '<tr><td colspan="4" class="text-secondary" style="color:var(--text-success)">全部确认完毕 🎉</td></tr>'
+            pending_rows = '<tr><td colspan="4" class="text-secondary" style="color:var(--text-success)">全部确认完毕</td></tr>'
 
         crypto_str = ", ".join(data.get("known_crypto", []))
         return f'''<div class="card-title">资产代码库</div>
