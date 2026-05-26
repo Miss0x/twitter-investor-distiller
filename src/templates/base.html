@@ -73,17 +73,20 @@
 </div>
 <div class="tabs">
   <button class="tab active" onclick="switchTab('dashboard')">抓取仪表盘</button>
-  <button class="tab" onclick="switchTab('pipeline')">分析流水线</button>
+  <button class="tab" onclick="switchTab('pipeline')">推文分析</button>
+  <button class="tab" onclick="switchTab('portraits')">分析师画像</button>
   <button class="tab" onclick="switchTab('insights')">信号与洞察</button>
 </div>
 <div id="tab-dashboard" class="tab-content active"></div>
 <div id="tab-pipeline" class="tab-content"></div>
+<div id="tab-portraits" class="tab-content"></div>
 <div id="tab-insights" class="tab-content"></div>
 </div>
 <script>
 const CARD_ORDER = {
   dashboard: ["system_status","daemon","fetch_control","telegram","accuracy","api_status"],
-  pipeline: ["pipeline","portrait"],
+  pipeline: ["pipeline"],
+  portraits: ["portrait"],
   insights: ["role_picker","portfolio","consensus","rotation","anomaly","network"]
 };
 
@@ -92,7 +95,7 @@ const REFRESH_MAP = {};   // 刷新间隔
 const LAST_FETCH = {};    // 上次拉取时间戳
 
 function switchTab(tab) {
-  const labels = {dashboard:'抓取', pipeline:'分析', insights:'洞察'};
+  const labels = {dashboard:'抓取', pipeline:'推文分析', portraits:'画像', insights:'洞察'};
   document.querySelectorAll('.tab').forEach(t => {
     t.classList.toggle('active', t.textContent.includes(labels[tab]));
   });

@@ -1,11 +1,9 @@
-"""API 采集状态 + 流水线控制"""
+"""API 采集状态 + 推文分析"""
 import json
 from pathlib import Path
-import requests
+from collections import Counter
 from src.cards.base import Card
 from src.cards import register
-
-API_BASE = "http://localhost:8000"
 
 
 @register
@@ -39,7 +37,7 @@ class ApiStatusCard(Card):
 <div class="grid grid-3 mb-sm">
   <div class="metric"><div class="metric-label">累计拉取</div><div class="metric-value">{total}</div><div class="metric-sub">条推文</div></div>
   <div class="metric"><div class="metric-label">监控用户</div><div class="metric-value">{len(users)}</div><div class="metric-sub">轮转采集</div></div>
-  <div class="metric"><div class="metric-label">上次更新</div><div class="metric-value" style="font-size:13px">{updated}</div><div class="metric-sub">60s 间隔</div></div>
+  <div class="metric"><div class="metric-label">上次更新</div><div class="metric-value" style="font-size:13px">{updated}</div><div class="metric-sub">120s 间隔</div></div>
 </div>
 <table class="data"><tr><th>用户</th><th>进度游标</th><th>来源</th></tr>{rows}</table>
 <div class="text-secondary mt-sm" style="font-size:11px">主路径: twitterapi.io | 备灾: 浏览器爬虫</div>'''
@@ -54,20 +52,30 @@ class PipelineCard(Card):
 
     def get_data(self, **params) -> dict:
         try:
-            r = requests.get(f"{API_BASE}/pipeline/tasks", timeout=5)
-            tasks = r.json()
+            from src.storage.database import db
+            from src.storage.models import PipelineTask
+            db.init_db()
+            s = db.get_session()
+            tasks = s.query(PipelineTask).order_by(PipelineTask.id.desc()).limit(50).all()
+            task_list = [{"id": t.id, "task_type": t.task_type, "status": t.status,
+                          "created_at": str(t.created_at)[:16] if t.created_at else ""} for t in tasks]
+            s.close()
+            return {"task_list": task_list, "total": len(task_list), "page": "pipeline"}
         except Exception:
-            tasks = []
-        return {"tasks": tasks, "page": "pipeline"}
+            return {"task_list": [], "total": 0, "page": "pipeline"}
 
     def _render_html(self, data: dict) -> str:
-        tasks = data.get("tasks", [])
+        tasks = data.get("task_list", [])
+        total = data.get("total", 0)
         if not tasks:
-            return '<div class="card-title">分析流水线</div><div class="text-secondary">无任务</div>'
+            return '<div class="card-title">推文分析</div><div class="text-secondary">暂无待处理任务。启动实时 API 采集后会自动生成。</div>'
+        stats = Counter(t.get("task_type", "?") for t in tasks)
+        stat_html = " ".join(f'<span class="tag tag-ok">{k}: {v}</span>' for k, v in stats.most_common(4))
         rows = "".join(
-            f'<tr><td>#{t.get("id","?")}</td>'
+            f'<tr><td><span style="font-weight:500">#{t.get("id","?")}</span></td>'
             f'<td>{t.get("task_type","?")}</td>'
-            f'<td>{t.get("status","?")}</td></tr>'
-            for t in tasks[:20]
+            f'<td><span class="tag {"tag-warn" if t.get("status")=="pending" else "tag-ok"}">{t.get("status","?")}</span></td>'
+            f'<td style="font-size:11px">{t.get("created_at","")}</td></tr>'
+            for t in tasks[:15]
         )
-        return f'<div class="card-title">分析流水线</div><table class="data"><tr><th>ID</th><th>类型</th><th>状态</th></tr>{rows}</table>'
+        return f'<div class="card-title">推文分析</div><div class="mb-sm">{stat_html} <span class="text-secondary" style="font-size:11px">共 {total} 个</span></div><table class="data"><tr><th>ID</th><th>类型</th><th>状态</th><th>时间</th></tr>{rows}</table>'

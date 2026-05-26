@@ -73,7 +73,7 @@ async function fetchManually(){{
 @register
 class PortraitCard(Card):
     name = "portrait"
-    tab = "pipeline"
+    tab = "portraits"
     endpoint = "/api/portrait"
     refresh = 300
 
