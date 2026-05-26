@@ -8,33 +8,6 @@ from sqlalchemy.orm import declarative_base, relationship
 Base = declarative_base()
 
 
-class CrawlJobType(StrEnum):
-    """抓取任务类型。"""
-
-    BACKFILL = "backfill"
-    INCREMENTAL = "incremental"
-
-
-class CrawlJobStatus(StrEnum):
-    """抓取任务状态。"""
-
-    PENDING = "pending"
-    RUNNING = "running"
-    PAUSED = "paused"
-    STOPPING = "stopping"
-    STOPPED = "stopped"
-    COMPLETED = "completed"
-    FAILED = "failed"
-
-
-class CrawlJobMode(StrEnum):
-    """抓取任务范围。"""
-
-    RECENT_3M = "recent_3m"
-    RECENT_1Y = "recent_1y"
-    FULL_HISTORY = "full_history"
-
-
 class User(Base):
     """Twitter 用户模型"""
 
@@ -161,57 +134,6 @@ class CrawlLog(Base):
 
     def __repr__(self):
         return f"<CrawlLog(user_id={self.user_id}, status='{self.status}', tweets={self.tweets_collected})>"
-
-
-class CrawlJob(Base):
-    """[WIP] 长周期抓取任务模型 — 预留, 当前未使用。"""
-
-    __tablename__ = "crawl_jobs"
-
-    id = Column(Integer, primary_key=True)
-    job_type = Column(String(20), nullable=False, default=CrawlJobType.BACKFILL.value)
-    status = Column(String(20), nullable=False, default=CrawlJobStatus.PENDING.value, index=True)
-    mode = Column(String(20), nullable=False, default=CrawlJobMode.RECENT_3M.value)
-    target_usernames = Column(JSON, nullable=False, default=list)
-    current_username = Column(String(100))
-    progress_percent = Column(Float, default=0.0)
-    tweets_collected_total = Column(Integer, default=0)
-    users_completed = Column(Integer, default=0)
-    users_total = Column(Integer, default=0)
-    last_error = Column(Text)
-    started_at = Column(DateTime)
-    finished_at = Column(DateTime)
-    created_at = Column(DateTime, default=datetime.now)
-    updated_at = Column(DateTime, default=datetime.now, onupdate=datetime.now)
-
-    checkpoints = relationship("CrawlJobCheckpoint", back_populates="job", cascade="all, delete-orphan")
-
-    def __repr__(self):
-        return f"<CrawlJob(id={self.id}, status='{self.status}', mode='{self.mode}')>"
-
-
-class CrawlJobCheckpoint(Base):
-    """抓取任务断点模型。"""
-
-    __tablename__ = "crawl_job_checkpoints"
-
-    id = Column(Integer, primary_key=True)
-    job_id = Column(Integer, ForeignKey("crawl_jobs.id"), nullable=False, index=True)
-    username = Column(String(100), nullable=False, index=True)
-    last_seen_tweet_id = Column(String(50))
-    last_seen_tweet_time = Column(DateTime)
-    scroll_iterations = Column(Integer, default=0)
-    consecutive_no_new_items = Column(Integer, default=0)
-    tweets_collected = Column(Integer, default=0)
-    page_cursor = Column(String(255))
-    stats_json = Column(JSON)
-    created_at = Column(DateTime, default=datetime.now)
-    updated_at = Column(DateTime, default=datetime.now, onupdate=datetime.now)
-
-    job = relationship("CrawlJob", back_populates="checkpoints")
-
-    def __repr__(self):
-        return f"<CrawlJobCheckpoint(job_id={self.job_id}, username='{self.username}')>"
 
 
 class VectorMetadata(Base):

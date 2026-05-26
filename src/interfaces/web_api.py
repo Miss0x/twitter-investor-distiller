@@ -11,10 +11,8 @@ from pydantic import BaseModel, Field
 from sqlalchemy import text
 
 from src.ai.chat_engine import ChatEngine
-from src.crawler.job_runner import JobRunner
-from src.interfaces.job_service import CrawlJobService
 from src.storage.database import db
-from src.storage.models import CrawlJob, CrawlJobCheckpoint, CrawlJobMode, CrawlJobType
+from src.storage.models import PipelineTask
 
 # 单例 ChatEngine，避免每次请求重建
 _chat_engine: ChatEngine | None = None
@@ -51,8 +49,6 @@ async def rate_limit_middleware(request: Request, call_next):
             return JSONResponse(status_code=429, content={"error": "rate limit exceeded"})
         bucket.append(now)
     return await call_next(request)
-job_service = CrawlJobService()
-job_runner = JobRunner(job_service=job_service)
 
 
 class ChatRequest(BaseModel):
@@ -64,55 +60,6 @@ class ChatResponse(BaseModel):
     answer: str
 
 
-class CreateJobRequest(BaseModel):
-    usernames: list[str] = Field(..., min_length=1)
-    mode: Literal["recent_3m", "recent_1y", "full_history"] = CrawlJobMode.RECENT_3M.value
-    job_type: Literal["backfill", "incremental"] = CrawlJobType.BACKFILL.value
-
-
-class JobResponse(BaseModel):
-    id: int
-    job_type: str
-    status: str
-    mode: str
-    target_usernames: list[str]
-    current_username: str | None
-    progress_percent: float
-    tweets_collected_total: int
-    users_completed: int
-    users_total: int
-    last_error: str | None
-    started_at: str | None
-    finished_at: str | None
-    created_at: str | None
-    updated_at: str | None
-
-
-class CheckpointResponse(BaseModel):
-    id: int
-    job_id: int
-    username: str
-    last_seen_tweet_id: str | None
-    last_seen_tweet_time: str | None
-    scroll_iterations: int
-    consecutive_no_new_items: int
-    tweets_collected: int
-    page_cursor: str | None
-    stats_json: dict | None
-    created_at: str | None
-    updated_at: str | None
-
-
-class JobActionResponse(BaseModel):
-    message: str
-    job: JobResponse
-
-
-class JobStatusResponse(BaseModel):
-    job: JobResponse
-    is_running_in_process: bool
-    active_job_id: int | None
-
 
 class ActiveJobResponse(BaseModel):
     active_job_id: int | None
@@ -123,191 +70,6 @@ def serialize_datetime(value: datetime | None) -> str | None:
     return value.isoformat() if value else None
 
 
-def serialize_job(job: CrawlJob) -> JobResponse:
-    return JobResponse(
-        id=job.id,
-        job_type=job.job_type,
-        status=job.status,
-        mode=job.mode,
-        target_usernames=job.target_usernames or [],
-        current_username=job.current_username,
-        progress_percent=job.progress_percent or 0.0,
-        tweets_collected_total=job.tweets_collected_total or 0,
-        users_completed=job.users_completed or 0,
-        users_total=job.users_total or 0,
-        last_error=job.last_error,
-        started_at=serialize_datetime(job.started_at),
-        finished_at=serialize_datetime(job.finished_at),
-        created_at=serialize_datetime(job.created_at),
-        updated_at=serialize_datetime(job.updated_at),
-    )
-
-
-def serialize_checkpoint(checkpoint: CrawlJobCheckpoint) -> CheckpointResponse:
-    return CheckpointResponse(
-        id=checkpoint.id,
-        job_id=checkpoint.job_id,
-        username=checkpoint.username,
-        last_seen_tweet_id=checkpoint.last_seen_tweet_id,
-        last_seen_tweet_time=serialize_datetime(checkpoint.last_seen_tweet_time),
-        scroll_iterations=checkpoint.scroll_iterations or 0,
-        consecutive_no_new_items=checkpoint.consecutive_no_new_items or 0,
-        tweets_collected=checkpoint.tweets_collected or 0,
-        page_cursor=checkpoint.page_cursor,
-        stats_json=checkpoint.stats_json,
-        created_at=serialize_datetime(checkpoint.created_at),
-        updated_at=serialize_datetime(checkpoint.updated_at),
-    )
-
-
-def get_job_or_404(job_id: int) -> CrawlJob:
-    job = job_service.get_job(job_id)
-    if job is None:
-        raise HTTPException(status_code=404, detail=f"任务不存在: {job_id}")
-    return job
-
-
-def map_value_error(exc: ValueError) -> HTTPException:
-    message = str(exc)
-    if "不存在" in message:
-        return HTTPException(status_code=404, detail=message)
-    if "已有活动任务" in message or "已有任务正在执行" in message:
-        return HTTPException(status_code=409, detail=message)
-    return HTTPException(status_code=400, detail=message)
-
-
-@app.on_event("startup")
-def on_startup() -> None:
-    db.init_db()
-
-
-@app.get("/health")
-def health() -> dict[str, str]:
-    checks = {"status": "ok", "db": "ok"}
-    try:
-        s = db.get_session()
-        s.execute(text("SELECT 1"))
-        s.close()
-    except Exception as e:
-        checks["db"] = f"error: {e}"
-    return checks
-
-
-@app.post("/chat", response_model=ChatResponse)
-def chat(request: ChatRequest, req: Request = None) -> ChatResponse:
-    # 简易 Token 认证
-    if config.dashboard_token:
-        token = (req.headers.get("authorization") or "").replace("Bearer ", "")
-        if token != config.dashboard_token:
-            raise HTTPException(status_code=401, detail="unauthorized")
-    engine = _get_chat_engine()
-    return ChatResponse(answer=engine.answer(request.question, top_k=request.top_k))
-
-
-@app.get("/jobs", response_model=list[JobResponse])
-def list_jobs() -> list[JobResponse]:
-    return [serialize_job(job) for job in job_service.list_jobs()]
-
-
-@app.get("/jobs/active", response_model=ActiveJobResponse)
-def get_active_job() -> ActiveJobResponse:
-    job = job_service.get_active_job()
-    return ActiveJobResponse(
-        active_job_id=job.id if job else None,
-        job=serialize_job(job) if job else None,
-    )
-
-
-@app.get("/jobs/{job_id}", response_model=JobResponse)
-def get_job(job_id: int) -> JobResponse:
-    return serialize_job(get_job_or_404(job_id))
-
-
-@app.get("/jobs/{job_id}/status", response_model=JobStatusResponse)
-def get_job_status(job_id: int) -> JobStatusResponse:
-    job = get_job_or_404(job_id)
-    return JobStatusResponse(
-        job=serialize_job(job),
-        is_running_in_process=job_runner.is_job_running(job_id),
-        active_job_id=job_runner.get_active_job_id(),
-    )
-
-
-@app.get("/jobs/{job_id}/checkpoints", response_model=list[CheckpointResponse])
-def list_job_checkpoints(job_id: int) -> list[CheckpointResponse]:
-    get_job_or_404(job_id)
-    checkpoints = job_service.list_checkpoints(job_id)
-    return [serialize_checkpoint(item) for item in checkpoints]
-
-
-@app.post("/jobs", response_model=JobActionResponse)
-def create_job(request: CreateJobRequest) -> JobActionResponse:
-    try:
-        job = job_service.create_job(
-            request.usernames,
-            mode=CrawlJobMode(request.mode),
-            job_type=CrawlJobType(request.job_type),
-        )
-    except ValueError as exc:
-        raise map_value_error(exc) from exc
-    return JobActionResponse(message="任务创建成功", job=serialize_job(job))
-
-
-@app.post("/jobs/{job_id}/start", response_model=JobActionResponse)
-def start_job(job_id: int) -> JobActionResponse:
-    get_job_or_404(job_id)
-    try:
-        job_runner.start_job(job_id)
-    except ValueError as exc:
-        raise map_value_error(exc) from exc
-    return JobActionResponse(message="任务已启动", job=serialize_job(get_job_or_404(job_id)))
-
-
-@app.post("/jobs/{job_id}/resume", response_model=JobActionResponse)
-def resume_job(job_id: int) -> JobActionResponse:
-    get_job_or_404(job_id)
-    try:
-        job_runner.resume_job(job_id)
-    except ValueError as exc:
-        raise map_value_error(exc) from exc
-    return JobActionResponse(message="任务已恢复", job=serialize_job(get_job_or_404(job_id)))
-
-
-@app.post("/jobs/{job_id}/pause", response_model=JobActionResponse)
-def pause_job(job_id: int) -> JobActionResponse:
-    get_job_or_404(job_id)
-    try:
-        job = job_service.request_pause(job_id)
-    except ValueError as exc:
-        raise map_value_error(exc) from exc
-    return JobActionResponse(message="任务已请求暂停", job=serialize_job(job))
-
-
-@app.post("/jobs/{job_id}/stop", response_model=JobActionResponse)
-def stop_job(job_id: int) -> JobActionResponse:
-    get_job_or_404(job_id)
-    try:
-        job = job_service.request_stop(job_id)
-    except ValueError as exc:
-        raise map_value_error(exc) from exc
-    return JobActionResponse(message="任务已请求停止", job=serialize_job(job))
-
-
-@app.post("/jobs/{job_id}/restart", response_model=JobActionResponse)
-def restart_job(job_id: int) -> JobActionResponse:
-    """将已结束的任务重置为 pending 状态。"""
-    get_job_or_404(job_id)
-    try:
-        job = job_service.restart_job(job_id)
-    except ValueError as exc:
-        raise map_value_error(exc) from exc
-    return JobActionResponse(message="任务已重置为待启动", job=serialize_job(job))
-
-
-# ── 流水线任务队列 ──
-
-from src.storage.models import PipelineTask
-from src.pipeline.task_executor import execute_tasks, get_progress, is_running
 import threading
 
 
@@ -723,8 +485,7 @@ async def card_action(name: str, payload: dict = None):
     """处理卡片交互动作（如 daemon toggle）。"""
     if name == "daemon" and payload and payload.get("action") == "toggle":
         try:
-            import subprocess, sys, textwrap
-            from pathlib import Path
+            import subprocess, sys
             from src.cards import get_card
             card = get_card("daemon")
             proc = getattr(card, "_proc", None)
@@ -732,63 +493,9 @@ async def card_action(name: str, payload: dict = None):
                 proc.terminate()
                 card._proc = None
             else:
-                inline = textwrap.dedent(f"""
-                import sys, json, time
-                from pathlib import Path
-                sys.path.insert(0, r'{Path.cwd()}')
-                from src.crawler.twitterapi_fetcher import TwitterAPIFetcher
-                from src.storage.database import db
-                from src.storage.models import PipelineTask
-                db.init_db()
-                
-                USERS = json.loads(Path('data/users.json').read_text(encoding='utf-8')) if Path('data/users.json').exists() else ['TJ_Research', 'dearbaibabybus']
-                INTERVAL = 120
-                fetcher = TwitterAPIFetcher()
-                state = Path('data/auto_scheduler_state.json')
-                st = {{}}
-                if state.exists():
-                    st = json.loads(state.read_text())
-                idx = st.get('user_idx', 0)
-                today = time.strftime('%Y-%m-%d')
-                
-                while True:
-                    try:
-                        USERS = json.loads(Path('data/users.json').read_text(encoding='utf-8')) if Path('data/users.json').exists() else USERS
-                        username = USERS[idx % len(USERS)]
-                        st['user_idx'] = (idx + 1) % len(USERS)
-                        st['updated'] = time.strftime('%Y-%m-%d %H:%M:%S')
-                        
-                        # 增量：从 DB 最后一条推文的时间之后拉取
-                        last_ts = fetcher.get_last_tweet_ts(username)
-                        db_cnt = fetcher.get_user_tweet_count(username)
-                        st[f'db_count_{{username}}'] = db_cnt
-                        
-                        res = fetcher.fetch_tweets(username, max_pages=1, since_ts=last_ts)
-                        new_cnt = res.get('total_new', 0)
-                        if res.get('ok') and new_cnt > 0:
-                            st['total_fetched'] = st.get('total_fetched', 0) + new_cnt
-                            # 自动触发流水线: filter → analyze
-                            session = db.get_session()
-                            for i in range(new_cnt):
-                                t = PipelineTask(task_type='filter', status='pending', payload=json.dumps({{'action': 'filter_latest', 'user': username}}))
-                                session.add(t)
-                            session.commit()
-                            session.close()
-                            print(f"[DAEMON] {{username}}: +{{new_cnt}} tweets, pipeline triggered")
-                        elif new_cnt == 0 and res.get('ok'):
-                            print(f"[DAEMON] {{username}}: 无新推文 (last_ts={{last_ts}}, db={{db_cnt}})")
-                        else:
-                            print(f"[DAEMON] {{username}}: {{res.get('error','')}}")
-                        
-                        state.write_text(json.dumps(st, ensure_ascii=False))
-                        idx += 1
-                        time.sleep(INTERVAL)
-                        today = time.strftime('%Y-%m-%d')
-                    except Exception as exc:
-                        print('[DAEMON] ' + str(exc))
-                        time.sleep(INTERVAL * 2)
-                """)
-                proc = subprocess.Popen([sys.executable, "-c", inline])
+                proc = subprocess.Popen(
+                    [sys.executable, "scripts/daemon_worker.py"]
+                )
                 card._proc = proc
             _card_cache.pop("daemon", None)
             return {"ok": True}
