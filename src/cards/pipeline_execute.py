@@ -224,7 +224,7 @@ class PortraitGenerateCard(Card):
                 PipelineTask.task_type == "portrait"
             ).order_by(PipelineTask.id.desc()).limit(20).all()
             items = [{"id": t.id, "status": t.status,
-                      "payload": __import__('json').loads(t.payload) if t.payload else {},
+                      "payload": json.loads(t.payload) if t.payload else {},
                       "created_at": str(t.created_at)[:16] if t.created_at else ""}
                      for t in portrait_tasks]
             s.close()

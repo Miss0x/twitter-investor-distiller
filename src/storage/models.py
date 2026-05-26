@@ -2,7 +2,7 @@
 from datetime import datetime
 from enum import StrEnum
 
-from sqlalchemy import Boolean, Column, DateTime, Float, ForeignKey, Integer, JSON, String, Text
+from sqlalchemy import Boolean, Column, DateTime, Float, ForeignKey, Index, Integer, JSON, String, Text
 from sqlalchemy.orm import declarative_base, relationship
 
 Base = declarative_base()
@@ -104,6 +104,10 @@ class Tweet(Base):
 
     user = relationship("User", back_populates="tweets")
     media = relationship("Media", back_populates="tweet", cascade="all, delete-orphan")
+
+    __table_args__ = (
+        Index("ix_tweets_user_created", "user_id", "created_at_twitter"),
+    )
 
     def __repr__(self):
         return f"<Tweet(tweet_id='{self.tweet_id}', text='{self.text[:50]}...')>"

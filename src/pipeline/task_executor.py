@@ -93,8 +93,7 @@ def execute_tasks(task_ids: list[int]) -> None:
                 t.error_msg = result.get("error")
                 t.updated_at = None
                 session.commit()
-            except Exception as exc:  # 外层安全网：捕获任务执行中的任何未预期错误
-                t.status = "failed"
+            except Exception as exc:
                 t.status = "failed"
                 t.error_msg = str(exc)[:500]
                 session.commit()
