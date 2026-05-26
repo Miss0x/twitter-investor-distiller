@@ -192,3 +192,26 @@ def _handle_script_run(payload: dict) -> dict:
     except Exception as e:
         return {"ok": False, "error": str(e)}
 
+
+def _handle_portrait_generate(payload: dict) -> dict:
+    """生成单用户画像。"""
+    import json as _json
+    from pathlib import Path as _Path
+    from src.storage.database import db
+    from src.storage.models import PipelineTask
+
+    user = payload.get("user", "TJ_Research")
+    try:
+        db.init_db()
+        s = db.get_session()
+        task = PipelineTask(
+            task_type="portrait",
+            status="pending",
+            payload=_json.dumps({"username": user, "action": "generate_portrait"}, ensure_ascii=False),
+        )
+        s.add(task)
+        s.commit()
+        s.close()
+        return {"ok": True, "task_id": task.id}
+    except Exception as e:
+        return {"ok": False, "error": str(e)}

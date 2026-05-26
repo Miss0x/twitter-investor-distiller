@@ -809,6 +809,8 @@ async def card_action(name: str, payload: dict = None):
         return _handle_pipeline_action(payload)
     if name == "script_runner" and payload:
         return _handle_script_run(payload)
+    if name == "portrait_generate" and payload:
+        return _handle_portrait_generate(payload)
     return {"ok": False, "error": "unknown action"}
 
 
@@ -816,6 +818,7 @@ async def card_action(name: str, payload: dict = None):
 from src.interfaces.card_actions import (  # noqa: E402
     _handle_role_picker, _handle_portfolio_analysis,
     _handle_fetch_control, _handle_pipeline_action, _handle_script_run,
+    _handle_portrait_generate,
 )
 
 @app.get("/", response_class=HTMLResponse)
