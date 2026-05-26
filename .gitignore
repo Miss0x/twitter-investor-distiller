@@ -17,6 +17,8 @@ env/
 .env
 .env.local
 config/pipeline.yaml
+data/sessions.jsonl
+data/cookies.json
 
 # 数据 — 保留 DB 和流水线结果，排除媒体和临时
 data/raw/

@@ -24,11 +24,12 @@ def _get_config() -> dict:
 def _get_client() -> OpenAI:
     global _client
     if _client is None:
+        from src.config import config
         cfg = _get_config()
         api_cfg = cfg.get("api", {})
         _client = OpenAI(
-            base_url=api_cfg.get("base_url", ""),
-            api_key=api_cfg.get("api_key", ""),
+            base_url=api_cfg.get("base_url", config.llm_base_url or ""),
+            api_key=config.llm_api_key or api_cfg.get("api_key", ""),
             timeout=api_cfg.get("timeout_seconds", 120),
         )
     return _client
