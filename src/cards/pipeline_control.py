@@ -1,4 +1,6 @@
-"""爬虫任务管理 + 流水线控制"""
+"""API 采集状态 + 流水线控制"""
+import json
+from pathlib import Path
 import requests
 from src.cards.base import Card
 from src.cards import register
@@ -7,32 +9,40 @@ API_BASE = "http://localhost:8000"
 
 
 @register
-class JobManagementCard(Card):
-    name = "job_management"
+class ApiStatusCard(Card):
+    name = "api_status"
     tab = "dashboard"
-    endpoint = "/api/job_management"
-    refresh = 10
+    endpoint = "/api/api_status"
+    refresh = 30
 
     def get_data(self, **params) -> dict:
-        try:
-            r = requests.get(f"{API_BASE}/jobs", timeout=5)
-            jobs = r.json()
-        except Exception:
-            jobs = []
-        return {"jobs": jobs, "selected_id": params.get("selected_id")}
+        state = Path("data/auto_scheduler_state.json")
+        st = json.loads(state.read_text()) if state.exists() else {}
+        return {
+            "users": ["TJ_Research", "dearbaibabybus"],
+            "total_fetched": st.get("total_fetched", 0),
+            "last_updated": st.get("updated", "未开始"),
+            "cursors": {k.replace("cursor_", ""): v[:20] + "..." for k, v in st.items() if k.startswith("cursor_")},
+        }
 
     def _render_html(self, data: dict) -> str:
-        jobs = data.get("jobs", [])
-        if not jobs:
-            return '<div class="card-title">爬虫任务</div><div class="text-secondary">无任务</div>'
+        total = data["total_fetched"]
+        users = data["users"]
+        updated = data["last_updated"]
         rows = "".join(
-            f'<tr><td style="font-weight:500">#{j.get("id","?")}</td>'
-            f'<td>{j.get("username","?")}</td>'
-            f'<td>{j.get("status","?")}</td>'
-            f'<td>{j.get("progress","?")}</td></tr>'
-            for j in jobs[:10]
+            f'<tr><td style="font-weight:500">{u}</td>'
+            f'<td>{data["cursors"].get(u, "首页")}</td>'
+            f'<td><span class="tag tag-ok">twitterapi.io</span></td></tr>'
+            for u in users
         )
-        return f'<div class="card-title">爬虫任务</div><table class="data"><tr><th>ID</th><th>用户</th><th>状态</th><th>进度</th></tr>{rows}</table>'
+        return f'''<div class="card-title">API 采集状态</div>
+<div class="grid grid-3 mb-sm">
+  <div class="metric"><div class="metric-label">累计拉取</div><div class="metric-value">{total}</div><div class="metric-sub">条推文</div></div>
+  <div class="metric"><div class="metric-label">监控用户</div><div class="metric-value">{len(users)}</div><div class="metric-sub">轮转采集</div></div>
+  <div class="metric"><div class="metric-label">上次更新</div><div class="metric-value" style="font-size:13px">{updated}</div><div class="metric-sub">60s 间隔</div></div>
+</div>
+<table class="data"><tr><th>用户</th><th>进度游标</th><th>来源</th></tr>{rows}</table>
+<div class="text-secondary mt-sm" style="font-size:11px">主路径: twitterapi.io | 备灾: 浏览器爬虫</div>'''
 
 
 @register

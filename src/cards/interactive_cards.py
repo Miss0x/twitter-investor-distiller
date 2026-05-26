@@ -27,8 +27,8 @@ class DaemonCard(Card):
         status = "运行中" if data["running"] else "未启动"
         color = "ok" if data["running"] else ""
         return f'''<div class="flex-between">
-  <div><div class="card-title">实时监控</div><div class="flex"><div class="status-dot {color}"></div><span style="font-size:20px;font-weight:500">{status}</span></div></div>
-  <div style="text-align:right"><div class="metric-value">{data["today"]} / {data["budget"]}</div><div class="metric-label">今日任务</div></div>
+  <div><div class="card-title">实时 API 采集</div><div class="flex"><div class="status-dot {color}"></div><span style="font-size:20px;font-weight:500">{status}</span></div><div class="text-secondary" style="font-size:11px">twitterapi.io · 60s 轮转 · 备灾浏览器爬虫</div></div>
+  <div style="text-align:right"><div class="metric-value">{data["today"]} / {data["budget"]}</div><div class="metric-label">今日拉取</div></div>
   <button class="btn {'btn-danger' if data['running'] else 'btn-primary'}" id="daemon-btn" onclick="toggleDaemon()">{'停止' if data['running'] else '启动'}</button>
 </div>'''
 
