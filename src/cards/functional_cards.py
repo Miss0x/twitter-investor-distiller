@@ -15,30 +15,90 @@ class AssetAliasCard(Card):
         aliases = []
         fp = Path("data/stock_alias.csv")
         if fp.exists():
-            reader = csv.DictReader(fp.read_text(encoding="utf-8").splitlines())
+            reader = csv.reader(fp.read_text(encoding="utf-8").splitlines())
             for row in reader:
-                aliases.append(dict(row))
+                if not row or not row[0] or row[0].startswith("#"):
+                    continue
+                alias = row[0].strip() if len(row) >= 1 else ""
+                ticker = row[1].strip() if len(row) >= 2 else ""
+                notes = row[2].strip() if len(row) >= 3 else ""
+                if alias:
+                    aliases.append({"alias": alias, "ticker": ticker, "type": notes})
+        # 拆分：已确认(ticker非空) vs 待判断(ticker为空)
+        confirmed = [a for a in aliases if a["ticker"]]
+        pending = [a for a in aliases if not a["ticker"]]
         return {"aliases": aliases, "count": len(aliases),
+                "confirmed": confirmed, "pending": pending,
+                "n_confirmed": len(confirmed), "n_pending": len(pending),
                 "known_crypto": ["BTC","ETH","XRP","SOL","DOGE","ADA","AVAX","DOT","MATIC"],
                 "known_etf": ["SPY","QQQ","SOXX","SMH","ARKK","IWM","DIA","VOO","VTI","XLE","XLF","TQQQ","SQQQ","SOXL","SOXS"],
                 "known_index": ["SPX","NDX","DJI","RUT","VIX"]}
 
     def _render_html(self, data: dict) -> str:
         count = data["count"]
-        rows = "".join(
-            f'<tr><td style="font-size:11px">{a.get("alias","")}</td><td style="font-weight:500">{a.get("ticker","")}</td><td>{a.get("type","")}</td></tr>'
-            for a in data["aliases"][:20]
-        )
+        confirmed = data["confirmed"]
+        pending = data["pending"]
+
+        # ── 已确认映射行 ──
+        confirmed_rows = ""
+        if confirmed:
+            confirmed_rows = "".join(
+                f'''<tr>
+  <td style="font-size:11px">{a["alias"]}</td>
+  <td style="font-weight:500">{a["ticker"]}</td>
+  <td style="font-size:11px;color:var(--text-secondary)">{a.get("type","")}</td>
+  <td style="text-align:right">
+    <button class="btn" style="font-size:10px;padding:1px 6px" onclick="editAliasRow(\'{a["alias"]}\',\'{a["ticker"]}\',\'{a.get("type","")}\')">编辑</button>
+    <button class="btn btn-danger" style="font-size:10px;padding:1px 6px" onclick="deleteAlias(\'{a["alias"]}\')">删除</button>
+  </td></tr>'''
+                for a in confirmed[:50]
+            )
+        else:
+            confirmed_rows = '<tr><td colspan="4" class="text-secondary">暂无已确认映射</td></tr>'
+
+        # ── 待人工判断行 ──
+        pending_rows = ""
+        if pending:
+            pending_rows = "".join(
+                f'''<tr style="background:rgba(239,159,39,0.05)">
+  <td style="font-size:11px;font-weight:500">{a["alias"]}</td>
+  <td style="font-size:11px;color:var(--text-secondary)">{a.get("type","")}</td>
+  <td style="text-align:right">
+    <button class="btn" style="font-size:10px;padding:1px 6px" onclick="fillAliasForm(\'{a["alias"]}\',\'{a.get("type","")}\')">填代码</button>
+    <button class="btn btn-danger" style="font-size:10px;padding:1px 6px" onclick="deleteAlias(\'{a["alias"]}\')">删除</button>
+  </td></tr>'''
+                for a in pending[:30]
+            )
+        else:
+            pending_rows = '<tr><td colspan="4" class="text-secondary" style="color:var(--text-success)">全部确认完毕 🎉</td></tr>'
+
         crypto_str = ", ".join(data.get("known_crypto", []))
         return f'''<div class="card-title">资产代码库</div>
-<div class="grid grid-3 mb-sm">
-  <div class="metric"><div class="metric-label">股票别名</div><div class="metric-value">{count}</div><div class="metric-sub">条映射</div></div>
-  <div class="metric"><div class="metric-label">加密货币</div><div class="metric-value">{len(data.get("known_crypto",[]))}</div><div class="metric-sub">种</div></div>
-  <div class="metric"><div class="metric-label">ETF+指数</div><div class="metric-value">{len(data.get("known_etf",[]))+len(data.get("known_index",[]))}</div><div class="metric-sub">只</div></div>
+<div class="grid grid-4 mb-sm">
+  <div class="metric"><div class="metric-label">总映射</div><div class="metric-value">{count}</div><div class="metric-sub">条</div></div>
+  <div class="metric"><div class="metric-label">已确认</div><div class="metric-value" style="color:var(--text-success)">{data["n_confirmed"]}</div><div class="metric-sub">ticker 明确</div></div>
+  <div class="metric"><div class="metric-label">待判断</div><div class="metric-value" style="color:var(--text-warning)">{data["n_pending"]}</div><div class="metric-sub">需人工</div></div>
+  <div class="metric"><div class="metric-label">加密+ETF+指数</div><div class="metric-value" style="font-size:12px">{len(data.get("known_crypto",[]))}+{len(data.get("known_etf",[]))}+{len(data.get("known_index",[]))}</div><div class="metric-sub">内置识别</div></div>
 </div>
-<div class="text-secondary mb-sm" style="font-size:11px">加密货币: {crypto_str}</div>
-<table class="data"><tr><th>别名</th><th>Ticker</th><th>类型</th></tr>{rows}</table>
-<div class="text-secondary mt-sm" style="font-size:11px">编辑: data/stock_alias.csv</div>'''
+
+<!-- 添加 / 编辑表单 -->
+<div class="flex mb-sm" style="gap:4px;flex-wrap:wrap">
+  <input id="aa_alias" placeholder="别名" style="flex:1;min-width:80px;font-size:11px;padding:4px 6px" />
+  <input id="aa_ticker" placeholder="代码" style="flex:1;min-width:60px;font-size:11px;padding:4px 6px" />
+  <input id="aa_notes" placeholder="备注" style="flex:1;min-width:60px;font-size:11px;padding:4px 6px" />
+  <button class="btn btn-primary" onclick="addAlias()" style="font-size:11px;padding:4px 10px" id="btn_aa_submit">添加</button>
+</div>
+<input type="hidden" id="aa_old_alias" value="" />
+<span id="aa_status" class="text-secondary" style="font-size:10px"></span>
+
+<!-- 已确认映射 -->
+<div class="mt-md mb-sm"><span style="font-size:12px;font-weight:500">已确认映射 ({data["n_confirmed"]}条)</span></div>
+<table class="data" style="margin-bottom:0"><tr><th>别名</th><th>Ticker</th><th>备注</th><th style="text-align:right">操作</th></tr>{confirmed_rows}</table>
+
+<!-- 待人工判断 -->
+<div class="mt-md mb-sm"><span style="font-size:12px;font-weight:500;color:var(--text-warning)">⚠ 待人工判断 ({data["n_pending"]}条)</span></div>
+<table class="data"><tr><th>别名</th><th>系统标注</th><th style="text-align:right">操作</th></tr>{pending_rows}</table>
+<div class="text-secondary mt-sm" style="font-size:10px">提示：点"填代码"自动回填表单，输入 ticker 后提交即可移入已确认列表。内置识别: {crypto_str}</div>'''
 
 
 @register
@@ -46,9 +106,10 @@ class CryptoCard(Card):
     name = "crypto"
     tab = "insights"
     endpoint = "/api/crypto"
-    refresh = 600
+    refresh = 300
 
     def get_data(self, **params) -> dict:
+        import re as _re
         fp = Path("data/crypto_prices.json")
         prices = {}
         if fp.exists():
@@ -59,17 +120,62 @@ class CryptoCard(Card):
             results = data.get("results", [])
             if results:
                 latest[ticker] = {"price": results[-1].get("c", 0), "time": results[-1].get("t", 0)}
-        return {"coins": latest, "total": len(prices)}
+
+        # 查询推文提及次数（信号强度代理指标）
+        mentions = {}
+        coins = list(latest.keys()) or ["BTC", "ETH", "XRP", "SOL", "DOGE"]
+        try:
+            import sqlite3
+            conn = sqlite3.connect("data/twitter_data.db")
+            for coin in coins:
+                pattern = f"%${coin}%"
+                cnt = conn.execute(
+                    "SELECT COUNT(*) FROM tweets WHERE text LIKE ?", (pattern,)
+                ).fetchone()[0]
+                if cnt > 0:
+                    mentions[coin] = cnt
+            conn.close()
+        except Exception:
+            pass
+
+        return {"coins": latest, "mentions": mentions, "total_coins": len(latest)}
 
     def _render_html(self, data: dict) -> str:
+        import time as _time_module
         coins = data["coins"]
+        mentions = data.get("mentions", {})
         if not coins:
-            return '<div class="card-title">加密货币行情</div><div class="text-secondary">暂无数据，请运行流水线 fetch_crypto</div>'
-        rows = "".join(
-            f'<tr><td style="font-weight:500">{t}</td><td style="text-align:right">${c["price"]:.2f}</td><td style="text-align:right;font-size:11px">{time.strftime("%m-%d %H:%M", time.localtime(c["time"]/1000)) if c.get("time") else "?"}</td></tr>'
-            for t, c in sorted(coins.items())
-        )
-        return f'<div class="card-title">加密货币行情</div><table class="data"><tr><th>币种</th><th style="text-align:right">价格 (USD)</th><th style="text-align:right">更新时间</th></tr>{rows}</table>'
+            return '<div class="card-title">加密货币信号</div><div class="text-secondary">暂无价格数据。运行流水线 fetch_crypto 获取。</div>'
+
+        # 按提及次数排序，再按市值排序
+        def sort_key(item):
+            t, c = item
+            return (-mentions.get(t, 0), -c.get("price", 0))
+        sorted_coins = sorted(coins.items(), key=sort_key)
+
+        rows = ""
+        for t, c in sorted_coins:
+            price = c["price"]
+            ts = c.get("time", 0)
+            time_str = _time_module.strftime("%m-%d %H:%M", _time_module.localtime(ts/1000)) if ts else "?"
+            mcnt = mentions.get(t, 0)
+            signal = ""
+            if mcnt >= 5:
+                signal = '<span class="tag tag-warn">🔥 热议</span>'
+            elif mcnt >= 2:
+                signal = '<span class="tag tag-ok">提及 {0}次</span>'.format(mcnt)
+            elif mcnt == 1:
+                signal = '<span style="font-size:10px;color:var(--text-tertiary)">{0}次</span>'.format(mcnt)
+            else:
+                signal = '<span style="font-size:10px;color:var(--text-tertiary)">-</span>'
+
+            rows += f'<tr><td style="font-weight:500">{t}</td><td style="text-align:right">${price:.2f}</td><td style="text-align:center">{signal}</td><td style="text-align:right;font-size:11px;color:var(--text-tertiary)">{time_str}</td></tr>'
+
+        total_mentions = sum(mentions.values())
+        return f'''<div class="card-title">加密货币信号</div>
+<div class="mb-sm"><span class="text-secondary" style="font-size:11px">覆盖 {data["total_coins"]} 种 · 分析师提及 {total_mentions} 次</span></div>
+<table class="data"><tr><th>币种</th><th style="text-align:right">价格 (USD)</th><th style="text-align:center">推文信号</th><th style="text-align:right">更新</th></tr>{rows}</table>
+<div class="text-secondary mt-sm" style="font-size:11px">信号基于推文中 $TICKER 提及次数。在"角色代入"选币时可参考。</div>'''
 
 
 @register
@@ -97,24 +203,21 @@ class ScriptRunnerCard(Card):
         groups = {}
         for name, info in data["scripts"].items():
             groups.setdefault(info["group"], []).append((name, info))
-        html = '<div class="card-title">脚本工具箱</div>'
+        group_labels = {"signal": "信号类", "analysis": "分析类", "viz": "图表类", "data": "数据类"}
+        html = '<div class="card-title flex-between">'
+        html += '<span>脚本工具箱 <span style="font-size:10px;color:var(--text-tertiary);font-weight:400">调试/手动触发</span></span>'
+        html += '<button class="btn" style="font-size:10px;padding:2px 8px" onclick="toggleScriptTools()" id="btn_toggle_tools">展开</button>'
+        html += '</div>'
+        html += '<div id="script_tools_body" style="display:none">'
         for group, items in groups.items():
+            label = group_labels.get(group, group)
             btns = "".join(
-                f'<button class="btn" onclick="runScript(\'{info["file"]}\')" style="margin:2px;font-size:11px" title="{info["desc"]}">{label}</button>'
-                for label, info in items
+                f'<button class="btn" onclick="runScript(\'{info["file"]}\')" style="margin:2px;font-size:11px" title="{info["desc"]}">{name}</button>'
+                for name, info in items
             )
-            html += f'<div class="mb-sm"><span class="text-secondary" style="font-size:11px">{group}</span><br>{btns}</div>'
+            html += f'<div class="mb-sm"><span class="text-secondary" style="font-size:11px">{label}</span><br>{btns}</div>'
         html += '<div id="sr_status" class="text-secondary mt-sm" style="font-size:11px"></div>'
-        html += '''<script>
-async function runScript(name){
-  var s=document.getElementById("sr_status"); s.innerText="运行 scripts/"+name+"...";
-  try{
-    var r=await fetch("/cards/script_runner/action",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({script:name})});
-    var d=await r.json(); s.innerText=d.ok?"完成: "+d.output:d.error;
-    setTimeout(()=>location.reload(),1500);
-  }catch(e){s.innerText="网络错误";}
-}
-</script>'''
+        html += '</div>'
         return html
 
 
@@ -129,12 +232,12 @@ class TimelineCard(Card):
         charts = {}
         for fp in Path("data/timeline").glob("*.html"):
             name = fp.stem.replace("_timeline", "").replace("_", " ")
-            charts[name] = str(fp)
+            charts[name] = fp.stem
         return {"charts": charts}
 
     def _render_html(self, data: dict) -> str:
         charts = data["charts"]
         if not charts:
             return '<div class="card-title">情绪时间线</div><div class="text-secondary">暂无图表。运行信号量化 + timeline_chart.py 生成。</div>'
-        links = "".join(f'<div style="margin-bottom:4px"><a href="/timeline/{fp.stem}" target="_blank" style="font-size:12px">{name}</a></div>' for name, fp in charts.items())
+        links = "".join(f'<div style="margin-bottom:4px"><a href="/timeline/{stem}" target="_blank" style="font-size:12px">{name}</a></div>' for name, stem in charts.items())
         return f'<div class="card-title">情绪时间线</div>{links}<div class="text-secondary mt-sm" style="font-size:11px">点击在新窗口打开交互图表</div>'

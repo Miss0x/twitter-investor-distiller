@@ -243,14 +243,29 @@ def _generate_portrait(username: str) -> dict:
     from src.ai.llm_client import chat
     from datetime import datetime, timedelta
 
-    # 解析组合名：TJ_Research_1个月 → user=TJ_Research, window=30
+    # 解析组合名：
+    # 格式A: TJ_Research_1个月 → user=TJ_Research, window=30
+    # 格式B: TJ_Research_2026-01-01_2026-05-27 → user=TJ_Research, 日期范围
     m = re.match(r"(.+?)_(1个月|3个月|6个月|1年|全量)", username)
-    if not m:
-        return {"error": f"无法解析用户名+窗口: {username}"}
-    user = m.group(1)
-    window_label = m.group(2)
-    window_map = {"1个月": 30, "3个月": 90, "6个月": 180, "1年": 365, "全量": 9999}
-    window_days = window_map.get(window_label, 9999)
+    use_date_range = False
+    date_from = date_to = ""
+    if m:
+        user = m.group(1)
+        window_label = m.group(2)
+        window_map = {"1个月": 30, "3个月": 90, "6个月": 180, "1年": 365, "全量": 9999}
+        window_days = window_map.get(window_label, 9999)
+    else:
+        # 尝试解析日期范围: user_YYYY-MM-DD_YYYY-MM-DD
+        m2 = re.match(r"(.+?)_(\d{4}-\d{2}-\d{2})_(\d{4}-\d{2}-\d{2})", username)
+        if m2:
+            user = m2.group(1)
+            date_from = m2.group(2)
+            date_to = m2.group(3)
+            window_label = f"{date_from} ~ {date_to}"
+            window_days = 9999
+            use_date_range = True
+        else:
+            return {"error": f"无法解析用户名+窗口: {username}"}
 
     # 加载该用户所有已清洗分析数据
     data = []
@@ -260,11 +275,14 @@ def _generate_portrait(username: str) -> dict:
         return {"error": "无分析数据"}
 
     # 时间窗口过滤
-    now = datetime.utcnow()
-    cutoff = now - timedelta(days=window_days) if window_days < 9999 else datetime(2000, 1, 1)
-    windowed = [r for r in data if r.get("created_at", "") and r["created_at"][:10] >= cutoff.strftime("%Y-%m-%d")]
+    if use_date_range:
+        windowed = [r for r in data if r.get("created_at", "") and date_from <= r["created_at"][:10] <= date_to]
+    else:
+        now = datetime.utcnow()
+        cutoff = now - timedelta(days=window_days) if window_days < 9999 else datetime(2000, 1, 1)
+        windowed = [r for r in data if r.get("created_at", "") and r["created_at"][:10] >= cutoff.strftime("%Y-%m-%d")]
     if not windowed:
-        return {"error": f"时间窗口 {window_label} 内无推文"}
+        return {"error": f"时间窗口 {window_label} 内无推文" if not use_date_range else f"日期范围 {date_from}~{date_to} 内无推文"}
     data = windowed
 
     # 统计摘要（用清洗后的 stock_details）
@@ -297,8 +315,17 @@ def _generate_portrait(username: str) -> dict:
 ### 10. 一句话总结"""
 
     report = chat(messages=[{"role": "user", "content": prompt}], role="analyzer", max_tokens=8192, temperature=0.5)
+    # 在输出文件头部写入元数据
+    meta = f"""---
+user: {user}
+window: {window_label}
+tweets: {len(data)}
+date_range: {times[0]} ~ {times[-1]}
+generated: {datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')} UTC
+---
+"""
     out = Path(f"data/pipeline/{username}_portrait.md")
-    out.write_text(report, encoding="utf-8")
+    out.write_text(meta + report, encoding="utf-8")
     return {"ok": True, "path": str(out), "window": window_label, "tweets": len(data)}
 
 

@@ -718,7 +718,7 @@ async def card_action(name: str, payload: dict = None):
                 from src.storage.models import PipelineTask
                 db.init_db()
                 
-                USERS = ['TJ_Research', 'dearbaibabybus']
+                USERS = json.loads(Path('data/users.json').read_text(encoding='utf-8')) if Path('data/users.json').exists() else ['TJ_Research', 'dearbaibabybus']
                 INTERVAL = 120
                 fetcher = TwitterAPIFetcher()
                 state = Path('data/auto_scheduler_state.json')
@@ -813,6 +813,10 @@ async def card_action(name: str, payload: dict = None):
         return _handle_script_run(payload)
     if name == "portrait_generate" and payload:
         return _handle_portrait_generate(payload)
+    if name == "asset_alias" and payload:
+        return _handle_asset_alias(payload)
+    if name == "api_status" and payload and payload.get("action") in ("add_user", "remove_user"):
+        return _handle_user_manage(payload)
     return {"ok": False, "error": "unknown action"}
 
 
@@ -820,7 +824,7 @@ async def card_action(name: str, payload: dict = None):
 from src.interfaces.card_actions import (  # noqa: E402
     _handle_role_picker, _handle_portfolio_analysis,
     _handle_fetch_control, _handle_pipeline_action, _handle_script_run,
-    _handle_portrait_generate,
+    _handle_portrait_generate, _handle_asset_alias, _handle_user_manage,
 )
 
 @app.get("/", response_class=HTMLResponse)

@@ -85,7 +85,7 @@
 <script>
 const CARD_ORDER = {
   dashboard: ["system_status","daemon","fetch_control","telegram","accuracy","api_status"],
-  pipeline: ["pipeline","pipeline_execute","asset_alias","script_runner"],
+  pipeline: ["pipeline_execute","asset_alias","script_runner"],
   portraits: ["portrait_generate","portrait"],
   insights: ["role_picker","portfolio","consensus","rotation","crypto","anomaly","timeline","network"]
 };
@@ -93,6 +93,16 @@ const CARD_ORDER = {
 const cache = {};         // 卡片 HTML 缓存
 const REFRESH_MAP = {};   // 刷新间隔
 const LAST_FETCH = {};    // 上次拉取时间戳
+
+// 让 innerHTML 中的 <script> 标签重新执行
+function reanimateScripts(container) {
+  container.querySelectorAll('script').forEach(function(s) {
+    var ns = document.createElement('script');
+    Array.from(s.attributes).forEach(function(a) { ns.setAttribute(a.name, a.value); });
+    ns.textContent = s.textContent;
+    s.replaceWith(ns);
+  });
+}
 
 function switchTab(tab) {
   const labels = {dashboard:'抓取', pipeline:'推文分析', portraits:'画像', insights:'洞察'};
@@ -113,6 +123,7 @@ async function loadCards(tab) {
   // 已缓存的直接渲染，无填充骨架
   if (hasCache.length === names.length) {
     container.innerHTML = names.map(n => cache[n]).join('');
+    reanimateScripts(container);
     attachButtons();
     return;
   }
@@ -123,6 +134,7 @@ async function loadCards(tab) {
     '<div class="flex"><div class="spinner"></div><span class="text-secondary">加载中...</span></div>' +
     '</div>')
   ).join('');
+  reanimateScripts(container);
 
   const toFetch = names.filter(n => !cache[n]);
 
@@ -140,7 +152,7 @@ async function loadCards(tab) {
     }
     // 从缓存渲染
     const el = document.getElementById('card-' + name);
-    if (el) el.innerHTML = cache[name];
+    if (el) { el.innerHTML = cache[name]; reanimateScripts(el); }
   });
 
   await Promise.all(promises);
@@ -150,22 +162,33 @@ async function loadCards(tab) {
 }
 
 // 后台自动刷新（仅活跃 tab）
+var PIPELINE_EXECUTE_REFRESHED = false;
 async function autoRefresh() {
   const active = document.querySelector('.tab-content.active');
   if (!active) return;
-  const names = CARD_ORDER[active.id.replace('tab-','')] || [];
+  const tabName = active.id.replace('tab-','');
+  const names = CARD_ORDER[tabName] || [];
   const now = Date.now();
   for (const name of names) {
     const interval = (REFRESH_MAP[name] || 0) * 1000;
     if (interval > 0 && now - (LAST_FETCH[name] || 0) > interval) {
       try {
         const resp = await fetch('/cards/' + name);
-        cache[name] = await resp.text();
+        const html = await resp.text();
+        // 内容没变就不动 DOM，避免无意义重排/跳动
+        if (cache[name] === html) { continue; }
+        cache[name] = html;
         LAST_FETCH[name] = Date.now();
         const el = document.getElementById('card-' + name);
-        if (el) el.innerHTML = cache[name];
+        if (el) { el.innerHTML = html; reanimateScripts(el); }
+        if (name === 'pipeline_execute') PIPELINE_EXECUTE_REFRESHED = true;
       } catch(e) {}
     }
+  }
+  // 若 pipeline_execute 被刷新，恢复之前选中类型
+  if (PIPELINE_EXECUTE_REFRESHED && tabName === 'pipeline') {
+    PIPELINE_EXECUTE_REFRESHED = false;
+    setTimeout(function() { loadTypePE(PE_ACTIVE); }, 50);
   }
   attachButtons();
 }
@@ -187,7 +210,7 @@ async function toggleDaemon() {
     const resp = await fetch('/cards/daemon');
     cache.daemon = await resp.text();
     const el = document.getElementById('card-daemon');
-    if (el) el.innerHTML = cache.daemon;
+    if (el) { el.innerHTML = cache.daemon; reanimateScripts(el); }
   } catch(e) {}
 }
 
@@ -258,22 +281,146 @@ async function seedTasksPE() {
   location.reload();
 }
 
-async function genPortrait() {
+// ── 画像生成 ──
+function selectWindow(label) {
+  document.getElementById('pg_window').value = label;
+  document.querySelectorAll('.pg-win-btn').forEach(function(b) { b.classList.remove('selected'); });
+  var btn = document.getElementById('pg_win_' + label);
+  if (btn) btn.classList.add('selected');
+  // 选窗口后清空日历
+  document.getElementById('pg_from').value = '';
+  document.getElementById('pg_to').value = '';
+}
+
+async function genPortraitAdv() {
   var u = document.getElementById('pg_user').value;
+  var w = document.getElementById('pg_window').value;
+  var from = document.getElementById('pg_from').value;
+  var to = document.getElementById('pg_to').value;
+  var label = document.getElementById('pg_label').value.trim();
   var s = document.getElementById('pg_status');
+
+  if (!w && !from) { if(s)s.innerText='请先选择时间窗口或日期'; return; }
+  if ((from && !to) || (!from && to)) { if(s)s.innerText='日期范围需同时填写起止'; return; }
+
   if (s) s.innerText = '生成中...';
   try {
     var r = await fetch('/cards/portrait_generate/action', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ user: u })
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ user: u, window: w, from: from, to: to, label: label })
     });
     var d = await r.json();
-    if (s) s.innerText = d.ok ? '完成' : '失败: ' + (d.error || '');
-    setTimeout(function() { location.reload(); }, 2000);
-  } catch (e) {
-    if (s) s.innerText = '网络错误';
+    if (s) s.innerText = d.ok ? '任务已创建 #'+d.task_id : '失败: '+(d.error||'');
+    if (d.ok) setTimeout(function(){location.reload();}, 1500);
+  } catch(e) { if(s) s.innerText='网络错误'; }
+}
+
+// ── 资产代码库操作 ──
+function editAliasRow(alias, ticker, notes) {
+  document.getElementById('aa_alias').value = alias;
+  document.getElementById('aa_ticker').value = ticker || '';
+  document.getElementById('aa_notes').value = notes || '';
+  document.getElementById('aa_old_alias').value = alias;
+  document.getElementById('btn_aa_submit').innerText = '更新';
+}
+
+function fillAliasForm(alias, notes) {
+  document.getElementById('aa_alias').value = alias;
+  document.getElementById('aa_ticker').value = '';
+  document.getElementById('aa_notes').value = notes || '';
+  document.getElementById('aa_old_alias').value = alias;
+  document.getElementById('btn_aa_submit').innerText = '确认';
+  document.getElementById('aa_ticker').focus();
+}
+
+async function addAlias() {
+  var alias = document.getElementById('aa_alias').value.trim();
+  var ticker = document.getElementById('aa_ticker').value.trim();
+  var notes = document.getElementById('aa_notes').value.trim();
+  var old = document.getElementById('aa_old_alias').value.trim();
+  var action = old ? 'edit' : 'add';
+  if (!alias) { setStatus('aa_status','别名不能为空'); return; }
+  setStatus('aa_status', (action === 'edit' ? '更新中...' : '添加中...'));
+  try {
+    var r = await fetch('/cards/asset_alias/action', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({action: action, alias: alias, ticker: ticker, notes: notes, old_alias: old})
+    });
+    var d = await r.json();
+    if (d.ok) { setStatus('aa_status', '成功'); document.getElementById('btn_aa_submit').innerText = '添加'; document.getElementById('aa_old_alias').value = ''; location.reload(); }
+    else { setStatus('aa_status', d.error); }
+  } catch(e) { setStatus('aa_status', '网络错误'); }
+}
+
+async function deleteAlias(alias) {
+  if (!confirm('确定删除 "' + alias + '" 吗？')) return;
+  setStatus('aa_status', '删除中...');
+  try {
+    var r = await fetch('/cards/asset_alias/action', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({action: 'delete', alias: alias})
+    });
+    var d = await r.json();
+    if (d.ok) { location.reload(); }
+    else { setStatus('aa_status', d.error); }
+  } catch(e) { setStatus('aa_status', '网络错误'); }
+}
+
+function setStatus(id, msg) {
+  var el = document.getElementById(id);
+  if (el) el.innerText = msg;
+}
+
+// ── 画像展开/收起 ──
+function togglePortrait(id) {
+  var body = document.getElementById('portrait-body-' + id);
+  if (!body) return;
+  body.style.display = body.style.display === 'none' ? 'block' : 'none';
+}
+
+// ── 用户管理 ──
+async function addTrackedUser() {
+  var u = document.getElementById('um_user').value.trim();
+  var s = document.getElementById('um_status');
+  if (!u) { if(s)s.innerText='请输入用户名'; return; }
+  if (s) s.innerText = '校验中...';
+  try {
+    var r = await fetch('/cards/api_status/action', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({action: 'add_user', user: u})
+    });
+    var d = await r.json();
+    if (d.ok) { if(s)s.innerText = '已添加 @'+u+' (粉丝: '+d.followers+')'; setTimeout(function(){location.reload();},1500); }
+    else { if(s)s.innerText = d.error; }
+  } catch(e) { if(s)s.innerText = '网络错误'; }
+}
+
+// ── 脚本工具箱折叠 ──
+function toggleScriptTools() {
+  var body = document.getElementById('script_tools_body');
+  var btn = document.getElementById('btn_toggle_tools');
+  if (!body || !btn) return;
+  if (body.style.display === 'none') {
+    body.style.display = 'block';
+    btn.innerText = '收起';
+  } else {
+    body.style.display = 'none';
+    btn.innerText = '展开';
   }
+}
+
+// ── 脚本工具箱 ──
+async function runScript(name){
+  var s=document.getElementById("sr_status"); if(s) s.innerText="运行 scripts/" + name + "...";
+  try{
+    var r=await fetch("/cards/script_runner/action",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({script:name})});
+    var d=await r.json(); if(s) s.innerText=d.ok?"完成: "+d.output:d.error;
+    setTimeout(function(){location.reload();},1500);
+  }catch(e){ if(s) s.innerText="网络错误"; }
 }
 
 // ── 启动 ──

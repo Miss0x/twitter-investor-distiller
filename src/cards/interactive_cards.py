@@ -12,7 +12,7 @@ class DaemonCard(Card):
 
     def get_data(self, **params) -> dict:
         state = Path("data/auto_scheduler_state.json")
-        running = getattr(self, "_proc", None) is not None
+        running = json.loads(state.read_text()).get("running", False) if state.exists() else False
         last_id = json.loads(state.read_text()).get("last_id", 0) if state.exists() else 0
         try:
             from src.storage.database import db

@@ -39,6 +39,3 @@ from . import pipeline_control   # noqa: E402, F401
 from . import tool_cards     # noqa: E402, F401
 from . import functional_cards  # noqa: E402, F401
 from . import pipeline_execute  # noqa: E402, F401
-from . import functional_cards  # noqa: E402, F401
-from . import tool_cards     # noqa: E402, F401
-from . import functional_cards  # noqa: E402, F401

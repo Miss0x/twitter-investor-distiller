@@ -27,10 +27,14 @@ class PipelineExecuteCard(Card):
                 grouped.setdefault(t.task_type, []).append(item)
             s.close()
             from src.pipeline.task_executor import is_running, get_progress
+            # 每类型数量统计
+            from collections import Counter
+            type_counts = Counter(t.task_type for t in tasks)
             return {
                 "groups": grouped,
                 "running": is_running(),
                 "progress": get_progress(),
+                "type_counts": dict(type_counts),
                 "types": ["filter", "analyze", "fetch_price", "fetch_crypto", "portrait", "clean"],
             }
         except Exception:
@@ -40,18 +44,25 @@ class PipelineExecuteCard(Card):
         groups = data.get("groups", {})
         running = data.get("running", False)
         progress = data.get("progress", {})
-
+        tc = data.get("type_counts", {})
         type_names = {
             "filter": "过滤筛选", "analyze": "推文分析", "fetch_price": "股价拉取",
             "fetch_crypto": "加密货币", "portrait": "画像生成", "clean": "数据清洗",
         }
         types = list(type_names.keys())
 
+        # ── 批量查推文文本，注入到 filter / analyze payload 中 ──
+        _enrich_tweet_texts(groups)
+
         type_tabs = "".join(
             f'<button class="tab pe-tab" onclick="loadTypePE(\'{t}\')" id="tab-{t}">{type_names[t]}</button>'
             for t in types
         )
         status_bar = f'执行中: {progress.get("msg","")} ({progress.get("done",0)}/{progress.get("total",0)})' if running else "空闲"
+        type_tags = "".join(
+            f'<span class="tag tag-ok">{type_names.get(t,t)}: {tc.get(t,0)}</span>'
+            for t in types if tc.get(t, 0) > 0
+        )
 
         containers = ""
         for t in types:
@@ -86,6 +97,7 @@ class PipelineExecuteCard(Card):
 
         return f'''<div class="card-title">流水线执行</div>
 <div class="flex-between mb-sm"><div class="flex"><div class="status-dot {"ok" if running else ""}"></div><span style="font-size:12px">{status_bar}</span></div></div>
+<div class="mb-sm" style="display:flex;gap:4px;flex-wrap:wrap">{type_tags}</div>
 <div class="mb-sm" style="display:flex;gap:4px;flex-wrap:wrap">{type_tabs}</div>
 <div style="display:flex;gap:6px;margin-bottom:8px">
   <button class="btn" onclick="filterNewTweetsPE()" style="font-size:11px">🔍 扫描新推文</button>
@@ -96,16 +108,90 @@ class PipelineExecuteCard(Card):
 </div>'''
 
 
+def _enrich_tweet_texts(groups: dict) -> None:
+    """批量查询推文文本，注入到 filter / analyze 任务的 payload 中"""
+    # 收集所有 tweet_id
+    tweet_ids = set()
+    for items in groups.values():
+        for item in items:
+            p = item.get("payload", {}) or {}
+            tid = p.get("tweet_id")
+            if tid and isinstance(tid, int) and item.get("task_type") in ("filter", "analyze"):
+                tweet_ids.add(tid)
+    if not tweet_ids:
+        return
+
+    # 批量 DB 查询
+    try:
+        import sqlite3
+        conn = sqlite3.connect("data/twitter_data.db")
+        placeholders = ",".join(["?"] * len(tweet_ids))
+        rows = conn.execute(
+            f"SELECT id, COALESCE(text,'') as text, COALESCE(user_id,'') as user_id FROM tweets WHERE id IN ({placeholders})",
+            tuple(tweet_ids)
+        ).fetchall()
+        text_map = {row[0]: {"text": row[1], "user_id": row[2]} for row in rows}
+        conn.close()
+    except Exception:
+        return
+
+    # 注入到 payload
+    for items in groups.values():
+        for item in items:
+            p = item.get("payload", {}) or {}
+            tid = p.get("tweet_id")
+            if tid in text_map:
+                p["_text"] = text_map[tid]["text"]
+                p["_user"] = text_map[tid]["user_id"]
+
+
 def _format_label(task_type: str, payload: dict) -> str:
-    if task_type == "analyze" and payload.get("tweet_id"):
-        return f'#{payload["tweet_id"]} | {payload.get("text","")[:40]}'
-    elif task_type in ("fetch_price", "fetch_crypto"):
-        return payload.get("ticker", "?")
+    """将任务 payload 转为可读中文描述"""
+    # filter: 优先展示注入的推文文本
+    if task_type == "filter":
+        txt = payload.get("_text", "")
+        if txt:
+            prefix = f'@{payload.get("_user","")} ' if payload.get("_user") else ""
+            return f'{prefix}{txt[:50]}{"..." if len(txt)>50 else ""}'
+        # 没有文本则显示 action 中文名
+        action = payload.get("action", "")
+        action_labels = {
+            "filter_single": "单条过滤",
+            "filter_latest": "最新推文过滤",
+            "filter_media": "媒体过滤",
+            "filter_replies": "回复过滤",
+        }
+        return action_labels.get(action, action or "推文过滤")
+    elif task_type == "analyze":
+        tid = payload.get("tweet_id", "")
+        text = payload.get("_text", "") or payload.get("text", "") or ""
+        if tid and text:
+            return f'#{tid} | {text[:50]}{"..." if len(text)>50 else ""}'
+        if tid:
+            return f'分析 #{tid}'
+        return text[:50] if text else "分析任务"
+    elif task_type == "fetch_price":
+        ticker = payload.get("ticker", "") or payload.get("symbol", "")
+        return ticker or "股价拉取"
+    elif task_type == "fetch_crypto":
+        ticker = payload.get("ticker", "") or payload.get("symbol", "") or payload.get("coin", "")
+        return ticker or "加密货币拉取"
     elif task_type == "portrait":
-        return f'{payload.get("username","?")} ({payload.get("tweet_count",0)}条 · {payload.get("label","")})'
-    elif task_type == "filter":
-        return payload.get("action", "filter_latest")
-    return payload.get("tweet_id", str(payload)[:40])
+        username = payload.get("username", "")
+        cnt = payload.get("tweet_count", 0)
+        label = payload.get("label", "")
+        return f'{username or "?"} ({cnt}条{f" · {label}" if label else ""})'
+    elif task_type == "clean":
+        target = payload.get("target", "") or payload.get("table", "") or payload.get("action", "")
+        return target or "数据清洗"
+    # 兜底
+    tid = payload.get("tweet_id", "")
+    if tid:
+        return f'#{tid}'
+    txt = payload.get("_text", "") or payload.get("text", "") or payload.get("msg", "")
+    if txt:
+        return txt[:50]
+    return "任务"
 
 
 @register
@@ -114,6 +200,14 @@ class PortraitGenerateCard(Card):
     tab = "portraits"
     endpoint = "/api/portrait_generate"
     refresh = 0
+
+    WINDOWS = [
+        ("1个月", 30, "近一月"),
+        ("3个月", 90, "近三月"),
+        ("6个月", 180, "近半年"),
+        ("1年", 365, "近一年"),
+        ("全量", 9999, "全部历史"),
+    ]
 
     def get_data(self, **params) -> dict:
         try:
@@ -131,18 +225,50 @@ class PortraitGenerateCard(Card):
             s.close()
         except Exception:
             items = []
-        return {"tasks": items, "users": ["TJ_Research", "dearbaibabybus"]}
+        return {"tasks": items, "users": _load_users_config()}
 
     def _render_html(self, data: dict) -> str:
         users = data.get("users", [])
         pending = [t for t in data.get("tasks", []) if t["status"] == "pending"]
         done = [t for t in data.get("tasks", []) if t["status"] == "done"]
-        user_opts = "".join(f'<option>{u}</option>' for u in users)
+        user_opts = "".join(f'<option value="{u}">{u}</option>' for u in users)
+        window_btns = "".join(
+            f'<button class="btn pg-win-btn" onclick="selectWindow(\'{label}\')" id="pg_win_{label}" style="font-size:10px;padding:3px 8px">{label}({desc})</button>'
+            for label, days, desc in self.WINDOWS
+        )
         return f'''<div class="card-title">画像生成</div>
 <div class="mb-sm"><span class="tag tag-ok">已完成: {len(done)}</span> <span class="tag tag-warn">待处理: {len(pending)}</span></div>
-<div class="flex mb-sm" style="gap:8px">
-  <select id="pg_user">{user_opts}</select>
-  <button class="btn btn-primary" onclick="genPortrait()">生成画像</button>
-  <span id="pg_status" class="text-secondary" style="font-size:11px"></span>
+
+<div class="flex mb-sm" style="gap:6px">
+  <select id="pg_user" style="flex:1">{user_opts}</select>
 </div>
-<div class="text-secondary" style="font-size:11px">需先完成 analyze 任务。也可用流水线执行中的 portrait 类型批量生成。</div>'''
+
+<div class="mb-sm"><span class="text-secondary" style="font-size:11px">时间窗口</span></div>
+<div class="flex mb-sm" style="gap:4px;flex-wrap:wrap" id="pg_windows">{window_btns}</div>
+
+<div class="flex mb-sm" style="gap:6px">
+  <input id="pg_from" type="date" style="flex:1;font-size:11px;padding:4px 6px" placeholder="开始日期" />
+  <input id="pg_to" type="date" style="flex:1;font-size:11px;padding:4px 6px" placeholder="结束日期" />
+</div>
+
+<div class="flex mb-sm" style="gap:6px">
+  <input id="pg_label" placeholder="画像标签（可选）" style="flex:1;font-size:11px;padding:4px 6px" />
+  <button class="btn btn-primary" onclick="genPortraitAdv()" style="font-size:11px;padding:4px 12px">生成画像</button>
+</div>
+<input type="hidden" id="pg_window" value="" />
+<span id="pg_status" class="text-secondary" style="font-size:10px"></span>
+
+<style>
+.pg-win-btn {{ border:0.5px solid var(--border-secondary); }}
+.pg-win-btn.selected {{ border-color: var(--text-primary); font-weight:500; }}
+</style>'''
+
+
+def _load_users_config():
+    """从 data/users.json 读取监控用户列表。"""
+    import json as _j
+    from pathlib import Path as _P
+    fp = _P("data/users.json")
+    if fp.exists():
+        return _j.loads(fp.read_text(encoding="utf-8"))
+    return ["TJ_Research", "dearbaibabybus"]
