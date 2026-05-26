@@ -1,0 +1,173 @@
+"""twitterapi.io 数据抓取器 —— 替代浏览器爬虫作为主路径。
+
+通过第三方 API 安全拉取推文和用户资料，写 SQLite。
+支持 cursor 翻页、增量抓取、去重。
+"""
+from __future__ import annotations
+
+import json
+import time
+import requests
+from datetime import datetime
+from pathlib import Path
+from typing import Any
+
+from src.storage.database import db
+from src.storage.models import Tweet, User
+
+API_BASE = "https://api.twitterapi.io"
+API_KEY = "new1_71d0cff271144374a4326ee5b0da43ba"
+HEADERS = {"X-API-Key": API_KEY}
+
+
+class TwitterAPIFetcher:
+    """通过 twitterapi.io 拉取推文和用户数据。"""
+
+    def __init__(self):
+        db.init_db()
+
+    def _get(self, endpoint: str, params: dict = None) -> dict:
+        r = requests.get(f"{API_BASE}{endpoint}", headers=HEADERS, params=params, timeout=15)
+        r.raise_for_status()
+        return r.json()
+
+    def fetch_user_info(self, username: str) -> dict:
+        """获取用户资料并写入 DB。"""
+        data = self._get("/twitter/user/info", {"userName": username})
+        user_data = data.get("data", {})
+        if not user_data:
+            return {"ok": False, "error": data.get("message", "unknown")}
+
+        session = db.get_session()
+        try:
+            existing = session.query(User).filter(User.username == username).first()
+            if existing:
+                existing.display_name = user_data.get("name")
+                existing.followers = user_data.get("followers")
+                existing.following = user_data.get("following")
+                existing.bio = user_data.get("description")
+                existing.tweet_count = user_data.get("statusesCount")
+                existing.avatar = user_data.get("profilePicture")
+                existing.updated_at = datetime.now()
+            else:
+                u = User(
+                    username=username,
+                    twitter_id=user_data.get("id"),
+                    display_name=user_data.get("name"),
+                    followers=user_data.get("followers"),
+                    following=user_data.get("following"),
+                    bio=user_data.get("description"),
+                    tweet_count=user_data.get("statusesCount"),
+                    avatar=user_data.get("profilePicture"),
+                    verified=user_data.get("isBlueVerified", False),
+                )
+                session.add(u)
+            session.commit()
+            return {"ok": True, "followers": user_data.get("followers")}
+        except Exception as e:
+            session.rollback()
+            return {"ok": False, "error": str(e)}
+        finally:
+            session.close()
+
+    def fetch_tweets(self, username: str, max_pages: int = 50, cursor: str = "") -> dict:
+        """拉取推文列表（带翻页），写入 DB。返回统计。"""
+        total_new = 0
+        pages = 0
+
+        for page in range(max_pages):
+            params = {
+                "query": f"from:{username}",
+                "queryType": "Latest",
+            }
+            if cursor:
+                params["cursor"] = cursor
+
+            try:
+                data = self._get("/twitter/tweet/advanced_search", params)
+            except Exception as e:
+                return {"ok": False, "error": str(e), "pages": pages, "total_new": total_new, "cursor": cursor}
+
+            tweets = data.get("tweets", [])
+            saved = self._save_tweets(username, tweets)
+            total_new += saved
+            pages += 1
+
+            if not data.get("has_next_page"):
+                break
+            cursor = data.get("next_cursor", "")
+            if not cursor:
+                break
+
+        return {"ok": True, "pages": pages, "total_new": total_new, "cursor": cursor}
+
+    def _save_tweets(self, username: str, api_tweets: list[dict]) -> int:
+        """将 API 推文写入 DB，去重。返回新入库数。"""
+        session = db.get_session()
+        saved = 0
+
+        # 确保用户存在
+        user = session.query(User).filter(User.username == username).first()
+        if not user:
+            user = User(username=username, display_name=username)
+            session.add(user)
+            session.flush()
+
+        for t in api_tweets:
+            tw_id = t.get("id")
+            if not tw_id:
+                continue
+            # 去重
+            existing = session.query(Tweet).filter(Tweet.tweet_id == tw_id).first()
+            if existing:
+                continue
+
+            # 处理 quoted tweet（引用）
+            qt = t.get("quoted_tweet")
+            # 处理 retweeted tweet（转发）
+            rt = t.get("retweeted_tweet")
+
+            created = _parse_twitter_time(t.get("createdAt", ""))
+
+            tw = Tweet(
+                tweet_id=tw_id,
+                user_id=user.id,
+                text=t.get("text", ""),
+                created_at_twitter=created,
+                is_reply=t.get("isReply", False),
+                is_retweet=rt is not None,
+                is_quote=qt is not None,
+                replied_to_tweet_id=t.get("inReplyToId"),
+                replied_to_user=t.get("inReplyToUsername"),
+                quoted_tweet_id=qt.get("id") if qt else None,
+                quoted_user=qt.get("author", {}).get("userName") if qt else None,
+                quoted_text=qt.get("text") if qt else None,
+                like_count=t.get("likeCount", 0),
+                retweet_count=t.get("retweetCount", 0),
+                reply_count=t.get("replyCount", 0),
+                quote_count=t.get("quoteCount", 0),
+                view_count=t.get("viewCount", 0),
+                url=t.get("url", ""),
+                extra_data={
+                    "bookmark_count": t.get("bookmarkCount", 0),
+                    "lang": t.get("lang", ""),
+                    "source": t.get("source", ""),
+                    "conversation_id": t.get("conversationId"),
+                },
+            )
+            session.add(tw)
+            saved += 1
+
+        session.commit()
+        session.close()
+        return saved
+
+
+def _parse_twitter_time(s: str) -> datetime:
+    """解析 'Tue May 26 06:37:31 +0000 2026' → datetime。"""
+    if not s:
+        return datetime.now()
+    try:
+        return datetime.strptime(s, "%a %b %d %H:%M:%S %z %Y")
+    except ValueError:
+        return datetime.now()

@@ -660,7 +660,6 @@ async def card_data(name: str):
         html = card.render(data)
         _set_cached_card_html(name, html)
         return HTMLResponse(content=html)
-        return HTMLResponse(content=html)
     except Exception as e:
         return HTMLResponse(content=f'<div class="card"><div class="flex"><div class="status-dot err"></div><span class="text-secondary">{name}: {e}</span></div></div>')
 
@@ -670,7 +669,7 @@ async def card_action(name: str, payload: dict = None):
     """处理卡片交互动作（如 daemon toggle）。"""
     if name == "daemon" and payload and payload.get("action") == "toggle":
         try:
-            import subprocess, sys, textwrap, time
+            import subprocess, sys, textwrap
             from pathlib import Path
             from src.cards import get_card
             card = get_card("daemon")
@@ -683,37 +682,39 @@ async def card_action(name: str, payload: dict = None):
                 import sys, json, time
                 from pathlib import Path
                 sys.path.insert(0, r'{Path.cwd()}')
-                from src.storage.database import db
-                from src.storage.models import Tweet, PipelineTask
-                db.init_db()
-                session = db.get_session()
-                last_id = 0
+                from src.crawler.twitterapi_fetcher import TwitterAPIFetcher
+                # 监控目标用户
+                USERS = ['TJ_Research', 'dearbaibabybus']
+                BUDGET = 20
                 state = Path('data/auto_scheduler_state.json')
+                st = {{}}
                 if state.exists():
-                    last_id = json.loads(state.read_text()).get('last_id', 0)
-                budget = 20
+                    st = json.loads(state.read_text())
+                # 轮转抓取模式：每次只拉一个用户，轮流
+                idx = st.get('user_idx', 0)
+                fetcher = TwitterAPIFetcher()
                 today = time.strftime('%Y-%m-%d')
                 while True:
                     try:
-                        new_tweets = session.query(Tweet).filter(Tweet.id > last_id, Tweet.text != None, Tweet.text != '').order_by(Tweet.id).all()
-                        today_count = session.query(PipelineTask).filter(PipelineTask.task_type == 'analyze', PipelineTask.created_at >= today).count()
-                        for tw in new_tweets:
-                            if today_count >= budget: break
-                            if session.query(PipelineTask).filter(PipelineTask.task_type == 'filter', PipelineTask.payload.contains(str(tw.id))).first(): continue
-                            t = PipelineTask(task_type='filter', status='pending', payload=json.dumps({{'action': 'filter_single', 'tweet_id': tw.id}}))
-                            session.add(t); today_count += 1
-                        if new_tweets:
-                            session.commit()
-                            last_id = new_tweets[-1].id
-                            state.write_text(json.dumps({{'last_id': last_id, 'updated': time.strftime('%Y-%m-%d %H:%M:%S')}}))
-                        session.close()
-                        time.sleep(30)
-                        session = db.get_session()
+                        username = USERS[idx % len(USERS)]
+                        st['user_idx'] = (idx + 1) % len(USERS)
+                        st['updated'] = time.strftime('%Y-%m-%d %H:%M:%S')
+                        # 拉 1 页新推文
+                        cursor = st.get(f'cursor_{{username}}', '')
+                        res = fetcher.fetch_tweets(username, max_pages=1, cursor=cursor)
+                        if res.get('ok'):
+                            st[f'cursor_{{username}}'] = res.get('cursor', '')
+                            st['total_fetched'] = st.get('total_fetched', 0) + res.get('total_new', 0)
+                            print(f"[DAEMON] {{username}}: +{{res.get('total_new',0)}} tweets")
+                        else:
+                            print(f"[DAEMON] {{username}}: {{res.get('error','')}}")
+                        state.write_text(json.dumps(st, ensure_ascii=False))
+                        idx += 1
+                        time.sleep(60)  # 控制频率
                         today = time.strftime('%Y-%m-%d')
                     except Exception as exc:
                         print('[DAEMON] ' + str(exc))
-                        session.rollback()
-                        break
+                        time.sleep(120)
                 """)
                 proc = subprocess.Popen([sys.executable, "-c", inline], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
                 card._proc = proc
