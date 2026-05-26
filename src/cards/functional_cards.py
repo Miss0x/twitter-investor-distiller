@@ -114,6 +114,7 @@ class CryptoCard(Card):
     tab = "insights"
     endpoint = "/api/crypto"
     refresh = 300
+    template = "crypto.html"
 
     def get_data(self, **params) -> dict:
         import re as _re
