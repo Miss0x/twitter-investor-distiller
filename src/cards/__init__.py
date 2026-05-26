@@ -33,3 +33,4 @@ from . import data_cards     # noqa: E402, F401
 from . import interactive_cards  # noqa: E402, F401
 from . import pipeline_control   # noqa: E402, F401
 from . import tool_cards     # noqa: E402, F401
+from . import functional_cards  # noqa: E402, F401

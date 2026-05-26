@@ -743,11 +743,18 @@ async def card_action(name: str, payload: dict = None):
         try:
             import json as _json
             from pathlib import Path as _Path
+            token = payload.get("token", "")
+            chat_id = payload.get("chat_id", "")
             _Path("data/telegram_config.json").write_text(_json.dumps({
-                "bot_token": payload.get("token", ""),
-                "chat_id": payload.get("chat_id", "")
+                "bot_token": token,
+                "chat_id": chat_id
             }, ensure_ascii=False, indent=2), encoding="utf-8")
             _card_cache.pop("telegram", None)
+            # 如果是测试消息
+            if payload.get("action") == "test":
+                import requests as _req
+                _req.post(f"https://api.telegram.org/bot{token}/sendMessage",
+                          json={"chat_id": chat_id, "text": "✅ Twitter Investor Distiller 测试消息成功！"})
             return {"ok": True}
         except Exception as e:
             return {"ok": False, "error": str(e)}
@@ -769,6 +776,10 @@ async def card_action(name: str, payload: dict = None):
             return {'ok': True, 'total': result.get('total_new', 0)}
         except Exception as e:
             return {"ok": False, "error": str(e)}
+    if name == "pipeline_execute" and payload:
+        return _handle_pipeline_action(payload)
+    if name == "script_runner" and payload:
+        return _handle_script_run(payload)
     return {"ok": False, "error": "unknown action"}
 
 
@@ -932,6 +943,41 @@ def _handle_fetch_control(payload: dict) -> dict:
     return f.fetch_tweets(user, max_pages=pages, since_ts=since_ts, until_ts=until_ts)
 
 
+def _handle_pipeline_action(payload: dict) -> dict:
+    """处理流水线执行动作。"""
+    import subprocess as _sp
+    action = payload.get("action", "")
+    try:
+        if action == "seed":
+            _sp.run(["python", "scripts/seed_tasks.py"], capture_output=True, text=True, cwd=Path.cwd(), timeout=30)
+        elif action == "filter_scan":
+            _sp.run(["python", "scripts/run_filter.py"], capture_output=True, text=True, cwd=Path.cwd(), timeout=30)
+        else:
+            # 执行特定类型任务
+            from src.pipeline.task_executor import execute_tasks
+            result = execute_tasks(action, limit=20)
+            return {"ok": True, "result": str(result)}
+        return {"ok": True}
+    except Exception as e:
+        return {"ok": False, "error": str(e)}
+
+
+def _handle_script_run(payload: dict) -> dict:
+    """运行 scripts/ 下的脚本。"""
+    import subprocess as _sp
+    script = payload.get("script", "")
+    if not script or "/" in script or ".." in script:
+        return {"ok": False, "error": "invalid script name"}
+    try:
+        r = _sp.run(["python", f"scripts/{script}"], capture_output=True, text=True, cwd=Path.cwd(), timeout=90)
+        output = (r.stdout + r.stderr)[:500]
+        return {"ok": r.returncode == 0, "output": output}
+    except _sp.TimeoutExpired:
+        return {"ok": False, "error": "脚本超时(90s)"}
+    except Exception as e:
+        return {"ok": False, "error": str(e)}
+
+
 @app.get("/", response_class=HTMLResponse)
 async def serve_dashboard():
     """服务模块化仪表盘主页。"""
@@ -941,6 +987,15 @@ async def serve_dashboard():
         content=base.read_text(encoding="utf-8"),
         headers={"Cache-Control": "no-cache, no-store, must-revalidate"}
     )
+
+
+@app.get("/timeline/{path:path}", response_class=HTMLResponse)
+async def serve_timeline(path: str):
+    """服务 timeline 图表 HTML 文件。"""
+    fp = Path("data/timeline") / path
+    if fp.exists() and fp.suffix == ".html":
+        return HTMLResponse(content=fp.read_text(encoding="utf-8"))
+    raise HTTPException(status_code=404, detail="not found")
 
 
 if __name__ == "__main__":

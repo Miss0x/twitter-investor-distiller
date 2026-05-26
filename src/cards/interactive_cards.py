@@ -53,9 +53,16 @@ class TelegramCard(Card):
 <div class="flex" style="gap:8px">
   <input id="tg_token" placeholder="Bot Token" style="flex:1;font-size:12px;padding:4px 8px" />
   <input id="tg_chatid" placeholder="Chat ID" style="width:140px;font-size:12px;padding:4px 8px" />
+  <button class="btn" onclick="sendTestMsg()">测试</button>
   <button class="btn" onclick="saveTelegram()">保存</button>
 </div>
 <script>
+async function sendTestMsg(){{
+  var t=document.getElementById("tg_token").value,c=document.getElementById("tg_chatid").value;
+  if(!t||!c)return;
+  await fetch("/cards/telegram/action",{{method:"POST",headers:{{"Content-Type":"application/json"}},body:JSON.stringify({{token:t,chat_id:c,action:"test"}})}});
+  alert("测试消息已发送，请检查 Telegram");
+}}
 async function saveTelegram(){{
   var t=document.getElementById("tg_token").value,c=document.getElementById("tg_chatid").value;
   if(!t||!c)return;
