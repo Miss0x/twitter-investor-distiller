@@ -1,4 +1,3 @@
-﻿TEMPLATE_DIR = Path(__file__).parent.parent / "templates"  # 模板根目录
 """卡片基类 — 所有模块化卡片的统一接口。
 
 每个卡片实现三个方法即可接入 dashboard：
@@ -22,16 +21,16 @@ TEMPLATE_DIR = Path(__file__).parent.parent / "templates"
 
 class Card(ABC):
     name: str = ""
-    tab: str = "dashboard"
+    tab: str = ""
     endpoint: str = ""
-    template: str = ""
     refresh: int = 0
-    actions: dict[str, Any] = {}
+    template: str = ""
 
-    @abstractmethod
     def get_data(self, **params) -> dict[str, Any]:
-        """获取卡片数据。params 来自 URL query string 或 POST body。"""
-        ...
+        return {}
+
+    def _render_html(self, data: dict[str, Any]) -> str:
+        return f"<pre>{data}</pre>"
 
     def render(self, data: dict[str, Any]) -> str:
         """渲染卡片 HTML。优先用 Jinja2 模板，否则用 _render_html。"""
@@ -46,18 +45,6 @@ class Card(ABC):
                 pass
         return self._render_html(data)
 
-    def _render_html(self, data: dict[str, Any]) -> str:
-        """子类可覆盖以自定义渲染。默认显示 JSON。"""
-        import json as _json
-        return f'<pre style="font-size:12px">{_json.dumps(data, indent=2, ensure_ascii=False)}</pre>'
-
-    def to_dict(self) -> dict[str, Any]:
-        return {
-            "name": self.name,
-            "tab": self.tab,
-            "endpoint": self.endpoint,
-            "refresh": self.refresh,
-            "has_actions": bool(self.actions),
-        }
-
-
+    @staticmethod
+    def handle_action(payload: dict) -> dict:
+        return {"ok": False, "error": "action not supported"}

@@ -15,7 +15,7 @@ class ConsensusCard(Card):
         for fp in Path("data/consensus").glob("*_consensus.json"):
             entries = json.loads(fp.read_text(encoding="utf-8"))
             if entries:
-                e = {**entries[-1], "ticker": fp.stem.replace("_consensus", "")
+                e = {**entries[-1], "ticker": fp.stem.replace("_consensus", "")}
                 results.append(e)
         results.sort(key=lambda x: x.get("consensus_score", 0), reverse=True)
         multi = sum(1 for r in results if len(r.get("analysts_in_window", [])) >= 2)
