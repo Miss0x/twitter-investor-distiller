@@ -884,7 +884,10 @@ async def serve_dashboard():
     """服务模块化仪表盘主页。"""
     from src.cards.base import TEMPLATE_DIR
     base = TEMPLATE_DIR.parent / "templates" / "base.html"
-    return HTMLResponse(content=base.read_text(encoding="utf-8"))
+    return HTMLResponse(
+        content=base.read_text(encoding="utf-8"),
+        headers={"Cache-Control": "no-cache, no-store, must-revalidate"}
+    )
 
 
 if __name__ == "__main__":
