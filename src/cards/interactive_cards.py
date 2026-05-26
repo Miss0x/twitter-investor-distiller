@@ -40,12 +40,29 @@ class TelegramCard(Card):
     def get_data(self, **params) -> dict:
         fp = Path("data/telegram_config.json")
         cfg = json.loads(fp.read_text(encoding="utf-8")) if fp.exists() else {}
-        return {"configured": bool(cfg.get("bot_token")), "chat_id": cfg.get("chat_id", "")}
+        return {"configured": bool(cfg.get("bot_token")), "chat_id": cfg.get("chat_id", ""),
+                "token_preview": (cfg.get("bot_token", "")[:12] + "...") if cfg.get("bot_token") else ""}
 
     def _render_html(self, data: dict) -> str:
         status = "已配置" if data["configured"] else "未配置"
         color = "ok" if data["configured"] else "warn"
-        return f'<div class="card-title">Telegram 通知</div><div class="flex"><div class="status-dot {color}"></div><span style="font-size:14px;font-weight:500">{status}</span></div>'
+        token_hint = data.get("token_preview", "")
+        return f'''<div class="card-title">Telegram 通知</div>
+<div class="flex mb-sm"><div class="status-dot {color}"></div><span style="font-size:14px;font-weight:500">{status}</span></div>
+<div class="text-secondary mb-sm" style="font-size:11px">{token_hint} → Chat: {data["chat_id"]}</div>
+<div class="flex" style="gap:8px">
+  <input id="tg_token" placeholder="Bot Token" style="flex:1;font-size:12px;padding:4px 8px" />
+  <input id="tg_chatid" placeholder="Chat ID" style="width:140px;font-size:12px;padding:4px 8px" />
+  <button class="btn" onclick="saveTelegram()">保存</button>
+</div>
+<script>
+async function saveTelegram(){{
+  var t=document.getElementById("tg_token").value,c=document.getElementById("tg_chatid").value;
+  if(!t||!c)return;
+  await fetch("/cards/telegram/action",{{method:"POST",headers:{{"Content-Type":"application/json"}},body:JSON.stringify({{token:t,chat_id:c}})}});
+  location.reload();
+}}
+</script>'''
 
 
 @register
@@ -71,16 +88,34 @@ class RolePickerCard(Card):
 
     def _render_html(self, data: dict) -> str:
         analysts_opts = "".join(f'<option>{a}</option>' for a in data["analysts"])
-        sector_opts = "".join(f'<option value="{k}">{k} ({len(v)}只)</option>' for k, v in data.get("sectors", {}).items())
+        sectors = data.get("sectors", {})
+        sector_opts = "".join(f'<option value="{k}">{k} ({len(v)}只)</option>' for k, v in sectors.items())
+        # 第一个行业的股票
+        first_sector = list(sectors.keys())[0] if sectors else ""
+        first_stocks = ", ".join(sectors.get(first_sector, [])[:15]) if first_sector else ""
         return f'''<div class="card-title">角色代入选股</div>
 <div class="grid grid-3 mb-sm">
-  <div><div class="text-secondary mb-sm">分析师</div><select>{analysts_opts}</select></div>
+  <div><div class="text-secondary mb-sm">分析师</div><select id="rp_analyst">{analysts_opts}</select></div>
   <div><div class="text-secondary mb-sm">行业板块</div><select id="rp_sector" onchange="updatePool()">{sector_opts}</select></div>
-  <div style="display:flex;align-items:flex-end"><button class="btn btn-primary" style="width:100%" onclick="genPick()">生成方案</button></div>
+  <div style="display:flex;align-items:flex-end"><button class="btn btn-primary" style="width:100%" onclick="generatePick()">生成方案</button></div>
 </div>
-<div class="text-secondary mb-sm">手动加减股票 <input style="width:100%;margin-top:4px" placeholder="可选: LRCX, AMAT, -INTC" /></div>
-<div id="rp_pool" class="text-secondary" style="font-size:11px"></div>
-<div id="rp_result"></div>'''
+<div class="text-secondary mb-sm">手动加减 <input id="rp_custom" style="width:100%;margin-top:4px" placeholder="可选: LRCX, AMAT, -INTC" /></div>
+<div id="rp_pool" class="text-secondary" style="font-size:11px;word-break:break-all">池内: {first_stocks}</div>
+<div id="rp_result" style="margin-top:12px"></div>
+<script>
+var SECTORS = {json.dumps(sectors)};
+function updatePool(){{ var s=document.getElementById("rp_sector").value; var t=SECTORS[s]||[]; document.getElementById("rp_pool").innerText="池内: "+t.join(", "); }}
+async function generatePick(){{ 
+  var btn=event.target; btn.disabled=true; btn.innerText="生成中...";
+  document.getElementById("rp_result").innerHTML='<div class="flex"><div class="spinner"></div><span class="text-secondary">AI 思考中...</span></div>';
+  try{{
+    var r=await fetch("/cards/role_picker/action",{{method:"POST",headers:{{"Content-Type":"application/json"}},body:JSON.stringify({{analyst:document.getElementById("rp_analyst").value,sector:document.getElementById("rp_sector").value,custom:document.getElementById("rp_custom").value}})}});
+    var d=await r.json();
+    document.getElementById("rp_result").innerHTML=d.ok?d.html:'<div class="text-secondary">错误: '+d.error+"</div>";
+  }}catch(e){{document.getElementById("rp_result").innerHTML='<div class="text-secondary">网络错误</div>';}}
+  btn.disabled=false; btn.innerText="生成方案";
+}}
+</script>'''
 
 
 @register
@@ -98,11 +133,25 @@ class PortfolioCard(Card):
 
     def _render_html(self, data: dict) -> str:
         return '''<div class="card-title">持股顾问</div>
-<div class="flex mb-sm">
-  <button class="btn" style="border-color:var(--text-primary)">CSV 文件</button>
-  <button class="btn">文字输入</button>
-  <button class="btn">截图上传</button>
-  <div style="flex:1"></div>
-  <button class="btn btn-primary">分析</button>
+<div class="mb-sm" style="display:flex;gap:6px">
+  <textarea id="pf_text" rows="3" style="flex:1;font-size:12px;padding:8px" placeholder="输入持仓: NVDA 100股 成本$110&#10;AVGO 50股 成本$320&hellip;"></textarea>
 </div>
-<div style="padding:30px;border:0.5px dashed var(--border-tertiary);border-radius:var(--radius-md);text-align:center" class="text-secondary">拖放文件或点击上传</div>'''
+<div class="flex" style="gap:8px">
+  <button class="btn btn-primary" onclick="analyzePortfolio()">分析持仓</button>
+  <span class="text-secondary" style="font-size:11px">也支持上传图片/CSV</span>
+</div>
+<div id="pf_result" style="margin-top:12px"></div>
+<script>
+async function analyzePortfolio(){
+  var v=document.getElementById("pf_text").value;
+  if(!v.trim())return;
+  var btn=event.target; btn.disabled=true; btn.innerText="分析中...";
+  document.getElementById("pf_result").innerHTML='<div class="flex"><div class="spinner"></div><span class="text-secondary">AI 分析中...</span></div>';
+  try{
+    var r=await fetch("/cards/portfolio/action",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({text:v})});
+    var d=await r.json();
+    document.getElementById("pf_result").innerHTML=d.ok?d.html:'<div class="text-secondary">错误: '+d.error+"</div>";
+  }catch(e){document.getElementById("pf_result").innerHTML='<div class="text-secondary">网络错误</div>';}
+  btn.disabled=false; btn.innerText="分析持仓";
+}
+</script>'''

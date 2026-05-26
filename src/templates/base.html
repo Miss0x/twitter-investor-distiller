@@ -136,7 +136,7 @@ async function loadCards(tab) {
     }
     // 从缓存渲染
     const el = document.getElementById('card-' + name);
-    if (el) el.outerHTML = cache[name];
+    if (el) el.innerHTML = cache[name];
   });
 
   await Promise.all(promises);
@@ -157,7 +157,7 @@ async function autoRefresh() {
         cache[name] = await resp.text();
         LAST_FETCH[name] = Date.now();
         const el = document.getElementById('card-' + name);
-        if (el) el.outerHTML = cache[name];
+        if (el) el.innerHTML = cache[name];
       } catch(e) {}
     }
   }
@@ -181,7 +181,7 @@ async function toggleDaemon() {
     const resp = await fetch('/cards/daemon');
     cache.daemon = await resp.text();
     const el = document.getElementById('card-daemon');
-    if (el) el.outerHTML = cache.daemon;
+    if (el) el.innerHTML = cache.daemon;
   } catch(e) {}
 }
 
