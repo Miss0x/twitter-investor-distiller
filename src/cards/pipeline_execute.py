@@ -1,4 +1,19 @@
-"""流水线执行 + 画像生成 — 完整交互卡片"""
+"""
+流水线执行面板 + 画像生成卡片
+================================
+
+包含两个核心卡片：
+  1. PipelineExecuteCard — 流水线任务管理面板
+     - 展示所有流水线任务（filter/analyze/fetch_price/fetch_crypto/portrait/clean）
+     - 支持按类型分组查看、全选/取消、执行选中任务、重试/跳过失败任务
+     - 内嵌"数据清洗"tab 用于管理资产代码别名映射
+     - refresh=15s 高频刷新以实时追踪任务进度
+
+  2. PortraitGenerateCard — 分析师画像生成卡片
+     - 选择用户、时间窗口（1个月~全量）、自定义日期范围
+     - 一键生成画像并追踪生成状态
+     - refresh=0（手动触发，不自动刷新）
+"""
 import csv
 import html
 import json
@@ -9,12 +24,47 @@ from src.cards import register
 
 @register
 class PipelineExecuteCard(Card):
+    """
+    流水线执行面板卡片。
+
+    属性:
+        name="pipeline_execute"  — 唯一标识
+        tab="pipeline"           — 属于流水线标签页
+        endpoint="/api/pipeline_execute" — API 路由
+        refresh=15               — 每 15 秒自动刷新（流水线状态频繁变化）
+    """
+
     name = "pipeline_execute"
     tab = "pipeline"
     endpoint = "/api/pipeline_execute"
     refresh = 15
 
     def get_data(self, **params) -> dict:
+        """
+        从 PipelineTask 表和 data/stock_alias.csv 获取数据。
+
+        返回结构:
+            {
+                "groups": {            # 按 task_type 分组的任务列表
+                    "filter": [{id, task_type, status, payload, error_msg, created_at}, ...],
+                    "analyze": [...],
+                    "fetch_price": [...],
+                    "fetch_crypto": [...],
+                    "portrait": [...],
+                    "clean": [...]     # clean 类型用于数据清洗
+                },
+                "running": bool,       # 是否有流水线正在运行
+                "progress": dict,      # 当前进度 {msg, done, total}
+                "type_counts": dict,   # 各类型任务总数 {filter: N, analyze: M, ...}
+                "types": [...],        # 所有类型名列表
+                "alias_stats": {       # 资产别名校准统计
+                    "confirmed": int,  # 已确认映射数
+                    "pending": int,    # 待人工判断数
+                    "skipped": int,    # 已跳过数
+                    "total": int       # 总数
+                }
+            }
+        """
         try:
             from src.storage.database import db
             from src.storage.models import PipelineTask
@@ -66,6 +116,20 @@ class PipelineExecuteCard(Card):
             return {"groups": {}, "running": False, "progress": {}, "types": [], "alias_stats": {}}
 
     def _render_html(self, data: dict) -> str:
+        """
+        生成流水线执行面板的完整 HTML。
+
+        HTML 结构概览:
+            1. 标题栏 — "流水线执行" + 运行状态指示灯
+            2. 统计标签行 — 各类型任务数量 badge
+            3. 主 tab 按钮组 — 切换 filter/analyze/portrait/clean 视图
+               (fetch_price/fetch_crypto 嵌套在 analyze 下作为前置子功能)
+            4. 操作按钮行 — 种子任务按钮（seedTasksPE）
+            5. 各类型任务容器 — 每个 tab 对应一个 pe-type-{t} 容器:
+               - 待办表格（含复选框、ID、详情列） + 全选/取消/执行选中按钮
+               - 失败表格（含重试/跳过按钮）
+               - clean 类型特殊处理: 内嵌资产代码库完整管理界面
+        """
         groups = data.get("groups", {})
         running = data.get("running", False)
         progress = data.get("progress", {})
@@ -199,8 +263,20 @@ class PipelineExecuteCard(Card):
 </div>'''
 
 
+# ────────────────────────────────────────────────────────────
+# 辅助函数
+# ────────────────────────────────────────────────────────────
+
 def _enrich_tweet_texts(groups: dict) -> None:
-    """批量查询推文文本，注入到 filter / analyze 任务的 payload 中"""
+    """批量查询推文文本并注入到 filter / analyze 任务的 payload 中。
+
+    从 data/twitter_data.db 的 tweets 表按 tweet_id 批量查询正文和作者，
+    将结果注入到 payload["_text"] 和 payload["_user"] 字段，
+    供 _format_label() 和渲染时使用。
+
+    采用分批查询（每批 900 条），使用只读 WAL 模式避免锁冲突。
+    查询失败时仅记录 warning 日志，不中断流程。
+    """
     # 收集所有 tweet_id
     tweet_ids = set()
     for items in groups.values():
@@ -246,7 +322,23 @@ def _enrich_tweet_texts(groups: dict) -> None:
 
 
 def _format_label(task_type: str, payload: dict) -> str:
-    """将任务 payload 转为可读中文描述"""
+    """将任务 payload 转换为可读的中文描述文本。
+
+    根据 task_type 采用不同的格式化策略:
+      - filter:   优先展示注入的推文文本（@user + 正文预览），否则显示 action 名 + tweet_id
+      - analyze:  展示 tweet_id + 推文正文预览
+      - fetch_price:  展示 ticker 代码
+      - fetch_crypto: 展示加密货币 ticker
+      - portrait: 展示用户名 + 推文数量 + 标签
+      - clean:    展示数据清洗目标
+
+    参数:
+        task_type: 任务类型字符串（filter|analyze|fetch_price|fetch_crypto|portrait|clean）
+        payload:   任务 payload 字典，可能包含 _text, _user, tweet_id, ticker, username 等
+
+    返回:
+        str: 格式化的中文描述，最长约 60 字符
+    """
     # filter: 优先展示注入的推文文本
     if task_type == "filter":
         txt = payload.get("_text", "")
@@ -298,13 +390,33 @@ def _format_label(task_type: str, payload: dict) -> str:
     return "任务"
 
 
+# ────────────────────────────────────────────────────────────
+# 画像生成卡片
+# ────────────────────────────────────────────────────────────
+
 @register
 class PortraitGenerateCard(Card):
+    """
+    分析师画像生成卡片。
+
+    属性:
+        name="portrait_generate"  — 唯一标识
+        tab="portraits"           — 属于画像标签页
+        endpoint="/api/portrait_generate" — API 路由
+        refresh=0                 — 不自动刷新（手动触发画像生成）
+
+    用户可选择:
+      - 目标用户（从 data/users.json 加载或使用纯文本列表）
+      - 时间窗口: 1个月/3个月/6个月/1年/全量（WINDOWS 常量）
+      - 自定义日期范围（开始/结束日期）
+      - 画像标签（可选）
+    """
     name = "portrait_generate"
     tab = "portraits"
     endpoint = "/api/portrait_generate"
     refresh = 0
 
+    # 预定义时间窗口: (显示名, 天数, 描述)
     WINDOWS = [
         ("1个月", 30, "近一月"),
         ("3个月", 90, "近三月"),
@@ -314,6 +426,22 @@ class PortraitGenerateCard(Card):
     ]
 
     def get_data(self, **params) -> dict:
+        """
+        获取最近 20 条 portrait 类型任务及用户列表。
+
+        数据来源:
+            - PipelineTask 表（task_type="portrait"）
+            - data/users.json（用户列表）
+
+        返回结构:
+            {
+                "tasks": [
+                    {id: int, status: str, payload: dict, created_at: str},
+                    ...
+                ],
+                "users": ["TJ_Research", ...]   # 监控用户列表
+            }
+        """
         try:
             from src.storage.database import db
             from src.storage.models import PipelineTask
@@ -332,6 +460,16 @@ class PortraitGenerateCard(Card):
         return {"tasks": items, "users": _load_users_config()}
 
     def _render_html(self, data: dict) -> str:
+        """
+        生成画像生成界面的 HTML。
+
+        HTML 结构概览:
+            1. 标题栏 — "画像生成" + 已完成/待处理统计
+            2. 用户选择器 — <select> 下拉框
+            3. 时间窗口按钮组 — 1个月/3个月/6个月/1年/全量
+            4. 自定义日期范围 — 开始/结束日期输入
+            5. 画像标签输入 + "生成画像"按钮
+        """
         users = data.get("users", [])
         pending = [t for t in data.get("tasks", []) if t["status"] == "pending"]
         done = [t for t in data.get("tasks", []) if t["status"] == "done"]
@@ -369,7 +507,14 @@ class PortraitGenerateCard(Card):
 
 
 def _load_users_config():
-    """从 data/users.json 读取监控用户列表。"""
+    """
+    从 data/users.json 读取监控用户列表。
+
+    该列表定义 Dashboard 关注的所有 Twitter 分析师用户名。
+
+    返回:
+        list[str]: 用户名列表，文件不存在时返回默认列表
+    """
     import json as _j
     from pathlib import Path as _P
     fp = _P("data/users.json")

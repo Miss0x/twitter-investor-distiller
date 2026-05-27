@@ -1,4 +1,13 @@
-"""流水线执行 + 资产代码 + 加密货币 + 脚本触发 + 情绪时间线 — 功能卡片"""
+"""
+功能卡片组（Functional Cards）
+================================
+
+包含四个数据管理/信号展示卡片：
+  1. AssetAliasCard    — 资产别名映射管理（股票/代码关联表格）
+  2. CryptoCard        — 加密货币价格 + 推文提及信号
+  3. ScriptRunnerCard  — 后台分析脚本触发器（信号/清洗/网络等）
+  4. TimelineCard      — 情绪时间线图表浏览
+"""
 import json, csv, time
 from pathlib import Path
 from collections import Counter
@@ -6,19 +15,65 @@ from src.cards.base import Card
 from src.cards import register
 
 
+# ────────────────────────────────────────────────────────────
+# 工具函数
+# ────────────────────────────────────────────────────────────
+
 def _esc_js(s: str) -> str:
-    """转义字符串用于 JS onclick 属性中，防注入。"""
+    """
+    JS 字符串安全转义函数。
+
+    将任意字符串转为安全的 JavaScript 字符串字面量，
+    用于 onclick 属性中防止 XSS/注入攻击。
+    使用 json.dumps 进行基础转义，再额外转义单引号。
+    """
     return json.dumps(str(s))[1:-1].replace("'", "\\'")
 
 
 @register
 class AssetAliasCard(Card):
+    """
+    资产别名映射管理卡片。
+
+    管理分析师推文中提到的"资产别名"与标准 ticker 代码的映射关系。
+    例如："纳指" → NQ（纳斯达克指数），"苹果" → AAPL。
+
+    别名有三种状态:
+      - 已确认(confirmed): ticker 已填写，映射明确
+      - 待判断(pending): ticker 为空且未被跳过，需人工确认
+      - 已跳过(skipped): 标注为 SKIP|xxx，表示该别名不需要映射
+
+    属性:
+        name="asset_alias"       — 唯一标识
+        tab="pipeline"           — 属于流水线标签页
+        endpoint="/api/asset_alias" — API 路由
+        refresh=300              — 每 5 分钟自动刷新
+    """
     name = "asset_alias"
     tab = "pipeline"
     endpoint = "/api/asset_alias"
     refresh = 300
 
     def get_data(self, **params) -> dict:
+        """
+        从 data/stock_alias.csv 读取别名映射数据。
+
+        CSV 格式: alias, ticker, notes （不含表头，# 开头的行视为注释）
+        数据按 ticker 是否为空和 notes 是否以 SKIP 开头分为三类。
+
+        返回结构:
+            {
+                "aliases": [{alias, ticker, type}, ...],  # 全部别名
+                "count": int,                                # 总条数
+                "confirmed": [...],                          # 已确认列表
+                "pending": [...],                            # 待判断列表
+                "skipped": [...],                            # 已跳过列表
+                "n_confirmed": int, "n_pending": int, "n_skipped": int,
+                "known_crypto": ["BTC","ETH",...],           # 已知加密货币列表
+                "known_etf": ["SPY","QQQ",...],              # 已知 ETF 列表
+                "known_index": ["SPX","NDX",...]             # 已知指数列表
+            }
+        """
         aliases = []
         fp = Path("data/stock_alias.csv")
         if fp.exists():
@@ -43,6 +98,17 @@ class AssetAliasCard(Card):
                 "known_index": ["SPX","NDX","DJI","RUT","VIX"]}
 
     def _render_html(self, data: dict) -> str:
+        """
+        生成资产代码库管理界面的 HTML。
+
+        HTML 结构概览:
+            1. 四格统计面板 — 总映射/已确认/待判断/已跳过
+            2. 添加/编辑表单 — alias + ticker + 备注 输入框
+            3. 已确认映射表格 — alias | ticker | 备注 | 操作(编辑/删除)
+            4. 待人工判断表格 — alias | 系统标注 | 操作(填代码/跳过/删除)
+            5. 已跳过表格（可折叠）— alias | 系统标注 | 操作(恢复)
+            6. 底部提示 — 内置识别列表
+        """
         count = data["count"]
         confirmed = data["confirmed"]
         pending = data["pending"]
@@ -128,6 +194,18 @@ class AssetAliasCard(Card):
 
 @register
 class CryptoCard(Card):
+    """
+    加密货币信号卡片。
+
+    展示已抓取的加密货币价格 + 分析师推文中 $TICKER 的提及频率（信号强度代理指标）。
+
+    属性:
+        name="crypto"            — 唯一标识
+        tab="insights"           — 属于分析洞察标签页
+        endpoint="/api/crypto"   — API 路由
+        refresh=300              — 每 5 分钟自动刷新
+        template="crypto.html"   — 使用 Jinja2 模板渲染
+    """
     name = "crypto"
     tab = "insights"
     endpoint = "/api/crypto"
@@ -135,6 +213,28 @@ class CryptoCard(Card):
     template = "crypto.html"
 
     def get_data(self, **params) -> dict:
+        """
+        从 data/crypto_prices.json 和 twitter_data.db 获取数据。
+
+        数据来源:
+            - data/crypto_prices.json: Polygon.io 或类似 API 抓取的币价历史
+            - twitter_data.db tweets 表: 搜索 $BTC, $ETH 等模式匹配统计提及次数
+
+        返回结构:
+            {
+                "coins": {               # 各币种最新价格
+                    "BTC": {"price": float, "time": int},
+                    "ETH": {...},
+                    ...
+                },
+                "mentions": {            # 各币种在推文中的提及次数
+                    "BTC": int,
+                    "ETH": int,
+                    ...
+                },
+                "total_coins": int       # 有价格数据的币种总数
+            }
+        """
         import re as _re
         fp = Path("data/crypto_prices.json")
         prices = {}
@@ -169,6 +269,16 @@ class CryptoCard(Card):
         return {"coins": latest, "mentions": mentions, "total_coins": len(latest)}
 
     def _render_html(self, data: dict) -> str:
+        """
+        生成加密货币信号表格的 HTML（模板不存在时的 fallback）。
+
+        HTML 结构概览:
+            1. 标题栏 — "加密货币信号"
+            2. 概览行 — 覆盖币种数 + 分析师提及总次数
+            3. 数据表格 — 币种 | 价格(USD) | 推文信号(热议/提及N次/-) | 更新时间
+               按提及次数降序排列，价格作为次级排序键
+            4. 底部说明 — 信号来源说明
+        """
         import time as _time_module
         coins = data["coins"]
         mentions = data.get("mentions", {})
@@ -208,11 +318,31 @@ class CryptoCard(Card):
 
 @register
 class ScriptRunnerCard(Card):
-    name = "script_runner"
-    tab = "pipeline"
-    endpoint = "/api/script_runner"
-    refresh = 0
-    template = "script_runner.html"
+    """
+    脚本运行器卡片。
+
+    提供一键触发后台分析脚本的界面。
+    每个脚本按 group 分组展示（signal/analysis/viz/data），
+    通过模板渲染带参数字段的表单。
+
+    属性:
+        name="script_runner"       — 唯一标识
+        tab="pipeline"             — 属于流水线标签页
+        endpoint="/api/script_runner" — API 路由
+        refresh=0                  — 不自动刷新（手动触发）
+        template="script_runner.html" — Jinja2 模板
+
+    脚本列表（scripts dict）:
+        - 信号量化: compute_signals.py      → 生成 0-100 分信号评分
+        - 共识联动: compute_consensus.py    → 多分析师信号共识
+        - 板块轮动: compute_rotation.py     → 周聚合 Z-score 热点
+        - 准确率回溯: backtest_accuracy.py  → 30日胜率/夏普比率
+        - 异常检测: detect_anomaly.py       → KL 散度异常检测
+        - 关联网络: build_network.py        → 投资者互动关系图
+        - 情绪时间线: timeline_chart.py     → stance+价格双轴图表
+        - 基本面快照: fetch_fundamentals.py → PE/ROE/营收增速
+        - 分析清洗: clean_analysis.py       → 股票/币种代码校准
+    """
 
     def get_data(self, **params) -> dict:
         scripts = {
@@ -235,11 +365,27 @@ class ScriptRunnerCard(Card):
 
 @register
 class TimelineCard(Card):
-    name = "timeline"
-    tab = "insights"
-    endpoint = "/api/timeline"
-    refresh = 600
-    template = "timeline.html"
+    """
+    情绪时间线卡片。
+
+    浏览 data/timeline/ 目录下的情绪时间线 HTML 图表文件。
+    每张图表展示某位分析师对某资产的情绪 stance 变化与价格走势的双轴对比。
+
+    属性:
+        name="timeline"           — 唯一标识
+        tab="insights"            — 属于分析洞察标签页
+        endpoint="/api/timeline"  — API 路由
+        refresh=600               — 每 10 分钟自动刷新
+        template="timeline.html"  — Jinja2 模板
+
+    get_data() 返回结构:
+        {
+            "charts": {
+                "显示名": "文件名前缀",  # 用于构建 iframe src
+                ...
+            }
+        }
+    """
 
     def get_data(self, **params) -> dict:
         charts = {}

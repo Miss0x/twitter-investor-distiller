@@ -1,4 +1,13 @@
-"""Daemon + Telegram + 角色代入 + 持仓顾问 — 交互卡片"""
+"""
+交互卡片组（Interactive Cards）
+================================
+
+包含四个交互功能卡片：
+  1. DaemonCard     — 守护进程状态面板（自动拉取推文的后台服务）
+  2. TelegramCard   — Telegram 通知配置面板（bot token + chat ID）
+  3. RolePickerCard — 角色代入选股面板（选择分析师并生成投资方案）
+  4. PortfolioCard  — 持股顾问面板（输入持仓获取建议）
+"""
 import json, time
 from pathlib import Path
 from collections import defaultdict
@@ -8,13 +17,35 @@ from src.cards import register
 
 @register
 class DaemonCard(Card):
-    name = "daemon"
-    tab = "dashboard"
-    endpoint = "/api/daemon"
-    refresh = 5
-    template = "daemon.html"
+    """
+    守护进程状态卡片。
+
+    监控自动拉取推文的后台守护进程状态，展示当日采样进度。
+
+    属性:
+        name="daemon"            — 唯一标识
+        tab="dashboard"          — 属于主仪表盘标签页
+        endpoint="/api/daemon"   — API 路由
+        refresh=5                — 每 5 秒自动刷新（状态变化快）
+        template="daemon.html"   — Jinja2 模板
+    """
 
     def get_data(self, **params) -> dict:
+        """
+        从 auto_scheduler_state.json 和 DB 获取守护进程状态。
+
+        数据来源:
+            - data/auto_scheduler_state.json: running 标志、last_id 游标
+            - PipelineTask 表: 当日 analyze 任务计数
+
+        返回结构:
+            {
+                "running": bool,   # 守护进程是否正在运行
+                "last_id": int,    # 最后处理的推文 ID
+                "today": int,      # 当日已抽样推文数（analyze 任务数）
+                "budget": int      # 当日预算上限（目前固定 20）
+            }
+        """
         state = Path("data/auto_scheduler_state.json")
         running = json.loads(state.read_text()).get("running", False) if state.exists() else False
         last_id = json.loads(state.read_text()).get("last_id", 0) if state.exists() else 0
@@ -30,10 +61,24 @@ class DaemonCard(Card):
 
 @register
 class TelegramCard(Card):
-    name = "telegram"
-    tab = "dashboard"
-    endpoint = "/api/telegram"
-    template = "telegram.html"
+    """
+    Telegram 通知配置卡片。
+
+    管理 Telegram Bot 连接配置，用于推送分析结果通知。
+
+    属性:
+        name="telegram"           — 唯一标识
+        tab="dashboard"           — 属于主仪表盘标签页
+        endpoint="/api/telegram"  — API 路由
+        template="telegram.html"  — Jinja2 模板
+
+    get_data() 返回结构:
+        {
+            "configured": bool,       # Bot Token 是否已配置
+            "chat_id": str,           # 目标聊天 ID
+            "token_preview": str      # Bot Token 预览（前12字符+...）
+        }
+    """
 
     def get_data(self, **params) -> dict:
         fp = Path("data/telegram_config.json")
@@ -42,6 +87,15 @@ class TelegramCard(Card):
                 "token_preview": (cfg.get("bot_token", "")[:12] + "...") if cfg.get("bot_token") else ""}
 
     def _render_html(self, data: dict) -> str:
+        """
+        Telegram 配置界面 HTML（模板不存在时的 fallback）。
+
+        HTML 结构概览:
+            1. 标题栏 — "Telegram 通知"
+            2. 状态指示 — 已配置(绿点) / 未配置(黄点)
+            3. Token 预览 + Chat ID 信息
+            4. 表单区 — Bot Token 输入框 + Chat ID 输入框 + 测试/保存按钮
+        """
         status = "已配置" if data["configured"] else "未配置"
         color = "ok" if data["configured"] else "warn"
         token_hint = data.get("token_preview", "")
@@ -58,9 +112,27 @@ class TelegramCard(Card):
 
 @register
 class RolePickerCard(Card):
-    name = "role_picker"
-    tab = "insights"
-    endpoint = "/api/role_picker"
+    """
+    角色代入选股卡片。
+
+    选择一个分析师，AI 会以该分析师的风格和偏好生成投资组合方案。
+    分析师的分析结果文件（*_analyzed_cleaned.json）提供其关注股票池。
+
+    属性:
+        name="role_picker"        — 唯一标识
+        tab="insights"            — 属于分析洞察标签页
+        endpoint="/api/role_picker" — API 路由
+        refresh=0（默认）          — 不自动刷新
+
+    get_data() 返回结构:
+        {
+            "analysts": ["TJ_Research", ...],   # 可用分析师列表
+            "sectors": {                         # 行业板块 → 股票列表
+                "Technology / Semiconductors": ["NVDA", "AMD", ...],
+                ...
+            }
+        }
+    """
 
     def get_data(self, **params) -> dict:
         analysts = set()
@@ -70,9 +142,14 @@ class RolePickerCard(Card):
         return {"analysts": sorted(analysts), "sectors": self._sectors()}
 
     def _sectors(self) -> dict:
+        """
+        从 data/sector_map.json 加载行业-股票映射。
+        
+        按 (sector / industry) 组合分组，仅保留股票数 >= 3 的板块，
+        按规模降序排列。用于角色代入选股时的股票池来源。
+        """
         fp = Path("data/sector_map.json")
         if not fp.exists(): return {}
-        d = json.loads(fp.read_text(encoding="utf-8"))
         groups: dict = defaultdict(list)
         for ticker, v in d.items():
             label = f'{v.get("sector","Other")} / {v.get("industry","Other")}'
@@ -80,6 +157,15 @@ class RolePickerCard(Card):
         return {k: sorted(v) for k, v in sorted(groups.items(), key=lambda x: -len(x[1])) if len(v) >= 3}
 
     def _render_html(self, data: dict) -> str:
+        """
+        生成角色代入选股界面的 HTML（模板不存在时的 fallback）。
+
+        HTML 结构概览:
+            1. 标题栏 — "角色代入选股"
+            2. 三栏选择区: 分析师下拉框 + 行业板块下拉框 + 生成方案按钮
+            3. 手动加减输入框（+TICKER / -TICKER 语法）
+            4. 当前股票池预览 + 隐层 JSON 数据 + 结果展示区
+        """
         analysts_opts = "".join(f'<option>{a}</option>' for a in data["analysts"])
         sectors = data.get("sectors", {})
         sector_opts = "".join(f'<option value="{k}">{k} ({len(v)}只)</option>' for k, v in sectors.items())
@@ -100,9 +186,26 @@ class RolePickerCard(Card):
 
 @register
 class PortfolioCard(Card):
-    name = "portfolio"
-    tab = "insights"
-    endpoint = "/api/portfolio"
+    """
+    持股顾问卡片。
+
+    用户输入或上传持仓信息（股票代码、股数、成本价），
+    系统结合分析师信号、板块轮动、准确率等数据给出持仓建议。
+
+    属性:
+        name="portfolio"          — 唯一标识
+        tab="insights"            — 属于分析洞察标签页
+        endpoint="/api/portfolio" — API 路由
+        refresh=0（默认）          — 不自动刷新
+
+    get_data() 返回结构:
+        {
+            "analysts": {                     # 分析师 → 30日胜率(%)
+                "TJ_Research": 65,
+                ...
+            }
+        }
+    """
 
     def get_data(self, **params) -> dict:
         acc = {}
@@ -114,6 +217,16 @@ class PortfolioCard(Card):
         return {"analysts": acc}
 
     def _render_html(self, data: dict) -> str:
+        """
+        生成持股顾问界面的 HTML（模板不存在时的 fallback）。
+
+        HTML 结构概览:
+            1. 标题栏 — "持股顾问"
+            2. 持仓输入区 — 文本输入框（持股文本描述）
+            3. 操作按钮 — "分析持仓" 按钮
+            4. 结果展示区（pf_result div）
+            5. 支持图片/CSV 上传
+        """
         return '''<div class="card-title">持股顾问</div>
 <div class="mb-sm" style="display:flex;gap:6px">
   <textarea id="pf_text" rows="3" style="flex:1;font-size:12px;padding:8px" placeholder="输入持仓: NVDA 100股 成本$110&#10;AVGO 50股 成本$320&hellip;"></textarea>

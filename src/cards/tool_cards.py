@@ -1,4 +1,11 @@
-"""时间范围控制 + 画像查看 — 工具卡片"""
+"""
+工具卡片组（Tool Cards）
+========================
+
+包含两个工具型卡片：
+  1. FetchControlCard — 手动推文拉取控制面板（选择用户 + 时间范围）
+  2. PortraitCard     — 分析师画像浏览面板（列出已生成的画像文件）
+"""
 import json, re
 from pathlib import Path
 from src.cards.base import Card
@@ -7,11 +14,24 @@ from src.cards import register
 
 @register
 class FetchControlCard(Card):
-    name = "fetch_control"
-    tab = "dashboard"
-    endpoint = "/api/fetch_control"
-    refresh = 0
-    template = "fetch_control.html"
+    """
+    手动拉取控制卡片。
+
+    前端交互面板，用于手动触发特定用户在特定时间范围的推文拉取。
+
+    属性:
+        name="fetch_control"       — 唯一标识
+        tab="dashboard"            — 属于主仪表盘标签页
+        endpoint="/api/fetch_control" — API 路由
+        refresh=0                  — 不自动刷新（手动操作卡片）
+        template="fetch_control.html" — Jinja2 模板
+
+    get_data() 返回结构:
+        {
+            "presets": ["最新","1天","3天","7天","30天","90天","180天","365天","全部"],
+            "users": ["TJ_Research", "dearbaibabybus", ...]  # 监控用户列表
+        }
+    """
 
     def get_data(self, **params) -> dict:
         users = self._load_users()
@@ -22,6 +42,12 @@ class FetchControlCard(Card):
 
     @staticmethod
     def _load_users():
+        """
+        从 data/users.json 加载监控用户列表。
+
+        返回:
+            list[str]: 用户名列表，文件不存在时返回默认列表
+        """
         fp = Path("data/users.json")
         if fp.exists():
             return json.loads(fp.read_text(encoding="utf-8"))
@@ -30,10 +56,38 @@ class FetchControlCard(Card):
 
 @register
 class PortraitCard(Card):
-    name = "portrait"
-    tab = "portraits"
-    endpoint = "/api/portrait"
-    refresh = 300
+    """
+    分析师画像浏览卡片。
+
+    列出 data/pipeline/ 下所有 *_portrait.md 文件，
+    按分析师和窗口分组展示，支持点击展开阅读完整内容。
+
+    属性:
+        name="portrait"           — 唯一标识
+        tab="portraits"           — 属于画像标签页
+        endpoint="/api/portrait"  — API 路由
+        refresh=300               — 每 5 分钟自动刷新
+
+    get_data() 返回结构:
+        {
+            "portraits": [
+                {
+                    "id": "TJ_Research_1个月_portrait",  # 文件标识
+                    "username": "TJ_Research",            # 分析师用户名
+                    "window": "1个月",                     # 时间窗口
+                    "title": "...",                       # Markdown 首行标题
+                    "preview": "...",                     # 前300字符预览
+                    "full": "...",                        # 完整内容
+                    "size_kb": 12.5,                      # 文件大小(KB)
+                    "date_range": "2025-01-01 ~ ...",     # 推文日期范围
+                    "tweet_count": "1500",                # 推文总数
+                    "modified_ts": 1700000000.0           # 文件修改时间戳
+                },
+                ...
+            ],
+            "users": ["TJ_Research", ...]   # 所有分析师用户名
+        }
+    """
 
     def get_data(self, **params) -> dict:
         portraits = []
@@ -80,6 +134,17 @@ class PortraitCard(Card):
         return {"portraits": portraits, "users": list(set(p["username"] for p in portraits))}
 
     def _render_html(self, data: dict) -> str:
+        """
+        生成画像浏览界面的 HTML。
+
+        HTML 结构概览:
+            1. 标题栏 — "分析师画像" + 总数统计
+            2. 画像卡片列表（portrait-item）:
+               - 每张卡片显示: 用户名 + 窗口标签 + 文件大小 + 修改时间
+               - 画像标题（Markdown 首行）
+               - 推文数量 + 日期范围
+               - 隐藏的完整内容 div（点击展开/收起，max-height 500px 可滚动）
+        """
         import time as _tm
         portraits = data["portraits"]
         if not portraits:

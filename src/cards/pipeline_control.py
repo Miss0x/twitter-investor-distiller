@@ -1,4 +1,10 @@
-"""API 采集状态"""
+"""
+API 采集状态卡片（Pipeline Control）
+=====================================
+
+监控 Twitter API 自动采集的后台调度状态，
+包括各用户的推文计数、限流状态、采集游标等信息。
+"""
 import json
 from pathlib import Path
 from src.cards.base import Card
@@ -7,11 +13,33 @@ from src.cards import register
 
 @register
 class ApiStatusCard(Card):
-    name = "api_status"
-    tab = "dashboard"
-    endpoint = "/api/api_status"
-    refresh = 30
-    template = "api_status.html"
+    """
+    API 采集状态卡片。
+
+    展示 Twitter API 自动调度器的运行状态和各用户数据采集进度。
+
+    属性:
+        name="api_status"         — 唯一标识
+        tab="dashboard"           — 属于主仪表盘标签页
+        endpoint="/api/api_status" — API 路由
+        refresh=30                — 每 30 秒自动刷新
+        template="api_status.html" — Jinja2 模板
+
+    get_data() 数据来源:
+        - data/auto_scheduler_state.json: 调度器状态（总拉取数、最后更新时间、限流标记）
+        - data/users.json: 监控用户列表
+        - DB tweets JOIN users 表: 各用户的推文计数
+
+    返回结构:
+        {
+            "users": ["TJ_Research", ...],          # 监控用户列表
+            "user_counts": {"TJ_Research": 500, ...}, # 各用户推文数
+            "total_fetched": int,                     # 累计拉取总数
+            "last_updated": str,                      # 最后更新时间
+            "rate_limited": str,                      # 限流标记（空=正常）
+            "cursors": {"TJ_Research": "...", ...}    # 各用户采集游标（截断显示）
+        }
+    """
 
     def get_data(self, **params) -> dict:
         state = Path("data/auto_scheduler_state.json")
