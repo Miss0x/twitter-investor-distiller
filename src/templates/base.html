@@ -167,8 +167,9 @@ async function updateStatusBar() {
   } catch(e) {}
 }
 
-// ════ 标签页 ────
+// ════ 标签页 — 记住最后位置，reload 后恢复 ════
 function switchTab(tab) {
+  sessionStorage.setItem('lastTab', tab);
   var labels = {signals:'信号看板', workbench:'决策工作台', analysts:'分析师', system:'系统'};
   document.querySelectorAll('.tab').forEach(function(t) {
     t.classList.toggle('active', t.textContent === labels[tab]);
@@ -481,7 +482,8 @@ async function fetchManually(){
 // ════ 启动 ────
 fetch('/cards/meta').then(function(r){return r.json();}).then(function(cards){
   cards.forEach(function(c){REFRESH_MAP[c.name]=c.refresh;});
-  switchTab('signals');
+  var lastTab = sessionStorage.getItem('lastTab') || 'signals';
+  switchTab(lastTab);
   updateStatusBar();
   setInterval(autoRefresh, 5000);
 });
