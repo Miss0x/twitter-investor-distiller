@@ -240,6 +240,7 @@ def _format_label(task_type: str, payload: dict) -> str:
         # 没有文本则显示 action 中文名
         action = payload.get("action", "")
         action_labels = {
+            "filter_new": "扫描新推文",
             "filter_single": "单条过滤",
             "filter_latest": "最新推文过滤",
             "filter_media": "媒体过滤",
