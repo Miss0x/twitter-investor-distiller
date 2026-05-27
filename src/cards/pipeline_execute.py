@@ -1,6 +1,8 @@
 """流水线执行 + 画像生成 — 完整交互卡片"""
+import csv
 import html
 import json
+from pathlib import Path
 from src.cards.base import Card
 from src.cards import register
 
@@ -92,7 +94,6 @@ class PipelineExecuteCard(Card):
             items = groups.get(t, [])
             if t == "clean":
                 # ── 数据清洗：资产代码库（完整表格 + 校准按钮） ──
-                import csv
                 aliases_list = []
                 afp = Path("data/stock_alias.csv")
                 if afp.exists():
