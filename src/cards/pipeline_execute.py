@@ -212,10 +212,13 @@ def _enrich_tweet_texts(groups: dict) -> None:
     if not tweet_ids:
         return
 
-    # 批量 DB 查询（分片，避免 SQLite 变量数超 999 限制）
+    # 批量 DB 查询（使用绝对路径和 WAL 模式，避免路径/锁问题）
     try:
         import sqlite3
-        conn = sqlite3.connect("data/twitter_data.db")
+        from pathlib import Path
+        db_path = str(Path("data/twitter_data.db").resolve())
+        conn = sqlite3.connect(f"file:{db_path}?mode=ro", uri=True)
+        conn.execute("PRAGMA journal_mode=WAL")
         tweet_ids_list = list(tweet_ids)
         text_map = {}
         for start in range(0, len(tweet_ids_list), 900):
@@ -227,7 +230,9 @@ def _enrich_tweet_texts(groups: dict) -> None:
             ).fetchall()
             text_map.update({row[0]: {"text": row[1], "user_id": row[2]} for row in rows})
         conn.close()
-    except Exception:
+    except Exception as e:
+        import logging
+        logging.getLogger("pipeline_execute").warning(f"_enrich_tweet_texts DB 查询失败: {e}")
         return
 
     # 注入到 payload
@@ -248,7 +253,8 @@ def _format_label(task_type: str, payload: dict) -> str:
         if txt:
             prefix = f'@{payload.get("_user","")} ' if payload.get("_user") else ""
             return f'{prefix}{html.escape(txt[:50])}{"..." if len(txt)>50 else ""}'
-        # 没有文本则显示 action 中文名
+        # 没有文本则尝试显示 tweet_id
+        tid = payload.get("tweet_id", "")
         action = payload.get("action", "")
         action_labels = {
             "filter_single": "单条过滤",
@@ -256,7 +262,10 @@ def _format_label(task_type: str, payload: dict) -> str:
             "filter_media": "媒体过滤",
             "filter_replies": "回复过滤",
         }
-        return action_labels.get(action, action or "推文过滤")
+        label = action_labels.get(action, action or "推文过滤")
+        if tid:
+            return f"#{tid} {label}"
+        return label
     elif task_type == "analyze":
         tid = payload.get("tweet_id", "")
         text = payload.get("_text", "") or payload.get("text", "") or ""
