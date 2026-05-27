@@ -145,7 +145,7 @@ const CARD_ORDER = {
   signals: ["consensus","rotation","anomaly","crypto","timeline","network"],
   workbench: ["role_picker","portfolio"],
   analysts: ["portrait_generate","portrait","accuracy"],
-  system: ["daemon","api_status","system_status","fetch_control","telegram","pipeline_execute","asset_alias","script_runner"]
+  system: ["daemon","api_status","system_status","fetch_control","telegram","pipeline_execute","script_runner"]
 };
 
 const cache = {};
@@ -321,6 +321,16 @@ async function filterNewTweetsPE(){
   setTimeout(function(){location.reload();},1500);
 }
 async function seedTasksPE(){await fetch('/pipeline/tasks/seed',{method:'POST'});location.reload();}
+async function runCleanAlias(){
+  var s=document.getElementById('clean_status');
+  if(s)s.innerText='校准中...';
+  try{
+    var r=await fetch('/pipeline/clean',{method:'POST'});
+    var d=await r.json();
+    if(s)s.innerText=d.ok?'完成, 清理了 '+d.result.cleaned+' 项':'失败';
+  }catch(e){if(s)s.innerText='失败';}
+  setTimeout(function(){location.reload();},2000);
+}
 
 // ════ 画像生成 ────
 function selectWindow(label){

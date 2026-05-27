@@ -273,6 +273,17 @@ def _is_known_stock_ticker(ticker: str) -> bool:
     return False
 
 
+@app.post("/pipeline/clean")
+def run_clean() -> dict:
+    """运行数据清洗：用 stock_alias.csv 校准已分析推文的股票别名。"""
+    from src.pipeline.task_executor import _clean_analysis
+    try:
+        result = _clean_analysis()
+        return {"ok": True, "result": result}
+    except Exception as e:
+        return {"ok": False, "error": str(e)}
+
+
 @app.post("/pipeline/tasks/seed")
 def seed_tasks() -> dict:
     """扫描未处理项，写入任务表。"""

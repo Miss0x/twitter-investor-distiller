@@ -28,18 +28,40 @@ class PipelineExecuteCard(Card):
                 grouped.setdefault(t.task_type, []).append(item)
             s.close()
             from src.pipeline.task_executor import is_running, get_progress
-            # 每类型数量统计
             from collections import Counter
             type_counts = Counter(t.task_type for t in tasks)
+
+            # ── 数据清洗：加载别名统计 ──
+            alias_stats = {"confirmed": 0, "pending": 0, "skipped": 0, "total": 0}
+            try:
+                import csv
+                alias_fp = Path("data/stock_alias.csv")
+                if alias_fp.exists():
+                    reader = csv.reader(alias_fp.read_text(encoding="utf-8").splitlines())
+                    for row in reader:
+                        if not row or not row[0] or row[0].startswith("#"):
+                            continue
+                        alias_stats["total"] += 1
+                        ticker = row[1].strip() if len(row) >= 2 else ""
+                        notes = row[2].strip() if len(row) >= 3 else ""
+                        if ticker:
+                            alias_stats["confirmed"] += 1
+                        elif notes.startswith("SKIP"):
+                            alias_stats["skipped"] += 1
+                        else:
+                            alias_stats["pending"] += 1
+            except: pass
+
             return {
                 "groups": grouped,
                 "running": is_running(),
                 "progress": get_progress(),
                 "type_counts": dict(type_counts),
-                "types": ["filter", "analyze", "fetch_price", "fetch_crypto", "portrait", "clean"],
+                "types": ["filter", "analyze", "fetch_price", "fetch_crypto", "portrait"],
+                "alias_stats": alias_stats,
             }
         except Exception:
-            return {"groups": {}, "running": False, "progress": {}, "types": []}
+            return {"groups": {}, "running": False, "progress": {}, "types": [], "alias_stats": {}}
 
     def _render_html(self, data: dict) -> str:
         groups = data.get("groups", {})
@@ -96,6 +118,7 @@ class PipelineExecuteCard(Card):
 {f'<div class="mt-sm"><span class="text-secondary" style="font-size:11px">失败 ({len(failed)})</span><table class="data">{failed_rows}</table></div>' if failed else ''}
 </div>'''
 
+        alias = data.get("alias_stats", {})
         return f'''<div class="card-title">流水线执行</div>
 <div class="flex-between mb-sm"><div class="flex"><div class="status-dot {"ok" if running else ""}"></div><span style="font-size:12px">{status_bar}</span></div></div>
 <div class="mb-sm" style="display:flex;gap:4px;flex-wrap:wrap">{type_tags}</div>
@@ -106,6 +129,21 @@ class PipelineExecuteCard(Card):
   <span id="pe-msg" class="text-secondary" style="font-size:11px"></span>
 </div>
 {containers}
+<!-- 数据清洗：别名管理 + 校准 -->
+<div class="mt-md" style="border-top:0.5px solid var(--border-tertiary);padding-top:12px">
+  <div class="flex-between mb-sm">
+    <span style="font-size:12px;font-weight:500">🧹 数据清洗</span>
+    <span style="font-size:11px;color:var(--text-secondary)">
+      已确认 {alias["confirmed"]} | 待判断 {alias["pending"]} | 已跳过 {alias["skipped"]}
+    </span>
+  </div>
+  <div class="flex" style="gap:6px">
+    <button class="btn" onclick="runCleanAlias()" style="font-size:11px">🔄 运行校准</button>
+    <span id="clean_status" class="text-secondary" style="font-size:11px"></span>
+  </div>
+  <div class="text-secondary mt-sm" style="font-size:10px">
+    将已分析推文中的股票别名自动匹配到标准 ticker。未匹配项 → 资产代码库待判断。
+  </div>
 </div>'''
 
 

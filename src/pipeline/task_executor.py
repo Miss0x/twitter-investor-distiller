@@ -33,6 +33,30 @@ def _load_alias() -> dict[str, str]:
                 if row and not row[0].startswith("#") and len(row) >= 2 and row[0].strip() and row[1].strip():
                     _alias_cache[row[0].strip()] = row[1].strip()
     return _alias_cache
+
+
+def _clean_analysis() -> dict:
+    """数据清洗：用 stock_alias.csv 校准已分析推文中的股票别名。"""
+    import re as _re
+    alias = _load_alias()
+    cleaned = 0
+    for fp in sorted(Path("data/pipeline").glob("*_analyzed.json")):
+        data = json.loads(fp.read_text(encoding="utf-8"))
+        updated = False
+        for item in data:
+            stocks = item.get("mentioned_stocks", [])
+            if stocks:
+                mapped = [alias.get(s.strip(), s.strip()) for s in stocks]
+                if mapped != stocks:
+                    item["mentioned_stocks"] = mapped
+                    item["_cleaned"] = True
+                    updated = True
+                    cleaned += 1
+        if updated:
+            fp.write_text(json.dumps(data, ensure_ascii=False, indent=2))
+    return {"ok": True, "cleaned": cleaned}
+
+
 _progress: dict = {"total": 0, "done": 0, "msg": ""}
 
 
@@ -85,6 +109,8 @@ def execute_tasks(task_ids: list[int]) -> None:
                     result = _analyze_tweet(payload)
                 elif t.task_type == "portrait":
                     result = _generate_portrait(payload["username"])
+                elif t.task_type == "clean":
+                    result = _clean_analysis()
                 else:
                     result = {"error": f"未知任务类型: {t.task_type}"}
 
