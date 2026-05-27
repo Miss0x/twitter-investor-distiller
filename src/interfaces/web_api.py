@@ -39,7 +39,15 @@ _rate_lock = threading.Lock()
 
 @app.middleware("http")
 async def rate_limit_middleware(request: Request, call_next):
-    # 不限制本地数据查询（/cards/* GET 和静态资源），只保护外部 API 调用
+    # ── 速限中间件 ──────────────────────────────────────
+    # TODO(prod): 正式上线前需重新设计限流策略:
+    #   - 当前: 卡片查询跳过限流, 外部API阈值max(env,120)/min
+    #   - 上线需考虑: 按端点分级(POST/chat限120/min, GET/本地不限)
+    #   - 多用户场景: 按用户ID+API Key而非IP限流
+    #   - 突发缓冲: 允许短暂burst(如5s内10次)而非均匀60s窗口
+    #   - 监控面板: /metrics 端点暴露限流命中率
+    #   - 参考: Stripe rate limiter, Cloudflare rate limiting docs
+    # ─────────────────────────────────────────────────┘
     if request.method == "GET" and request.url.path.startswith("/cards/"):
         return await call_next(request)
     if request.url.path.startswith(("/timeline/", "/static/", "/favicon")):
