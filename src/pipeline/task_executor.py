@@ -413,7 +413,7 @@ generated: {datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')} UTC
 
 
 def _filter_tweets(payload: dict) -> dict:
-    """过滤新入库推文：从 DB 扫描 → 过滤模型 → 写入 filtered JSON。"""
+    """过滤推文：支持单条（filter_single）和全量扫描（filter_new 兼容旧逻辑）。"""
     from src.storage.database import db
     from src.storage.models import Tweet, User
     from src.ai.llm_client import chat
@@ -424,6 +424,9 @@ def _filter_tweets(payload: dict) -> dict:
 输入是一批推文（JSON 数组），每条有 id 和 text。
 输出严格 JSON 数组，每项格式：{"id": <tweet_id>, "is_investment_related": true/false}
 只输出 JSON，不要解释。"""
+
+    action = payload.get("action", "")
+    single_tweet_id = payload.get("tweet_id")  # filter_single 指定单条
 
     session = db.get_session()
     try:
@@ -440,10 +443,12 @@ def _filter_tweets(payload: dict) -> dict:
 
         for u in users:
             tweets = session.query(Tweet).filter(Tweet.user_id == u.id).order_by(Tweet.id).all()
-            # 找未过滤的
             new = []
             for t in tweets:
                 if t.id not in done_ids and t.tweet_id not in done_ids and t.text:
+                    # 单条模式：只处理指定 tweet_id
+                    if action == "filter_single" and single_tweet_id and t.id != single_tweet_id:
+                        continue
                     new.append({
                         "id": t.id, "tweet_id": t.tweet_id,
                         "text": t.text or "", "created_at": t.created_at_twitter.isoformat(),
@@ -491,7 +496,6 @@ def _filter_tweets(payload: dict) -> dict:
                     if t["id"] not in existing_ids:
                         existing.append(t)
                 out_path.write_text(json.dumps(existing, ensure_ascii=False, indent=2), encoding="utf-8")
-                related = sum(1 for t in month_tweets if t.get("is_investment_related"))
                 total_new += len(month_tweets)
 
         session.close()

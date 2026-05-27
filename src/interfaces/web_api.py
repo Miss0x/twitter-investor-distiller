@@ -228,31 +228,6 @@ def list_crypto_fetched() -> dict:
     return {"tickers": [], "count": 0}
 
 
-@app.post("/pipeline/filter")
-def run_filter() -> dict:
-    """运行过滤：扫描 DB 新推文 → 过滤模型 → 写入 filtered JSON。"""
-    session = db.get_session()
-
-    # 先清理旧的未执行 filter_new 任务（上次点了但没跑成的）
-    stale = session.query(PipelineTask).filter(
-        PipelineTask.task_type == "filter",
-        PipelineTask.status == "pending",
-        PipelineTask.payload.like('%filter_new%')
-    ).all()
-    for s in stale:
-        s.status = "done"
-        s.error_msg = "被新任务替代"
-    session.commit()
-
-    t = PipelineTask(task_type="filter", status="pending", payload=json.dumps({"action": "filter_new"}, ensure_ascii=False))
-    session.add(t)
-    session.commit()
-    tid = t.id
-    session.close()
-    threading.Thread(target=execute_tasks, args=([tid],), daemon=True).start()
-    return {"ok": True, "message": "过滤已启动"}
-
-
 def _load_skip_set() -> set[str]:
     """从别名表读取已跳过/已修正的条目。"""
     skip = set()
@@ -263,9 +238,9 @@ def _load_skip_set() -> set[str]:
             if len(parts) >= 2:
                 alias = parts[0].strip()
                 target = parts[1].strip()
-                if alias and not target:  # 跳过类：空目标
+                if alias and not target:
                     skip.add(alias.upper())
-                elif alias and target:  # 修正类：用修正后的名字
+                elif alias and target:
                     skip.add(alias.upper())
     return skip
 
@@ -281,7 +256,7 @@ def _is_known_stock_ticker(ticker: str) -> bool:
     for line in ap.read_text(encoding="utf-8").split("\n"):
         parts = [x.strip() for x in line.strip().split(",")]
         if len(parts) >= 2 and parts[0].upper() == ticker.upper():
-            return bool(parts[1])  # 有目标 = 已知股票
+            return bool(parts[1])
     return False
 
 
@@ -336,9 +311,37 @@ def seed_tasks() -> dict:
             return stem, ""
 
         # ── 清旧待办 ──
-        session.query(PipelineTask).filter(
-            PipelineTask.task_type == "analyze", PipelineTask.status == "pending"
-        ).delete()
+        for tt in ("filter", "analyze", "fetch_price", "fetch_crypto"):
+            session.query(PipelineTask).filter(
+                PipelineTask.task_type == tt, PipelineTask.status == "pending"
+            ).delete()
+
+        # ── 第一步：从 DB 扫描新推文 → 创建 filter_single 任务 ──
+        from src.storage.models import Tweet, User as DbUser
+        # 收集已过滤的 tweet_id（从 filtered JSON）
+        filtered_ids: set[int] = set()
+        for fp in Path("data/pipeline").glob("*_filtered.json"):
+            for t in json.loads(fp.read_text(encoding="utf-8")):
+                filtered_ids.add(t.get("tweet_id"))
+                filtered_ids.add(t.get("id"))
+        # 收集已有 filter 任务的 tweet_id
+        for t in session.query(PipelineTask).filter(PipelineTask.task_type == "filter").all():
+            try:
+                pid = json.loads(t.payload).get("tweet_id")
+                if pid:
+                    filtered_ids.add(pid)
+            except (json.JSONDecodeError, TypeError):
+                pass
+        for u in session.query(DbUser).all():
+            for tw in session.query(Tweet).filter(
+                Tweet.user_id == u.id, Tweet.text != None, Tweet.text != ""
+            ).order_by(Tweet.id).all():
+                if tw.id not in filtered_ids and tw.tweet_id not in filtered_ids:
+                    t = PipelineTask(task_type="filter", status="pending", payload=json.dumps({
+                        "action": "filter_single", "tweet_id": tw.id,
+                    }, ensure_ascii=False))
+                    session.add(t)
+                    count += 1
 
         # ── 收集已有分析任务的 tweet_id（避免 Like 查询）──
         existing_tweet_ids = set()
@@ -383,11 +386,6 @@ def seed_tasks() -> dict:
 
         # 加载已跳过/修正的别名（种子时不生成这些）
         skip_set = _load_skip_set()
-
-        # 清除旧的未执行股价任务
-        session.query(PipelineTask).filter(
-            PipelineTask.task_type == "fetch_price", PipelineTask.status == "pending"
-        ).delete()
 
         # 收集每个 ticker 的来源推文（最多 3 条）
         all_stocks = {}  # ticker → [{username, text, date}]

@@ -180,7 +180,6 @@ class PipelineExecuteCard(Card):
 <div class="mb-sm" style="display:flex;gap:4px;flex-wrap:wrap">{type_tags}</div>
 <div class="mb-sm" style="display:flex;gap:4px;flex-wrap:wrap">{type_tabs}</div>
 <div style="display:flex;gap:6px;margin-bottom:8px">
-  <button class="btn" onclick="filterNewTweetsPE()" style="font-size:11px">🔍 扫描新推文</button>
   <button class="btn" onclick="seedTasksPE()" style="font-size:11px">🌱 种子任务</button>
   <span id="pe-msg" class="text-secondary" style="font-size:11px"></span>
 </div>
@@ -240,7 +239,6 @@ def _format_label(task_type: str, payload: dict) -> str:
         # 没有文本则显示 action 中文名
         action = payload.get("action", "")
         action_labels = {
-            "filter_new": "扫描新推文",
             "filter_single": "单条过滤",
             "filter_latest": "最新推文过滤",
             "filter_media": "媒体过滤",

@@ -315,11 +315,6 @@ async function execPipeline(t){
 }
 async function retryTaskPE(id){await fetch('/pipeline/tasks/'+id+'/retry',{method:'POST'});location.reload();}
 async function skipTaskPE(id){await fetch('/pipeline/tasks/'+id+'/skip',{method:'POST'});location.reload();}
-async function filterNewTweetsPE(){
-  var s=document.getElementById('pe-msg'); if(s)s.innerText='扫描中...';
-  try{await fetch('/pipeline/filter',{method:'POST'});if(s)s.innerText='完成';}catch(e){if(s)s.innerText='失败';}
-  setTimeout(function(){location.reload();},1500);
-}
 async function seedTasksPE(){await fetch('/pipeline/tasks/seed',{method:'POST'});location.reload();}
 async function runCleanAlias(){
   var s=document.getElementById('clean_status');
