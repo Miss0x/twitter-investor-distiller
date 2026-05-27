@@ -53,6 +53,8 @@ class AnomalyCard(Card):
             }
         }
     """
+
+    def get_data(self, **params) -> dict:
         results = {}
         for fp in Path("data/anomaly").glob("*_anomaly.json"):
             tag = fp.stem.replace("_anomaly", "")

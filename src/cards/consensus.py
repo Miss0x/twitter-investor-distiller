@@ -49,6 +49,8 @@ class ConsensusCard(Card):
             "multi": int                     # 多分析师参与（>=2人）的标的数
         }
     """
+
+    def get_data(self, **params) -> dict:
         results = []
         for fp in Path("data/consensus").glob("*_consensus.json"):
             entries = json.loads(fp.read_text(encoding="utf-8"))

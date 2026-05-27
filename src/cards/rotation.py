@@ -46,6 +46,8 @@ class RotationCard(Card):
             }
         }
     """
+
+    def get_data(self, **params) -> dict:
         results = {}
         for fp in Path("data/rotation").glob("*_rotation.json"):
             username = fp.stem.replace("_rotation", "")

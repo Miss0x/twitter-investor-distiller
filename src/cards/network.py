@@ -48,6 +48,8 @@ class NetworkCard(Card):
             "nodes": int            # 节点总数
         }
     """
+
+    def get_data(self, **params) -> dict:
         fp = Path("data/network/investor_network.json")
         if not fp.exists():
             return {"recs": [], "edges": 0, "nodes": 0}

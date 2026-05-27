@@ -39,6 +39,8 @@ class SystemStatusCard(Card):
             "signals": int       # 生成评分的信号总条数
         }
     """
+
+    def get_data(self, **params) -> dict:
         from src.storage.database import db
         from src.storage.models import Tweet
         db.init_db(); s = db.get_session()

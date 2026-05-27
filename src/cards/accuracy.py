@@ -49,6 +49,8 @@ class AccuracyCard(Card):
             }
         }
     """
+
+    def get_data(self, **params) -> dict:
         result = {}
         for fp in Path("data/accuracy").glob("*_accuracy.json"):
             username = fp.stem.replace("_accuracy", "")
