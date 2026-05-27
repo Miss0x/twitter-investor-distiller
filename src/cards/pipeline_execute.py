@@ -57,7 +57,7 @@ class PipelineExecuteCard(Card):
                 "running": is_running(),
                 "progress": get_progress(),
                 "type_counts": dict(type_counts),
-                "types": ["filter", "analyze", "fetch_price", "fetch_crypto", "portrait"],
+                "types": ["filter", "analyze", "fetch_price", "fetch_crypto", "portrait", "clean"],
                 "alias_stats": alias_stats,
             }
         except Exception:
@@ -90,6 +90,15 @@ class PipelineExecuteCard(Card):
         containers = ""
         for t in types:
             items = groups.get(t, [])
+            if t == "clean":
+                # ── 数据清洗：独立的别名管理界面 ──
+                containers += f'''<div id="pe-type-clean" class="pe-container" style="display:none">
+<div class="text-secondary mb-sm" style="font-size:11px">用 stock_alias.csv 校准已分析推文中的股票别名 → 标准 ticker</div>
+<button class="btn" onclick="runCleanAlias()" style="font-size:11px">🔄 运行校准</button>
+<span id="clean_status" class="text-secondary" style="font-size:11px;margin-left:8px"></span>
+<div class="text-secondary mt-sm" style="font-size:10px">未匹配项 → 在「资产代码库」卡片中人工判断</div>
+</div>'''
+                continue
             pending = [i for i in items if i["status"] == "pending"]
             failed = [i for i in items if i["status"] == "failed"]
             done = [i for i in items if i["status"] == "done"]
@@ -118,7 +127,6 @@ class PipelineExecuteCard(Card):
 {f'<div class="mt-sm"><span class="text-secondary" style="font-size:11px">失败 ({len(failed)})</span><table class="data">{failed_rows}</table></div>' if failed else ''}
 </div>'''
 
-        alias = data.get("alias_stats", {})
         return f'''<div class="card-title">流水线执行</div>
 <div class="flex-between mb-sm"><div class="flex"><div class="status-dot {"ok" if running else ""}"></div><span style="font-size:12px">{status_bar}</span></div></div>
 <div class="mb-sm" style="display:flex;gap:4px;flex-wrap:wrap">{type_tags}</div>
@@ -129,17 +137,6 @@ class PipelineExecuteCard(Card):
   <span id="pe-msg" class="text-secondary" style="font-size:11px"></span>
 </div>
 {containers}
-<!-- 数据清洗：折叠区, 点击展开 -->
-<div class="mt-md" style="border-top:0.5px solid var(--border-tertiary);padding-top:10px">
-  <div class="flex-between" onclick="document.getElementById('clean_body').style.display=document.getElementById('clean_body').style.display==='none'?'block':'none'" style="cursor:pointer">
-    <span style="font-size:11px;color:var(--text-secondary)">🧹 数据清洗 — 别名校准 ({alias["confirmed"]}确认/{alias["pending"]}待判/{alias["skipped"]}跳过)</span>
-    <span style="font-size:10px;color:var(--text-tertiary)" id="clean_toggle">展开 ▾</span>
-  </div>
-  <div id="clean_body" style="display:none;margin-top:8px">
-    <button class="btn" onclick="runCleanAlias()" style="font-size:11px">🔄 运行校准</button>
-    <span id="clean_status" class="text-secondary" style="font-size:11px;margin-left:8px"></span>
-    <div class="text-secondary mt-sm" style="font-size:10px">用 stock_alias.csv 匹配已分析推文的股票别名 → 标准 ticker。未匹配项待人工判断。</div>
-  </div>
 </div>'''
 
 
