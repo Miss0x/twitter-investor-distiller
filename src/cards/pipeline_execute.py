@@ -91,12 +91,59 @@ class PipelineExecuteCard(Card):
         for t in types:
             items = groups.get(t, [])
             if t == "clean":
-                # ── 数据清洗：独立的别名管理界面 ──
+                # ── 数据清洗：资产代码库（完整表格 + 校准按钮） ──
+                import csv
+                aliases_list = []
+                afp = Path("data/stock_alias.csv")
+                if afp.exists():
+                    reader = csv.reader(afp.read_text(encoding="utf-8").splitlines())
+                    for row in reader:
+                        if not row or not row[0] or row[0].startswith("#"): continue
+                        a = row[0].strip()
+                        tkr = row[1].strip() if len(row) >= 2 else ""
+                        nts = row[2].strip() if len(row) >= 3 else ""
+                        if a: aliases_list.append({"alias": a, "ticker": tkr, "type": nts})
+                confirmed = [a for a in aliases_list if a["ticker"]]
+                pending = [a for a in aliases_list if not a["ticker"] and not a.get("type","").startswith("SKIP")]
+                skipped = [a for a in aliases_list if not a["ticker"] and a.get("type","").startswith("SKIP")]
+
+                confirmed_rows = "".join(
+                    f'<tr><td style="font-size:11px">{a["alias"]}</td><td style="font-weight:500">{a["ticker"]}</td><td style="font-size:11px;color:var(--text-secondary)">{a.get("type","")}</td><td style="text-align:right"><button class="btn" style="font-size:10px;padding:1px 6px" onclick="editAliasRow(\'{html.escape(a["alias"])}\',\'{html.escape(a["ticker"])}\',\'{html.escape(a.get("type",""))}\')">编辑</button> <button class="btn btn-danger" style="font-size:10px;padding:1px 6px" onclick="deleteAlias(\'{html.escape(a["alias"])}\')">删除</button></td></tr>'
+                    for a in confirmed[:50]
+                ) if confirmed else '<tr><td colspan="4" class="text-secondary">暂无已确认映射</td></tr>'
+
+                pending_rows = "".join(
+                    f'<tr style="background:rgba(239,159,39,0.05)"><td style="font-size:11px;font-weight:500">{a["alias"]}</td><td style="font-size:11px;color:var(--text-secondary)">{a.get("type","")}</td><td style="text-align:right"><button class="btn" style="font-size:10px;padding:1px 6px" onclick="fillAliasForm(\'{html.escape(a["alias"])}\',\'{html.escape(a.get("type",""))}\')">填代码</button> <button class="btn" style="font-size:10px;padding:1px 6px;border-color:var(--text-tertiary);color:var(--text-tertiary)" onclick="skipAlias(\'{html.escape(a["alias"])}\')">跳过</button> <button class="btn btn-danger" style="font-size:10px;padding:1px 6px" onclick="deleteAlias(\'{html.escape(a["alias"])}\')">删除</button></td></tr>'
+                    for a in pending[:30]
+                ) if pending else '<tr><td colspan="4" class="text-secondary" style="color:var(--text-success)">全部确认完毕</td></tr>'
+
+                skipped_rows = "".join(
+                    f'<tr style="opacity:0.5"><td style="font-size:11px">{a["alias"]}</td><td style="font-size:11px;color:var(--text-secondary)">{a.get("type","").replace("SKIP|","",1)}</td><td style="text-align:right"><button class="btn" style="font-size:10px;padding:1px 6px" onclick="unskipAlias(\'{html.escape(a["alias"])}\')">恢复</button></td></tr>'
+                    for a in skipped[:30]
+                )
+
                 containers += f'''<div id="pe-type-clean" class="pe-container" style="display:none">
-<div class="text-secondary mb-sm" style="font-size:11px">用 stock_alias.csv 校准已分析推文中的股票别名 → 标准 ticker</div>
-<button class="btn" onclick="runCleanAlias()" style="font-size:11px">🔄 运行校准</button>
-<span id="clean_status" class="text-secondary" style="font-size:11px;margin-left:8px"></span>
-<div class="text-secondary mt-sm" style="font-size:10px">未匹配项 → 在「资产代码库」卡片中人工判断</div>
+<div class="flex-between mb-sm"><span style="font-size:12px;font-weight:500">资产代码库</span><button class="btn" onclick="runCleanAlias()" style="font-size:11px">🔄 运行校准</button></div>
+<div class="mb-sm"><span id="clean_status" class="text-secondary" style="font-size:11px"></span></div>
+<div class="grid grid-4 mb-sm">
+  <div class="metric"><div class="metric-label">总映射</div><div class="metric-value">{len(aliases_list)}</div></div>
+  <div class="metric"><div class="metric-label">已确认</div><div class="metric-value" style="color:var(--text-success)">{len(confirmed)}</div></div>
+  <div class="metric"><div class="metric-label">待判断</div><div class="metric-value" style="color:var(--text-warning)">{len(pending)}</div></div>
+  <div class="metric"><div class="metric-label">已跳过</div><div class="metric-value" style="color:var(--text-tertiary)">{len(skipped)}</div></div>
+</div>
+<div class="flex mb-sm" style="gap:4px;flex-wrap:wrap">
+  <input id="aa_alias" placeholder="别名" style="flex:1;min-width:80px;font-size:11px;padding:4px 6px" />
+  <input id="aa_ticker" placeholder="代码" style="flex:1;min-width:60px;font-size:11px;padding:4px 6px" />
+  <input id="aa_notes" placeholder="备注" style="flex:1;min-width:60px;font-size:11px;padding:4px 6px" />
+  <button class="btn btn-primary" onclick="addAlias()" style="font-size:11px;padding:4px 10px" id="btn_aa_submit">添加</button>
+</div>
+<input type="hidden" id="aa_old_alias" value="" />
+<div class="mt-md mb-sm"><span style="font-size:12px;font-weight:500;color:var(--text-primary)">已确认映射 ({len(confirmed)}条)</span></div>
+<table class="data"><tr><th>别名</th><th>代码</th><th>备注</th><th style="text-align:right">操作</th></tr>{confirmed_rows}</table>
+<div class="mt-md mb-sm"><span style="font-size:12px;font-weight:500;color:var(--text-warning)">待人工判断 ({len(pending)}条)</span></div>
+<table class="data"><tr><th>别名</th><th>系统标注</th><th style="text-align:right">操作</th></tr>{pending_rows}</table>
+{skipped_rows and f'<div class="mt-md mb-sm"><span style="font-size:12px;font-weight:500;color:var(--text-tertiary)">已跳过 ({len(skipped)}条)</span></div><table class="data"><tr><th>别名</th><th>系统标注</th><th style="text-align:right">操作</th></tr>' + skipped_rows + '</table>'}
+<div class="text-secondary mt-sm" style="font-size:10px">提示：点"填代码"自动回填表单，输入 ticker 后提交即可移入已确认列表。跳过则暂不处理。</div>
 </div>'''
                 continue
             pending = [i for i in items if i["status"] == "pending"]
