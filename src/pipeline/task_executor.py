@@ -181,6 +181,62 @@ def _fetch_polygon(ticker: str, store_path: Path) -> dict:
     return {"error": "重试失败"}
 
 
+def _enrich_price_context(stocks: list[str], created_at: str) -> list[dict]:
+    """为分析结果注入K线摘要+基本面, 标记 backward_available。
+    
+    backward_available=True: 推文发布后有K线数据可回测
+    backward_available=False: 仅发布前数据, 无法回测
+    """
+    if not stocks:
+        return []
+    result = []
+    prices_db = {}
+    fundamentals = {}
+    if PRICES_PATH.exists():
+        prices_db = json.loads(PRICES_PATH.read_text(encoding="utf-8"))
+    f_fp = Path("data/fundamental_cache.json")
+    if f_fp.exists():
+        fundamentals = json.loads(f_fp.read_text(encoding="utf-8"))
+
+    tweet_ts = 0
+    if created_at:
+        try:
+            from datetime import datetime
+            tweet_ts = int(datetime.strptime(created_at[:19], "%Y-%m-%d %H:%M:%S").timestamp())
+        except: pass
+
+    for ticker in stocks[:10]:
+        ctx = {"ticker": ticker, "backward_available": False, "price_summary": None, "fundamentals": None}
+        price_data = prices_db.get(ticker, {})
+        if price_data and price_data.get("results"):
+            bars = price_data["results"]
+            if tweet_ts and bars:
+                before = [b for b in bars if b.get("t", 0) / 1000 <= tweet_ts]
+                after = [b for b in bars if b.get("t", 0) / 1000 > tweet_ts]
+                if before:
+                    last_close = before[-1].get("c", 0)
+                    pct_30d = round((last_close - before[0].get("c", last_close)) / before[0].get("c", 1) * 100, 1) if len(before) > 1 else 0
+                    ctx["price_summary"] = {
+                        "close_at_tweet": last_close,
+                        "pct_30d_before": pct_30d,
+                        "recent_close": bars[-1].get("c", last_close)
+                    }
+                if after:
+                    ctx["backward_available"] = True
+            else:
+                if bars:
+                    ctx["price_summary"] = {"recent_close": bars[-1].get("c", 0)}
+        # 基本面
+        f = fundamentals.get(ticker, {})
+        if f:
+            ctx["fundamentals"] = {
+                "pe": f.get("pe_ratio"), "roe": f.get("roe"),
+                "revenue_growth": f.get("revenue_growth"), "sector": f.get("sector", "")
+            }
+        result.append(ctx)
+    return result
+
+
 def _analyze_tweet(payload: dict) -> dict:
     """分析单条推文。payload: {username, tweet_id, text, created_at, ...}"""
     from collections import Counter
@@ -239,6 +295,8 @@ def _analyze_tweet(payload: dict) -> dict:
             result["twitter_id"] = payload.get("tweet_id_str", "")
             result["text"] = payload.get("text", "")
             result["created_at"] = payload.get("created_at", "")
+            # 注入K线+基本面上下文
+            result["price_context"] = _enrich_price_context(result["mentioned_stocks"], payload.get("created_at", ""))
             _save_analyzed(payload.get("username", ""), result)
             time.sleep(20)
             return {"ok": True}
