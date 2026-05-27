@@ -467,7 +467,7 @@ async function fetchManually(){
 // ════ 启动 ────
 fetch('/cards/meta').then(function(r){return r.json();}).then(function(cards){
   cards.forEach(function(c){REFRESH_MAP[c.name]=c.refresh;});
-  loadCards('signals');
+  switchTab('signals');
   updateStatusBar();
   setInterval(autoRefresh, 5000);
 });
