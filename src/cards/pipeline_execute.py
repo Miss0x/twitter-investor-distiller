@@ -129,20 +129,16 @@ class PipelineExecuteCard(Card):
   <span id="pe-msg" class="text-secondary" style="font-size:11px"></span>
 </div>
 {containers}
-<!-- 数据清洗：别名管理 + 校准 -->
-<div class="mt-md" style="border-top:0.5px solid var(--border-tertiary);padding-top:12px">
-  <div class="flex-between mb-sm">
-    <span style="font-size:12px;font-weight:500">🧹 数据清洗</span>
-    <span style="font-size:11px;color:var(--text-secondary)">
-      已确认 {alias["confirmed"]} | 待判断 {alias["pending"]} | 已跳过 {alias["skipped"]}
-    </span>
+<!-- 数据清洗：折叠区, 点击展开 -->
+<div class="mt-md" style="border-top:0.5px solid var(--border-tertiary);padding-top:10px">
+  <div class="flex-between" onclick="document.getElementById('clean_body').style.display=document.getElementById('clean_body').style.display==='none'?'block':'none'" style="cursor:pointer">
+    <span style="font-size:11px;color:var(--text-secondary)">🧹 数据清洗 — 别名校准 ({alias["confirmed"]}确认/{alias["pending"]}待判/{alias["skipped"]}跳过)</span>
+    <span style="font-size:10px;color:var(--text-tertiary)" id="clean_toggle">展开 ▾</span>
   </div>
-  <div class="flex" style="gap:6px">
+  <div id="clean_body" style="display:none;margin-top:8px">
     <button class="btn" onclick="runCleanAlias()" style="font-size:11px">🔄 运行校准</button>
-    <span id="clean_status" class="text-secondary" style="font-size:11px"></span>
-  </div>
-  <div class="text-secondary mt-sm" style="font-size:10px">
-    将已分析推文中的股票别名自动匹配到标准 ticker。未匹配项 → 资产代码库待判断。
+    <span id="clean_status" class="text-secondary" style="font-size:11px;margin-left:8px"></span>
+    <div class="text-secondary mt-sm" style="font-size:10px">用 stock_alias.csv 匹配已分析推文的股票别名 → 标准 ticker。未匹配项待人工判断。</div>
   </div>
 </div>'''
 

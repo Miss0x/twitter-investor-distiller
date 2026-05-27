@@ -276,10 +276,32 @@ def _is_known_stock_ticker(ticker: str) -> bool:
 @app.post("/pipeline/clean")
 def run_clean() -> dict:
     """运行数据清洗：用 stock_alias.csv 校准已分析推文的股票别名。"""
-    from src.pipeline.task_executor import _clean_analysis
+    import csv as _csv
     try:
-        result = _clean_analysis()
-        return {"ok": True, "result": result}
+        # 加载别名映射
+        alias = {}
+        afp = Path("data/stock_alias.csv")
+        if afp.exists():
+            with open(afp, encoding="utf-8") as f:
+                for row in _csv.reader(f):
+                    if row and not row[0].startswith("#") and len(row) >= 2 and row[0].strip() and row[1].strip():
+                        alias[row[0].strip()] = row[1].strip()
+        cleaned = 0
+        for fp in sorted(Path("data/pipeline").glob("*_analyzed.json")):
+            data = json.loads(fp.read_text(encoding="utf-8"))
+            updated = False
+            for item in data:
+                stocks = item.get("mentioned_stocks", [])
+                if stocks:
+                    mapped = [alias.get(s.strip(), s.strip()) for s in stocks]
+                    if mapped != stocks:
+                        item["mentioned_stocks"] = mapped
+                        item["_cleaned"] = True
+                        updated = True
+                        cleaned += 1
+            if updated:
+                fp.write_text(json.dumps(data, ensure_ascii=False, indent=2))
+        return {"ok": True, "cleaned": cleaned}
     except Exception as e:
         return {"ok": False, "error": str(e)}
 

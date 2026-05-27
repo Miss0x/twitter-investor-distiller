@@ -327,7 +327,7 @@ async function runCleanAlias(){
   try{
     var r=await fetch('/pipeline/clean',{method:'POST'});
     var d=await r.json();
-    if(s)s.innerText=d.ok?'完成, 清理了 '+d.result.cleaned+' 项':'失败';
+    if(s)s.innerText=d.ok?'完成, 清理了 '+d.cleaned+' 项':'失败';
   }catch(e){if(s)s.innerText='失败';}
   setTimeout(function(){location.reload();},2000);
 }
