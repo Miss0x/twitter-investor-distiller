@@ -1,12 +1,22 @@
-<div class="card-title">共识 TOP 5</div>
-<table class="data">
-<tr><th>股票</th><th style="text-align:right">得分</th><th style="text-align:right">信号</th></tr>
-{% for r in top[:5] %}
-<tr>
-  <td style="font-weight:500">{{ r.ticker }}</td>
-  <td style="text-align:right;font-weight:500;color:var(--text-success)">{{ '%d' % r.consensus_score }}</td>
-  <td style="text-align:right;font-size:11px">{% if r.get('analysts_in_window', []) | length >= 2 %}🔥 {% endif %}{{ r.get('signal_count', 0) }}条</td>
-</tr>
+<div class="card-title">🔥 多分析师共识</div>
+<div class="flex mb-sm" style="gap:4px;flex-wrap:wrap">
+  <span class="tag tag-ok">{{ total }}只覆盖</span>
+  <span class="tag tag-warn">{{ multi }}只多人共识</span>
+</div>
+<div class="grid grid-2" style="gap:8px">
+{% for r in top[:6] %}
+  <div class="metric" style="border-left:3px solid {% if r.consensus_score >= 80 %}var(--text-warning){% elif r.consensus_score >= 60 %}var(--text-success){% else %}var(--border-tertiary){% endif %}">
+    <div class="flex-between">
+      <span style="font-weight:600;font-size:14px">{{ r.ticker }}</span>
+      <span style="font-size:18px;font-weight:600;color:{% if r.consensus_score >= 80 %}var(--text-warning){% elif r.consensus_score >= 60 %}var(--text-success){% else %}var(--text-secondary){% endif %}">{{ '%d' % r.consensus_score }}</span>
+    </div>
+    <div class="flex" style="margin-top:4px">
+      {% if r.get('analysts_in_window', []) | length >= 2 %}<span style="font-size:11px">🔥 多人</span>{% endif %}
+      <span class="text-secondary" style="font-size:11px">{{ r.get('signal_count', 0) }}条信号</span>
+    </div>
+  </div>
 {% endfor %}
-</table>
-<div class="text-secondary mt-sm">{{ total }}只覆盖, {{ multi }}只双人</div>
+</div>
+{% if not top %}
+<div class="text-secondary">暂无共识数据。运行 compute_consensus.py 生成。</div>
+{% endif %}

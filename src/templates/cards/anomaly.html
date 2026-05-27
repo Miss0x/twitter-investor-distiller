@@ -1,5 +1,6 @@
 <div class="card-title">异常检测</div>
 {% if anomalies %}
+<div class="mb-sm"><span class="tag tag-warn">{{ anomalies | length }}个数据集异常</span></div>
 {% for tag, info in anomalies.items() %}
 <div class="flex-between" style="font-size:12px;margin-bottom:6px">
   <span class="text-secondary">{{ tag }}</span>
@@ -9,5 +10,5 @@
 </div>
 {% endfor %}
 {% else %}
-<div class="text-secondary">无异常</div>
+<div class="flex"><div class="status-dot ok"></div><span class="text-secondary">近 24h 无异常，信号分布正常</span></div>
 {% endif %}

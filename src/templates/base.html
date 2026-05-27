@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8">
@@ -17,36 +17,70 @@
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: var(--font); font-size: 13px; color: var(--text-primary); background: var(--bg-tertiary); line-height: 1.6; }
   .app { max-width: 960px; margin: 0 auto; padding: 20px 24px; }
-  .header { margin-bottom: 20px; }
+
+  /* ── 全局状态栏 ── */
+  .status-bar {
+    display: flex; align-items: center; gap: 16px;
+    padding: 8px 16px; margin-bottom: 16px;
+    background: var(--bg-primary); border: 0.5px solid var(--border-tertiary);
+    border-radius: var(--radius-lg); font-size: 12px;
+  }
+  .status-bar .pulse { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 4px; }
+  .status-bar .pulse.on { background: var(--text-success); animation: pulse 2s infinite; }
+  .status-bar .pulse.off { background: var(--text-tertiary); }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+  .status-bar .sep { color: var(--border-secondary); }
+  .status-bar .metric { font-weight: 500; }
+
+  /* ── 页面头部 ── */
+  .header { margin-bottom: 16px; }
   .header h1 { font-size: 16px; font-weight: 500; }
   .header p { font-size: 12px; color: var(--text-secondary); }
+
+  /* ── 标签页 ── */
   .tabs { display: flex; gap: 0; margin-bottom: 20px; border-bottom: 0.5px solid var(--border-tertiary); }
   .tab { padding: 8px 16px; font-size: 13px; color: var(--text-secondary); border: none; background: none; cursor: pointer; border-bottom: 2px solid transparent; transition: all .15s; }
   .tab:hover { color: var(--text-primary); }
   .tab.active { color: var(--text-primary); font-weight: 500; border-bottom-color: var(--text-primary); }
   .tab-content { display: none; }
   .tab-content.active { display: block; }
+
+  /* ── 网格 ── */
   .grid { display: grid; gap: 12px; }
   .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-  .card { background: var(--bg-primary); border: 0.5px solid var(--border-tertiary); border-radius: var(--radius-lg); padding: 14px 16px; }
+
+  /* ── 卡片 ── */
+  .card { background: var(--bg-primary); border: 0.5px solid var(--border-tertiary); border-radius: var(--radius-lg); padding: 14px 16px; margin-bottom: 12px; }
+  .card-headline { border-color: rgba(239,159,39,0.3); background: linear-gradient(135deg, rgba(239,159,39,0.03), var(--bg-primary)); }
+  .card-headline .card-title { color: var(--text-warning); font-size: 14px; }
   .card-title { font-size: 13px; font-weight: 500; margin-bottom: 10px; color: var(--text-primary); }
+
+  /* ── 指标 ── */
   .metric { background: var(--bg-secondary); border-radius: var(--radius-md); padding: 12px; }
   .metric-label { font-size: 11px; color: var(--text-secondary); }
   .metric-value { font-size: 20px; font-weight: 500; margin-top: 2px; }
   .metric-sub { font-size: 11px; color: var(--text-tertiary); margin-top: 2px; }
+
+  /* ── 表格 ── */
   table.data { width: 100%; border-collapse: collapse; font-size: 12px; }
   table.data th, table.data td { padding: 6px 10px; text-align: left; }
   table.data th { background: var(--bg-secondary); color: var(--text-secondary); font-weight: 400; font-size: 11px; }
   table.data td { border-top: 0.5px solid var(--border-tertiary); }
-  .btn { font-size: 12px; padding: 5px 14px; border: 0.5px solid var(--border-secondary); border-radius: var(--radius-md); background: var(--bg-primary); cursor: pointer; font-family: var(--font); }
+
+  /* ── 按钮 ── */
+  .btn { font-size: 12px; padding: 5px 14px; border: 0.5px solid var(--border-secondary); border-radius: var(--radius-md); background: var(--bg-primary); cursor: pointer; font-family: var(--font); transition: all .1s; }
   .btn:hover { border-color: var(--border-primary); }
+  .btn:active { transform: scale(0.97); }
   .btn-primary { border-color: var(--text-primary); font-weight: 500; }
   .btn-danger { border-color: var(--text-danger); color: var(--text-danger); }
+
+  /* ── 表单 ── */
   input, select, textarea { font-size: 13px; padding: 6px 10px; border: 0.5px solid var(--border-tertiary); border-radius: var(--radius-md); font-family: var(--font); background: var(--bg-primary); }
   input:focus, select:focus { outline: none; border-color: var(--border-primary); }
   select { width: 100%; }
+
+  /* ── 组件 ── */
   .status-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; }
   .status-dot.ok { background: var(--text-success); }
   .status-dot.warn { background: var(--text-warning); }
@@ -56,428 +90,387 @@
   .tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; }
   .tag-ok { background: rgba(29,158,117,0.1); color: var(--text-success); }
   .tag-warn { background: rgba(239,159,39,0.1); color: var(--text-warning); }
+
+  /* ── 布局工具 ── */
   .flex { display: flex; align-items: center; gap: 8px; }
   .flex-between { display: flex; justify-content: space-between; align-items: center; }
   .text-secondary { color: var(--text-secondary); font-size: 12px; }
-  .mt-sm { margin-top: 8px; }
-  .mt-md { margin-top: 16px; }
-  .mb-sm { margin-bottom: 8px; }
-  .mb-md { margin-bottom: 16px; }
+  .mt-sm { margin-top: 8px; } .mt-md { margin-top: 16px; }
+  .mb-sm { margin-bottom: 8px; } .mb-md { margin-bottom: 16px; }
+
+  /* ── 标签页渐入动画 ── */
+  .tab-content.active { animation: fadeIn .25s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
 </style>
 </head>
 <body>
 <div class="app">
+
+<!-- ════ 全局状态栏 ════ -->
+<div class="status-bar" id="status_bar">
+  <span class="flex"><span class="pulse off" id="sb_pulse"></span><span id="sb_daemon">检查中...</span></span>
+  <span class="sep">|</span>
+  <span>今日抓取 <span class="metric" id="sb_today">-</span> 条</span>
+  <span class="sep">|</span>
+  <span>累计 <span class="metric" id="sb_total">-</span> 条推文</span>
+  <span class="sep">|</span>
+  <span style="margin-left:auto;font-size:11px;color:var(--text-tertiary)" id="sb_updated"></span>
+</div>
+
+<!-- ════ 页面头部 ════ -->
 <div class="header">
   <h1>Twitter Investor Distiller</h1>
   <p>抓取 → 分析 → 画像 → 信号</p>
 </div>
+
+<!-- ════ 标签页 ════ -->
 <div class="tabs">
-  <button class="tab active" onclick="switchTab('dashboard')">抓取仪表盘</button>
-  <button class="tab" onclick="switchTab('pipeline')">推文分析</button>
-  <button class="tab" onclick="switchTab('portraits')">分析师画像</button>
-  <button class="tab" onclick="switchTab('insights')">信号与洞察</button>
+  <button class="tab active" onclick="switchTab('signals')">信号看板</button>
+  <button class="tab" onclick="switchTab('workbench')">决策工作台</button>
+  <button class="tab" onclick="switchTab('analysts')">分析师</button>
+  <button class="tab" onclick="switchTab('system')">系统</button>
 </div>
-<div id="tab-dashboard" class="tab-content active"></div>
-<div id="tab-pipeline" class="tab-content"></div>
-<div id="tab-portraits" class="tab-content"></div>
-<div id="tab-insights" class="tab-content"></div>
+<div id="tab-signals" class="tab-content active"></div>
+<div id="tab-workbench" class="tab-content"></div>
+<div id="tab-analysts" class="tab-content"></div>
+<div id="tab-system" class="tab-content"></div>
 </div>
+
 <script>
+// ════ 卡片编排 — 按用户心智分组 ════
 const CARD_ORDER = {
-  dashboard: ["system_status","daemon","fetch_control","telegram","accuracy","api_status"],
-  pipeline: ["pipeline_execute","asset_alias","script_runner"],
-  portraits: ["portrait_generate","portrait"],
-  insights: ["role_picker","portfolio","consensus","rotation","crypto","anomaly","timeline","network"]
+  signals: ["consensus","rotation","anomaly","crypto","timeline","network"],
+  workbench: ["role_picker","portfolio","asset_alias"],
+  analysts: ["portrait_generate","portrait","accuracy"],
+  system: ["daemon","api_status","system_status","fetch_control","telegram","pipeline_execute","script_runner"]
 };
 
-const cache = {};         // 卡片 HTML 缓存
-const REFRESH_MAP = {};   // 刷新间隔
-const LAST_FETCH = {};    // 上次拉取时间戳
+const cache = {};
+const REFRESH_MAP = {};
+const LAST_FETCH = {};
 
+// ════ 全局状态栏更新 ════
+async function updateStatusBar() {
+  try {
+    var dr = await fetch('/cards/daemon'), d = await dr.text();
+    var ar = await fetch('/cards/api_status'), a = await ar.json();
+    var parser = new DOMParser();
+    var daemon_doc = parser.parseFromString(d, 'text/html');
+    var running = daemon_doc.body.textContent.indexOf('运行中') > -1;
+
+    var pulse = document.getElementById('sb_pulse');
+    pulse.className = 'pulse ' + (running ? 'on' : 'off');
+    document.getElementById('sb_daemon').textContent = running ? 'Daemon 运行中' : 'Daemon 已停止';
+    document.getElementById('sb_today').textContent = running ? (a.total_fetched || '-') : '-';
+    document.getElementById('sb_total').textContent = Object.values(a.user_counts||{}).reduce(function(s,v){return s+v},0) || '-';
+    document.getElementById('sb_updated').textContent = a.last_updated !== '未开始' ? '更新于 ' + a.last_updated : '';
+  } catch(e) {}
+}
+
+// ════ 标签页 ────
 function switchTab(tab) {
-  const labels = {dashboard:'抓取', pipeline:'推文分析', portraits:'画像', insights:'洞察'};
-  document.querySelectorAll('.tab').forEach(t => {
-    t.classList.toggle('active', t.textContent.includes(labels[tab]));
+  var labels = {signals:'信号看板', workbench:'决策工作台', analysts:'分析师', system:'系统'};
+  document.querySelectorAll('.tab').forEach(function(t) {
+    t.classList.toggle('active', t.textContent === labels[tab]);
   });
-  document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(function(c) { c.classList.remove('active'); });
   document.getElementById('tab-' + tab).classList.add('active');
   loadCards(tab);
 }
 
 async function loadCards(tab) {
-  const container = document.getElementById('tab-' + tab);
-  const names = CARD_ORDER[tab] || [];
-  
-  const hasCache = names.filter(n => !!cache[n]);
+  var container = document.getElementById('tab-' + tab);
+  var names = CARD_ORDER[tab] || [];
+  var hasCache = names.filter(function(n) { return !!cache[n]; });
 
-  // 已缓存的直接渲染，无填充骨架
   if (hasCache.length === names.length) {
-    container.innerHTML = names.map(n => cache[n]).join('');
+    container.innerHTML = names.map(function(n) { return cache[n]; }).join('');
+    postRender(tab);
     return;
   }
 
-  // 部分缓存：显示已缓存的 + 骨架
-  container.innerHTML = names.map(n =>
-    cache[n] || ('<div id="card-'+n+'" class="card" style="margin-bottom:12px">' +
-    '<div class="flex"><div class="spinner"></div><span class="text-secondary">加载中...</span></div>' +
-    '</div>')
-  ).join('');
+  container.innerHTML = names.map(function(n) {
+    return cache[n] || (
+      '<div id="card-'+n+'" class="card" style="margin-bottom:12px">' +
+      '<div class="flex"><div class="spinner"></div><span class="text-secondary">加载中...</span></div>' +
+      '</div>'
+    );
+  }).join('');
 
-  const toFetch = names.filter(n => !cache[n]);
-
-  // 并行拉取
-  const promises = names.map(async (name) => {
-    if (toFetch.includes(name)) {
+  var toFetch = names.filter(function(n) { return !cache[n]; });
+  var promises = names.map(async function(name) {
+    if (toFetch.indexOf(name) >= 0) {
       try {
-        const resp = await fetch('/cards/' + name);
-        const html = await resp.text();
+        var resp = await fetch('/cards/' + name);
+        var html = await resp.text();
         cache[name] = html;
         LAST_FETCH[name] = Date.now();
-      } catch (e) {
+      } catch(e) {
         cache[name] = '<div class="flex"><div class="status-dot err"></div><span class="text-secondary">加载失败</span></div>';
       }
     }
-    // 从缓存渲染
-    const el = document.getElementById('card-' + name);
+    var el = document.getElementById('card-' + name);
     if (el) el.innerHTML = cache[name];
   });
 
   await Promise.all(promises);
-  // 流水线卡片初始加载：默认显示过滤筛选 tab
-  if (tab === 'pipeline') { requestAnimationFrame(function() { loadTypePE('filter'); }); }
-  attachButtons();
+  postRender(tab);
 }
 
-// 后台自动刷新（仅活跃 tab）
+// ════ 渲染后处理 ════
+function postRender(tab) {
+  // 信号看板: 给共识卡片加头条样式
+  if (tab === 'signals') {
+    var consensusCard = document.getElementById('card-consensus');
+    if (consensusCard) consensusCard.classList.add('card-headline');
+  }
+  // 决策工作台: 调整宽度
+  if (tab === 'workbench') {
+    var rp = document.getElementById('card-role_picker');
+    var pf = document.getElementById('card-portfolio');
+    if (rp) rp.style.gridColumn = '1 / 3';
+  }
+}
+
+// ════ 后台自动刷新 ────
+var PE_ACTIVE = 'filter';
 var PIPELINE_EXECUTE_REFRESHED = false;
 async function autoRefresh() {
-  const active = document.querySelector('.tab-content.active');
+  var active = document.querySelector('.tab-content.active');
   if (!active) return;
-  const tabName = active.id.replace('tab-','');
-  const names = CARD_ORDER[tabName] || [];
-  const now = Date.now();
-  for (const name of names) {
-    const interval = (REFRESH_MAP[name] || 0) * 1000;
+  var tabName = active.id.replace('tab-','');
+  var names = CARD_ORDER[tabName] || [];
+  var now = Date.now();
+  for (var i = 0; i < names.length; i++) {
+    var name = names[i];
+    var interval = (REFRESH_MAP[name] || 0) * 1000;
     if (interval > 0 && now - (LAST_FETCH[name] || 0) > interval) {
       try {
-        const resp = await fetch('/cards/' + name);
-        const html = await resp.text();
-        // 内容没变就不动 DOM，避免无意义重排/跳动
-        if (cache[name] === html) { continue; }
+        var resp = await fetch('/cards/' + name);
+        var html = await resp.text();
+        if (cache[name] === html) continue;
         cache[name] = html;
         LAST_FETCH[name] = Date.now();
-        const el = document.getElementById('card-' + name);
-        if (el) { el.innerHTML = html; }
+        var el = document.getElementById('card-' + name);
+        if (el) el.innerHTML = html;
         if (name === 'pipeline_execute') PIPELINE_EXECUTE_REFRESHED = true;
       } catch(e) {}
     }
   }
-  // 若 pipeline_execute 被刷新，恢复之前选中类型
-  if (PIPELINE_EXECUTE_REFRESHED && tabName === 'pipeline') {
+  if (PIPELINE_EXECUTE_REFRESHED && tabName === 'system') {
     PIPELINE_EXECUTE_REFRESHED = false;
     setTimeout(function() { loadTypePE(PE_ACTIVE); }, 50);
   }
+  updateStatusBar();
 }
 
+// ════ Daemon 启停 ────
 async function toggleDaemon() {
-  const btn = document.getElementById('daemon-btn');
+  var btn = document.getElementById('daemon-btn');
   if (!btn) return;
   btn.disabled = true;
   try {
-    await fetch('/cards/daemon/action', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({action: 'toggle'})
-    });
+    await fetch('/cards/daemon/action', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'toggle'})});
   } catch(e) {}
   try {
-    const resp = await fetch('/cards/daemon');
+    var resp = await fetch('/cards/daemon');
     cache.daemon = await resp.text();
-    const el = document.getElementById('card-daemon');
+    var el = document.getElementById('card-daemon');
     if (el) el.innerHTML = cache.daemon;
   } catch(e) {}
+  updateStatusBar();
 }
 
-// ── 流水线执行函数 ──
-var PE_ACTIVE = 'filter';
-
+// ════ 流水线执行 ────
 function loadTypePE(t) {
   PE_ACTIVE = t;
-  document.querySelectorAll('.pe-container').forEach(function(e) { e.style.display = 'none'; });
-  document.querySelectorAll('.pe-tab').forEach(function(e) { e.classList.remove('active'); });
-  var c = document.getElementById('pe-type-' + t);
-  if (c) c.style.display = 'block';
-  var tab = document.getElementById('tab-' + t);
-  if (tab) tab.classList.add('active');
+  document.querySelectorAll('.pe-container').forEach(function(e){e.style.display='none';});
+  document.querySelectorAll('.pe-tab').forEach(function(e){e.classList.remove('active');});
+  var c=document.getElementById('pe-type-'+t); if(c)c.style.display='block';
+  var tab=document.getElementById('tab-'+t); if(tab)tab.classList.add('active');
+}
+function selectAllPE(t){document.querySelectorAll('.pe-cb-'+t).forEach(function(c){c.checked=true;});}
+function clearAllPE(t){document.querySelectorAll('.pe-cb-'+t).forEach(function(c){c.checked=false;});}
+async function execPipeline(t){
+  var ids=[];document.querySelectorAll('.pe-cb-'+t+':checked').forEach(function(c){ids.push(c.value);});
+  if(!ids.length)return;
+  var s=document.getElementById('pe-msg'); if(s)s.innerText='执行中...';
+  try{
+    var r=await fetch('/pipeline/tasks/execute',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({task_ids:ids})});
+    if(s)s.innerText='已提交 '+ids.length+' 个';setTimeout(function(){location.reload();},2000);
+  }catch(e){if(s)s.innerText='网络错误';}
+}
+async function retryTaskPE(id){await fetch('/pipeline/tasks/'+id+'/retry',{method:'POST'});location.reload();}
+async function skipTaskPE(id){await fetch('/pipeline/tasks/'+id+'/skip',{method:'POST'});location.reload();}
+async function filterNewTweetsPE(){
+  var s=document.getElementById('pe-msg'); if(s)s.innerText='扫描中...';
+  try{await fetch('/pipeline/filter',{method:'POST'});if(s)s.innerText='完成';}catch(e){if(s)s.innerText='失败';}
+  setTimeout(function(){location.reload();},1500);
+}
+async function seedTasksPE(){await fetch('/pipeline/tasks/seed',{method:'POST'});location.reload();}
+
+// ════ 画像生成 ────
+function selectWindow(label){
+  document.getElementById('pg_window').value=label;
+  document.querySelectorAll('.pg-win-btn').forEach(function(b){b.classList.remove('selected');});
+  var btn=document.getElementById('pg_win_'+label); if(btn)btn.classList.add('selected');
+  document.getElementById('pg_from').value=''; document.getElementById('pg_to').value='';
+}
+async function genPortraitAdv(){
+  var u=document.getElementById('pg_user').value,w=document.getElementById('pg_window').value;
+  var from=document.getElementById('pg_from').value,to=document.getElementById('pg_to').value;
+  var label=document.getElementById('pg_label').value.trim(),s=document.getElementById('pg_status');
+  if(!w&&!from){if(s)s.innerText='请先选择时间窗口或日期';return;}
+  if((from&&!to)||(!from&&to)){if(s)s.innerText='日期范围需同时填写起止';return;}
+  if(s)s.innerText='生成中...';
+  try{
+    var r=await fetch('/cards/portrait_generate/action',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user:u,window:w,from:from,to:to,label:label})});
+    var d=await r.json();
+    if(s)s.innerText=d.ok?'任务已创建 #'+d.task_id:'失败: '+(d.error||'');
+    if(d.ok)setTimeout(function(){location.reload();},1500);
+  }catch(e){if(s)s.innerText='网络错误';}
 }
 
-function selectAllPE(t) {
-  document.querySelectorAll('.pe-cb-' + t).forEach(function(c) { c.checked = true; });
+// ════ 资产代码库 ────
+function editAliasRow(alias,ticker,notes){
+  document.getElementById('aa_alias').value=alias;
+  document.getElementById('aa_ticker').value=ticker||'';
+  document.getElementById('aa_notes').value=notes||'';
+  document.getElementById('aa_old_alias').value=alias;
+  document.getElementById('btn_aa_submit').innerText='更新';
 }
-
-function clearAllPE(t) {
-  document.querySelectorAll('.pe-cb-' + t).forEach(function(c) { c.checked = false; });
-}
-
-async function execPipeline(t) {
-  var ids = [];
-  document.querySelectorAll('.pe-cb-' + t + ':checked').forEach(function(c) { ids.push(c.value); });
-  if (!ids.length) return;
-  var s = document.getElementById('pe-msg');
-  if (s) s.innerText = '执行中...';
-  try {
-    var r = await fetch('/pipeline/tasks/execute', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ task_ids: ids })
-    });
-    if (s) s.innerText = '已提交 ' + ids.length + ' 个';
-    setTimeout(function() { location.reload(); }, 2000);
-  } catch (e) {
-    if (s) s.innerText = '网络错误';
-  }
-}
-
-async function retryTaskPE(id) {
-  await fetch('/pipeline/tasks/' + id + '/retry', { method: 'POST' });
-  location.reload();
-}
-
-async function skipTaskPE(id) {
-  await fetch('/pipeline/tasks/' + id + '/skip', { method: 'POST' });
-  location.reload();
-}
-
-async function filterNewTweetsPE() {
-  var s = document.getElementById('pe-msg');
-  if (s) s.innerText = '扫描中...';
-  try {
-    await fetch('/pipeline/filter', { method: 'POST' });
-    if (s) s.innerText = '完成';
-  } catch (e) {
-    if (s) s.innerText = '失败';
-  }
-  setTimeout(function() { location.reload(); }, 1500);
-}
-
-async function seedTasksPE() {
-  await fetch('/pipeline/tasks/seed', { method: 'POST' });
-  location.reload();
-}
-
-// ── 画像生成 ──
-function selectWindow(label) {
-  document.getElementById('pg_window').value = label;
-  document.querySelectorAll('.pg-win-btn').forEach(function(b) { b.classList.remove('selected'); });
-  var btn = document.getElementById('pg_win_' + label);
-  if (btn) btn.classList.add('selected');
-  // 选窗口后清空日历
-  document.getElementById('pg_from').value = '';
-  document.getElementById('pg_to').value = '';
-}
-
-async function genPortraitAdv() {
-  var u = document.getElementById('pg_user').value;
-  var w = document.getElementById('pg_window').value;
-  var from = document.getElementById('pg_from').value;
-  var to = document.getElementById('pg_to').value;
-  var label = document.getElementById('pg_label').value.trim();
-  var s = document.getElementById('pg_status');
-
-  if (!w && !from) { if(s)s.innerText='请先选择时间窗口或日期'; return; }
-  if ((from && !to) || (!from && to)) { if(s)s.innerText='日期范围需同时填写起止'; return; }
-
-  if (s) s.innerText = '生成中...';
-  try {
-    var r = await fetch('/cards/portrait_generate/action', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({ user: u, window: w, from: from, to: to, label: label })
-    });
-    var d = await r.json();
-    if (s) s.innerText = d.ok ? '任务已创建 #'+d.task_id : '失败: '+(d.error||'');
-    if (d.ok) setTimeout(function(){location.reload();}, 1500);
-  } catch(e) { if(s) s.innerText='网络错误'; }
-}
-
-// ── 资产代码库操作 ──
-function editAliasRow(alias, ticker, notes) {
-  document.getElementById('aa_alias').value = alias;
-  document.getElementById('aa_ticker').value = ticker || '';
-  document.getElementById('aa_notes').value = notes || '';
-  document.getElementById('aa_old_alias').value = alias;
-  document.getElementById('btn_aa_submit').innerText = '更新';
-}
-
-function fillAliasForm(alias, notes) {
-  document.getElementById('aa_alias').value = alias;
-  document.getElementById('aa_ticker').value = '';
-  document.getElementById('aa_notes').value = notes || '';
-  document.getElementById('aa_old_alias').value = alias;
-  document.getElementById('btn_aa_submit').innerText = '确认';
+function fillAliasForm(alias,notes){
+  document.getElementById('aa_alias').value=alias;
+  document.getElementById('aa_ticker').value='';
+  document.getElementById('aa_notes').value=notes||'';
+  document.getElementById('aa_old_alias').value=alias;
+  document.getElementById('btn_aa_submit').innerText='确认';
   document.getElementById('aa_ticker').focus();
 }
+async function addAlias(){
+  var alias=document.getElementById('aa_alias').value.trim(),ticker=document.getElementById('aa_ticker').value.trim();
+  var notes=document.getElementById('aa_notes').value.trim(),old=document.getElementById('aa_old_alias').value.trim();
+  var action=old?'edit':'add';
+  if(!alias){setStatus('aa_status','别名不能为空');return;}
+  setStatus('aa_status',(action==='edit'?'更新中...':'添加中...'));
+  try{
+    var r=await fetch('/cards/asset_alias/action',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:action,alias:alias,ticker:ticker,notes:notes,old_alias:old})});
+    var d=await r.json();
+    if(d.ok){setStatus('aa_status','成功');document.getElementById('btn_aa_submit').innerText='添加';document.getElementById('aa_old_alias').value='';location.reload();}
+    else setStatus('aa_status',d.error);
+  }catch(e){setStatus('aa_status','网络错误');}
+}
+async function deleteAlias(alias){
+  if(!confirm('确定删除 "'+alias+'" 吗？'))return;
+  setStatus('aa_status','删除中...');
+  try{
+    var r=await fetch('/cards/asset_alias/action',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'delete',alias:alias})});
+    var d=await r.json(); if(d.ok)location.reload(); else setStatus('aa_status',d.error);
+  }catch(e){setStatus('aa_status','网络错误');}
+}
+function setStatus(id,msg){var el=document.getElementById(id);if(el)el.innerText=msg;}
 
-async function addAlias() {
-  var alias = document.getElementById('aa_alias').value.trim();
-  var ticker = document.getElementById('aa_ticker').value.trim();
-  var notes = document.getElementById('aa_notes').value.trim();
-  var old = document.getElementById('aa_old_alias').value.trim();
-  var action = old ? 'edit' : 'add';
-  if (!alias) { setStatus('aa_status','别名不能为空'); return; }
-  setStatus('aa_status', (action === 'edit' ? '更新中...' : '添加中...'));
-  try {
-    var r = await fetch('/cards/asset_alias/action', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({action: action, alias: alias, ticker: ticker, notes: notes, old_alias: old})
-    });
-    var d = await r.json();
-    if (d.ok) { setStatus('aa_status', '成功'); document.getElementById('btn_aa_submit').innerText = '添加'; document.getElementById('aa_old_alias').value = ''; location.reload(); }
-    else { setStatus('aa_status', d.error); }
-  } catch(e) { setStatus('aa_status', '网络错误'); }
+// ════ 画像展开 ────
+function togglePortrait(id){
+  var body=document.getElementById('portrait-body-'+id);
+  if(!body)return;
+  body.style.display=body.style.display==='none'?'block':'none';
 }
 
-async function deleteAlias(alias) {
-  if (!confirm('确定删除 "' + alias + '" 吗？')) return;
-  setStatus('aa_status', '删除中...');
-  try {
-    var r = await fetch('/cards/asset_alias/action', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({action: 'delete', alias: alias})
-    });
-    var d = await r.json();
-    if (d.ok) { location.reload(); }
-    else { setStatus('aa_status', d.error); }
-  } catch(e) { setStatus('aa_status', '网络错误'); }
+// ════ 用户管理 ────
+async function addTrackedUser(){
+  var u=document.getElementById('um_user').value.trim(),s=document.getElementById('um_status');
+  if(!u){if(s)s.innerText='请输入用户名';return;}
+  if(s)s.innerText='校验中...';
+  try{
+    var r=await fetch('/cards/api_status/action',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'add_user',user:u})});
+    var d=await r.json();
+    if(d.ok){if(s)s.innerText='已添加 @'+u+' (粉丝: '+d.followers+')';setTimeout(function(){location.reload();},1500);}
+    else{if(s)s.innerText=d.error;}
+  }catch(e){if(s)s.innerText='网络错误';}
 }
 
-function setStatus(id, msg) {
-  var el = document.getElementById(id);
-  if (el) el.innerText = msg;
+// ════ 脚本工具箱 ────
+function toggleScriptTools(){
+  var body=document.getElementById('script_tools_body'),btn=document.getElementById('btn_toggle_tools');
+  if(!body||!btn)return;
+  if(body.style.display==='none'){body.style.display='block';btn.innerText='收起';}
+  else{body.style.display='none';btn.innerText='展开';}
+}
+async function runScript(name){
+  var s=document.getElementById('sr_status');if(s)s.innerText='运行 scripts/'+name+'...';
+  try{
+    var r=await fetch('/cards/script_runner/action',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({script:name})});
+    var d=await r.json(); if(s)s.innerText=d.ok?'完成: '+d.output:d.error;
+    setTimeout(function(){location.reload();},1500);
+  }catch(e){if(s)s.innerText='网络错误';}
 }
 
-// ── Telegram ──
-async function sendTestMsg() {
-  var t=document.getElementById("tg_token").value,c=document.getElementById("tg_chatid").value;
+// ════ Telegram ────
+async function sendTestMsg(){
+  var t=document.getElementById('tg_token').value,c=document.getElementById('tg_chatid').value;
   if(!t||!c)return;
-  await fetch("/cards/telegram/action",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({token:t,chat_id:c,action:"test"})});
-  alert("测试消息已发送，请检查 Telegram");
+  await fetch('/cards/telegram/action',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({token:t,chat_id:c,action:'test'})});
+  alert('测试消息已发送，请检查 Telegram');
 }
-async function saveTelegram() {
-  var t=document.getElementById("tg_token").value,c=document.getElementById("tg_chatid").value;
+async function saveTelegram(){
+  var t=document.getElementById('tg_token').value,c=document.getElementById('tg_chatid').value;
   if(!t||!c)return;
-  await fetch("/cards/telegram/action",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({token:t,chat_id:c})});
+  await fetch('/cards/telegram/action',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({token:t,chat_id:c})});
   location.reload();
 }
 
-// ── 角色代入 ──
-function updatePool() {
-  var s=document.getElementById("rp_sector").value;
-  var el=document.getElementById("rp_sectors");
+// ════ 角色代入 ────
+function updatePool(){
+  var s=document.getElementById('rp_sector').value,el=document.getElementById('rp_sectors');
   if(!el)return;
   var data=JSON.parse(el.textContent),t=data[s]||[];
-  document.getElementById("rp_pool").innerText="池内: "+t.join(", ");
+  document.getElementById('rp_pool').innerText='池内: '+t.join(', ');
 }
-async function generatePick() {
-  var btn=event.target;btn.disabled=true;btn.innerText="生成中...";
-  document.getElementById("rp_result").innerHTML='<div class="flex"><div class="spinner"></div><span class="text-secondary">AI 思考中...</span></div>';
+async function generatePick(){
+  var btn=event.target;btn.disabled=true;btn.innerText='生成中...';
+  document.getElementById('rp_result').innerHTML='<div class="flex"><div class="spinner"></div><span class="text-secondary">AI 思考中...</span></div>';
   try{
-    var r=await fetch("/cards/role_picker/action",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({analyst:document.getElementById("rp_analyst").value,sector:document.getElementById("rp_sector").value,custom:document.getElementById("rp_custom").value})});
+    var r=await fetch('/cards/role_picker/action',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({analyst:document.getElementById('rp_analyst').value,sector:document.getElementById('rp_sector').value,custom:document.getElementById('rp_custom').value})});
     var d=await r.json();
-    document.getElementById("rp_result").innerHTML=d.ok?d.html:'<div class="text-secondary">错误: '+d.error+"</div>";
-  }catch(e){document.getElementById("rp_result").innerHTML='<div class="text-secondary">网络错误</div>';}
-  btn.disabled=false;btn.innerText="生成方案";
+    document.getElementById('rp_result').innerHTML=d.ok?d.html:'<div class="text-secondary">错误: '+d.error+'</div>';
+  }catch(e){document.getElementById('rp_result').innerHTML='<div class="text-secondary">网络错误</div>';}
+  btn.disabled=false;btn.innerText='生成方案';
 }
 
-// ── 持仓顾问 ──
-async function analyzePortfolio() {
-  var v=document.getElementById("pf_text").value;
+// ════ 持仓顾问 ────
+async function analyzePortfolio(){
+  var v=document.getElementById('pf_text').value;
   if(!v.trim())return;
-  var btn=event.target;btn.disabled=true;btn.innerText="分析中...";
-  document.getElementById("pf_result").innerHTML='<div class="flex"><div class="spinner"></div><span class="text-secondary">AI 分析中...</span></div>';
+  var btn=event.target;btn.disabled=true;btn.innerText='分析中...';
+  document.getElementById('pf_result').innerHTML='<div class="flex"><div class="spinner"></div><span class="text-secondary">AI 分析中...</span></div>';
   try{
-    var r=await fetch("/cards/portfolio/action",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({text:v})});
+    var r=await fetch('/cards/portfolio/action',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text:v})});
     var d=await r.json();
-    document.getElementById("pf_result").innerHTML=d.ok?d.html:'<div class="text-secondary">错误: '+d.error+"</div>";
-  }catch(e){document.getElementById("pf_result").innerHTML='<div class="text-secondary">网络错误</div>';}
-  btn.disabled=false;btn.innerText="分析持仓";
+    document.getElementById('pf_result').innerHTML=d.ok?d.html:'<div class="text-secondary">错误: '+d.error+'</div>';
+  }catch(e){document.getElementById('pf_result').innerHTML='<div class="text-secondary">网络错误</div>';}
+  btn.disabled=false;btn.innerText='分析持仓';
 }
 
-// ── 手动拉取 ──
-async function fetchManually() {
-  var u=document.getElementById("fc_user").value;
-  var rng=document.getElementById("fc_range").value;
-  var pages=document.getElementById("fc_pages").value;
-  var from=document.getElementById("fc_from").value;
-  var to=document.getElementById("fc_to").value;
-  var s=document.getElementById("fc_status");
-  s.innerText="拉取中...";
+// ════ 手动拉取 ────
+async function fetchManually(){
+  var u=document.getElementById('fc_user').value,rng=document.getElementById('fc_range').value;
+  var pages=document.getElementById('fc_pages').value,from=document.getElementById('fc_from').value,to=document.getElementById('fc_to').value;
+  var s=document.getElementById('fc_status'); s.innerText='拉取中...';
   try{
-    var resp=await fetch("/cards/fetch_control/action",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({user:u,range:rng,pages:pages,from:from,to:to})});
-    var d=await resp.json();
-    s.innerText=d.ok?"完成: +"+d.total+"条":d.error;
+    var resp=await fetch('/cards/fetch_control/action',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user:u,range:rng,pages:pages,from:from,to:to})});
+    var d=await resp.json(); s.innerText=d.ok?'完成: +'+d.total+'条':d.error;
     setTimeout(function(){location.reload();},1000);
-  }catch(e){s.innerText="网络错误";}
+  }catch(e){s.innerText='网络错误';}
 }
 
-// ── 画像展开/收起 ──
-function togglePortrait(id) {
-  var body = document.getElementById('portrait-body-' + id);
-  if (!body) return;
-  body.style.display = body.style.display === 'none' ? 'block' : 'none';
-}
-
-// ── 用户管理 ──
-async function addTrackedUser() {
-  var u = document.getElementById('um_user').value.trim();
-  var s = document.getElementById('um_status');
-  if (!u) { if(s)s.innerText='请输入用户名'; return; }
-  if (s) s.innerText = '校验中...';
-  try {
-    var r = await fetch('/cards/api_status/action', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({action: 'add_user', user: u})
-    });
-    var d = await r.json();
-    if (d.ok) { if(s)s.innerText = '已添加 @'+u+' (粉丝: '+d.followers+')'; setTimeout(function(){location.reload();},1500); }
-    else { if(s)s.innerText = d.error; }
-  } catch(e) { if(s)s.innerText = '网络错误'; }
-}
-
-// ── 脚本工具箱折叠 ──
-function toggleScriptTools() {
-  var body = document.getElementById('script_tools_body');
-  var btn = document.getElementById('btn_toggle_tools');
-  if (!body || !btn) return;
-  if (body.style.display === 'none') {
-    body.style.display = 'block';
-    btn.innerText = '收起';
-  } else {
-    body.style.display = 'none';
-    btn.innerText = '展开';
-  }
-}
-
-// ── 脚本工具箱 ──
-async function runScript(name){
-  var s=document.getElementById("sr_status"); if(s) s.innerText="运行 scripts/" + name + "...";
-  try{
-    var r=await fetch("/cards/script_runner/action",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({script:name})});
-    var d=await r.json(); if(s) s.innerText=d.ok?"完成: "+d.output:d.error;
-    setTimeout(function(){location.reload();},1500);
-  }catch(e){ if(s) s.innerText="网络错误"; }
-}
-
-// ── 启动 ──
-fetch('/cards/meta').then(r => r.json()).then(cards => {
-  cards.forEach(c => { REFRESH_MAP[c.name] = c.refresh; });
-  loadCards('dashboard');
+// ════ 启动 ────
+fetch('/cards/meta').then(function(r){return r.json();}).then(function(cards){
+  cards.forEach(function(c){REFRESH_MAP[c.name]=c.refresh;});
+  loadCards('signals');
+  updateStatusBar();
   setInterval(autoRefresh, 5000);
 });
 </script>
 </body>
 </html>
-
