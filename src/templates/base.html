@@ -130,7 +130,10 @@
   <button class="tab" onclick="switchTab('analysts')">分析师</button>
   <button class="tab" onclick="switchTab('system')">系统</button>
 </div>
-<div id="tab-signals" class="tab-content active"></div>
+<!-- 默认显示信号看板，避免JS加载前空白 -->
+<div id="tab-signals" class="tab-content active" style="min-height:200px">
+  <div class="flex" style="justify-content:center;padding:40px 0"><div class="spinner"></div><span class="text-secondary">正在加载卡片...</span></div>
+</div>
 <div id="tab-workbench" class="tab-content"></div>
 <div id="tab-analysts" class="tab-content"></div>
 <div id="tab-system" class="tab-content"></div>
@@ -488,14 +491,18 @@ async function fetchManually(){
   }catch(e){s.innerText='网络错误';}
 }
 
-// ════ 启动 ────
-fetch('/cards/meta').then(function(r){return r.json();}).then(function(cards){
-  cards.forEach(function(c){REFRESH_MAP[c.name]=c.refresh;});
+// ════ 启动 ════
+(function init() {
   var lastTab = sessionStorage.getItem('lastTab') || 'signals';
+  // 先切换到目标标签（此时按钮状态正确，骨架已显示）
   switchTab(lastTab);
+  // 异步加载 meta 数据，无需等待
+  fetch('/cards/meta').then(function(r){return r.json();}).then(function(cards){
+    cards.forEach(function(c){REFRESH_MAP[c.name]=c.refresh;});
+  }).catch(function(){});
   updateStatusBar();
   setInterval(autoRefresh, 5000);
-});
+})();
 </script>
 </body>
 </html>
