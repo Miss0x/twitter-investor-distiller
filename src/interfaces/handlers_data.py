@@ -88,7 +88,14 @@ def _set_notes(fp, alias: str, notes_val: str) -> dict:
         if len(parts) >= 1 and parts[0].strip() == alias:
             found = True
             ticker = parts[1].strip() if len(parts) >= 2 else ""
-            new_lines.append(f"{alias},{ticker},{notes_val}")
+            old_notes = parts[2].strip() if len(parts) >= 3 else ""
+            if notes_val == "SKIP":
+                # 保留原始上下文: SKIP|原备注
+                new_notes = "SKIP|" + old_notes if old_notes else "SKIP"
+            else:  # unskip
+                # 恢复原始备注: 去掉 SKIP| 前缀
+                new_notes = old_notes.replace("SKIP|", "", 1) if old_notes.startswith("SKIP|") else ""
+            new_lines.append(f"{alias},{ticker},{new_notes}")
             continue
         new_lines.append(line)
     if found:

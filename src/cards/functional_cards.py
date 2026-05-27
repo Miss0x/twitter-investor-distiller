@@ -33,8 +33,8 @@ class AssetAliasCard(Card):
                     aliases.append({"alias": alias, "ticker": ticker, "type": notes})
         # 拆分：已确认(ticker非空) vs 待判断(ticker为空且notes非SKIP) vs 已跳过(notes=SKIP)
         confirmed = [a for a in aliases if a["ticker"]]
-        pending = [a for a in aliases if not a["ticker"] and a.get("type") != "SKIP"]
-        skipped = [a for a in aliases if not a["ticker"] and a.get("type") == "SKIP"]
+        pending = [a for a in aliases if not a["ticker"] and not a.get("type","").startswith("SKIP")]
+        skipped = [a for a in aliases if not a["ticker"] and a.get("type","").startswith("SKIP")]
         return {"aliases": aliases, "count": len(aliases),
                 "confirmed": confirmed, "pending": pending, "skipped": skipped,
                 "n_confirmed": len(confirmed), "n_pending": len(pending), "n_skipped": len(skipped),
@@ -88,7 +88,7 @@ class AssetAliasCard(Card):
             skipped_rows = "".join(
                 f'''<tr style="opacity:0.5">
   <td style="font-size:11px">{a["alias"]}</td>
-  <td style="font-size:11px;color:var(--text-secondary)">{a.get("type","")}</td>
+  <td style="font-size:11px;color:var(--text-secondary)">{a.get("type","").replace("SKIP|","",1) if a.get("type","").startswith("SKIP|") else a.get("type","")}</td>
   <td style="text-align:right">
     <button class="btn" style="font-size:10px;padding:1px 6px" onclick="unskipAlias('{_esc_js(a["alias"])}')">恢复</button>
   </td></tr>'''
