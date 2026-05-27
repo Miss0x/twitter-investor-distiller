@@ -231,8 +231,20 @@ def list_crypto_fetched() -> dict:
 @app.post("/pipeline/filter")
 def run_filter() -> dict:
     """运行过滤：扫描 DB 新推文 → 过滤模型 → 写入 filtered JSON。"""
-    t = PipelineTask(task_type="filter", status="pending", payload=json.dumps({"action": "filter_new"}, ensure_ascii=False))
     session = db.get_session()
+
+    # 先清理旧的未执行 filter_new 任务（上次点了但没跑成的）
+    stale = session.query(PipelineTask).filter(
+        PipelineTask.task_type == "filter",
+        PipelineTask.status == "pending",
+        PipelineTask.payload.like('%filter_new%')
+    ).all()
+    for s in stale:
+        s.status = "done"
+        s.error_msg = "被新任务替代"
+    session.commit()
+
+    t = PipelineTask(task_type="filter", status="pending", payload=json.dumps({"action": "filter_new"}, ensure_ascii=False))
     session.add(t)
     session.commit()
     tid = t.id
