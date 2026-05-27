@@ -31,10 +31,10 @@ class AssetAliasCard(Card):
                 notes = row[2].strip() if len(row) >= 3 else ""
                 if alias:
                     aliases.append({"alias": alias, "ticker": ticker, "type": notes})
-        # 拆分：已确认(ticker非空且非SKIP) vs 待判断(ticker为空) vs 已跳过(ticker=SKIP)
-        confirmed = [a for a in aliases if a["ticker"] and a["ticker"] != "SKIP"]
-        skipped = [a for a in aliases if a["ticker"] == "SKIP"]
-        pending = [a for a in aliases if not a["ticker"]]
+        # 拆分：已确认(ticker非空) vs 待判断(ticker为空且notes非SKIP) vs 已跳过(notes=SKIP)
+        confirmed = [a for a in aliases if a["ticker"]]
+        pending = [a for a in aliases if not a["ticker"] and a.get("type") != "SKIP"]
+        skipped = [a for a in aliases if not a["ticker"] and a.get("type") == "SKIP"]
         return {"aliases": aliases, "count": len(aliases),
                 "confirmed": confirmed, "pending": pending, "skipped": skipped,
                 "n_confirmed": len(confirmed), "n_pending": len(pending), "n_skipped": len(skipped),

@@ -69,15 +69,15 @@ def _handle_asset_alias(payload: dict) -> dict:
         return {"ok": False, "error": f"别名 '{target}' 未找到"}
 
     elif action == "skip":
-        return _modify_ticker(fp, alias, "SKIP")
+        return _set_notes(fp, alias, "SKIP")
     elif action == "unskip":
-        return _modify_ticker(fp, alias, "")
+        return _set_notes(fp, alias, "")
 
     return {"ok": False, "error": "unknown action"}
 
 
-def _modify_ticker(fp, alias: str, new_ticker: str) -> dict:
-    """修改别名行中的 ticker 字段（用于 skip/unskip）。"""
+def _set_notes(fp, alias: str, notes_val: str) -> dict:
+    """修改别名行中的备注字段（用于 skip/unskip）。"""
     lines = fp.read_text(encoding="utf-8").split("\n")
     new_lines = []; found = False
     for line in lines:
@@ -87,8 +87,8 @@ def _modify_ticker(fp, alias: str, new_ticker: str) -> dict:
         parts = line.split(",", 2)
         if len(parts) >= 1 and parts[0].strip() == alias:
             found = True
-            notes = parts[2].strip() if len(parts) >= 3 else ""
-            new_lines.append(f"{alias},{new_ticker},{notes}")
+            ticker = parts[1].strip() if len(parts) >= 2 else ""
+            new_lines.append(f"{alias},{ticker},{notes_val}")
             continue
         new_lines.append(line)
     if found:
