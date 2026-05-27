@@ -483,7 +483,17 @@ async function analyzePortfolio(){
 async function fetchManually(){
   var u=document.getElementById('fc_user').value,rng=document.getElementById('fc_range').value;
   var pages=document.getElementById('fc_pages').value,from=document.getElementById('fc_from').value,to=document.getElementById('fc_to').value;
-  var s=document.getElementById('fc_status'); s.innerText='拉取中...';
+  var s=document.getElementById('fc_status');
+  // 检查 daemon 是否在限流
+  try{
+    var cr=await fetch('/cards/api_status'); var ca=await cr.json();
+    if(ca.rate_limited){
+      s.innerText='API 限流冷却中, 请等待 daemon 恢复';
+      setTimeout(function(){s.innerText='';},5000);
+      return;
+    }
+  }catch(e){}
+  s.innerText='拉取中...';
   try{
     var resp=await fetch('/cards/fetch_control/action',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user:u,range:rng,pages:pages,from:from,to:to})});
     var d=await resp.json(); s.innerText=d.ok?'完成: +'+d.total+'条':d.error;

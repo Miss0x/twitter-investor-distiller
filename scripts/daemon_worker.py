@@ -16,7 +16,7 @@ from src.storage.models import PipelineTask
 def run():
     db.init_db()
     USERS = _load_users()
-    INTERVAL = 120
+    INTERVAL = 300  # 300s = 5分钟, 避免频繁触发限流
     fetcher = TwitterAPIFetcher()
     state = Path("data/auto_scheduler_state.json")
     st = json.loads(state.read_text()) if state.exists() else {}
