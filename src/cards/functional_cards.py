@@ -31,12 +31,13 @@ class AssetAliasCard(Card):
                 notes = row[2].strip() if len(row) >= 3 else ""
                 if alias:
                     aliases.append({"alias": alias, "ticker": ticker, "type": notes})
-        # 拆分：已确认(ticker非空) vs 待判断(ticker为空)
-        confirmed = [a for a in aliases if a["ticker"]]
+        # 拆分：已确认(ticker非空且非SKIP) vs 待判断(ticker为空) vs 已跳过(ticker=SKIP)
+        confirmed = [a for a in aliases if a["ticker"] and a["ticker"] != "SKIP"]
+        skipped = [a for a in aliases if a["ticker"] == "SKIP"]
         pending = [a for a in aliases if not a["ticker"]]
         return {"aliases": aliases, "count": len(aliases),
-                "confirmed": confirmed, "pending": pending,
-                "n_confirmed": len(confirmed), "n_pending": len(pending),
+                "confirmed": confirmed, "pending": pending, "skipped": skipped,
+                "n_confirmed": len(confirmed), "n_pending": len(pending), "n_skipped": len(skipped),
                 "known_crypto": ["BTC","ETH","XRP","SOL","DOGE","ADA","AVAX","DOT","MATIC"],
                 "known_etf": ["SPY","QQQ","SOXX","SMH","ARKK","IWM","DIA","VOO","VTI","XLE","XLF","TQQQ","SQQQ","SOXL","SOXS"],
                 "known_index": ["SPX","NDX","DJI","RUT","VIX"]}
@@ -72,12 +73,27 @@ class AssetAliasCard(Card):
   <td style="font-size:11px;color:var(--text-secondary)">{a.get("type","")}</td>
   <td style="text-align:right">
     <button class="btn" style="font-size:10px;padding:1px 6px" onclick="fillAliasForm('{_esc_js(a["alias"])}','{_esc_js(a.get("type",""))}')">填代码</button>
+    <button class="btn" style="font-size:10px;padding:1px 6px;border-color:var(--text-tertiary);color:var(--text-tertiary)" onclick="skipAlias('{_esc_js(a["alias"])}')">跳过</button>
     <button class="btn btn-danger" style="font-size:10px;padding:1px 6px" onclick="deleteAlias('{_esc_js(a["alias"])}')">删除</button>
   </td></tr>'''
                 for a in pending[:30]
             )
         else:
-            pending_rows = '<tr><td colspan="4" class="text-secondary" style="color:var(--text-success)">全部确认完毕</td></tr>'
+            pending_rows = '<tr><td colspan="4" class="text-secondary" style="color:var(--text-success)">🎉 全部确认完毕</td></tr>'
+
+        # ── 已跳过行 ──
+        skipped = data.get("skipped", [])
+        skipped_rows = ""
+        if skipped:
+            skipped_rows = "".join(
+                f'''<tr style="opacity:0.5">
+  <td style="font-size:11px">{a["alias"]}</td>
+  <td style="font-size:11px;color:var(--text-secondary)">{a.get("type","")}</td>
+  <td style="text-align:right">
+    <button class="btn" style="font-size:10px;padding:1px 6px" onclick="unskipAlias('{_esc_js(a["alias"])}')">恢复</button>
+  </td></tr>'''
+                for a in skipped[:30]
+            )
 
         crypto_str = ", ".join(data.get("known_crypto", []))
         return f'''<div class="card-title">资产代码库</div>
@@ -85,7 +101,7 @@ class AssetAliasCard(Card):
   <div class="metric"><div class="metric-label">总映射</div><div class="metric-value">{count}</div><div class="metric-sub">条</div></div>
   <div class="metric"><div class="metric-label">已确认</div><div class="metric-value" style="color:var(--text-success)">{data["n_confirmed"]}</div><div class="metric-sub">ticker 明确</div></div>
   <div class="metric"><div class="metric-label">待判断</div><div class="metric-value" style="color:var(--text-warning)">{data["n_pending"]}</div><div class="metric-sub">需人工</div></div>
-  <div class="metric"><div class="metric-label">加密+ETF+指数</div><div class="metric-value" style="font-size:12px">{len(data.get("known_crypto",[]))}+{len(data.get("known_etf",[]))}+{len(data.get("known_index",[]))}</div><div class="metric-sub">内置识别</div></div>
+  <div class="metric"><div class="metric-label">已跳过</div><div class="metric-value" style="color:var(--text-tertiary)">{data["n_skipped"]}</div><div class="metric-sub">暂不处理</div></div>
 </div>
 
 <!-- 添加 / 编辑表单 -->
@@ -105,7 +121,9 @@ class AssetAliasCard(Card):
 <!-- 待人工判断 -->
 <div class="mt-md mb-sm"><span style="font-size:12px;font-weight:500;color:var(--text-warning)">⚠ 待人工判断 ({data["n_pending"]}条)</span></div>
 <table class="data"><tr><th>别名</th><th>系统标注</th><th style="text-align:right">操作</th></tr>{pending_rows}</table>
-<div class="text-secondary mt-sm" style="font-size:10px">提示：点"填代码"自动回填表单，输入 ticker 后提交即可移入已确认列表。内置识别: {crypto_str}</div>'''
+<!-- 已跳过 -->
+{skipped_rows and f'<div class="mt-md mb-sm"><span style="font-size:12px;font-weight:500;color:var(--text-tertiary)">⊘ 已跳过 ({data["n_skipped"]}条)</span></div><table class="data"><tr><th>别名</th><th>系统标注</th><th style="text-align:right">操作</th></tr>' + skipped_rows + '</table>'}
+<div class="text-secondary mt-sm" style="font-size:10px">提示：点"填代码"自动回填表单，输入 ticker 后提交即可移入已确认列表。跳过则暂不处理。内置识别: {crypto_str}</div>'''
 
 
 @register

@@ -368,6 +368,20 @@ async function deleteAlias(alias){
     var d=await r.json(); if(d.ok)location.reload(); else setStatus('aa_status',d.error);
   }catch(e){setStatus('aa_status','网络错误');}
 }
+async function skipAlias(alias){
+  setStatus('aa_status','跳过中...');
+  try{
+    var r=await fetch('/cards/asset_alias/action',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'skip',alias:alias})});
+    var d=await r.json(); if(d.ok)location.reload(); else setStatus('aa_status',d.error);
+  }catch(e){setStatus('aa_status','网络错误');}
+}
+async function unskipAlias(alias){
+  setStatus('aa_status','恢复中...');
+  try{
+    var r=await fetch('/cards/asset_alias/action',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'unskip',alias:alias})});
+    var d=await r.json(); if(d.ok)location.reload(); else setStatus('aa_status',d.error);
+  }catch(e){setStatus('aa_status','网络错误');}
+}
 function setStatus(id,msg){var el=document.getElementById(id);if(el)el.innerText=msg;}
 
 // ════ 画像展开 ────
