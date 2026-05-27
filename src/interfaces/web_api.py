@@ -39,12 +39,17 @@ _rate_lock = threading.Lock()
 
 @app.middleware("http")
 async def rate_limit_middleware(request: Request, call_next):
+    # 不限制本地数据查询（/cards/* GET 和静态资源），只保护外部 API 调用
+    if request.method == "GET" and request.url.path.startswith("/cards/"):
+        return await call_next(request)
+    if request.url.path.startswith(("/timeline/", "/static/", "/favicon")):
+        return await call_next(request)
     ip = request.client.host if request.client else "unknown"
     now = _time.time()
     with _rate_lock:
         bucket = _rate_buckets.setdefault(ip, [])
         bucket[:] = [t for t in bucket if now - t < 60]
-        if len(bucket) >= config.rate_limit_per_minute:
+        if len(bucket) >= max(config.rate_limit_per_minute, 120):
             from fastapi.responses import JSONResponse
             return JSONResponse(status_code=429, content={"error": "rate limit exceeded"})
         bucket.append(now)
