@@ -38,6 +38,7 @@ class ApiStatusCard(Card):
             "user_counts": user_counts,
             "total_fetched": st.get("total_fetched", 0),
             "last_updated": st.get("updated", "未开始"),
+            "rate_limited": st.get("rate_limited", ""),
             "cursors": {k.replace("cursor_", ""): v[:20] + "..." for k, v in st.items() if k.startswith("cursor_")},
         }
 

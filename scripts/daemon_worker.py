@@ -21,10 +21,11 @@ def run():
     state = Path("data/auto_scheduler_state.json")
     st = json.loads(state.read_text()) if state.exists() else {}
     idx = st.get("user_idx", 0)
+    backoff = 1  # 指数退避倍数
 
     while True:
         try:
-            USERS = _load_users() or USERS  # 每次循环重读, 支持动态添加
+            USERS = _load_users() or USERS
             username = USERS[idx % len(USERS)]
             st["user_idx"] = (idx + 1) % len(USERS)
             st["updated"] = time.strftime("%Y-%m-%d %H:%M:%S")
@@ -47,15 +48,22 @@ def run():
                     session.add(t)
                 session.commit()
                 session.close()
+                st.pop("rate_limited", None)
+                backoff = max(1, backoff // 2)
                 print(f"[DAEMON] {username}: +{new_cnt} tweets, pipeline triggered")
             elif new_cnt == 0 and res.get("ok"):
+                st.pop("rate_limited", None)
                 print(f"[DAEMON] {username}: 无新推文")
+            elif "rate limit" in str(res.get("error", "")).lower():
+                backoff = min(backoff * 2, 8)
+                st["rate_limited"] = f"限流, {INTERVAL * backoff}s 后重试"
+                print(f"[DAEMON] {username}: rate limited, backoff x{backoff}")
             else:
                 print(f"[DAEMON] {username}: {res.get('error', '')}")
 
             state.write_text(json.dumps(st, ensure_ascii=False))
             idx += 1
-            time.sleep(INTERVAL)
+            time.sleep(INTERVAL * backoff)
         except Exception as exc:
             print(f"[DAEMON] error: {exc}")
             time.sleep(INTERVAL * 2)

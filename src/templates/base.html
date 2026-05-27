@@ -160,7 +160,16 @@ async function updateStatusBar() {
 
     var pulse = document.getElementById('sb_pulse');
     pulse.className = 'pulse ' + (running ? 'on' : 'off');
-    document.getElementById('sb_daemon').textContent = running ? 'Daemon 运行中' : 'Daemon 已停止';
+
+    // 限流状态
+    var rateLimited = a.rate_limited;
+    document.getElementById('sb_daemon').textContent = rateLimited
+      ? 'Daemon 限流等待中...'
+      : (running ? 'Daemon 运行中' : 'Daemon 已停止');
+    if (rateLimited) {
+      pulse.className = 'pulse';
+      pulse.style.background = 'var(--text-warning)';
+    }
     document.getElementById('sb_today').textContent = running ? (a.total_fetched || '-') : '-';
     document.getElementById('sb_total').textContent = Object.values(a.user_counts||{}).reduce(function(s,v){return s+v},0) || '-';
     document.getElementById('sb_updated').textContent = a.last_updated !== '未开始' ? '更新于 ' + a.last_updated : '';
