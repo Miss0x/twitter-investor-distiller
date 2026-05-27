@@ -38,7 +38,7 @@ FIREFLY,,未上市(Adobe)
 SPACEX,,未上市
 NEOCLOUD,,未上市或退市
 TIKTOK,,未上市
-字节跳动,,未上市
+字节跳动,,SKIP|未上市
 长江存储,,未上市中国企业
 长鑫存储,,未上市中国企业
 SK海力士,,韩国上市公司
@@ -86,7 +86,7 @@ SPX,,标普500指数(非个股无需行情)
 MSTR,MSTR,微策略(美股)
 COIN,COIN,Coinbase(美股)
 KLA,KLAC,人工修正
-MAG3,,人工跳过
+MAG3,,SKIP|人工跳过
 SMIC,,人工跳过
 SNAM,,人工跳过
 SS,,人工跳过
