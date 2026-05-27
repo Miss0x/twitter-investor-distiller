@@ -295,9 +295,11 @@ def run_clean() -> dict:
 
 @app.post("/pipeline/tasks/seed")
 def seed_tasks() -> dict:
-    """扫描未处理项，写入任务表。"""
+    """扫描未处理项，写入任务表（增量，不清理已有待办）。"""
     session = db.get_session()
-    count = 0
+    counts = {"filter": 0, "analyze": 0, "fetch_price": 0, "fetch_crypto": 0, "portrait": 0}
+    type_names = {"filter": "过滤筛选", "analyze": "推文分析", "fetch_price": "股价拉取",
+                  "fetch_crypto": "加密货币", "portrait": "画像生成"}
     try:
         # 辅助：从文件名提取用户+月份
         def _parse_stem(stem: str) -> tuple[str, str]:
@@ -310,11 +312,7 @@ def seed_tasks() -> dict:
                 return parts[0], "_".join(parts[1:])
             return stem, ""
 
-        # ── 清旧待办 ──
-        for tt in ("filter", "analyze", "fetch_price", "fetch_crypto"):
-            session.query(PipelineTask).filter(
-                PipelineTask.task_type == tt, PipelineTask.status == "pending"
-            ).delete()
+        # ── 不清理旧待办，增量创建 ──
 
         # ── 第一步：从 DB 扫描新推文 → 创建 filter_single 任务 ──
         from src.storage.models import Tweet, User as DbUser
@@ -341,7 +339,7 @@ def seed_tasks() -> dict:
                         "action": "filter_single", "tweet_id": tw.id,
                     }, ensure_ascii=False))
                     session.add(t)
-                    count += 1
+                    counts["filter"] += 1
 
         # ── 收集已有分析任务的 tweet_id（避免 Like 查询）──
         existing_tweet_ids = set()
@@ -376,7 +374,7 @@ def seed_tasks() -> dict:
                     "quoted_user": tweet.get("quoted_user", ""),
                 }, ensure_ascii=False))
                 session.add(t)
-                count += 1
+                counts["analyze"] += 1
 
         # ── 拉取股价（从清洗后数据提取已验证股票）──
         price_path = Path("data/prices.json")
@@ -415,7 +413,7 @@ def seed_tasks() -> dict:
                 "sources": all_stocks[ticker],
             }, ensure_ascii=False))
             session.add(t)
-            count += 1
+            counts["fetch_price"] += 1
 
         # ── 加密货币行情 ──
         crypto_path = Path("data/crypto_prices.json")
@@ -446,7 +444,7 @@ def seed_tasks() -> dict:
                 "ticker": ticker, "sources": all_cryptos[ticker],
             }, ensure_ascii=False))
             session.add(t)
-            count += 1
+            counts["fetch_crypto"] += 1
 
         # ── 画像生成（每用户 × 5 个时间窗口）──
         from datetime import datetime, timedelta
@@ -479,10 +477,11 @@ def seed_tasks() -> dict:
                     "tweet_count": count,
                 }, ensure_ascii=False))
                 session.add(t)
-                count += 1
+                counts["portrait"] += 1
 
         session.commit()
-        return {"ok": True, "message": f"已创建 {count} 个待办任务"}
+        parts = [f"{v} 条{type_names.get(k,k)}" for k,v in counts.items() if v > 0]
+        msg = "新增: " + ", ".join(parts) if parts else "无需新增任务"
     finally:
         session.close()
 

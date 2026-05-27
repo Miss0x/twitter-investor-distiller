@@ -300,6 +300,12 @@ function loadTypePE(t) {
   document.querySelectorAll('.pe-container').forEach(function(e){e.style.display='none';});
   document.querySelectorAll('.pe-tab').forEach(function(e){e.classList.remove('active');});
   var c=document.getElementById('pe-type-'+t); if(c)c.style.display='block';
+  // 子 tab：analyze 下展示 fetch_price + fetch_crypto
+  if(t==='analyze') {
+    ['fetch_price','fetch_crypto'].forEach(function(st){
+      var sc=document.getElementById('pe-type-'+st); if(sc)sc.style.display='block';
+    });
+  }
   var tab=document.getElementById('tab-'+t); if(tab)tab.classList.add('active');
 }
 function selectAllPE(t){document.querySelectorAll('.pe-cb-'+t).forEach(function(c){c.checked=true;});}
@@ -310,12 +316,30 @@ async function execPipeline(t){
   var s=document.getElementById('pe-msg'); if(s)s.innerText='执行中...';
   try{
     var r=await fetch('/pipeline/tasks/execute',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({task_ids:ids})});
-    if(s)s.innerText='已提交 '+ids.length+' 个';setTimeout(function(){location.reload();},2000);
+    if(s)s.innerText='已提交 '+ids.length+' 个'; setTimeout(function(){location.reload();},2000);
   }catch(e){if(s)s.innerText='网络错误';}
 }
 async function retryTaskPE(id){await fetch('/pipeline/tasks/'+id+'/retry',{method:'POST'});location.reload();}
 async function skipTaskPE(id){await fetch('/pipeline/tasks/'+id+'/skip',{method:'POST'});location.reload();}
-async function seedTasksPE(){await fetch('/pipeline/tasks/seed',{method:'POST'});location.reload();}
+async function seedTasksPE(){
+  var s=document.getElementById('pe-msg'); if(s)s.innerText='种子任务扫描中...';
+  try{
+    var r=await fetch('/pipeline/tasks/seed',{method:'POST'});
+    var d=await r.json();
+    if(s)s.innerText=d.ok?(d.message||'已完成') :('错误: '+(d.error||'未知'));
+  }catch(e){if(s)s.innerText='网络错误';}
+  // 静默刷新 pipeline_execute 卡片
+  setTimeout(async function(){
+    try{
+      var resp=await fetch('/cards/pipeline_execute');
+      cache['pipeline_execute']=await resp.text();
+      LAST_FETCH['pipeline_execute']=Date.now();
+      var el=document.getElementById('card-pipeline_execute');
+      if(el)el.innerHTML=cache['pipeline_execute'];
+      loadTypePE(PE_ACTIVE);
+    }catch(e){}
+  },1000);
+}
 async function runCleanAlias(){
   var s=document.getElementById('clean_status');
   if(s)s.innerText='校准中...';

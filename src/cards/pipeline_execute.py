@@ -71,26 +71,32 @@ class PipelineExecuteCard(Card):
         progress = data.get("progress", {})
         tc = data.get("type_counts", {})
         type_names = {
-            "filter": "过滤筛选", "analyze": "推文分析", "fetch_price": "股价拉取",
-            "fetch_crypto": "加密货币", "portrait": "画像生成", "clean": "数据清洗",
+            "filter": "过滤筛选", "analyze": "推文分析",
+            "fetch_price": "股价拉取", "fetch_crypto": "加密货币",
+            "portrait": "画像生成", "clean": "数据清洗",
         }
-        types = list(type_names.keys())
+        # 主 tab，fetch_price/fetch_crypto 为推文分析的前置子功能
+        main_types = ["filter", "analyze", "portrait", "clean"]
+        sub_of = {"fetch_price": "analyze", "fetch_crypto": "analyze"}
 
         # ── 批量查推文文本，注入到 filter / analyze payload 中 ──
         _enrich_tweet_texts(groups)
 
+        # 主 tab 按钮（fetch_price/fetch_crypto 嵌套在推文分析下）
+        all_ts = ["filter", "analyze", "fetch_price", "fetch_crypto", "portrait", "clean"]
+
         type_tabs = "".join(
             f'<button class="tab pe-tab" onclick="loadTypePE(\'{t}\')" id="tab-{t}">{type_names[t]}</button>'
-            for t in types
+            for t in main_types
         )
         status_bar = f'执行中: {progress.get("msg","")} ({progress.get("done",0)}/{progress.get("total",0)})' if running else "空闲"
         type_tags = "".join(
             f'<span class="tag tag-ok">{type_names.get(t,t)}: {tc.get(t,0)}</span>'
-            for t in types if tc.get(t, 0) > 0
+            for t in all_ts if tc.get(t, 0) > 0
         )
 
         containers = ""
-        for t in types:
+        for t in all_ts:
             items = groups.get(t, [])
             if t == "clean":
                 # ── 数据清洗：资产代码库（完整表格 + 校准按钮） ──
@@ -166,8 +172,14 @@ class PipelineExecuteCard(Card):
                 for f in failed[:10]
             ) if failed else ''
 
+            # 子 tab 视觉标记
+            section_title = type_names.get(t, t)
+            if t in sub_of:
+                section_title = f'└ 前置数据: {section_title}'
+
             containers += f'''<div id="pe-type-{t}" class="pe-container" style="display:none">
-<div class="flex-between mb-sm"><span class="text-secondary" style="font-size:11px">待办 {len(pending)} | 完成 {len(done)} | 失败 {len(failed)}</span>
+<div class="flex-between mb-sm"><span class="text-secondary" style="font-size:11px">
+{section_title} · 待办 {len(pending)} | 完成 {len(done)} | 失败 {len(failed)}</span>
 <span><button class="btn" style="font-size:10px;padding:2px 6px" onclick="selectAllPE('{t}')">全选</button>
 <button class="btn" style="font-size:10px;padding:2px 6px" onclick="clearAllPE('{t}')">取消</button>
 <button class="btn" style="font-size:10px;padding:2px 6px" onclick="execPipeline('{t}')">▶ 执行选中</button></span></div>
