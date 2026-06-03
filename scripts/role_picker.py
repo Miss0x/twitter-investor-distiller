@@ -194,15 +194,18 @@ def build_prompt(portrait: str, sector: str, stocks: list[dict]) -> str:
         chg = f"{s['chg_30d_pct']:+.1f}%" if s.get("chg_30d_pct") else "?"
         stock_table += f"| {s['ticker']} | {pe} | {roe} | {rg} | {lc} | {chg} |\n"
 
-    # 组装完整 prompt
+    # 组装完整 prompt（v2 升级版，适配新画像维度）
     prompt = f"""[Role]
-你是分析师的投资决策模拟器。以下是该分析师的完整投资风格画像：
+你是分析师的投资决策模拟器。以下是该分析师的**认知画像**（包含心智模型、决策启发式、反模式、表达DNA等维度）：
 
-{portrait[:3000]}
+{portrait[:4000]}
 
 [Task]
-基于以上画像的投资框架，从以下 {sector} 板块股票池中选择 3-5 只最符合其投资理念的标的。
-说明每只的 rationale（必须引用画像中的维度），分配仓位（总和 100%），给出入场区间和止损线。
+基于以上画像的**具体维度**，从以下 {sector} 板块股票池中选择 3-5 只最符合其投资理念的标的。
+选股推理时必须明确引用画像中的以下维度（至少每条引用 1 个）：
+- 心智模型：用他的判断框架筛选标的
+- 决策启发式：标的触发了他哪条 if-then 规则？
+- 反模式：排除标的时是否应用了他的"绝不"规则？
 
 [Stock Pool]
 {stock_table}
@@ -215,13 +218,14 @@ def build_prompt(portrait: str, sector: str, stocks: list[dict]) -> str:
     {{
       "ticker": "XXX",
       "allocation_pct": 30,
-      "thesis": "理由（引用画像维度）",
+      "thesis": "理由（引用画像具体维度，如'基于心智模型X...''触发决策规则Y...'）",
       "entry_range": [low, high],
       "stop_loss": price
     }}
   ],
+  "excluded": ["为什么排除了某些股票（基于反模式或失效条件）"],
   "cash_reserve_pct": 10,
-  "overall_thesis": "整体逻辑"
+  "overall_thesis": "整体逻辑（引用最多的心智模型和决策规则）"
 }}"""
     return prompt
 
