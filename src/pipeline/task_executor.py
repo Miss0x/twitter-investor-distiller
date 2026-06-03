@@ -639,11 +639,12 @@ def _generate_portrait(username: str) -> dict:
     格式 B（日期范围）：TJ_Research_2024-01-01_2024-06-30
         → user=TJ_Research, 精确日期范围过滤
 
-    画像包含 10 个维度：
-        1. 投资哲学    2. 核心板块      3. 操作风格
-        4. 仓位管理    5. 风险偏好      6. 决策框架
-        7. 情绪特征    8. 预测准确率    9. 进化轨迹
-        10. 一句话总结
+    画像包含 12 个维度（v2 升级版，注入"女娲"思维提炼方法论）：
+        1. 投资哲学      2. 心智模型（三重验证）       3. 核心板块
+        4. 操作风格      5. 决策启发式（if-then规则）  6. 仓位管理与Beta调节
+        7. 风险偏好      8. 反模式（绝不做什么）       9. 情绪与表达DNA
+        10. 预测准确率   11. 进化轨迹                  12. 诚实边界
+        13. 智识谱系 + 一句话总结
 
     Args:
         username: "用户名_窗口" 或 "用户名_开始日期_结束日期" 格式
@@ -656,8 +657,6 @@ def _generate_portrait(username: str) -> dict:
     from datetime import datetime, timedelta
 
     # ── 解析用户名 + 时间窗口 ──
-    # 格式 A: TJ_Research_1个月 → user=TJ_Research, window=30
-    # 格式 B: TJ_Research_2026-01-01_2026-05-27 → user=TJ_Research, 日期范围
     m = re.match(r"(.+)_(1个月|3个月|6个月|1年|全量)$", username)
     use_date_range = False
     date_from = date_to = ""
@@ -667,7 +666,6 @@ def _generate_portrait(username: str) -> dict:
         window_map = {"1个月": 30, "3个月": 90, "6个月": 180, "1年": 365, "全量": 9999}
         window_days = window_map.get(window_label, 9999)
     else:
-        # 尝试解析日期范围格式: user_YYYY-MM-DD_YYYY-MM-DD
         m2 = re.match(r"(.+?)_(\d{4}-\d{2}-\d{2})_(\d{4}-\d{2}-\d{2})", username)
         if m2:
             user = m2.group(1)
@@ -688,10 +686,8 @@ def _generate_portrait(username: str) -> dict:
 
     # ── 时间窗口过滤 ──
     if use_date_range:
-        # 精确日期范围过滤
         windowed = [r for r in data if r.get("created_at", "") and date_from <= r["created_at"][:10] <= date_to]
     else:
-        # 相对时间窗口过滤（如 "最近1个月"）
         now = datetime.utcnow()
         cutoff = now - timedelta(days=window_days) if window_days < 9999 else datetime(2000, 1, 1)
         windowed = [r for r in data if r.get("created_at", "") and r["created_at"][:10] >= cutoff.strftime("%Y-%m-%d")]
@@ -700,46 +696,136 @@ def _generate_portrait(username: str) -> dict:
         return {"error": f"时间窗口 {window_label} 内无推文" if not use_date_range else f"日期范围 {date_from}~{date_to} 内无推文"}
     data = windowed
 
-    # ── 统计摘要 ──
+    # ── 丰富统计摘要（为 LLM 提炼心智模型提供更多维度）──
     from collections import Counter
-    topics = Counter(r.get("topic", "?") for r in data)    # 话题分布
-    stances = Counter(r.get("stance", "?") for r in data)  # 态度分布
+    topics = Counter(r.get("topic", "?") for r in data)
+    stances = Counter(r.get("stance", "?") for r in data)
+    confidences = Counter(r.get("confidence", "?") for r in data)
+    action_hints = Counter(r.get("action_hint", "?") for r in data)
     stocks = Counter()
+    sectors = Counter()
     for r in data:
         for sd in r.get("stock_details", []):
             stocks[sd.get("ticker", "?")] += 1
+            if sd.get("sector"):
+                sectors[sd["sector"]] += 1
     times = sorted(r["created_at"][:10] for r in data if r.get("created_at"))
 
-    # ── 构造画像生成 Prompt ──
-    prompt = f"""你是投资分析师。基于 {len(data)} 条 {user} 的推文分析结果，生成投资风格画像。
+    # 抽取典型推文样本（供 LLM 分析表达风格：确定性措辞、类比使用、引用习惯等）
+    sample_texts = []
+    for r in data[-30:]:  # 最近 30 条
+        txt = r.get("text", "") or r.get("key_quote", "")
+        if txt and len(txt) > 20:
+            sample_texts.append(txt[:200])
 
-时间窗口: {window_label} ({times[0]} ~ {times[-1]})
-话题: {dict(topics.most_common())}
-态度: 看多{stances.get('看多',0)} 看空{stances.get('看空',0)} 观望{stances.get('观望',0)}
-重仓股: {dict(stocks.most_common(15))}
+    # ── 构造画像生成 Prompt（v2 升级版，注入思维提炼方法论）──
+    prompt = f"""你是投资分析 + 认知心理学交叉领域的专家。基于 {len(data)} 条 {user} 的推文分析结果和原始推文样本，生成一份"可操作的认知画像"——不只是描述他做了什么，更要揭示他**如何思考**。
 
-输出格式:
+## 基础数据
+- 时间窗口: {window_label} ({times[0]} ~ {times[-1]})
+- 话题分布: {dict(topics.most_common())}
+- 态度分布: 看多{stances.get('看多',0)} 看空{stances.get('看空',0)} 观望{stances.get('观望',0)}
+- 置信度分布: {dict(confidences)}
+- 操作倾向: {dict(action_hints.most_common())}
+- 重仓股: {dict(stocks.most_common(15))}
+- 关注板块: {dict(sectors.most_common(10))}
+- 最近推文样本（用于表达风格分析）:
+{chr(10).join(f"  [{i+1}] {t}" for i,t in enumerate(sample_texts[:20]))}
+
+## 输出要求（严格按以下结构）
+
 ### 1. 投资哲学（200字）
-### 2. 核心板块
-### 3. 操作风格
-### 4. 仓位管理与Beta调节（重点分析：净仓位暴露范围、现金比例、降beta的触发条件、降beta时会切换到哪些防御板块或现金等价物、加仓/减仓的节奏和信号）
-### 5. 风险偏好
-### 6. 决策框架
-### 7. 情绪特征
-### 8. 预测准确率（对照股价）
-### 9. 进化轨迹
-### 10. 一句话总结"""
+他如何看待市场？核心理念是什么？（价值/成长/动量/宏观？混合型就说明混合比例）
 
-    # 调用 LLM 生成画像
-    report = chat(messages=[{"role": "user", "content": prompt}], role="analyzer", max_tokens=8192, temperature=0.5)
+### 2. 心智模型（3-5个，每个需附证据）【核心升级维度】
+提炼该投资者反复使用的**判断框架**——不是观点，而是他看问题的"镜片"。
+每个心智模型必须满足以下格式：
+```
+**模型名**：一句话描述
+- 证据A：[推文日期] "推文原文关键句..." → 对应场景
+- 证据B：[推文日期] "推文原文关键句..." → 对应场景
+- 应用方式：当遇到X类情况时，他会用这个模型如何判断
+- 失效条件：这个模型在什么情况下会失灵
+```
+**筛选标准（三重验证）**：
+- 跨域复现：在≥2 只不同股票/行业中用过这个框架？
+- 生成力：能推断他对新问题的立场？（不只是复述他说过的话）
+- 排他性：这个框架不是所有投资者通用的？（"买低卖高"不算）
+只输出通过至少两重验证的模型。
+
+### 3. 核心板块
+板块偏好及权重，说明他对各板块的理解深度差异。
+
+### 4. 操作风格
+买入/卖出的节奏、持仓周期、是否做波段、对消息面的反应模式。
+
+### 5. 决策启发式（5-10条 if-then 规则）【核心升级维度】
+提炼他的**快速判断规则**——可表述为"如果 X，则 Y"的简洁行动指令。
+每条格式：`如果 [触发条件]，则 [行动]` + 证据（推文日期 + 关键词）
+优选级排序：最独特、最反直觉的规则排前面。
+示例：
+- 如果 纳指PE超过30x 且 持仓已有浮盈>20%，则 每涨2%减1/4仓位
+- 如果 财报超预期 但 股价不涨反跌，则 警惕"利好出尽"
+
+### 6. 仓位管理与 Beta 调节
+重点分析：净仓位暴露范围、现金比例、降beta的触发条件、防御板块切换节奏、加仓/减仓的信号。
+
+### 7. 风险偏好
+对最大回撤的容忍度、是否使用杠杆/期权、对黑天鹅的态度。
+
+### 8. 反模式（他绝对不会做什么，≥3条）【核心升级维度】
+定义一个人的边界往往比定义他的能力圈更有信息量。
+- 明确回避的操作："从不____"、"绝不____"
+- 明确回避的标的类型
+- 明确回避的市场行为
+每条例证（如果推文中明确表达了，引用原话；如果是从行为推断的，标注为"推断"）
+
+### 9. 情绪与表达 DNA【核心升级维度】
+从推文样本中分析他的表达特征：
+- 句式偏好：短句/长句？陈述/反问？类比密度高吗？
+- 确定性表达：常用"大概率/可能"还是"一定/必然"？
+- 幽默方式：讽刺/自嘲/荒诞/不幽默？
+- 引用习惯：爱引用谁？引用什么类型的内容？
+- 在极端行情下的情绪波动特征
+
+### 10. 预测准确率（对照股价）
+基于 accuracy/ 目录的回测数据，注明准确率来源（回测结果/自我评价/推断）。
+
+### 11. 进化轨迹
+思想是否在变化？标注具体的观点转变（从A→B，时间点+证据）。
+
+### 12. 诚实边界（≥3 条具体局限）【核心升级维度】
+**必须明确指出本画像的局限性**——这比画像本身更能帮助使用者避免误用。
+- 信息来源局限（仅推文，无私下持仓信息）
+- 某类场景缺失（如从未讨论过期权/加密货币/债市）
+- 画像时间窗口局限（历史不代表未来）
+- 自述偏差（公开表达≠真实操作）
+- 任何感到不确定的地方请注明"不确定"
+
+### 13. 智识谱系 + 一句话总结
+- 他受谁影响？（从引用/推崇中推断）
+- 他的独特之处是什么？
+- 一句话总结（不超过 30 字）
+
+---
+输出规则：
+- 只输出研究成果，不编造证据
+- 如果某维度信息不足，写"信息不足"并说明缺什么，不要硬凑
+- 引用推文原话时标注日期
+- 推断 vs 确信要明确区分
+- 诚实边界至少写 3 条具体局限"""
+
+    # 调用 LLM 生成画像（v2 升级版需要更多输出 token）
+    report = chat(messages=[{"role": "user", "content": prompt}], role="analyzer", max_tokens=16384, temperature=0.5)
     
-    # ── 在输出文件头部写入元数据 ──
+    # ── 在输出文件头部写入元数据（v2 升级版）──
     meta = f"""---
 user: {user}
 window: {window_label}
 tweets: {len(data)}
 date_range: {times[0]} ~ {times[-1]}
 generated: {datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')} UTC
+version: v2 (nuwa-enhanced — 心智模型/决策启发式/反模式/表达DNA/诚实边界)
 ---
 """
     out = Path(f"data/pipeline/{username}_portrait.md")
