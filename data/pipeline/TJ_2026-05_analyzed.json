@@ -179,5 +179,1350 @@
     "twitter_id": "2057811825404850287",
     "text": "所以说~富途暴跌三成多~是非理性的恐慌？",
     "created_at": "2026-05-22T13:12:26"
+  },
+  {
+    "topic": "操作记录",
+    "mentioned_stocks": [
+      "AAPL",
+      "SIRI"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看多",
+    "confidence": "high",
+    "reasoning_chain": "用户描述了AAPL的历史建仓与追涨操作，并明确表示若6月SIRI表现不佳将继续加仓，核心观点是AAPL基本面与当前价位匹配，整体表达偏强烈看多。",
+    "action_hint": "加仓",
+    "key_quote": "上年6月份$200大仓位开仓，今年4月7日$246追。基本面到点位，几乎完美了最好6月份SIRI来个拉跨，继续加！",
+    "image_analysis": null,
+    "tweet_id": 1855,
+    "twitter_id": "2057851513154765281",
+    "text": "$AAPL\n, 上年6月份$200大仓位开仓，今年4月7日$246追。基本面到点位，几乎完美了最好6月份SIRI来个拉跨，继续加！",
+    "created_at": "2026-05-22T15:50:08",
+    "price_context": [
+      {
+        "ticker": "AAPL",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 308.82
+        },
+        "fundamentals": {
+          "pe": 37.65,
+          "roe": 171.42245,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      },
+      {
+        "ticker": "SIRI",
+        "backward_available": false,
+        "price_summary": null,
+        "fundamentals": null
+      }
+    ]
+  },
+  {
+    "topic": "其他",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "无明确方向",
+    "confidence": "low",
+    "reasoning_chain": "文本过于简短，只有对“是否影响盈利”的模糊回应，缺乏具体标的、行业、宏观或操作信息，无法判断明确投资方向。",
+    "action_hint": "无",
+    "key_quote": "从对于盈利的影响，我觉得是的",
+    "image_analysis": null,
+    "tweet_id": 1859,
+    "twitter_id": "2057812011187073212",
+    "text": "从对于盈利的影响，我觉得是的",
+    "created_at": "2026-05-22T13:13:10",
+    "price_context": []
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "INTU"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "人工智能",
+      "财税软件"
+    ],
+    "stance": "观望",
+    "confidence": "medium",
+    "reasoning_chain": "推文围绕INTU在AI Agent驱动的个人/企业退税市场中的竞争地位展开，提出未来需求确定但市场份额归属未定，未明确表达看多或看空，更偏向对INTU护城河的观察性讨论。",
+    "action_hint": "观望",
+    "key_quote": "个人（企业）退税这种事情，我认为未来一定会被个人/企业的AI AGENT做了，那么问题就是新的AI NATIVE公司做，还是 $INTU 能独占这个市场",
+    "image_analysis": null,
+    "tweet_id": 1861,
+    "twitter_id": "2057660156939207036",
+    "text": "$INTU\n 个人（企业）退税这种事情，我认为未来一定会被个人/企业的AI AGENT做了，那么问题就是新的AI NATIVE公司做，还是 \n$INTU\n 能独占这个市场",
+    "created_at": "2026-05-22T03:09:45",
+    "price_context": [
+      {
+        "ticker": "INTU",
+        "backward_available": false,
+        "price_summary": null,
+        "fundamentals": null
+      }
+    ]
+  },
+  {
+    "topic": "投资策略",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看空",
+    "confidence": "medium",
+    "reasoning_chain": "推文未提及具体标的，而是评论市场上“增发就是买点”的普遍观点，认为这是2020年情绪的复刻，重点在于情绪面一致性。此类表述通常带有对过热共识的警惕，隐含对当下追涨逻辑的否定，因此整体偏谨慎偏空。",
+    "action_hint": "观望",
+    "key_quote": "今天我刷到了很多类似增发就是买点的观点，20年的复刻，标的可以不同，情绪面是一样的。",
+    "image_analysis": null,
+    "tweet_id": 1864,
+    "twitter_id": "2057631403248861522",
+    "text": "今天我刷到了很多类似增发就是买点的观点，20年的复刻，标的可以不同，情绪面是一样的。",
+    "created_at": "2026-05-22T01:15:30",
+    "price_context": []
+  },
+  {
+    "topic": "行业研判",
+    "mentioned_stocks": [
+      "INTU"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "软件"
+    ],
+    "stance": "中性",
+    "confidence": "medium",
+    "reasoning_chain": "推文指出当日软件板块上涨主要受INTU带动，表达了对软件股联动性强、同涨同跌现象的观察，并夹杂对市场定价逻辑的情绪化评价，但未明确给出后续看多或看空判断。",
+    "action_hint": "观望",
+    "key_quote": "原来 $INTU带的，软件真的是一荣俱荣 一损俱损",
+    "image_analysis": null,
+    "tweet_id": 1865,
+    "twitter_id": "2057568881812685161",
+    "text": "怪不得我想今天怎么软件又拉了，原来 $INTU带的，软件真的是一荣俱荣 一损俱损，市场真的是不讲道理。",
+    "created_at": "2026-05-21T21:07:03",
+    "price_context": [
+      {
+        "ticker": "INTU",
+        "backward_available": false,
+        "price_summary": null,
+        "fundamentals": null
+      }
+    ]
+  },
+  {
+    "topic": "宏观分析",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "中性",
+    "confidence": "high",
+    "reasoning_chain": "内容围绕10年期美债无风险利率变化对估值PE的影响展开，讨论从去年预期降息到今年预期紧缩加息的宏观预期切换，属于宏观与估值框架层面的分析提问，未表达明确单边交易观点。",
+    "action_hint": "观望",
+    "key_quote": "是否要考虑到10yr美债无风险利率对pe的影响，从去年预期降息到今年预期紧缩加息有一个变化",
+    "image_analysis": null,
+    "tweet_id": 1884,
+    "twitter_id": "2058001682076971294",
+    "text": "是否要考虑到10yr美债无风险利率对pe的影响，从去年预期降息到今年预期紧缩加息有一个变化",
+    "created_at": "2026-05-23T01:46:51",
+    "price_context": []
+  },
+  {
+    "topic": "投资策略",
+    "mentioned_stocks": [
+      "FUTU"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "中概股",
+      "美股"
+    ],
+    "stance": "看空",
+    "confidence": "medium",
+    "reasoning_chain": "推文提到“看看futu”并给出明确偏好：既然可以买美股，就不要买中概股，反映出对中概股相对美股的负面判断；FUTU被点名，语境中更像是作为中概股代表或负面例子。",
+    "action_hint": "观望",
+    "key_quote": "我們可以買美股就不要買中概股",
+    "image_analysis": null,
+    "tweet_id": 1889,
+    "twitter_id": "2057805802841276707",
+    "text": "看看futu,我們可以買美股就不要買中概股",
+    "created_at": "2026-05-22T12:48:30",
+    "price_context": [
+      {
+        "ticker": "FUTU",
+        "backward_available": false,
+        "price_summary": null,
+        "fundamentals": null
+      }
+    ]
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "MSFT",
+      "META"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看空",
+    "confidence": "medium",
+    "reasoning_chain": "推文直接点名MSFT和META，并用“很惨”表达明显负面评价，指向这两只个股表现不佳或遭遇利空，但缺乏进一步上下文与依据。",
+    "action_hint": "观望",
+    "key_quote": "msft meta很惨",
+    "image_analysis": null,
+    "tweet_id": 1890,
+    "twitter_id": "2057947862390952228",
+    "text": "msft meta很惨",
+    "created_at": "2026-05-22T22:12:59",
+    "price_context": [
+      {
+        "ticker": "MSFT",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 418.57
+        },
+        "fundamentals": {
+          "pe": 24.93,
+          "roe": 33.280824,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      },
+      {
+        "ticker": "META",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 610.26
+        },
+        "fundamentals": {
+          "pe": 22.24,
+          "roe": 30.238071,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "行业研判",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "科技股"
+    ],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "内容判断未来两个月市场将开始关注科技股的类VIE结构，并推动估值上行，隐含对科技板块后续重估的乐观预期。",
+    "action_hint": "持有",
+    "key_quote": "还有2个月市场就会讨论科技股的类VIE结构，估值就贵了",
+    "image_analysis": null,
+    "tweet_id": 1891,
+    "twitter_id": "2057991663927148772",
+    "text": "还有2个月市场就会讨论科技股的类VIE结构，估值就贵了",
+    "created_at": "2026-05-23T01:07:02",
+    "price_context": []
+  },
+  {
+    "topic": "投资策略",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "无明确方向",
+    "confidence": "medium",
+    "reasoning_chain": "内容仅提到“市场参与度”可作为衡量指标和侧面印证，属于对市场观察方法的讨论，未涉及具体标的、行业或明确交易方向。",
+    "action_hint": "观望",
+    "key_quote": "市场参与度也是一个很好的衡量指标和侧面印证。",
+    "image_analysis": null,
+    "tweet_id": 1892,
+    "twitter_id": "2057832147969253786",
+    "text": "T君提到的市场参与度也是一个很好的衡量指标和侧面印证。",
+    "created_at": "2026-05-22T14:33:11",
+    "price_context": []
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "SPACEX"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "航天",
+      "卫星互联网",
+      "人工智能"
+    ],
+    "stance": "看空",
+    "confidence": "high",
+    "reasoning_chain": "推文对SpaceX进行分部估值：Space业务600B、Connectivity 800B、AI 250B，总计约1.65T，并明确表示“已经给得很慷慨了”，说明作者认为当前估值假设偏乐观、进一步上行空间有限，整体态度偏谨慎偏空。",
+    "action_hint": "观望",
+    "key_quote": "已经给得很慷慨了",
+    "image_analysis": null,
+    "tweet_id": 1894,
+    "twitter_id": "2059144231994699965",
+    "text": "SpaceX 估值1.65T\nSpace业务600B\nConnectivity800B\nAI 250B\n已经给得很慷慨了",
+    "created_at": "2026-05-26T05:26:56",
+    "price_context": [
+      {
+        "ticker": "SPACEX",
+        "backward_available": false,
+        "price_summary": null,
+        "fundamentals": null
+      }
+    ]
+  },
+  {
+    "topic": "宏观分析",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "观望",
+    "confidence": "medium",
+    "reasoning_chain": "发言认为宏观风险正在累积，但当前判断是先等待市场情绪继续走高，暂时不急于行动，体现出偏谨慎的等待态度。",
+    "action_hint": "观望",
+    "key_quote": "宏观的风险已经在积累了，就等市场HIGH完，还不急",
+    "image_analysis": null,
+    "tweet_id": 1905,
+    "twitter_id": "2055108640126701719",
+    "text": "@gishingchiang 宏观的风险已经在积累了，就等市场HIGH完，还不急",
+    "created_at": "2026-05-15T02:10:56",
+    "price_context": []
+  },
+  {
+    "topic": "投资策略",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "中性",
+    "confidence": "high",
+    "reasoning_chain": "内容强调单日价格波动不足以说明趋势，属于对短期行情解读方法的观点表达，没有指向具体资产或明确交易方向。",
+    "action_hint": "观望",
+    "key_quote": "一天的走势没有意义",
+    "image_analysis": null,
+    "tweet_id": 1908,
+    "twitter_id": "2054989646124216372",
+    "text": "@eesuperchen 一天的走势没有意义",
+    "created_at": "2026-05-14T18:18:06",
+    "price_context": []
+  },
+  {
+    "topic": "加密货币",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [
+      "Polymarket"
+    ],
+    "mentioned_sectors": [
+      "预测市场"
+    ],
+    "stance": "中性",
+    "confidence": "medium",
+    "reasoning_chain": "推文讨论的是对赌/真实买盘两种机制下价格影响的差异，并用Polymarket类比，核心是在解释市场结构，而非表达明确做多或做空观点。",
+    "action_hint": "观望",
+    "key_quote": "真正背后有买的应该跌，纯开对赌的应该无影响，反正就和polymarket一样",
+    "image_analysis": null,
+    "tweet_id": 1911,
+    "twitter_id": "2054634906035110255",
+    "text": "@PhyrexNi 照道理那些真正背后有买的应该跌\n纯开对赌的应该无影响，反正就和polymarket一样😂",
+    "created_at": "2026-05-13T18:48:29",
+    "price_context": []
+  },
+  {
+    "topic": "行业研判",
+    "mentioned_stocks": [
+      "GOOGL"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "半导体",
+      "科技",
+      "人工智能",
+      "石油"
+    ],
+    "stance": "看多",
+    "confidence": "high",
+    "reasoning_chain": "推文认为当前远期市盈率尚未昂贵，半导体与科技板块盈利表现良好；Mag 7 资本开支持续且现金流质量优于互联网泡沫时期，公司层面暂未出现因AI放缓而削减开支的信号，因此未来6个月到1年不存在明显盈利或估值泡沫。并指出本轮上涨集中在受益于CAPEX支出的标的，若地缘冲突缓和、油价回落，更多板块可能跟涨。",
+    "action_hint": "持有",
+    "key_quote": "So far, we don't see any signs yet, so within 6M to 1Y, no earnings or P/E bubble IMHO.",
+    "image_analysis": null,
+    "tweet_id": 1912,
+    "twitter_id": "2054633063393501624",
+    "text": "@dampedspring @fejau_inc Hi Andy, I can agree with you on the vibes here on X. But forward P/E is not expensive yet, and semi or tech earnings have been good, even if we look one year out. Mag 7 are the CAPEX spenders, their cashflow quality is a lot different than those during tech bubble. Google is spending more in 27. Unless big tech is stepping back which could happen if AI slows down. So far, we don't see any signs yet, so within 6M to 1Y, no earnings or P/E bubble IMHO. This rally is extremely concentrated among those benefits from CAPEX spending. I'm not surprised to see others join if any sign of war's ending, i.e. oil started to come down",
+    "created_at": "2026-05-13T18:41:10",
+    "price_context": [
+      {
+        "ticker": "GOOGL",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 382.97
+        },
+        "fundamentals": {
+          "pe": 29.65,
+          "roe": 35.704782,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "投资策略",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "观望",
+    "confidence": "medium",
+    "reasoning_chain": "内容仅表达对波动较大的谨慎态度，强调风险控制，没有提及具体标的、行业或明确交易计划，因此更接近一般性的投资策略提醒，整体偏观望。",
+    "action_hint": "观望",
+    "key_quote": "还是要小心，波动有点大的",
+    "image_analysis": null,
+    "tweet_id": 1913,
+    "twitter_id": "2054602032896471248",
+    "text": "@dsjmark 哇，还是要小心，波动有点大的",
+    "created_at": "2026-05-13T16:37:51",
+    "price_context": []
+  },
+  {
+    "topic": "投资策略",
+    "mentioned_stocks": [
+      "INTC"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "中性",
+    "confidence": "high",
+    "reasoning_chain": "内容主要讨论用最高点回调百分比设置止损，属于交易风控与仓位管理建议；提到英特尔仅作为示例，并未表达对其明确看多或看空判断。",
+    "action_hint": "观望",
+    "key_quote": "你可以设置最高点回调%止损，比如英特尔设10%，那就是132*0.9=120左右",
+    "image_analysis": null,
+    "tweet_id": 1917,
+    "twitter_id": "2054406824388911296",
+    "text": "@icallyouman 你可以设置最高点回调%止损，比如英特尔设10%，那就是132*0.9=120左右",
+    "created_at": "2026-05-13T03:42:10",
+    "price_context": [
+      {
+        "ticker": "INTC",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 119.84
+        },
+        "fundamentals": {
+          "pe": -203.12,
+          "roe": -0.250057,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "INTC"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "半导体"
+    ],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "内容仅提及“英特尔120，5%”，通常可理解为对英特尔给出目标价/预期值120，并附带5%的仓位或涨幅相关表达，整体偏正向，但信息过于简略，判断存在不确定性。",
+    "action_hint": "观望",
+    "key_quote": "英特尔120，5%",
+    "image_analysis": null,
+    "tweet_id": 1919,
+    "twitter_id": "2054228643799290106",
+    "text": "@PP4849616732730 @hazenlee 英特尔120，5%",
+    "created_at": "2026-05-12T15:54:09",
+    "price_context": [
+      {
+        "ticker": "INTC",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 119.84
+        },
+        "fundamentals": {
+          "pe": -203.12,
+          "roe": -0.250057,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "其他",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "无明确方向",
+    "confidence": "low",
+    "reasoning_chain": "内容为对市场情绪的调侃，表达“需要一次回光返照式追高才能看到希望”，未提及具体资产、行业或明确交易判断。",
+    "action_hint": "观望",
+    "key_quote": "必须有个回光返照追高的才能看到希望😂",
+    "image_analysis": null,
+    "tweet_id": 1920,
+    "twitter_id": "2054219206829248636",
+    "text": "@hazenlee 必须有个回光返照追高的才能看到希望😂",
+    "created_at": "2026-05-12T15:16:39",
+    "price_context": []
+  },
+  {
+    "topic": "其他",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "无明确方向",
+    "confidence": "low",
+    "reasoning_chain": "内容仅为对他人评论的简短回复“1年100倍😂”，未提及具体标的、行业、宏观观点或明确投资行为，更多像情绪化调侃或夸张表达，无法据此判断真实投资立场。",
+    "action_hint": "无",
+    "key_quote": "1年100倍😂",
+    "image_analysis": null,
+    "tweet_id": 1922,
+    "twitter_id": "2053900772627161294",
+    "text": "@Corsica267 1年100倍😂",
+    "created_at": "2026-05-11T18:11:18",
+    "price_context": []
+  },
+  {
+    "topic": "加密货币",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "区块链"
+    ],
+    "stance": "观望",
+    "confidence": "low",
+    "reasoning_chain": "推文以反问形式质疑“还没站稳就出竞争链”，语气偏审慎，隐含对相关项目战略节奏的担忧，但未明确点名具体币种或给出交易判断。",
+    "action_hint": "观望",
+    "key_quote": "因为还没站稳就出竞争链？",
+    "image_analysis": null,
+    "tweet_id": 1923,
+    "twitter_id": "2053893385975419262",
+    "text": "@PhyrexNi 因为还没站稳就出竞争链？",
+    "created_at": "2026-05-11T17:41:57",
+    "price_context": []
+  },
+  {
+    "topic": "投资策略",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "AI"
+    ],
+    "stance": "无明确方向",
+    "confidence": "medium",
+    "reasoning_chain": "内容主要围绕投资时间维度与市场判断方法展开，强调短期（未来一年）相对可判断、长期（5年）不确定，反对用过长周期论证当前泡沫与否；未给出具体标的或明确买卖方向。",
+    "action_hint": "观望",
+    "key_quote": "我只知道未来一年是确定的，2年后没人知道。",
+    "image_analysis": null,
+    "tweet_id": 1927,
+    "twitter_id": "2053256381004665289",
+    "text": "@Musiclover2000A 拿中国和美国比说明你不懂美国市场，没必要什么都展开和你争，没意义。股市也从来不是交易5年后，5年后你对了，说明你现在喊泡沫对了？\n我只知道未来一年是确定的，2年后没人知道。半年前你知道会有OPENCLAW吗？5年后你连AI能到哪都不知道，还谈什么盈利增速。",
+    "created_at": "2026-05-09T23:30:43",
+    "price_context": []
+  },
+  {
+    "topic": "其他",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "无明确方向",
+    "confidence": "low",
+    "reasoning_chain": "该内容仅为对“价格泡沫”现象的简短追问，没有涉及具体资产、行业或宏观结论，也未表达明确看多或看空立场。",
+    "action_hint": "无",
+    "key_quote": "价格的泡沫反应在哪？",
+    "image_analysis": null,
+    "tweet_id": 1928,
+    "twitter_id": "2053239361446051891",
+    "text": "@Musiclover2000A 价格的泡沫反应在哪？",
+    "created_at": "2026-05-09T22:23:05",
+    "price_context": []
+  },
+  {
+    "topic": "操作记录",
+    "mentioned_stocks": [
+      "QQQM",
+      "TQQQ",
+      "IEI"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "ETF",
+      "美股科技指数",
+      "美国国债"
+    ],
+    "stance": "无明确方向",
+    "confidence": "high",
+    "reasoning_chain": "内容主要是在回顾个人账户操作与收益表现：3月新开账户后买入QQQM、TQQQ、IEI，一个多月收益超30%，并明确提到昨天已卖出TQQQ、获利70%以上。文本以交易记录和收益分享为主，没有明确表达后续市场判断。",
+    "action_hint": "卖出",
+    "key_quote": "一个多月30%多了，昨天把TQQQ卖了，70%+ LOL",
+    "image_analysis": null,
+    "tweet_id": 1929,
+    "twitter_id": "2052962788268548594",
+    "text": "@HahaAha884721 @Pengekommer @PP38507705 我有其他账户，3月刚开了一个，本来有其他用途，没时间打理，就只买了QQQM, TQQQ, IEI，一个多月30%多了🤣，昨天把TQQQ卖了，70%+ LOL",
+    "created_at": "2026-05-09T04:04:05",
+    "price_context": [
+      {
+        "ticker": "QQQM",
+        "backward_available": false,
+        "price_summary": null,
+        "fundamentals": null
+      },
+      {
+        "ticker": "TQQQ",
+        "backward_available": false,
+        "price_summary": null,
+        "fundamentals": null
+      },
+      {
+        "ticker": "IEI",
+        "backward_available": false,
+        "price_summary": null,
+        "fundamentals": null
+      }
+    ]
+  },
+  {
+    "topic": "宏观分析",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "中性",
+    "confidence": "medium",
+    "reasoning_chain": "内容是在评价某次数据表现与当日股价走势的关系，认为数据结果未达预期，但市场走势明显受数据驱动；未提及具体标的或明确交易倾向，更偏向对宏观数据影响市场的复盘判断。",
+    "action_hint": "观望",
+    "key_quote": "但是数据还是MISS了，当天股价走势基本都和数据相关",
+    "image_analysis": null,
+    "tweet_id": 1930,
+    "twitter_id": "2052955183680778399",
+    "text": "@xiantancaijing 不差啊，但是数据还是MISS了，当天股价走势基本都和数据相关",
+    "created_at": "2026-05-09T03:33:52",
+    "price_context": []
+  },
+  {
+    "topic": "操作记录",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "无明确方向",
+    "confidence": "medium",
+    "reasoning_chain": "推文核心内容只有“换仓”，表示进行了调仓/换仓操作，属于交易动作记录；未提及具体标的、行业或市场观点，因此无法判断明确看多或看空方向。",
+    "action_hint": "无",
+    "key_quote": "换仓",
+    "image_analysis": null,
+    "tweet_id": 1931,
+    "twitter_id": "2052888414433731037",
+    "text": "@Pengekommer @PP38507705 换仓",
+    "created_at": "2026-05-08T23:08:33",
+    "price_context": []
+  },
+  {
+    "topic": "其他",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "观望",
+    "confidence": "low",
+    "reasoning_chain": "内容仅为对@PhyrexNi的追问，询问“4月份增加了那么多吗”，没有明确提及具体资产、行业或投资结论，更多是交流确认信息。",
+    "action_hint": "观望",
+    "key_quote": "4月份增加了那么多吗",
+    "image_analysis": null,
+    "tweet_id": 1932,
+    "twitter_id": "2052879739656757348",
+    "text": "@PhyrexNi 4月份增加了那么多吗",
+    "created_at": "2026-05-08T22:34:05",
+    "price_context": []
+  },
+  {
+    "topic": "投资策略",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "内容表示不预测短期涨跌，但会在价格下跌时继续加仓，体现出逢低买入、长期偏多的投资策略。",
+    "action_hint": "加仓",
+    "key_quote": "不猜涨跌，但跌就加仓",
+    "image_analysis": null,
+    "tweet_id": 1933,
+    "twitter_id": "2052844280872350137",
+    "text": "@PP38507705 不猜涨跌，但跌就加仓",
+    "created_at": "2026-05-08T20:13:11",
+    "price_context": []
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "COIN"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看多",
+    "confidence": "high",
+    "reasoning_chain": "推文提到COIN财报不佳但股价表现为“低开高走”，并结合上季度类似走势，明确将其解读为看涨信号（BULLISH SIGN），反映作者更重视价格行为强于财报本身的短期偏弱影响。",
+    "action_hint": "持有",
+    "key_quote": "$COIN 今天又是一个财报不好，低开高走的情况，上个季度我们看过，BULLISH SIGN",
+    "image_analysis": null,
+    "tweet_id": 1934,
+    "twitter_id": "2052842724567470240",
+    "text": "$COIN 今天又是一个财报不好，低开高走的情况，上个季度我们看过，BULLISH SIGN",
+    "created_at": "2026-05-08T20:07:00",
+    "price_context": [
+      {
+        "ticker": "COIN",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 184.99
+        },
+        "fundamentals": {
+          "pe": 69.67,
+          "roe": 10.054504,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "操作记录",
+    "mentioned_stocks": [
+      "苹果",
+      "INTC"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "云计算"
+    ],
+    "stance": "看多",
+    "confidence": "high",
+    "reasoning_chain": "内容以回顾自身交易为主：作者在苹果下跌时右侧加仓并称当前估值仍不贵，同时提到此前也对英特尔进行过右侧加仓，整体表达对相关标的偏乐观态度。",
+    "action_hint": "加仓",
+    "key_quote": "只做一件事就是告诉你们现在估值仍然不贵。",
+    "image_analysis": null,
+    "tweet_id": 1955,
+    "twitter_id": "2052833087499763764",
+    "text": "上年$200开仓10%的苹果，2,3月一直说没加够，4月7日那天折叠机延后的新闻跌5%，果断把剩下的现金全部买入，右侧加仓。英特尔我也在上年11月$34右侧加过。买完苹果后就几乎没有任何操作，APP也没啥更新，只做一件事就是告诉你们现在估值仍然不贵。今晚9点油管+X直播，聊下neocloud和非农 https://t.co/2tZxuWF98b",
+    "created_at": "2026-05-08T19:28:42",
+    "price_context": [
+      {
+        "ticker": "苹果",
+        "backward_available": false,
+        "price_summary": null,
+        "fundamentals": null
+      },
+      {
+        "ticker": "INTC",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 119.84
+        },
+        "fundamentals": {
+          "pe": -203.12,
+          "roe": -0.250057,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "加密货币",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [
+      "BTC",
+      "比特币"
+    ],
+    "mentioned_sectors": [
+      "加密货币",
+      "比特币矿业"
+    ],
+    "stance": "看空",
+    "confidence": "medium",
+    "reasoning_chain": "推文认为比特币相对美股走弱的原因在于矿工转型带来的持续抛压，并判断未来两年可能继续偏弱，需等待新的叙事吸引增量买盘；虽然提到核心叙事未变，但短中期判断明显偏谨慎。",
+    "action_hint": "观望",
+    "key_quote": "甚至更悲观点接下去的两年都有可能很弱，直到有个新的故事线带动新买家入场。",
+    "image_analysis": null,
+    "tweet_id": 1956,
+    "twitter_id": "2052799286371365157",
+    "text": "为何美股新高比特币那么弱？我认为还是矿工转型无情抛压导致，甚至更悲观点接下去的两年都有可能很弱，直到有个新的故事线带动新买家入场。\n但比特币的核心叙事一直没变。 https://t.co/8Fv3y0M6zi",
+    "created_at": "2026-05-08T17:14:23",
+    "price_context": []
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "CRCL",
+      "COIN",
+      "META"
+    ],
+    "mentioned_crypto": [
+      "USDC"
+    ],
+    "mentioned_sectors": [
+      "稳定币",
+      "智能体支付",
+      "链上投资"
+    ],
+    "stance": "中性",
+    "confidence": "medium",
+    "reasoning_chain": "内容围绕CRCL财报预期，并借COIN稳定币收入对比推演CRCL利息收入大致表现；同时指出市场更关注稳定币应用落地、USDC adoption及链上投资闭环，而非直接判断财报后股价走势，整体偏基本面与叙事分析，方向上未给出明确交易结论。",
+    "action_hint": "观望",
+    "key_quote": "可以做为炒作的故事线，但更多的还是USDC的ADOPTION",
+    "image_analysis": null,
+    "tweet_id": 1960,
+    "twitter_id": "2052764408657424843",
+    "text": "$CRCL 财报\nCOIN Q42025稳定币收入：331\nCOIN Q12026稳定币收入：305，环比降低7.9%\nCRCL Q42025利息收入：733\nCRCL Q12026利息收入市场预期：677，环比降低7.7%\n最终数据应该差不多吧。但重点还是其他营收，市场预期37。\n并非要预测财报后走势，从COIN财报里的问题，市场很多关注度在稳定币的应用上，智能体支付，智能体购物等等。公司本身现在还是在做产品和铺基建上，智能体购物也刚刚开始推出，智能体购物还有很多个阶段。智能体支付前提也是智能体得先普及和落地。\n可以做为炒作的故事线，但更多的还是USDC的ADOPTION，所以4月底那条新闻看到META通过STRIPE用USDC给哥伦比亚和菲律宾的人发工资是一个很好的用USDC增加美元全球渗透的例子，下一个痛点要解决的是怎么让钱留在USDC，用来去消费和投资，这就是为啥链上投资是必然的一步，且形成了闭环。",
+    "created_at": "2026-05-08T14:55:48",
+    "price_context": [
+      {
+        "ticker": "CRCL",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 113.12
+        },
+        "fundamentals": {
+          "pe": -497.24,
+          "roe": -2.758461,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      },
+      {
+        "ticker": "COIN",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 184.99
+        },
+        "fundamentals": {
+          "pe": 69.67,
+          "roe": 10.054504,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      },
+      {
+        "ticker": "META",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 610.26
+        },
+        "fundamentals": {
+          "pe": 22.24,
+          "roe": 30.238071,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "MSTR"
+    ],
+    "mentioned_crypto": [
+      "比特币"
+    ],
+    "mentioned_sectors": [
+      "加密货币概念股"
+    ],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "推文批评他人讨论MSTR时忽略其溢价因素，认为仅按比特币、ETF、MSTR风险高低简单比较是“不懂MSTR”。这表明作者认为MSTR有不同于现货比特币和ETF的估值逻辑，隐含其对MSTR分析应更复杂、不能简单替代，整体偏向为MSTR辩护。未直接给出交易价位或明确买卖指令，因此置信度中等。",
+    "action_hint": "观望",
+    "key_quote": "聊mstr不聊溢价，简单得出结论说比特币，etf，mstr根据风险选说明他根本不懂mstr",
+    "image_analysis": null,
+    "tweet_id": 1982,
+    "twitter_id": "2052638232093851958",
+    "text": "@lun_ai85181 @Money_or_Life_X 聊mstr不聊溢价，简单得出结论说比特币，etf，mstr根据风险选说明他根本不懂mstr，求关注度而已",
+    "created_at": "2026-05-08T06:34:25",
+    "price_context": [
+      {
+        "ticker": "MSTR",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 159.89
+        },
+        "fundamentals": {
+          "pe": -4.37,
+          "roe": -11.110113,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "信息分享",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "大科技"
+    ],
+    "stance": "无明确方向",
+    "confidence": "medium",
+    "reasoning_chain": "内容核心是在推荐一则关于大科技行业分析的视频，强调其基于财报数据、业务发展、资本开支与回报的深度研究，属于信息转发与观点认可，不构成对具体资产的直接交易判断。",
+    "action_hint": "观望",
+    "key_quote": "这一期视频是我听过对于大科技点评最详细的了，财报数据，业务发展和方向，行业整体资本开支和回报。",
+    "image_analysis": null,
+    "tweet_id": 1991,
+    "twitter_id": "2052562388331761869",
+    "text": "这一期视频是我听过对于大科技点评最详细的了，财报数据，业务发展和方向，行业整体资本开支和回报。\n所有的观点全部建立在数据和对于行业的深度理解上，建议起码看两遍以上。\n谁有周总的联系方式？希望有机会也能做个采访 https://t.co/MiRc9AgmMo",
+    "created_at": "2026-05-08T01:33:02",
+    "price_context": []
+  },
+  {
+    "topic": "加密货币",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看空",
+    "confidence": "high",
+    "reasoning_chain": "推文直接评价“币圈”是“韭菜收割市场”和“测试道德底线的地方”，对加密货币市场生态持明显负面态度，未涉及具体币种或交易计划。",
+    "action_hint": "观望",
+    "key_quote": "币圈真的是个好的韭菜收割市场 和测试道德底线的地方",
+    "image_analysis": null,
+    "tweet_id": 1995,
+    "twitter_id": "2052469092175478880",
+    "text": "@PhyrexNi 币圈真的是个好的韭菜收割市场\n和测试道德底线的地方",
+    "created_at": "2026-05-07T19:22:19",
+    "price_context": []
+  },
+  {
+    "topic": "投资策略",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "观望",
+    "confidence": "medium",
+    "reasoning_chain": "内容围绕技术指标RSI的修复方式展开，强调当前只是对现状的描述，并指出横盘或下跌都可能完成RSI修复，未表达明确看多或看空立场，更偏向技术性观察。",
+    "action_hint": "观望",
+    "key_quote": "关于RSI，横盘和下跌都可以修复",
+    "image_analysis": null,
+    "tweet_id": 1996,
+    "twitter_id": "2052466915918876682",
+    "text": "@BonusBomber88 只是对于现状的描述\n关于RSI，横盘和下跌都可以修复",
+    "created_at": "2026-05-07T19:13:40",
+    "price_context": []
+  },
+  {
+    "topic": "行业研判",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "人工智能",
+      "算力"
+    ],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "推文围绕xAI的估值拆分进行评论，认为其1GW算力约值50B，其余约200B来自模型与团队价值，语气带有明显赞叹，体现出对AI模型、人才和算力资产定价的认可，整体偏向看多人工智能行业价值重估逻辑。",
+    "action_hint": "观望",
+    "key_quote": "XAI可是卖了250B，1gw算力大概50B，模型和团队卖了200B，真厉害",
+    "image_analysis": null,
+    "tweet_id": 1997,
+    "twitter_id": "2052466258952475129",
+    "text": "XAI可是卖了250B，1gw算力大概50B，模型和团队卖了200B，真厉害",
+    "created_at": "2026-05-07T19:11:03",
+    "price_context": []
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "MU",
+      "NVDA",
+      "AMD"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "存储",
+      "芯片",
+      "AI"
+    ],
+    "stance": "观望",
+    "confidence": "high",
+    "reasoning_chain": "围绕MU等存储股低P/E是否能摆脱周期属性展开讨论，并用NVDA、AMD的估值与PEG作对比。作者认为未来一年存储和芯片基本面确定性较高，但一年以后存在较大不确定性，需持续验证资本开支、订单执行和AI落地进展，因此整体结论偏走一步看一步。",
+    "action_hint": "观望",
+    "key_quote": "结论就是走一步看一步，基本面是变动的。",
+    "image_analysis": null,
+    "tweet_id": 2000,
+    "twitter_id": "2052262478696821115",
+    "text": "很多人问我MU这类存储的P/E很低，会不会走出周期属性外的高P/E。我觉得我们可以参考NVDA，市场给了3年以后18倍的P/E，这代表了市场不相信资本开支可以年年增高。\n所以需要一步步验证，几个月前我说AMD和NVDA的PEG都在1.2，1.1，是很低的，只要AMD能执行订单，OPENAI能付得起钱，市场其实是比较悲观的。现在即使经过这一波CPU带起的上涨，AMD的PEG仍然只在1.6X，正常区间。我看PEG通常看未来三年，所以肯定有不确定性。但其实无论存储还是芯片，未来一年确定性都很高，因为都订满的。不确定性基本都在1年开外，投资股市我们通常需要想象6个月后的样子，投资芯片就得看1年后了， 但大模型的更新，AI的落地可能1，2个月就有大变动，这就是投资有意思的地方。结论就是走一步看一步，基本面是变动的。",
+    "created_at": "2026-05-07T05:41:18",
+    "price_context": [
+      {
+        "ticker": "MU",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 751
+        },
+        "fundamentals": {
+          "pe": 36.17,
+          "roe": 17.199082,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      },
+      {
+        "ticker": "NVDA",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 215.33
+        },
+        "fundamentals": {
+          "pe": 33.26,
+          "roe": 119.177466,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      },
+      {
+        "ticker": "AMD",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 467.51
+        },
+        "fundamentals": {
+          "pe": 154.96,
+          "roe": 7.08154,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "AMD"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "美股",
+      "半导体"
+    ],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "内容提到“AMD老股东”并表示“一直炒她作业”，隐含对AMD过往表现和持仓逻辑的认可，整体情绪偏正面，但未给出明确交易计划或详细分析。",
+    "action_hint": "持有",
+    "key_quote": "AMD老股东了，我一直炒她作业🤪",
+    "image_analysis": null,
+    "tweet_id": 2021,
+    "twitter_id": "2059303778642243603",
+    "text": "@web4miko @yifaer_chen 发姐一直有投美股啊，AMD老股东了，我一直炒她作业🤪",
+    "created_at": "2026-05-26T16:00:55",
+    "price_context": [
+      {
+        "ticker": "AMD",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 467.51
+        },
+        "fundamentals": {
+          "pe": 154.96,
+          "roe": 7.08154,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "宏观分析",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "能源",
+      "美股"
+    ],
+    "stance": "观望",
+    "confidence": "medium",
+    "reasoning_chain": "推文回顾了此前市场对战争、油价飙升和美股继续下跌的强烈预期，指出两个月上涨后市场迅速遗忘旧叙事，强调真正的验证往往发生在下一次下跌或调整时。整体是在反思市场情绪和叙事切换，而非给出明确单边判断，因此偏谨慎观望。",
+    "action_hint": "观望",
+    "key_quote": "市场的记忆真的是短暂的，直到下一次的调整。",
+    "image_analysis": null,
+    "tweet_id": 2032,
+    "twitter_id": "2060889406056325168",
+    "text": "偶尔刷到，3月份不少人喊200美元的石油，美股没跌够。现在快6月份了，两个月涨下来没人记得了吧，全成股神了，每一次的下跌才是验证的时候。\n谁还记得我说也许1，2个月之后就没人记得战争了？谁又在当时深信那些写战争故事的账号：这次一方taco没用的，革命卫队了解一下。\n市场的记忆真的是短暂的，直到下一次的调整。",
+    "created_at": "2026-05-31T01:01:38",
+    "price_context": []
+  },
+  {
+    "topic": "行业研判",
+    "mentioned_stocks": [
+      "INTC",
+      "AMD"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "AI PC",
+      "Edge AI",
+      "半导体"
+    ],
+    "stance": "看多",
+    "confidence": "high",
+    "reasoning_chain": "推文核心观点是反驳“英伟达进入AI PC会利空INTC/AMD”的线性判断，认为INTC和AMD此前已布局AI PC且出货表现不差，英伟达入场反而验证了AI PC赛道的成立；同时作者看好Edge AI长期落地，判断推理不会完全集中在云端，终端硬件将迎来新一轮更新周期，因此对相关产业链整体偏乐观。",
+    "action_hint": "持有",
+    "key_quote": "Edge AI是一定会发生的，不会所有的推理都上云。所有的电子产品都会被重新定义和硬件更新。三家公司齐头并进。",
+    "image_analysis": null,
+    "tweet_id": 2033,
+    "twitter_id": "2060877490634059980",
+    "text": "市场太多二极管思维：老黄做AI PC，INTC AMD就一定利空\n后者AI PC喊了两年了，出货其实一直不错。老黄的进入恰恰证明了这条赛道。\nEdge AI是一定会发生的，不会所有的推理都上云。所有的电子产品都会被重新定义和硬件更新。三家公司齐头并进。",
+    "created_at": "2026-05-31T00:14:17",
+    "price_context": [
+      {
+        "ticker": "INTC",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 119.84
+        },
+        "fundamentals": {
+          "pe": -203.12,
+          "roe": -0.250057,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      },
+      {
+        "ticker": "AMD",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 467.51
+        },
+        "fundamentals": {
+          "pe": 154.96,
+          "roe": 7.08154,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "DELL"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "科技硬件",
+      "服务器"
+    ],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "推文围绕Dell财报表现及未来上行空间展开，措辞中出现“delivered tremendous...”，语气明显偏正面，核心是在讨论财报超预期与后续估值/业绩弹性，因此属于偏多的个股解读。但由于内容被截断，具体依据不完整，置信度为中等。",
+    "action_hint": "观望",
+    "key_quote": "What should we take away from Dell's earnings — and what upside is left for the company? First: Dell delivered tremendous gro…",
+    "image_analysis": null,
+    "tweet_id": 2034,
+    "twitter_id": "2060671163848614319",
+    "text": "RT @jukan05: What should we take away from Dell's earnings — and what upside is left for the company?\n\nFirst: Dell delivered tremendous gro…",
+    "created_at": "2026-05-30T10:34:25",
+    "price_context": [
+      {
+        "ticker": "DELL",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 295.19
+        },
+        "fundamentals": {
+          "pe": 33.76,
+          "roe": 0.0,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "操作记录",
+    "mentioned_stocks": [
+      "INTC",
+      "AMZN"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "半导体",
+      "电商"
+    ],
+    "stance": "中性",
+    "confidence": "medium",
+    "reasoning_chain": "内容是在复盘当日账户表现：第一大仓位INTC下跌5.14%，第二大仓位亚马逊也下跌，但整体账户仅下跌0.2%，说明还有其他重仓标的对冲了亏损。文本没有明确表达后续买卖计划，更多是晒持仓和互动。",
+    "action_hint": "观望",
+    "key_quote": "第一大仓位 $INTC 📉5.14%，第二大亚麻也跌，账户只跌了0.2%，全靠他！",
+    "image_analysis": null,
+    "tweet_id": 2035,
+    "twitter_id": "2060453484793594103",
+    "text": "第一大仓位 $INTC 📉5.14%，第二大亚麻也跌，账户只跌了0.2%，全靠他！巨____\n留言区大声告诉我！",
+    "created_at": "2026-05-29T20:09:26",
+    "price_context": [
+      {
+        "ticker": "INTC",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 119.84
+        },
+        "fundamentals": {
+          "pe": -203.12,
+          "roe": -0.250057,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      },
+      {
+        "ticker": "AMZN",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 266.32
+        },
+        "fundamentals": {
+          "pe": 32.18,
+          "roe": 22.285825,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "加密货币",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [
+      "比特币"
+    ],
+    "mentioned_sectors": [],
+    "stance": "看多",
+    "confidence": "high",
+    "reasoning_chain": "推文直接强调不要放弃比特币，并用拟人化表达暗示未来错过比特币将付出代价，明显传递对比特币长期价值和上涨前景的乐观看法。",
+    "action_hint": "持有",
+    "key_quote": "今天你抛弃比特币，明天你将会被比特币抛弃",
+    "image_analysis": null,
+    "tweet_id": 2036,
+    "twitter_id": "2060403397023416577",
+    "text": "今天你抛弃比特币，明天你将会被比特币抛弃",
+    "created_at": "2026-05-29T16:50:24",
+    "price_context": []
+  },
+  {
+    "topic": "投资策略",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "观望",
+    "confidence": "high",
+    "reasoning_chain": "内容聚焦市场情绪与反弹性质判断：作者认为一季度部分Long-Only基金已投降，当前上涨更多是空头回补，尚未确认趋势性反弹；只有在不同类型公司财报形成持续接力、市场出现更健康的轮动时，才算真正反弹。因此整体态度偏谨慎观望。",
+    "action_hint": "观望",
+    "key_quote": "现在看到的最多只是空头回补。什么时候看到硬软交替，才是真正的反弹",
+    "image_analysis": null,
+    "tweet_id": 2037,
+    "twitter_id": "2060365590695449076",
+    "text": "我在最近的几次直播里聊过，一季度很多LO的基金都投降了，接下去需要不同公司的财报接力，保持情绪面，现在看到的最多只是空头回补。什么时候看到硬软交替，才是真正的反弹",
+    "created_at": "2026-05-29T14:20:11",
+    "price_context": []
+  },
+  {
+    "topic": "投资策略",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "中性",
+    "confidence": "high",
+    "reasoning_chain": "内容主要在比较加密市场与美股的定价逻辑：前者更依赖叙事、情绪和增量接盘，后者更偏向盈利驱动与估值判断。没有明确给出具体买卖方向，更像是对不同市场分析框架的总结。",
+    "action_hint": "观望",
+    "key_quote": "币圈多数纯靠故事和新韭菜进来接盘，一级市场更是如此，也给了很多KOL空间。所以情绪面判断行情的比重很大。美股毕竟核心是盈利驱动",
+    "image_analysis": null,
+    "tweet_id": 2038,
+    "twitter_id": "2060103183439994952",
+    "text": "100%，币圈多数纯靠故事和新韭菜进来接盘，一级市场更是如此，也给了很多KOL空间。所以情绪面判断行情的比重很大。美股毕竟核心是盈利驱动，人会因为价格高而情绪高，但价格高，不代表公司贵（P/E）",
+    "created_at": "2026-05-28T20:57:28",
+    "price_context": []
+  },
+  {
+    "topic": "信息分享",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "无明确方向",
+    "confidence": "low",
+    "reasoning_chain": "推文仅包含惊讶表情和对@zerohedge的引用，没有具体观点、标的、行业或宏观内容，无法提炼明确投资结论。",
+    "action_hint": "无",
+    "key_quote": "😱 引用 @zerohedge",
+    "image_analysis": null,
+    "tweet_id": 2039,
+    "twitter_id": "2060095604806566198",
+    "text": "😱",
+    "created_at": "2026-05-28T20:27:21",
+    "price_context": []
+  },
+  {
+    "topic": "操作记录",
+    "mentioned_stocks": [
+      "SOXL",
+      "SNXX"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "半导体"
+    ],
+    "stance": "看多",
+    "confidence": "high",
+    "reasoning_chain": "发文者回顾自己于3月30日“抄底”SOXL和SNXX，并强调当前涨幅，表达对其此前买入判断正确和价格上涨的认可，整体偏多。",
+    "action_hint": "持有",
+    "key_quote": "我在3月30日抄底的SOXL和SNXX，看看现在📈多少了！",
+    "image_analysis": null,
+    "tweet_id": 2040,
+    "twitter_id": "2060075553470779849",
+    "text": "不怕告诉你们，我在3月30日抄底的SOXL和SNXX，看看现在📈多少了！",
+    "created_at": "2026-05-28T19:07:40",
+    "price_context": [
+      {
+        "ticker": "SOXL",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 190.56
+        },
+        "fundamentals": null
+      },
+      {
+        "ticker": "SNXX",
+        "backward_available": false,
+        "price_summary": null,
+        "fundamentals": null
+      }
+    ]
+  },
+  {
+    "topic": "宏观分析",
+    "mentioned_stocks": [
+      "NVDA"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "硬件",
+      "美股"
+    ],
+    "stance": "中性",
+    "confidence": "high",
+    "reasoning_chain": "内容围绕美股指数远期PE、未来一年盈利预期、市场参与度与情绪面进行拆解。作者认为估值层面和指数参与度层面暂未出现明显泡沫，且多数硬件公司订单和产能支撑未来盈利；但情绪面存在泡沫，因此整体判断并非单边看多，而是偏基本面支撑下的理性中性看法。",
+    "action_hint": "观望",
+    "key_quote": "那么哪些判断指标权重更高？对我来说估值和盈利更重要。",
+    "image_analysis": null,
+    "tweet_id": 2041,
+    "twitter_id": "2060064349067387049",
+    "text": "美股指数估值(Forward PE)没有泡沫，因为未来一年预期盈利增速很快。\n那盈利预期有没有泡沫，见仁见智。得具体公司具体看，订单，产能等等。多数硬件公司未来一年产能都满负荷运转。盈利确定性很高，参考过去3年英伟达的盈利，可见订单2-3季度。\n指数参与度有没有泡沫，也没有，因为很多个股都趴地上。\n情绪面有没有泡沫，有。应该都能感觉到：社交媒体晒回报的，造神的帖子处处都是。\n那么哪些判断指标权重更高？对我来说估值和盈利更重要。",
+    "created_at": "2026-05-28T18:23:09",
+    "price_context": [
+      {
+        "ticker": "NVDA",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 215.33
+        },
+        "fundamentals": {
+          "pe": 33.26,
+          "roe": 119.177466,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
   }
 ]

@@ -1,0 +1,505 @@
+[
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "HOOD"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "无明确方向",
+    "confidence": "low",
+    "reasoning_chain": "内容是在询问是否继续持有HOOD，未提供作者自身的判断或市场观点，因此方向性不明确。",
+    "action_hint": "观望",
+    "key_quote": "神哥，hood还要不要坚持拿着啊",
+    "image_analysis": null,
+    "tweet_id": 238,
+    "twitter_id": "2018999329646952845",
+    "text": "神哥，hood还要不要坚持拿着啊",
+    "created_at": "2026-02-04T10:45:26",
+    "price_context": [
+      {
+        "ticker": "HOOD",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 73.64
+        },
+        "fundamentals": {
+          "pe": 35.97,
+          "roe": 22.007948,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "加密货币",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [
+      "BTC"
+    ],
+    "mentioned_sectors": [],
+    "stance": "看空",
+    "confidence": "low",
+    "reasoning_chain": "内容仅提到“btc到20？”，直观上是在讨论比特币可能下跌至20这一价位，带有偏空猜测；但表达非常简短且口语化，缺乏明确观点与依据。",
+    "action_hint": "观望",
+    "key_quote": "btc到20？tree new bee",
+    "image_analysis": null,
+    "tweet_id": 234,
+    "twitter_id": "2026849526594576703",
+    "text": "btc到20？tree new bee",
+    "created_at": "2026-02-26T02:39:18",
+    "price_context": []
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "算力"
+    ],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "发言将某标的与另一对象比较，认为其“基本面好太多了”，并认可其“卖算力+自身业务”的双重逻辑，整体表达偏正面，但未明确点名具体标的或给出交易指令。",
+    "action_hint": "观望",
+    "key_quote": "一样啊 但是基本面好太多了。逻辑是卖算力 但是还有自身业务",
+    "image_analysis": null,
+    "tweet_id": 1707,
+    "twitter_id": "2027466623612030989",
+    "text": "一样啊 但是基本面好太多了。逻辑是卖算力 但是还有自身业务",
+    "created_at": "2026-02-27T19:31:26",
+    "price_context": []
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "BLOCK"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "金融科技",
+      "人工智能",
+      "高端消费"
+    ],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "推文围绕Block裁员后的成本与人才结构变化展开，认为市场只看到裁员和缺钱叙事，但忽略了留下员工的现金与股权激励显著提升，说明公司在向高质量、高集中度的人才配置转型。作者同时判断AI未必压缩需求，反而可能扩大需求，只是会导致资源向头部集中。最后对高端消费持续旺盛也持正面判断，整体语气偏乐观。",
+    "action_hint": "观望",
+    "key_quote": "ai很可能不会让需求变少反而更多",
+    "image_analysis": null,
+    "tweet_id": 1705,
+    "twitter_id": "2027473072098553975",
+    "text": "block的事情还有另外一个版本，市场当下认为大量裁员都没钱对吧。但是有一个事block没说 留下的全体 cash+equity。薪水暴涨。权益暴涨 一大笔。block剩下的非科技岗直接涨成大厂码农的档次了。ai很可能不会让需求变少反而更多 但是有概率过于集中 这是一个问题。高端消费会一直旺盛 坐船我要最好的",
+    "created_at": "2026-02-27T19:57:03",
+    "price_context": [
+      {
+        "ticker": "BLOCK",
+        "backward_available": false,
+        "price_summary": null,
+        "fundamentals": {
+          "pe": null,
+          "roe": null,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "其他",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "人工智能"
+    ],
+    "stance": "看空",
+    "confidence": "medium",
+    "reasoning_chain": "发言者认为该公司与AI趋势无实质关系，当前问题源于此前盲目扩张，现阶段以AI或趋势为借口进行调整，本质是公司自身经营问题，因此整体评价偏负面。",
+    "action_hint": "观望",
+    "key_quote": "这公司跟ai没有半毛钱关系 就是当初扩张 现在不用了 找个借口都给踹了。自己问题 跟趋势无关。",
+    "image_analysis": null,
+    "tweet_id": 1704,
+    "twitter_id": "2027475105094504556",
+    "text": "这公司跟ai没有半毛钱关系 就是当初扩张 现在不用了 找个借口都给踹了。自己问题 跟趋势无关。",
+    "created_at": "2026-02-27T20:05:08",
+    "price_context": []
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "ZM"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "人工智能",
+      "软件"
+    ],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "推文认为Zoom持有大量现金及Anthropic股权，其合计价值可能已接近或超过当前市值；若Anthropic未来上市，Zoom的隐含持仓价值有望被市场重估，因此作者判断Zoom被严重低估。",
+    "action_hint": "买入",
+    "key_quote": "如果你想投资Anthropic 又没有门路 买zoom就行了……一旦anthropic上市。几乎可以说严重低估了。",
+    "image_analysis": null,
+    "tweet_id": 1703,
+    "twitter_id": "2027505561223475692",
+    "text": "如果你想投资Anthropic 又没有门路 买zoom就行了 zoom才220亿手里现金和anthropic的股权 都不止这点钱 一旦anthropic上市。几乎可以说严重低估了。",
+    "created_at": "2026-02-27T22:06:09",
+    "price_context": [
+      {
+        "ticker": "ZM",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 105.64
+        },
+        "fundamentals": null
+      }
+    ]
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "人工智能"
+    ],
+    "stance": "中性",
+    "confidence": "low",
+    "reasoning_chain": "推文围绕“扣掉现金”和“Anthropic的估值”来判断某标的隐含价值，属于基于资产/持股价值的估值讨论，但未明确点名具体股票，也未直接给出买卖方向。",
+    "action_hint": "观望",
+    "key_quote": "自己算算吧扣掉现金 Anthropic的估值 就大概知道了。",
+    "image_analysis": null,
+    "tweet_id": 1702,
+    "twitter_id": "2027507141062561989",
+    "text": "自己算算吧扣掉现金 Anthropic的估值 就大概知道了。",
+    "created_at": "2026-02-27T22:12:26",
+    "price_context": []
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "ZM"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "软件",
+      "AI"
+    ],
+    "stance": "看多",
+    "confidence": "high",
+    "reasoning_chain": "发言人认为负面新闻导致Zoom股价下跌反而提供买入机会，核心依据是公司拥有约80亿美元现金及约40亿美元股权资产，并看好其所持Anthropic股权未来大幅增值，从而推导Zoom当前估值偏低、股价偏多。",
+    "action_hint": "买入",
+    "key_quote": "给zoom杀烂 才是机会。8B现金 再加上4B股权... 粗略一算 就可以知道zoom股价很buillsh的。",
+    "image_analysis": null,
+    "tweet_id": 1701,
+    "twitter_id": "2027508423592689897",
+    "text": "就是出这种新闻才好 给zoom杀烂 才是机会。都是好消息 无风险赚个几把？8B现金 再加上4B股权 一旦Anthropic上万亿 就是10B股权了。粗略一算 就可以知道zoom股价很buillsh的。最好是喷Anthropic上天 我好投一下zoom。捡钱一样。",
+    "created_at": "2026-02-27T22:17:32",
+    "price_context": [
+      {
+        "ticker": "ZM",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 105.64
+        },
+        "fundamentals": null
+      }
+    ]
+  },
+  {
+    "topic": "宏观分析",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "内容围绕整体市场情绪与资金行为展开，核心观点是场外资金充足、抛压被承接、下跌都有买盘介入，体现对市场韧性和多头力量的认可，偏向整体看多而非针对具体标的。",
+    "action_hint": "持有",
+    "key_quote": "所有的dip都有人买。",
+    "image_analysis": null,
+    "tweet_id": 1700,
+    "twitter_id": "2027508936639975441",
+    "text": "不知道慌什么 外面全是多头。随便杀 钱在外面 股票本质就是买卖 都买了什么利好也没用 都卖了 什么利空也没用。所有的dip都有人买。",
+    "created_at": "2026-02-27T22:19:34",
+    "price_context": []
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "ZM"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "人工智能",
+      "软件"
+    ],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "推文核心观点是Zoom持有的Anthropic股权价值很高，甚至被认为“比Zoom自身还值钱”，表达了对Anthropic资产价值的强烈看好，并间接说明Zoom存在被低估的资产属性。由于未给出具体估值依据，置信度为中等。",
+    "action_hint": "观望",
+    "key_quote": "Anthropic一定是值大价钱的 zoom手里这部分股权比zoom自身还值钱。",
+    "image_analysis": null,
+    "tweet_id": 1699,
+    "twitter_id": "2027510325436973389",
+    "text": "Anthropic一定是值大价钱的 zoom手里这部分股权比zoom自身还值钱。",
+    "created_at": "2026-02-27T22:25:05",
+    "price_context": [
+      {
+        "ticker": "ZM",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 105.64
+        },
+        "fundamentals": null
+      }
+    ]
+  },
+  {
+    "topic": "加密货币",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [
+      "ZOO"
+    ],
+    "mentioned_sectors": [],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "发文者认为ZOO若跌至20B以下就是明显低估、具备很强买入价值，表达了明确的看多判断，但缺少更多基本面或数据支撑。",
+    "action_hint": "买入",
+    "key_quote": "zoo 下20B 就绝对是捡钱了。",
+    "image_analysis": null,
+    "tweet_id": 1698,
+    "twitter_id": "2027510699715649937",
+    "text": "就这么说吧 zoo 下20B 就绝对是捡钱了。",
+    "created_at": "2026-02-27T22:26:34",
+    "price_context": []
+  },
+  {
+    "topic": "信息分享",
+    "mentioned_stocks": [
+      "ZM"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "人工智能"
+    ],
+    "stance": "无明确方向",
+    "confidence": "low",
+    "reasoning_chain": "内容是在分享一个投资Anthropic的渠道或路径，未明确表达对具体标的的涨跌判断，也未给出买卖建议。",
+    "action_hint": "观望",
+    "key_quote": "If you're interested in investing in Anthropic, Zoom is a good channel.",
+    "image_analysis": null,
+    "tweet_id": 1697,
+    "twitter_id": "2027510891793809531",
+    "text": "If you're interested in investing in Anthropic, Zoom is a good channel.",
+    "created_at": "2026-02-27T22:27:20",
+    "price_context": [
+      {
+        "ticker": "ZM",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 105.64
+        },
+        "fundamentals": null
+      }
+    ]
+  },
+  {
+    "topic": "投资策略",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "人工智能"
+    ],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "发言认为Anthropic当前估值仍然便宜，核心逻辑是如果等到AI行业确定性更高、公司临近或完成上市后，估值可能大幅抬升，届时早期投资空间会明显缩小。因此表达的是对Anthropic及AI赛道早期投资机会的看多态度。",
+    "action_hint": "买入",
+    "key_quote": "当下估值anthropic 一定是便宜的 你等ai确定性很高了 他要上市了 搞不好万亿起步了 你根本没有油水了。",
+    "image_analysis": null,
+    "tweet_id": 1696,
+    "twitter_id": "2027512063162192081",
+    "text": "当下估值anthropic 一定是便宜的 你等ai确定性很高了 他要上市了 搞不好万亿起步了 你根本没有油水了。",
+    "created_at": "2026-02-27T22:31:59",
+    "price_context": []
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "ZM"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "SaaS",
+      "人工智能"
+    ],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "推文围绕Zoom的现金、当前市值与其所持Anthropic相关权益进行估值拆分，认为市场对Zoom主业和所持AI资产的价值低估；核心观点是如果Zoom总市值跌到200亿美元以下，将具备较强吸引力，因为作者预期Anthropic未来上市估值会非常高，从而抬升Zoom隐含价值。",
+    "action_hint": "观望",
+    "key_quote": "所以zoom如果下20B 值得买。你等anthropic上市 估计万亿起步了。",
+    "image_analysis": null,
+    "tweet_id": 1695,
+    "twitter_id": "2027513442111000990",
+    "text": "zoom还有8B现金 22减掉8 14。现在股权就是4B。也就是 zoom 这公司10B。如果再跌跌。是吧。anthropic 翻几倍不是问题 这价钱。所以zoom如果下20B 值得买。你等anthropic上市 估计万亿起步了。",
+    "created_at": "2026-02-27T22:37:28",
+    "price_context": [
+      {
+        "ticker": "ZM",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 105.64
+        },
+        "fundamentals": null
+      }
+    ]
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "ZM"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "人工智能",
+      "软件服务"
+    ],
+    "stance": "看多",
+    "confidence": "high",
+    "reasoning_chain": "推文核心观点是Zoom当前股价被低估，认为其主营业务虽一般但持有的股权价值很高，隐含资产价值至少达数百亿美元；作者将“买Zoom”类比为“投资高估值Anthropic并免费获得Zoom主业”，因此认为若市值继续下跌到约200亿美元将是更好的买点，整体表达明显偏多。",
+    "action_hint": "买入",
+    "key_quote": "现在买zoom股票相当于 投anthropic万亿市值 送你一个zoom。",
+    "image_analysis": null,
+    "tweet_id": 1694,
+    "twitter_id": "2027516037563093081",
+    "text": "业务在垃圾不是也赚钱 只不过自己没故事 但是手里的股权 是金山。它手里股权最后至少值几十B。现在买zoom股票相当于 投anthropic万亿市值 送你一个zoom。你赚的就是zoom这个。如果能继续大跌 那就太棒了。杀进20B 不是送钱？",
+    "created_at": "2026-02-27T22:47:47",
+    "price_context": [
+      {
+        "ticker": "ZM",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 105.64
+        },
+        "fundamentals": null
+      }
+    ]
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "ZM",
+      "ANTHROPIC"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "人工智能"
+    ],
+    "stance": "观望",
+    "confidence": "medium",
+    "reasoning_chain": "内容表达的是等待Anthropic上市以及Zoom相关权益被市场定价后，再考虑出售这部分权益，属于事件驱动下的持有待卖思路，没有明确看多或看空当前价格方向。",
+    "action_hint": "卖出",
+    "key_quote": "等anthropic上市 zoom被定价 这部分权益 就可以卖了。",
+    "image_analysis": null,
+    "tweet_id": 1693,
+    "twitter_id": "2027516612056916238",
+    "text": "是的 就是等anthropic上市 zoom被定价 这部分权益 就可以卖了。",
+    "created_at": "2026-02-27T22:50:04",
+    "price_context": [
+      {
+        "ticker": "ZM",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 105.64
+        },
+        "fundamentals": null
+      },
+      {
+        "ticker": "ANTHROPIC",
+        "backward_available": false,
+        "price_summary": null,
+        "fundamentals": null
+      }
+    ]
+  },
+  {
+    "topic": "投资策略",
+    "mentioned_stocks": [
+      "ZM"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "人工智能",
+      "软件"
+    ],
+    "stance": "观望",
+    "confidence": "medium",
+    "reasoning_chain": "内容是在讨论一种事件驱动型投资思路：通过买入Zoom，间接押注其所持有的Anthropic相关权益，并计划在Anthropic IPO后卖出。这更像投资策略讨论，而非明确看多或看空结论；发言者是在征求观点，未给出确定执行判断。",
+    "action_hint": "观望",
+    "key_quote": "Buy Zoom as a passive investment in Anthropic, wait for the IPO, and then sell Zoom.",
+    "image_analysis": null,
+    "tweet_id": 1691,
+    "twitter_id": "2027517814194753858",
+    "text": "Do you think my view is reasonable? Buy Zoom as a passive investment in Anthropic, wait for the IPO, and then sell Zoom.",
+    "created_at": "2026-02-27T22:54:51",
+    "price_context": [
+      {
+        "ticker": "ZM",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 105.64
+        },
+        "fundamentals": null
+      }
+    ]
+  },
+  {
+    "topic": "信息分享",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "人工智能",
+      "国防"
+    ],
+    "stance": "无明确方向",
+    "confidence": "medium",
+    "reasoning_chain": "推文表达了对特朗普采取更强硬行动的期待，并引用图片内容称美国政府和军方将停止与Anthropic合作。内容核心是政治与科技政策信息转述，未直接给出可执行的投资判断，也未涉及明确标的买卖观点。",
+    "action_hint": "无",
+    "key_quote": "希望特朗普来劲！使劲啊川子。",
+    "image_analysis": "图片内容声称特朗普在Truth Social表态，美国政府与军方将停止使用Anthropic技术，并将其列为国家安全供应链风险；现有合作将在不超过六个月内过渡结束。整体传达的是对Anthropic的强烈负面政策信号。",
+    "tweet_id": 1690,
+    "twitter_id": "2027522855148392490",
+    "text": "希望特朗普来劲！使劲啊川子。",
+    "created_at": "2026-02-27T23:14:52",
+    "price_context": []
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "ZM"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "AI",
+      "视频会议/SaaS"
+    ],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "推文核心在于用Zoom持有的Anthropic相关股权价值、主营业务及现金储备来论证其未来估值提升空间，整体语气明显偏乐观，属于基于公开信息的看多型个股判断。",
+    "action_hint": "买入",
+    "key_quote": "未来肯定有 一两万个亿 anthropic 问题不大吧。zoom手里股权就值几百亿。",
+    "image_analysis": null,
+    "tweet_id": 1689,
+    "twitter_id": "2027524130518774041",
+    "text": "当下没有啊 未来肯定有 一两万个亿 anthropic 问题不大吧。zoom手里股权就值几百亿。你在家上zoom 业务 和手里现金。自己算算吧 都是公开信心 我还给大家喂嘴里。",
+    "created_at": "2026-02-27T23:19:56",
+    "price_context": [
+      {
+        "ticker": "ZM",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 105.64
+        },
+        "fundamentals": null
+      }
+    ]
+  }
+]

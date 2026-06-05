@@ -763,6 +763,10 @@ def seed_tasks() -> dict:
         # 构建汇总消息
         parts = [f"{v} 条{type_names.get(k, k)}" for k, v in counts.items() if v > 0]
         msg = "新增: " + ", ".join(parts) if parts else "无需新增任务"
+        return {"ok": True, "message": msg, "counts": counts}
+    except Exception as e:
+        session.rollback()
+        return {"ok": False, "error": str(e)}
     finally:
         session.close()
 

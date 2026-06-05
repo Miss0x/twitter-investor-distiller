@@ -1,0 +1,2902 @@
+[
+  {
+    "topic": "操作记录",
+    "mentioned_stocks": [
+      "SOXS"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "半导体"
+    ],
+    "stance": "看空",
+    "confidence": "medium",
+    "reasoning_chain": "作者明确表示“短线见顶”，并给出下方目标区间6500-6450，同时点名SOXS做空盈亏比好并设置4块止损，整体是偏短线看空并带有交易计划的表达。",
+    "action_hint": "买入",
+    "key_quote": "短线见顶了。先看6500-6450。soxs 这做空 盈亏比极好。",
+    "image_analysis": null,
+    "tweet_id": 1615,
+    "twitter_id": "1981024771329462423",
+    "text": "短线见顶了。没什么可说的 先看6500-6450。soxs 这做空 盈亏比极好。不服可以打我4块止损。我觉得你手里没有子弹。",
+    "created_at": "2025-10-22T15:48:05",
+    "price_context": [
+      {
+        "ticker": "SOXS",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 7.73
+        },
+        "fundamentals": null
+      }
+    ]
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "NVDA"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "半导体",
+      "人工智能"
+    ],
+    "stance": "看空",
+    "confidence": "high",
+    "reasoning_chain": "推文直接指出‘上升楔形走完了，瀑布可以了’，其中‘上升楔形’通常被视为偏空技术形态，‘瀑布’明确表达对后续快速下跌的预期。配图中标的是NVDA 120-150/250-350区间分析，图上也画出了上升通道、楔形结构及下方多条回撤支撑位，整体是在表达英伟达阶段性见顶、可能进入回调。",
+    "action_hint": "卖出",
+    "key_quote": "上升楔形走完了 瀑布可以了",
+    "image_analysis": "图片为一张NVDA（日线）技术分析图，价格在上升通道高位震荡，作者画出楔形/通道结构并标注多个下方支撑区间，意图是说明当前形态偏向向下破位后的回撤风险。",
+    "tweet_id": 1614,
+    "twitter_id": "1981030032576270744",
+    "text": "上升楔形走完了 瀑布可以了",
+    "created_at": "2025-10-22T16:09:00",
+    "price_context": [
+      {
+        "ticker": "NVDA",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 215.33
+        },
+        "fundamentals": {
+          "pe": 33.26,
+          "roe": 119.177466,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "投资策略",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "无明确方向",
+    "confidence": "low",
+    "reasoning_chain": "内容是在调侃/评价“技术派”处境，未提及具体资产、行业或明确行情判断，也没有给出可执行的交易观点。",
+    "action_hint": "观望",
+    "key_quote": "技术派们 已经吐血了。对吧技术派们。",
+    "image_analysis": null,
+    "tweet_id": 1607,
+    "twitter_id": "1981060059494043705",
+    "text": "技术派们 已经吐血了。对吧技术派们。",
+    "created_at": "2025-10-22T18:08:19",
+    "price_context": []
+  },
+  {
+    "topic": "投资策略",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看空",
+    "confidence": "medium",
+    "reasoning_chain": "内容仅有“Evening star”，通常指K线形态中的“黄昏星”，为常见的看跌反转信号；但未提供具体标的、市场或上下文，因此判断有限。",
+    "action_hint": "观望",
+    "key_quote": "Evening star",
+    "image_analysis": null,
+    "tweet_id": 1604,
+    "twitter_id": "1981079642678210601",
+    "text": "Evening star",
+    "created_at": "2025-10-22T19:26:08",
+    "price_context": []
+  },
+  {
+    "topic": "其他",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看空",
+    "confidence": "low",
+    "reasoning_chain": "内容仅为“等他割肉”，表达等待他人因亏损而卖出，带有负面和看空情绪，但缺乏具体标的与背景信息。",
+    "action_hint": "观望",
+    "key_quote": "等他割肉。",
+    "image_analysis": null,
+    "tweet_id": 1597,
+    "twitter_id": "1981150239647322285",
+    "text": "等他割肉。",
+    "created_at": "2025-10-23T00:06:39",
+    "price_context": []
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "SMR"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "核能"
+    ],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "推文直接表达“SMR还是看好的”，体现出对SMR后续表现的正面预期，但未提供具体基本面、技术面或事件驱动依据，因此判断为对个股的简单看多表态。",
+    "action_hint": "持有",
+    "key_quote": "SMR还是看好的！",
+    "image_analysis": null,
+    "tweet_id": 1617,
+    "twitter_id": "1981164853684572395",
+    "text": "SMR还是看好的！",
+    "created_at": "2025-10-23T01:04:44",
+    "price_context": [
+      {
+        "ticker": "SMR",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 11.4
+        },
+        "fundamentals": null
+      }
+    ]
+  },
+  {
+    "topic": "操作记录",
+    "mentioned_stocks": [
+      "IREN",
+      "BMNR",
+      "OPEN",
+      "SOUN",
+      "MP",
+      "OKLO",
+      "HOND",
+      "CRML"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "美股",
+      "加密矿业",
+      "AI应用",
+      "稀土/矿业",
+      "核能",
+      "房地产科技"
+    ],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "文本表达对组合涨幅的强烈兴奋，尤其提到IREN低成本持仓被大幅炒高；配图展示持仓与多只高波动个股，整体更像复盘/晒单，情绪偏乐观，但未给出明确交易计划。",
+    "action_hint": "持有",
+    "key_quote": "他们iren本钱是6块多…我真没想到给炒到这价钱",
+    "image_analysis": "配图1为社交平台评论区，讨论买入时点与持仓；配图2为多只股票下跌提醒，包括SOUN、BMNR、MP、OKLO、HOND、CRML；配图3为券商持仓截图，显示持有BMNR、OPEN、IREN且当日浮亏，说明组合波动极大。",
+    "tweet_id": 1596,
+    "twitter_id": "1981168245924327684",
+    "text": "太刺激了。比亚马逊page都刺激。这组合太屌了。他们iren本钱是6块多 24年 我看着他们在那边捡。我真没想到给炒到这价钱 哈哈哈",
+    "created_at": "2025-10-23T01:18:12",
+    "price_context": [
+      {
+        "ticker": "IREN",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 56.83
+        },
+        "fundamentals": {
+          "pe": 73.91,
+          "roe": 11.044663,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      },
+      {
+        "ticker": "BMNR",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 18.88
+        },
+        "fundamentals": {
+          "pe": -2.61,
+          "roe": 7.614726,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      },
+      {
+        "ticker": "OPEN",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 4.53
+        },
+        "fundamentals": {
+          "pe": -2.55,
+          "roe": -151.338766,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      },
+      {
+        "ticker": "SOUN",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 8.17
+        },
+        "fundamentals": null
+      },
+      {
+        "ticker": "MP",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 64.46
+        },
+        "fundamentals": {
+          "pe": -159.06,
+          "roe": -4.982177,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      },
+      {
+        "ticker": "OKLO",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 65.88
+        },
+        "fundamentals": {
+          "pe": -78.96,
+          "roe": -12.236121,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      },
+      {
+        "ticker": "HOND",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 18.04
+        },
+        "fundamentals": {
+          "pe": null,
+          "roe": null,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      },
+      {
+        "ticker": "CRML",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 10.98
+        },
+        "fundamentals": {
+          "pe": -7.79,
+          "roe": 0.0,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "其他",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看多",
+    "confidence": "low",
+    "reasoning_chain": "仅有“至少到32吧”这一句，表达了对某标的价格上涨至32以上的预期，偏多头判断，但缺少具体标的与上下文，无法精确归类。",
+    "action_hint": "持有",
+    "key_quote": "至少到32吧",
+    "image_analysis": null,
+    "tweet_id": 1618,
+    "twitter_id": "1981210612480065640",
+    "text": "至少到32吧",
+    "created_at": "2025-10-23T04:06:33",
+    "price_context": []
+  },
+  {
+    "topic": "操作记录",
+    "mentioned_stocks": [
+      "RGTI"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "量子计算"
+    ],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "推文表达了明显的短线交易意图，核心意思是立即冲进去参与，并在收盘前卖出；配图显示标的是RGTI期权合约，且当日涨幅显著，偏向追涨的日内博弈，而非中长期基本面分析。",
+    "action_hint": "买入",
+    "key_quote": "冲就行了 收盘卖",
+    "image_analysis": "图片为RGTI 10/14/20-25期权页面，最新价约36.06，涨幅约+9.85%；正股Rigetti Computing盘前/盘中表现强势，页面还出现“量子计算”相关标签，说明发帖人是在分享RGTI相关的短线交易机会。",
+    "tweet_id": 1594,
+    "twitter_id": "1981346754147586457",
+    "text": "冲就行了 收盘卖",
+    "created_at": "2025-10-23T13:07:32",
+    "price_context": [
+      {
+        "ticker": "RGTI",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 26.42
+        },
+        "fundamentals": null
+      }
+    ]
+  },
+  {
+    "topic": "操作记录",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看空",
+    "confidence": "medium",
+    "reasoning_chain": "内容描述开盘即亏损1.6%并已割肉离场，且用负面情绪词表达对相关标的或市场的不信任，偏向短线看空。",
+    "action_hint": "卖出",
+    "key_quote": "爆亏开盘爆亏1.6%割肉了",
+    "image_analysis": null,
+    "tweet_id": 1593,
+    "twitter_id": "1981353784237269458",
+    "text": "爆亏开盘爆亏1.6%割肉了 呜呜呜诈骗犯果然不行没钱了市场",
+    "created_at": "2025-10-23T13:35:28",
+    "price_context": []
+  },
+  {
+    "topic": "其他",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看空",
+    "confidence": "medium",
+    "reasoning_chain": "“杀猪”在投资语境中常用于形容即将收割、坑杀散户，带有明显负面情绪。该句未指向具体资产或板块，更像情绪化判断，因此归为其他，方向偏空。",
+    "action_hint": "观望",
+    "key_quote": "村里要杀猪喽。",
+    "image_analysis": null,
+    "tweet_id": 1592,
+    "twitter_id": "1981364726828585410",
+    "text": "村里要杀猪喽。",
+    "created_at": "2025-10-23T14:18:57",
+    "price_context": []
+  },
+  {
+    "topic": "操作记录",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看空",
+    "confidence": "low",
+    "reasoning_chain": "内容表达对当日走势不满，带有“只有割肉才拉盘”的调侃/抱怨情绪，隐含对短线价格表现偏负面判断；但未提及具体标的与明确交易计划，判断置信度较低。",
+    "action_hint": "观望",
+    "key_quote": "怪不得今天不涨……不割肉不拉盘",
+    "image_analysis": null,
+    "tweet_id": 1616,
+    "twitter_id": "1981366915798093893",
+    "text": "怪不得今天不涨……不割肉不拉盘",
+    "created_at": "2025-10-23T14:27:39",
+    "price_context": []
+  },
+  {
+    "topic": "投资策略",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "内容表达了对后市的正面预期，强调以年为单位长期持有和耐心等待，但未提及具体标的或更明确操作细节。",
+    "action_hint": "持有",
+    "key_quote": "我也看好，慢慢等，炒股可以用年来做单位的。",
+    "image_analysis": null,
+    "tweet_id": 1620,
+    "twitter_id": "1981412512894767156",
+    "text": "我也看好，慢慢等，炒股可以用年来做单位的。",
+    "created_at": "2025-10-23T17:28:50",
+    "price_context": []
+  },
+  {
+    "topic": "操作记录",
+    "mentioned_stocks": [
+      "SOXS"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "美股",
+      "A股"
+    ],
+    "stance": "看多",
+    "confidence": "high",
+    "reasoning_chain": "发文者明确表示已对做空工具SOXS认亏出局，并称“别在牛市做空”“上证新高了”“美股肯定马上刷新新高”，整体表达对股市后续上涨的判断，同时记录了自身止损离场的操作。",
+    "action_hint": "卖出",
+    "key_quote": "完蛋了 彻底认亏出局别在牛市做空！ soxs 认亏出局。上证新高了。美股肯定马上刷新新高。",
+    "image_analysis": null,
+    "tweet_id": 1588,
+    "twitter_id": "1981538489662648323",
+    "text": "完蛋了 彻底认亏出局别在牛市做空！太傻逼了。soxs 认亏出局。爆亏几个点 人生滑铁卢。上证新高了。美股肯定马上刷新新高。呜呜呜",
+    "created_at": "2025-10-24T01:49:25",
+    "price_context": [
+      {
+        "ticker": "SOXS",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 7.73
+        },
+        "fundamentals": null
+      }
+    ]
+  },
+  {
+    "topic": "操作记录",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "无明确方向",
+    "confidence": "medium",
+    "reasoning_chain": "推文表达了对交易判断失误的承认，并说明已经执行止损，属于对既有仓位的操作复盘；未提及具体标的、行业或后续明确看法，因此方向性不强。",
+    "action_hint": "卖出",
+    "key_quote": "及时认错。及时止损了。呜呜",
+    "image_analysis": null,
+    "tweet_id": 1587,
+    "twitter_id": "1981539105256140935",
+    "text": "及时认错。及时止损了。呜呜",
+    "created_at": "2025-10-24T01:51:52",
+    "price_context": []
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "BWXT"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "核能"
+    ],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "文本明确提到“财报很好”，配图显示BWXT股价大涨并处于阶段高位附近，整体偏正面；但信息来源为“据不记名人士胡说”，带有调侃和不确定性，因此置信度中等。",
+    "action_hint": "观望",
+    "key_quote": "据不记名人士胡说。财报很好",
+    "image_analysis": "配图为BWX Technologies（BWXT）行情页截图，股价约199.920，单日上涨约8.750（+4.58%）。K线显示近期明显上行，右侧有放量上涨迹象。",
+    "tweet_id": 1585,
+    "twitter_id": "1981571642586251719",
+    "text": "据不记名人士胡说。财报很好",
+    "created_at": "2025-10-24T04:01:10",
+    "price_context": [
+      {
+        "ticker": "BWXT",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 202.91
+        },
+        "fundamentals": {
+          "pe": 54.25,
+          "roe": 28.441094,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "操作记录",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "内容主要描述个人昨晚因CPI影响进行止损并随后大量买入，属于交易操作复盘；虽未说明具体标的，但“买了一大堆”体现出偏多交易倾向。",
+    "action_hint": "买入",
+    "key_quote": "昨晚连夜割肉 差点让cpi杀死我自己。买了一大堆昨晚。",
+    "image_analysis": null,
+    "tweet_id": 1582,
+    "twitter_id": "1981710209602159012",
+    "text": "割肉也是一个技术活。昨晚连夜割肉 差点让cpi杀死我自己。买了一大堆昨晚。",
+    "created_at": "2025-10-24T13:11:47",
+    "price_context": []
+  },
+  {
+    "topic": "操作记录",
+    "mentioned_stocks": [
+      "AMZN",
+      "VST",
+      "BA",
+      "RCAT",
+      "DLR",
+      "MP",
+      "DHI",
+      "LMND",
+      "OKLO",
+      "SOXS",
+      "CRWV"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看多",
+    "confidence": "high",
+    "reasoning_chain": "内容明确表示昨晚连夜做多多只美股，并说明LMND、OKLO此前已做多；同时提到SOXS作为对冲仓位，整体仍以看多个股为主。对CRWV则表示持续关注，等待更好介入时机。",
+    "action_hint": "买入",
+    "key_quote": "昨晚连夜做多 amzn vst ba rcat dlr mp dhi、lmnd oklo昨天就做多了",
+    "image_analysis": null,
+    "tweet_id": 1581,
+    "twitter_id": "1981710871127867394",
+    "text": "昨晚连夜做多 amzn vst ba rcat dlr mp dhi、lmnd oklo昨天就做多了 对冲我的soxs，等 一货车股票。持续关注crwv 等他们骂街割肉。",
+    "created_at": "2025-10-24T13:14:24",
+    "price_context": [
+      {
+        "ticker": "AMZN",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 266.32
+        },
+        "fundamentals": {
+          "pe": 32.18,
+          "roe": 22.285825,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      },
+      {
+        "ticker": "VST",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 156.27
+        },
+        "fundamentals": null
+      },
+      {
+        "ticker": "BA",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 219.02
+        },
+        "fundamentals": {
+          "pe": 86.18,
+          "roe": 289.003881,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      },
+      {
+        "ticker": "RCAT",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 9.41
+        },
+        "fundamentals": null
+      },
+      {
+        "ticker": "DLR",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 192.03
+        },
+        "fundamentals": {
+          "pe": 50.79,
+          "roe": 5.912381,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      },
+      {
+        "ticker": "MP",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 64.46
+        },
+        "fundamentals": {
+          "pe": -159.06,
+          "roe": -4.982177,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      },
+      {
+        "ticker": "DHI",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 143.73
+        },
+        "fundamentals": {
+          "pe": 13.28,
+          "roe": 14.48472,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      },
+      {
+        "ticker": "LMND",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 56.52
+        },
+        "fundamentals": {
+          "pe": -30.54,
+          "roe": -29.370009,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      },
+      {
+        "ticker": "OKLO",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 65.88
+        },
+        "fundamentals": {
+          "pe": -78.96,
+          "roe": -12.236121,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      },
+      {
+        "ticker": "SOXS",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 7.73
+        },
+        "fundamentals": null
+      }
+    ]
+  },
+  {
+    "topic": "操作记录",
+    "mentioned_stocks": [
+      "ANGX",
+      "Angel Studios"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "影视娱乐",
+      "媒体"
+    ],
+    "stance": "看多",
+    "confidence": "high",
+    "reasoning_chain": "推文明确表达‘继续做多’，并提到‘上次赚的有点多’，属于基于过往盈利经验继续看多同一标的的交易表态。配图为ANGX（Angel Studios）行情页，进一步确认讨论对象为该个股。",
+    "action_hint": "加仓",
+    "key_quote": "继续做多 我的天使营业 呜呜呜 上次赚的有点多",
+    "image_analysis": "配图为ANGX（Angel Studios）股票行情截图，股价约6.910美元，当日小幅下跌约0.29%。K线为日线，历史上曾出现大幅拉升和回落，近期股价在低位附近波动。截图显示用户正在关注该股并带有交易意图。",
+    "tweet_id": 1580,
+    "twitter_id": "1981724080127582484",
+    "text": "继续做多 我的天使营业 呜呜呜 上次赚的有点多",
+    "created_at": "2025-10-24T14:06:54",
+    "price_context": [
+      {
+        "ticker": "ANGX",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 2.84
+        },
+        "fundamentals": {
+          "pe": -3.18,
+          "roe": null,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      },
+      {
+        "ticker": "Angel Studios",
+        "backward_available": false,
+        "price_summary": null,
+        "fundamentals": null
+      }
+    ]
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "INTC"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "半导体"
+    ],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "推文明确提到INTC回落后准备“全接回来”，并判断股价“不会低于36块”，同时给出“先看100”的目标位，体现出对该股后续上涨空间的强烈乐观预期。内容围绕单一个股价格判断与交易计划展开，属于个股分析。",
+    "action_hint": "买入",
+    "key_quote": "等着全接回来。不会低于36块了 intc。没有了。先看100。",
+    "image_analysis": null,
+    "tweet_id": 1579,
+    "twitter_id": "1981726656256430388",
+    "text": "intc掉下来了。太棒了 不然大卖飞。等着全接回来。不会低于36块了 intc。没有了。先看100。",
+    "created_at": "2025-10-24T14:17:08",
+    "price_context": [
+      {
+        "ticker": "INTC",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 119.84
+        },
+        "fundamentals": {
+          "pe": -203.12,
+          "roe": -0.250057,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "操作记录",
+    "mentioned_stocks": [
+      "INTC",
+      "NVDA"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "半导体"
+    ],
+    "stance": "无明确方向",
+    "confidence": "high",
+    "reasoning_chain": "内容主要是在回顾个人对英特尔（INTC）的买卖操作：18美元附近重仓买入，23美元继续买入，38美元左右卖出，并表达了对后续走势判断失误的懊悔。提到英伟达（NV）大概率是指NVDA，反映其曾预期英伟达下跌会带动英特尔下跌，但并未形成明确当前交易观点。",
+    "action_hint": "无",
+    "key_quote": "我是18爆买intc一级买到23。每天睁开眼就是他妈买intc的日子。然后38块左右卖了",
+    "image_analysis": null,
+    "tweet_id": 1578,
+    "twitter_id": "1981727014684864645",
+    "text": "我是18爆买intc一级买到23。每天睁开眼就是他妈买intc的日子。然后38块左右卖了 我还想着nv下去给intc带下去。哎。",
+    "created_at": "2025-10-24T14:18:33",
+    "price_context": [
+      {
+        "ticker": "INTC",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 119.84
+        },
+        "fundamentals": {
+          "pe": -203.12,
+          "roe": -0.250057,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      },
+      {
+        "ticker": "NVDA",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 215.33
+        },
+        "fundamentals": {
+          "pe": 33.26,
+          "roe": 119.177466,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "AMZN",
+      "GOOG"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "科技"
+    ],
+    "stance": "看多",
+    "confidence": "high",
+    "reasoning_chain": "推文明确表达对亚马逊的看多观点，核心依据是技术面上‘接近年线’被视为买点，并类比谷歌去年在140附近年线位置的买入机会，认为亚马逊当前处于类似位置，具备向上潜力。",
+    "action_hint": "买入",
+    "key_quote": "买亚马逊。就是明天的谷歌。",
+    "image_analysis": null,
+    "tweet_id": 1576,
+    "twitter_id": "1981917685769179177",
+    "text": "买亚马逊。就是明天的谷歌。去年140干嘛的 年线不买。亚马逊下面就是年线 一样的",
+    "created_at": "2025-10-25T02:56:13",
+    "price_context": [
+      {
+        "ticker": "AMZN",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 266.32
+        },
+        "fundamentals": {
+          "pe": 32.18,
+          "roe": 22.285825,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      },
+      {
+        "ticker": "GOOG",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 379.38
+        },
+        "fundamentals": {
+          "pe": 29.35,
+          "roe": 35.704782,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "投资策略",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "内容表达了逆向投资思路：在基本面差、市场情绪悲观时选择多买，待情况转好时再逐步派发，整体偏向逢低布局与看多后续修复。未提及具体标的，因此判断置信度中等。",
+    "action_hint": "买入",
+    "key_quote": "基本面很差吗 那多买点 差的时候多买点 好的时候派发",
+    "image_analysis": null,
+    "tweet_id": 1575,
+    "twitter_id": "1982153667445723349",
+    "text": "是么基本面很差吗 那多买点 差的时候多买点 好的时候派发",
+    "created_at": "2025-10-25T18:33:55",
+    "price_context": []
+  },
+  {
+    "topic": "宏观分析",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "推文强调“宽松”优于各种利空，并提到“今年两次，明年还至少一次”，明显在讨论货币政策进一步宽松或降息预期。宽松通常对应风险资产估值支撑，因此整体偏多。",
+    "action_hint": "持有",
+    "key_quote": "万事利空 不如宽松。今年两次 明年还至少一次。",
+    "image_analysis": null,
+    "tweet_id": 1573,
+    "twitter_id": "1982452432467607885",
+    "text": "万事利空 不如宽松。今年两次 明年还至少一次。",
+    "created_at": "2025-10-26T14:21:06",
+    "price_context": []
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "EQIX",
+      "SNOW"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "无明确方向",
+    "confidence": "medium",
+    "reasoning_chain": "内容在询问是否关注/看到EQIX，以及是否未提及SNOW，涉及具体个股，但没有给出明确看多看空判断或操作计划。",
+    "action_hint": "无",
+    "key_quote": "能看到eqix 没有snow吗。",
+    "image_analysis": null,
+    "tweet_id": 1572,
+    "twitter_id": "1982552389220782197",
+    "text": "能看到eqix 没有snow吗。",
+    "created_at": "2025-10-26T20:58:18",
+    "price_context": [
+      {
+        "ticker": "EQIX",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 1079.79
+        },
+        "fundamentals": {
+          "pe": 73.98,
+          "roe": 9.752926,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      },
+      {
+        "ticker": "SNOW",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 172.2
+        },
+        "fundamentals": null
+      }
+    ]
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "RCL"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "邮轮旅游"
+    ],
+    "stance": "看多",
+    "confidence": "high",
+    "reasoning_chain": "推文多次直接强调“买RCL/皇家加勒比”，表达了非常明确的看多和买入倾向，未提供更多基本面或技术面依据。",
+    "action_hint": "买入",
+    "key_quote": "一定要买rcl！一定要买 today一定要买。皇家加勒比！",
+    "image_analysis": null,
+    "tweet_id": 1571,
+    "twitter_id": "1982849408128708741",
+    "text": "一定要买rcl！一定要买 today一定要买。皇家加勒比！",
+    "created_at": "2025-10-27T16:38:33",
+    "price_context": [
+      {
+        "ticker": "RCL",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 256.1
+        },
+        "fundamentals": null
+      }
+    ]
+  },
+  {
+    "topic": "投资策略",
+    "mentioned_stocks": [
+      "BILL"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "中性",
+    "confidence": "medium",
+    "reasoning_chain": "内容强调交易应关注市场对财报的反应与筹码结构，而非单纯依据财报好坏做判断；以BILL财报差但股价上涨为例，表达的是一种交易方法论，不是明确看多或看空某一资产。",
+    "action_hint": "观望",
+    "key_quote": "别看财报 那个都是骗人的……你要猜的是市场反应……筹码结构决定方向。所有人都上车了你财报好出花也没用。",
+    "image_analysis": null,
+    "tweet_id": 1569,
+    "twitter_id": "1982862677971218651",
+    "text": "别看财报 那个都是骗人的 很多公司财报我都提前知道 但是你要猜的是市场反应，我上个季度买的bill 的财报 财报很垃圾 但是一样暴涨 筹码结构决定方向。所有人都上车了你财报好出花也没用。",
+    "created_at": "2025-10-27T17:31:16",
+    "price_context": [
+      {
+        "ticker": "BILL",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 36.14
+        },
+        "fundamentals": {
+          "pe": 384.67,
+          "roe": 0.591359,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "CPNG"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "发文认为CPNG当前处于洗盘阶段，并指出主力资金前两天已介入，因此建议逢跌买入，整体偏向短线看多判断。",
+    "action_hint": "买入",
+    "key_quote": "cpng在洗盘 我建议 有跌就买 主力炒家前两天在里面了。",
+    "image_analysis": null,
+    "tweet_id": 1568,
+    "twitter_id": "1982866749445025920",
+    "text": "cpng在洗盘 我建议 有跌就买 主力炒家前两天在里面了。",
+    "created_at": "2025-10-27T17:47:27",
+    "price_context": [
+      {
+        "ticker": "CPNG",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 16.12
+        },
+        "fundamentals": {
+          "pe": -161.35,
+          "roe": 4.767362,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "宏观分析",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "中性",
+    "confidence": "medium",
+    "reasoning_chain": "内容在讨论未来失业率作为经济衡量指标的重要性可能下降，属于对宏观经济指标有效性的判断，没有明确表达看多或看空方向，也未给出具体投资标的或操作建议。",
+    "action_hint": "观望",
+    "key_quote": "可能以后 失业率不是一个衡量经济的指标了 或者说不是主要指标",
+    "image_analysis": null,
+    "tweet_id": 1567,
+    "twitter_id": "1982884019055591619",
+    "text": "可能以后 失业率不是一个衡量经济的指标了 或者说不是主要指标",
+    "created_at": "2025-10-27T18:56:05",
+    "price_context": []
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "AMZN",
+      "TSLA",
+      "XLY"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "可选消费"
+    ],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "推文认为XLY处于主升浪阶段，核心驱动主要来自AMZN和特斯拉，并明确判断两者中至少有一个会暴涨，且作者进一步倾向于两者都会上涨，整体明显偏多。",
+    "action_hint": "买入",
+    "key_quote": "xly 主升浪 里面就两个票 amzn 特斯拉。必有一个暴涨 但是我认为两个都暴涨。",
+    "image_analysis": null,
+    "tweet_id": 1566,
+    "twitter_id": "1982884422505673119",
+    "text": "xly 主升浪 里面就两个票 amzn 特斯拉。必有一个暴涨 但是我认为两个都暴涨。",
+    "created_at": "2025-10-27T18:57:41",
+    "price_context": [
+      {
+        "ticker": "AMZN",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 266.32
+        },
+        "fundamentals": {
+          "pe": 32.18,
+          "roe": 22.285825,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      },
+      {
+        "ticker": "TSLA",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 426.01
+        },
+        "fundamentals": null
+      },
+      {
+        "ticker": "XLY",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 119.18
+        },
+        "fundamentals": null
+      }
+    ]
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "MSTR"
+    ],
+    "mentioned_crypto": [
+      "BTC"
+    ],
+    "mentioned_sectors": [
+      "比特币概念股"
+    ],
+    "stance": "看多",
+    "confidence": "high",
+    "reasoning_chain": "推文直接建议可以买入MSTR，核心逻辑是其当前杠杆率/溢价水平较低（1.29倍），若BTC暴涨，MSTR将受益于比特币上涨叠加自身杠杆效应，因此表达了明确的看多观点。",
+    "action_hint": "买入",
+    "key_quote": "谁愿意可以买点mstr 杠杆率真的很低 一般是1.5倍 现在1.29 而且一旦btc暴涨 这家伙跟着涨再加上自身杠杆 涨幅很吓人。",
+    "image_analysis": "配图为StrategyTracker页面，显示Strategy（MSTR）的BTC Holdings约为864,808，Sats per Share约为200,196，Market Cap约为$84.9B，mNAV为1.29x，BTC Yield YTD为+26.2%。图片意在佐证MSTR当前相对历史杠杆/溢价不高。",
+    "tweet_id": 1564,
+    "twitter_id": "1982897721775472826",
+    "text": "谁愿意可以买点mstr 杠杆率真的很低 一般是1.5倍 现在1.29 而且一旦btc暴涨 这家伙跟着涨再加上自身杠杆 涨幅很吓人。",
+    "created_at": "2025-10-27T19:50:31",
+    "price_context": [
+      {
+        "ticker": "MSTR",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 159.89
+        },
+        "fundamentals": {
+          "pe": -4.37,
+          "roe": -11.110113,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "加密货币",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [
+      "BTC"
+    ],
+    "mentioned_sectors": [],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "推文明确表示“我都是btc”，说明其当前仓位主要在比特币；“可以吃溢价”暗示其认为相关标的/机会存在盈利空间，但本人未参与其他标的，因此整体对BTC偏多。",
+    "action_hint": "持有",
+    "key_quote": "可以吃溢价 我没买哈 我都是btc",
+    "image_analysis": null,
+    "tweet_id": 1563,
+    "twitter_id": "1982897957679812654",
+    "text": "可以吃溢价 我没买哈 我都是btc",
+    "created_at": "2025-10-27T19:51:28",
+    "price_context": []
+  },
+  {
+    "topic": "投资策略",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "AI"
+    ],
+    "stance": "中性",
+    "confidence": "low",
+    "reasoning_chain": "内容更像对市场运行逻辑的泛化判断，表达的是‘是否有AI概念并非决定涨跌的核心，该涨的标的自然会涨’，没有指向具体资产、行业或明确交易方向。",
+    "action_hint": "观望",
+    "key_quote": "有没有ai 该涨就是会涨的。",
+    "image_analysis": null,
+    "tweet_id": 1561,
+    "twitter_id": "1982930563880415332",
+    "text": "有没有ai 该涨就是会涨的。",
+    "created_at": "2025-10-27T22:01:02",
+    "price_context": []
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "AMZN"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "内容判断亚马逊正处于主力洗盘阶段，作者认为此前已多次洗筹，当前不应因短期小利提前离场，隐含后续仍有上涨预期。",
+    "action_hint": "持有",
+    "key_quote": "亚马逊的主力炒家已经三次洗筹了。现在是洗盘阶段 不要被后面一点蝇头小利摔下车。",
+    "image_analysis": null,
+    "tweet_id": 1560,
+    "twitter_id": "1982931826856603885",
+    "text": "亚马逊的主力炒家已经三次洗筹了。现在是洗盘阶段 不要被后面一点蝇头小利摔下车。",
+    "created_at": "2025-10-27T22:06:03",
+    "price_context": [
+      {
+        "ticker": "AMZN",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 266.32
+        },
+        "fundamentals": {
+          "pe": 32.18,
+          "roe": 22.285825,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "操作记录",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "内容提到“吸筹”且已进行“五次吸筹”，表达的是主力/资金持续承接、收集筹码的判断，通常偏多；但未明确标的，信息不完整。",
+    "action_hint": "观望",
+    "key_quote": "严格意义来说 五次吸筹 从9.25开始。吃这么多货也不怕撑死",
+    "image_analysis": null,
+    "tweet_id": 1559,
+    "twitter_id": "1982932302562017677",
+    "text": "严格意义来说 五次吸筹 从9.25开始。吃这么多货也不怕撑死",
+    "created_at": "2025-10-27T22:07:56",
+    "price_context": []
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "UPS"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "推文提到“UPS暴涨”并称“下降趋势走完了”，表达了对股价下跌阶段结束、可能转为上涨的判断，但语气带有不确定和情绪化色彩。",
+    "action_hint": "观望",
+    "key_quote": "明早不会ups暴涨吧。我靠 下降趋势走完了….颤抖",
+    "image_analysis": null,
+    "tweet_id": 1557,
+    "twitter_id": "1982978181004149149",
+    "text": "明早不会ups暴涨吧。我靠 下降趋势走完了….颤抖",
+    "created_at": "2025-10-28T01:10:14",
+    "price_context": [
+      {
+        "ticker": "UPS",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 101.02
+        },
+        "fundamentals": null
+      }
+    ]
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "CRCL"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "发言认为CRCL主力资金自150美元附近到100多美元区间持续买入且至今未卖出，当前股价约140美元仍判断主力在场内洗盘，隐含后续继续上行预期，并明确表达“值得关注买入”。",
+    "action_hint": "买入",
+    "key_quote": "这个票值得关注买入 别看140 主力还在里面洗。",
+    "image_analysis": null,
+    "tweet_id": 1555,
+    "twitter_id": "1983012921983541574",
+    "text": "我没看懂一个股票 crcl 主力从150小买 100零几块 爆买 到现在都没卖 准备上天吗。这个票值得关注买入 别看140 主力还在里面洗。",
+    "created_at": "2025-10-28T03:28:17",
+    "price_context": [
+      {
+        "ticker": "CRCL",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 113.12
+        },
+        "fundamentals": {
+          "pe": -497.24,
+          "roe": -2.758461,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "RCL"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "邮轮",
+      "旅游消费"
+    ],
+    "stance": "看多",
+    "confidence": "high",
+    "reasoning_chain": "内容围绕RCL财报后股价表现展开。作者提到“财报超预期并上调指引还是跌”，认为是典型利好兑现后的短线回落，但明确表示“继续拿喽，不可能被骗下船”，说明其对后续走势仍偏乐观，选择继续持有而非离场。",
+    "action_hint": "持有",
+    "key_quote": "财报超预期 并上调指引 还是跌 sell the news了。继续拿喽。不可能被骗下船的。",
+    "image_analysis": "图片为RCL（皇家加勒比邮轮）行情截图，股价约320.26，日内上涨约1.86%，配有K线与盘口信息，佐证讨论对象为RCL。",
+    "tweet_id": 1554,
+    "twitter_id": "1983134919313273138",
+    "text": "完蛋 翻船了。财报超预期 并上调指引 还是跌 sell the news了。继续拿喽。不可能被骗下船的。",
+    "created_at": "2025-10-28T11:33:04",
+    "price_context": [
+      {
+        "ticker": "RCL",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 256.1
+        },
+        "fundamentals": null
+      }
+    ]
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "发言认为下跌属于“sell the news”式反应，而非基本面恶化；同时强调公司财报超预期并上调指引，说明经营表现强于预期，整体倾向偏多。",
+    "action_hint": "持有",
+    "key_quote": "sell the news罢了 又不是公司出问题 财报非常好 超预期 上调指引",
+    "image_analysis": null,
+    "tweet_id": 1553,
+    "twitter_id": "1983135149689610399",
+    "text": "呜呜呜没事 sell the news罢了 又不是公司出问题 财报非常好 超预期 上调指引。",
+    "created_at": "2025-10-28T11:33:59",
+    "price_context": []
+  },
+  {
+    "topic": "宏观分析",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "发言人认为当前利空或波动‘没有用’，并类比过去‘六千点’时更剧烈的情绪冲击，强调很多人曾因恐慌下车后一路踏空；同时判断这次下跌‘跌两天可以修复’，整体表达对后续修复和继续上行的乐观态度。",
+    "action_hint": "持有",
+    "key_quote": "无数人下车。然后一路踏空这东西跌两天可以修复的。",
+    "image_analysis": null,
+    "tweet_id": 1552,
+    "twitter_id": "1983152327684174140",
+    "text": "这种东西没有用 六千点那时候比这个还猛 无数人下车。然后一路踏空这东西跌两天可以修复的。 \nhttps://\nx.com/laochenusa/sta\n/laochenusa/status/1983014360772686194\n…",
+    "created_at": "2025-10-28T12:42:14",
+    "price_context": []
+  },
+  {
+    "topic": "操作记录",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "航运"
+    ],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "发文者表达了继续买入“我的小轮船”的操作意图，并明确表示不担心财报，认为有资金或主力支撑，因此整体态度偏积极看多。由于“小轮船”更像昵称，无法准确映射具体标的，行业判断为航运相关但不完全确定。",
+    "action_hint": "加仓",
+    "key_quote": "继续买我的小轮船。不用怕财报 有人给我擦屁股 主力在场",
+    "image_analysis": null,
+    "tweet_id": 1551,
+    "twitter_id": "1983166857789223167",
+    "text": "继续买我的小轮船。不用怕财报 有人给我擦屁股 主力在场",
+    "created_at": "2025-10-28T13:39:59",
+    "price_context": []
+  },
+  {
+    "topic": "宏观分析",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "观望",
+    "confidence": "medium",
+    "reasoning_chain": "内容是在总结本季度财报季的市场反应：不少优质公司即便超预期并上调指引，股价仍出现“sell the news”式回落。作者认为这种现象当前有些过度，但同时明确表示这不代表其对未来走势的判断，因此整体偏观察而非明确看多或看空。",
+    "action_hint": "观望",
+    "key_quote": "好公司超预期 上调指引的 不少 sell the news。 有点过多了 目前看。不代表未来看法。",
+    "image_analysis": null,
+    "tweet_id": 1550,
+    "twitter_id": "1983167777713303979",
+    "text": "本季度财报有一个特点哦 好公司超预期 上调指引的 不少 sell the news。 有点过多了 目前看。不代表未来看法。",
+    "created_at": "2025-10-28T13:43:38",
+    "price_context": []
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "SMR",
+      "OKLO"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "核能"
+    ],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "推文提到SMR“突破了”，通常表示技术走势转强；同时称“SMR洗太干净了”暗示充分洗盘后上涨，更偏积极。对于OKLO则表示“在休息”“好难”，说明相对偏弱或整理中，但整体语气仍以SMR的强势为主。",
+    "action_hint": "持有",
+    "key_quote": "smr突破了。oklo在休息。smr洗太干净了 oklo 好难。",
+    "image_analysis": null,
+    "tweet_id": 1549,
+    "twitter_id": "1983168230933049854",
+    "text": "smr突破了。oklo在休息。smr洗太干净了 oklo 好难。",
+    "created_at": "2025-10-28T13:45:26",
+    "price_context": [
+      {
+        "ticker": "SMR",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 11.4
+        },
+        "fundamentals": null
+      },
+      {
+        "ticker": "OKLO",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 65.88
+        },
+        "fundamentals": {
+          "pe": -78.96,
+          "roe": -12.236121,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "操作记录",
+    "mentioned_stocks": [
+      "VST"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看多",
+    "confidence": "high",
+    "reasoning_chain": "推文明确提到在187.3价格附近对VST进行买入，表达了强烈的接盘意愿，体现出对该价位的看多判断。",
+    "action_hint": "买入",
+    "key_quote": "到了我闭眼买。",
+    "image_analysis": null,
+    "tweet_id": 1548,
+    "twitter_id": "1983168873760509992",
+    "text": "187.3跟 vst拼了。到了我闭眼买。死了就记住我的墓志铭 vst187.3",
+    "created_at": "2025-10-28T13:47:59",
+    "price_context": [
+      {
+        "ticker": "VST",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 156.27
+        },
+        "fundamentals": null
+      }
+    ]
+  },
+  {
+    "topic": "宏观分析",
+    "mentioned_stocks": [
+      "JNK"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "垃圾债",
+      "高收益债"
+    ],
+    "stance": "看空",
+    "confidence": "medium",
+    "reasoning_chain": "将JNK（垃圾债/高收益债ETF）视为市场风险偏好的领先指标，认为其小幅下跌预示大盘短线将冲高回落，因此对整体市场走势偏空。",
+    "action_hint": "观望",
+    "key_quote": "jnk跌-0.1大盘必然冲高回落哈。没什么可说的 垃圾债就是神。",
+    "image_analysis": null,
+    "tweet_id": 1547,
+    "twitter_id": "1983169894486290581",
+    "text": "jnk跌-0.1大盘必然冲高回落哈。没什么可说的 垃圾债就是神。",
+    "created_at": "2025-10-28T13:52:03",
+    "price_context": [
+      {
+        "ticker": "JNK",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 96.25
+        },
+        "fundamentals": {
+          "pe": 0.0,
+          "roe": null,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "操作记录",
+    "mentioned_stocks": [
+      "VST",
+      "Vistra Energy"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "电力",
+      "公用事业"
+    ],
+    "stance": "无明确方向",
+    "confidence": "medium",
+    "reasoning_chain": "推文描述为“挂单成功”，更像是交易执行记录；配图显示标的是VST（Vistra Energy），但未明确说明买卖方向或后续判断。",
+    "action_hint": "无",
+    "key_quote": "卧槽 直接抹我屁股了。挂单成功。",
+    "image_analysis": null,
+    "tweet_id": 1545,
+    "twitter_id": "1983175111005126910",
+    "text": "卧槽 直接抹我屁股了。挂单成功。",
+    "created_at": "2025-10-28T14:12:46",
+    "price_context": [
+      {
+        "ticker": "VST",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 156.27
+        },
+        "fundamentals": null
+      },
+      {
+        "ticker": "Vistra Energy",
+        "backward_available": false,
+        "price_summary": null,
+        "fundamentals": null
+      }
+    ]
+  },
+  {
+    "topic": "操作记录",
+    "mentioned_stocks": [
+      "VST"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "提到具体标的VST及明确等待成交价位187.265，语气像是在挂单接入，隐含对该价位买入意愿，偏多但缺乏更多分析依据。",
+    "action_hint": "买入",
+    "key_quote": "风里雨里 我在vst187.3等你 准确的说187.265",
+    "image_analysis": null,
+    "tweet_id": 1544,
+    "twitter_id": "1983175225157316817",
+    "text": "风里雨里 我在vst187.3等你 准确的说187.265",
+    "created_at": "2025-10-28T14:13:13",
+    "price_context": [
+      {
+        "ticker": "VST",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 156.27
+        },
+        "fundamentals": null
+      }
+    ]
+  },
+  {
+    "topic": "操作记录",
+    "mentioned_stocks": [
+      "RCL",
+      "VST"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "航运",
+      "公用事业",
+      "电力"
+    ],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "文本明确表达“rcl不要怕，继续加”，属于对RCL的加仓表态，整体偏多；但配图显示的是VST（Vistra Energy）盘中下跌截图，与正文标的不一致，因此置信度下降。",
+    "action_hint": "加仓",
+    "key_quote": "rcl不要怕 继续加 不要被吓死。",
+    "image_analysis": {
+      "ticker": "VST",
+      "name": "Vistra Energy",
+      "price": "188.335",
+      "change": "-10.965",
+      "change_pct": "-5.50%",
+      "timestamp": "10/28 10:16",
+      "summary": "配图为VST盘中行情，股价明显下跌，短线情绪偏弱；但与正文提到的RCL不是同一标的。"
+    },
+    "tweet_id": 1543,
+    "twitter_id": "1983176006254186843",
+    "text": "牛逼不是吹的 火车不是推的。rcl不要怕 继续加 不要被吓死。",
+    "created_at": "2025-10-28T14:16:20",
+    "price_context": [
+      {
+        "ticker": "RCL",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 256.1
+        },
+        "fundamentals": null
+      },
+      {
+        "ticker": "VST",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 156.27
+        },
+        "fundamentals": null
+      }
+    ]
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "VST",
+      "Vistra Energy"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "电力",
+      "能源",
+      "公用事业"
+    ],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "推文配图显示VST当日大跌后出现明显盘中拉升，文案“别被洗下车”表达了对下跌为洗盘而非趋势反转的判断，倾向认为后续仍有反弹或上涨空间。",
+    "action_hint": "持有",
+    "key_quote": "一群臭流氓罢了 别被洗下车",
+    "image_analysis": null,
+    "tweet_id": 1542,
+    "twitter_id": "1983194772362920171",
+    "text": "一群臭流氓罢了 别被洗下车",
+    "created_at": "2025-10-28T15:30:54",
+    "price_context": [
+      {
+        "ticker": "VST",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 156.27
+        },
+        "fundamentals": null
+      },
+      {
+        "ticker": "Vistra Energy",
+        "backward_available": false,
+        "price_summary": null,
+        "fundamentals": null
+      }
+    ]
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "AMZN"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "电商",
+      "云计算"
+    ],
+    "stance": "看多",
+    "confidence": "high",
+    "reasoning_chain": "推文明确表示亚马逊“突破了”，说明作者认为股价完成技术性突破；同时称其为“我的第一大持仓”，表明已重仓持有；“等待起飞。先看300”直接给出上涨预期与目标价，因此整体为明确看多观点。",
+    "action_hint": "持有",
+    "key_quote": "亚马逊突破了。我的第一大持仓。等待起飞。先看300。",
+    "image_analysis": null,
+    "tweet_id": 1540,
+    "twitter_id": "1983203701436088811",
+    "text": "亚马逊突破了。我的第一大持仓。等待起飞。先看300。",
+    "created_at": "2025-10-28T16:06:23",
+    "price_context": [
+      {
+        "ticker": "AMZN",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 266.32
+        },
+        "fundamentals": {
+          "pe": 32.18,
+          "roe": 22.285825,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "AMZN",
+      "AMAZON"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "电商",
+      "云计算",
+      "科技"
+    ],
+    "stance": "看多",
+    "confidence": "high",
+    "reasoning_chain": "发文者明确上调主观评级至“超配”，表示在220价格重仓买入，认为这是“好公司大便宜”，并给出至少上涨到300的目标价；配图也显示UBS维持亚马逊买入评级，整体倾向明显偏多。虽提到“公司基本面钢铁一般”，但核心结论仍是强烈看多。",
+    "action_hint": "买入",
+    "key_quote": "我220梭哈了很多 道理很简单 好公司大便宜 玩命干。到300记得感谢我。",
+    "image_analysis": "图片为一则关于亚马逊的资讯截图，标题为“Amazon Is Maintained at Buy by UBS（瑞银维持亚马逊的买入评级）”，页面显示亚马逊/AMZN股价约230.765，涨幅约+1.67%。",
+    "tweet_id": 1539,
+    "twitter_id": "1983229490592465311",
+    "text": "什么买入评级 我给超配，至少涨到300是免费的。后面再看公司如何。公司基本面钢铁一般。我220梭哈了很多 道理很简单 好公司大便宜 玩命干。到300记得感谢我。有些公司不适合上仓位有一些摆明送钱。",
+    "created_at": "2025-10-28T17:48:51",
+    "price_context": [
+      {
+        "ticker": "AMZN",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 266.32
+        },
+        "fundamentals": {
+          "pe": 32.18,
+          "roe": 22.285825,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      },
+      {
+        "ticker": "AMAZON",
+        "backward_available": false,
+        "price_summary": null,
+        "fundamentals": null
+      }
+    ]
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "GOOGL"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "互联网科技"
+    ],
+    "stance": "无明确方向",
+    "confidence": "low",
+    "reasoning_chain": "内容仅点名谷歌并表达关注，没有提供观点依据、财务判断或明确交易倾向。",
+    "action_hint": "观望",
+    "key_quote": "谷歌。我就想听谷歌",
+    "image_analysis": null,
+    "tweet_id": 1538,
+    "twitter_id": "1983258203229171771",
+    "text": "谷歌。我就想听谷歌",
+    "created_at": "2025-10-28T19:42:57",
+    "price_context": [
+      {
+        "ticker": "GOOGL",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 382.97
+        },
+        "fundamentals": {
+          "pe": 29.65,
+          "roe": 35.704782,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "投资策略",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看空",
+    "confidence": "medium",
+    "reasoning_chain": "内容强调“割肉”和“跑得快”，表达在下跌或高风险环境中应及时止损、避免更大损失，整体偏防御和悲观。",
+    "action_hint": "卖出",
+    "key_quote": "割肉是艺术 跑得慢的 家都没了。",
+    "image_analysis": null,
+    "tweet_id": 1537,
+    "twitter_id": "1983269816501973212",
+    "text": "割肉是艺术 跑得慢的 家都没了。",
+    "created_at": "2025-10-28T20:29:06",
+    "price_context": []
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "INTC"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "半导体"
+    ],
+    "stance": "看空",
+    "confidence": "medium",
+    "reasoning_chain": "推文直接点名英特尔，并使用“进入第一阶段派发”这一偏技术分析/筹码分布语境中的看空表述，通常意味着资金开始出货、后续走势承压；“还是有点耐心吧”体现的是谨慎等待而非积极看多。",
+    "action_hint": "减仓",
+    "key_quote": "英特尔进入第一阶段派发了。还是有点耐心吧。",
+    "image_analysis": null,
+    "tweet_id": 1535,
+    "twitter_id": "1983488580841243001",
+    "text": "英特尔进入第一阶段派发了。 还是有点耐心吧。",
+    "created_at": "2025-10-29T10:58:23",
+    "price_context": [
+      {
+        "ticker": "INTC",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 119.84
+        },
+        "fundamentals": {
+          "pe": -203.12,
+          "roe": -0.250057,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "NVDA"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "半导体",
+      "人工智能"
+    ],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "推文提到NVDA“创造历史”，语气明显偏正面，表达对股价或市值表现创新高的认可与庆祝，整体情绪偏多，但未提供具体数据、逻辑或操作计划。",
+    "action_hint": "无",
+    "key_quote": "恭喜nvda创造历史！",
+    "image_analysis": null,
+    "tweet_id": 1533,
+    "twitter_id": "1983528163855757575",
+    "text": "恭喜nvda创造历史！",
+    "created_at": "2025-10-29T13:35:41",
+    "price_context": [
+      {
+        "ticker": "NVDA",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 215.33
+        },
+        "fundamentals": {
+          "pe": 33.26,
+          "roe": 119.177466,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "操作记录",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "电力"
+    ],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "内容明确表示“满仓冲进电力股”，属于已执行的重仓买入行为，反映出对电力板块短期偏多判断；但未提及具体逻辑、个股或时间周期，且带有调侃语气，因此置信度中等。",
+    "action_hint": "买入",
+    "key_quote": "满仓冲进电力股看谁是那小白鼠。",
+    "image_analysis": null,
+    "tweet_id": 1531,
+    "twitter_id": "1983546050003767729",
+    "text": "满仓冲进电力股看谁是那小白鼠。",
+    "created_at": "2025-10-29T14:46:45",
+    "price_context": []
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "OKLO"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "推文直接表达对OKLO的强烈偏好与喜爱，体现明显正面态度，但未提供具体基本面、价格观点或交易计划。",
+    "action_hint": "无",
+    "key_quote": "i love oklo ！",
+    "image_analysis": null,
+    "tweet_id": 1529,
+    "twitter_id": "1983612613276922012",
+    "text": "i love oklo ！",
+    "created_at": "2025-10-29T19:11:15",
+    "price_context": [
+      {
+        "ticker": "OKLO",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 65.88
+        },
+        "fundamentals": {
+          "pe": -78.96,
+          "roe": -12.236121,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "操作记录",
+    "mentioned_stocks": [
+      "VST",
+      "BA"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "电力"
+    ],
+    "stance": "看多",
+    "confidence": "high",
+    "reasoning_chain": "发文者明确表达对VST的偏好，称已提前卖出BA且获利，随后表示“梭哈电力了”，说明其当前仓位和观点明显偏向电力板块，整体为偏多的交易操作记录。",
+    "action_hint": "加仓",
+    "key_quote": "i love vst。ba没亏钱提前卖了 忘了说了 还赚了 梭哈电力了。",
+    "image_analysis": null,
+    "tweet_id": 1528,
+    "twitter_id": "1983612897898197344",
+    "text": "i love vst。ba没亏钱提前卖了 忘了说了 还赚了 梭哈电力了。",
+    "created_at": "2025-10-29T19:12:23",
+    "price_context": [
+      {
+        "ticker": "VST",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 156.27
+        },
+        "fundamentals": null
+      },
+      {
+        "ticker": "BA",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 219.02
+        },
+        "fundamentals": {
+          "pe": 86.18,
+          "roe": 289.003881,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "宏观分析",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "美联储",
+      "货币政策"
+    ],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "推文核心在于判断美联储将于12月降息，且明年至少再降一次，指向货币政策边际转松。降息预期通常对应流动性改善，对风险资产整体偏利多，因此归类为宏观层面的偏多观点。",
+    "action_hint": "观望",
+    "key_quote": "12月必降息 明年至少还有一次。",
+    "image_analysis": null,
+    "tweet_id": 1527,
+    "twitter_id": "1983616502722130439",
+    "text": "不用看鲍威尔讲什么。12月必降息 明年至少还有一次。联储的政策不用猜。我一句话给你们总结 “货币政策从紧缩 改为 适度紧缩 还是维持紧缩。”",
+    "created_at": "2025-10-29T19:26:42",
+    "price_context": []
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "META"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "互联网科技"
+    ],
+    "stance": "看空",
+    "confidence": "low",
+    "reasoning_chain": "内容仅有“bye meta”，可能表达对Meta的离场或负面态度，但信息过少，判断置信度较低。",
+    "action_hint": "卖出",
+    "key_quote": "bye meta。",
+    "image_analysis": null,
+    "tweet_id": 1523,
+    "twitter_id": "1983626930927902849",
+    "text": "bye meta。",
+    "created_at": "2025-10-29T20:08:08",
+    "price_context": [
+      {
+        "ticker": "META",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 610.26
+        },
+        "fundamentals": {
+          "pe": 22.24,
+          "roe": 30.238071,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "操作记录",
+    "mentioned_stocks": [
+      "AMZN"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "中性",
+    "confidence": "medium",
+    "reasoning_chain": "发言者表示在市场整体动荡时选择待在亚马逊这只股票中避险，但又用“躲在垃圾堆了”表达对其表现不佳或自嘲的不满，因此不是明确看多或看空，更像是持仓中的情绪表达。",
+    "action_hint": "持有",
+    "key_quote": "外面腥风血雨 我在亚马逊里面躲着呢。躲在垃圾堆了",
+    "image_analysis": null,
+    "tweet_id": 1522,
+    "twitter_id": "1983628678342099451",
+    "text": "外面腥风血雨 我在亚马逊里面躲着呢。躲在垃圾堆了",
+    "created_at": "2025-10-29T20:15:05",
+    "price_context": [
+      {
+        "ticker": "AMZN",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 266.32
+        },
+        "fundamentals": {
+          "pe": 32.18,
+          "roe": 22.285825,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "META"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "互联网科技"
+    ],
+    "stance": "观望",
+    "confidence": "low",
+    "reasoning_chain": "内容仅为对META是否应在700价位附近抄底的简短提问，未提供明确观点、依据或操作结论，因此整体倾向不明确，更接近观望和求判断。",
+    "action_hint": "观望",
+    "key_quote": "700meta 抄底吗",
+    "image_analysis": null,
+    "tweet_id": 1521,
+    "twitter_id": "1983638189551317258",
+    "text": "700meta 抄底吗",
+    "created_at": "2025-10-29T20:52:53",
+    "price_context": [
+      {
+        "ticker": "META",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 610.26
+        },
+        "fundamentals": {
+          "pe": 22.24,
+          "roe": 30.238071,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "META"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "观望",
+    "confidence": "medium",
+    "reasoning_chain": "内容仅为询问‘是否准备抄底Meta’，提及单一个股Meta，但没有给出明确观点、论据或实际操作，因此更偏向围绕个股的观察性提问，方向不明确。",
+    "action_hint": "观望",
+    "key_quote": "猫姐准备抄底meta吗",
+    "image_analysis": null,
+    "tweet_id": 1520,
+    "twitter_id": "1983641961446723891",
+    "text": "猫姐准备抄底meta吗",
+    "created_at": "2025-10-29T21:07:52",
+    "price_context": [
+      {
+        "ticker": "META",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 610.26
+        },
+        "fundamentals": {
+          "pe": 22.24,
+          "roe": 30.238071,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "操作记录",
+    "mentioned_stocks": [
+      "META"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "互联网科技"
+    ],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "推文明确提到以683.63买入META，属于实际交易记录。虽然“买着玩”显示仓位或态度较随意，但买入行为本身通常代表短期偏多。",
+    "action_hint": "买入",
+    "key_quote": "683.63买入了meta。买着玩",
+    "image_analysis": null,
+    "tweet_id": 1519,
+    "twitter_id": "1983647119803396437",
+    "text": "683.63买入了meta。买着玩",
+    "created_at": "2025-10-29T21:28:22",
+    "price_context": [
+      {
+        "ticker": "META",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 610.26
+        },
+        "fundamentals": {
+          "pe": 22.24,
+          "roe": 30.238071,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "投资策略",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "文本表达了强烈的买入倾向，并认为长期持有会上涨，但未提及具体标的，因此归类为泛投资策略判断。",
+    "action_hint": "买入",
+    "key_quote": "必眼买。长期拿能涨",
+    "image_analysis": null,
+    "tweet_id": 1518,
+    "twitter_id": "1983648420213760263",
+    "text": "必眼买。长期拿能涨",
+    "created_at": "2025-10-29T21:33:32",
+    "price_context": []
+  },
+  {
+    "topic": "其他",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "中性",
+    "confidence": "low",
+    "reasoning_chain": "内容仅表述“涨了，一丢丢”，表示价格小幅上涨，但未说明具体标的、行业、逻辑或操作计划，信息不足以形成明确投资判断。",
+    "action_hint": "无",
+    "key_quote": "涨了。一丢丢。",
+    "image_analysis": null,
+    "tweet_id": 1517,
+    "twitter_id": "1983648559515004966",
+    "text": "涨了。一丢丢。",
+    "created_at": "2025-10-29T21:34:05",
+    "price_context": []
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "AMZN",
+      "META",
+      "MSFT"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "科技",
+      "互联网",
+      "云计算"
+    ],
+    "stance": "看空",
+    "confidence": "medium",
+    "reasoning_chain": "推文表达了对亚马逊股价表现的不满，认为在META和MSFT下跌时，AMZN也跟随走弱，并质疑其基本面是否更差，整体情绪偏负面。",
+    "action_hint": "观望",
+    "key_quote": "meta msft 扑街 亚马逊跟着抖。基本面不如他们俩是吧。",
+    "image_analysis": null,
+    "tweet_id": 1516,
+    "twitter_id": "1983651115637125409",
+    "text": "给老子笑死了 在亚马逊里面挨打。meta msft 扑街 亚马逊跟着抖。基本面不如他们俩是吧。",
+    "created_at": "2025-10-29T21:44:15",
+    "price_context": [
+      {
+        "ticker": "AMZN",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 266.32
+        },
+        "fundamentals": {
+          "pe": 32.18,
+          "roe": 22.285825,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      },
+      {
+        "ticker": "META",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 610.26
+        },
+        "fundamentals": {
+          "pe": 22.24,
+          "roe": 30.238071,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      },
+      {
+        "ticker": "MSFT",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 418.57
+        },
+        "fundamentals": {
+          "pe": 24.93,
+          "roe": 33.280824,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "操作记录",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "观望",
+    "confidence": "medium",
+    "reasoning_chain": "推文仅有“职业接飞刀”，属于投资风格/操作自述，常指在大跌中逆势承接，但未说明具体标的、时点和明确方向，信息不足以判断实际看多或看空。",
+    "action_hint": "观望",
+    "key_quote": "职业接飞刀。",
+    "image_analysis": null,
+    "tweet_id": 1514,
+    "twitter_id": "1983702063348642025",
+    "text": "职业接飞刀。",
+    "created_at": "2025-10-30T01:06:41",
+    "price_context": []
+  },
+  {
+    "topic": "操作记录",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "内容表达了在“220”价位或相关位置进行重仓押注，措辞带有高风险高收益的投机色彩，体现出明显的看多倾向，但未明确标的，因此置信度中等。",
+    "action_hint": "加仓",
+    "key_quote": "我220重仓 赢了会所嫩模 输了 下海接客",
+    "image_analysis": null,
+    "tweet_id": 1513,
+    "twitter_id": "1983720122050285792",
+    "text": "我220重仓 赢了会所嫩模 输了 下海接客",
+    "created_at": "2025-10-30T02:18:27",
+    "price_context": []
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看多",
+    "confidence": "low",
+    "reasoning_chain": "发言者将标的称为“现金奶牛”，说明其认为基本面或盈利能力很强；同时对下跌表示不理解，体现出对当前回调的不认可，整体情绪偏多。但未指出具体标的，判断置信度较低。",
+    "action_hint": "持有",
+    "key_quote": "简直他妈现金奶牛。我都不知道跌个屁",
+    "image_analysis": null,
+    "tweet_id": 1512,
+    "twitter_id": "1983720246168187117",
+    "text": "简直他妈现金奶牛。我都不知道跌个屁",
+    "created_at": "2025-10-30T02:18:57",
+    "price_context": []
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "OKLO",
+      "VST",
+      "META"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "核能/先进核电",
+      "公用事业/电力",
+      "互联网科技/社交媒体"
+    ],
+    "stance": "观望",
+    "confidence": "medium",
+    "reasoning_chain": "推文表达了对持仓个股下跌的困惑与情绪化反应，并猜测可能与中美关系紧张有关，但未给出明确分析结论或交易计划，因此更偏向对个股波动的抱怨与观望。",
+    "action_hint": "观望",
+    "key_quote": "怎么回事 跌了？中美又干起来了？... 呜呜呜我的oklo 我的 vst 我的meta。",
+    "image_analysis": null,
+    "tweet_id": 1511,
+    "twitter_id": "1983848407505760620",
+    "text": "怎么回事 跌了？中美又干起来了？哪位政治专家解答一下。呜呜呜我的oklo 我的 vst 我的meta。",
+    "created_at": "2025-10-30T10:48:13",
+    "price_context": [
+      {
+        "ticker": "OKLO",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 65.88
+        },
+        "fundamentals": {
+          "pe": -78.96,
+          "roe": -12.236121,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      },
+      {
+        "ticker": "VST",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 156.27
+        },
+        "fundamentals": null
+      },
+      {
+        "ticker": "META",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 610.26
+        },
+        "fundamentals": {
+          "pe": 22.24,
+          "roe": 30.238071,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "宏观分析",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看空",
+    "confidence": "medium",
+    "reasoning_chain": "推文在描述市场因“会谈时长短于预期”而下跌，表达对下跌逻辑的讽刺与不满，整体偏负面，没有具体标的或明确交易计划。",
+    "action_hint": "观望",
+    "key_quote": "会谈时常短于预期 所以跌。牛逼的。",
+    "image_analysis": null,
+    "tweet_id": 1510,
+    "twitter_id": "1983877351579775007",
+    "text": "会谈时常短于预期 所以跌。牛逼的。",
+    "created_at": "2025-10-30T12:43:13",
+    "price_context": []
+  },
+  {
+    "topic": "操作记录",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "无明确方向",
+    "confidence": "low",
+    "reasoning_chain": "内容仅表达个人交易被套后的情绪，没有提及具体标的、行业或明确市场观点，因此更像是交易结果反馈而非分析判断。",
+    "action_hint": "无",
+    "key_quote": "被套死我了",
+    "image_analysis": null,
+    "tweet_id": 1509,
+    "twitter_id": "1983901218406645771",
+    "text": "呜呜呜太牛逼了 被套死我了",
+    "created_at": "2025-10-30T14:18:04",
+    "price_context": []
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "META"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "互联网科技"
+    ],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "推文明确表达对Meta的偏爱，并给出逆向观点：当市场普遍批评Meta时选择买入，体现对该个股的看多态度。",
+    "action_hint": "买入",
+    "key_quote": "Meta 都骂meta的时候 买meta。",
+    "image_analysis": null,
+    "tweet_id": 1508,
+    "twitter_id": "1983925475471663176",
+    "text": "I lovvvvvvve. Meta 都骂meta的时候 买meta。",
+    "created_at": "2025-10-30T15:54:27",
+    "price_context": [
+      {
+        "ticker": "META",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 610.26
+        },
+        "fundamentals": {
+          "pe": 22.24,
+          "roe": 30.238071,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "投资策略",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "内容表达了对后续行情走势的判断，认为不会继续下跌，11月将持续上涨，12月维持震荡上行，整体偏乐观，但未明确具体标的。",
+    "action_hint": "持有",
+    "key_quote": "就不可能跌到了11月一直涨 一直涨到12月震荡向上。",
+    "image_analysis": null,
+    "tweet_id": 1507,
+    "twitter_id": "1983931072590098818",
+    "text": "就不可能跌到了11月一直涨 一直涨到12月震荡向上。",
+    "created_at": "2025-10-30T16:16:42",
+    "price_context": []
+  },
+  {
+    "topic": "操作记录",
+    "mentioned_stocks": [
+      "META"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看多",
+    "confidence": "high",
+    "reasoning_chain": "推文直接表达“buy！META！”，明确给出对META的买入态度，属于个股交易/操作表达，方向偏多。",
+    "action_hint": "买入",
+    "key_quote": "buy！META！",
+    "image_analysis": null,
+    "tweet_id": 1506,
+    "twitter_id": "1983933627512611152",
+    "text": "buy！META！",
+    "created_at": "2025-10-30T16:26:51",
+    "price_context": [
+      {
+        "ticker": "META",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 610.26
+        },
+        "fundamentals": {
+          "pe": 22.24,
+          "roe": 30.238071,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "操作记录",
+    "mentioned_stocks": [
+      "META",
+      "AMZN"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看空",
+    "confidence": "medium",
+    "reasoning_chain": "推文提到此前建议买入META，但并未建议卖出AMZN，当前表达“两头挨打”和“呜呜呜”体现出作者对这两笔相关持仓/判断短期表现不佳的抱怨与负面情绪，属于交易结果反馈而非系统性分析。",
+    "action_hint": "观望",
+    "key_quote": "让你们买meta 没让你们卖amzn 呜呜呜 两头挨打",
+    "image_analysis": null,
+    "tweet_id": 1505,
+    "twitter_id": "1983936496408109506",
+    "text": "让你们买meta 没让你们卖amzn  呜呜呜 两头挨打",
+    "created_at": "2025-10-30T16:38:15",
+    "price_context": [
+      {
+        "ticker": "META",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 610.26
+        },
+        "fundamentals": {
+          "pe": 22.24,
+          "roe": 30.238071,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      },
+      {
+        "ticker": "AMZN",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 266.32
+        },
+        "fundamentals": {
+          "pe": 32.18,
+          "roe": 22.285825,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "投资策略",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看多",
+    "confidence": "low",
+    "reasoning_chain": "推文仅含简短判断“主力在买”，通常表示作者认为有资金推动、偏向积极解读；但未提及具体标的、逻辑与操作细节，信息不足。",
+    "action_hint": "观望",
+    "key_quote": "主力在买 不看了",
+    "image_analysis": null,
+    "tweet_id": 1503,
+    "twitter_id": "1983944137326866793",
+    "text": "主力在买 不看了",
+    "created_at": "2025-10-30T17:08:36",
+    "price_context": []
+  },
+  {
+    "topic": "信息分享",
+    "mentioned_stocks": [
+      "META",
+      "ORACLE"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "科技"
+    ],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "内容指出有人在抄底Meta并大肆购买甲骨文，反映出对这两只科技股的偏多交易行为，但未提供作者本人明确投资建议或更充分背景。",
+    "action_hint": "观望",
+    "key_quote": "有人抄底meta的同时 大肆购买甲骨文哦。",
+    "image_analysis": null,
+    "tweet_id": 1502,
+    "twitter_id": "1983947394052972695",
+    "text": "有人抄底meta的同时 大肆购买甲骨文哦。",
+    "created_at": "2025-10-30T17:21:33",
+    "price_context": [
+      {
+        "ticker": "META",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 610.26
+        },
+        "fundamentals": {
+          "pe": 22.24,
+          "roe": 30.238071,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      },
+      {
+        "ticker": "ORACLE",
+        "backward_available": false,
+        "price_summary": null,
+        "fundamentals": null
+      }
+    ]
+  },
+  {
+    "topic": "操作记录",
+    "mentioned_stocks": [
+      "AMZN",
+      "META"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看多",
+    "confidence": "high",
+    "reasoning_chain": "发文者表示重仓亚马逊，判断本季度和下季度财报会很好，已经先行买入并表达“宁可被套不可踏空”，体现对AMZN明显偏多；同时明确认为META本季度业绩不好，但核心交易动作集中在AMZN仓位。",
+    "action_hint": "买入",
+    "key_quote": "我重仓亚马逊。这个季度和下一个季度财报会很好……先买了。宁可被套不可踏空",
+    "image_analysis": null,
+    "tweet_id": 1501,
+    "twitter_id": "1983975752388448622",
+    "text": "我重仓亚马逊。这个季度和下一个季度财报会很好 我其实吃不准 先买了。meta这季度是肯定不好 早知道。amzn55开了。这季度不行 就装死到下季度了 宁可被套不可踏空",
+    "created_at": "2025-10-30T19:14:14",
+    "price_context": [
+      {
+        "ticker": "AMZN",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 266.32
+        },
+        "fundamentals": {
+          "pe": 32.18,
+          "roe": 22.285825,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      },
+      {
+        "ticker": "META",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 610.26
+        },
+        "fundamentals": {
+          "pe": 22.24,
+          "roe": 30.238071,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "AMZN",
+      "META"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "无明确方向",
+    "confidence": "medium",
+    "reasoning_chain": "发言同时表达了对AMZN的偏多尝试性买入，以及对META当季表现的偏空判断，整体为分化观点，缺乏统一方向性结论。",
+    "action_hint": "买入",
+    "key_quote": "amzn 这个季度或者下个季度很好 吃不准 先买了。被套不怕 meta这季度就是不行。",
+    "image_analysis": null,
+    "tweet_id": 1500,
+    "twitter_id": "1983975948715528563",
+    "text": "我是说amzn 这个季度或者下个季度很好 吃不准 先买了。被套不怕 meta这季度就是不行。",
+    "created_at": "2025-10-30T19:15:01",
+    "price_context": [
+      {
+        "ticker": "AMZN",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 266.32
+        },
+        "fundamentals": {
+          "pe": 32.18,
+          "roe": 22.285825,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      },
+      {
+        "ticker": "META",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 610.26
+        },
+        "fundamentals": {
+          "pe": 22.24,
+          "roe": 30.238071,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "其他",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看多",
+    "confidence": "low",
+    "reasoning_chain": "未提及具体标的或行业，表达了对本季度或下季度表现至少有一个会很好的乐观预期，但同时强调“赌大小”和“闭眼了”，说明判断依据不足、带有较强不确定性。",
+    "action_hint": "观望",
+    "key_quote": "真是赌大小了 只是知道 本季度和下个季度肯定会有一个很好的 闭眼了",
+    "image_analysis": null,
+    "tweet_id": 1499,
+    "twitter_id": "1983984016438202837",
+    "text": "真是赌大小了 只是知道 本季度和下个季度肯定会有一个很好的 闭眼了",
+    "created_at": "2025-10-30T19:47:04",
+    "price_context": []
+  },
+  {
+    "topic": "投资策略",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看空",
+    "confidence": "medium",
+    "reasoning_chain": "文本表达对后市快速下跌的预期，出现“暴跌的日子来了”等明显偏空措辞；未提及具体标的，属于泛市场态度表达。",
+    "action_hint": "卖出",
+    "key_quote": "哐哐暴跌的日子来了",
+    "image_analysis": null,
+    "tweet_id": 1498,
+    "twitter_id": "1983986316275806560",
+    "text": "买定离手啦。 哐哐暴跌的日子来了",
+    "created_at": "2025-10-30T19:56:13",
+    "price_context": []
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "AAPL",
+      "苹果"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "科技",
+      "消费电子"
+    ],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "推文配图为苹果（AAPL）行情/期权相关界面，股价盘后明显上涨；文案“有点东西”并嘲讽做空者，体现出对苹果短线表现的正面态度，偏向看多。",
+    "action_hint": "持有",
+    "key_quote": "有点东西。也不知道做空的在那里做鸡。",
+    "image_analysis": "图片为苹果 AAPL 的行情页面，显示盘后上涨约4.09%，现价约282.50，K线出现快速拉升；页面标题含“AAPL 170-190/250-300”，疑似与期权策略或自选分组有关。整体图像传达苹果财报或盘后表现强势。",
+    "tweet_id": 1494,
+    "twitter_id": "1984003137548775552",
+    "text": "有点东西。也不知道做空的在那里做鸡。",
+    "created_at": "2025-10-30T21:03:03",
+    "price_context": [
+      {
+        "ticker": "AAPL",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 308.82
+        },
+        "fundamentals": {
+          "pe": 37.65,
+          "roe": 171.42245,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      },
+      {
+        "ticker": "苹果",
+        "backward_available": false,
+        "price_summary": null,
+        "fundamentals": null
+      }
+    ]
+  },
+  {
+    "topic": "其他",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看多",
+    "confidence": "low",
+    "reasoning_chain": "文本仅有'gooooooo'，配图为战斗/冲锋情绪化表情包，通常传达继续上冲或助威意味，但缺乏具体标的与逻辑，判断为弱看多情绪表达。",
+    "action_hint": "观望",
+    "key_quote": "gooooooo",
+    "image_analysis": "图片为一名斯巴达战士在战场上怒吼的影视截图，常用于表达冲锋、激昂、看涨助威等情绪。",
+    "tweet_id": 1493,
+    "twitter_id": "1984004361132109990",
+    "text": "gooooooo",
+    "created_at": "2025-10-30T21:07:55",
+    "price_context": []
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "AMD"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "半导体"
+    ],
+    "stance": "看多",
+    "confidence": "low",
+    "reasoning_chain": "内容表达了对AMD上涨的FOMO情绪，并担心其继续大幅拉升，体现出偏多预期，但缺乏具体基本面或交易计划支撑。",
+    "action_hint": "观望",
+    "key_quote": "我有点fomo amd了……她不会b飞了吧。",
+    "image_analysis": null,
+    "tweet_id": 1492,
+    "twitter_id": "1984005383137227115",
+    "text": "我有点fomo amd了 卧槽。她出了多少啊。日了狗 她不会b飞了吧。",
+    "created_at": "2025-10-30T21:11:59",
+    "price_context": [
+      {
+        "ticker": "AMD",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 467.51
+        },
+        "fundamentals": {
+          "pe": 154.96,
+          "roe": 7.08154,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "RDDT"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "观望",
+    "confidence": "medium",
+    "reasoning_chain": "提到RDDT财报表现很好，但发言者明确表示“我不懂它”，说明虽认可基本面消息偏正面，但自身没有形成明确交易判断，整体态度偏观望。",
+    "action_hint": "观望",
+    "key_quote": "rddt也很好财报。但是我不懂它。",
+    "image_analysis": null,
+    "tweet_id": 1491,
+    "twitter_id": "1984008061997171075",
+    "text": "rddt也很好财报。但是我不懂它。",
+    "created_at": "2025-10-30T21:22:37",
+    "price_context": [
+      {
+        "ticker": "RDDT",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 141.67
+        },
+        "fundamentals": null
+      }
+    ]
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "VST"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "电力",
+      "公用事业",
+      "发电"
+    ],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "内容高频强调“电/发电”，并直接点名“vst”，语气兴奋，倾向表达对电力发电相关标的VST的正面看法；但信息量很少，缺乏具体逻辑与数据支撑。",
+    "action_hint": "观望",
+    "key_quote": "电！电！电！发电！vst 发电！",
+    "image_analysis": null,
+    "tweet_id": 1490,
+    "twitter_id": "1984009435933769844",
+    "text": "电！电！电！发电！vst 发电！",
+    "created_at": "2025-10-30T21:28:05",
+    "price_context": [
+      {
+        "ticker": "VST",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 156.27
+        },
+        "fundamentals": null
+      }
+    ]
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "INTC"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "半导体"
+    ],
+    "stance": "看多",
+    "confidence": "low",
+    "reasoning_chain": "文本提到“intc”，通常指英特尔股票代码；“call”在交易语境中常可理解为看涨期权或偏多表达，但整体信息极少且语义不完整，因此仅作弱看多判断。",
+    "action_hint": "观望",
+    "key_quote": "call intc andy plz。",
+    "image_analysis": "图片显示一名男子佩戴夸张珠宝与手表、手持麦克风，偏社交/娱乐场景，未提供明确投资信息或可验证的市场信号。",
+    "tweet_id": 1489,
+    "twitter_id": "1984010110621118558",
+    "text": "call intc andy plz。",
+    "created_at": "2025-10-30T21:30:46",
+    "price_context": [
+      {
+        "ticker": "INTC",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 119.84
+        },
+        "fundamentals": {
+          "pe": -203.12,
+          "roe": -0.250057,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "操作记录",
+    "mentioned_stocks": [
+      "AMZN"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "推文仅表达‘选了AMZN’，属于个人选股/持仓倾向，通常隐含对该标的正面预期，但未提供具体逻辑与操作细节。",
+    "action_hint": "买入",
+    "key_quote": "主要是我选了 amzn",
+    "image_analysis": null,
+    "tweet_id": 1487,
+    "twitter_id": "1984021926252294637",
+    "text": "主要是我选了 amzn",
+    "created_at": "2025-10-30T22:17:43",
+    "price_context": [
+      {
+        "ticker": "AMZN",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 266.32
+        },
+        "fundamentals": {
+          "pe": 32.18,
+          "roe": 22.285825,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "投资策略",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "无明确方向",
+    "confidence": "medium",
+    "reasoning_chain": "内容表达的是一种跟随主力资金动向的交易思路，属于方法论表态，没有提及具体标的、行业或明确看多看空方向。",
+    "action_hint": "观望",
+    "key_quote": "主力在哪里 我就在哪里",
+    "image_analysis": null,
+    "tweet_id": 1486,
+    "twitter_id": "1984040816764186760",
+    "text": "主力在哪里 我就在哪里",
+    "created_at": "2025-10-30T23:32:47",
+    "price_context": []
+  }
+]

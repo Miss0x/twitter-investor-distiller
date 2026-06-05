@@ -1,0 +1,548 @@
+[
+  {
+    "topic": "行业研判",
+    "mentioned_stocks": [
+      "ETN",
+      "VST",
+      "FSLR",
+      "POWR"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "电力",
+      "能源",
+      "核电",
+      "铀"
+    ],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "内容核心是在看好多数电力相关资产，明确建议“不知道买什么就买POWR ETF”，并点名ETN、VST、FSLR，认为“电力行情在”。配图中也显示Energy Fuels、Uranium Energy、NuScale Power上涨，进一步强化电力/核能链条走强的判断。但表述偏个人观点，且自称“我菜”“看不懂”，因此置信度为中等。",
+    "action_hint": "观望",
+    "key_quote": "你不知道买什么就买 powr etf……个人认为电力行情在的。",
+    "image_analysis": "截图显示作者此前分享的电力/能源相关标的上涨：Energy Fuels涨约7%、Uranium Energy涨约3%、NuScale Power涨约2%，并配有“美股核电股盘初齐涨”的文字，指向核电、铀、电力板块短线走强。",
+    "tweet_id": 1651,
+    "twitter_id": "2005652431301140643",
+    "text": "给我尊贵的3500多粉丝汇报过电力股你要买了吧 你不知道买什么就买 powr etf叫做 powr 就都是电力 个人认为电力行情在的。个人意见 etn vst fslr 。我肯定买50B以上的 不够就不看了。看不懂 我菜。",
+    "created_at": "2025-12-29T14:49:37",
+    "price_context": [
+      {
+        "ticker": "ETN",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 391.35
+        },
+        "fundamentals": {
+          "pe": 37.98,
+          "roe": 21.565162,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      },
+      {
+        "ticker": "VST",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 156.27
+        },
+        "fundamentals": null
+      },
+      {
+        "ticker": "FSLR",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 257.85
+        },
+        "fundamentals": {
+          "pe": 16.32,
+          "roe": 17.449949,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      },
+      {
+        "ticker": "POWR",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 27.75
+        },
+        "fundamentals": null
+      }
+    ]
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "发文者称在200多时进行抄底，并咨询过专业人士，得到“没有任何问题”的反馈；同时强调公司只是当时管理稍乱，但基本面很强，整体表达出对该标的后续表现的乐观看法。由于未明确提及具体公司名称或代码，置信度为中等。",
+    "action_hint": "买入",
+    "key_quote": "200多抄底的时候 我也怕 我问过了 说是没有任何问题。就是当时公司有点乱。基本面比刚还硬。",
+    "image_analysis": null,
+    "tweet_id": 1650,
+    "twitter_id": "2005671058368839917",
+    "text": "纯捡钱 我给专业的打过电话了。200多抄底的时候 我也怕 我问过了 说是没有任何问题。就是当时公司有点乱。基本面比刚还硬。",
+    "created_at": "2025-12-29T16:03:38",
+    "price_context": []
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "观望",
+    "confidence": "low",
+    "reasoning_chain": "内容讨论股价上涨过快后可能出现抛压，表达对短期走势的谨慎态度，但未提及具体标的和明确操作计划。",
+    "action_hint": "观望",
+    "key_quote": "股价涨太快会出现卖现实。",
+    "image_analysis": null,
+    "tweet_id": 1649,
+    "twitter_id": "2005671386938044675",
+    "text": "无敌。股价涨太快会出现卖现实。",
+    "created_at": "2025-12-29T16:04:56",
+    "price_context": []
+  },
+  {
+    "topic": "操作记录",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看空",
+    "confidence": "high",
+    "reasoning_chain": "推文表达了交易亏损与情绪化退出倾向：周五盈利在周一基本回吐，说明作者在记录短期交易结果，并对当前市场表现明显不满，情绪偏负面。未提及具体标的，因此无法指向个股或行业，只能判断为操作层面的偏空反馈。",
+    "action_hint": "观望",
+    "key_quote": "还钱！不玩了 周五赚的钱周一都快吐干净了。",
+    "image_analysis": null,
+    "tweet_id": 1648,
+    "twitter_id": "2005671610553118808",
+    "text": "还钱！不玩了 周五赚的钱周一都快吐干净了。",
+    "created_at": "2025-12-29T16:05:50",
+    "price_context": []
+  },
+  {
+    "topic": "其他",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看空",
+    "confidence": "low",
+    "reasoning_chain": "内容仅表达对下跌的主观看法，未提及具体标的、行业或宏观背景，但语气上明确认为下跌是合理的，偏负面判断。",
+    "action_hint": "观望",
+    "key_quote": "就该跌的 正常。",
+    "image_analysis": null,
+    "tweet_id": 1647,
+    "twitter_id": "2005675567270797421",
+    "text": "就该跌的 正常。",
+    "created_at": "2025-12-29T16:21:33",
+    "price_context": []
+  },
+  {
+    "topic": "操作记录",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "观望",
+    "confidence": "medium",
+    "reasoning_chain": "内容仅表达当前不卖出的操作态度，并强调继续观察，未提供具体标的或明确看多/看空逻辑，更偏向持仓观望。",
+    "action_hint": "持有",
+    "key_quote": "不卖。继续观察",
+    "image_analysis": null,
+    "tweet_id": 1646,
+    "twitter_id": "2005677601462087992",
+    "text": "不卖。继续观察",
+    "created_at": "2025-12-29T16:29:38",
+    "price_context": []
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "GOOG",
+      "NVDA"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "科技",
+      "互联网",
+      "半导体"
+    ],
+    "stance": "看空",
+    "confidence": "high",
+    "reasoning_chain": "推文核心在于看空谷歌估值，认为其股价存在明显水分，甚至提到下跌20%并不困难；同时将其与高估值的NVDA对比，强调谷歌当前定价更夸张。虽然作者明确表示“不会去做空”，承认贵不代表立刻下跌、也可能横盘，但整体表达仍以负面判断为主，方向偏空而非中性。配图也显示GOOG处于高位整理区间，进一步强化其高位承压的语境。",
+    "action_hint": "观望",
+    "key_quote": "我认为谷歌股价已经有水分了。跌20%轻轻松松。",
+    "image_analysis": "图片为TrendSpider发布的GOOG日线图，显示谷歌股价自年中以来持续上行，12月附近处于高位区域，K线短期形成一个略向下倾斜的整理/楔形结构。图中标注“Wall Street High PT”约400和“Wall Street Low PT”约255，当前价位约314.96，说明市场目标区间较宽。右侧成交分布显示当前价格附近有一定筹码堆积，整体图像传递的是高位盘整、上方仍有空间但短线存在回调/震荡风险。",
+    "tweet_id": 1645,
+    "twitter_id": "2005689492179419525",
+    "text": "别画了。不暴跌就不错了 这不是谷歌我肯定做空了。 我就这么说吧 这个比五万亿nvda还夸张 我认为谷歌股价已经有水分了。跌20%轻轻松松。说实话很想做空 X上一堆人 放空什么的都有 唱空谷歌的却不敢。我愿意做唱空谷歌第一人哈哈 但是不会去做空 股价贵不代表会跌 可以横起来。",
+    "created_at": "2025-12-29T17:16:53",
+    "price_context": [
+      {
+        "ticker": "GOOG",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 379.38
+        },
+        "fundamentals": {
+          "pe": 29.35,
+          "roe": 35.704782,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      },
+      {
+        "ticker": "NVDA",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 215.33
+        },
+        "fundamentals": {
+          "pe": 33.26,
+          "roe": 119.177466,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "INTC"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "半导体"
+    ],
+    "stance": "无明确方向",
+    "confidence": "low",
+    "reasoning_chain": "仅包含对INTC当前看法的简短提问，未提供具体观点、论据或市场判断，无法提炼明确多空倾向。",
+    "action_hint": "观望",
+    "key_quote": "intc怎么说 现在",
+    "image_analysis": null,
+    "tweet_id": 1643,
+    "twitter_id": "2005721554659991884",
+    "text": "intc怎么说 现在",
+    "created_at": "2025-12-29T19:24:17",
+    "price_context": [
+      {
+        "ticker": "INTC",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 119.84
+        },
+        "fundamentals": {
+          "pe": -203.12,
+          "roe": -0.250057,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "投资策略",
+    "mentioned_stocks": [
+      "ORCL"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "提到“很想买ORCL末日call”，末日call通常指临近到期的看涨期权，表达了对ORCL短线冲高的投机性看多倾向，但未说明具体逻辑与是否已执行。",
+    "action_hint": "买入",
+    "key_quote": "很想买orcl 末日call",
+    "image_analysis": null,
+    "tweet_id": 1642,
+    "twitter_id": "2005722792663327177",
+    "text": "很想买orcl 末日call",
+    "created_at": "2025-12-29T19:29:12",
+    "price_context": [
+      {
+        "ticker": "ORCL",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 192.08
+        },
+        "fundamentals": {
+          "pe": 34.67,
+          "roe": 85.357572,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "信息分享",
+    "mentioned_stocks": [
+      "摩根大通"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "银行",
+      "贵金属",
+      "白银期货"
+    ],
+    "stance": "无明确方向",
+    "confidence": "medium",
+    "reasoning_chain": "内容是在转述并调侃一则关于“摩根大通在白银期货上出事、并由美联储救助”的传闻，核心是信息传播与情绪表达，没有给出明确投资判断或交易计划。",
+    "action_hint": "观望",
+    "key_quote": "说是摩根大通在白银期货崩盘了 美联储救呢 哈哈哈",
+    "image_analysis": "配图是一张英文截图，内容声称一家具有系统重要性的美国银行因白银期货相关保证金问题被强平，并称美联储通过隔夜回购向银行体系注入流动性；截图下方中文说明猜测该银行可能是摩根大通。该图片更像未经证实的传闻截图，缺乏正式信源佐证。",
+    "tweet_id": 1641,
+    "twitter_id": "2005775801157816771",
+    "text": "在小红书什么都能看见 说是摩根大通在白银期货崩盘了 美联储救呢 哈哈哈 也不能让我自己笑 你们也看看。",
+    "created_at": "2025-12-29T22:59:51",
+    "price_context": [
+      {
+        "ticker": "摩根大通",
+        "backward_available": false,
+        "price_summary": null,
+        "fundamentals": null
+      }
+    ]
+  },
+  {
+    "topic": "加密货币",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [
+      "ETH",
+      "BTC"
+    ],
+    "mentioned_sectors": [
+      "加密货币"
+    ],
+    "stance": "看空",
+    "confidence": "medium",
+    "reasoning_chain": "发言者在批评加密圈内容创作者只会喊价格目标，不讨论监管、流动性、降息、QE、通胀、买盘等真正催化因素，并用“活该大跌”表达对这种叙事的否定，整体对当前看多论调偏负面。",
+    "action_hint": "观望",
+    "key_quote": "要不我帮你们吹吹？应该说去监管释放多少流动性 多少会流入加密 降息 qe 通胀 等等等这我才有点开视频听的想法 光比价格 活该大跌。",
+    "image_analysis": null,
+    "tweet_id": 1639,
+    "twitter_id": "2005853565475057809",
+    "text": "他说什么 宛如放屁。加密的人才有一些断层了 能换一批吗？坐台也不能老是一批人吧。你们应该讲讲后面有什么催化 有多少买盘 还是你们也不知道会不会有人买。要不我帮你们吹吹？应该说去监管释放多少流动性 多少会流入加密 降息 qe 通胀 等等等这我才有点开视频听的想法 光比价格  活该大跌。",
+    "created_at": "2025-12-30T04:08:51",
+    "price_context": []
+  },
+  {
+    "topic": "其他",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "无明确方向",
+    "confidence": "medium",
+    "reasoning_chain": "内容仅为对Tom Lee的情绪化评价，未提及具体个股、行业、宏观判断或明确交易观点。",
+    "action_hint": "无",
+    "key_quote": "tom lee 宛如放屁哈",
+    "image_analysis": null,
+    "tweet_id": 1638,
+    "twitter_id": "2005853691832676653",
+    "text": "我说 tom lee 宛如放屁哈。",
+    "created_at": "2025-12-30T04:09:21",
+    "price_context": []
+  },
+  {
+    "topic": "其他",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看空",
+    "confidence": "medium",
+    "reasoning_chain": "推文表达“散户们跑的快极了”，反映出散户集中撤离、市场情绪偏恐慌，通常对应短期风险偏好下降，因此整体倾向偏空；但未指向具体资产或市场，确定性有限。",
+    "action_hint": "观望",
+    "key_quote": "散户们跑的快极了。",
+    "image_analysis": null,
+    "tweet_id": 1637,
+    "twitter_id": "2006024376336920709",
+    "text": "散户们跑的快极了。",
+    "created_at": "2025-12-30T15:27:36",
+    "price_context": []
+  },
+  {
+    "topic": "投资策略",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "观望",
+    "confidence": "medium",
+    "reasoning_chain": "内容仅有“伺机而动”，表达等待合适时机再行动的策略倾向，未涉及具体标的、行业或明确方向性判断。",
+    "action_hint": "观望",
+    "key_quote": "伺机而动",
+    "image_analysis": null,
+    "tweet_id": 1636,
+    "twitter_id": "2006025966842265666",
+    "text": "伺机而动",
+    "created_at": "2025-12-30T15:33:55",
+    "price_context": []
+  },
+  {
+    "topic": "投资策略",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "无明确方向",
+    "confidence": "medium",
+    "reasoning_chain": "推文仅表达对“散户是反向指标”这一市场观点的否定，属于投资认知或策略层面的表态，未涉及具体标的、行业或明确买卖方向。",
+    "action_hint": "无",
+    "key_quote": "散户从来不是反指",
+    "image_analysis": null,
+    "tweet_id": 1635,
+    "twitter_id": "2006026980165083445",
+    "text": "散户从来不是反指",
+    "created_at": "2025-12-30T15:37:56",
+    "price_context": []
+  },
+  {
+    "topic": "操作记录",
+    "mentioned_stocks": [
+      "OKLO"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "核能"
+    ],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "内容表述为已买入OKLO，并明确表达对次日上涨的强烈预期，属于带有投机色彩的短线交易记录；但缺乏基本面或逻辑支撑，语气偏情绪化，因此置信度为中等。",
+    "action_hint": "买入",
+    "key_quote": "买个oklo 末日 玩玩。极端末日 明天必须涨。",
+    "image_analysis": null,
+    "tweet_id": 1634,
+    "twitter_id": "2006028638559301959",
+    "text": "买个oklo 末日 玩玩。极端末日 明天必须涨。",
+    "created_at": "2025-12-30T15:44:32",
+    "price_context": [
+      {
+        "ticker": "OKLO",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 65.88
+        },
+        "fundamentals": {
+          "pe": -78.96,
+          "roe": -12.236121,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "其他",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "无明确方向",
+    "confidence": "low",
+    "reasoning_chain": "内容仅表达资金充足与比较心态，未提及具体标的、行业、宏观观点或明确交易计划，投资指向性很弱。",
+    "action_hint": "无",
+    "key_quote": "我无限子弹。你别跟我比。",
+    "image_analysis": null,
+    "tweet_id": 1633,
+    "twitter_id": "2006029104206815254",
+    "text": "我无限子弹。你别跟我比。",
+    "created_at": "2025-12-30T15:46:23",
+    "price_context": []
+  },
+  {
+    "topic": "其他",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看多",
+    "confidence": "low",
+    "reasoning_chain": "文本表达了对他人判断的认可，并明确出现“应该买”，体现出偏多态度；但未提及具体标的、行业或逻辑依据，因此置信度较低。",
+    "action_hint": "买入",
+    "key_quote": "粉丝是对的 应该买",
+    "image_analysis": null,
+    "tweet_id": 1632,
+    "twitter_id": "2006032283464040617",
+    "text": "看我这粉丝水准 牛的不行。粉丝是对的 应该买",
+    "created_at": "2025-12-30T15:59:01",
+    "price_context": []
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "ORCL"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "推文直接表示“多头胜”，并指出ORCL今天上涨，体现出对该股短线表现的正面态度，但缺乏更深入的基本面或交易计划信息。",
+    "action_hint": "持有",
+    "key_quote": "多头胜！orcl涨了今天。",
+    "image_analysis": null,
+    "tweet_id": 1631,
+    "twitter_id": "2006032358303011296",
+    "text": "多头胜！orcl涨了今天。",
+    "created_at": "2025-12-30T15:59:19",
+    "price_context": [
+      {
+        "ticker": "ORCL",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 192.08
+        },
+        "fundamentals": {
+          "pe": 34.67,
+          "roe": 85.357572,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "操作记录",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "无明确方向",
+    "confidence": "low",
+    "reasoning_chain": "内容仅为对他人期权卖出call头寸是否被行权/价内穿仓的疑问，缺乏具体标的、价格、策略背景和明确观点。",
+    "action_hint": "无",
+    "key_quote": "他卖的call被穿啦？",
+    "image_analysis": null,
+    "tweet_id": 1629,
+    "twitter_id": "2006038914453164082",
+    "text": "他卖的call被穿啦？",
+    "created_at": "2025-12-30T16:25:22",
+    "price_context": []
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "OKLO"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看空",
+    "confidence": "medium",
+    "reasoning_chain": "发言点名关注OKLO，并以“今天买进去都不赚钱，那你就是被套了”表达对其短线承接和盈利空间的负面判断，偏向认为当前介入风险较高。",
+    "action_hint": "观望",
+    "key_quote": "留意oklo吧……你今天买进去都不赚钱 那你就是被套了。",
+    "image_analysis": null,
+    "tweet_id": 1627,
+    "twitter_id": "2006040954482938082",
+    "text": "留意oklo吧 我末日玩完了。有的时候能不能赚钱买个末日就知道 你今天买进去都不赚钱 那你就是被套了。",
+    "created_at": "2025-12-30T16:33:28",
+    "price_context": [
+      {
+        "ticker": "OKLO",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 65.88
+        },
+        "fundamentals": {
+          "pe": -78.96,
+          "roe": -12.236121,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  }
+]

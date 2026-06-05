@@ -1,0 +1,681 @@
+[
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "UNH",
+      "AMD"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "半导体",
+      "医疗保险"
+    ],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "发言对UNH表现出回避/厌倦态度，同时明确表示更倾向炒作AMD，并计划本周开始行动，整体偏向看多AMD的短线交易机会。",
+    "action_hint": "买入",
+    "key_quote": "不过应该炒amd。我准备这周开始干了。",
+    "image_analysis": null,
+    "tweet_id": 1483,
+    "twitter_id": "1967416715215839515",
+    "text": "放过unh吧 求你了。不过应该炒amd。我准备这周开始干了。",
+    "created_at": "2025-09-15T02:34:32",
+    "price_context": [
+      {
+        "ticker": "UNH",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 388.47
+        },
+        "fundamentals": null
+      },
+      {
+        "ticker": "AMD",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 467.51
+        },
+        "fundamentals": {
+          "pe": 154.96,
+          "roe": 7.08154,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "操作记录",
+    "mentioned_stocks": [
+      "AMD"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "半导体",
+      "人工智能"
+    ],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "文本表达出先买后研究的激进买入态度，配图为AMD资讯页，指向其对AMD短线/情绪化看多，但缺乏基本面论证。",
+    "action_hint": "买入",
+    "key_quote": "先买去买完再研究。涨了牛逼 跌了傻逼",
+    "image_analysis": "图片为AMD（美国超微公司）资讯页面截图，包含Piper Sandler维持AMD买入评级等相关新闻，强化了内容与AMD个股相关。",
+    "tweet_id": 1482,
+    "twitter_id": "1967561046677393876",
+    "text": "先买去买完再研究。涨了牛逼 跌了傻逼",
+    "created_at": "2025-09-15T12:08:03",
+    "price_context": [
+      {
+        "ticker": "AMD",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 467.51
+        },
+        "fundamentals": {
+          "pe": 154.96,
+          "roe": 7.08154,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "CRWV"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "发言称做空CRWV等于“自杀”，并认为空头几天内会投降，说明其判断该股走势强势、偏向继续上涨。",
+    "action_hint": "持有",
+    "key_quote": "做空crwv 确实自杀了 用不了几天就投降了",
+    "image_analysis": null,
+    "tweet_id": 1481,
+    "twitter_id": "1967612316079566952",
+    "text": "这个股价做空crwv 确实自杀了 用不了几天就投降了。饭碗被砸了",
+    "created_at": "2025-09-15T15:31:47",
+    "price_context": [
+      {
+        "ticker": "CRWV",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 105.49
+        },
+        "fundamentals": {
+          "pe": -39.19,
+          "roe": -50.27547,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "CRWV"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "观望",
+    "confidence": "medium",
+    "reasoning_chain": "推文提到做空CRWV并强调连续持有三周非常困难，更多是在表达该标的波动大、做空持仓难度高，而非直接给出明确做多或做空建议。",
+    "action_hint": "观望",
+    "key_quote": "If you can hold a short position in crwv for three weeks, I will have great admiration for you.",
+    "image_analysis": null,
+    "tweet_id": 1479,
+    "twitter_id": "1967613590665617652",
+    "text": "If you can hold a short position in crwv for three weeks, I will have great admiration for you.",
+    "created_at": "2025-09-15T15:36:51",
+    "price_context": [
+      {
+        "ticker": "CRWV",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 105.49
+        },
+        "fundamentals": {
+          "pe": -39.19,
+          "roe": -50.27547,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "INTC",
+      "NVDA"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "半导体",
+      "GPU/显卡"
+    ],
+    "stance": "观望",
+    "confidence": "low",
+    "reasoning_chain": "内容提到对INTC显卡需求上升、对NV显卡需求转弱，但仅为简短感叹，缺乏明确逻辑与交易结论，整体更像市场现象观察。",
+    "action_hint": "观望",
+    "key_quote": "intc的卡都要 突然告诉你 我不要nv的卡了。也是有点意思",
+    "image_analysis": null,
+    "tweet_id": 1478,
+    "twitter_id": "1968289262513918208",
+    "text": "intc的卡都要 突然告诉你 我不要nv的卡了。也是有点意思",
+    "created_at": "2025-09-17T12:21:43",
+    "price_context": [
+      {
+        "ticker": "INTC",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 119.84
+        },
+        "fundamentals": {
+          "pe": -203.12,
+          "roe": -0.250057,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      },
+      {
+        "ticker": "NVDA",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 215.33
+        },
+        "fundamentals": {
+          "pe": 33.26,
+          "roe": 119.177466,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "其他",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "无明确方向",
+    "confidence": "medium",
+    "reasoning_chain": "内容是在评价他人此前做空获利后的言行，并表达将其拉黑的态度；未涉及具体标的、行业或明确后续投资判断。",
+    "action_hint": "无",
+    "key_quote": "四月之前做空赢了开始装逼 就被我拉黑了。",
+    "image_analysis": null,
+    "tweet_id": 1477,
+    "twitter_id": "1968317641933852847",
+    "text": "四月之前做空赢了开始装逼 就被我拉黑了。",
+    "created_at": "2025-09-17T14:14:30",
+    "price_context": []
+  },
+  {
+    "topic": "操作记录",
+    "mentioned_stocks": [
+      "CRWV"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "发言者表示自己也买入了CRWV，并且是在开盘大跌时买入，属于逢低买入的操作表态，体现对该标的短线或后续表现持偏多态度。",
+    "action_hint": "买入",
+    "key_quote": "好巧 我也进了 crwv 哈 开盘大跌买的",
+    "image_analysis": null,
+    "tweet_id": 1475,
+    "twitter_id": "1968419671599640822",
+    "text": "好巧 我也进了 crwv 哈 开盘大跌买的",
+    "created_at": "2025-09-17T20:59:55",
+    "price_context": [
+      {
+        "ticker": "CRWV",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 105.49
+        },
+        "fundamentals": {
+          "pe": -39.19,
+          "roe": -50.27547,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "AMD"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "半导体"
+    ],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "推文直接点名AMD，并用“捡钱机会来了”表达这是一个明显的低位介入或获利机会，整体情绪偏强烈看多，但未提供具体逻辑与数据支撑。",
+    "action_hint": "买入",
+    "key_quote": "这不明显 amd 捡钱机会来了。",
+    "image_analysis": null,
+    "tweet_id": 1474,
+    "twitter_id": "1968651409756229920",
+    "text": "这不明显 amd 捡钱机会来了。",
+    "created_at": "2025-09-18T12:20:46",
+    "price_context": [
+      {
+        "ticker": "AMD",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 467.51
+        },
+        "fundamentals": {
+          "pe": 154.96,
+          "roe": 7.08154,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "NVDA"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "半导体",
+      "人工智能"
+    ],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "推文明确称“投资黄仁勋这个人比nvda更好”，核心是在赞赏黄仁勋的领导力与CEO能力，隐含对英伟达长期发展与管理层质量的正面判断，但没有给出具体财务、估值或交易层面的依据，因此置信度为中等。",
+    "action_hint": "持有",
+    "key_quote": "投资黄仁勋这个人比nvda更好。这人理想ceo",
+    "image_analysis": null,
+    "tweet_id": 1473,
+    "twitter_id": "1968668921227075991",
+    "text": "投资黄仁勋这个人比nvda更好。这人理想ceo",
+    "created_at": "2025-09-18T13:30:21",
+    "price_context": [
+      {
+        "ticker": "NVDA",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 215.33
+        },
+        "fundamentals": {
+          "pe": 33.26,
+          "roe": 119.177466,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "操作记录",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "内容直接表达开盘即持续买入，体现出明确的做多和积极建仓态度，但未说明具体标的，因此判断范围有限。",
+    "action_hint": "买入",
+    "key_quote": "开盘我们就在买 疯狂买",
+    "image_analysis": null,
+    "tweet_id": 1471,
+    "twitter_id": "1968702724460933550",
+    "text": "开盘我们就在买 疯狂买",
+    "created_at": "2025-09-18T15:44:40",
+    "price_context": []
+  },
+  {
+    "topic": "操作记录",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "发言强调不要害怕，并明确表示“本周疯狂买”，体现出强烈的主动买入倾向和偏多态度，但未提及具体标的，因此确定方向但对象不明确。",
+    "action_hint": "加仓",
+    "key_quote": "怕什么 我本周疯狂买",
+    "image_analysis": null,
+    "tweet_id": 1470,
+    "twitter_id": "1968725538287005869",
+    "text": "对别怕就是干。风来了你跑了。怕什么 我本周疯狂买",
+    "created_at": "2025-09-18T17:15:20",
+    "price_context": []
+  },
+  {
+    "topic": "操作记录",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看多",
+    "confidence": "low",
+    "reasoning_chain": "推文提到“直接涨停”，表达对标的短线上涨的兴奋与认可；但未说明具体股票、行业或交易标的，“50的c”可能指期权看涨合约或圈内简称，信息不足。",
+    "action_hint": "观望",
+    "key_quote": "直接涨停！牛哥 50的c呢。拿出来给他们看看！",
+    "image_analysis": null,
+    "tweet_id": 1465,
+    "twitter_id": "1969086380476125551",
+    "text": "直接涨停！牛哥 50的c呢。拿出来给他们看看！",
+    "created_at": "2025-09-19T17:09:11",
+    "price_context": []
+  },
+  {
+    "topic": "操作记录",
+    "mentioned_stocks": [
+      "VST",
+      "ET"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "核电"
+    ],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "发言者表示已买入核电相关标的，并看多ET（做call），还提到‘就差VST了’，说明对相关能源/公用事业标的整体偏积极，尤其对VST有潜在买入意愿。",
+    "action_hint": "买入",
+    "key_quote": "我买了核电 也call了 et 就差vst了。",
+    "image_analysis": null,
+    "tweet_id": 1462,
+    "twitter_id": "1971043288078745772",
+    "text": "vst呗。我买了核电 也call了 et 就差vst了。",
+    "created_at": "2025-09-25T02:45:14",
+    "price_context": [
+      {
+        "ticker": "VST",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 156.27
+        },
+        "fundamentals": null
+      },
+      {
+        "ticker": "ET",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 20.07
+        },
+        "fundamentals": {
+          "pe": 16.67,
+          "roe": 12.747525,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "3677"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "内容直接提到“3677”并表示“会考虑做多”，反映出对该标的存在偏多倾向，但未给出具体逻辑、价格区间或执行计划，因此判断确定性中等。",
+    "action_hint": "买入",
+    "key_quote": "3677 我会考虑做多。",
+    "image_analysis": null,
+    "tweet_id": 1460,
+    "twitter_id": "1971264214376317295",
+    "text": "sorry 3677 我会考虑做多。",
+    "created_at": "2025-09-25T17:23:07",
+    "price_context": [
+      {
+        "ticker": "3677",
+        "backward_available": false,
+        "price_summary": null,
+        "fundamentals": null
+      }
+    ]
+  },
+  {
+    "topic": "加密货币",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [
+      "BTC"
+    ],
+    "mentioned_sectors": [],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "内容明确提到BTC当前点位，并给出“应该做多”的方向判断；同时提到下方支撑位，若支撑失守则行情转弱，说明其看多判断建立在支撑有效前提下。",
+    "action_hint": "买入",
+    "key_quote": "应该做多。不怕 这个支撑撑不住 就完了 btc是108963",
+    "image_analysis": null,
+    "tweet_id": 1459,
+    "twitter_id": "1971264750920319037",
+    "text": "周五前肯定能收在3681以内。应该做多。不怕 这个支撑撑不住 就完了 btc是108963",
+    "created_at": "2025-09-25T17:25:15",
+    "price_context": []
+  },
+  {
+    "topic": "加密货币",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [
+      "BTC"
+    ],
+    "mentioned_sectors": [],
+    "stance": "观望",
+    "confidence": "medium",
+    "reasoning_chain": "提到BTC已到达其此前关注的价位，但核心判断是观察该价位能否形成支撑，表达的是等待确认而非明确看多或看空。",
+    "action_hint": "观望",
+    "key_quote": "到了我说的价钱了。btc 看看是不是撑得住了。",
+    "image_analysis": null,
+    "tweet_id": 1458,
+    "twitter_id": "1971274075382362207",
+    "text": "到了我说的价钱了。btc 看看是不是撑得住了。",
+    "created_at": "2025-09-25T18:02:18",
+    "price_context": []
+  },
+  {
+    "topic": "加密货币",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [
+      "ETH",
+      "BTC"
+    ],
+    "mentioned_sectors": [
+      "加密货币"
+    ],
+    "stance": "中性",
+    "confidence": "medium",
+    "reasoning_chain": "内容同时表达了对ETH短线继续下杀的预期，以及对触及支撑后反弹收回的判断；对BTC则认为未必跟随大幅下跌，并提到自己买入价位，整体是短空后看反弹的交易观点，不是单边明确看多或看空。",
+    "action_hint": "买入",
+    "key_quote": "eth 杀到了你可以考虑进去做多 收盘绝对能拉回来",
+    "image_analysis": null,
+    "tweet_id": 1457,
+    "twitter_id": "1971279728372838691",
+    "text": "eth 在3677 我估计明天继续杀盘 但是未必杀得动btc 杀下我的支撑也会回去 但是eth 杀到了你可以考虑进去做多 收盘绝对能拉回来 btc我看错了 我买的是108740",
+    "created_at": "2025-09-25T18:24:46",
+    "price_context": []
+  },
+  {
+    "topic": "加密货币",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [
+      "ETH"
+    ],
+    "mentioned_sectors": [],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "内容表达了对ETH在特定价位回落后的参与意愿，属于逢低看多思路，但缺乏详细依据，确定性一般。",
+    "action_hint": "买入",
+    "key_quote": "信我 3670 eth 杀得到搞一把",
+    "image_analysis": null,
+    "tweet_id": 1456,
+    "twitter_id": "1971279916185551247",
+    "text": "信我 3670 eth 杀得到搞一把",
+    "created_at": "2025-09-25T18:25:31",
+    "price_context": []
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "UNH",
+      "CNC",
+      "ELV"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "医保",
+      "医疗保险"
+    ],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "推文将图片中的政策反复/回撤解读为“taco”，并进一步类比到美国医保政策，表达希望医保相关政策也出现类似回撤。随后明确表示“买了不少 unh cnc elv”，说明其已实际配置联合健康、Centene、Elevance Health 等医保股，体现出对该板块和相关个股的偏多判断。",
+    "action_hint": "买入",
+    "key_quote": "医保你也taco吧。买了不少 unh cnc elv",
+    "image_analysis": "图片内容为中文新闻截图，称此前被DOGE要求离职的数百名美国联邦政府员工被重新聘用，且解职的7个月按带薪休假计算；其核心含义是政策执行出现回撤或修正。",
+    "tweet_id": 1452,
+    "twitter_id": "1971397455007875099",
+    "text": "又他妈“taco”了？医保你也taco吧。买了不少unh cnc elv",
+    "created_at": "2025-09-26T02:12:34",
+    "price_context": [
+      {
+        "ticker": "UNH",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 388.47
+        },
+        "fundamentals": null
+      },
+      {
+        "ticker": "CNC",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 59.14
+        },
+        "fundamentals": {
+          "pe": -4.5,
+          "roe": -28.790199,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      },
+      {
+        "ticker": "ELV",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 394.69
+        },
+        "fundamentals": {
+          "pe": 16.71,
+          "roe": 13.291548,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "操作记录",
+    "mentioned_stocks": [
+      "CNC",
+      "NVO"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "医疗保健",
+      "制药"
+    ],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "发文者表示‘CNC NVO都在车上’，说明已经持有这两只股票；‘快给我TACO’带有期待行情向上、尽快兑现收益的情绪色彩。整体更像是在汇报持仓并表达看涨期待，但未给出明确交易计划或逻辑细节，因此置信度中等。",
+    "action_hint": "持有",
+    "key_quote": "CNC NVO都在车上，快给我TACO",
+    "image_analysis": null,
+    "tweet_id": 1485,
+    "twitter_id": "1971397568262447290",
+    "text": "CNC NVO都在车上，快给我TACO",
+    "created_at": "2025-09-26T02:13:01",
+    "price_context": [
+      {
+        "ticker": "CNC",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 59.14
+        },
+        "fundamentals": {
+          "pe": -4.5,
+          "roe": -28.790199,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      },
+      {
+        "ticker": "NVO",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 44.96
+        },
+        "fundamentals": {
+          "pe": 10.58,
+          "roe": 61.247371,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "宏观分析",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看空",
+    "confidence": "high",
+    "reasoning_chain": "推文核心观点是股市下跌的主因在于美债长端利率上行，而不是静态PE高低；作者强调市场关注的是PE能否持续，一旦盈利预期或估值支撑不可持续，就会出现大跌。同时点名“衰退、通胀、长债利率”作为压制股市的关键宏观变量，整体偏向风险提示与负面判断。",
+    "action_hint": "观望",
+    "key_quote": "当年是美债利率 给股市打爆了。股市不是看pe 是pe是否可持续。不可持续就会大跌。衰退 通胀 长债利率。",
+    "image_analysis": null,
+    "tweet_id": 1449,
+    "twitter_id": "1971983746514743586",
+    "text": "别听他们的。当年是美债利率 给股市打爆了。股市不是看pe 是pe是否可持续。不可持续就会大跌。衰退 通胀 长债利率。",
+    "created_at": "2025-09-27T17:02:17",
+    "price_context": []
+  },
+  {
+    "topic": "操作记录",
+    "mentioned_stocks": [
+      "AMDL"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "半导体"
+    ],
+    "stance": "看多",
+    "confidence": "high",
+    "reasoning_chain": "推文明确表示“买了amdl的call”，购买看涨期权通常代表对标的短期或中期上涨持乐观预期，属于个人交易操作披露。",
+    "action_hint": "买入",
+    "key_quote": "我可买了amdl 的 call",
+    "image_analysis": null,
+    "tweet_id": 1447,
+    "twitter_id": "1972732387969880087",
+    "text": "被你发现了！我可买了amdl 的 call",
+    "created_at": "2025-09-29T18:37:07",
+    "price_context": [
+      {
+        "ticker": "AMDL",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 57.88
+        },
+        "fundamentals": {
+          "pe": 0.0,
+          "roe": null,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  }
+]

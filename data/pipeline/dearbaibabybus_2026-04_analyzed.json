@@ -1,0 +1,407 @@
+[
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "SOFI",
+      "HOOD"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "金融科技",
+      "互联网券商"
+    ],
+    "stance": "看空",
+    "confidence": "high",
+    "reasoning_chain": "推文明确回顾自己此前不建议买入SOFI，并认为市场因CEO对赌协议而过度乐观。作者表示SOFI虽有未来，但不是风口，更偏好同类中的HOOD，并预期SOFI未来可能再跌至12-13区间，整体态度偏空。",
+    "action_hint": "观望",
+    "key_quote": "上次到15 就饶了你们了 下次给你杀到12-13 全老实了。",
+    "image_analysis": null,
+    "tweet_id": 1772,
+    "twitter_id": "2049269536533172391",
+    "text": "嘎嘎嘎 当初我不让买 我说不行 那个人还跟我嘴。是不是我说的准12-16 但是我不买。那个人叫什么20便宜还是19。套麻了吧  包括很多人看见ceo那个对赌协议了 都认为sofi稳了。我呵呵一笑。肯定有未来但是绝不是什么风口 这类金融 直接hood就行了。上次到15 就饶了你们了 下次给你杀到12-13 全老实了。",
+    "created_at": "2026-04-28T23:28:25",
+    "price_context": [
+      {
+        "ticker": "SOFI",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 15.62
+        },
+        "fundamentals": null
+      },
+      {
+        "ticker": "HOOD",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 73.64
+        },
+        "fundamentals": {
+          "pe": 35.97,
+          "roe": 22.007948,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "投资策略",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "观望",
+    "confidence": "low",
+    "reasoning_chain": "内容表达了对某个标的的条件式买入意愿，即如果今年出现较大下跌就会买入，但未提及具体标的，也未给出明确时间点或执行计划，因此更偏向等待回调后的策略性表态。",
+    "action_hint": "观望",
+    "key_quote": "我今年肯定要买它的，跌的凶的话。",
+    "image_analysis": null,
+    "tweet_id": 1771,
+    "twitter_id": "2049269760248910007",
+    "text": "再说 我今年肯定要买它的 跌的凶的话。",
+    "created_at": "2026-04-28T23:29:19",
+    "price_context": []
+  },
+  {
+    "topic": "投资策略",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "观望",
+    "confidence": "medium",
+    "reasoning_chain": "发言表达了当前不应买入的犹豫态度，并提出是否等财报后再买回，核心是等待财报这一事件驱动后的再决策，因此整体偏观望。",
+    "action_hint": "观望",
+    "key_quote": "但是觉得不该买 是不是财报买回来呢",
+    "image_analysis": null,
+    "tweet_id": 1770,
+    "twitter_id": "2049282682115268685",
+    "text": "嗯 但是觉得不该买 是不是财报买回来呢",
+    "created_at": "2026-04-29T00:20:39",
+    "price_context": []
+  },
+  {
+    "topic": "行业研判",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "人工智能",
+      "AI"
+    ],
+    "stance": "看多",
+    "confidence": "high",
+    "reasoning_chain": "推文明确反驳当前对AI行情见顶或结束的看空观点，认为AI行情“刚第二年”，未来仍有4-5年的延续空间，核心判断是AI产业与相关资产仍处于中早期上升阶段。配图使用“Parabolic Growth Pattern”强调AI行情可能处于加速上行过程中的阶段性回撤前后，而非整体趋势终结。",
+    "action_hint": "持有",
+    "key_quote": "ai这波所有看空都会被打脸。party刚开始就都认为要结束。刚第二年。这ai走4-5年吧。",
+    "image_analysis": "配图标题为“PARABOLIC GROWTH PATTERN”，展示价格沿抛物线加速上涨，分为Base 1到Base 4几个平台整理阶段，并标注末端可能快速翻倍后再回调至Base 3区域，传递的是典型强趋势资产在泡沫化加速阶段的演绎路径。",
+    "tweet_id": 1769,
+    "twitter_id": "2049284720349884636",
+    "text": "这后面都会被打脸。ai这波所有看空都会被打脸。party刚开始就都认为要结束。刚第二年。这ai走4-5年吧。",
+    "created_at": "2026-04-29T00:28:45",
+    "price_context": []
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "LLY",
+      "UNH"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "医药",
+      "减肥药"
+    ],
+    "stance": "看空",
+    "confidence": "medium",
+    "reasoning_chain": "推文强烈批评某类医药公司商业模式差、法律与授权风险高，并认为减肥药行情周期已结束；同时给出偏防御性的替代选择，认为若买减肥药只看LLY，整体更建议买UNH，体现出对多数相关标的偏空。",
+    "action_hint": "观望",
+    "key_quote": "减肥药的周期结束了。买的话就是lly 其他不用看了。踏踏实实买unh",
+    "image_analysis": null,
+    "tweet_id": 1768,
+    "twitter_id": "2049286002988974208",
+    "text": "垃圾 企业文化很狼性 算是唯一亮点 业务都是一坨大便 巴菲特永远不会买这种公司去 商业模式不行。又不能保证不被告 或者拿到各种药授权。来是一阵风 去时全合理。减肥药的周期结束了。买的话就是lly 其他不用看了。药你要么特别懂要么就别碰 每一家机构都有一个祖传百倍千倍梦想医药股。踏踏实实买unh",
+    "created_at": "2026-04-29T00:33:51",
+    "price_context": [
+      {
+        "ticker": "LLY",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 1065
+        },
+        "fundamentals": {
+          "pe": 37.62,
+          "roe": 101.349224,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      },
+      {
+        "ticker": "UNH",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 388.47
+        },
+        "fundamentals": null
+      }
+    ]
+  },
+  {
+    "topic": "其他",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "无明确方向",
+    "confidence": "high",
+    "reasoning_chain": "内容仅为社交互动与转述建议，未涉及具体资产、行业、宏观判断或交易计划。",
+    "action_hint": "无",
+    "key_quote": "不懂 问金老师吧。",
+    "image_analysis": null,
+    "tweet_id": 1767,
+    "twitter_id": "2049290529754521840",
+    "text": "不懂 问金老师吧。",
+    "created_at": "2026-04-29T00:51:50",
+    "price_context": []
+  },
+  {
+    "topic": "行业研判",
+    "mentioned_stocks": [
+      "TSM"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "ASIC",
+      "半导体",
+      "晶圆代工"
+    ],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "内容表达对ASIC相关周期看好，认为后续相关方向表现最强，并提到台积电扩产拉满，将带动产业链整体爆发，属于对半导体尤其ASIC/代工链的乐观看法。",
+    "action_hint": "买入",
+    "key_quote": "asic之年。后面光会最屌。然后tsm 扩产拉满了安排一下全体大爆发。",
+    "image_analysis": null,
+    "tweet_id": 1766,
+    "twitter_id": "2049290832071582038",
+    "text": "我早就发过asic之年。后面光会最屌。然后tsm 扩产拉满了安排一下全体大爆发。",
+    "created_at": "2026-04-29T00:53:03",
+    "price_context": [
+      {
+        "ticker": "TSM",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 404.52
+        },
+        "fundamentals": null
+      }
+    ]
+  },
+  {
+    "topic": "其他",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "观望",
+    "confidence": "low",
+    "reasoning_chain": "内容仅表达“没想明白”，没有涉及具体资产、行业或宏观观点，也未给出明确投资方向，因此判断为其他类的模糊表态，倾向观望。",
+    "action_hint": "观望",
+    "key_quote": "没想明白。",
+    "image_analysis": null,
+    "tweet_id": 1765,
+    "twitter_id": "2049297830674665608",
+    "text": "没想明白。",
+    "created_at": "2026-04-29T01:20:51",
+    "price_context": []
+  },
+  {
+    "topic": "其他",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "无明确方向",
+    "confidence": "low",
+    "reasoning_chain": "内容仅为社交互动与回复引用，没有涉及具体投资标的、行业、宏观或交易观点，缺乏可用于金融分析的信息。",
+    "action_hint": "无",
+    "key_quote": "哈哈哈哈 你懂我了。",
+    "image_analysis": null,
+    "tweet_id": 1764,
+    "twitter_id": "2049300962926264687",
+    "text": "哈哈哈哈 你懂我了。",
+    "created_at": "2026-04-29T01:33:18",
+    "price_context": []
+  },
+  {
+    "topic": "操作记录",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "内容表达了发现了一个不错的投资标的，并计划明天出手，体现出偏积极的交易意图，但未明确具体标的或逻辑。",
+    "action_hint": "买入",
+    "key_quote": "我发现一个好的！ 明天出手。终于看见一个不错的。",
+    "image_analysis": null,
+    "tweet_id": 1763,
+    "twitter_id": "2049306384584356248",
+    "text": "我发现一个好的！ 明天出手。终于看见一个不错的。",
+    "created_at": "2026-04-29T01:54:51",
+    "price_context": []
+  },
+  {
+    "topic": "其他",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看多",
+    "confidence": "low",
+    "reasoning_chain": "文本仅有“空头受不了吧”，直接表达对空头不利、对价格上涨有利的情绪倾向；但缺少具体标的、行业和上下文，无法进一步确认是个股、行业还是加密资产。",
+    "action_hint": "观望",
+    "key_quote": "空头受不了吧。",
+    "image_analysis": null,
+    "tweet_id": 1761,
+    "twitter_id": "2049458929831166311",
+    "text": "空头受不了吧。 \nhttps://\nx.com/raycat2021/sta\ntus/2049458803792621999\n…",
+    "created_at": "2026-04-29T12:01:00",
+    "price_context": []
+  },
+  {
+    "topic": "其他",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看多",
+    "confidence": "low",
+    "reasoning_chain": "推文内容较短，未明确指向具体个股、行业、宏观或加密资产；但“明年开始让你知道……厉害”表达了明显的正向预期和乐观判断，因此倾向归为模糊的看多表态。由于缺乏标的与上下文，置信度较低。",
+    "action_hint": "观望",
+    "key_quote": "光是第一年 明年开始让你知道 光的厉害。",
+    "image_analysis": null,
+    "tweet_id": 1760,
+    "twitter_id": "2049459299080982731",
+    "text": "光是第一年 明年开始让你知道 光的厉害。",
+    "created_at": "2026-04-29T12:02:28",
+    "price_context": []
+  },
+  {
+    "topic": "投资策略",
+    "mentioned_stocks": [
+      "SOXS",
+      "VST"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "观望",
+    "confidence": "high",
+    "reasoning_chain": "发言人先以玩笑提到SOXS，随后明确表示担心市场后续剧烈动荡，因此当前选择什么都不买；虽然对VST略有兴趣，但强调可以继续等待、更低位置再考虑，整体是谨慎观望而非立即交易。",
+    "action_hint": "观望",
+    "key_quote": "我有点担心 市场后续剧烈动荡 我反正啥也不买。对vst有一点点动心 但是可以等",
+    "image_analysis": null,
+    "tweet_id": 1759,
+    "twitter_id": "2049464152704373244",
+    "text": "soxs吧哈哈哈。开玩笑。我有点担心 市场后续剧烈动荡 我反正啥也不买。对vst有一点点动心 但是可以等 抄佩洛西的底。",
+    "created_at": "2026-04-29T12:21:45",
+    "price_context": [
+      {
+        "ticker": "SOXS",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 7.73
+        },
+        "fundamentals": null
+      },
+      {
+        "ticker": "VST",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 156.27
+        },
+        "fundamentals": null
+      }
+    ]
+  },
+  {
+    "topic": "宏观分析",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "观望",
+    "confidence": "medium",
+    "reasoning_chain": "“小鸡啄米行情”通常形容盘面小幅频繁波动、缺乏持续性主线与明确趋势，偏向对整体市场节奏的概括，而非针对具体标的提出明确交易方向。",
+    "action_hint": "观望",
+    "key_quote": "小鸡啄米行情。",
+    "image_analysis": null,
+    "tweet_id": 1758,
+    "twitter_id": "2049466325458637078",
+    "text": "小鸡啄米行情。",
+    "created_at": "2026-04-29T12:30:23",
+    "price_context": []
+  },
+  {
+    "topic": "投资策略",
+    "mentioned_stocks": [
+      "VG"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看多",
+    "confidence": "low",
+    "reasoning_chain": "推文表达了在不确定如何对冲时，建议买入“vg”，属于简单的交易/对冲应对策略；但“vg”具体所指存在歧义，因此置信度较低。",
+    "action_hint": "买入",
+    "key_quote": "不知道如何对冲 就买点 vg。",
+    "image_analysis": null,
+    "tweet_id": 1757,
+    "twitter_id": "2049468471449141458",
+    "text": "不知道如何对冲 就买点 vg。",
+    "created_at": "2026-04-29T12:38:55",
+    "price_context": [
+      {
+        "ticker": "VG",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 13.83
+        },
+        "fundamentals": null
+      }
+    ]
+  },
+  {
+    "topic": "宏观分析",
+    "mentioned_stocks": [
+      "RSP"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看空",
+    "confidence": "medium",
+    "reasoning_chain": "提到RSP比大盘更弱，并指出市场宽广度存在问题，通常意味着上涨并不健康、整体市场内部走弱，因此偏空判断。语气中的“正常”更像是在确认弱势特征而非表达反转预期。",
+    "action_hint": "观望",
+    "key_quote": "更弱的是rsp 宽广度有问题了。正常",
+    "image_analysis": null,
+    "tweet_id": 1755,
+    "twitter_id": "2049512625587835107",
+    "text": "哈哈 更弱的是rsp 宽广度有问题了。正常",
+    "created_at": "2026-04-29T15:34:22",
+    "price_context": [
+      {
+        "ticker": "RSP",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 206.58
+        },
+        "fundamentals": null
+      }
+    ]
+  },
+  {
+    "topic": "宏观分析",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看空",
+    "confidence": "medium",
+    "reasoning_chain": "内容指向鲍威尔在会议上的讲话风格明显转鹰，市场通常将更强硬的美联储表态解读为对风险资产偏空的宏观信号；但未给出具体资产与政策细节，因此判断置信度中等。",
+    "action_hint": "观望",
+    "key_quote": "开完会大家发现这个不是之前的鲍威尔了。",
+    "image_analysis": null,
+    "tweet_id": 1751,
+    "twitter_id": "2049552943108501975",
+    "text": "来了领带一摔 直接开喷。从头喷到位 开完会大家发现这个不是之前的鲍威尔了。",
+    "created_at": "2026-04-29T18:14:35",
+    "price_context": []
+  }
+]

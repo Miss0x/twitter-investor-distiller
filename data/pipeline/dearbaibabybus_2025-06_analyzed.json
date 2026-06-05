@@ -1,0 +1,301 @@
+[
+  {
+    "topic": "操作记录",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "发言者表示“最近买了其中几只”，说明其对提及标的采取了实际买入动作，体现出偏积极态度。但未给出具体标的、逻辑或仓位信息，因此判断置信度有限。",
+    "action_hint": "买入",
+    "key_quote": "哈哈 我最近买了其中几只。",
+    "image_analysis": null,
+    "tweet_id": 1378,
+    "twitter_id": "1929467240543306097",
+    "text": "哈哈 我最近买了其中几只。",
+    "created_at": "2025-06-02T09:16:52",
+    "price_context": []
+  },
+  {
+    "topic": "投资策略",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "无明确方向",
+    "confidence": "low",
+    "reasoning_chain": "内容仅为一句口语化感叹，表达了“追涨杀跌”的交易行为或对该行为的自嘲/评价，未提供具体标的、行业、市场判断或明确买卖倾向。",
+    "action_hint": "无",
+    "key_quote": "追涨杀跌啊。",
+    "image_analysis": null,
+    "tweet_id": 1376,
+    "twitter_id": "1929696858089345226",
+    "text": "追涨杀跌啊。",
+    "created_at": "2025-06-03T00:29:17",
+    "price_context": []
+  },
+  {
+    "topic": "其他",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "无明确方向",
+    "confidence": "high",
+    "reasoning_chain": "内容仅为情绪/价值观表达与转发引用，不包含股票、行业、宏观或加密货币相关分析，也没有明确投资操作意图。",
+    "action_hint": "无",
+    "key_quote": "有理想的人不伤心。",
+    "image_analysis": null,
+    "tweet_id": 1372,
+    "twitter_id": "1930228946614005792",
+    "text": "有理想的人不伤心。",
+    "created_at": "2025-06-04T11:43:37",
+    "price_context": []
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "GOOG"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "观望",
+    "confidence": "medium",
+    "reasoning_chain": "提到“更合适的是谷歌”，说明在个股选择上偏向谷歌；同时认为“市场完全错了”表示其对当前市场定价有不同看法，带有一定看多倾向；但又说“也没砸，等待一个机会”，说明当前并未立即行动，而是在等待更好的入场点。",
+    "action_hint": "观望",
+    "key_quote": "更合适的是谷歌。市场完全错了。但是也没砸。等待一个机会",
+    "image_analysis": null,
+    "tweet_id": 1370,
+    "twitter_id": "1930308738348699925",
+    "text": "更合适的是谷歌。 市场完全错了。但是也没砸。等待一个机会",
+    "created_at": "2025-06-04T17:00:41",
+    "price_context": [
+      {
+        "ticker": "GOOG",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 379.38
+        },
+        "fundamentals": {
+          "pe": 29.35,
+          "roe": 35.704782,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "其他",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看空",
+    "confidence": "medium",
+    "reasoning_chain": "内容仅表达“利空，盈利预期下修”，明确传达负面基本面变化，但未指向具体个股、行业或宏观对象，因此归类为其他；语气偏负面，对应看空倾向。",
+    "action_hint": "卖出",
+    "key_quote": "利空，盈利预期下修。",
+    "image_analysis": null,
+    "tweet_id": 1368,
+    "twitter_id": "1930419832912261367",
+    "text": "利空，盈利预期下修。",
+    "created_at": "2025-06-05T00:22:08",
+    "price_context": []
+  },
+  {
+    "topic": "其他",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "无明确方向",
+    "confidence": "low",
+    "reasoning_chain": "内容仅为一句简短评论，提到“没超卖”但未说明具体标的、行业或操作计划，信息不足以判断明确投资观点。",
+    "action_hint": "无",
+    "key_quote": "那也没超卖哈哈",
+    "image_analysis": null,
+    "tweet_id": 1364,
+    "twitter_id": "1930610902094757960",
+    "text": "那也没超卖哈哈",
+    "created_at": "2025-06-05T13:01:22",
+    "price_context": []
+  },
+  {
+    "topic": "其他",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "量化"
+    ],
+    "stance": "无明确方向",
+    "confidence": "low",
+    "reasoning_chain": "内容为对市场波动幅度和量化交易从业者情绪的吐槽，未涉及具体标的、板块或明确交易判断。",
+    "action_hint": "无",
+    "key_quote": "量化都骂街。50个点的幅度 这个班属实多余了",
+    "image_analysis": null,
+    "tweet_id": 1363,
+    "twitter_id": "1931014486925914474",
+    "text": "这个确实。量化都骂街。50个点的幅度 这个班属实多余了",
+    "created_at": "2025-06-06T15:45:04",
+    "price_context": []
+  },
+  {
+    "topic": "宏观分析",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看空",
+    "confidence": "high",
+    "reasoning_chain": "推文讨论货币政策路径“先降息再加息”对市场的负面冲击，明确表达这种政策反复会导致市场大跌，因此整体偏空。",
+    "action_hint": "观望",
+    "key_quote": "降息之后 再加息 市场直接嗝屁。",
+    "image_analysis": null,
+    "tweet_id": 1362,
+    "twitter_id": "1931014763108266042",
+    "text": "降息之后 再加息 市场直接嗝屁。",
+    "created_at": "2025-06-06T15:46:10",
+    "price_context": []
+  },
+  {
+    "topic": "其他",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看空",
+    "confidence": "low",
+    "reasoning_chain": "内容仅表示“CEO在卖股票”，通常被市场解读为偏负面信号，但未提供具体公司、卖出原因或规模，信息不足。",
+    "action_hint": "观望",
+    "key_quote": "ceo卖股票呢",
+    "image_analysis": null,
+    "tweet_id": 1360,
+    "twitter_id": "1932464157728883116",
+    "text": "ceo卖股票呢",
+    "created_at": "2025-06-10T15:45:33",
+    "price_context": []
+  },
+  {
+    "topic": "投资策略",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "内容在对比市场中的贪婪与恐惧，核心观点是恐惧终将消退，而贪婪会重新主导市场情绪，属于偏逆向且偏乐观的市场判断，暗示当前或未来风险偏好有修复空间。",
+    "action_hint": "买入",
+    "key_quote": "贪婪可以永远贪婪。恐惧不可能永远恐惧。",
+    "image_analysis": null,
+    "tweet_id": 1359,
+    "twitter_id": "1932581324508033463",
+    "text": "贪婪可以永远贪婪。恐惧不可能永远恐惧。",
+    "created_at": "2025-06-10T23:31:08",
+    "price_context": []
+  },
+  {
+    "topic": "投资策略",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "观望",
+    "confidence": "medium",
+    "reasoning_chain": "内容围绕加仓时机与估值判断展开，核心观点是标的基本面可能不错，但当前价格偏贵、加仓过早，因此不建议继续加仓，偏向等待更合适的时点。未提及具体股票或行业。",
+    "action_hint": "观望",
+    "key_quote": "公司不错 价格很贵啦。你看的太多 加的太早了。",
+    "image_analysis": null,
+    "tweet_id": 1358,
+    "twitter_id": "1932626266357961143",
+    "text": "不该加 公司不错 价格很贵啦。昨天我就想说。你看的太多 加的太早了。",
+    "created_at": "2025-06-11T02:29:43",
+    "price_context": []
+  },
+  {
+    "topic": "操作记录",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "波动率"
+    ],
+    "stance": "观望",
+    "confidence": "high",
+    "reasoning_chain": "内容表达的是短线交易观察而非立即执行，提到先等一天观察卖盘强弱，同时认为VIX明显上冲带来了短线机会。整体态度偏等待确认，未给出明确做多做空标的。",
+    "action_hint": "观望",
+    "key_quote": "不着急 等一天再看 看看有多少卖盘。vix确实激凸 是一个短线交易机会",
+    "image_analysis": null,
+    "tweet_id": 1356,
+    "twitter_id": "1933395696738242883",
+    "text": "不着急 等一天再看 看看有多少卖盘。vix确实激凸 是一个短线交易机会",
+    "created_at": "2025-06-13T05:27:09",
+    "price_context": []
+  },
+  {
+    "topic": "宏观分析",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "美联储",
+      "美国宏观政策"
+    ],
+    "stance": "看空",
+    "confidence": "medium",
+    "reasoning_chain": "推文未直接提及具体资产，但结合配图中特朗普与鲍威尔同框，以及“已经迟到了”“门关上了”“喊再多也没用了”的表述，核心含义更像是在评论某项宏观政策或降息/救市时点已错过，表达对后续修复空间有限的悲观看法。由于没有给出明确标的和交易计划，方向判断基于情绪和隐喻，确定性中等。",
+    "action_hint": "观望",
+    "key_quote": "已经迟到了……门关上了，喊再多波若波若密也没用了。",
+    "image_analysis": "图片为特朗普与美联储主席鲍威尔同框，常用于影射美国政府与美联储政策博弈，强化了推文的宏观政策评论属性。",
+    "tweet_id": 1353,
+    "twitter_id": "1935715678193164546",
+    "text": "不能再赞同更多了。已经迟到了 大话西游最后至尊宝的门关上了 喊再多波若波若密也没用了。",
+    "created_at": "2025-06-19T15:05:56",
+    "price_context": []
+  },
+  {
+    "topic": "投资策略",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "中性",
+    "confidence": "medium",
+    "reasoning_chain": "内容在讨论市场对估值的定价逻辑：有明确成长/叙事逻辑的标的即使30倍估值也能被接受，缺乏可见逻辑的标的即使18倍估值也难获资金关注。未提及具体标的，更像对市场定价偏好的总结。",
+    "action_hint": "观望",
+    "key_quote": "逻辑走得通 30倍也能给 逻辑看不见18倍也没动静",
+    "image_analysis": null,
+    "tweet_id": 1352,
+    "twitter_id": "1937167032983998800",
+    "text": "逻辑走得通 30倍也能给 逻辑看不见18倍也没动静",
+    "created_at": "2025-06-23T15:13:06",
+    "price_context": []
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "TSLA",
+      "优步"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "自动驾驶",
+      "网约车"
+    ],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "推文以夸张调侃口吻对比特斯拉与Uber，明确表示对Uber的支持更强（‘我uber出十倍’），核心倾向是看多Uber；图片为特斯拉车内驾驶/中控场景，说明讨论语境与智能驾驶相关，但正文未给出具体交易逻辑或估值依据。",
+    "action_hint": "观望",
+    "key_quote": "特斯拉给了多少钱！我uber出十倍！给我狠狠吹！",
+    "image_analysis": "图片展示一辆特斯拉风格车辆的前排内饰与中控大屏，车辆正行驶或停在城市道路中，强化了推文围绕特斯拉/自动驾驶出行场景的讨论背景。",
+    "tweet_id": 1351,
+    "twitter_id": "1937388469783036161",
+    "text": "特斯拉给了多少钱！我uber出十倍！给我狠狠吹！",
+    "created_at": "2025-06-24T05:53:00",
+    "price_context": [
+      {
+        "ticker": "TSLA",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 426.01
+        },
+        "fundamentals": null
+      },
+      {
+        "ticker": "优步",
+        "backward_available": false,
+        "price_summary": null,
+        "fundamentals": null
+      }
+    ]
+  }
+]

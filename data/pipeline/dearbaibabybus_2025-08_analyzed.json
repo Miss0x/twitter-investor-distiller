@@ -1,0 +1,612 @@
+[
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "ELV",
+      "CNC",
+      "UNH"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "医保",
+      "医疗保险"
+    ],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "推文认为在中期选举前，特朗普可能在医保政策上回撤，因为该政策会伤害红州选票；若政策压力减轻，医保公司具备涨价空间，且当前估值已充分计入利空，因此对ELV、CNC、UNH偏多。",
+    "action_hint": "买入",
+    "key_quote": "估值已经完全定价所有利空了",
+    "image_analysis": null,
+    "tweet_id": 1418,
+    "twitter_id": "1957104452394946704",
+    "text": "直接elv cnc unh 据我了解 中期选举 之前川普会taco 医保政策 因为这个政策对红州选票受到伤害，医保公司可以涨价 最关键一个 估值已经完全定价所有利空了。",
+    "created_at": "2025-08-17T15:37:17",
+    "price_context": [
+      {
+        "ticker": "ELV",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 394.69
+        },
+        "fundamentals": {
+          "pe": 16.71,
+          "roe": 13.291548,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      },
+      {
+        "ticker": "CNC",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 59.14
+        },
+        "fundamentals": {
+          "pe": -4.5,
+          "roe": -28.790199,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      },
+      {
+        "ticker": "UNH",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 388.47
+        },
+        "fundamentals": null
+      }
+    ]
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "CNC"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "医疗保险"
+    ],
+    "stance": "看多",
+    "confidence": "high",
+    "reasoning_chain": "推文核心观点是CNC在Q2末出现暴跌，当前估值被认为极度便宜，且作者预期Q3会吸引大量此前未配置医保公司的基金买入，从而带来估值修复。论据包括：历史收购估值约500亿美元，而当前市值仅约100多亿美元；公司仍属标普500成分股；不依赖增长逻辑，仅靠估值修复就可能推动股价反弹。整体属于基于低估值和潜在机构回流的看多判断。",
+    "action_hint": "买入",
+    "key_quote": "Q3 信我 几百上千家 fund 那些从不买 医保公司的 都会加入 因为估值已经非常非常便宜了。",
+    "image_analysis": null,
+    "tweet_id": 1417,
+    "twitter_id": "1957135318550712688",
+    "text": "还一个事情 都不用等到中期选举 因为cnc最后暴跌是在7月一号开始 也就是Q2 没有fund买 cnc 没显示但是 Q3 信我 几百上千家 fund 那些从不买 医保公司的 都会加入 因为估值已经非常非常便宜了。不谈增长 两年前cnc被收购还要五百亿 现在估值才一百多了。cnc还是标普500的公司。股价有一个暴力修复就可以",
+    "created_at": "2025-08-17T17:39:56",
+    "price_context": [
+      {
+        "ticker": "CNC",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 59.14
+        },
+        "fundamentals": {
+          "pe": -4.5,
+          "roe": -28.790199,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "投资策略",
+    "mentioned_stocks": [
+      "UVXY",
+      "QQQ"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看空",
+    "confidence": "high",
+    "reasoning_chain": "发文者明确表示UVXY不足以表达其预期，更倾向于买入QQQ三个月期限的看跌期权，并预判市场可能出现两波下跌，体现出对后市明显悲观的判断。",
+    "action_hint": "买入",
+    "key_quote": "uvxy 可不够 我要put qqq 三个月那种。",
+    "image_analysis": null,
+    "tweet_id": 1416,
+    "twitter_id": "1957139012579381698",
+    "text": "uvxy 可不够 我要put qqq 三个月那种。哈哈哈 这次怕是有人第一波暴跌就冲去了 然后第二波 直接跳楼",
+    "created_at": "2025-08-17T17:54:37",
+    "price_context": [
+      {
+        "ticker": "UVXY",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 32.91
+        },
+        "fundamentals": null
+      },
+      {
+        "ticker": "QQQ",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 717.54
+        },
+        "fundamentals": null
+      }
+    ]
+  },
+  {
+    "topic": "宏观分析",
+    "mentioned_stocks": [
+      "美股"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看空",
+    "confidence": "high",
+    "reasoning_chain": "推文围绕13F披露和达利欧仓位变化展开，核心观点是连长期看空者都大举买入美股，说明市场情绪与仓位可能已高度一致。作者将其定义为“经典信号”，语境上更接近反向指标，暗示美股后续上涨空间有限、需警惕见顶或回撤风险。",
+    "action_hint": "减仓",
+    "key_quote": "这车上连他妈最后一个喊空的都all in了",
+    "image_analysis": null,
+    "tweet_id": 1415,
+    "twitter_id": "1957140645514195295",
+    "text": "前两天有一个巨经典指标 13F公布，连达利欧长期看空美股 Q2 都他妈梭哈美股了。你就说吧 这车上连他妈最后一个喊空的都all in了 谁还没在车上吧。 绝对日后是一个经典信号。太经典了。",
+    "created_at": "2025-08-17T18:01:06",
+    "price_context": [
+      {
+        "ticker": "美股",
+        "backward_available": false,
+        "price_summary": null,
+        "fundamentals": null
+      }
+    ]
+  },
+  {
+    "topic": "其他",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看空",
+    "confidence": "medium",
+    "reasoning_chain": "内容是在呼唤某人回归，并表达‘等你回来估计要死了’的悲观判断，指向对当前市场状态的负面预期，但未涉及具体标的或明确投资动作。",
+    "action_hint": "观望",
+    "key_quote": "市场需要您啊！等你回来估计要死了",
+    "image_analysis": null,
+    "tweet_id": 1414,
+    "twitter_id": "1957458231078314471",
+    "text": "市场需要您啊 ！等你回来估计要死了",
+    "created_at": "2025-08-18T15:03:04",
+    "price_context": []
+  },
+  {
+    "topic": "操作记录",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "发言者明确否定某份报告的参考价值，认为“毫无意义”；随后表达“就等着买”，说明其核心意图是等待买入机会而非卖出。同时提到“做空太危险，看着爽而已”，表明其不认可做空操作、偏向多头思路。但未提及具体标的，因此方向判断只限于整体操作倾向。",
+    "action_hint": "观望",
+    "key_quote": "就等着买 做空太危险 看着爽而已",
+    "image_analysis": null,
+    "tweet_id": 1413,
+    "twitter_id": "1958210516188549610",
+    "text": "那个报告我都没看。毫无意义。啊哈哈 就等着买 做空太危险 看着爽而已",
+    "created_at": "2025-08-20T16:52:23",
+    "price_context": []
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "GE"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看空",
+    "confidence": "high",
+    "reasoning_chain": "内容明确提到作者此前已提示GE出现“卖出”信号，且强调为月级别指标，并建议查看月K线，说明其基于中长期技术面判断该股偏弱或进入卖出区间。",
+    "action_hint": "卖出",
+    "key_quote": "我的指标提示我 ge卖出。而且是月级别的。",
+    "image_analysis": null,
+    "tweet_id": 1412,
+    "twitter_id": "1959049934528749790",
+    "text": "前几天我就提醒过你了 我的指标提示我 ge卖出。而且是月级别的。看一下月K线 一切尽在掌握。",
+    "created_at": "2025-08-23T00:27:56",
+    "price_context": [
+      {
+        "ticker": "GE",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 302.84
+        },
+        "fundamentals": {
+          "pe": 37.06,
+          "roe": 45.235277,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "其他",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "无明确方向",
+    "confidence": "high",
+    "reasoning_chain": "内容主要是在表达对社交平台发言和提供交易建议的负面感受，强调交易应自行负责，没有涉及具体标的、行业、宏观或加密资产判断，也没有给出明确买卖方向。",
+    "action_hint": "无",
+    "key_quote": "交易是自己的本就不该给建议 赔的又不是我的钱。",
+    "image_analysis": null,
+    "tweet_id": 1411,
+    "twitter_id": "1959074624286662980",
+    "text": "哎 就不该在推特发言 提醒一下吧 说对了还是被喷 我如果提醒错了 估计会被公开处刑吧。以后不在推特上留言 毫无意义 没有情绪价值 然后还惹一身骚。交易是自己的本就不该给建议 赔的又不是我的钱。祝各位爆赚。",
+    "created_at": "2025-08-23T02:06:02",
+    "price_context": []
+  },
+  {
+    "topic": "宏观分析",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "垃圾债"
+    ],
+    "stance": "看空",
+    "confidence": "medium",
+    "reasoning_chain": "发言将“垃圾债”走势视为市场方向的先行信号，并用“无需多言”强调结论已较明确。通常提及垃圾债恶化多用于提示风险偏好下降、信用环境转弱，因此整体偏向风险资产看空判断。",
+    "action_hint": "观望",
+    "key_quote": "垃圾债给答案了。无需多言的。",
+    "image_analysis": null,
+    "tweet_id": 1409,
+    "twitter_id": "1959772848756830350",
+    "text": "垃圾债给答案了。无需多言的。",
+    "created_at": "2025-08-25T00:20:32",
+    "price_context": []
+  },
+  {
+    "topic": "宏观分析",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "观望",
+    "confidence": "medium",
+    "reasoning_chain": "内容围绕某位被认为偏鸽派的人物政策立场变化展开，提到其在六月前并不鸽、六月后开始松动，并进一步讨论是否会被撤换，明显是在解读宏观政策或央行人事预期。未直接给出具体资产方向，整体是带有不确定性的观察与研究态度。",
+    "action_hint": "观望",
+    "key_quote": "她是鸽派的 但是六月以前可没鸽 六月开始也有点松动。能不能真给炒了。得研究",
+    "image_analysis": null,
+    "tweet_id": 1408,
+    "twitter_id": "1960138823779955194",
+    "text": "她是鸽派的 但是六月以前可没鸽 六月开始也有点松动。能不能真给炒了。得研究",
+    "created_at": "2025-08-26T00:34:47",
+    "price_context": []
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "SNOW"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "观望",
+    "confidence": "medium",
+    "reasoning_chain": "内容仅点名询问 Snowflake（SNOW），没有提供具体观点、逻辑或操作计划，因此只能判断其关注对象是个股SNOW，但方向性不明确，整体偏观望表达。",
+    "action_hint": "观望",
+    "key_quote": "我就想问问 snow 其他的都不看。",
+    "image_analysis": null,
+    "tweet_id": 1406,
+    "twitter_id": "1960395563393769481",
+    "text": "我就想问问 snow 其他的都不看。",
+    "created_at": "2025-08-26T17:34:59",
+    "price_context": [
+      {
+        "ticker": "SNOW",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 172.2
+        },
+        "fundamentals": null
+      }
+    ]
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "MDB"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看空",
+    "confidence": "medium",
+    "reasoning_chain": "推文提到'MDB'，通常指MongoDB个股；结合'不用等明天盘后了'，语境是在说无需再等财报或盘后事件验证，因为作者认为当前走势/预期已经提前反映。'都beta了'带有明显负面口吻，表达该股已经走弱或预期已坏，因此整体偏空。由于'beta了'表述较口语化且含义不完全清晰，置信度设为中等。",
+    "action_hint": "卖出",
+    "key_quote": "不用等明天盘后了 mdb 都beta了",
+    "image_analysis": null,
+    "tweet_id": 1405,
+    "twitter_id": "1960434402317504646",
+    "text": "不用等明天盘后了 mdb 都beta了",
+    "created_at": "2025-08-26T20:09:19",
+    "price_context": [
+      {
+        "ticker": "MDB",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 326.13
+        },
+        "fundamentals": {
+          "pe": -371.05,
+          "roe": -6.702927,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "操作记录",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看多",
+    "confidence": "high",
+    "reasoning_chain": "推文表达了作者在尾盘主动大量买入，且语气坚决（“不能等明天”“根本不客气”），体现出明确的短线或即时看多倾向。但未提及具体标的，因此无法判断对应股票、加密货币或行业。",
+    "action_hint": "买入",
+    "key_quote": "我就知道 不能等明天 我尾盘一顿买。根本不客气",
+    "image_analysis": null,
+    "tweet_id": 1404,
+    "twitter_id": "1960441729938505926",
+    "text": "我就知道 不能等明天 我尾盘一顿买。根本不客气",
+    "created_at": "2025-08-26T20:38:26",
+    "price_context": []
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "UNH"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看空",
+    "confidence": "medium",
+    "reasoning_chain": "提到UNH，并明确表示希望其继续下跌，同时称自己还有“子弹”（可用资金），说明其预期或希望短期股价走弱，以便在更低位置介入。",
+    "action_hint": "观望",
+    "key_quote": "I hope unh can going down. My plenty of bullets.",
+    "image_analysis": null,
+    "tweet_id": 1403,
+    "twitter_id": "1960505980585758779",
+    "text": "I hope unh can going down. My plenty of bullets.",
+    "created_at": "2025-08-27T00:53:44",
+    "price_context": [
+      {
+        "ticker": "UNH",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 388.47
+        },
+        "fundamentals": null
+      }
+    ]
+  },
+  {
+    "topic": "投资策略",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看多",
+    "confidence": "low",
+    "reasoning_chain": "内容仅表达“直接all in”的强烈进场态度，但未说明具体标的、逻辑或市场背景，只能判断为偏激进的看多/重仓倾向。",
+    "action_hint": "买入",
+    "key_quote": "就直接说 all in 那个！",
+    "image_analysis": null,
+    "tweet_id": 1400,
+    "twitter_id": "1961007823573123264",
+    "text": "就直接说 all in 那个！",
+    "created_at": "2025-08-28T10:07:53",
+    "price_context": []
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "MRVL",
+      "AVGO",
+      "NVDA"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "AI",
+      "半导体"
+    ],
+    "stance": "看空",
+    "confidence": "high",
+    "reasoning_chain": "推文直接点名MRVL的业绩指引表现不及预期，认为其此前被高估为可与AVGO、NVDA竞争AI红利，但现实结果显著弱于预期；同时作者进一步延伸到AI产业链，认为大多数相关公司难以真正盈利，只有极少数龙头受益，整体表述明显偏悲观。",
+    "action_hint": "卖出",
+    "key_quote": "这个指引直接稀碎了。很可能最后的结果就是这波AI，95%的相关公司都没赚到钱，只剩那5%躺赢。",
+    "image_analysis": null,
+    "tweet_id": 1419,
+    "twitter_id": "1961488405390569974",
+    "text": "$MRVL\n 一度被捧成跟 \n$AVGO\n 和 \n$NVDA\n 抢蛋糕的人，这个指引直接稀碎了。\n\n很可能最后的结果就是这波AI，95%的相关公司都没赚到钱，只剩那5%躺赢，这种吸血效应对整体经济的影响可想而知。",
+    "created_at": "2025-08-29T17:57:33",
+    "price_context": [
+      {
+        "ticker": "MRVL",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 196.33
+        },
+        "fundamentals": {
+          "pe": 64.14,
+          "roe": -6.263624,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      },
+      {
+        "ticker": "AVGO",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 414.14
+        },
+        "fundamentals": {
+          "pe": 80.66,
+          "roe": 31.047862,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      },
+      {
+        "ticker": "NVDA",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 215.33
+        },
+        "fundamentals": {
+          "pe": 33.26,
+          "roe": 119.177466,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "宏观分析",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "半导体",
+      "人工智能",
+      "美股"
+    ],
+    "stance": "看空",
+    "confidence": "high",
+    "reasoning_chain": "内容核心围绕低利率驱动AI与半导体投资热、市场抢跑、政策催化泡沫以及长端利率最终刺破泡沫，整体明显是在表达对当前市场尤其是AI/半导体行情的泡沫化担忧与下跌预期。",
+    "action_hint": "卖出",
+    "key_quote": "跑吧，跑得越快摔得越狠…… .com再现，最后就靠长端利率打爆一切。",
+    "image_analysis": null,
+    "tweet_id": 1399,
+    "twitter_id": "1961495855136985347",
+    "text": "大场capx 给到了头部的大场半导体 真正的ai 热投资热潮 还是要低利率 市场严重抢跑罢了 跑吧 跑得越快摔得越狠 然后从新来。一个想舔投票的总统为了获得自己权利最大化 加速了股市泡沫。等联储换人了 最后连戳破泡沫的那个人都没有了。.com再现 最后就靠长端利率打爆一切。",
+    "created_at": "2025-08-29T18:27:09",
+    "price_context": []
+  },
+  {
+    "topic": "投资策略",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看空",
+    "confidence": "low",
+    "reasoning_chain": "内容表达了对关键价位330的技术位判断：若跌破330，可能出现快速下跌（“瀑布”）。但未说明具体标的，方向判断仅基于短句中的风险提示。",
+    "action_hint": "观望",
+    "key_quote": "跌破330就瀑布 别慌。",
+    "image_analysis": null,
+    "tweet_id": 1398,
+    "twitter_id": "1961496591421845809",
+    "text": "跌破330就瀑布 别慌。",
+    "created_at": "2025-08-29T18:30:04",
+    "price_context": []
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "MRVL"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "半导体"
+    ],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "文本围绕迈威尔财报后的股价压制展开，作者认为当前受财报影响只是短期限制，后续仍会有触发上涨的催化因素，整体语气偏积极。",
+    "action_hint": "持有",
+    "key_quote": "财报锁死迈威尔。小事 板机终究是要激发的。",
+    "image_analysis": null,
+    "tweet_id": 1397,
+    "twitter_id": "1961522324995244291",
+    "text": "东风不与周郎便 财报锁死迈威尔。小事 板机终究是要激发的。",
+    "created_at": "2025-08-29T20:12:20",
+    "price_context": [
+      {
+        "ticker": "MRVL",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 196.33
+        },
+        "fundamentals": {
+          "pe": 64.14,
+          "roe": -6.263624,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "操作记录",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看空",
+    "confidence": "low",
+    "reasoning_chain": "内容表达了作者在行情不利时尚未离场的尴尬情绪，隐含对短期走势偏负面的判断，但未提及具体标的或明确后续计划。",
+    "action_hint": "卖出",
+    "key_quote": "我还没跑呢。….尴尬了",
+    "image_analysis": null,
+    "tweet_id": 1395,
+    "twitter_id": "1961573471835611526",
+    "text": "我还没跑呢。….尴尬了",
+    "created_at": "2025-08-29T23:35:34",
+    "price_context": []
+  },
+  {
+    "topic": "宏观分析",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "黄金",
+      "AI"
+    ],
+    "stance": "观望",
+    "confidence": "medium",
+    "reasoning_chain": "内容在判断黄金与AI之间的阶段性强弱关系，认为黄金真正的大牛市可能出现在AI崩盘时点；但就当前时点判断，大方向仍以震荡为主，没有给出明确单边看多或看空结论。",
+    "action_hint": "观望",
+    "key_quote": "不会 黄金真的大牛市 是在ai崩盘的时候。现在大方向还是震荡。",
+    "image_analysis": null,
+    "tweet_id": 1394,
+    "twitter_id": "1961780591604400523",
+    "text": "不会 黄金真的大牛市 是在ai崩盘的时候。现在大方向还是震荡。",
+    "created_at": "2025-08-30T13:18:35",
+    "price_context": []
+  },
+  {
+    "topic": "行业研判",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "AI"
+    ],
+    "stance": "看空",
+    "confidence": "medium",
+    "reasoning_chain": "发言在质疑仅靠简单包装或概念炒作就能推动AI相关标的上涨，强调AI需要真实技术实力，隐含对纯概念型AI炒作的不看好。未指向具体标的，偏向对板块内投机行为的负面评价。",
+    "action_hint": "观望",
+    "key_quote": "跟.com做个网页就虚空拉盘差的远。没两把刷子能搞ai么",
+    "image_analysis": null,
+    "tweet_id": 1420,
+    "twitter_id": "1961917827713323444",
+    "text": "跟.com做个网页就虚空拉盘差的远。没两把刷子能搞ai么",
+    "created_at": "2025-08-30T22:23:55",
+    "price_context": []
+  },
+  {
+    "topic": "宏观分析",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看空",
+    "confidence": "medium",
+    "reasoning_chain": "内容在解释“泡米”意为行情泡沫化，并强调与AI无关，隐含对整体市场估值或走势存在泡沫风险判断，偏向未来将出现验证，因此整体倾向偏空。",
+    "action_hint": "观望",
+    "key_quote": "泡米指的是行情泡沫化 跟ai没关系。未来你会看见的。",
+    "image_analysis": null,
+    "tweet_id": 1393,
+    "twitter_id": "1961923521774301263",
+    "text": "泡米指的是行情泡沫化 跟ai没关系。未来你会看见的。",
+    "created_at": "2025-08-30T22:46:33",
+    "price_context": []
+  }
+]

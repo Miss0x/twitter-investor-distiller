@@ -1,0 +1,427 @@
+[
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "AVGO"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看空",
+    "confidence": "high",
+    "reasoning_chain": "内容直接表达对AVGO的做空观点，没有提供具体逻辑或基本面依据，但方向性非常明确，因此可判断为对个股的明确看空表态。",
+    "action_hint": "卖出",
+    "key_quote": "做空avgo！",
+    "image_analysis": null,
+    "tweet_id": 1349,
+    "twitter_id": "1922844950749684199",
+    "text": "做空avgo！",
+    "created_at": "2025-05-15T02:42:15",
+    "price_context": [
+      {
+        "ticker": "AVGO",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 414.14
+        },
+        "fundamentals": {
+          "pe": 80.66,
+          "roe": 31.047862,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "UNH"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "医疗保险"
+    ],
+    "stance": "看多",
+    "confidence": "high",
+    "reasoning_chain": "推文明确提到UNH，认为“没事”“无需大惊小怪”，并强调“基本面依旧牛逼、股价杀过头了”，表达的是对公司基本面维持乐观、对当前下跌视为超跌的判断，属于典型的个股看多观点。",
+    "action_hint": "买入",
+    "key_quote": "unh 没事 无需大惊小怪。基本面依旧牛逼 股价杀过头了",
+    "image_analysis": null,
+    "tweet_id": 1348,
+    "twitter_id": "1923545416068641058",
+    "text": "unh 没事 无需大惊小怪。基本面依旧牛逼 股价杀过头了",
+    "created_at": "2025-05-17T01:05:39",
+    "price_context": [
+      {
+        "ticker": "UNH",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 388.47
+        },
+        "fundamentals": null
+      }
+    ]
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "观望",
+    "confidence": "low",
+    "reasoning_chain": "推文讨论某个标的的估值与潜在罚款影响，认为当前PE已计入较多利空，罚款未必是坏事，甚至可能不会影响MA业务，但整体表述较为犹豫，并以“回头再说吧”收尾，体现出暂不下明确判断的观望态度。",
+    "action_hint": "观望",
+    "key_quote": "pe已经 price in 很多了 罚款是好事 甚至罚款都不会出来 ma业务。回头再说吧",
+    "image_analysis": null,
+    "tweet_id": 1347,
+    "twitter_id": "1923560105020359090",
+    "text": "不保证 但是pe已经 price in 很多了 罚款是好事 甚至罚款都不会出来 ma业务。回头再说吧",
+    "created_at": "2025-05-17T02:04:01",
+    "price_context": []
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "发文者基于估值低（12倍PE）和对司法调查影响有限的判断，认为公司基本面未发生重大恶化；同时提到相关收入约占30%，但该业务与政府关系较深，说明其判断依赖一定行业/业务理解而非公开细节。结论上明确给出买入区间“低于300就可以”，整体偏强烈看多。",
+    "action_hint": "买入",
+    "key_quote": "12倍pe 干就完了。就是可以买了。低于300就可以",
+    "image_analysis": null,
+    "tweet_id": 1346,
+    "twitter_id": "1923562071616356555",
+    "text": "12倍pe 干就完了。 我了解就是 司法调查并没有对公司基本面有巨大影响 ma revenue 大概是30% 但是这个业务跟政府关系很大 一句两句解释不清楚。就是可以买了。低于300就可以",
+    "created_at": "2025-05-17T02:11:50",
+    "price_context": []
+  },
+  {
+    "topic": "投资策略",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看多",
+    "confidence": "low",
+    "reasoning_chain": "“二次探底”属于技术分析语境，通常指价格再次回踩前低区域，往往被部分交易者视为筑底或反弹前信号。原文过于简短，未给出具体标的、周期和后续判断，因此只能弱判断为偏多。",
+    "action_hint": "观望",
+    "key_quote": "人家管这叫 二次探底",
+    "image_analysis": null,
+    "tweet_id": 1345,
+    "twitter_id": "1923573353568403827",
+    "text": "人家管这叫 二次探底",
+    "created_at": "2025-05-17T02:56:40",
+    "price_context": []
+  },
+  {
+    "topic": "投资策略",
+    "mentioned_stocks": [
+      "CGDV"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "ETF"
+    ],
+    "stance": "看多",
+    "confidence": "high",
+    "reasoning_chain": "内容直接推荐一个具体ETF“CGDV”，属于明确的投资建议倾向；未展开宏观或行业逻辑，但推荐本身隐含正面态度。",
+    "action_hint": "买入",
+    "key_quote": "推荐一个 etf。CGDV。",
+    "image_analysis": null,
+    "tweet_id": 1344,
+    "twitter_id": "1924803448207507674",
+    "text": "推荐一个 etf。CGDV。",
+    "created_at": "2025-05-20T12:24:37",
+    "price_context": [
+      {
+        "ticker": "CGDV",
+        "backward_available": false,
+        "price_summary": null,
+        "fundamentals": null
+      }
+    ]
+  },
+  {
+    "topic": "投资策略",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "高股息"
+    ],
+    "stance": "观望",
+    "confidence": "medium",
+    "reasoning_chain": "内容围绕一只ETF展开，核心观点是该ETF被大量买入、持仓质量较好、偏高股息、对衰退风险有一定防御性，且成长性被认为高于SPY；但作者明确表示“很贵，不买”，因此整体不是看多买入，而是认可标的质量但因估值偏高选择观望。",
+    "action_hint": "观望",
+    "key_quote": "不买 很贵 非常贵",
+    "image_analysis": null,
+    "tweet_id": 1343,
+    "twitter_id": "1924842137449119964",
+    "text": "不买 很贵 非常贵 我只是看见这个etf 被爆买了。而且这个etf持仓很好 很适合特朗普。对风险尤其是衰退 有针对性 很多高股息股票 这etf不会翻船 且成长性高于spy",
+    "created_at": "2025-05-20T14:58:22",
+    "price_context": []
+  },
+  {
+    "topic": "宏观分析",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "人工智能",
+      "互联网",
+      "美债"
+    ],
+    "stance": "观望",
+    "confidence": "high",
+    "reasoning_chain": "内容围绕AI与互联网资产可能出现类似2000年泡沫的情绪性风险，并以10年美债收益率是否升破6%-6.5%作为未来系统性风险触发条件；同时强调当前风险尚未到2000年级别，因此结论偏谨慎等待而非立刻看空。",
+    "action_hint": "观望",
+    "key_quote": "看见十年美债收益率破6 甚至到6.5 记得一键清仓 股票。...现在风险还远远没到2000年呢。",
+    "image_analysis": null,
+    "tweet_id": 1342,
+    "twitter_id": "1925339996590047695",
+    "text": "债市科学家们又上线啦！2000互联网泡沫会再次来袭，只不过时间问题，ai一定会泡沫化，不是技术泡沫 是投资情绪 或者说 行情泡沫化，看见十年美债收益率破6 甚至到6.5 记得一键清仓 股票。巴菲特不出手可能是在等大的历史级别的大底。不着急还能玩几年，现在风险还远远没到2000年呢。",
+    "created_at": "2025-05-21T23:56:40",
+    "price_context": []
+  },
+  {
+    "topic": "宏观分析",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "互联网"
+    ],
+    "stance": "观望",
+    "confidence": "medium",
+    "reasoning_chain": "内容仅提到“2000年互联网泡沫”，更像是对历史市场风险事件的回顾，没有给出具体标的、明确交易观点或当前操作建议。",
+    "action_hint": "观望",
+    "key_quote": "2000年 互联网泡沫。复习一下即可",
+    "image_analysis": null,
+    "tweet_id": 1339,
+    "twitter_id": "1925428807009542354",
+    "text": "2000年 互联网泡沫。复习一下即可",
+    "created_at": "2025-05-22T05:49:34",
+    "price_context": []
+  },
+  {
+    "topic": "加密货币",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [
+      "比特币"
+    ],
+    "mentioned_sectors": [],
+    "stance": "看空",
+    "confidence": "high",
+    "reasoning_chain": "内容直接表示考虑卖出手中的比特币做多仓位，体现出对比特币短期走势偏谨慎或偏空的判断。",
+    "action_hint": "卖出",
+    "key_quote": "可以考虑出售自己手里的做多比特币仓位了",
+    "image_analysis": null,
+    "tweet_id": 1338,
+    "twitter_id": "1925804925797229048",
+    "text": "可以考虑出售自己手里的做多比特币仓位了",
+    "created_at": "2025-05-23T06:44:08",
+    "price_context": []
+  },
+  {
+    "topic": "加密货币",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [
+      "比特币"
+    ],
+    "mentioned_sectors": [],
+    "stance": "看多",
+    "confidence": "high",
+    "reasoning_chain": "内容直接肯定比特币的核心价值在于“去中心化”，属于对比特币基本面/理念层面的正面表达，没有出现风险提示或反向观点，因此判断为看多。",
+    "action_hint": "持有",
+    "key_quote": "这就是比特币的价值 去中心化。",
+    "image_analysis": null,
+    "tweet_id": 1335,
+    "twitter_id": "1926862099499585710",
+    "text": "这就是比特币的价值 去中心化。",
+    "created_at": "2025-05-26T04:44:58",
+    "price_context": []
+  },
+  {
+    "topic": "加密货币",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [
+      "比特币"
+    ],
+    "mentioned_sectors": [],
+    "stance": "看多",
+    "confidence": "high",
+    "reasoning_chain": "发言人强调比特币可在线下购买黄金、去中心化程度更高、供应增速有限，并贬低中心化发行的其他币种，整体明显偏向看多比特币。",
+    "action_hint": "买入",
+    "key_quote": "比特币去中心化更高。比特币供应速度是非常有限",
+    "image_analysis": null,
+    "tweet_id": 1334,
+    "twitter_id": "1926924544872255752",
+    "text": "我在美东 我这边线下都可以用比特币买金子。比特币去中心化更高。比特币供应速度是非常有限 你自己发的币哪里有去中心化。不都是你发的。",
+    "created_at": "2025-05-26T08:53:06",
+    "price_context": []
+  },
+  {
+    "topic": "加密货币",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [
+      "比特币"
+    ],
+    "mentioned_sectors": [],
+    "stance": "看空",
+    "confidence": "high",
+    "reasoning_chain": "推文明确表示此前在11点就建议将比特币多单平仓，说明作者认为继续持有多头头寸的性价比下降，短线偏向止盈离场，体现出对后续走势的谨慎或偏空判断。",
+    "action_hint": "卖出",
+    "key_quote": "11的时候我就说了 比特币的多单可以出掉了嘿嘿。",
+    "image_analysis": null,
+    "tweet_id": 1333,
+    "twitter_id": "1927529138304241712",
+    "text": "11的时候我就说了 比特币的多单可以出掉了嘿嘿。",
+    "created_at": "2025-05-28T00:55:32",
+    "price_context": []
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "PEP"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "发文明确表示当前PEP价格“不错”，并认为对长期耐心资本而言持有体验较舒适，体现出对该标的中长期配置价值的正面判断，但未提供更具体基本面或交易细节，因此置信度为中等。",
+    "action_hint": "买入",
+    "key_quote": "关注 pep 这个价钱 不坏的。至少长期耐心资本的话 挺舒服了。",
+    "image_analysis": null,
+    "tweet_id": 1331,
+    "twitter_id": "1927880481355227590",
+    "text": "关注 pep 这个价钱 不坏的。至少长期耐心资本的话 挺舒服了。",
+    "created_at": "2025-05-29T00:11:39",
+    "price_context": [
+      {
+        "ticker": "PEP",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 150.57
+        },
+        "fundamentals": null
+      }
+    ]
+  },
+  {
+    "topic": "操作记录",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "推文明确表示“盘中增持了”，说明作者在交易时段内增加了持仓，通常反映对后市上涨的偏乐观看法；但未提及具体标的与逻辑，“上帝保佑我”也显示出一定不确定性与情绪化表达，因此置信度为中等。",
+    "action_hint": "加仓",
+    "key_quote": "我今天盘中增持了。上帝保佑我",
+    "image_analysis": null,
+    "tweet_id": 1330,
+    "twitter_id": "1927893439066075299",
+    "text": "我今天盘中增持了。上帝保佑我",
+    "created_at": "2025-05-29T01:03:09",
+    "price_context": []
+  },
+  {
+    "topic": "操作记录",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看空",
+    "confidence": "high",
+    "reasoning_chain": "内容明确表示已进行“短空”操作，属于个人交易记录；“保护一下”说明其目的是对冲或防守，体现出短线偏空判断。未提及具体标的、行业或更完整策略，因此仅能判断为短期看空操作。",
+    "action_hint": "卖出",
+    "key_quote": "我做了短空 保护一下。",
+    "image_analysis": null,
+    "tweet_id": 1327,
+    "twitter_id": "1928300857663111391",
+    "text": "我做了短空 保护一下。",
+    "created_at": "2025-05-30T04:02:05",
+    "price_context": []
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "DHI"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "房地产",
+      "住宅建筑"
+    ],
+    "stance": "观望",
+    "confidence": "high",
+    "reasoning_chain": "内容聚焦DHI估值，认为当前估值合理且略低估，但明确表示在等待更好的长线建仓时机，尤其希望股价跌破105再介入；同时提到Fed，说明其判断也受宏观利率环境影响。整体偏长期看多，但短线选择等待，因此定为观望。",
+    "action_hint": "观望",
+    "key_quote": "估值合理偏低估 等待长线建仓的机会。跌破105的话就好极了 希望fed别让我失望。",
+    "image_analysis": "截图为DHI（霍顿房屋）个股页面，显示股价约112.87，日内涨幅约0.80%。页面包含财务预测与财务指标：营收预测曲线显示未来季度预期波动；每股收益指标中，历史季度EPS约为3.52、4.10、3.92、2.61，最新预期季度为亏损约-26.76%。整体图片支持其在观察基本面与估值后等待更优买点。",
+    "tweet_id": 1325,
+    "twitter_id": "1928367957651968060",
+    "text": "估值合理偏低估 等待长线建仓的机会。跌破105的话就好极了 希望fed别让我失望。",
+    "created_at": "2025-05-30T08:28:43",
+    "price_context": [
+      {
+        "ticker": "DHI",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 143.73
+        },
+        "fundamentals": {
+          "pe": 13.28,
+          "roe": 14.48472,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "NVDA",
+      "GOOGL"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "半导体",
+      "互联网平台"
+    ],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "发言质疑在NVDA 90美元时卖出，暗含对该价位继续持有或不应过早离场的看法；同时用“170谷歌是90NVDA”做类比，表达对谷歌当前估值/机会的正面判断。整体偏向看多大型科技股机会，但表述较口语化，细节有限。",
+    "action_hint": "持有",
+    "key_quote": "90的nvda 你就卖了选择出局？ 不是说170谷歌是90nvda。",
+    "image_analysis": null,
+    "tweet_id": 1324,
+    "twitter_id": "1928488097580462438",
+    "text": "90的nvda 你就卖了选择出局？ 不是说170谷歌是90nvda。",
+    "created_at": "2025-05-30T16:26:06",
+    "price_context": [
+      {
+        "ticker": "NVDA",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 215.33
+        },
+        "fundamentals": {
+          "pe": 33.26,
+          "roe": 119.177466,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      },
+      {
+        "ticker": "GOOGL",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 382.97
+        },
+        "fundamentals": {
+          "pe": 29.65,
+          "roe": 35.704782,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  }
+]

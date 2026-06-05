@@ -1,0 +1,324 @@
+[
+  {
+    "topic": "宏观分析",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "贵金属",
+      "黄金"
+    ],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "内容表达对黄金未来价格的明显上行预期，认为到2028年黄金有望达到8000，属于对黄金资产的长期看多判断。",
+    "action_hint": "买入",
+    "key_quote": "黄金28年8000",
+    "image_analysis": null,
+    "tweet_id": 233,
+    "twitter_id": "2032154977968529693",
+    "text": "黄金28年8000",
+    "created_at": "2026-03-12T18:01:17",
+    "price_context": []
+  },
+  {
+    "topic": "操作记录",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看空",
+    "confidence": "medium",
+    "reasoning_chain": "推文仅有“wow”并引用他人，主要信息来自配图：多张账户截图显示当日大额亏损，表达对市场或持仓表现的震惊与负面情绪，属于晒亏损/交易记录，而非明确的投资观点分析。",
+    "action_hint": "观望",
+    "key_quote": "wow",
+    "image_analysis": "配图1为账户当日盈亏截图，出现多笔大额负收益（如-40673.32、-386362.00、-111681.84等）；配图2为调侃性梗图，表达表面平静但全球局势/市场混乱；配图3为人物照片，与投资判断无直接关联。",
+    "tweet_id": 1746,
+    "twitter_id": "2035995890541043989",
+    "text": "wow",
+    "created_at": "2026-03-23T08:23:41",
+    "price_context": []
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "AVGO",
+      "NVDA"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "电力",
+      "半导体"
+    ],
+    "stance": "看多",
+    "confidence": "high",
+    "reasoning_chain": "发文者判断电力价格将上涨，并明确表示个人更看好AVGO；同时认可NVDA表现，但认为当前风口下更偏好AVGO，整体为偏多观点。",
+    "action_hint": "买入",
+    "key_quote": "电力又要涨了。然后我个人很看好avgo。nvda不比多说 但是风口我更爱avgo",
+    "image_analysis": null,
+    "tweet_id": 1743,
+    "twitter_id": "2036083373328970171",
+    "text": "电力又要涨了。然后我个人很看好avgo。nvda不比多说 但是风口我更爱avgo",
+    "created_at": "2026-03-23T14:11:19",
+    "price_context": [
+      {
+        "ticker": "AVGO",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 414.14
+        },
+        "fundamentals": {
+          "pe": 80.66,
+          "roe": 31.047862,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      },
+      {
+        "ticker": "NVDA",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 215.33
+        },
+        "fundamentals": {
+          "pe": 33.26,
+          "roe": 119.177466,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "其他",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "无明确方向",
+    "confidence": "low",
+    "reasoning_chain": "内容仅提到‘隐含波动率’和‘2.几’，像是在回忆某个期权/标的的IV水平，但没有给出具体标的、市场观点或交易意图，信息不足以归类为明确的个股/行业/宏观判断。",
+    "action_hint": "无",
+    "key_quote": "这隐含波动率多少来着？2.几？我都忘了。",
+    "image_analysis": null,
+    "tweet_id": 1741,
+    "twitter_id": "2036089545410965902",
+    "text": "这隐含波动率多少来着？2.几？我都忘了。 懂吧",
+    "created_at": "2026-03-23T14:35:50",
+    "price_context": []
+  },
+  {
+    "topic": "宏观分析",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "黄金"
+    ],
+    "stance": "中性",
+    "confidence": "medium",
+    "reasoning_chain": "内容围绕“黄金周期”展开，属于对黄金及其周期逻辑的讨论，偏宏观/大宗商品分析；但原文未表达明确看多或看空观点，只强调问题复杂、需要详细说明，因此判断为中性。",
+    "action_hint": "观望",
+    "key_quote": "嗯 其实很复杂 要说清楚黄金周期",
+    "image_analysis": null,
+    "tweet_id": 1740,
+    "twitter_id": "2036250890861199523",
+    "text": "嗯 其实很复杂 要说清楚黄金周期",
+    "created_at": "2026-03-24T01:16:58",
+    "price_context": []
+  },
+  {
+    "topic": "操作记录",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "观望",
+    "confidence": "medium",
+    "reasoning_chain": "发言提到本周约有2.4%的收益，并认为昨天盘中涨幅过大，明确表示“别太追了”，整体是在复盘短线节奏并提醒不要追高，倾向谨慎观望而非继续积极看多。",
+    "action_hint": "观望",
+    "key_quote": "我就是觉得昨天盘中涨太多了。我忘记了提一嘴别太追了",
+    "image_analysis": null,
+    "tweet_id": 1738,
+    "twitter_id": "2036274058837524986",
+    "text": "这周大概2.4%吧 我就是觉得昨天盘中涨太多了。我忘记了提一嘴别太追了 可以看看",
+    "created_at": "2026-03-24T02:49:02",
+    "price_context": []
+  },
+  {
+    "topic": "其他",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "无明确方向",
+    "confidence": "low",
+    "reasoning_chain": "内容仅为社交互动用语“你悟了”，并包含回复/引用信息，未涉及具体资产、行业、宏观或投资观点。",
+    "action_hint": "无",
+    "key_quote": "你悟了",
+    "image_analysis": null,
+    "tweet_id": 1735,
+    "twitter_id": "2036301013519642846",
+    "text": "你悟了",
+    "created_at": "2026-03-24T04:36:08",
+    "price_context": []
+  },
+  {
+    "topic": "其他",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "无明确方向",
+    "confidence": "low",
+    "reasoning_chain": "推文内容为情绪化表达与抱怨，提到“分析股票”但未涉及具体标的、行业、市场观点或操作建议，无法提炼明确投资结论。",
+    "action_hint": "无",
+    "key_quote": "谁给我们分析股票？",
+    "image_analysis": null,
+    "tweet_id": 1748,
+    "twitter_id": "2036423611549098340",
+    "text": "你他妈的别傻，你那个了，谁给我们分析股票？",
+    "created_at": "2026-03-24T12:43:18",
+    "price_context": []
+  },
+  {
+    "topic": "宏观分析",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "美债10年期收益率",
+      "标普500指数"
+    ],
+    "stance": "中性",
+    "confidence": "medium",
+    "reasoning_chain": "内容强调市场核心变量是10Y（通常指10年期美债收益率），并认为SPX本身不是主要矛盾。未表达明确看多或看空方向，更像是在指出驱动因素优先级，属于宏观层面的观察。",
+    "action_hint": "观望",
+    "key_quote": "主要是10Y。spx他其实无所谓的。",
+    "image_analysis": null,
+    "tweet_id": 1726,
+    "twitter_id": "2037342245322707016",
+    "text": "主要是10Y。spx他其实无所谓的。",
+    "created_at": "2026-03-27T01:33:37",
+    "price_context": []
+  },
+  {
+    "topic": "宏观分析",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "原油",
+      "航运",
+      "军工"
+    ],
+    "stance": "看空",
+    "confidence": "medium",
+    "reasoning_chain": "推文围绕美伊冲突、霍尔木兹海峡控制权及其对市场的潜在冲击展开，核心判断是周末可能发生军事行动，并导致下周市场下跌，属于地缘政治驱动的宏观风险分析。虽然提到若快速控制海峡可能带来后续变化，但对短期市场影响偏负面。",
+    "action_hint": "观望",
+    "key_quote": "周末打吧 看看美军效率是不是真的快 快的话本周末就可以干了 下礼拜随便跌 但是随时可以宣布控制海峡。",
+    "image_analysis": null,
+    "tweet_id": 1725,
+    "twitter_id": "2037344548125638839",
+    "text": "我觉得周末可以行动啊 这周或者下周 火云邪神求饶 一定是准备掏暗器啦。再来就是一击毙命，看谁完全控制霍尔木兹海峡喽。特朗普没有对伊朗taco必要 taco的是10Y。周末打吧 看看美军效率是不是真的快 快的话本周末就可以干了 下礼拜随便跌 但是随时可以宣布控制海峡。",
+    "created_at": "2026-03-27T01:42:46",
+    "price_context": []
+  },
+  {
+    "topic": "投资策略",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "观望",
+    "confidence": "medium",
+    "reasoning_chain": "内容表达出发言者主观上偏多头，但同时认为当前市场下跌意愿很强，整体信号矛盾，未给出明确标的或清晰交易计划，因此更偏向谨慎观望。",
+    "action_hint": "观望",
+    "key_quote": "多头 但是市场哈哈哈非常想跌。",
+    "image_analysis": null,
+    "tweet_id": 1724,
+    "twitter_id": "2037512806850060387",
+    "text": "多头  但是市场哈哈哈非常想跌。",
+    "created_at": "2026-03-27T12:51:22",
+    "price_context": []
+  },
+  {
+    "topic": "行业研判",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "航运"
+    ],
+    "stance": "看空",
+    "confidence": "medium",
+    "reasoning_chain": "内容指出“船没通航”是核心问题，表达因航运未恢复而对相关行业表现持负面判断，但未涉及具体标的或明确交易计划。",
+    "action_hint": "观望",
+    "key_quote": "主要是 船没通航 不行。",
+    "image_analysis": null,
+    "tweet_id": 1720,
+    "twitter_id": "2037715320144818504",
+    "text": "主要是 船没通航 不行。",
+    "created_at": "2026-03-28T02:16:05",
+    "price_context": []
+  },
+  {
+    "topic": "行业研判",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "标普500",
+      "信息技术"
+    ],
+    "stance": "观望",
+    "confidence": "medium",
+    "reasoning_chain": "推文仅表示对图表认可，并引用了一张对比标普500与信息技术板块前瞻市盈率的估值图。图中显示当前科技板块前瞻PE约20.9，高于标普500约19.9，但未明显脱离历史区间，也未附带明确交易判断，因此更偏向估值观察而非方向性表态。",
+    "action_hint": "观望",
+    "key_quote": "这图好",
+    "image_analysis": "图片标题为“FORWARD P/E: S&P 500 VS S&P 500 INFORMATION TECHNOLOGY (daily)”。红线代表标普500前瞻PE，蓝线代表信息技术板块前瞻PE，时间跨度约为1997年至2026年。当前读数显示标普500前瞻PE约19.9，信息技术板块约20.9。历史上科技板块估值在2000年前后显著泡沫化，当前虽高于大盘但远低于互联网泡沫时期，表达的是科技板块相对大盘估值略高但并非极端。",
+    "tweet_id": 1719,
+    "twitter_id": "2037747205910761690",
+    "text": "这图好",
+    "created_at": "2026-03-28T04:22:48",
+    "price_context": []
+  },
+  {
+    "topic": "其他",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "无明确方向",
+    "confidence": "low",
+    "reasoning_chain": "推文正文仅有“不会”，缺乏具体投资标的、行业、宏观或操作相关信息，无法形成明确分析结论。",
+    "action_hint": "无",
+    "key_quote": "不会",
+    "image_analysis": null,
+    "tweet_id": 1718,
+    "twitter_id": "2037842252987609282",
+    "text": "不会",
+    "created_at": "2026-03-28T10:40:29",
+    "price_context": []
+  },
+  {
+    "topic": "信息分享",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "观望",
+    "confidence": "medium",
+    "reasoning_chain": "内容是转发一期YouTube播客，标题讨论“短期修估值还是一路走到戴维斯双杀”，偏向市场观察与风险讨论，没有直接给出具体标的、行业或明确交易结论。",
+    "action_hint": "观望",
+    "key_quote": "短期修估值還是一路走到戴維斯雙殺？",
+    "image_analysis": null,
+    "tweet_id": 1717,
+    "twitter_id": "2038143117917073835",
+    "text": "【MM Podcast】After Meeting EP. 192｜短期修估值還是一路走到戴維斯雙殺？ \nhttps://\nyoutu.be/hNOPkCtEDsE?si\n=C0DdTtuYGpbG-Qn1\n… 来自 \n@YouTube",
+    "created_at": "2026-03-29T06:36:00",
+    "price_context": []
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "无明确方向",
+    "confidence": "low",
+    "reasoning_chain": "内容围绕股票K线图与RSI技术指标展开，但发文者明确表示“看不懂、不会、无法掌握”，未给出明确看多或看空判断，也未提及具体标的代码。",
+    "action_hint": "观望",
+    "key_quote": "哈哈rsi我真看不懂。不会 无法掌握",
+    "image_analysis": "图片为一只个股的技术走势截图：收盘价634.09，当日下跌11.00（-1.71%）。K线整体呈下行趋势，价格接近布林带下轨，MACD为负且柱状图偏弱，RSI(14)约28.53，接近超卖区域，显示短线偏弱但发文者未据此形成明确结论。",
+    "tweet_id": 1716,
+    "twitter_id": "2038143752204956101",
+    "text": "哈哈rsi我真看不懂。不会 无法掌握",
+    "created_at": "2026-03-29T06:38:32",
+    "price_context": []
+  }
+]

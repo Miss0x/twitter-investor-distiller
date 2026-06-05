@@ -1,0 +1,200 @@
+[
+  {
+    "topic": "宏观分析",
+    "mentioned_stocks": [
+      "JNK",
+      "SPX"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "高收益债",
+      "美股大盘"
+    ],
+    "stance": "看空",
+    "confidence": "high",
+    "reasoning_chain": "文本明确表示‘并未出现反转信号’、‘垃圾债还是被抛售’、‘市场继续避险’，并判断‘4800 spx未必拦得住’，说明作者认为风险偏好仍在下降、股债风险资产承压，整体偏空；但操作上选择继续等待，而非立即交易。",
+    "action_hint": "观望",
+    "key_quote": "并未出现反转信号 垃圾债还是被抛售 市场继续避险。继续等 看来4800 spx未必拦得住",
+    "image_analysis": "图片为JNK（SPDR Bloomberg High Yield Bond ETF）日K图，价格大跌至91.300，跌幅约1.24%，盘中出现明显跳水；下方成交量放大，MACD走弱，强化了高收益债遭抛售、风险偏好回落的判断。",
+    "tweet_id": 1318,
+    "twitter_id": "1909241447330742307",
+    "text": "并未出现反转信号 垃圾债还是被抛售 市场继续避险。继续等 看来4800 spx未必拦得住",
+    "created_at": "2025-04-07T13:46:47",
+    "price_context": [
+      {
+        "ticker": "JNK",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 96.25
+        },
+        "fundamentals": {
+          "pe": 0.0,
+          "roe": null,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      },
+      {
+        "ticker": "SPX",
+        "backward_available": false,
+        "price_summary": null,
+        "fundamentals": null
+      }
+    ]
+  },
+  {
+    "topic": "投资策略",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "债市"
+    ],
+    "stance": "观望",
+    "confidence": "high",
+    "reasoning_chain": "内容明确表示当前不适合参与夜盘交易，需等待白天确认债市企稳后再判断，体现出谨慎观望的交易态度。",
+    "action_hint": "观望",
+    "key_quote": "这时候不适合夜盘喽。就等白天确认债市站稳。",
+    "image_analysis": null,
+    "tweet_id": 1317,
+    "twitter_id": "1909242608251294073",
+    "text": "这时候不适合夜盘喽。就等白天确认债市站稳。",
+    "created_at": "2025-04-07T13:51:24",
+    "price_context": []
+  },
+  {
+    "topic": "宏观分析",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "美债",
+      "进口贸易",
+      "GDP"
+    ],
+    "stance": "中性",
+    "confidence": "high",
+    "reasoning_chain": "内容围绕美国国债抛售效果、美国一季度进口囤货及GDP放缓的宏观逻辑展开。核心观点是：抛售美债规模有限且会自损，因此效果不大；美国进口商一季度提前囤货，短期影响未完全显现；一季度GDP放缓与进口过多有关；因此通过谈判解决更合理。整体不是明确看多或看空某类资产，而是对宏观形势作偏理性判断。",
+    "action_hint": "观望",
+    "key_quote": "抛美债没用。七千亿太少了 而且自己会亏钱，一季度美国进口商囤货很多 短期还不至于 谈判是对的。",
+    "image_analysis": null,
+    "tweet_id": 1308,
+    "twitter_id": "1910182946889453639",
+    "text": "抛美债没用。七千亿太少了 而且自己会亏钱，一季度美国进口商囤货很多 短期还不至于 谈判是对的。忘记啦 一季度gdp放缓 因为进口太多。",
+    "created_at": "2025-04-10T04:07:58",
+    "price_context": []
+  },
+  {
+    "topic": "宏观分析",
+    "mentioned_stocks": [
+      "SPX",
+      "标普500"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "美股"
+    ],
+    "stance": "看空",
+    "confidence": "high",
+    "reasoning_chain": "推文直接指出“美股彻底进入熊市”，并以“月线顶背离”作为技术面依据，明确给出“逢高做空”“底部还很远”的判断，整体为强烈看空观点。",
+    "action_hint": "卖出",
+    "key_quote": "美股彻底进入熊市 从四月开始。逢高做空吧。底部还很远。",
+    "image_analysis": "图片为SPX/标普500指数月线图，显示指数近期自高位明显回落，配文强调“月K顶背离”，用以佐证美股进入熊市的判断。",
+    "tweet_id": 1307,
+    "twitter_id": "1910372695591780790",
+    "text": "熊市了 月线顶背离。美股彻底进入熊市 从四月开始。逢高做空吧。底部还很远。",
+    "created_at": "2025-04-10T16:41:58",
+    "price_context": [
+      {
+        "ticker": "SPX",
+        "backward_available": false,
+        "price_summary": null,
+        "fundamentals": null
+      },
+      {
+        "ticker": "标普500",
+        "backward_available": false,
+        "price_summary": null,
+        "fundamentals": null
+      }
+    ]
+  },
+  {
+    "topic": "其他",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "无明确方向",
+    "confidence": "low",
+    "reasoning_chain": "推文仅包含“完全正确”以及引用他人信息，没有具体讨论个股、行业、宏观、加密货币或投资操作，缺乏可识别的投资观点与标的。",
+    "action_hint": "无",
+    "key_quote": "完全正确",
+    "image_analysis": null,
+    "tweet_id": 1305,
+    "twitter_id": "1911366388561875289",
+    "text": "完全正确",
+    "created_at": "2025-04-13T10:30:33",
+    "price_context": []
+  },
+  {
+    "topic": "宏观分析",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看空",
+    "confidence": "medium",
+    "reasoning_chain": "推文将特朗普的体检结果与2025年股市表现联系起来，核心表达是“身体还挺好”被视为“最大股票市场利空”，属于基于政治人物健康状况对整体市场风险偏好的宏观层面评论。未涉及具体个股、行业或交易计划，语气明显带有调侃和隐含政治预期，因此方向可判定为偏空，但确定性一般。",
+    "action_hint": "观望",
+    "key_quote": "2025最大股票市场利空！身体还挺好",
+    "image_analysis": "图片为一张信息图《Trump’s physical, by the numbers》，列出特朗普体检数据，包括年龄71岁7个月、身高6英尺3英寸、体重239磅、BMI 29.9、血压122/74、静息心率68、总胆固醇223、HDL 67、LDL 143、空腹血糖89，并附带其服用降脂药、阿司匹林、非那雄胺及治疗酒糟鼻药物的信息。整体传达的是其身体状况总体尚可。",
+    "tweet_id": 1304,
+    "twitter_id": "1911773392425861201",
+    "text": "2025最大股票市场利空！身体还挺好",
+    "created_at": "2025-04-14T13:27:50",
+    "price_context": []
+  },
+  {
+    "topic": "宏观分析",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看空",
+    "confidence": "high",
+    "reasoning_chain": "推文将“发债印钱提振GDP”类比为“吸毒”，明显表达了对依赖债务和货币刺激拉动经济的负面看法，认为这种方式不可持续且有副作用，属于对宏观政策效果的悲观评价。",
+    "action_hint": "观望",
+    "key_quote": "发债印钱 提振gdp。就是 吸毒",
+    "image_analysis": null,
+    "tweet_id": 1301,
+    "twitter_id": "1913370336558792740",
+    "text": "发债印钱 提振gdp。就是 吸毒",
+    "created_at": "2025-04-18T23:13:31",
+    "price_context": []
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "沃尔玛(WMT)"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "零售",
+      "必需消费品"
+    ],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "推文明确提到沃尔玛，并将其归类为“人类必需品公司”，强调其通过整合全球资源具备长期稳健性与抗风险能力，表达出对这类企业长期不倒、持续存在的正面判断，因此整体偏看多。",
+    "action_hint": "持有",
+    "key_quote": "沃尔玛 那些人类必需品公司 靠整合全球资源的 永世不倒。",
+    "image_analysis": null,
+    "tweet_id": 1299,
+    "twitter_id": "1914250395054141939",
+    "text": "沃尔玛 那些人类必需品公司 靠整合全球资源的 永世不倒。",
+    "created_at": "2025-04-21T09:30:33",
+    "price_context": [
+      {
+        "ticker": "沃尔玛(WMT)",
+        "backward_available": false,
+        "price_summary": null,
+        "fundamentals": null
+      }
+    ]
+  }
+]

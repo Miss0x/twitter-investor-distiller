@@ -2,7 +2,7 @@
   {
     "topic": "个股分析",
     "mentioned_stocks": [
-      "苹果(AAPL)"
+      "AAPL"
     ],
     "mentioned_crypto": [],
     "mentioned_sectors": [
@@ -20,7 +20,8 @@
     "tweet_id": 368,
     "twitter_id": "1884292776407490826",
     "text": "3/（1）我很认同，这应该也是为何昨天苹果涨得原因或者背后的交易逻辑吧",
-    "created_at": "2025-01-28T17:29:41"
+    "created_at": "2025-01-28T17:29:41",
+    "_cleaned": true
   },
   {
     "topic": "宏观分析",
@@ -655,7 +656,7 @@
   {
     "topic": "操作记录",
     "mentioned_stocks": [
-      "TESLA"
+      "TSLA"
     ],
     "mentioned_crypto": [],
     "mentioned_sectors": [
@@ -670,7 +671,8 @@
     "tweet_id": 475,
     "twitter_id": "1905713108364165534",
     "text": "还好仓位都在tesla 上   很轻松",
-    "created_at": "2025-03-28T20:06:26"
+    "created_at": "2025-03-28T20:06:26",
+    "_cleaned": true
   },
   {
     "topic": "投资策略",
@@ -823,7 +825,7 @@
   {
     "topic": "操作记录",
     "mentioned_stocks": [
-      "微软"
+      "MSFT"
     ],
     "mentioned_crypto": [],
     "mentioned_sectors": [],
@@ -836,7 +838,8 @@
     "tweet_id": 1827,
     "twitter_id": "2057686607206154702",
     "text": "微软我买了210股了 我买不动了 我趴着看别人吃肉",
-    "created_at": "2026-05-22T04:54:51"
+    "created_at": "2026-05-22T04:54:51",
+    "_cleaned": true
   },
   {
     "topic": "宏观分析",
@@ -1252,7 +1255,7 @@
   {
     "topic": "加密货币",
     "mentioned_stocks": [
-      "BLACKROCK",
+      "BLK",
       "CIRCLE"
     ],
     "mentioned_crypto": [],
@@ -1270,7 +1273,8 @@
     "tweet_id": 569,
     "twitter_id": "1924678511601607125",
     "text": "那为啥贝莱德不发而选择和CIRCLE合作呢？\n我觉得应该有先行者优势和这些传统的大机构发，反而有信任问题，你怎么看？",
-    "created_at": "2025-05-20T04:08:10"
+    "created_at": "2025-05-20T04:08:10",
+    "_cleaned": true
   },
   {
     "topic": "加密货币",
@@ -1849,8 +1853,8 @@
     "topic": "个股分析",
     "mentioned_stocks": [
       "CRCL",
-      "VISA",
-      "MASTERCARD",
+      "V",
+      "MA",
       "CIRCLE"
     ],
     "mentioned_crypto": [
@@ -1871,7 +1875,8 @@
     "tweet_id": 641,
     "twitter_id": "1938766357551833195",
     "text": "能看到visa mastercard下跌就说明crcl未来的故事线肯定不是美债了。\n如果抢占总共支付体量的10%，那就是2.6万亿，虽然交易量并不等于usdc的supply，但这是现在usdc的40倍，即使流通体量是支付体量的1/10，那也是4倍现在的supply\n所以usdc未来超过usdt几乎是一定的事情。看circle",
-    "created_at": "2025-06-28T01:08:14"
+    "created_at": "2025-06-28T01:08:14",
+    "_cleaned": true
   },
   {
     "topic": "投资策略",
@@ -1910,7 +1915,7 @@
   {
     "topic": "加密货币",
     "mentioned_stocks": [
-      "VISA",
+      "V",
       "MA",
       "AMZN",
       "WMT"
@@ -1932,7 +1937,8 @@
     "tweet_id": 638,
     "twitter_id": "1938770032202248474",
     "text": "的确没人可以保证USDC就是未来的龙头，至于VA, MA自己搞，同样的逻辑，亚麻，沃尔玛都可以自己搞，我们就看他们会不会搞就好了",
-    "created_at": "2025-06-28T01:22:50"
+    "created_at": "2025-06-28T01:22:50",
+    "_cleaned": true
   },
   {
     "topic": "个股分析",
@@ -1991,8 +1997,8 @@
   {
     "topic": "宏观分析",
     "mentioned_stocks": [
-      "^GSPC",
-      "S&P 500"
+      "SPX",
+      "SPX"
     ],
     "mentioned_crypto": [],
     "mentioned_sectors": [],
@@ -2005,7 +2011,8 @@
     "tweet_id": 629,
     "twitter_id": "1939370961259712988",
     "text": "你猜接下去咋走？打开自己的app看看。",
-    "created_at": "2025-06-29T17:10:43"
+    "created_at": "2025-06-29T17:10:43",
+    "_cleaned": true
   },
   {
     "topic": "个股分析",
@@ -2267,7 +2274,7 @@
   {
     "topic": "个股分析",
     "mentioned_stocks": [
-      "英特尔"
+      "INTC"
     ],
     "mentioned_crypto": [],
     "mentioned_sectors": [],
@@ -2280,7 +2287,8 @@
     "tweet_id": 767,
     "twitter_id": "1971598883617968347",
     "text": "英特尔保守一点，三年再翻倍，3200亿。。。",
-    "created_at": "2025-09-26T15:32:59"
+    "created_at": "2025-09-26T15:32:59",
+    "_cleaned": true
   },
   {
     "topic": "个股分析",
@@ -2444,7 +2452,7 @@
     "topic": "操作记录",
     "mentioned_stocks": [
       "GOOG",
-      "微软"
+      "MSFT"
     ],
     "mentioned_crypto": [],
     "mentioned_sectors": [],
@@ -2457,7 +2465,8 @@
     "tweet_id": 863,
     "twitter_id": "1983943178077229154",
     "text": "卖了谷歌和微软的put，刚刚下单。",
-    "created_at": "2025-10-30T17:04:48"
+    "created_at": "2025-10-30T17:04:48",
+    "_cleaned": true
   },
   {
     "topic": "行业研判",
@@ -2629,7 +2638,7 @@
   {
     "topic": "个股分析",
     "mentioned_stocks": [
-      "亚马逊"
+      "AMZN"
     ],
     "mentioned_crypto": [],
     "mentioned_sectors": [],
@@ -2642,7 +2651,8 @@
     "tweet_id": 865,
     "twitter_id": "1984003626575233497",
     "text": "听你的买了亚马逊，今天终于爆发",
-    "created_at": "2025-10-30T21:05:00"
+    "created_at": "2025-10-30T21:05:00",
+    "_cleaned": true
   },
   {
     "topic": "宏观分析",
@@ -2711,7 +2721,7 @@
   {
     "topic": "个股分析",
     "mentioned_stocks": [
-      "微软"
+      "MSFT"
     ],
     "mentioned_crypto": [],
     "mentioned_sectors": [],
@@ -2724,7 +2734,8 @@
     "tweet_id": 858,
     "twitter_id": "1984038677312630961",
     "text": "开盘看到微软回调，就下了条件单，接几手再说，微软基本无脑入",
-    "created_at": "2025-10-30T23:24:16"
+    "created_at": "2025-10-30T23:24:16",
+    "_cleaned": true
   },
   {
     "topic": "其他",
@@ -2932,7 +2943,7 @@
     "topic": "投资策略",
     "mentioned_stocks": [
       "SPY",
-      "亚麻"
+      "AMZN"
     ],
     "mentioned_crypto": [],
     "mentioned_sectors": [],
@@ -2945,7 +2956,8 @@
     "tweet_id": 903,
     "twitter_id": "1994131176743919803",
     "text": "我觉得我看懂你说的降beta： \n25年SPY 15% 的回报一部分来自盈利增长，一部分来自multiple 升高。\n你降beta 并不是说26年你不看好市场，而是你仍然看好盈利增长，但不确认是否还有multiple 升高。所以你持仓的调整线路回到盈利增长确定性强的公司， 比如亚麻。  我理解的对吗？",
-    "created_at": "2025-11-27T19:48:16"
+    "created_at": "2025-11-27T19:48:16",
+    "_cleaned": true
   },
   {
     "topic": "宏观分析",
@@ -3134,7 +3146,7 @@
   {
     "topic": "行业研判",
     "mentioned_stocks": [
-      "COINBASE"
+      "COIN"
     ],
     "mentioned_crypto": [],
     "mentioned_sectors": [
@@ -3149,7 +3161,8 @@
     "tweet_id": 1004,
     "twitter_id": "1997205631993041224",
     "text": "circle的目标是跨境支付基础设施、而不是coinbase炒币，未来coinbase的影响会变低",
-    "created_at": "2025-12-06T07:25:03"
+    "created_at": "2025-12-06T07:25:03",
+    "_cleaned": true
   },
   {
     "topic": "加密货币",
@@ -3318,8 +3331,8 @@
   {
     "topic": "加密货币",
     "mentioned_stocks": [
-      "VISA",
-      "MASTERCARD"
+      "V",
+      "MA"
     ],
     "mentioned_crypto": [
       "USDC"
@@ -3338,7 +3351,8 @@
     "tweet_id": 960,
     "twitter_id": "2001292864404263169",
     "text": "非常好的科普\n在这个基础上商家可以选择以前的清算方式，收美元，时间长，或者当天就收到USDC，做贸易的，钱周转得越快，赚钱速度就越快。\n如果VISA商家的进货商也接受USDC，那进货商的钱周转也会加速。所以支付稳定币无法产生货币乘数，但提升了货币的流通速度",
-    "created_at": "2025-12-17T14:06:15"
+    "created_at": "2025-12-17T14:06:15",
+    "_cleaned": true
   },
   {
     "topic": "其他",
@@ -5031,7 +5045,7 @@
   {
     "topic": "信息分享",
     "mentioned_stocks": [
-      "VISA"
+      "V"
     ],
     "mentioned_crypto": [],
     "mentioned_sectors": [
@@ -5047,7 +5061,8 @@
     "tweet_id": 675,
     "twitter_id": "1950435333612478817",
     "text": "VISA财报：AI购物体验已试运行",
-    "created_at": "2025-07-30T05:56:35"
+    "created_at": "2025-07-30T05:56:35",
+    "_cleaned": true
   },
   {
     "topic": "宏观分析",
@@ -6141,9 +6156,9 @@
   {
     "topic": "投资策略",
     "mentioned_stocks": [
-      "高通",
-      "英特尔",
-      "美光"
+      "QCOM",
+      "INTC",
+      "MU"
     ],
     "mentioned_crypto": [],
     "mentioned_sectors": [],
@@ -6156,7 +6171,8 @@
     "tweet_id": 73,
     "twitter_id": "2054577091069554745",
     "text": "为什么你总是拿不住大肉，却能扛住巨大的亏损\n\n昨晚CPI数据出来，4月同比3.8%，创2023年以来新高。\n\n纳指、高通、英特尔、美光...全都在跌，不乏看到有人说这波结束了。\n\n结果今天不到24小时基本就涨回来了。",
-    "created_at": "2026-05-13T14:58:45"
+    "created_at": "2026-05-13T14:58:45",
+    "_cleaned": true
   },
   {
     "topic": "个股分析",
@@ -6359,9 +6375,9 @@
       "NVDA",
       "NEOCLOUD",
       "MAG3",
-      "微软",
+      "MSFT",
       "GOOG",
-      "亚麻"
+      "AMZN"
     ],
     "mentioned_crypto": [],
     "mentioned_sectors": [
@@ -6376,7 +6392,8 @@
     "tweet_id": 59,
     "twitter_id": "2055095779761574108",
     "text": "今天账户跌1.24%，英伟达真厉害，不知道大空头现在作何感想，还有前段时间做空NEOCLOUD的🤣\n剩下三个不争气的MAG3，加油哦，把指数带到更高去。今天没视频，比较忙。明天盘后会有13F，看看一季度机构，大佬都干了啥，估计很多卖微软，买谷歌亚麻的。",
-    "created_at": "2026-05-15T01:19:50"
+    "created_at": "2026-05-15T01:19:50",
+    "_cleaned": true
   },
   {
     "topic": "个股分析",
@@ -6503,7 +6520,7 @@
   {
     "topic": "个股分析",
     "mentioned_stocks": [
-      "亚马逊"
+      "AMZN"
     ],
     "mentioned_crypto": [],
     "mentioned_sectors": [],
@@ -6516,7 +6533,8 @@
     "tweet_id": 852,
     "twitter_id": "1983916422884376760",
     "text": "屏气凝神等待亚马逊财报，得之我幸，失之我命",
-    "created_at": "2025-10-30T15:18:29"
+    "created_at": "2025-10-30T15:18:29",
+    "_cleaned": true
   },
   {
     "topic": "个股分析",
@@ -7108,7 +7126,7 @@
   {
     "topic": "个股分析",
     "mentioned_stocks": [
-      "CRC"
+      "CRCL"
     ],
     "mentioned_crypto": [],
     "mentioned_sectors": [],
@@ -7121,7 +7139,8 @@
     "tweet_id": 975,
     "twitter_id": "1997198611625701800",
     "text": "你一个大佬也能发表这么短视的没有营养的文章，我表示非标震惊。你应该看一看crc公司l的三阶段目标是什么！",
-    "created_at": "2025-12-06T06:57:09"
+    "created_at": "2025-12-06T06:57:09",
+    "_cleaned": true
   },
   {
     "topic": "加密货币",
@@ -7824,7 +7843,7 @@
   {
     "topic": "个股分析",
     "mentioned_stocks": [
-      "ADOBE"
+      "ADBE"
     ],
     "mentioned_crypto": [],
     "mentioned_sectors": [],
@@ -7837,7 +7856,8 @@
     "tweet_id": 1115,
     "twitter_id": "2026384762152063269",
     "text": "ADOBE的TO B会比市场的预期要好，TO C就会比较难了，最终故事线交易完之后看看估值是否合适了",
-    "created_at": "2026-02-24T19:52:30"
+    "created_at": "2026-02-24T19:52:30",
+    "_cleaned": true
   },
   {
     "topic": "个股分析",
@@ -8253,7 +8273,7 @@
     "topic": "行业研判",
     "mentioned_stocks": [
       "NVDA",
-      "微软"
+      "MSFT"
     ],
     "mentioned_crypto": [],
     "mentioned_sectors": [
@@ -8268,7 +8288,8 @@
     "tweet_id": 1072,
     "twitter_id": "2027124139765420104",
     "text": "说两个非市场共识：\n英伟达的估值，起码定价了很多AI泡沫论。\n微软能把Copilot做好，切会成为非常成功的产品。",
-    "created_at": "2026-02-26T20:50:31"
+    "created_at": "2026-02-26T20:50:31",
+    "_cleaned": true
   },
   {
     "topic": "个股分析",
@@ -8769,9 +8790,9 @@
   {
     "topic": "个股分析",
     "mentioned_stocks": [
-      "英特尔",
-      "台积电",
-      "阿斯麦"
+      "INTC",
+      "TSM",
+      "ASML"
     ],
     "mentioned_crypto": [],
     "mentioned_sectors": [
@@ -8786,12 +8807,13 @@
     "tweet_id": 18,
     "twitter_id": "2047492113080701142",
     "text": "刚听完英特尔财报，我知道最近涨太凶了，很多人拿不住了，但希望你有时间去听听陈立武的发言。\n我追踪上百家公司里让我最安心的两家公司的管理层是台积电和阿斯麦，纯个人感受。今天听完之后，我愿意把陈立武放进去。\n1. 客户至上（台积电的风格）\n2. 充分接受挑战并且有清晰的应对政策\n3. 说得少，做得多（台积电的风格）\n4. 行业里的人际关系，了解同行和竞争者\n一年多的时间，虽然有CPU的运气成分，但没有陈立武，英特尔可能还是那个价值陷阱。NOT SELLING A SHARE。",
-    "created_at": "2026-04-24T01:45:00"
+    "created_at": "2026-04-24T01:45:00",
+    "_cleaned": true
   },
   {
     "topic": "个股分析",
     "mentioned_stocks": [
-      "INTEL"
+      "INTC"
     ],
     "mentioned_crypto": [],
     "mentioned_sectors": [
@@ -8810,7 +8832,8 @@
     "tweet_id": 17,
     "twitter_id": "2047519072112546143",
     "text": "Intel盘后大涨，这次电话会非常值得看。CEO Lip-Bu Tan讲Intel如何重新回到AI时代的牌桌上？\n\n他把重点放在两个位置。第一，AI从训练走向推理和agent以后，CPU的价值会重新被市场看见。第二，Intel Foundry的现实突破口，可能会先出现在先进封装，不用一上来就在最先进晶圆代工上和台积电正面对撞。\n\n过去两年，市场对AI算力的理解几乎被一个公式统治：GPU + HBM + CoWoS。大模型训练阶段确实如此。但AI不会永远停留在训练阶段。往推理、agentic AI、企业部署走，要接入数据库，处理权限、存储、网络和安全，要和各种内部工具协同，事情远比单纯的矩阵乘法复杂。GPU负责加速，CPU负责把整个系统组织起来。训练集群里CPU和GPU的比例可能是1:8，到推理集群可能变成1:4，agent越来越多、企业系统接入越来越深，CPU的权重还有可能继续上升。\n\n所以这次DCAI收入同比增长22%，市场会特别敏感。AI capex的外溢，已经从GPU扩散到CPU服务器平台。CPU在AI时代不够性感，但可能仍然是最基础、最难绕开的资产。\n\n第二个被低估的点，是先进封装。大家一提Intel Foundry，第一反应就是问18A行不行，14A有没有客户，良率怎么样。这些问题都重要，但先进制程代工拼的是PDK、EDA、IP、良率、产能、交期和客户信任，这些东西很难在一个季度内修复。更现实的切入口可能在别处。\n\n我的判断，现在高端AI芯片领域最紧的瓶颈已经从先进制程晶圆扩散到整个后道。真正卡交付的是HBM、先进封装、高端载板和系统级集成能力。没有足够的2.5D/3D封装能力，前道晶圆做出来也很难变成可以交付的AI加速器模块。AI芯片的竞争，正在从\"谁能设计出更强的芯片\"转向\"谁能把芯片大规模封出来、交出来\"。\n\nLip-Bu Tan把advanced packaging和x86 CPU、manufacturing network放在同一层讲，我觉得是正确的。Intel的EMIB、Foveros很早就在做了，有实际量产经验。过去市场不愿意给这部分资产定价，因为大家盯着的是制程落后和Foundry烧钱。但现在AI芯片进入chiplet和异构集成阶段，封装从制造链条的尾巴变成了系统架构的一部分。一个客户的compute die在台积电做，HBM来自SK海力士，I/O die来自另一个节点，最后谁来把这些东西高效率地封在一起？这就是Intel有机会切进去的位置。\n\n所以Intel Foundry的商业化路径可能是两条线并行。晶圆代工决定长期技术信用，18A和14A需要拿到有分量的外部客户。但先进封装可能更早成为它接触AI客户、形成收入的入口。\n\n盘后这波涨幅，很大一部分贡献应该来自Lip-Bu Tan在电话会上的讲话，因为他讲到了市场心里。AI进入推理和agent阶段，CPU可能重新变重要；AI芯片进入异构集成阶段，先进封装可能重新变稀缺。",
-    "created_at": "2026-04-24T03:32:00"
+    "created_at": "2026-04-24T03:32:00",
+    "_cleaned": true
   },
   {
     "topic": "投资策略",
@@ -9308,7 +9331,7 @@
   {
     "topic": "操作记录",
     "mentioned_stocks": [
-      "微软"
+      "MSFT"
     ],
     "mentioned_crypto": [],
     "mentioned_sectors": [],
@@ -9321,7 +9344,8 @@
     "tweet_id": 186,
     "twitter_id": "2052878845544427732",
     "text": "这一波我稳稳地在微软里躲牛市了",
-    "created_at": "2026-05-08T22:30:32"
+    "created_at": "2026-05-08T22:30:32",
+    "_cleaned": true
   },
   {
     "topic": "操作记录",
@@ -9501,7 +9525,7 @@
   {
     "topic": "操作记录",
     "mentioned_stocks": [
-      "美光"
+      "MU"
     ],
     "mentioned_crypto": [],
     "mentioned_sectors": [],
@@ -9514,7 +9538,8 @@
     "tweet_id": 198,
     "twitter_id": "2052886414673801225",
     "text": "不知道买什么，买了fang指数基金，结果中间指数还换进来美光",
-    "created_at": "2026-05-08T23:00:36"
+    "created_at": "2026-05-08T23:00:36",
+    "_cleaned": true
   },
   {
     "topic": "个股分析",
@@ -9949,7 +9974,7 @@
       "Analog Devices",
       "Tokyo Electron",
       "Texas Instruments",
-      "KLA",
+      "KLAC",
       "NAURA Technology Group",
       "AMD",
       "Lam Research",
@@ -9963,7 +9988,7 @@
       "ASE Group",
       "Cambricon Technologies",
       "Monolithic Power Systems",
-      "INTEL",
+      "INTC",
       "Arm Holdings"
     ],
     "mentioned_crypto": [],
@@ -9980,7 +10005,8 @@
     "tweet_id": 112,
     "twitter_id": "2053264927947673822",
     "text": "远期P/E是现在价格和远期盈利的结果。\nFORWARD P/E = PRICE / FORWARD EPS\n不是P/E越低越便宜，而是P/E越低，EPS增速越快，哪天P/E大幅上涨（要不就是EPS预期放缓，要不就是情绪面溢价），就是要跑的时候。",
-    "created_at": "2026-05-10T00:04:41"
+    "created_at": "2026-05-10T00:04:41",
+    "_cleaned": true
   },
   {
     "topic": "操作记录",
@@ -11512,8 +11538,8 @@
     "topic": "投资策略",
     "mentioned_stocks": [
       "UBER",
-      "台积电",
-      "阿斯麦",
+      "TSM",
+      "ASML",
       "CRM",
       "NOW",
       "DASH"
@@ -11532,7 +11558,8 @@
     "tweet_id": 51,
     "twitter_id": "2055380508662734889",
     "text": "刚刚又和一家基金做完REVIEW，令人叹息。\n背景：\n1. 过去一年跑输标尺16%\n2. 22年11月我视频分享过他们加仓UBER，很多人当时非常不理解，结果证明他们是对的，关注基本面，而不是宏观\n3. 25年4月份关税时没有任何操作\n所以给我的整体印象是非常标准的价值投资，甚至偏固执。然后刚刚过去的第一季度，开始追芯片（台积电，阿斯麦）卖了CRM, NOW（我基本每一个季度的灵魂拷问他们NOW，他们一直觉得没问题），给的理由是：市场告诉我们，我们是错的，所以我们做出了调整。\n这个季度我还灵魂拷问了UBER+DASH，并没有得到满意的答案。\n但其实我认为背后更大的原因是：业绩压力。业绩压力使得很多基金必须追热门股，连这样高信仰的策略都做出了妥协。这件事情给我的启发是：现在软件板块真的已经没有什么仓位，敢这位位置去接的都是逆向思维，如果业绩能证明，是非常好的RISK/REWARD。而相反，芯片硬件是非常拥挤地方，倒不是说股价不能涨，而是P/E,行业溢价的空间可能不大，没有更多的买盘进来了，更多的来自于盈利增速。\n最后我认为投资里面认错也非常重要，而不是硬抗，我们都会错，买入前就要知道错的条件是什么，一旦条件满足，再见下一个。",
-    "created_at": "2026-05-15T20:11:15"
+    "created_at": "2026-05-15T20:11:15",
+    "_cleaned": true
   },
   {
     "topic": "投资策略",

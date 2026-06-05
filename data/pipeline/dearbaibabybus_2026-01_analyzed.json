@@ -1,0 +1,710 @@
+[
+  {
+    "topic": "投资策略",
+    "mentioned_stocks": [
+      "SPY"
+    ],
+    "mentioned_crypto": [
+      "BTC"
+    ],
+    "mentioned_sectors": [
+      "贵金属"
+    ],
+    "stance": "看多",
+    "confidence": "high",
+    "reasoning_chain": "推文明确重申未来目标价：BTC到2028年20万美元、黄金5900、SPY年内保持两位数上涨，整体对加密货币、贵金属和美股市场表达明显乐观预期，属于多资产看多判断。",
+    "action_hint": "持有",
+    "key_quote": "再次重申目标。btc28年 20万一枚 黄金5900。spy每年两位数上涨ytd。",
+    "image_analysis": null,
+    "tweet_id": 219,
+    "twitter_id": "2016192155409055825",
+    "text": "再次重申目标。btc28年 20万一枚 黄金5900。spy每年两位数上涨ytd。",
+    "created_at": "2026-01-27T16:50:43",
+    "price_context": [
+      {
+        "ticker": "SPY",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 745.64
+        },
+        "fundamentals": null
+      }
+    ]
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "NVDA"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "半导体",
+      "人工智能"
+    ],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "推文将“到2028年才20万”的收益表现与NVDA进行比较，表达出对前者收益不满意，并认为买入NVDA更具吸引力，体现出对NVDA未来表现的偏多态度。",
+    "action_hint": "买入",
+    "key_quote": "28年才20萬不如買nvda",
+    "image_analysis": null,
+    "tweet_id": 239,
+    "twitter_id": "2016269207177200033",
+    "text": "28年才20萬不如買nvda",
+    "created_at": "2026-01-27T21:56:54",
+    "price_context": [
+      {
+        "ticker": "NVDA",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 215.33
+        },
+        "fundamentals": {
+          "pe": 33.26,
+          "roe": 119.177466,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "宏观分析",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "黄金"
+    ],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "推文提到“黄金喊少了”，表达了对黄金上涨或配置价值的事后强化认可，隐含此前看多但认为力度不够，整体偏多。",
+    "action_hint": "加仓",
+    "key_quote": "黄金喊少了",
+    "image_analysis": null,
+    "tweet_id": 231,
+    "twitter_id": "2016317851238555813",
+    "text": "黄金喊少了",
+    "created_at": "2026-01-28T01:10:11",
+    "price_context": []
+  },
+  {
+    "topic": "操作记录",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看空",
+    "confidence": "medium",
+    "reasoning_chain": "配文为“展示实力完毕”，更像是在展示一次判断或操作结果；配图为纳斯达克综合指数盘中下跌，指数约跌0.99%，K线走势明显走弱，因此整体倾向偏空。但未出现明确交易指令或完整论证，判断置信度中等。",
+    "action_hint": "观望",
+    "key_quote": "展示实力完毕。",
+    "image_analysis": "图片为行情软件截图，显示纳斯达克综合指数（.IXIC）报约23450.83，跌234.29，跌幅约0.99%；纳斯达克100等相关指数亦下跌，分时走势整体向下。",
+    "tweet_id": 1676,
+    "twitter_id": "2017283621585826297",
+    "text": "展示实力完毕。",
+    "created_at": "2026-01-30T17:07:49",
+    "price_context": []
+  },
+  {
+    "topic": "操作记录",
+    "mentioned_stocks": [
+      "SOXS",
+      "SOXX"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "半导体"
+    ],
+    "stance": "看空",
+    "confidence": "medium",
+    "reasoning_chain": "推文称“买个彩票”，并配有SOXS看涨期权持仓截图，表达用小仓位押注2月份半导体板块走弱。SOXS是半导体板块反向杠杆ETF，其看涨期权通常对应对半导体/ SOXX偏空判断。文中“soxx会不会死妈”也体现对SOXX下跌的投机预期。",
+    "action_hint": "观望",
+    "key_quote": "买个彩票。看看二月份soxx会不会死妈。",
+    "image_analysis": "截图显示在券商账户中持有SOXS $3.5 Call，看涨期权400张，均价$0.05，现价$0.04，到期日2026-02-27，盈亏为-$400（-20%）。这表明发帖人已建立一笔针对SOXS上涨的高风险短期期权仓位。",
+    "tweet_id": 1674,
+    "twitter_id": "2017285994479792320",
+    "text": "买个彩票。看看二月份soxx会不会死妈。",
+    "created_at": "2026-01-30T17:17:15",
+    "price_context": [
+      {
+        "ticker": "SOXS",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 7.73
+        },
+        "fundamentals": null
+      },
+      {
+        "ticker": "SOXX",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 537.33
+        },
+        "fundamentals": null
+      }
+    ]
+  },
+  {
+    "topic": "其他",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "无明确方向",
+    "confidence": "high",
+    "reasoning_chain": "内容为日常生活吐槽/安全提醒，与金融市场、投资标的或交易观点无关，未表达任何投资方向或操作建议。",
+    "action_hint": "无",
+    "key_quote": "赶紧给房东说一下 把天台门锁上吧。要了命了。",
+    "image_analysis": null,
+    "tweet_id": 1673,
+    "twitter_id": "2017290771875995760",
+    "text": "赶紧给房东说一下 把天台门锁上吧。要了命了。",
+    "created_at": "2026-01-30T17:36:14",
+    "price_context": []
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "NVDA",
+      "MSFT"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "半导体",
+      "人工智能"
+    ],
+    "stance": "看空",
+    "confidence": "high",
+    "reasoning_chain": "作者认为除NVDA外多数标的估值偏高，虽然认可NVDA被低估，但担心MSFT拿卡情况与NVDA当季出货不及预期，同时对新主席政策判断未明，整体从中性转向偏空，并建议先卖出一部分观望。",
+    "action_hint": "减仓",
+    "key_quote": "现在 很中性 甚至我看跌了。这个新主席还没拿捏出眉目 大家先卖一部分看看吧。",
+    "image_analysis": null,
+    "tweet_id": 1672,
+    "twitter_id": "2017293261715496985",
+    "text": "除了nvda 剩下的没什么看头吧。nvda无疑是低估了。问题是 很多都非常高估 市场是nv涨 还是一起一起先跌呢。msft是不是没拿到更多卡 nvda是不是没有在本季度疯狂出货。所以 dip是布局机会 现在 很中性 甚至我看跌了。这个新主席还没拿捏出眉目 大家先卖一部分看看吧。",
+    "created_at": "2026-01-30T17:46:07",
+    "price_context": [
+      {
+        "ticker": "NVDA",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 215.33
+        },
+        "fundamentals": {
+          "pe": 33.26,
+          "roe": 119.177466,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      },
+      {
+        "ticker": "MSFT",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 418.57
+        },
+        "fundamentals": {
+          "pe": 24.93,
+          "roe": 33.280824,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "CRCL",
+      "JPM",
+      "SOFI",
+      "HOOD"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "金融科技",
+      "券商",
+      "银行"
+    ],
+    "stance": "看多",
+    "confidence": "high",
+    "reasoning_chain": "发言明确看空CRCL和SOFI，认为其竞争力弱、依附大行且缺乏吸引力；同时强烈看好HOOD，强调其创新能力强、用户粘性高，并表示在同类金融新贵中首推HOOD，因此整体倾向为对HOOD看多的个股比较分析。",
+    "action_hint": "买入",
+    "key_quote": "这一类金融新贵吧 我首推hood 就是创新能力 太棒了，粘性高。",
+    "image_analysis": null,
+    "tweet_id": 1671,
+    "twitter_id": "2017293854068625554",
+    "text": "我不看好crcl 给jpm当狗人家都未必会给他狗粮。自生自灭吧。什么 sofi coin 垃圾。都不如hood。这一类金融新贵吧 我首推hood 就是创新能力 太棒了，粘性高。我这辈子能给我hood看大门当保安 然后分给我股票 我就发财了。",
+    "created_at": "2026-01-30T17:48:28",
+    "price_context": [
+      {
+        "ticker": "CRCL",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 113.12
+        },
+        "fundamentals": {
+          "pe": -497.24,
+          "roe": -2.758461,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      },
+      {
+        "ticker": "JPM",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 306.38
+        },
+        "fundamentals": {
+          "pe": 14.63,
+          "roe": 16.057218,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      },
+      {
+        "ticker": "SOFI",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 15.62
+        },
+        "fundamentals": null
+      },
+      {
+        "ticker": "HOOD",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 73.64
+        },
+        "fundamentals": {
+          "pe": 35.97,
+          "roe": 22.007948,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "FIG"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看空",
+    "confidence": "high",
+    "reasoning_chain": "发文者回顾自己在FIG上市首日给出远低于市场的估值（内在价值18），并以当前股价回落来证明此前判断正确。其明确表示该公司“没有投资价值”“长期没有价值，短期玩一把还可以”，整体对公司基本面和长期持有价值持否定态度，偏空明显。",
+    "action_hint": "观望",
+    "key_quote": "这公司我的总结没有投资价值。长期没有价值 短期玩一把还可以。",
+    "image_analysis": "截图显示标的为FIG，当前股价约26.155，日跌幅约3.33%，历史高位曾接近142.920。配文强调作者曾在上市首日给出100附近时仅值18的估值判断。",
+    "tweet_id": 1670,
+    "twitter_id": "2017295126335246480",
+    "text": "fig 这个价钱是我在他上市第一天给的估值 当时也被别人看成傻逼了。现在不好意思又一战封神了。这公司我的总结没有投资价值。长期没有价值 短期玩一把还可以。上市一百吧那天 我说这个公司内在价值18。他们觉得我有问题。后来你们懂了 好久都没人问我了。沉默让我感受到了震耳欲聋",
+    "created_at": "2026-01-30T17:53:32",
+    "price_context": [
+      {
+        "ticker": "FIG",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 22.71
+        },
+        "fundamentals": {
+          "pe": -5.65,
+          "roe": -92.716533,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "宏观分析",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "无明确方向",
+    "confidence": "medium",
+    "reasoning_chain": "内容围绕美联储职责、财政部发债与降息对特朗普财政压力和利息支出的影响展开，属于宏观政策解读，但未明确给出具体资产或市场方向判断。",
+    "action_hint": "无",
+    "key_quote": "联储的第三责任 隐形责任 配合财政部发债，qt 降低比市场预期更多的利率",
+    "image_analysis": null,
+    "tweet_id": 1669,
+    "twitter_id": "2017296378771218715",
+    "text": "沃什我还没想好怎么评价 但是我几次说过一件事 就是美联储的职责 很多人都知道 也广为人知就是 保就业 控通胀。实际我老说一个事 就是联储的第三责任 隐形责任 配合财政部发债，qt 降低比市场预期更多的利率 其实就利好一个人 特朗普 还利息变少了 这逼口袋里钱多了。扩大营收无非两个",
+    "created_at": "2026-01-30T17:58:30",
+    "price_context": []
+  },
+  {
+    "topic": "行业研判",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "白银",
+      "贵金属"
+    ],
+    "stance": "看空",
+    "confidence": "medium",
+    "reasoning_chain": "推文围绕白银价格暴跌展开，并质疑此前喊多白银的人只说不做，整体情绪偏负面，反映出对白银短线走势的明显看空态度，但未给出明确交易计划。",
+    "action_hint": "观望",
+    "key_quote": "你们最好说的时候自己手里有白银多单 光说不买真的别带了",
+    "image_analysis": "截图显示一则快讯：现货白银价格创历史最大单日跌幅，盘中一度跌超26.5%，低见84美元/盎司；下方白银ETF报价为2494.591，跌幅-26.26%。",
+    "tweet_id": 1668,
+    "twitter_id": "2017298333182668842",
+    "text": "刚才白银老师们是天台还是卖银？你们最好说的时候自己手里有白银多单光说不买真的别带了 我求你们了。",
+    "created_at": "2026-01-30T18:06:16",
+    "price_context": []
+  },
+  {
+    "topic": "其他",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "无明确方向",
+    "confidence": "low",
+    "reasoning_chain": "内容为情绪化表述，提到“我发的都没有跌得快，我还是太落后了”，缺乏明确标的、行业或具体投资观点，无法判断其针对的资产及操作意图。",
+    "action_hint": "无",
+    "key_quote": "我发的都没有跌得快。我还是太落后了。",
+    "image_analysis": null,
+    "tweet_id": 1667,
+    "twitter_id": "2017302620071747744",
+    "text": "我发的都没有跌得快。我还是太落后了。",
+    "created_at": "2026-01-30T18:23:18",
+    "price_context": []
+  },
+  {
+    "topic": "投资策略",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "内容讨论市场对鹰派信号的短期误判与政策发布初期的波动放大，核心观点是若因波动出现大跌，可逢低买入，体现出对后市修复和回升的偏多判断。",
+    "action_hint": "买入",
+    "key_quote": "一旦出现大跌 咱们进去买就行了。",
+    "image_analysis": null,
+    "tweet_id": 1665,
+    "twitter_id": "2017322893982544083",
+    "text": "嗯 但是市场上能说出这句话的人并不多 他们一般看见鹰派可能先卖了。然后后面原来如此又回来了。一个新的政策体系发布的时候波动率可能要先上去了。一旦出现大跌 咱们进去买就行了。",
+    "created_at": "2026-01-30T19:43:52",
+    "price_context": []
+  },
+  {
+    "topic": "投资策略",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "推文核心是在称赞“卖出大部分股票、改买长期看涨期权并保留现金”的仓位管理方式，认为这样既能参与上涨又保留流动性，整体表达偏积极进攻，因此判断为看多。",
+    "action_hint": "买入",
+    "key_quote": "卖掉大部分股票 买点长期看涨期权 既不错过涨幅 也他妈手里一堆子弹。进可攻退可守",
+    "image_analysis": null,
+    "tweet_id": 1664,
+    "twitter_id": "2017323241644122114",
+    "text": "南希那个策略就很对 卖掉大部分股票 买点长期看涨期权 既不错过涨幅 也他妈手里一堆子弹。进可攻退可守 南希奶奶永远胜利。美联储选南希佩洛西吧 她开个fund吧 我去给她看门。我无脑梭哈。",
+    "created_at": "2026-01-30T19:45:15",
+    "price_context": []
+  },
+  {
+    "topic": "宏观分析",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "美股",
+      "纳斯达克期货"
+    ],
+    "stance": "看空",
+    "confidence": "high",
+    "reasoning_chain": "推文明确表示“二月份 全体回调”，并特别提醒“纳斯达克期货多头注意”，核心观点是对2月份纳斯达克期货走势持偏空判断，预期将出现整体回调。",
+    "action_hint": "卖出",
+    "key_quote": "二月份 全体回调 请所有纳斯达克期货多头注意",
+    "image_analysis": null,
+    "tweet_id": 1663,
+    "twitter_id": "2017329190727471284",
+    "text": "正式宣布 我们决定二月份 全体回调 请所有纳斯达克期货多头注意 切莫与我为敌！",
+    "created_at": "2026-01-30T20:08:53",
+    "price_context": []
+  },
+  {
+    "topic": "投资策略",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "观望",
+    "confidence": "medium",
+    "reasoning_chain": "内容是在询问是否需要清仓一年两年的LEAP期权和正股，表达了明显担忧情绪，但没有给出明确判断或具体标的，因此更偏向风险讨论与仓位决策层面的投资策略提问。",
+    "action_hint": "观望",
+    "key_quote": "太可怕了哥，超市里的各种一年两年leap和正股都需要清仓逃跑吗？",
+    "image_analysis": null,
+    "tweet_id": 1677,
+    "twitter_id": "2017329621369332034",
+    "text": "太可怕了哥，超市里的各种一年两年leap和正股都需要清仓逃跑吗？",
+    "created_at": "2026-01-30T20:10:36",
+    "price_context": []
+  },
+  {
+    "topic": "行业研判",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "科技股"
+    ],
+    "stance": "观望",
+    "confidence": "low",
+    "reasoning_chain": "提到“科技股那没我的事”，表明发言者对科技股不参与或保持距离，没有表达明确看多或看空观点。",
+    "action_hint": "观望",
+    "key_quote": "喔喔科技股那沒我的事",
+    "image_analysis": null,
+    "tweet_id": 1679,
+    "twitter_id": "2017329689208270904",
+    "text": "我跟你拼了….喔喔科技股那沒我的事",
+    "created_at": "2026-01-30T20:10:52",
+    "price_context": []
+  },
+  {
+    "topic": "宏观分析",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看空",
+    "confidence": "low",
+    "reasoning_chain": "内容仅有“短跌”，表达对短期走势下跌的判断，但未说明具体标的、板块或逻辑依据。",
+    "action_hint": "观望",
+    "key_quote": "短跌",
+    "image_analysis": null,
+    "tweet_id": 1662,
+    "twitter_id": "2017331281655120262",
+    "text": "短跌",
+    "created_at": "2026-01-30T20:17:12",
+    "price_context": []
+  },
+  {
+    "topic": "投资策略",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "观望",
+    "confidence": "medium",
+    "reasoning_chain": "内容强调当前应尽快去杠杆、保留现金头寸，虽然认可长期看涨期权逻辑，但短期建议先等待更好的买点，整体偏谨慎观望。",
+    "action_hint": "观望",
+    "key_quote": "你们现在做好赶紧去杠杆！长期看涨期权没事 保证自己有子弹 。等买。",
+    "image_analysis": null,
+    "tweet_id": 1661,
+    "twitter_id": "2017331871449804973",
+    "text": "你们现在做好赶紧去杠杆！长期看涨期权没事 保证自己有子弹 。等买。",
+    "created_at": "2026-01-30T20:19:33",
+    "price_context": []
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "SNDK"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "半导体",
+      "存储"
+    ],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "推文语气在嘲讽做空该股，表达“昨天根本不敢想去空它”的意思；配图显示SNDK当日上涨4.43%，且新闻栏提到数据中心将成NAND最大市场、需求强劲，整体偏多。",
+    "action_hint": "观望",
+    "key_quote": "哈哈哈空你 我都不敢想ytd",
+    "image_analysis": "配图为SNDK行情截图：股价563.17，日内上涨23.87（+4.43%），成交量约3076万；页面新闻提到电话会中称数据中心将成NAND最大市场、CEO表示需求旺盛。日内走势高开后回落，但收盘仍显著上涨。",
+    "tweet_id": 1658,
+    "twitter_id": "2017337072260985333",
+    "text": "哈哈哈空你 我都不敢想ytd",
+    "created_at": "2026-01-30T20:40:12",
+    "price_context": [
+      {
+        "ticker": "SNDK",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 1478.69
+        },
+        "fundamentals": null
+      }
+    ]
+  },
+  {
+    "topic": "投资策略",
+    "mentioned_stocks": [
+      "OKLO",
+      "SMR"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "核能",
+      "小型模块化反应堆(SMR)"
+    ],
+    "stance": "中性",
+    "confidence": "high",
+    "reasoning_chain": "内容核心是在讨论两倍杠杆ETF的适用标的特征：蓝筹和大权重由于波动率有限，长期使用两倍ETF容易损耗，最终表现可能接近正股；而波动更大的OKLO、SMR这类高弹性标的更适合两倍ETF。这是工具适配和波动率驱动的策略判断，不是单纯看多或看空市场。",
+    "action_hint": "观望",
+    "key_quote": "蓝筹股 大权重不适合两倍etf……什么适合两倍 oklo smr这种",
+    "image_analysis": null,
+    "tweet_id": 1657,
+    "twitter_id": "2017339316586926289",
+    "text": "蓝筹股 大权重不适合两倍etf 你一定是吃亏的，甚至最后跑得跟正股差不多，年波动率其实都是有一定范畴的。这些都有算法，什么适合两倍 oklo smr这种 来时天地皆同力 去时狗几把都不是。太适合了",
+    "created_at": "2026-01-30T20:49:08",
+    "price_context": [
+      {
+        "ticker": "OKLO",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 65.88
+        },
+        "fundamentals": {
+          "pe": -78.96,
+          "roe": -12.236121,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      },
+      {
+        "ticker": "SMR",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 11.4
+        },
+        "fundamentals": null
+      }
+    ]
+  },
+  {
+    "topic": "宏观分析",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "美股科技",
+      "纳斯达克指数"
+    ],
+    "stance": "观望",
+    "confidence": "medium",
+    "reasoning_chain": "内容是在观察纳指综合指数与纳指100当日跌幅出现明显分化，强调市场结构差异而非直接给出交易结论，属于对大盘表现的现象级评论。没有明确表达做多或做空倾向，因此判断为观望。",
+    "action_hint": "观望",
+    "key_quote": "纳指总和 和 纳指100 出现0.7的差距。一个跌0.7一个跌1.4 好有意思",
+    "image_analysis": null,
+    "tweet_id": 1656,
+    "twitter_id": "2017339908000563390",
+    "text": "纳指总和 和 纳指100 出现0.7的差距。一个跌0.7一个跌1.4 好有意思",
+    "created_at": "2026-01-30T20:51:29",
+    "price_context": []
+  },
+  {
+    "topic": "宏观分析",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "观望",
+    "confidence": "low",
+    "reasoning_chain": "内容仅为对二月行情是否下跌的泛化提问，未指明具体市场、资产或明确观点，因此只能判断为对整体市场走势的观望性讨论。",
+    "action_hint": "观望",
+    "key_quote": "二月会跌吗",
+    "image_analysis": null,
+    "tweet_id": 1681,
+    "twitter_id": "2017354262754562559",
+    "text": "二月会跌吗",
+    "created_at": "2026-01-30T21:48:31",
+    "price_context": []
+  },
+  {
+    "topic": "行业研判",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "人工智能"
+    ],
+    "stance": "观望",
+    "confidence": "low",
+    "reasoning_chain": "内容仅以疑问句提到‘AI泡沫又破灭了’，指向对人工智能板块估值/情绪的讨论，但没有给出明确论据、标的或结论，因此更接近行业层面的情绪观察，方向偏谨慎观望。",
+    "action_hint": "观望",
+    "key_quote": "AI泡沫又破灭了？",
+    "image_analysis": null,
+    "tweet_id": 1680,
+    "twitter_id": "2017355956133499086",
+    "text": "AI泡沫又破灭了？",
+    "created_at": "2026-01-30T21:55:15",
+    "price_context": []
+  },
+  {
+    "topic": "行业研判",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "科技股"
+    ],
+    "stance": "观望",
+    "confidence": "low",
+    "reasoning_chain": "内容是在询问市场回调是集中于科技股还是整体性回调，属于对板块与市场范围的判断提问，没有表达明确看多或看空立场，也没有具体交易计划。",
+    "action_hint": "观望",
+    "key_quote": "想問一下是科技股，還是說所有都是回調？",
+    "image_analysis": null,
+    "tweet_id": 1682,
+    "twitter_id": "2017385489959969265",
+    "text": "想問一下是科技股，還是說所有都是回調？",
+    "created_at": "2026-01-30T23:52:36",
+    "price_context": []
+  },
+  {
+    "topic": "操作记录",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看空",
+    "confidence": "medium",
+    "reasoning_chain": "推文称“梭哈put了”，表示重仓买入看跌期权，核心表达是对标的后市下跌的押注；但未提及具体标的、期限和逻辑，信息有限。",
+    "action_hint": "无",
+    "key_quote": "梭哈put了 赢了请你喝考费儿",
+    "image_analysis": null,
+    "tweet_id": 1685,
+    "twitter_id": "2017460039704055941",
+    "text": "梭哈put了 赢了请你喝考费儿",
+    "created_at": "2026-01-31T04:48:50",
+    "price_context": []
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "谷歌(Alphabet/GOOGL)"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "互联网科技"
+    ],
+    "stance": "观望",
+    "confidence": "low",
+    "reasoning_chain": "内容仅提到“谷歌财报后”，指向谷歌财报事件，但未表达明确看多或看空观点，也没有给出交易计划，因此判断为围绕个股财报的简短提及，整体偏观望。",
+    "action_hint": "观望",
+    "key_quote": "谷歌财报后嘛",
+    "image_analysis": null,
+    "tweet_id": 1684,
+    "twitter_id": "2017501635107606687",
+    "text": "谷歌财报后嘛",
+    "created_at": "2026-01-31T07:34:07",
+    "price_context": [
+      {
+        "ticker": "谷歌(Alphabet/GOOGL)",
+        "backward_available": false,
+        "price_summary": null,
+        "fundamentals": null
+      }
+    ]
+  },
+  {
+    "topic": "其他",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "无明确方向",
+    "confidence": "low",
+    "reasoning_chain": "该内容为对他人过往观点的追问，提到“周五还看多”，但未明确当前分析对象、市场方向或具体投资判断，因此无法提炼出清晰立场。",
+    "action_hint": "无",
+    "key_quote": "我记得你周五不是还看多吗",
+    "image_analysis": null,
+    "tweet_id": 1683,
+    "twitter_id": "2017612317979251193",
+    "text": "我记得你周五不是还看多吗",
+    "created_at": "2026-01-31T14:53:56",
+    "price_context": []
+  }
+]

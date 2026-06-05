@@ -1,0 +1,56 @@
+[
+  {
+    "topic": "投资策略",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "观望",
+    "confidence": "high",
+    "reasoning_chain": "内容核心是在提醒发言要谨慎，避免对市场或投资观点下过于绝对的判断，因为若后续市场暴跌或事实证明此前判断错误，相关言论可能被拿来攻击。文本没有表达对具体资产、行业或宏观方向的明确看多或看空，而是强调风险意识与舆论压力管理，因此更接近投资表达层面的策略性观望。",
+    "action_hint": "观望",
+    "key_quote": "市场一旦暴跌，人家就拿你曾经说的话来喷你。",
+    "image_analysis": null,
+    "tweet_id": 1385,
+    "twitter_id": "1943976499566326108",
+    "text": "慎重。万一那天 巴菲特做的是对的 你这话就成了别人的把柄  喷子不分这些的 这话我都睡过 市场一旦暴跌 人家就拿你曾经说的话来喷你。",
+    "created_at": "2025-07-12T10:11:29",
+    "price_context": []
+  },
+  {
+    "topic": "投资策略",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看多",
+    "confidence": "low",
+    "reasoning_chain": "推文将“更便宜的价格”视为利好，表达了对下跌带来买入机会的积极态度，但未说明具体标的或市场背景。",
+    "action_hint": "观望",
+    "key_quote": "Good news. We get more cheap prices",
+    "image_analysis": null,
+    "tweet_id": 1382,
+    "twitter_id": "1950324695985004720",
+    "text": "Good news. We get more cheap prices",
+    "created_at": "2025-07-29T22:36:57",
+    "price_context": []
+  },
+  {
+    "topic": "宏观分析",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "美国财政",
+      "宏观经济"
+    ],
+    "stance": "中性",
+    "confidence": "medium",
+    "reasoning_chain": "推文围绕美国联邦财政收支数据展开，核心观点是若剔除1月异常值、以2月作为川普政府起点，则2-6月财政表现改善明显：收入同比增长约11.2%，支出基本持平，累计赤字收窄约33%。但作者明确表示无法判断改善更多来自前任基数较低还是现任政策效果，因此结论偏数据观察而非明确方向判断。",
+    "action_hint": "观望",
+    "key_quote": "支出同比未增长，收入涨11.2%，赤字大减33%。",
+    "image_analysis": "图片展示了2024-2025年2-6月美国联邦财政收支对比表：2-6月合计收入从2169.3增至2411.9（+11.2%），支出从2910.7降至2909.7（约持平），赤字由约741.4缩至497.8，降幅约33%。下方还给出1-6月赤字对比，暗示1月数据波动较大，支持作者采用2月作为观察起点。",
+    "tweet_id": 1390,
+    "twitter_id": "1950570974539125233",
+    "text": "如果把1月份夸张的数据去掉，以2月为川普政府的起始点，那么财政上确实很亮眼，支出同比未增长，收入涨11.2%，赤字大减33%。我也不知道原因是拜登干的太差还是川普干的太好。",
+    "created_at": "2025-07-30T14:55:34",
+    "price_context": []
+  }
+]

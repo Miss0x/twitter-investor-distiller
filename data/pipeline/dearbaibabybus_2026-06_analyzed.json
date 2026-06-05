@@ -1,0 +1,421 @@
+[
+  {
+    "topic": "操作记录",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "观望",
+    "confidence": "medium",
+    "reasoning_chain": "发言者表示“还没买够”，说明其处于持续建仓阶段；同时强调建仓可能需要较长时间，并指出无法预知市场明天会发生什么，体现出谨慎、分批操作而非明确短线看多或看空。因此整体更偏向谨慎观望中的建仓表态。",
+    "action_hint": "观望",
+    "key_quote": "我还没买够呢。有的时候建仓时间会很久。你不知道市场会在明天发生什么",
+    "image_analysis": null,
+    "tweet_id": 2042,
+    "twitter_id": "2061984515862511672",
+    "text": "我还没买够呢。有的时候建仓时间会很久。你不知道市场会在明天发生什么",
+    "created_at": "2026-06-03T01:33:13",
+    "price_context": []
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "PANW"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "网络安全"
+    ],
+    "stance": "看空",
+    "confidence": "high",
+    "reasoning_chain": "作者点评PANW财报虽接近满分，但未达到市场预期的“炸裂”水平；且增长较多依赖收购带来的非Organic Growth，而非公司自身业务高增，这会被市场打折并担忧持续性。在股价已处于高位并维持较久的背景下，利好兑现后更容易出现sell the news。作者同时认可公司长期质量，但对当前财报驱动的股价表现偏负面。",
+    "action_hint": "减仓",
+    "key_quote": "panw sell the news 财报一般般 接近满分但是有瑕疵。",
+    "image_analysis": null,
+    "tweet_id": 2043,
+    "twitter_id": "2061983975371895169",
+    "text": "panw sell the news 财报一般般 接近满分但是有瑕疵。第一 不够炸裂 第二 增长业务买来的新业务提供了大量帮助 这就属于瑕疵 市场希望看见自己的业务暴涨 而不是去靠收购。我开面粉厂 我年初收购了别人年的面粉厂 然后我今年业务暴涨  但是这个不是你自身Organic Growth 非Organic Growth会打折扣 因为不可持续担心。所以股价ath蛮久了 然后一个95分财报没有打动市场。所以就soso了。公司还是很牛逼。如果剔除收购增长会很一般了。",
+    "created_at": "2026-06-03T01:31:04",
+    "price_context": [
+      {
+        "ticker": "PANW",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 260.58
+        },
+        "fundamentals": {
+          "pe": 143.56,
+          "roe": 17.452536,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "其他",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "观望",
+    "confidence": "low",
+    "reasoning_chain": "内容仅表达“情绪挺高”的市场感受，未涉及具体标的、行业或明确交易逻辑，整体偏情绪观察，方向性不足。",
+    "action_hint": "观望",
+    "key_quote": "soso。情绪挺高。",
+    "image_analysis": null,
+    "tweet_id": 2044,
+    "twitter_id": "2061908756586217916",
+    "text": "soso。情绪挺高。",
+    "created_at": "2026-06-02T20:32:10",
+    "price_context": []
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "PANW",
+      "SKYY"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "推文直接点名PANW和SKYY，并使用“主升浪来吧”“期待发威”等明显偏多表述，体现对相关标的后续上涨的期待，但未提供具体逻辑与交易计划。",
+    "action_hint": "无",
+    "key_quote": "期待p神发威了！ panw！ skyy主升浪来吧",
+    "image_analysis": null,
+    "tweet_id": 2045,
+    "twitter_id": "2061902354585108529",
+    "text": "期待p神发威了！ panw！ skyy主升浪来吧",
+    "created_at": "2026-06-02T20:06:44",
+    "price_context": [
+      {
+        "ticker": "PANW",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 260.58
+        },
+        "fundamentals": {
+          "pe": 143.56,
+          "roe": 17.452536,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      },
+      {
+        "ticker": "SKYY",
+        "backward_available": false,
+        "price_summary": null,
+        "fundamentals": null
+      }
+    ]
+  },
+  {
+    "topic": "其他",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看多",
+    "confidence": "low",
+    "reasoning_chain": "内容仅表达对价格下跌的强烈排斥，体现偏多情绪，但未提及具体资产、逻辑或操作计划，语义也可能带有情绪化或夸张成分。",
+    "action_hint": "无",
+    "key_quote": "有一秒钟下跌我都无法接受。",
+    "image_analysis": null,
+    "tweet_id": 2046,
+    "twitter_id": "2061900288995324221",
+    "text": "有一秒钟下跌我都无法接受。",
+    "created_at": "2026-06-02T19:58:31",
+    "price_context": []
+  },
+  {
+    "topic": "操作记录",
+    "mentioned_stocks": [
+      "甲骨文"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看空",
+    "confidence": "high",
+    "reasoning_chain": "内容直接描述甲骨文暴跌且本人已出现较大亏损，属于基于持仓表现的情绪化表态，没有展开基本面分析，但短期态度明显偏负面。",
+    "action_hint": "卖出",
+    "key_quote": "甲骨文暴跌 已经亏麻了 各位告辞",
+    "image_analysis": null,
+    "tweet_id": 2047,
+    "twitter_id": "2061867590763352127",
+    "text": "甲骨文暴跌 已经亏麻了 各位告辞",
+    "created_at": "2026-06-02T17:48:35",
+    "price_context": [
+      {
+        "ticker": "甲骨文",
+        "backward_available": false,
+        "price_summary": null,
+        "fundamentals": null
+      }
+    ]
+  },
+  {
+    "topic": "其他",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "无明确方向",
+    "confidence": "medium",
+    "reasoning_chain": "推文主要是在批评他人靠夸大宣传、言语煽动来拉抬市场情绪，没有明确提及具体股票、加密货币或行业，也未给出清晰的多空判断，更像是对'嘴炮拉盘'行为的讽刺与质疑。",
+    "action_hint": "观望",
+    "key_quote": "纯正用嘴拉盘了。",
+    "image_analysis": null,
+    "tweet_id": 2048,
+    "twitter_id": "2061849048458379774",
+    "text": "我以为我就够能吹牛逼得了 没想到还有高人。但是你也要看清楚 纯正用嘴拉盘了。",
+    "created_at": "2026-06-02T16:34:55",
+    "price_context": []
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "推文围绕某公司估值区间展开判断，认为115-150价格区间属于“严重低估”，明确给出“闭眼买”的强烈看多态度；同时指出400以上可“闭眼卖”，说明其核心逻辑是基于估值区间进行交易决策。但由于未指明具体公司名称，标的识别不完整，因此置信度为中等。",
+    "action_hint": "买入",
+    "key_quote": "115-150 就是严重低估。闭眼买。400以上大概就闭眼卖了。",
+    "image_analysis": null,
+    "tweet_id": 2050,
+    "twitter_id": "2061781351326458162",
+    "text": "这不行啊。这公司估值很好做啊。不复杂啊。115-150 就是严重低估。闭眼买。400以上大概就闭眼卖了。",
+    "created_at": "2026-06-02T12:05:54",
+    "price_context": []
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "SNPS",
+      "MRVL"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "ASIC",
+      "半导体"
+    ],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "推文提到“asic之年”、明确说“买snps”，并对MRVL给出更高市值预期，核心是在讨论ASIC/半导体链条及相关个股的看多逻辑；虽语气偏吐槽他人跟随观点，但方向性仍偏多。",
+    "action_hint": "买入",
+    "key_quote": "我说买snps 他也合作snps。我说mrvl五千亿 你喊一万亿！",
+    "image_analysis": null,
+    "tweet_id": 2053,
+    "twitter_id": "2061652467410985126",
+    "text": "哇 这个老头真的很坏 我说asic之年 他也马上说asic 我说买snps 他也合作snps。我说mrvl五千亿 你喊一万亿！ https://t.co/lJxVUN3FvU",
+    "created_at": "2026-06-02T03:33:46",
+    "price_context": [
+      {
+        "ticker": "SNPS",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 524.74
+        },
+        "fundamentals": null
+      },
+      {
+        "ticker": "MRVL",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 196.33
+        },
+        "fundamentals": {
+          "pe": 64.14,
+          "roe": -6.263624,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "宏观分析",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看空",
+    "confidence": "medium",
+    "reasoning_chain": "内容聚焦VIX（市场恐慌/波动率指标），并判断“波动率摁不住了”，通常意味着市场风险偏好下降、避险情绪升温，对大盘资产价格偏负面。未给出具体标的或交易计划，因此结论以整体市场偏空解读。",
+    "action_hint": "观望",
+    "key_quote": "一切都在vix上。波动率摁不住了",
+    "image_analysis": null,
+    "tweet_id": 2054,
+    "twitter_id": "2061646336315871562",
+    "text": "一切都在vix上。波动率摁不住了",
+    "created_at": "2026-06-02T03:09:24",
+    "price_context": []
+  },
+  {
+    "topic": "信息分享",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "人工智能"
+    ],
+    "stance": "无明确方向",
+    "confidence": "low",
+    "reasoning_chain": "推文仅为分享一则YouTube视频《AI投资复盘》，未提供具体观点、标的、仓位或明确交易判断，因此更偏向信息转发。",
+    "action_hint": "无",
+    "key_quote": "AI投资复盘 https://t.co/LN4gXOGpl3 来自 @YouTube",
+    "image_analysis": null,
+    "tweet_id": 2056,
+    "twitter_id": "2061627160545177860",
+    "text": "AI投资复盘 https://t.co/LN4gXOGpl3 来自 @YouTube",
+    "created_at": "2026-06-02T01:53:12",
+    "price_context": []
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看空",
+    "confidence": "medium",
+    "reasoning_chain": "推文围绕某只股票的定增事件展开评价，认为“定增还打折”反映当前股价偏贵；虽然“给巴菲特”被视为利好，意味着知名投资者背书、可削弱泡沫质疑，但作者最终判断利空大于利好，核心结论是该股估值过高。",
+    "action_hint": "减仓",
+    "key_quote": "但是综合还是坏的 说明股价就是非常昂贵了。",
+    "image_analysis": null,
+    "tweet_id": 2057,
+    "twitter_id": "2061623663284138162",
+    "text": "有好有坏 坏的是定增 还打折说明股价太贵了。好的是是给巴菲特。泡沫论可以取消了吧。但是综合还是坏的 说明股价就是非常昂贵了。",
+    "created_at": "2026-06-02T01:39:19",
+    "price_context": []
+  },
+  {
+    "topic": "操作记录",
+    "mentioned_stocks": [],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看多",
+    "confidence": "medium",
+    "reasoning_chain": "内容表示发言者在80价位买入，并称“达成一致共识”，体现其实际参与买入并认同相关判断，倾向偏多，但未说明具体标的与更完整逻辑。",
+    "action_hint": "买入",
+    "key_quote": "我也是80买的 达成一致共识",
+    "image_analysis": null,
+    "tweet_id": 2058,
+    "twitter_id": "2061622398537929172",
+    "text": "我也是80买的 达成一致共识",
+    "created_at": "2026-06-02T01:34:17",
+    "price_context": []
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "GOOGL",
+      "ORCL"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "云计算",
+      "科技"
+    ],
+    "stance": "观望",
+    "confidence": "medium",
+    "reasoning_chain": "推文围绕谷歌与甲骨文展开，核心观点是甲骨文短期涨幅过大，出现回踩、下跌或横盘调整都属正常，未表达明确看多或看空，更偏向对短期波动的理性看待与等待确认。",
+    "action_hint": "观望",
+    "key_quote": "涨太多了这几天 都疯了一样。有一些回踩下跌横盘调整 都是正常。目标明确即可。",
+    "image_analysis": null,
+    "tweet_id": 2059,
+    "twitter_id": "2061605636824076779",
+    "text": "谷歌都需要借钱 你不担心orcl借更多吗哈哈。涨太多了这几天 都疯了一样。有一些回踩下跌横盘调整 都是正常。目标明确即可。",
+    "created_at": "2026-06-02T00:27:41",
+    "price_context": [
+      {
+        "ticker": "GOOGL",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 382.97
+        },
+        "fundamentals": {
+          "pe": 29.65,
+          "roe": 35.704782,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      },
+      {
+        "ticker": "ORCL",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 192.08
+        },
+        "fundamentals": {
+          "pe": 34.67,
+          "roe": 85.357572,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "操作记录",
+    "mentioned_stocks": [
+      "GOOG"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [],
+    "stance": "看多",
+    "confidence": "high",
+    "reasoning_chain": "推文明确表示“梭哈goog了”，即将大量资金集中买入GOOG，属于个人交易动作披露，直接体现对该股后续走势持乐观看法。内容未展开基本面或估值分析，因此分类更适合操作记录而非个股分析。",
+    "action_hint": "买入",
+    "key_quote": "梭哈goog了。你敢信",
+    "image_analysis": null,
+    "tweet_id": 2060,
+    "twitter_id": "2061591610719158783",
+    "text": "哈哈哈哈 梭哈goog了。你敢信",
+    "created_at": "2026-06-01T23:31:57",
+    "price_context": [
+      {
+        "ticker": "GOOG",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 379.38
+        },
+        "fundamentals": {
+          "pe": 29.35,
+          "roe": 35.704782,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  },
+  {
+    "topic": "个股分析",
+    "mentioned_stocks": [
+      "GOOGL"
+    ],
+    "mentioned_crypto": [],
+    "mentioned_sectors": [
+      "科技"
+    ],
+    "stance": "看空",
+    "confidence": "medium",
+    "reasoning_chain": "推文直接提到“谷歌需要疯狂借钱”，通常被解读为对公司财务压力或资金需求上升的负面评价，语气带有担忧与悲观情绪，因此倾向于利空个股判断。",
+    "action_hint": "观望",
+    "key_quote": "连谷歌都需要疯狂借钱 呜呜",
+    "image_analysis": null,
+    "tweet_id": 2061,
+    "twitter_id": "2061556401877463365",
+    "text": "连谷歌都需要疯狂借钱 呜呜",
+    "created_at": "2026-06-01T21:12:02",
+    "price_context": [
+      {
+        "ticker": "GOOGL",
+        "backward_available": false,
+        "price_summary": {
+          "recent_close": 382.97
+        },
+        "fundamentals": {
+          "pe": 29.65,
+          "roe": 35.704782,
+          "revenue_growth": null,
+          "sector": ""
+        }
+      }
+    ]
+  }
+]
