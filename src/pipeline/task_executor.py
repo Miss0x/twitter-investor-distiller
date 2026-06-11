@@ -242,6 +242,8 @@ def execute_tasks(task_ids: list[int]) -> None:
                     result = _generate_portrait(payload["username"])
                 elif t.task_type == "clean":
                     result = _clean_analysis()
+                elif t.task_type and t.task_type.startswith("governance_"):
+                    result = _dispatch_governance_task(t.task_type, payload)
                 else:
                     result = {"error": f"未知任务类型: {t.task_type}"}
 
@@ -974,3 +976,34 @@ def _filter_tweets(payload: dict) -> dict:
         return {"ok": True, "new_filtered": total_new, "message": f"已过滤 {total_new} 条新推文"}
     finally:
         session.close()
+
+
+# ═══════════════════════════════════════════════════════════════════════
+# 信号治理任务桩
+# ═══════════════════════════════════════════════════════════════════════
+
+_GOVERNANCE_TASKS = {
+    "governance_candidate",
+    "governance_quality",
+    "governance_risk",
+    "governance_panel",
+    "governance_debate",
+    "governance_publish",
+    "governance_report",
+}
+
+
+def _dispatch_governance_task(task_type: str, payload: dict) -> dict:
+    """Dispatch governance task types to their stub implementations.
+
+    These tasks will be connected to real governance modules once the
+    full pipeline (candidate → analysis → governance) is online.
+    """
+    if task_type not in _GOVERNANCE_TASKS:
+        return {"error": f"未知治理任务类型: {task_type}"}
+
+    return {
+        "ack": task_type,
+        "signal_id": payload.get("signal_id", ""),
+        "message": f"治理任务 {task_type} 已入队（桩实现）",
+    }
