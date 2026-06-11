@@ -1,9 +1,9 @@
 <div class="card-title">脚本工具箱 <span style="font-size:10px;color:var(--text-tertiary);font-weight:400">调试/手动触发</span></div>
-<button class="btn" style="font-size:10px;padding:2px 8px" onclick="toggleScriptTools()" id="btn_toggle_tools">展开</button>
+<button class="btn" style="font-size:10px;padding:2px 8px" data-action="toggle-scripts" data-card="script_runner" id="btn_toggle_tools">展开</button>
 <div id="script_tools_body" style="display:none">
 {% for group, items in groups.items() %}
 <div class="mb-sm"><span class="text-secondary" style="font-size:11px">{{ group }}</span><br>
-{% for name, info in items %}<button class="btn" onclick="runScript('{{ info.file }}')" style="margin:2px;font-size:11px" title="{{ info.desc }}">{{ name }}</button>{% endfor %}
+{% for name, info in items %}<button class="btn" data-action="run-script" data-script="{{ info.file }}" data-card="script_runner" style="margin:2px;font-size:11px" title="{{ info.desc }}">{{ name }}</button>{% endfor %}
 </div>
 {% endfor %}
 <div id="sr_status" class="text-secondary mt-sm" style="font-size:11px"></div>

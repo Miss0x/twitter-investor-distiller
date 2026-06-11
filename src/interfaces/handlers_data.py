@@ -1,14 +1,14 @@
 """卡片交互处理模块 — 数据管理类。
 
 负责处理 Web Dashboard 中与数据管理相关的交互请求:
-    - _handle_asset_alias: 资产代码（股票/加密货币）别名管理（增删改查）
+    - _handle_asset_alias: 标的代码（股票/加密货币）映射管理（增删改查）
     - _handle_portrait_generate: 单用户画像生成（支持时间窗口和日历筛选）
     - _handle_user_manage: 监控用户管理（添加/校验新用户）
 
 这些函数由 web_api.py 的 /cards/{name}/action 路由通过 import 调用。
 """
 def _handle_asset_alias(payload: dict) -> dict:
-    """处理资产代码库增删改：管理 stock_alias.csv 中的别名映射。
+    """处理标的代码映射增删改：管理 stock_alias.csv 中的提及名称映射。
 
     资产别名机制:
         - 如果 LLM 提取的股票名称与 Yahoo Finance ticker 不匹配，可通过别名表映射

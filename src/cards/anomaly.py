@@ -53,7 +53,7 @@ class AnomalyCard(Card):
             }
         }
     """
-
+    name = "anomaly"
     def get_data(self, **params) -> dict:
         results = {}
         for fp in Path("data/anomaly").glob("*_anomaly.json"):

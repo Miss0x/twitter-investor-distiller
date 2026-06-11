@@ -49,7 +49,7 @@ class AccuracyCard(Card):
             }
         }
     """
-
+    name = "accuracy"
     def get_data(self, **params) -> dict:
         result = {}
         for fp in Path("data/accuracy").glob("*_accuracy.json"):

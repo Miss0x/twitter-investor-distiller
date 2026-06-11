@@ -24,6 +24,7 @@ get_card(name)          按名称查找单个卡片
 from __future__ import annotations
 
 from .base import Card
+from .cards_config import CARD_CONFIG, apply_card_config
 
 # ── 全局卡片注册表 ──
 # 存储所有已注册卡片实例的列表，Dashboard 遍历此列表进行路由挂载和页面渲染
@@ -41,17 +42,30 @@ def register(card_cls):
             ...
 
     行为:
-        1. 实例化 card_cls（调用 __init__ 创建 Card 对象）
-        2. 将实例追加到全局 CARDS 列表
-        3. 返回原始类（不修改类本身）
+        1. 从 CARD_CONFIG 中心配置注入元数据
+        2. 校验 template 和 _render_html() 互斥（规则二）
+        3. 实例化 card_cls 并追加到全局 CARDS 列表
+        4. 返回原始类
 
     参数:
         card_cls: Card 子类（非实例），必须可无参实例化
-
-    返回:
-        原始类对象（保持类定义不变，便于链式使用）
     """
     instance = card_cls()
+
+    # ── 从中心配置注入元数据 ──
+    apply_card_config(instance)
+
+    # ── 规则二：template 和 _render_html 互斥校验 ──
+    has_template = bool(instance.template)
+    has_custom_render = (type(instance)._render_html != Card._render_html)
+    if has_template and has_custom_render:
+        raise ValueError(
+            f"Card '{instance.name}' has both template='{instance.template}' "
+            f"and a custom _render_html(). "
+            f"They are mutually exclusive (规则二). Remove one from CARD_CONFIG "
+            f"or the card class."
+        )
+
     CARDS.append(instance)
     return card_cls
 
@@ -98,6 +112,7 @@ def get_card(name: str) -> Card | None:
 # ── 导入所有卡片模块以触发 @register 装饰器 ──
 # 每个 import 会执行模块顶层代码，从而运行 @register 将卡片实例注入 CARDS
 # noqa 注释抑制 linter 的"未使用导入"警告
+from . import chat_card     # noqa: E402, F401   — 智能问答入口
 from . import accuracy       # noqa: E402, F401   — 分析准确率面板
 from . import consensus      # noqa: E402, F401   — 多分析师共识信号
 from . import rotation       # noqa: E402, F401   — 板块轮动热点

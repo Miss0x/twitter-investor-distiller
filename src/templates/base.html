@@ -6,542 +6,852 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <title>Twitter Investor Distiller</title>
 <style>
+  /* ═══════════════════════════════════════════════════════
+     暗色主题配色 — 对齐参考网站 (api.tevxzen.dpdns.org)
+     LAB 颜色空间精确转换到 HSL，保证暗色感知一致性
+     ═══════════════════════════════════════════════════════ */
   :root {
-    --bg-primary: #ffffff; --bg-secondary: #f5f5f5; --bg-tertiary: #fafafa;
-    --text-primary: #1a1a1a; --text-secondary: #666666; --text-tertiary: #999999;
-    --text-success: #1D9E75; --text-warning: #EF9F27; --text-info: #378ADD; --text-danger: #E24B4A;
-    --border-primary: rgba(0,0,0,0.2); --border-secondary: rgba(0,0,0,0.12); --border-tertiary: rgba(0,0,0,0.07);
-    --radius-md: 8px; --radius-lg: 12px;
+    /* 基础色 — 参考网站暗色主题 LAB→HSL 精确转换 */
+    --bg:               hsl(0 0% 7.3%);       /* #121212, --background */
+    --card:             hsl(0 0% 11.8%);      /* #1d1d1d, --card */
+    --border:           hsl(0 0% 100% / .09); /* white-9%, --border */
+    --border-light:     hsl(0 0% 100% / .05); /* white-5%, 更淡分割 */
+    --text:             hsl(0 0% 95.4%);      /* #f3f3f3, --foreground */
+    --muted:            hsl(0 0% 69.4%);      /* #b0b0b0, --muted-foreground */
+    --dim:              hsl(0 0% 45%);        /* 比 muted 更暗淡 */
+    /* 语义色 */
+    --accent:           hsl(219.7 100% 44.9%);/* #004de5, chart-1 蓝 */
+    --accent-light:     hsla(219.7 100% 44.9% / .15);
+    --success:          hsl(160.3 100% 36.8%);/* #00bb7d, chart-2 绿 */
+    --warning:          hsl(35.9 100% 50%);   /* #ff9800, chart-3 橙 */
+    --danger:           hsl(359.2 100% 69.7%);/* #ff6466, --destructive 红 */
+    /* 辅助色 (shadcn/ui 命名对齐) */
+    --primary:          hsl(0 0% 95.4%);      /* #f3f3f3, 白色主色 */
+    --primary-fg:       hsl(0 0% 3.9%);       /* #0a0a0a, 白色上的深色文字 */
+    --secondary:        hsl(0 0% 16.5%);      /* #292929, 次要背景 */
+    --ring:             hsl(0 0% 59.6%);      /* #989898, focus ring */
+    /* 图表色 */
+    --chart-1:          hsl(219.7 100% 44.9%);/* #004de5 蓝 */
+    --chart-2:          hsl(160.3 100% 36.8%);/* #00bb7d 绿 */
+    --chart-3:          hsl(35.9 100% 50%);   /* #ff9800 橙 */
+    --chart-4:          hsl(265.7 100% 65.5%);/* #9a4fff 紫 */
+    --chart-5:          hsl(346.4 100% 56.9%);/* #ff2355 粉红 */
+    --info:             hsl(199 100% 47.5%);  /* #00a5f2 信息蓝 */
+    /* 侧边栏专用 */
+    --sidebar-bg:       hsl(0 0% 2%);         /* #050505, --sidebar */
+    --sidebar-fg:       hsl(0 0% 93.4%);      /* #eeeeee */
+    --sidebar-accent:   hsl(0 0% 18.9%);      /* #303030 */
+    --sidebar-border:   hsl(0 0% 100% / .1);
+    /* 圆角 / 字体 */
+    --radius-sm: 6px; --radius: 0.5rem; --radius-md: 10px; --radius-lg: 14px;
     --font: system-ui, -apple-system, sans-serif;
+    --font-mono: 'SF Mono', 'JetBrains Mono', ui-monospace, 'Cascadia Code', Menlo, monospace;
+    --sidebar-w: 232px;
+
+    /* ═══════════════════════════════════════════════════════
+       语义化别名（兼容层）—— 修复全站 40+ 处坏引用
+       此前 consensus/rotation/anomaly 等模板引用了 --text-warning
+       /--border-tertiary 等不存在的变量名，导致颜色全部失效、
+       页面发灰无层次。这里统一映射到上方真实颜色，一处补全、全站生效。
+       ═══════════════════════════════════════════════════════ */
+    --text-primary:      var(--text);       /* 主文字（白） */
+    --text-secondary:    var(--muted);      /* 次要文字（灰） */
+    --text-tertiary:     var(--dim);        /* 最弱文字（暗灰） */
+    --text-success:      var(--success);    /* 成功/看多 绿 */
+    --text-warning:      var(--warning);    /* 警告/强信号 橙 */
+    --text-danger:       var(--danger);     /* 危险/看空 红 */
+    --text-info:         var(--info);       /* 信息 蓝 */
+    --bg-secondary:      var(--secondary);  /* 次级背景面 */
+    --bg-tertiary:       hsl(0 0% 14.5%);   /* 三级背景（表头等） */
+    --border-primary:    hsl(0 0% 100% / .18);
+    --border-secondary:  hsl(0 0% 100% / .12);
+    --border-tertiary:   var(--border);     /* 默认边框 */
+
+    /* ── 现代科技感：发光/阴影/层次令牌（美化用） ── */
+    --glow-accent:  0 0 0 1px hsla(219.7 100% 44.9% / .35), 0 4px 20px hsla(219.7 100% 44.9% / .12);
+    --glow-success: 0 0 0 1px hsla(160.3 100% 36.8% / .3),  0 4px 18px hsla(160.3 100% 36.8% / .1);
+    --shadow-card:  0 1px 2px rgba(0,0,0,.3), 0 8px 24px -8px rgba(0,0,0,.45);
+    --ease-out:     cubic-bezier(.16, 1, .3, 1);
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: var(--font); font-size: 13px; color: var(--text-primary); background: var(--bg-tertiary); line-height: 1.6; }
-  .app { max-width: 960px; margin: 0 auto; padding: 20px 24px; }
+  body { font-family: var(--font); font-size: 13px; color: var(--text); background: var(--bg); line-height: 1.6; }
 
-  /* ── 全局状态栏 ── */
-  .status-bar {
-    display: flex; align-items: center; gap: 16px;
-    padding: 8px 16px; margin-bottom: 16px;
-    background: var(--bg-primary); border: 0.5px solid var(--border-tertiary);
-    border-radius: var(--radius-lg); font-size: 12px;
+  /* ── 暗色滚动条 ── */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: hsl(0 0% 100% / .12); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: hsl(0 0% 100% / .22); }
+
+  /* ── 全局 Toast ── */
+  #global-toast {
+    position: fixed; top: 16px; left: 50%; transform: translateX(-50%);
+    padding: 10px 24px; border-radius: var(--radius);
+    background: var(--primary); color: var(--primary-fg);
+    font-size: 13px; z-index: 9999; font-weight: 500;
+    opacity: 0; pointer-events: none; transition: opacity .25s;
+    box-shadow: 0 4px 16px rgba(0,0,0,.4);
   }
-  .status-bar .pulse { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 4px; }
-  .status-bar .pulse.on { background: var(--text-success); animation: pulse 2s infinite; }
-  .status-bar .pulse.off { background: var(--text-tertiary); }
-  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
-  .status-bar .sep { color: var(--border-secondary); }
-  .status-bar .metric { font-weight: 500; }
+  #global-toast.show { opacity: 1; }
 
-  /* ── 页面头部 ── */
-  .header { margin-bottom: 16px; }
-  .header h1 { font-size: 16px; font-weight: 500; }
-  .header p { font-size: 12px; color: var(--text-secondary); }
+  /* ── Layout ── */
+  .layout { display: flex; min-height: 100vh; }
 
-  /* ── 标签页 ── */
-  .tabs { display: flex; gap: 0; margin-bottom: 20px; border-bottom: 0.5px solid var(--border-tertiary); }
-  .tab { padding: 8px 16px; font-size: 13px; color: var(--text-secondary); border: none; background: none; cursor: pointer; border-bottom: 2px solid transparent; transition: all .15s; }
-  .tab:hover { color: var(--text-primary); }
-  .tab.active { color: var(--text-primary); font-weight: 500; border-bottom-color: var(--text-primary); }
+  /* ── Sidebar ── */
+  .sidebar {
+    width: var(--sidebar-w);
+    background: var(--sidebar-bg);
+    border-right: 1px solid var(--sidebar-border);
+    display: flex; flex-direction: column;
+    position: fixed; top: 0; left: 0; bottom: 0; z-index: 10;
+    overflow-y: auto;
+  }
+  .sidebar .brand {
+    padding: 18px 20px 14px;
+    font-size: 14px; font-weight: 600; color: var(--text);
+    letter-spacing: -0.01em;
+    border-bottom: 1px solid hsl(0 0% 100% / .06);
+    display: flex; align-items: center; gap: 9px;
+  }
+  .sidebar .brand .logo-mark {
+    width: 22px; height: 22px; border-radius: 6px; flex-shrink: 0;
+    background: linear-gradient(135deg, var(--accent), hsl(265.7 100% 65.5%));
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 700;
+  }
+  .sidebar .brand a { color: inherit; text-decoration: none; display: flex; align-items: center; gap: 9px; }
+  .sidebar .nav { flex: 1; padding: 8px; }
+  .sidebar .nav-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 9px 12px; margin-bottom: 2px;
+    border-radius: var(--radius-sm);
+    font-size: 13px; color: var(--muted);
+    cursor: pointer; transition: color .15s, background .15s;
+    user-select: none; position: relative;
+  }
+  .sidebar .nav-item:hover { color: var(--text); background: hsl(0 0% 100% / .05); }
+  .sidebar .nav-item.active { color: var(--text); background: hsl(0 0% 100% / .08); font-weight: 500; }
+  /* 激活项左侧电光蓝强调条 */
+  .sidebar .nav-item.active::before {
+    content: ""; position: absolute; left: 0; top: 50%; transform: translateY(-50%);
+    width: 3px; height: 16px; border-radius: 0 3px 3px 0; background: var(--accent);
+  }
+  .sidebar .nav-item .icon { font-size: 15px; width: 20px; text-align: center; flex-shrink: 0; }
+  .sidebar .footer { padding: 12px 20px; border-top: 1px solid hsl(0 0% 100% / .06); font-size: 11px; color: var(--dim); }
+
+  /* ── Main ── */
+  .main { margin-left: var(--sidebar-w); flex: 1; min-width: 0; }
+
+  /* ── Top bar ── */
+  .topbar {
+    display: flex; align-items: center; gap: 16px;
+    padding: 12px 24px;
+    background: var(--card); border-bottom: 1px solid var(--border);
+    position: sticky; top: 0; z-index: 5;
+  }
+  .topbar .title { font-size: 14px; font-weight: 600; }
+  .topbar .pulse { display: inline-block; width: 7px; height: 7px; border-radius: 50%; }
+  .topbar .pulse.on { background: var(--success); animation: softPulse 2s infinite; }
+  .topbar .pulse.off { background: var(--dim); }
+  @keyframes softPulse { 0%,100%{opacity:1} 50%{opacity:.35} }
+  .topbar .status-text { font-size: 12px; color: var(--muted); }
+  .topbar .sep { width: 1px; height: 18px; background: var(--border); }
+  .topbar .spacer { flex: 1; }
+
+  /* ── Content ── */
+  .content { padding: 24px; max-width: 1320px; }
   .tab-content { display: none; }
-  .tab-content.active { display: block; }
+  /* 响应式 bento 网格：卡片自动排布，span_full 卡片占满整行 */
+  .tab-content.active {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    align-items: start;
+    animation: fadeIn .3s var(--ease-out);
+  }
+  .tab-content.active > .card { margin-bottom: 0; }
+  @media (max-width: 900px) {
+    .tab-content.active { grid-template-columns: 1fr; }
+  }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
   /* ── 网格 ── */
-  .grid { display: grid; gap: 12px; }
+  .grid { display: grid; gap: 16px; }
   .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 
-  /* ── 卡片 ── */
-  .card { background: var(--bg-primary); border: 0.5px solid var(--border-tertiary); border-radius: var(--radius-lg); padding: 14px 16px; margin-bottom: 12px; }
-  .card-headline { border-color: rgba(239,159,39,0.3); background: linear-gradient(135deg, rgba(239,159,39,0.03), var(--bg-primary)); }
-  .card-headline .card-title { color: var(--text-warning); font-size: 14px; }
-  .card-title { font-size: 13px; font-weight: 500; margin-bottom: 10px; color: var(--text-primary); }
+  /* ── 卡片：现代科技感 —— 微妙边框 + 层次阴影 + hover 物理位移 ── */
+  .card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); padding: 20px 22px; margin-bottom: 16px;
+    box-shadow: var(--shadow-card);
+    position: relative;
+    transition: border-color .2s var(--ease-out), box-shadow .2s var(--ease-out), transform .2s var(--ease-out);
+  }
+  /* 顶部 1px 高光线，模拟物理边缘折射（克制，无霓虹） */
+  .card::before {
+    content: ""; position: absolute; inset: 0 0 auto 0; height: 1px;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    background: linear-gradient(90deg, transparent, hsl(0 0% 100% / .08) 50%, transparent);
+    pointer-events: none;
+  }
+  @media (min-width: 641px) {
+    .card:hover { border-color: var(--border-secondary); transform: translateY(-2px); box-shadow: 0 2px 4px rgba(0,0,0,.3), 0 12px 32px -10px rgba(0,0,0,.5); }
+  }
+  .card-headline { border-color: hsla(35.9 100% 50% / .28); background: linear-gradient(180deg, hsla(35.9 100% 50% / .07), var(--card) 60%); }
+  .card-headline:hover { border-color: hsla(35.9 100% 50% / .4); }
+  .card-headline .card-title { color: var(--warning); font-size: 14px; }
+  .card-title { font-size: 13px; font-weight: 600; margin-bottom: 12px; color: var(--text); letter-spacing: -.01em; display: flex; align-items: center; gap: 7px; }
+  /* 卡片副标题：一句话功能说明 */
+  .card-subtitle { font-size: 11px; color: var(--dim); font-weight: 400; margin: -8px 0 14px; line-height: 1.5; }
+  .card-error { border-color: hsla(359.2 100% 69.7% / .25); background: hsla(359.2 100% 69.7% / .06); }
 
-  /* ── 指标 ── */
-  .metric { background: var(--bg-secondary); border-radius: var(--radius-md); padding: 12px; }
-  .metric-label { font-size: 11px; color: var(--text-secondary); }
-  .metric-value { font-size: 20px; font-weight: 500; margin-top: 2px; }
-  .metric-sub { font-size: 11px; color: var(--text-tertiary); margin-top: 2px; }
+  /* ── 指标：等宽数字 + 强调底纹 ── */
+  .metric { background: var(--secondary); border-radius: var(--radius); padding: 16px; border: 1px solid hsl(0 0% 100% / .04); transition: border-color .15s; }
+  .metric:hover { border-color: hsl(0 0% 100% / .1); }
+  .metric-label { font-size: 11px; color: var(--muted); letter-spacing: .02em; }
+  .metric-value { font-size: 24px; font-weight: 600; margin-top: 4px; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; font-family: var(--font-mono); }
+  .metric-sub { font-size: 11px; color: var(--dim); margin-top: 2px; }
 
   /* ── 表格 ── */
-  table.data { width: 100%; border-collapse: collapse; font-size: 12px; }
-  table.data th, table.data td { padding: 6px 10px; text-align: left; }
-  table.data th { background: var(--bg-secondary); color: var(--text-secondary); font-weight: 400; font-size: 11px; }
-  table.data td { border-top: 0.5px solid var(--border-tertiary); }
+  table.data { width: 100%; border-collapse: collapse; font-size: 12px; font-variant-numeric: tabular-nums; }
+  table.data th, table.data td { padding: 8px 12px; text-align: left; }
+  table.data th { background: var(--bg-tertiary); color: var(--muted); font-weight: 500; font-size: 11px; border-bottom: 1px solid var(--border); letter-spacing: .02em; position: sticky; top: 0; }
+  table.data td { border-bottom: 1px solid hsl(0 0% 100% / .04); }
+  /* 数字列自动等宽对齐 */
+  table.data td[style*="text-align:right"], table.data td[style*="text-align: right"] { font-family: var(--font-mono); }
+  table.data tr { transition: background-color .12s; }
+  table.data tbody tr:hover { background: hsl(0 0% 100% / .04); }
+  table.data tr:last-child td { border-bottom: none; }
 
-  /* ── 按钮 ── */
-  .btn { font-size: 12px; padding: 5px 14px; border: 0.5px solid var(--border-secondary); border-radius: var(--radius-md); background: var(--bg-primary); cursor: pointer; font-family: var(--font); transition: all .1s; }
-  .btn:hover { border-color: var(--border-primary); }
-  .btn:active { transform: scale(0.97); }
-  .btn-primary { border-color: var(--text-primary); font-weight: 500; }
-  .btn-danger { border-color: var(--text-danger); color: var(--text-danger); }
+  @keyframes tableEnter { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+  table.data tbody tr { animation: .2s cubic-bezier(.33,1,.68,1) tableEnter; }
+  table.data tbody tr:nth-child(2) { animation-delay: .02s; }
+  table.data tbody tr:nth-child(3) { animation-delay: .04s; }
+  table.data tbody tr:nth-child(4) { animation-delay: .06s; }
+  table.data tbody tr:nth-child(5) { animation-delay: .08s; }
+
+  /* ── 按钮：触觉反馈 + 主按钮微光 ── */
+  .btn { font-size: 12px; padding: 6px 14px; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--card); cursor: pointer; font-family: var(--font); transition: background .15s, border-color .15s, transform .08s var(--ease-out), box-shadow .15s; color: var(--text); font-weight: 500; }
+  .btn:hover { background: var(--secondary); border-color: var(--border-secondary); }
+  .btn:active { transform: scale(.96); }
+  .btn-primary { background: var(--primary); color: var(--primary-fg); border-color: var(--primary); }
+  .btn-primary:hover { background: hsl(0 0% 90%); border-color: hsl(0 0% 90%); }
+  .btn-accent { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn-accent:hover { background: hsl(219.7 100% 50%); box-shadow: var(--glow-accent); }
+  .btn-danger { border-color: hsla(359.2 100% 69.7% / .25); color: var(--danger); }
+  .btn-danger:hover { background: hsla(359.2 100% 69.7% / .1); border-color: hsla(359.2 100% 69.7% / .35); }
 
   /* ── 表单 ── */
-  input, select, textarea { font-size: 13px; padding: 6px 10px; border: 0.5px solid var(--border-tertiary); border-radius: var(--radius-md); font-family: var(--font); background: var(--bg-primary); }
-  input:focus, select:focus { outline: none; border-color: var(--border-primary); }
+  input, select, textarea { font-size: 13px; padding: 7px 10px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-family: var(--font); background: var(--card); color: var(--text); transition: border-color .15s, box-shadow .15s; }
+  input:focus, select:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px hsla(219.7 100% 44.9% / .2); }
   select { width: 100%; }
+  select option { background: #1a1a1a; color: var(--text); }
 
   /* ── 组件 ── */
-  .status-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; }
-  .status-dot.ok { background: var(--text-success); }
-  .status-dot.warn { background: var(--text-warning); }
-  .status-dot.err { background: var(--text-danger); }
-  .spinner { width: 14px; height: 14px; border: 2px solid var(--border-tertiary); border-top-color: var(--text-primary); border-radius: 50%; animation: spin .6s linear infinite; margin-right: 6px; }
+  .status-dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; margin-right: 6px; }
+  .status-dot.ok { background: var(--success); }
+  .status-dot.warn { background: var(--warning); }
+  .status-dot.err { background: var(--danger); }
+  .spinner { width: 14px; height: 14px; border: 2px solid hsl(0 0% 100% / .1); border-top-color: var(--accent); border-radius: 50%; animation: spin .6s linear infinite; margin-right: 6px; }
   @keyframes spin { to { transform: rotate(360deg); } }
-  .tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; }
-  .tag-ok { background: rgba(29,158,117,0.1); color: var(--text-success); }
-  .tag-warn { background: rgba(239,159,39,0.1); color: var(--text-warning); }
+  .tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 500; }
+  .tag-ok { background: hsla(160.3 100% 36.8% / .15); color: var(--success); }
+  .tag-warn { background: hsla(35.9 100% 50% / .15); color: var(--warning); }
+  .tag-danger { background: hsla(359.2 100% 69.7% / .12); color: var(--danger); }
 
   /* ── 布局工具 ── */
   .flex { display: flex; align-items: center; gap: 8px; }
   .flex-between { display: flex; justify-content: space-between; align-items: center; }
-  .text-secondary { color: var(--text-secondary); font-size: 12px; }
+  .text-secondary { color: var(--muted); font-size: 12px; }
   .mt-sm { margin-top: 8px; } .mt-md { margin-top: 16px; }
   .mb-sm { margin-bottom: 8px; } .mb-md { margin-bottom: 16px; }
 
-  /* ── 标签页渐入动画 ── */
-  .tab-content.active { animation: fadeIn .25s ease; }
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+  /* ── 骨架屏 (暗色) ── */
+  .skeleton { background: linear-gradient(90deg, hsl(0 0% 16%) 25%, hsl(0 0% 20%) 50%, hsl(0 0% 16%) 75%); background-size: 200% 100%; animation: shimmer 1.8s ease-in-out infinite; border-radius: var(--radius-sm); height: 14px; margin-bottom: 6px; }
+  @keyframes shimmer { 0%{background-position:200% 0} to{background-position:-200% 0} }
+
+  /* ── 响应式 ── */
+  @media (max-width: 768px) {
+    .sidebar { width: 56px; }
+    .sidebar .brand { font-size: 0; padding: 16px 12px; }
+    .sidebar .nav-item { justify-content: center; padding: 10px; }
+    .sidebar .nav-item .icon { margin: 0; }
+    .sidebar .nav-item .label { display: none; }
+    .sidebar .footer { display: none; }
+    .main { margin-left: 56px; }
+    .content { padding: 16px; }
+    :root { --sidebar-w: 56px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tab-content.active { animation: none; }
+    table.data tbody tr { animation: none; }
+    .skeleton { animation: none; background: hsl(0 0% 16%); }
+  }
 </style>
 </head>
 <body>
-<div class="app">
 
-<!-- ════ 全局状态栏 ════ -->
-<div class="status-bar" id="status_bar">
-  <span class="flex"><span class="pulse off" id="sb_pulse"></span><span id="sb_daemon">检查中...</span></span>
-  <span class="sep">|</span>
-  <span>今日抓取 <span class="metric" id="sb_today">-</span> 条</span>
-  <span class="sep">|</span>
-  <span>累计 <span class="metric" id="sb_total">-</span> 条推文</span>
-  <span class="sep">|</span>
-  <span style="margin-left:auto;font-size:11px;color:var(--text-tertiary)" id="sb_updated"></span>
-</div>
+<!-- ════ 全局 Toast ──── -->
+<div id="global-toast"></div>
 
-<!-- ════ 页面头部 ════ -->
-<div class="header">
-  <h1>Twitter Investor Distiller</h1>
-  <p>抓取 → 分析 → 画像 → 信号</p>
-</div>
+<!-- ════ 布局：侧边栏 + 主区域 ──── -->
+<div class="layout">
 
-<!-- ════ 标签页 ════ -->
-<div class="tabs">
-  <button class="tab active" onclick="switchTab('signals')">信号看板</button>
-  <button class="tab" onclick="switchTab('workbench')">决策工作台</button>
-  <button class="tab" onclick="switchTab('analysts')">分析师</button>
-  <button class="tab" onclick="switchTab('system')">系统</button>
-</div>
-<!-- 默认显示信号看板，避免JS加载前空白 -->
-<div id="tab-signals" class="tab-content active" style="min-height:200px">
-  <div class="flex" style="justify-content:center;padding:40px 0"><div class="spinner"></div><span class="text-secondary">正在加载卡片...</span></div>
-</div>
-<div id="tab-workbench" class="tab-content"></div>
-<div id="tab-analysts" class="tab-content"></div>
-<div id="tab-system" class="tab-content"></div>
+<!-- ════ 侧边栏 ──── -->
+<aside class="sidebar" id="sidebar">
+  <div class="brand"><a href="/"><span class="logo-mark">蒸</span><span>投资信号蒸馏台</span></a></div>
+  <nav class="nav" id="sidebar_nav"></nav>
+  <div class="footer">
+    <span id="sidebar_status">加载中...</span>
+    <span style="float:right"><span class="status-dot" id="sb_pulse" style="display:inline-block"></span></span>
+  </div>
+</aside>
+
+<!-- ════ 主区域 ──── -->
+<main class="main">
+  <div class="topbar">
+    <span id="topbar_title" class="title">今日信号</span>
+    <span class="sep"></span>
+    <span class="status-text" id="sb_daemon">加载中...</span>
+    <span class="sep"></span>
+    <span class="status-text">今日 <strong id="sb_today">-</strong> 条</span>
+    <span class="sep"></span>
+    <span class="status-text">累计 <strong id="sb_total">-</strong></span>
+    <span class="spacer"></span>
+    <span class="status-text" id="sb_updated"></span>
+  </div>
+  <div class="content">
+    <div id="tab_contents"></div>
+  </div>
+</main>
+
 </div>
 
 <script>
-// ════ 卡片编排 — 按用户心智分组 ════
-const CARD_ORDER = {
-  signals: ["consensus","rotation","anomaly","crypto","timeline","network"],
-  workbench: ["role_picker","portfolio"],
-  analysts: ["portrait_generate","portrait","accuracy"],
-  system: ["daemon","api_status","system_status","fetch_control","telegram","pipeline_execute","script_runner"]
+// ═══════════════════════════════════════════════════════════
+// 全局运行时状态
+// ═══════════════════════════════════════════════════════════
+var ALL_CARDS = [];
+var TABS = [];
+var TAB_CARDS = {};
+var CARD_META = {};
+var CACHE = {};
+var LAST_FETCH = {};
+var REFRESH_MAP = {};
+
+async function apiFetch(url, options) {
+  try {
+    var res = await fetch(url, options);
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    return await res.json();
+  } catch (e) {
+    showToast('请求失败: ' + e.message);
+    console.error('[apiFetch]', url, e);
+    return null;
+  }
+}
+
+function showToast(msg, duration) {
+  var el = document.getElementById('global-toast');
+  if (!el) return;
+  el.textContent = msg;
+  el.classList.add('show');
+  clearTimeout(el._tid);
+  el._tid = setTimeout(function() { el.classList.remove('show'); }, duration || 4000);
+}
+
+// ═══════════════════════════════════════════════════════════
+// 元数据加载 → 构建侧边栏 + 卡片分组
+// ═══════════════════════════════════════════════════════════
+var TAB_ICONS = {
+  signals: '📡',
+  decisions: '🎯',
+  research: '🔍',
+  data: '🗄️',
+  settings: '⚙️'
 };
 
-const cache = {};
-const REFRESH_MAP = {};
-const LAST_FETCH = {};
+async function bootstrap() {
+  var meta = await apiFetch('/cards/meta');
+  if (!meta || !meta.length) { showToast('无法加载卡片元数据'); return; }
+  ALL_CARDS = meta;
+  meta.forEach(function(c) { CARD_META[c.name] = c; REFRESH_MAP[c.name] = c.refresh; });
 
-// ════ 全局状态栏更新 ════
-async function updateStatusBar() {
-  try {
-    var dr = await fetch('/cards/daemon'), d = await dr.text();
-    var ar = await fetch('/cards/api_status'), a = await ar.json();
-    var parser = new DOMParser();
-    var daemon_doc = parser.parseFromString(d, 'text/html');
-    var running = daemon_doc.body.textContent.indexOf('运行中') > -1;
-
-    var pulse = document.getElementById('sb_pulse');
-    pulse.className = 'pulse ' + (running ? 'on' : 'off');
-
-    // 限流状态
-    var rateLimited = a.rate_limited;
-    document.getElementById('sb_daemon').textContent = rateLimited
-      ? 'Daemon 限流等待中...'
-      : (running ? 'Daemon 运行中' : 'Daemon 已停止');
-    if (rateLimited) {
-      pulse.className = 'pulse';
-      pulse.style.background = 'var(--text-warning)';
-    }
-    document.getElementById('sb_today').textContent = running ? (a.total_fetched || '-') : '-';
-    document.getElementById('sb_total').textContent = Object.values(a.user_counts||{}).reduce(function(s,v){return s+v},0) || '-';
-    document.getElementById('sb_updated').textContent = a.last_updated !== '未开始' ? '更新于 ' + a.last_updated : '';
-  } catch(e) {}
-}
-
-// ════ 标签页 — 记住最后位置，reload 后恢复 ════
-function switchTab(tab) {
-  sessionStorage.setItem('lastTab', tab);
-  var labels = {signals:'信号看板', workbench:'决策工作台', analysts:'分析师', system:'系统'};
-  document.querySelectorAll('.tab').forEach(function(t) {
-    t.classList.toggle('active', t.textContent === labels[tab]);
+  // 去重 + 排序标签页
+  var tabMap = {};
+  meta.forEach(function(c) {
+    if (!tabMap[c.tab]) tabMap[c.tab] = { key: c.tab, label: c.tab_label, order: c.tab_order };
   });
-  document.querySelectorAll('.tab-content').forEach(function(c) { c.classList.remove('active'); });
-  document.getElementById('tab-' + tab).classList.add('active');
-  loadCards(tab);
+  TABS = Object.values(tabMap).sort(function(a, b) { return a.order - b.order; });
+
+  // 按 tab 分组 + 排序
+  TAB_CARDS = {};
+  meta.forEach(function(c) {
+    if (!TAB_CARDS[c.tab]) TAB_CARDS[c.tab] = [];
+    TAB_CARDS[c.tab].push(c);
+  });
+  Object.keys(TAB_CARDS).forEach(function(t) {
+    TAB_CARDS[t].sort(function(a, b) { return a.order - b.order; });
+  });
+
+  renderSidebar();
+  var lastTab = sessionStorage.getItem('lastTab') || (TABS[0] ? TABS[0].key : '');
+  if (!TABS.some(function(t) { return t.key === lastTab; })) {
+    lastTab = TABS[0] ? TABS[0].key : '';
+  }
+  switchTab(lastTab);
+  updateStatusBar();
+  setInterval(autoRefresh, 5000);
 }
 
-async function loadCards(tab) {
-  var container = document.getElementById('tab-' + tab);
-  var names = CARD_ORDER[tab] || [];
-  var hasCache = names.filter(function(n) { return !!cache[n]; });
+function renderSidebar() {
+  var nav = document.getElementById('sidebar_nav');
+  nav.innerHTML = '';
+  TABS.forEach(function(t) {
+    var item = document.createElement('div');
+    item.className = 'nav-item';
+    item.setAttribute('data-tab', t.key);
+    item.innerHTML = '<span class="icon">' + (TAB_ICONS[t.key] || '') + '</span><span class="label">' + t.label + '</span>';
+    nav.appendChild(item);
+  });
+}
 
-  if (hasCache.length === names.length) {
-    container.innerHTML = names.map(function(n) { return cache[n]; }).join('');
-    postRender(tab);
+function switchTab(tabKey) {
+  sessionStorage.setItem('lastTab', tabKey);
+  document.querySelectorAll('.nav-item').forEach(function(item) {
+    item.classList.toggle('active', item.getAttribute('data-tab') === tabKey);
+  });
+  var tab = TABS.find(function(t) { return t.key === tabKey; });
+  if (tab) document.getElementById('topbar_title').textContent = tab.label;
+
+  document.querySelectorAll('.tab-content').forEach(function(c) { c.classList.remove('active'); });
+  var el = document.getElementById('tab-' + tabKey);
+  if (el) el.classList.add('active');
+  loadCards(tabKey);
+}
+
+// ═══════════════════════════════════════════════════════════
+// 卡片加载
+// ═══════════════════════════════════════════════════════════
+async function loadCards(tabKey) {
+  var container = document.getElementById('tab-' + tabKey);
+  if (!container) {
+    var contents = document.getElementById('tab_contents');
+    container = document.createElement('div');
+    container.id = 'tab-' + tabKey;
+    container.className = 'tab-content';
+    contents.appendChild(container);
+  }
+  var cards = TAB_CARDS[tabKey] || [];
+  if (!cards.length) return;
+
+  var allCached = cards.every(function(c) { return !!CACHE[c.name]; });
+  if (allCached) {
+    container.innerHTML = cards.map(function(c) { return CACHE[c.name].html; }).join('');
+    postRender(container, cards);
+    container.classList.add('active');
     return;
   }
 
-  container.innerHTML = names.map(function(n) {
-    return cache[n] || (
-      '<div id="card-'+n+'" class="card" style="margin-bottom:12px">' +
-      '<div class="flex"><div class="spinner"></div><span class="text-secondary">加载中...</span></div>' +
-      '</div>'
-    );
+  container.innerHTML = cards.map(function(c) {
+    if (CACHE[c.name]) return CACHE[c.name].html;
+    return '<div id="card-' + c.name + '" class="card" data-card="' + c.name + '"><div class="flex"><div class="spinner"></div><span class="text-secondary">加载中...</span></div></div>';
   }).join('');
+  container.classList.add('active');
 
-  var toFetch = names.filter(function(n) { return !cache[n]; });
-  var promises = names.map(async function(name) {
-    if (toFetch.indexOf(name) >= 0) {
-      try {
-        var resp = await fetch('/cards/' + name);
-        var html = await resp.text();
-        cache[name] = html;
-        LAST_FETCH[name] = Date.now();
-      } catch(e) {
-        cache[name] = '<div class="flex"><div class="status-dot err"></div><span class="text-secondary">加载失败</span></div>';
+  var promises = cards.map(async function(c) {
+    if (CACHE[c.name]) {
+      var el = document.getElementById('card-' + c.name);
+      if (el) { el.innerHTML = CACHE[c.name].html; el.setAttribute('data-card', c.name); }
+      return;
+    }
+    var result = await apiFetch('/cards/' + c.name);
+    if (!result || result.error) {
+      CACHE[c.name] = { html: '<div class="flex"><div class="status-dot err"></div><span class="text-secondary">加载失败</span><button class="btn" style="margin-left:8px;font-size:10px" data-action="retry-card" data-card="' + c.name + '">重试</button></div>', data: {} };
+    } else {
+      CACHE[c.name] = { html: result.html, data: result.data || {} };
+      LAST_FETCH[c.name] = Date.now();
+    }
+    var el = document.getElementById('card-' + c.name);
+    if (el) { el.innerHTML = CACHE[c.name].html; el.setAttribute('data-card', c.name); }
+  });
+  await Promise.all(promises);
+  postRender(container, cards);
+}
+
+function retryCard(name) {
+  delete CACHE[name];
+  var el = document.getElementById('card-' + name);
+  if (el) el.innerHTML = '<div class="flex"><div class="spinner"></div><span class="text-secondary">重新加载...</span></div>';
+  for (var t in TAB_CARDS) {
+    for (var i = 0; i < TAB_CARDS[t].length; i++) {
+      if (TAB_CARDS[t][i].name === name) { loadCards(t); return; }
+    }
+  }
+}
+
+function postRender(container, cards) {
+  cards.forEach(function(c) {
+    var meta = CARD_META[c.name];
+    if (!meta) return;
+    var el = document.getElementById('card-' + c.name);
+    if (!el) return;
+    el.setAttribute('data-card', c.name);
+    if (meta.is_headline) el.classList.add('card-headline');
+    if (meta.span_full) el.style.gridColumn = '1 / -1';
+    // 注入一句话功能说明（命名优化层）：插到卡片标题正下方，仅注入一次
+    if (meta.subtitle && !el.querySelector('.card-subtitle')) {
+      var titleEl = el.querySelector('.card-title');
+      if (titleEl) {
+        var sub = document.createElement('div');
+        sub.className = 'card-subtitle';
+        sub.textContent = meta.subtitle;
+        titleEl.insertAdjacentElement('afterend', sub);
       }
     }
-    var el = document.getElementById('card-' + name);
-    if (el) el.innerHTML = cache[name];
   });
-
-  await Promise.all(promises);
-  postRender(tab);
 }
 
-// ════ 渲染后处理 ════
-function postRender(tab) {
-  // 信号看板: 给共识卡片加头条样式
-  if (tab === 'signals') {
-    var consensusCard = document.getElementById('card-consensus');
-    if (consensusCard) consensusCard.classList.add('card-headline');
-  }
-  // 决策工作台: 调整宽度
-  if (tab === 'workbench') {
-    var rp = document.getElementById('card-role_picker');
-    var pf = document.getElementById('card-portfolio');
-    if (rp) rp.style.gridColumn = '1 / 3';
+function cardEl(cardName, selector) {
+  var container = document.getElementById('card-' + cardName);
+  return container ? container.querySelector(selector) : null;
+}
+
+function fillChatQuestion(question) {
+  var input = cardEl('chat', '#chat-question');
+  if (input && question) input.value = question;
+}
+
+async function askChat() {
+  var input = cardEl('chat', '#chat-question');
+  var answer = cardEl('chat', '#chat-answer');
+  if (!input || !answer) return;
+  var question = input.value.trim();
+  if (!question) { answer.innerText = '请先输入问题'; return; }
+  answer.innerHTML = '<div class="flex"><div class="spinner"></div><span class="text-secondary">正在检索历史观点...</span></div>';
+  var result = await apiFetch('/cards/chat/action', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({action: 'ask', question: question, top_k: 5})
+  });
+  if (result && result.ok) {
+    answer.innerText = result.answer || '未生成回答';
+  } else {
+    answer.innerText = '问答失败: ' + ((result && result.error) || '未知错误');
   }
 }
 
-// ════ 后台自动刷新 ────
-var PE_ACTIVE = 'filter';
-var PIPELINE_EXECUTE_REFRESHED = false;
+// ═══════════════════════════════════════════════════════════
+// 自动刷新
+// ═══════════════════════════════════════════════════════════
 async function autoRefresh() {
   var active = document.querySelector('.tab-content.active');
   if (!active) return;
-  var tabName = active.id.replace('tab-','');
-  var names = CARD_ORDER[tabName] || [];
+  var tabKey = active.id.replace('tab-', '');
+  var cards = TAB_CARDS[tabKey] || [];
   var now = Date.now();
-  for (var i = 0; i < names.length; i++) {
-    var name = names[i];
+  for (var i = 0; i < cards.length; i++) {
+    var name = cards[i].name;
     var interval = (REFRESH_MAP[name] || 0) * 1000;
-    if (interval > 0 && now - (LAST_FETCH[name] || 0) > interval) {
-      try {
-        var resp = await fetch('/cards/' + name);
-        var html = await resp.text();
-        if (cache[name] === html) continue;
-        cache[name] = html;
-        LAST_FETCH[name] = Date.now();
-        var el = document.getElementById('card-' + name);
-        if (el) el.innerHTML = html;
-        if (name === 'pipeline_execute') PIPELINE_EXECUTE_REFRESHED = true;
-      } catch(e) {}
-    }
-  }
-  if (PIPELINE_EXECUTE_REFRESHED && tabName === 'system') {
-    PIPELINE_EXECUTE_REFRESHED = false;
-    setTimeout(function() { loadTypePE(PE_ACTIVE); }, 50);
+    if (interval <= 0) continue;
+    if (now - (LAST_FETCH[name] || 0) <= interval) continue;
+    var result = await apiFetch('/cards/' + name);
+    if (!result || result.error) continue;
+    var newHtml = result.html;
+    if (CACHE[name] && CACHE[name].html === newHtml) continue;
+    CACHE[name] = { html: newHtml, data: result.data || {} };
+    LAST_FETCH[name] = Date.now();
+    var el = document.getElementById('card-' + name);
+    if (el) el.innerHTML = newHtml;
+    el && el.dispatchEvent(new CustomEvent('cardRefreshed', { bubbles: true }));
   }
   updateStatusBar();
 }
 
-// ════ Daemon 启停 ────
+// ═══════════════════════════════════════════════════════════
+// 状态栏
+// ═══════════════════════════════════════════════════════════
+async function updateStatusBar() {
+  var dResult = await apiFetch('/cards/daemon');
+  var aResult = await apiFetch('/cards/api_status');
+  if (!dResult || !aResult) return;
+  var d = dResult.data, a = aResult.data;
+  var running = d.running || false, rateLimited = a.rate_limited;
+
+  var pulse = document.getElementById('sb_pulse');
+  pulse.className = 'status-dot ' + (running ? 'on pulse' : 'off');
+  pulse.style.background = rateLimited ? 'var(--warning)' : '';
+
+  document.getElementById('sb_daemon').textContent = rateLimited ? '限流等待中...' : (running ? '自动采集运行中' : '自动采集已停止');
+  document.getElementById('sidebar_status').textContent = rateLimited ? '限流中' : (running ? '运行中' : '已停止');
+  document.getElementById('sb_today').textContent = running ? (a.total_fetched || '-') : '-';
+  var total = 0; var counts = a.user_counts || {};
+  Object.keys(counts).forEach(function(k) { total += counts[k]; });
+  document.getElementById('sb_total').textContent = total || '-';
+  document.getElementById('sb_updated').textContent = a.last_updated && a.last_updated !== '未开始' ? '更新于 ' + a.last_updated : '';
+}
+
+// ═══════════════════════════════════════════════════════════
+// 侧边栏点击事件委托
+// ═══════════════════════════════════════════════════════════
+document.getElementById('sidebar_nav').addEventListener('click', function(e) {
+  var item = e.target.closest('[data-tab]');
+  if (!item) return;
+  switchTab(item.getAttribute('data-tab'));
+});
+
+// ═══════════════════════════════════════════════════════════
+// 全局事件委托 — data-action 驱动的交互路由
+// ═══════════════════════════════════════════════════════════
+// 提取共享分发逻辑，供 click 和 change 事件复用
+function _dispatchAction(el) {
+  var action = el.getAttribute('data-action');
+  if (!action) return;
+  var cardEl = el.closest('[data-card]');
+  var cardName = cardEl ? cardEl.getAttribute('data-card') : '';
+
+  switch (action) {
+    case 'ask-chat': askChat(); break;
+    case 'fill-chat-question': fillChatQuestion(el.getAttribute('data-question')); break;
+    case 'toggle-daemon': toggleDaemon(); break;
+    case 'test-telegram': sendTestMsg(); break;
+    case 'save-telegram': saveTelegram(); break;
+    case 'fetch-manual': fetchManually(); break;
+    case 'gen-pick': generatePick(); break;
+    case 'analyze-portfolio': analyzePortfolio(); break;
+    case 'gen-portrait': genPortraitAdv(); break;
+    case 'seed-tasks': seedTasksPE(); break;
+    case 'run-clean': runCleanAlias(); break;
+    case 'add-alias': addAlias(cardName); break;
+    case 'toggle-scripts': toggleScriptTools(); break;
+    case 'add-user': addTrackedUser(); break;
+    case 'exec-pipeline': execPipeline(el.getAttribute('data-type')); break;
+    case 'select-all-pe': selectAllPE(el.getAttribute('data-type')); break;
+    case 'clear-all-pe': clearAllPE(el.getAttribute('data-type')); break;
+    case 'retry-task': retryTaskPE(el.getAttribute('data-id')); break;
+    case 'skip-task': skipTaskPE(el.getAttribute('data-id')); break;
+    case 'load-type-pe': loadTypePE(el.getAttribute('data-type')); break;
+    case 'select-window': selectWindow(el.getAttribute('data-label')); break;
+    case 'edit-alias': editAliasRow(cardName, el.getAttribute('data-alias'), el.getAttribute('data-ticker'), el.getAttribute('data-notes')); break;
+    case 'delete-alias': deleteAlias(cardName, el.getAttribute('data-alias')); break;
+    case 'fill-alias': fillAliasForm(cardName, el.getAttribute('data-alias'), el.getAttribute('data-notes')); break;
+    case 'skip-alias': skipAlias(cardName, el.getAttribute('data-alias')); break;
+    case 'unskip-alias': unskipAlias(cardName, el.getAttribute('data-alias')); break;
+    case 'toggle-portrait': togglePortrait(el.getAttribute('data-id')); break;
+    case 'run-script': runScript(el.getAttribute('data-script')); break;
+    case 'retry-card': retryCard(cardName); break;
+    case 'update-pool': updatePool(); break;
+  }
+}
+
+document.addEventListener('click', function(e) {
+  var el = e.target.closest('[data-action]');
+  if (!el) return;
+  _dispatchAction(el);
+});
+
+document.addEventListener('change', function(e) {
+  var el = e.target.closest('[data-action]');
+  if (!el) return;
+  _dispatchAction(el);
+});
+
+// ═══════════════════════════════════════════════════════════
+// Daemon 启停
+// ═══════════════════════════════════════════════════════════
 async function toggleDaemon() {
   var btn = document.getElementById('daemon-btn');
   if (!btn) return;
   btn.disabled = true;
-  try {
-    await fetch('/cards/daemon/action', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'toggle'})});
-  } catch(e) {}
-  try {
-    var resp = await fetch('/cards/daemon');
-    cache.daemon = await resp.text();
-    var el = document.getElementById('card-daemon');
-    if (el) el.innerHTML = cache.daemon;
-  } catch(e) {}
-  updateStatusBar();
+  var before = await apiFetch('/cards/daemon');
+  var wasRunning = before && before.data && before.data.running;
+  await apiFetch('/cards/daemon/action', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({action:'toggle'}) });
+  for (var i = 0; i < 12; i++) {
+    await new Promise(function(r) { setTimeout(r, 500); });
+    var poll = await apiFetch('/cards/daemon');
+    if (poll && poll.data && poll.data.running !== wasRunning) break;
+  }
+  var result = await apiFetch('/cards/daemon');
+  if (result) { CACHE.daemon = { html: result.html, data: result.data || {} }; LAST_FETCH.daemon = Date.now(); var el = document.getElementById('card-daemon'); if (el) el.innerHTML = result.html; }
+  updateStatusBar(); btn.disabled = false;
 }
 
-// ════ 流水线执行 ────
+// ═══════════════════════════════════════════════════════════
+// 所有交互函数
+// ═══════════════════════════════════════════════════════════
+var PE_ACTIVE = 'filter';
 function loadTypePE(t) {
   PE_ACTIVE = t;
-  document.querySelectorAll('.pe-container').forEach(function(e){e.style.display='none';});
-  document.querySelectorAll('.pe-tab').forEach(function(e){e.classList.remove('active');});
-  var c=document.getElementById('pe-type-'+t); if(c)c.style.display='block';
-  // 子 tab：analyze 下展示 fetch_price + fetch_crypto
-  if(t==='analyze') {
-    ['fetch_price','fetch_crypto'].forEach(function(st){
-      var sc=document.getElementById('pe-type-'+st); if(sc)sc.style.display='block';
-    });
-  }
-  var tab=document.getElementById('tab-'+t); if(tab)tab.classList.add('active');
+  document.querySelectorAll('.pe-container').forEach(function(e) { e.style.display = 'none'; });
+  document.querySelectorAll('.pe-tab').forEach(function(e) { e.classList.remove('active'); });
+  var c = document.getElementById('pe-type-' + t); if (c) c.style.display = 'block';
+  if (t === 'analyze') { ['fetch_price','fetch_crypto'].forEach(function(st) { var sc = document.getElementById('pe-type-' + st); if (sc) sc.style.display = 'block'; }); }
+  var tab = document.getElementById('tab-' + t); if (tab) tab.classList.add('active');
 }
-function selectAllPE(t){document.querySelectorAll('.pe-cb-'+t).forEach(function(c){c.checked=true;});}
-function clearAllPE(t){document.querySelectorAll('.pe-cb-'+t).forEach(function(c){c.checked=false;});}
-async function execPipeline(t){
-  var ids=[];document.querySelectorAll('.pe-cb-'+t+':checked').forEach(function(c){ids.push(c.value);});
-  if(!ids.length)return;
-  var s=document.getElementById('pe-msg'); if(s)s.innerText='执行中...';
-  try{
-    var r=await fetch('/pipeline/tasks/execute',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({task_ids:ids})});
-    if(s)s.innerText='已提交 '+ids.length+' 个'; setTimeout(function(){location.reload();},2000);
-  }catch(e){if(s)s.innerText='网络错误';}
+function selectAllPE(t) { document.querySelectorAll('.pe-cb-' + t).forEach(function(c) { c.checked = true; }); }
+function clearAllPE(t) { document.querySelectorAll('.pe-cb-' + t).forEach(function(c) { c.checked = false; }); }
+async function execPipeline(t) {
+  var ids = []; document.querySelectorAll('.pe-cb-' + t + ':checked').forEach(function(c) { ids.push(c.value); });
+  if (!ids.length) return;
+  var s = document.getElementById('pe-msg'); if (s) s.innerText = '执行中...';
+  var result = await apiFetch('/pipeline/tasks/execute', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({task_ids:ids}) });
+  if (s) s.innerText = result && result.ok ? '已提交 ' + ids.length + ' 个' : '提交失败';
+  if (result && result.ok) setTimeout(function() { location.reload(); }, 2000);
 }
-async function retryTaskPE(id){await fetch('/pipeline/tasks/'+id+'/retry',{method:'POST'});location.reload();}
-async function skipTaskPE(id){await fetch('/pipeline/tasks/'+id+'/skip',{method:'POST'});location.reload();}
-async function seedTasksPE(){
-  var s=document.getElementById('pe-msg'); if(s)s.innerText='种子任务扫描中...';
-  try{
-    var r=await fetch('/pipeline/tasks/seed',{method:'POST'});
-    var d=await r.json();
-    if(s)s.innerText=d.ok?(d.message||'已完成') :('错误: '+(d.error||'未知'));
-  }catch(e){if(s)s.innerText='网络错误';}
-  // 静默刷新 pipeline_execute 卡片
-  setTimeout(async function(){
-    try{
-      var resp=await fetch('/cards/pipeline_execute');
-      cache['pipeline_execute']=await resp.text();
-      LAST_FETCH['pipeline_execute']=Date.now();
-      var el=document.getElementById('card-pipeline_execute');
-      if(el)el.innerHTML=cache['pipeline_execute'];
-      loadTypePE(PE_ACTIVE);
-    }catch(e){}
-  },1000);
+async function retryTaskPE(id) {
+  var s = document.getElementById('pe-msg'); if (s) s.innerText = '重试中...';
+  var result = await apiFetch('/pipeline/tasks/' + id + '/retry', { method:'POST' });
+  if (result && result.ok) location.reload();
+  else if (s) s.innerText = '重试失败: ' + ((result && result.error) || '未知错误');
 }
-async function runCleanAlias(){
-  var s=document.getElementById('clean_status');
-  if(s)s.innerText='校准中...';
-  try{
-    var r=await fetch('/pipeline/clean',{method:'POST'});
-    var d=await r.json();
-    if(s)s.innerText=d.ok?'完成, 清理了 '+d.cleaned+' 项':'失败';
-  }catch(e){if(s)s.innerText='失败';}
-  setTimeout(function(){location.reload();},2000);
+async function skipTaskPE(id) {
+  var s = document.getElementById('pe-msg'); if (s) s.innerText = '跳过中...';
+  var result = await apiFetch('/pipeline/tasks/' + id + '/skip', { method:'POST' });
+  if (result && result.ok) location.reload();
+  else if (s) s.innerText = '跳过失败: ' + ((result && result.error) || '未知错误');
 }
-
-// ════ 画像生成 ────
-function selectWindow(label){
-  document.getElementById('pg_window').value=label;
-  document.querySelectorAll('.pg-win-btn').forEach(function(b){b.classList.remove('selected');});
-  var btn=document.getElementById('pg_win_'+label); if(btn)btn.classList.add('selected');
-  document.getElementById('pg_from').value=''; document.getElementById('pg_to').value='';
+async function seedTasksPE() {
+  var s = document.getElementById('pe-msg'); if (s) s.innerText = '扫描中...';
+  var result = await apiFetch('/pipeline/tasks/seed', { method:'POST' });
+  if (s) s.innerText = result && result.ok ? (result.message || '已完成') : ('错误: ' + ((result && result.error) || '未知'));
+  setTimeout(async function() {
+    var r = await apiFetch('/cards/pipeline_execute');
+    if (r) { CACHE.pipeline_execute = { html: r.html, data: r.data || {} }; LAST_FETCH.pipeline_execute = Date.now(); var el = document.getElementById('card-pipeline_execute'); if (el) el.innerHTML = r.html; loadTypePE(PE_ACTIVE); }
+  }, 1000);
 }
-async function genPortraitAdv(){
-  var u=document.getElementById('pg_user').value,w=document.getElementById('pg_window').value;
-  var from=document.getElementById('pg_from').value,to=document.getElementById('pg_to').value;
-  var label=document.getElementById('pg_label').value.trim(),s=document.getElementById('pg_status');
-  if(!w&&!from){if(s)s.innerText='请先选择时间窗口或日期';return;}
-  if((from&&!to)||(!from&&to)){if(s)s.innerText='日期范围需同时填写起止';return;}
-  if(s)s.innerText='生成中...';
-  try{
-    var r=await fetch('/cards/portrait_generate/action',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user:u,window:w,from:from,to:to,label:label})});
-    var d=await r.json();
-    if(s)s.innerText=d.ok?'任务已创建 #'+d.task_id:'失败: '+(d.error||'');
-    if(d.ok)setTimeout(function(){location.reload();},1500);
-  }catch(e){if(s)s.innerText='网络错误';}
+async function runCleanAlias() {
+  var s = document.getElementById('pipeline_execute-clean_status'); if (s) s.innerText = '校准中...';
+  var result = await apiFetch('/pipeline/clean', { method:'POST' });
+  if (s) s.innerText = result && result.ok ? ('完成, 清理了 ' + result.cleaned + ' 项') : '失败';
+  if (result && result.ok) setTimeout(function() { location.reload(); }, 2000);
 }
-
-// ════ 资产代码库 ────
-function editAliasRow(alias,ticker,notes){
-  document.getElementById('aa_alias').value=alias;
-  document.getElementById('aa_ticker').value=ticker||'';
-  document.getElementById('aa_notes').value=notes||'';
-  document.getElementById('aa_old_alias').value=alias;
-  document.getElementById('btn_aa_submit').innerText='更新';
+function selectWindow(label) {
+  document.getElementById('pg_window').value = label;
+  document.querySelectorAll('.pg-win-btn').forEach(function(b) { b.classList.remove('selected'); });
+  var btn = document.getElementById('pg_win_' + label); if (btn) btn.classList.add('selected');
+  document.getElementById('pg_from').value = ''; document.getElementById('pg_to').value = '';
 }
-function fillAliasForm(alias,notes){
-  document.getElementById('aa_alias').value=alias;
-  document.getElementById('aa_ticker').value='';
-  document.getElementById('aa_notes').value=notes||'';
-  document.getElementById('aa_old_alias').value=alias;
-  document.getElementById('btn_aa_submit').innerText='确认';
-  document.getElementById('aa_ticker').focus();
+async function genPortraitAdv() {
+  var u = document.getElementById('pg_user').value, w = document.getElementById('pg_window').value;
+  var from = document.getElementById('pg_from').value, to = document.getElementById('pg_to').value;
+  var label = document.getElementById('pg_label').value.trim(), s = document.getElementById('pg_status');
+  if (!w && !from) { if (s) s.innerText = '请先选择时间窗口或日期'; return; }
+  if ((from && !to) || (!from && to)) { if (s) s.innerText = '日期范围需同时填写起止'; return; }
+  if (s) s.innerText = '生成中...';
+  var result = await apiFetch('/cards/portrait_generate/action', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({user:u, window:w, from:from, to:to, label:label}) });
+  if (s) s.innerText = result && result.ok ? ('任务已创建 #' + result.task_id) : ('失败: ' + ((result && result.error) || ''));
+  if (result && result.ok) setTimeout(function() { location.reload(); }, 1500);
 }
-async function addAlias(){
-  var alias=document.getElementById('aa_alias').value.trim(),ticker=document.getElementById('aa_ticker').value.trim();
-  var notes=document.getElementById('aa_notes').value.trim(),old=document.getElementById('aa_old_alias').value.trim();
-  var action=old?'edit':'add';
-  if(!alias){setStatus('aa_status','别名不能为空');return;}
-  setStatus('aa_status',(action==='edit'?'更新中...':'添加中...'));
-  try{
-    var r=await fetch('/cards/asset_alias/action',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:action,alias:alias,ticker:ticker,notes:notes,old_alias:old})});
-    var d=await r.json();
-    if(d.ok){setStatus('aa_status','成功');document.getElementById('btn_aa_submit').innerText='添加';document.getElementById('aa_old_alias').value='';location.reload();}
-    else setStatus('aa_status',d.error);
-  }catch(e){setStatus('aa_status','网络错误');}
+function editAliasRow(cardName, alias, ticker, notes) {
+  cardEl(cardName, '#aa_alias').value = alias;
+  cardEl(cardName, '#aa_ticker').value = ticker || '';
+  cardEl(cardName, '#aa_notes').value = notes || '';
+  cardEl(cardName, '#aa_old_alias').value = alias;
+  cardEl(cardName, '#btn_aa_submit').innerText = '更新';
 }
-async function deleteAlias(alias){
-  if(!confirm('确定删除 "'+alias+'" 吗？'))return;
-  setStatus('aa_status','删除中...');
-  try{
-    var r=await fetch('/cards/asset_alias/action',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'delete',alias:alias})});
-    var d=await r.json(); if(d.ok)location.reload(); else setStatus('aa_status',d.error);
-  }catch(e){setStatus('aa_status','网络错误');}
+function fillAliasForm(cardName, alias, notes) {
+  cardEl(cardName, '#aa_alias').value = alias;
+  cardEl(cardName, '#aa_ticker').value = '';
+  cardEl(cardName, '#aa_notes').value = notes || '';
+  cardEl(cardName, '#aa_old_alias').value = alias;
+  cardEl(cardName, '#btn_aa_submit').innerText = '确认';
+  cardEl(cardName, '#aa_ticker').focus();
 }
-async function skipAlias(alias){
-  setStatus('aa_status','跳过中...');
-  try{
-    var r=await fetch('/cards/asset_alias/action',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'skip',alias:alias})});
-    var d=await r.json(); if(d.ok)location.reload(); else setStatus('aa_status',d.error);
-  }catch(e){setStatus('aa_status','网络错误');}
+function setStatus(id, msg) { var el = document.getElementById(id); if (el) el.innerText = msg; }
+async function addAlias(cardName) {
+  var alias = cardEl(cardName, '#aa_alias').value.trim(), ticker = cardEl(cardName, '#aa_ticker').value.trim();
+  var notes = cardEl(cardName, '#aa_notes').value.trim(), old = cardEl(cardName, '#aa_old_alias').value.trim();
+  var action = old ? 'edit' : 'add';
+  if (!alias) { setStatus(cardName + '-aa_status', '别名不能为空'); return; }
+  setStatus(cardName + '-aa_status', action === 'edit' ? '更新中...' : '添加中...');
+  var result = await apiFetch('/cards/asset_alias/action', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({action:action, alias:alias, ticker:ticker, notes:notes, old_alias:old}) });
+  if (result && result.ok) { setStatus(cardName + '-aa_status', '成功'); cardEl(cardName, '#btn_aa_submit').innerText = '添加'; cardEl(cardName, '#aa_old_alias').value = ''; location.reload(); }
+  else setStatus(cardName + '-aa_status', result ? result.error : '网络错误');
 }
-async function unskipAlias(alias){
-  setStatus('aa_status','恢复中...');
-  try{
-    var r=await fetch('/cards/asset_alias/action',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'unskip',alias:alias})});
-    var d=await r.json(); if(d.ok)location.reload(); else setStatus('aa_status',d.error);
-  }catch(e){setStatus('aa_status','网络错误');}
+async function deleteAlias(cardName, alias) {
+  if (!confirm('确定删除 "' + alias + '" 吗？')) return;
+  setStatus(cardName + '-aa_status', '删除中...');
+  var result = await apiFetch('/cards/asset_alias/action', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({action:'delete', alias:alias}) });
+  if (result && result.ok) location.reload(); else setStatus(cardName + '-aa_status', result ? result.error : '网络错误');
 }
-function setStatus(id,msg){var el=document.getElementById(id);if(el)el.innerText=msg;}
-
-// ════ 画像展开 ────
-function togglePortrait(id){
-  var body=document.getElementById('portrait-body-'+id);
-  if(!body)return;
-  body.style.display=body.style.display==='none'?'block':'none';
+async function skipAlias(cardName, alias) {
+  setStatus(cardName + '-aa_status', '跳过中...');
+  var result = await apiFetch('/cards/asset_alias/action', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({action:'skip', alias:alias}) });
+  if (result && result.ok) location.reload(); else setStatus(cardName + '-aa_status', result ? result.error : '网络错误');
 }
-
-// ════ 用户管理 ────
-async function addTrackedUser(){
-  var u=document.getElementById('um_user').value.trim(),s=document.getElementById('um_status');
-  if(!u){if(s)s.innerText='请输入用户名';return;}
-  if(s)s.innerText='校验中...';
-  try{
-    var r=await fetch('/cards/api_status/action',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'add_user',user:u})});
-    var d=await r.json();
-    if(d.ok){if(s)s.innerText='已添加 @'+u+' (粉丝: '+d.followers+')';setTimeout(function(){location.reload();},1500);}
-    else{if(s)s.innerText=d.error;}
-  }catch(e){if(s)s.innerText='网络错误';}
+async function unskipAlias(cardName, alias) {
+  setStatus(cardName + '-aa_status', '恢复中...');
+  var result = await apiFetch('/cards/asset_alias/action', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({action:'unskip', alias:alias}) });
+  if (result && result.ok) location.reload(); else setStatus(cardName + '-aa_status', result ? result.error : '网络错误');
 }
-
-// ════ 脚本工具箱 ────
-function toggleScriptTools(){
-  var body=document.getElementById('script_tools_body'),btn=document.getElementById('btn_toggle_tools');
-  if(!body||!btn)return;
-  if(body.style.display==='none'){body.style.display='block';btn.innerText='收起';}
-  else{body.style.display='none';btn.innerText='展开';}
+function togglePortrait(id) { var body = document.getElementById('portrait-body-' + id); if (!body) return; body.style.display = body.style.display === 'none' ? 'block' : 'none'; }
+async function addTrackedUser() {
+  var u = document.getElementById('um_user').value.trim(), s = document.getElementById('um_status');
+  if (!u) { if (s) s.innerText = '请输入用户名'; return; }
+  if (s) s.innerText = '校验中...';
+  var result = await apiFetch('/cards/api_status/action', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({action:'add_user', user:u}) });
+  if (s) s.innerText = result && result.ok ? ('已添加 @' + u + ' (粉丝: ' + result.followers + ')') : (result ? result.error : '网络错误');
+  if (result && result.ok) setTimeout(function() { location.reload(); }, 1500);
 }
-async function runScript(name){
-  var s=document.getElementById('sr_status');if(s)s.innerText='运行 scripts/'+name+'...';
-  try{
-    var r=await fetch('/cards/script_runner/action',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({script:name})});
-    var d=await r.json(); if(s)s.innerText=d.ok?'完成: '+d.output:d.error;
-    setTimeout(function(){location.reload();},1500);
-  }catch(e){if(s)s.innerText='网络错误';}
+function toggleScriptTools() {
+  var body = document.getElementById('script_tools_body'), btn = document.getElementById('btn_toggle_tools');
+  if (!body || !btn) return;
+  if (body.style.display === 'none') { body.style.display = 'block'; btn.innerText = '收起'; }
+  else { body.style.display = 'none'; btn.innerText = '展开'; }
 }
-
-// ════ Telegram ────
-async function sendTestMsg(){
-  var t=document.getElementById('tg_token').value,c=document.getElementById('tg_chatid').value;
-  if(!t||!c)return;
-  await fetch('/cards/telegram/action',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({token:t,chat_id:c,action:'test'})});
+async function runScript(name) {
+  var s = document.getElementById('sr_status'); if (s) s.innerText = '运行 scripts/' + name + '...';
+  var result = await apiFetch('/cards/script_runner/action', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({script:name}) });
+  if (s) s.innerText = result && result.ok ? ('完成: ' + result.output) : (result ? result.error : '网络错误');
+  if (result && result.ok) setTimeout(function() { location.reload(); }, 1500);
+}
+async function sendTestMsg() {
+  var t = document.getElementById('tg_token').value, c = document.getElementById('tg_chatid').value;
+  if (!t || !c) return;
+  await apiFetch('/cards/telegram/action', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({token:t, chat_id:c, action:'test'}) });
   alert('测试消息已发送，请检查 Telegram');
 }
-async function saveTelegram(){
-  var t=document.getElementById('tg_token').value,c=document.getElementById('tg_chatid').value;
-  if(!t||!c)return;
-  await fetch('/cards/telegram/action',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({token:t,chat_id:c})});
+async function saveTelegram() {
+  var t = document.getElementById('tg_token').value, c = document.getElementById('tg_chatid').value;
+  if (!t || !c) return;
+  await apiFetch('/cards/telegram/action', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({token:t, chat_id:c}) });
   location.reload();
 }
-
-// ════ 角色代入 ────
-function updatePool(){
-  var s=document.getElementById('rp_sector').value,el=document.getElementById('rp_sectors');
-  if(!el)return;
-  var data=JSON.parse(el.textContent),t=data[s]||[];
-  document.getElementById('rp_pool').innerText='池内: '+t.join(', ');
+function updatePool() {
+  var s = document.getElementById('rp_sector').value, el = document.getElementById('rp_sectors');
+  if (!el) return;
+  var data = JSON.parse(el.textContent), t = data[s] || [];
+  document.getElementById('rp_pool').innerText = '池内: ' + t.join(', ');
 }
-async function generatePick(){
-  var btn=event.target;btn.disabled=true;btn.innerText='生成中...';
-  document.getElementById('rp_result').innerHTML='<div class="flex"><div class="spinner"></div><span class="text-secondary">AI 思考中...</span></div>';
-  try{
-    var r=await fetch('/cards/role_picker/action',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({analyst:document.getElementById('rp_analyst').value,sector:document.getElementById('rp_sector').value,custom:document.getElementById('rp_custom').value})});
-    var d=await r.json();
-    document.getElementById('rp_result').innerHTML=d.ok?d.html:'<div class="text-secondary">错误: '+d.error+'</div>';
-  }catch(e){document.getElementById('rp_result').innerHTML='<div class="text-secondary">网络错误</div>';}
-  btn.disabled=false;btn.innerText='生成方案';
+async function generatePick() {
+  var btn = event.target; btn.disabled = true; btn.innerText = '生成中...';
+  document.getElementById('rp_result').innerHTML = '<div class="flex"><div class="spinner"></div><span class="text-secondary">AI 思考中...</span></div>';
+  var result = await apiFetch('/cards/role_picker/action', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({analyst:document.getElementById('rp_analyst').value, sector:document.getElementById('rp_sector').value, custom:document.getElementById('rp_custom').value}) });
+  document.getElementById('rp_result').innerHTML = result && result.ok ? result.html : '<div class="text-secondary">错误: ' + (result ? result.error : '网络错误') + '</div>';
+  btn.disabled = false; btn.innerText = '生成方案';
 }
-
-// ════ 持仓顾问 ────
-async function analyzePortfolio(){
-  var v=document.getElementById('pf_text').value;
-  if(!v.trim())return;
-  var btn=event.target;btn.disabled=true;btn.innerText='分析中...';
-  document.getElementById('pf_result').innerHTML='<div class="flex"><div class="spinner"></div><span class="text-secondary">AI 分析中...</span></div>';
-  try{
-    var r=await fetch('/cards/portfolio/action',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text:v})});
-    var d=await r.json();
-    document.getElementById('pf_result').innerHTML=d.ok?d.html:'<div class="text-secondary">错误: '+d.error+'</div>';
-  }catch(e){document.getElementById('pf_result').innerHTML='<div class="text-secondary">网络错误</div>';}
-  btn.disabled=false;btn.innerText='分析持仓';
+async function analyzePortfolio() {
+  var v = document.getElementById('pf_text').value;
+  if (!v.trim()) return;
+  var btn = event.target; btn.disabled = true; btn.innerText = '分析中...';
+  document.getElementById('pf_result').innerHTML = '<div class="flex"><div class="spinner"></div><span class="text-secondary">AI 分析中...</span></div>';
+  var result = await apiFetch('/cards/portfolio/action', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({text:v}) });
+  document.getElementById('pf_result').innerHTML = result && result.ok ? result.html : '<div class="text-secondary">错误: ' + (result ? result.error : '网络错误') + '</div>';
+  btn.disabled = false; btn.innerText = '分析持仓';
 }
-
-// ════ 手动拉取 ────
-async function fetchManually(){
-  var u=document.getElementById('fc_user').value,rng=document.getElementById('fc_range').value;
-  var pages=document.getElementById('fc_pages').value,from=document.getElementById('fc_from').value,to=document.getElementById('fc_to').value;
-  var s=document.getElementById('fc_status');
-  // 检查 daemon 是否在限流
-  try{
-    var cr=await fetch('/cards/api_status'); var ca=await cr.json();
-    if(ca.rate_limited){
-      s.innerText='API 限流冷却中, 请等待 daemon 恢复';
-      setTimeout(function(){s.innerText='';},5000);
-      return;
-    }
-  }catch(e){}
-  s.innerText='拉取中...';
-  try{
-    var resp=await fetch('/cards/fetch_control/action',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user:u,range:rng,pages:pages,from:from,to:to})});
-    var d=await resp.json(); s.innerText=d.ok?'完成: +'+d.total+'条':d.error;
-    setTimeout(function(){location.reload();},1000);
-  }catch(e){s.innerText='网络错误';}
+async function fetchManually() {
+  var u = document.getElementById('fc_user').value, rng = document.getElementById('fc_range').value;
+  var pages = document.getElementById('fc_pages').value, from = document.getElementById('fc_from').value, to = document.getElementById('fc_to').value;
+  var s = document.getElementById('fc_status');
+  var check = await apiFetch('/cards/api_status');
+  if (check && check.data && check.data.rate_limited) { if (s) { s.innerText = 'API 限流冷却中'; setTimeout(function() { s.innerText = ''; }, 5000); } return; }
+  if (s) s.innerText = '拉取中...';
+  var result = await apiFetch('/cards/fetch_control/action', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({user:u, range:rng, pages:pages, from:from, to:to}) });
+  if (s) s.innerText = result && result.ok ? ('完成: +' + result.total + '条') : (result ? result.error : '网络错误');
+  if (result && result.ok) setTimeout(function() { location.reload(); }, 1000);
 }
 
-// ════ 启动 ════
-(function init() {
-  var lastTab = sessionStorage.getItem('lastTab') || 'signals';
-  // 先切换到目标标签（此时按钮状态正确，骨架已显示）
-  switchTab(lastTab);
-  // 异步加载 meta 数据，无需等待
-  fetch('/cards/meta').then(function(r){return r.json();}).then(function(cards){
-    cards.forEach(function(c){REFRESH_MAP[c.name]=c.refresh;});
-  }).catch(function(){});
-  updateStatusBar();
-  setInterval(autoRefresh, 5000);
-})();
+bootstrap();
 </script>
 </body>
 </html>

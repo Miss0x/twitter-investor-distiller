@@ -48,12 +48,20 @@ class NetworkCard(Card):
             "nodes": int            # 节点总数
         }
     """
-
+    name = "network"
     def get_data(self, **params) -> dict:
         fp = Path("data/network/investor_network.json")
         if not fp.exists():
             return {"recs": [], "edges": 0, "nodes": 0}
         d = json.loads(fp.read_text(encoding="utf-8"))
-        return {"recs": d.get("recommendations", [])[:5],
+        # 防御性字段标准化：确保 recs 中每条记录有 user/in_degree，防止模板字段名不匹配导致静默空渲染
+        raw_recs = d.get("recommendations", [])[:5]
+        normalized = []
+        for r in raw_recs:
+            normalized.append({
+                "user": r.get("user", r.get("username", "?")),
+                "in_degree": r.get("in_degree", r.get("score", 0)),
+            })
+        return {"recs": normalized,
                 "edges": len(d.get("edges", [])),
                 "nodes": len(d.get("nodes", []))}

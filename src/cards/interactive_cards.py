@@ -29,6 +29,7 @@ class DaemonCard(Card):
         refresh=5                — 每 5 秒自动刷新（状态变化快）
         template="daemon.html"   — Jinja2 模板
     """
+    name = "daemon"
 
     def get_data(self, **params) -> dict:
         """
@@ -79,6 +80,7 @@ class TelegramCard(Card):
             "token_preview": str      # Bot Token 预览（前12字符+...）
         }
     """
+    name = "telegram"
 
     def get_data(self, **params) -> dict:
         fp = Path("data/telegram_config.json")
@@ -86,28 +88,7 @@ class TelegramCard(Card):
         return {"configured": bool(cfg.get("bot_token")), "chat_id": cfg.get("chat_id", ""),
                 "token_preview": (cfg.get("bot_token", "")[:12] + "...") if cfg.get("bot_token") else ""}
 
-    def _render_html(self, data: dict) -> str:
-        """
-        Telegram 配置界面 HTML（模板不存在时的 fallback）。
-
-        HTML 结构概览:
-            1. 标题栏 — "Telegram 通知"
-            2. 状态指示 — 已配置(绿点) / 未配置(黄点)
-            3. Token 预览 + Chat ID 信息
-            4. 表单区 — Bot Token 输入框 + Chat ID 输入框 + 测试/保存按钮
-        """
-        status = "已配置" if data["configured"] else "未配置"
-        color = "ok" if data["configured"] else "warn"
-        token_hint = data.get("token_preview", "")
-        return f'''<div class="card-title">Telegram 通知</div>
-<div class="flex mb-sm"><div class="status-dot {color}"></div><span style="font-size:14px;font-weight:500">{status}</span></div>
-<div class="text-secondary mb-sm" style="font-size:11px">{token_hint} → Chat: {data["chat_id"]}</div>
-<div class="flex" style="gap:8px">
-  <input id="tg_token" placeholder="Bot Token" style="flex:1;font-size:12px;padding:4px 8px" />
-  <input id="tg_chatid" placeholder="Chat ID" style="width:140px;font-size:12px;padding:4px 8px" />
-  <button class="btn" onclick="sendTestMsg()">测试</button>
-  <button class="btn" onclick="saveTelegram()">保存</button>
-</div>'''
+    # _render_html removed — template telegram.html handles rendering (规则二)
 
 
 @register
@@ -133,7 +114,7 @@ class RolePickerCard(Card):
             }
         }
     """
-
+    name = "role_picker"
     def get_data(self, **params) -> dict:
         analysts = set()
         for fp in Path("data/pipeline").glob("*_analyzed_cleaned.json"):
@@ -150,8 +131,9 @@ class RolePickerCard(Card):
         """
         fp = Path("data/sector_map.json")
         if not fp.exists(): return {}
+        raw = json.loads(fp.read_text(encoding="utf-8"))
         groups: dict = defaultdict(list)
-        for ticker, v in d.items():
+        for ticker, v in raw.items():
             label = f'{v.get("sector","Other")} / {v.get("industry","Other")}'
             groups[label].append(ticker)
         return {k: sorted(v) for k, v in sorted(groups.items(), key=lambda x: -len(x[1])) if len(v) >= 3}
@@ -175,8 +157,8 @@ class RolePickerCard(Card):
         return f'''<div class="card-title">角色代入选股</div>
 <div class="grid grid-3 mb-sm">
   <div><div class="text-secondary mb-sm">分析师</div><select id="rp_analyst">{analysts_opts}</select></div>
-  <div><div class="text-secondary mb-sm">行业板块</div><select id="rp_sector" onchange="updatePool()">{sector_opts}</select></div>
-  <div style="display:flex;align-items:flex-end"><button class="btn btn-primary" style="width:100%" onclick="generatePick()">生成方案</button></div>
+  <div><div class="text-secondary mb-sm">行业板块</div><select id="rp_sector" data-action="update-pool" data-card="role_picker">{sector_opts}</select></div>
+  <div style="display:flex;align-items:flex-end"><button class="btn btn-primary" style="width:100%" data-action="gen-pick" data-card="role_picker">生成方案</button></div>
 </div>
 <div class="text-secondary mb-sm">手动加减 <input id="rp_custom" style="width:100%;margin-top:4px" placeholder="可选: LRCX, AMAT, -INTC" /></div>
 <div id="rp_pool" class="text-secondary" style="font-size:11px;word-break:break-all">池内: {first_stocks}</div>
@@ -206,7 +188,7 @@ class PortfolioCard(Card):
             }
         }
     """
-
+    name = "portfolio"
     def get_data(self, **params) -> dict:
         acc = {}
         for fp in Path("data/accuracy").glob("*_accuracy.json"):
@@ -232,7 +214,7 @@ class PortfolioCard(Card):
   <textarea id="pf_text" rows="3" style="flex:1;font-size:12px;padding:8px" placeholder="输入持仓: NVDA 100股 成本$110&#10;AVGO 50股 成本$320&hellip;"></textarea>
 </div>
 <div class="flex" style="gap:8px">
-  <button class="btn btn-primary" onclick="analyzePortfolio()">分析持仓</button>
+  <button class="btn btn-primary" data-action="analyze-portfolio" data-card="portfolio">分析持仓</button>
   <span class="text-secondary" style="font-size:11px">也支持上传图片/CSV</span>
 </div>
 <div id="pf_result" style="margin-top:12px"></div>'''

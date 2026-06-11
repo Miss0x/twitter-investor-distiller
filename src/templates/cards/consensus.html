@@ -5,10 +5,11 @@
 </div>
 <div class="grid grid-2" style="gap:8px">
 {% for r in top[:6] %}
-  <div class="metric" style="border-left:3px solid {% if r.consensus_score >= 80 %}var(--text-warning){% elif r.consensus_score >= 60 %}var(--text-success){% else %}var(--border-tertiary){% endif %}">
+  {% set score = r.get('consensus_score', 0) %}
+  <div class="metric" style="border-left:3px solid {% if score >= 80 %}var(--warning){% elif score >= 60 %}var(--success){% else %}var(--border){% endif %}">
     <div class="flex-between">
       <span style="font-weight:600;font-size:14px">{{ r.ticker }}</span>
-      <span style="font-size:18px;font-weight:600;color:{% if r.consensus_score >= 80 %}var(--text-warning){% elif r.consensus_score >= 60 %}var(--text-success){% else %}var(--text-secondary){% endif %}">{{ '%d' % r.consensus_score }}</span>
+      <span style="font-size:18px;font-weight:600;color:{% if score >= 80 %}var(--warning){% elif score >= 60 %}var(--success){% else %}var(--muted){% endif %}">{{ '%d' % score }}</span>
     </div>
     <div class="flex" style="margin-top:4px">
       {% if r.get('analysts_in_window', []) | length >= 2 %}<span style="font-size:11px">🔥 多人</span>{% endif %}

@@ -124,20 +124,20 @@ class PipelineExecuteCard(Card):
             2. 统计标签行 — 各类型任务数量 badge
             3. 主 tab 按钮组 — 切换 filter/analyze/portrait/clean 视图
                (fetch_price/fetch_crypto 嵌套在 analyze 下作为前置子功能)
-            4. 操作按钮行 — 种子任务按钮（seedTasksPE）
+            4. 操作按钮行 — 扫描新内容按钮（seedTasksPE）
             5. 各类型任务容器 — 每个 tab 对应一个 pe-type-{t} 容器:
                - 待办表格（含复选框、ID、详情列） + 全选/取消/执行选中按钮
                - 失败表格（含重试/跳过按钮）
-               - clean 类型特殊处理: 内嵌资产代码库完整管理界面
+               - clean 类型特殊处理: 内嵌标的代码映射完整管理界面
         """
         groups = data.get("groups", {})
         running = data.get("running", False)
         progress = data.get("progress", {})
         tc = data.get("type_counts", {})
         type_names = {
-            "filter": "过滤筛选", "analyze": "推文分析",
-            "fetch_price": "股价拉取", "fetch_crypto": "加密货币",
-            "portrait": "画像生成", "clean": "数据清洗",
+            "filter": "筛选推文", "analyze": "分析观点",
+            "fetch_price": "补全行情", "fetch_crypto": "补全加密行情",
+            "portrait": "生成画像", "clean": "校准标的",
         }
         # 主 tab，fetch_price/fetch_crypto 为推文分析的前置子功能
         main_types = ["filter", "analyze", "portrait", "clean"]
@@ -150,7 +150,7 @@ class PipelineExecuteCard(Card):
         all_ts = ["filter", "analyze", "fetch_price", "fetch_crypto", "portrait", "clean"]
 
         type_tabs = "".join(
-            f'<button class="tab pe-tab" onclick="loadTypePE(\'{t}\')" id="tab-{t}">{type_names[t]}</button>'
+            f'<button class="tab pe-tab" data-action="load-type-pe" data-type="{t}" id="tab-{t}">{type_names[t]}</button>'
             for t in main_types
         )
         status_bar = f'执行中: {progress.get("msg","")} ({progress.get("done",0)}/{progress.get("total",0)})' if running else "空闲"
@@ -163,7 +163,7 @@ class PipelineExecuteCard(Card):
         for t in all_ts:
             items = groups.get(t, [])
             if t == "clean":
-                # ── 数据清洗：资产代码库（完整表格 + 校准按钮） ──
+                # ── 校准标的：标的代码映射（完整表格 + 修正按钮） ──
                 aliases_list = []
                 afp = Path("data/stock_alias.csv")
                 if afp.exists():
@@ -179,23 +179,23 @@ class PipelineExecuteCard(Card):
                 skipped = [a for a in aliases_list if not a["ticker"] and a.get("type","").startswith("SKIP")]
 
                 confirmed_rows = "".join(
-                    f'<tr><td style="font-size:11px">{a["alias"]}</td><td style="font-weight:500">{a["ticker"]}</td><td style="font-size:11px;color:var(--text-secondary)">{a.get("type","")}</td><td style="text-align:right"><button class="btn" style="font-size:10px;padding:1px 6px" onclick="editAliasRow(\'{html.escape(a["alias"])}\',\'{html.escape(a["ticker"])}\',\'{html.escape(a.get("type",""))}\')">编辑</button> <button class="btn btn-danger" style="font-size:10px;padding:1px 6px" onclick="deleteAlias(\'{html.escape(a["alias"])}\')">删除</button></td></tr>'
+                    f'<tr><td style="font-size:11px">{a["alias"]}</td><td style="font-weight:500">{a["ticker"]}</td><td style="font-size:11px;color:var(--text-secondary)">{a.get("type","")}</td><td style="text-align:right"><button class="btn" style="font-size:10px;padding:1px 6px" data-action="edit-alias" data-alias="{html.escape(a["alias"])}" data-ticker="{html.escape(a["ticker"])}" data-notes="{html.escape(a.get("type",""))}">编辑</button> <button class="btn btn-danger" style="font-size:10px;padding:1px 6px" data-action="delete-alias" data-alias="{html.escape(a["alias"])}">删除</button></td></tr>'
                     for a in confirmed[:50]
                 ) if confirmed else '<tr><td colspan="4" class="text-secondary">暂无已确认映射</td></tr>'
 
                 pending_rows = "".join(
-                    f'<tr style="background:rgba(239,159,39,0.05)"><td style="font-size:11px;font-weight:500">{a["alias"]}</td><td style="font-size:11px;color:var(--text-secondary)">{a.get("type","")}</td><td style="text-align:right"><button class="btn" style="font-size:10px;padding:1px 6px" onclick="fillAliasForm(\'{html.escape(a["alias"])}\',\'{html.escape(a.get("type",""))}\')">填代码</button> <button class="btn" style="font-size:10px;padding:1px 6px;border-color:var(--text-tertiary);color:var(--text-tertiary)" onclick="skipAlias(\'{html.escape(a["alias"])}\')">跳过</button> <button class="btn btn-danger" style="font-size:10px;padding:1px 6px" onclick="deleteAlias(\'{html.escape(a["alias"])}\')">删除</button></td></tr>'
+                    f'<tr style="background:rgba(239,159,39,0.05)"><td style="font-size:11px;font-weight:500">{a["alias"]}</td><td style="font-size:11px;color:var(--text-secondary)">{a.get("type","")}</td><td style="text-align:right"><button class="btn" style="font-size:10px;padding:1px 6px" data-action="fill-alias" data-alias="{html.escape(a["alias"])}" data-notes="{html.escape(a.get("type",""))}">填写代码</button> <button class="btn" style="font-size:10px;padding:1px 6px;border-color:var(--text-tertiary);color:var(--text-tertiary)" data-action="skip-alias" data-alias="{html.escape(a["alias"])}">跳过</button> <button class="btn btn-danger" style="font-size:10px;padding:1px 6px" data-action="delete-alias" data-alias="{html.escape(a["alias"])}">删除</button></td></tr>'
                     for a in pending[:30]
                 ) if pending else '<tr><td colspan="4" class="text-secondary" style="color:var(--text-success)">全部确认完毕</td></tr>'
 
                 skipped_rows = "".join(
-                    f'<tr style="opacity:0.5"><td style="font-size:11px">{a["alias"]}</td><td style="font-size:11px;color:var(--text-secondary)">{a.get("type","").replace("SKIP|","",1)}</td><td style="text-align:right"><button class="btn" style="font-size:10px;padding:1px 6px" onclick="unskipAlias(\'{html.escape(a["alias"])}\')">恢复</button></td></tr>'
+                    f'<tr style="opacity:0.5"><td style="font-size:11px">{a["alias"]}</td><td style="font-size:11px;color:var(--text-secondary)">{a.get("type","").replace("SKIP|","",1)}</td><td style="text-align:right"><button class="btn" style="font-size:10px;padding:1px 6px" data-action="unskip-alias" data-alias="{html.escape(a["alias"])}">恢复</button></td></tr>'
                     for a in skipped[:30]
                 )
 
                 containers += f'''<div id="pe-type-clean" class="pe-container" style="display:none">
-<div class="flex-between mb-sm"><span style="font-size:12px;font-weight:500">资产代码库</span><button class="btn" onclick="runCleanAlias()" style="font-size:11px">🔄 运行校准</button></div>
-<div class="mb-sm"><span id="clean_status" class="text-secondary" style="font-size:11px"></span></div>
+<div class="flex-between mb-sm"><span style="font-size:12px;font-weight:500">标的代码映射</span><button class="btn" data-action="run-clean" data-card="pipeline_execute" style="font-size:11px">应用映射修正</button></div>
+<div class="mb-sm"><span id="pipeline_execute-clean_status" class="text-secondary" style="font-size:11px"></span></div>
 <div class="grid grid-4 mb-sm">
   <div class="metric"><div class="metric-label">总映射</div><div class="metric-value">{len(aliases_list)}</div></div>
   <div class="metric"><div class="metric-label">已确认</div><div class="metric-value" style="color:var(--text-success)">{len(confirmed)}</div></div>
@@ -203,18 +203,18 @@ class PipelineExecuteCard(Card):
   <div class="metric"><div class="metric-label">已跳过</div><div class="metric-value" style="color:var(--text-tertiary)">{len(skipped)}</div></div>
 </div>
 <div class="flex mb-sm" style="gap:4px;flex-wrap:wrap">
-  <input id="aa_alias" placeholder="别名" style="flex:1;min-width:80px;font-size:11px;padding:4px 6px" />
-  <input id="aa_ticker" placeholder="代码" style="flex:1;min-width:60px;font-size:11px;padding:4px 6px" />
-  <input id="aa_notes" placeholder="备注" style="flex:1;min-width:60px;font-size:11px;padding:4px 6px" />
-  <button class="btn btn-primary" onclick="addAlias()" style="font-size:11px;padding:4px 10px" id="btn_aa_submit">添加</button>
+  <input id="pipeline_execute-aa_alias" placeholder="提及名称" style="flex:1;min-width:80px;font-size:11px;padding:4px 6px" />
+  <input id="pipeline_execute-aa_ticker" placeholder="标的代码" style="flex:1;min-width:60px;font-size:11px;padding:4px 6px" />
+  <input id="pipeline_execute-aa_notes" placeholder="备注" style="flex:1;min-width:60px;font-size:11px;padding:4px 6px" />
+  <button class="btn btn-primary" data-action="add-alias" data-card="pipeline_execute" style="font-size:11px;padding:4px 10px" id="pipeline_execute-btn_aa_submit">添加</button>
 </div>
-<input type="hidden" id="aa_old_alias" value="" />
+<input type="hidden" id="pipeline_execute-aa_old_alias" value="" />
 <div class="mt-md mb-sm"><span style="font-size:12px;font-weight:500;color:var(--text-primary)">已确认映射 ({len(confirmed)}条)</span></div>
-<table class="data"><tr><th>别名</th><th>代码</th><th>备注</th><th style="text-align:right">操作</th></tr>{confirmed_rows}</table>
+<table class="data"><tr><th>提及名称</th><th>标的代码</th><th>备注</th><th style="text-align:right">操作</th></tr>{confirmed_rows}</table>
 <div class="mt-md mb-sm"><span style="font-size:12px;font-weight:500;color:var(--text-warning)">待人工判断 ({len(pending)}条)</span></div>
-<table class="data"><tr><th>别名</th><th>系统标注</th><th style="text-align:right">操作</th></tr>{pending_rows}</table>
-{skipped_rows and f'<div class="mt-md mb-sm"><span style="font-size:12px;font-weight:500;color:var(--text-tertiary)">已跳过 ({len(skipped)}条)</span></div><table class="data"><tr><th>别名</th><th>系统标注</th><th style="text-align:right">操作</th></tr>' + skipped_rows + '</table>'}
-<div class="text-secondary mt-sm" style="font-size:10px">提示：点"填代码"自动回填表单，输入 ticker 后提交即可移入已确认列表。跳过则暂不处理。</div>
+<table class="data"><tr><th>提及名称</th><th>系统标注</th><th style="text-align:right">操作</th></tr>{pending_rows}</table>
+{skipped_rows and f'<div class="mt-md mb-sm"><span style="font-size:12px;font-weight:500;color:var(--text-tertiary)">已跳过 ({len(skipped)}条)</span></div><table class="data"><tr><th>提及名称</th><th>系统标注</th><th style="text-align:right">操作</th></tr>' + skipped_rows + '</table>'}
+<div class="text-secondary mt-sm" style="font-size:10px">提示：点"填写代码"自动回填表单，输入标的代码后提交即可移入已确认列表。跳过则暂不处理。</div>
 </div>'''
                 continue
             pending = [i for i in items if i["status"] == "pending"]
@@ -231,8 +231,8 @@ class PipelineExecuteCard(Card):
             failed_rows = "".join(
                 f'<tr><td style="font-size:11px">#{f["id"]}</td>'
                 f'<td style="font-size:11px">{f.get("error_msg","?")[:50]}</td>'
-                f'<td><button class="btn" style="font-size:10px;padding:2px 6px" onclick="retryTaskPE({f["id"]})">重试</button> '
-                f'<button class="btn" style="font-size:10px;padding:2px 6px" onclick="skipTaskPE({f["id"]})">跳过</button></td></tr>'
+                f'<td><button class="btn" style="font-size:10px;padding:2px 6px" data-action="retry-task" data-id="{f["id"]}">重试</button> '
+                f'<button class="btn" style="font-size:10px;padding:2px 6px" data-action="skip-task" data-id="{f["id"]}">跳过</button></td></tr>'
                 for f in failed[:10]
             ) if failed else ''
 
@@ -244,19 +244,26 @@ class PipelineExecuteCard(Card):
             containers += f'''<div id="pe-type-{t}" class="pe-container" style="display:none">
 <div class="flex-between mb-sm"><span class="text-secondary" style="font-size:11px">
 {section_title} · 待办 {len(pending)} | 完成 {len(done)} | 失败 {len(failed)}</span>
-<span><button class="btn" style="font-size:10px;padding:2px 6px" onclick="selectAllPE('{t}')">全选</button>
-<button class="btn" style="font-size:10px;padding:2px 6px" onclick="clearAllPE('{t}')">取消</button>
-<button class="btn" style="font-size:10px;padding:2px 6px" onclick="execPipeline('{t}')">▶ 执行选中</button></span></div>
+<span><button class="btn" style="font-size:10px;padding:2px 6px" data-action="select-all-pe" data-type="{t}">全选</button>
+<button class="btn" style="font-size:10px;padding:2px 6px" data-action="clear-all-pe" data-type="{t}">取消</button>
+<button class="btn" style="font-size:10px;padding:2px 6px" data-action="exec-pipeline" data-type="{t}">▶ 执行选中</button></span></div>
 <table class="data"><tr><th style="width:24px"></th><th>ID</th><th>详情</th></tr>{pending_rows}</table>
 {f'<div class="mt-sm"><span class="text-secondary" style="font-size:11px">失败 ({len(failed)})</span><table class="data">{failed_rows}</table></div>' if failed else ''}
 </div>'''
 
-        return f'''<div class="card-title">流水线执行</div>
+        return f'''<div class="card-title">处理队列</div>
+<div class="mb-sm" style="font-size:11px;color:var(--text-secondary);line-height:1.6">
+  <span class="tag tag-ok">1 采集内容</span>
+  <span class="text-secondary">→</span>
+  <span class="tag tag-warn">2 扫描新内容</span>
+  <span class="text-secondary">→</span>
+  <span class="tag tag-ok">3 运行分析流程</span>
+</div>
 <div class="flex-between mb-sm"><div class="flex"><div class="status-dot {"ok" if running else ""}"></div><span style="font-size:12px">{status_bar}</span></div></div>
 <div class="mb-sm" style="display:flex;gap:4px;flex-wrap:wrap">{type_tags}</div>
 <div class="mb-sm" style="display:flex;gap:4px;flex-wrap:wrap">{type_tabs}</div>
 <div style="display:flex;gap:6px;margin-bottom:8px">
-  <button class="btn" onclick="seedTasksPE()" style="font-size:11px">🌱 种子任务</button>
+  <button class="btn" data-action="seed-tasks" data-card="pipeline_execute" style="font-size:11px">扫描新内容</button>
   <span id="pe-msg" class="text-secondary" style="font-size:11px"></span>
 </div>
 {containers}
@@ -368,7 +375,7 @@ def _format_label(task_type: str, payload: dict) -> str:
         return html.escape(text[:50]) if text else "分析任务"
     elif task_type == "fetch_price":
         ticker = payload.get("ticker", "") or payload.get("symbol", "")
-        return ticker or "股价拉取"
+        return ticker or "补全行情"
     elif task_type == "fetch_crypto":
         ticker = payload.get("ticker", "") or payload.get("symbol", "") or payload.get("coin", "")
         return ticker or "加密货币拉取"
@@ -475,7 +482,7 @@ class PortraitGenerateCard(Card):
         done = [t for t in data.get("tasks", []) if t["status"] == "done"]
         user_opts = "".join(f'<option value="{u}">{u}</option>' for u in users)
         window_btns = "".join(
-            f'<button class="btn pg-win-btn" onclick="selectWindow(\'{label}\')" id="pg_win_{label}" style="font-size:10px;padding:3px 8px">{label}({desc})</button>'
+            f'<button class="btn pg-win-btn" data-action="select-window" data-label="{label}" id="pg_win_{label}" style="font-size:10px;padding:3px 8px">{label}({desc})</button>'
             for label, days, desc in self.WINDOWS
         )
         return f'''<div class="card-title">画像生成</div>
@@ -495,7 +502,7 @@ class PortraitGenerateCard(Card):
 
 <div class="flex mb-sm" style="gap:6px">
   <input id="pg_label" placeholder="画像标签（可选）" style="flex:1;font-size:11px;padding:4px 6px" />
-  <button class="btn btn-primary" onclick="genPortraitAdv()" style="font-size:11px;padding:4px 12px">生成画像</button>
+  <button class="btn btn-primary" data-action="gen-portrait" data-card="portrait_generate" style="font-size:11px;padding:4px 12px">生成画像</button>
 </div>
 <input type="hidden" id="pg_window" value="" />
 <span id="pg_status" class="text-secondary" style="font-size:10px"></span>

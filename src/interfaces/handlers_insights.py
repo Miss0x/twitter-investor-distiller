@@ -106,7 +106,7 @@ def _handle_role_picker(payload: dict) -> str:
                 parts = [p.strip() for p in line.split("|")]
                 if len(parts) >= 15:
                     prices[t] = {"price": parts[6], "pe": parts[15], "chg": parts[9]}
-        except (subprocess.TimeoutExpired, subprocess.CalledProcessError, OSError, ValueError, IndexError):
+        except (_sp.TimeoutExpired, _sp.CalledProcessError, OSError, ValueError, IndexError):
             pass  # 单只股票查询失败不影响整体
 
     # ── 构建股票信息表 ──

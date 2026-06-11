@@ -6,7 +6,7 @@
   1. FetchControlCard — 手动推文拉取控制面板（选择用户 + 时间范围）
   2. PortraitCard     — 分析师画像浏览面板（列出已生成的画像文件）
 """
-import json, re
+import json, re, html
 from pathlib import Path
 from src.cards.base import Card
 from src.cards import register
@@ -32,11 +32,22 @@ class FetchControlCard(Card):
             "users": ["TJ_Research", "dearbaibabybus", ...]  # 监控用户列表
         }
     """
-
+    name = "fetch_control"
     def get_data(self, **params) -> dict:
         users = self._load_users()
+        # 结构化 presets：value 对应后端 range_days 参数
         return {
-            "presets": ["最新", "1天", "3天", "7天", "30天", "90天", "180天", "365天", "全部"],
+            "presets": [
+                {"value": 0, "label": "仅最新（增量更新）"},
+                {"value": 1, "label": "1天"},
+                {"value": 3, "label": "3天"},
+                {"value": 7, "label": "7天"},
+                {"value": 30, "label": "30天"},
+                {"value": 90, "label": "90天"},
+                {"value": 180, "label": "180天"},
+                {"value": 365, "label": "365天"},
+                {"value": -1, "label": "全部历史"},
+            ],
             "users": users,
         }
 
@@ -88,7 +99,7 @@ class PortraitCard(Card):
             "users": ["TJ_Research", ...]   # 所有分析师用户名
         }
     """
-
+    name = "portrait"
     def get_data(self, **params) -> dict:
         portraits = []
         for fp in sorted(Path("data/pipeline").glob("*_portrait.md"), reverse=True):
@@ -154,17 +165,22 @@ class PortraitCard(Card):
         for p in portraits[:20]:
             mod_time = _tm.strftime("%m-%d %H:%M", _tm.localtime(p["modified_ts"]))
             window_class = "tag-ok" if p["window"] in ("全量", "1年", "6个月") else "tag-warn"
-            cards += f'''<div class="portrait-item" style="border:0.5px solid var(--border-tertiary);border-radius:var(--radius-md);padding:8px 10px;margin-bottom:6px;cursor:pointer" onclick="togglePortrait({json.dumps(p["id"])})">
+            pid_safe = html.escape(str(p["id"]), quote=True)
+            username_safe = html.escape(str(p["username"]))
+            window_safe = html.escape(str(p["window"]))
+            title_safe = html.escape(str(p["title"] or "画像"))
+            full_safe = html.escape(str(p["full"]))
+            cards += f'''<div class="portrait-item" style="border:0.5px solid var(--border-tertiary);border-radius:var(--radius-md);padding:8px 10px;margin-bottom:6px;cursor:pointer" data-action="toggle-portrait" data-id="{pid_safe}">
   <div class="flex-between">
-    <span><span style="font-weight:500;font-size:12px">{p["username"]}</span>
-      <span class="tag {window_class}" style="font-size:10px;margin-left:6px">{p["window"]}</span>
+    <span><span style="font-weight:500;font-size:12px">{username_safe}</span>
+      <span class="tag {window_class}" style="font-size:10px;margin-left:6px">{window_safe}</span>
       <span style="font-size:10px;color:var(--text-tertiary);margin-left:8px">{p["size_kb"]}KB</span>
     </span>
     <span style="font-size:10px;color:var(--text-tertiary)">{mod_time}</span>
   </div>
-  <div style="font-size:11px;color:var(--text-secondary);margin-top:4px">{p["title"] or "画像"}</div>
-  <div style="font-size:10px;color:var(--text-tertiary);margin-top:2px">{'推文: ' + p["tweet_count"] + '条 · ' + p["date_range"] if p["date_range"] else ('推文: ' + p["tweet_count"] + '条' if p["tweet_count"] else '')}</div>
-  <div id="portrait-body-{p["id"]}" style="display:none;margin-top:8px;padding:10px;background:var(--bg-secondary);border-radius:var(--radius-md);font-size:12px;max-height:500px;overflow:auto;white-space:pre-wrap;line-height:1.7">{p["full"]}</div>
+  <div style="font-size:11px;color:var(--text-secondary);margin-top:4px">{title_safe}</div>
+  <div style="font-size:10px;color:var(--text-tertiary);margin-top:2px">{'推文: ' + str(p["tweet_count"]) + '条 · ' + p["date_range"] if p["date_range"] else ('推文: ' + str(p["tweet_count"]) + '条' if p["tweet_count"] else '')}</div>
+  <div id="portrait-body-{p["id"]}" style="display:none;margin-top:8px;padding:10px;background:var(--bg-secondary);border-radius:var(--radius-md);font-size:12px;max-height:500px;overflow:auto;white-space:pre-wrap;line-height:1.7">{full_safe}</div>
 </div>'''
 
         return f'''<div class="card-title">分析师画像</div>

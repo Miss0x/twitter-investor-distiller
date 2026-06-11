@@ -24,19 +24,19 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, Field
 from sqlalchemy import text
 
-from src.ai.chat_engine import ChatEngine
 from src.storage.database import db
 from src.storage.models import PipelineTask
 
 # ── ChatEngine 单例 ──
-# 避免每次请求都重新初始化 LLM 客户端连接
-_chat_engine: ChatEngine | None = None
+# 避免每次请求都重新初始化 LLM 客户端连接；同时避免 Dashboard 启动依赖 ChromaDB。
+_chat_engine = None
 
 
-def _get_chat_engine() -> ChatEngine:
+def _get_chat_engine():
     """获取 ChatEngine 单例实例（懒初始化）。"""
     global _chat_engine
     if _chat_engine is None:
+        from src.ai.chat_engine import ChatEngine
         _chat_engine = ChatEngine()  # 首次调用时初始化
     return _chat_engine
 
@@ -548,8 +548,8 @@ def seed_tasks() -> dict:
     """
     session = db.get_session()
     counts = {"filter": 0, "analyze": 0, "fetch_price": 0, "fetch_crypto": 0, "portrait": 0}
-    type_names = {"filter": "过滤筛选", "analyze": "推文分析",
-                  "fetch_price": "股价拉取", "fetch_crypto": "加密货币", "portrait": "画像生成"}
+    type_names = {"filter": "筛选推文", "analyze": "分析观点",
+                  "fetch_price": "补全行情", "fetch_crypto": "补全加密行情", "portrait": "生成画像"}
     try:
         # ── 辅助函数：从文件名解析用户名和月份 ──
         def _parse_stem(stem: str) -> tuple[str, str]:
@@ -776,38 +776,40 @@ def seed_tasks() -> dict:
 # ═══════════════════════════════════════════════════════
 
 from src.cards import CARDS, get_card  # noqa: E402
+from src.cards.base import TEMPLATE_DIR  # noqa: E402
 from fastapi.responses import HTMLResponse  # noqa: E402
 
-# 卡片 HTML 缓存：{name: (html_content, expire_timestamp)}
-_card_cache: dict[str, tuple[str, float]] = {}
+# 卡片缓存：{name: ((html, data), expire_timestamp)}
+_card_cache: dict[str, tuple[tuple[str, dict], float]] = {}
 _CACHE_TTL = 2  # 缓存生存时间（秒）
 
 
-def _get_cached_card_html(name: str) -> str | None:
-    """从服务端缓存获取卡片 HTML。
+def _get_cached_card_html(name: str) -> tuple[str, dict] | None:
+    """从服务端缓存获取卡片 HTML 和 data。
 
     Args:
-        name: 卡片名称（如 "dashboard_stats"、"pipeline_status"）
+        name: 卡片名称
 
     Returns:
-        缓存的 HTML 字符串，None 表示未命中或已过期
+        (html, data) 元组，None 表示未命中或已过期
     """
     now = _time.time()
     if name in _card_cache:
-        html, expire = _card_cache[name]
+        (html, data), expire = _card_cache[name]
         if now < expire:
-            return html  # 缓存有效
+            return (html, data)
     return None
 
 
-def _set_cached_card_html(name: str, html: str) -> None:
-    """设置卡片 HTML 缓存。
+def _set_cached_card_html(name: str, html: str, data: dict) -> None:
+    """设置卡片缓存（HTML + data 一起缓存）。
 
     Args:
         name: 卡片名称
         html: 渲染后的 HTML 字符串
+        data: get_data() 返回的结构化数据
     """
-    _card_cache[name] = (html, _time.time() + _CACHE_TTL)
+    _card_cache[name] = ((html, data), _time.time() + _CACHE_TTL)
 
 
 @app.get("/cards/meta")
@@ -827,25 +829,27 @@ async def cards_meta():
 
 @app.get("/cards/{name}")
 async def card_data(name: str):
-    """返回单个卡片渲染后的 HTML 片段（2 秒服务端缓存）。
+    """返回单个卡片渲染结果，信封模式 {html, data, error}。
 
     请求格式:
-        GET /cards/dashboard_stats
+        GET /cards/consensus
+
+    返回格式（规则一——Stripe Envelope Pattern）:
+        {
+            "html": "<div class='card'>...</div>",
+            "data": {...},
+            "error": null
+        }
 
     缓存策略:
-        - 2 秒内的重复请求直接返回缓存 HTML
+        - 2 秒内的重复请求直接返回缓存（html + data 一起缓存）
         - 超过 2 秒重新调用 card.get_data() + card.render()
-
-    Returns:
-        HTMLResponse: 卡片的 HTML 片段
-
-    Raises:
-        HTTPException(404): 卡片名称不存在
     """
     # 尝试从缓存读取
     cached = _get_cached_card_html(name)
     if cached is not None:
-        return HTMLResponse(content=cached)
+        html, data = cached
+        return {"html": html, "data": data, "error": None}
 
     card = get_card(name)
     if card is None:
@@ -853,18 +857,24 @@ async def card_data(name: str):
 
     try:
         data = card.get_data()       # 获取卡片数据
+        # ── 规则五：dataclass schema 校验 ──
+        from src.cards.card_schema import validate_card_data
+        data, schema_warning = validate_card_data(name, data)
         html = card.render(data)     # 渲染为 HTML
-        _set_cached_card_html(name, html)  # 写入缓存
-        return HTMLResponse(content=html)
+        _set_cached_card_html(name, html, data)
+        return {"html": html, "data": data, "error": None}
     except Exception as e:
-        # 错误时返回带错误样式的卡片（不中断整个页面）
-        return HTMLResponse(content=(
-            f'<div class="card"><div class="flex">'
-            f'<div class="status-dot err"></div>'
-            f'<span class="text-secondary">{name}: '
-            f'{str(e).replace("<","&lt;").replace(">","&gt;")}'
-            f'</span></div></div>'
-        ))
+        return {
+            "html": (
+                f'<div class="card"><div class="flex">'
+                f'<div class="status-dot err"></div>'
+                f'<span class="text-secondary">{name}: '
+                f'{str(e).replace("<","&lt;").replace(">","&gt;")}'
+                f'</span></div></div>'
+            ),
+            "data": {},
+            "error": str(e),
+        }
 
 
 @app.post("/cards/{name}/action")
@@ -938,6 +948,18 @@ async def card_action(name: str, payload: dict = None):
         except Exception as e:
             return {"ok": False, "error": str(e)}
 
+    # ── 智能问答 ──
+    if name == "chat" and payload and payload.get("action") == "ask":
+        try:
+            question = (payload.get("question") or "").strip()
+            if not question:
+                return {"ok": False, "error": "问题不能为空"}
+            top_k = int(payload.get("top_k", 5))
+            answer = _get_chat_engine().answer(question, top_k=top_k)
+            return {"ok": True, "answer": answer}
+        except Exception as e:
+            return {"ok": False, "error": f"智能问答暂不可用：{e}"}
+
     # ── 角色代入选股 ──
     if name == "role_picker" and payload:
         try:
@@ -1002,24 +1024,40 @@ from src.interfaces.handlers_data import _handle_asset_alias, _handle_portrait_g
 
 
 @app.get("/", response_class=HTMLResponse)
+async def serve_landing():
+    """服务产品首页（Landing Page）。
+
+    展示产品介绍、核心能力和流水线流程，
+    引导用户进入控制台。
+    """
+    landing = TEMPLATE_DIR / "landing.html"
+    if landing.exists():
+        return HTMLResponse(
+            content=landing.read_text(encoding="utf-8"),
+        )
+    # Fallback：如果 landing.html 不存在，跳转到 dashboard
+    from fastapi.responses import RedirectResponse
+    return RedirectResponse(url="/dashboard")
+
+
+@app.get("/dashboard", response_class=HTMLResponse)
 async def serve_dashboard():
     """服务模块化仪表盘主页。
 
     请求格式:
-        GET /
+        GET /dashboard
 
     Returns:
         HTMLResponse: 完整的仪表盘 HTML 页面（包含所有卡片占位符）
 
     实现:
-        读取 cards/templates/base.html 模板并返回，前端 JS 通过 /cards/meta
+        读取 templates/base.html 并返回，前端 JS 通过 /cards/meta
         和 /cards/{name} 动态加载卡片内容
     """
-    from src.cards.base import TEMPLATE_DIR
     base = TEMPLATE_DIR / "base.html"
     return HTMLResponse(
         content=base.read_text(encoding="utf-8"),
-        headers={"Cache-Control": "no-cache, no-store, must-revalidate"}  # 禁用缓存
+        headers={"Cache-Control": "no-cache, no-store, must-revalidate"}
     )
 
 

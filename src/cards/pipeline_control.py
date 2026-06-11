@@ -40,7 +40,7 @@ class ApiStatusCard(Card):
             "cursors": {"TJ_Research": "...", ...}    # 各用户采集游标（截断显示）
         }
     """
-
+    name = "api_status"
     def get_data(self, **params) -> dict:
         state = Path("data/auto_scheduler_state.json")
         st = json.loads(state.read_text()) if state.exists() else {}
@@ -59,7 +59,7 @@ class ApiStatusCard(Card):
             ).fetchall()
             user_counts = {row[0]: row[1] for row in rows}
             s.close()
-        except:
+        except Exception:
             pass
         return {
             "users": users,

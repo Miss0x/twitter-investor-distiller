@@ -8,7 +8,7 @@
   3. ScriptRunnerCard  — 后台分析脚本触发器（信号/清洗/网络等）
   4. TimelineCard      — 情绪时间线图表浏览
 """
-import json, csv, time
+import json, csv, time, html
 from pathlib import Path
 from collections import Counter
 from src.cards.base import Card
@@ -19,15 +19,14 @@ from src.cards import register
 # 工具函数
 # ────────────────────────────────────────────────────────────
 
-def _esc_js(s: str) -> str:
+def _attr(s: str) -> str:
     """
-    JS 字符串安全转义函数。
+    HTML 属性值安全转义函数。
 
-    将任意字符串转为安全的 JavaScript 字符串字面量，
-    用于 onclick 属性中防止 XSS/注入攻击。
-    使用 json.dumps 进行基础转义，再额外转义单引号。
+    转义 & < > " 四个字符用于嵌入 HTML 属性值内部（如 data-* 属性），
+    防止属性值注入攻击。基于标准库 html.escape(quote=True)。
     """
-    return json.dumps(str(s))[1:-1].replace("'", "\\'")
+    return html.escape(str(s), quote=True)
 
 
 @register
@@ -99,14 +98,14 @@ class AssetAliasCard(Card):
 
     def _render_html(self, data: dict) -> str:
         """
-        生成资产代码库管理界面的 HTML。
+        生成标的代码映射管理界面的 HTML。
 
         HTML 结构概览:
             1. 四格统计面板 — 总映射/已确认/待判断/已跳过
-            2. 添加/编辑表单 — alias + ticker + 备注 输入框
-            3. 已确认映射表格 — alias | ticker | 备注 | 操作(编辑/删除)
-            4. 待人工判断表格 — alias | 系统标注 | 操作(填代码/跳过/删除)
-            5. 已跳过表格（可折叠）— alias | 系统标注 | 操作(恢复)
+            2. 添加/编辑表单 — 提及名称 + 标的代码 + 备注 输入框
+            3. 已确认映射表格 — 提及名称 | 标的代码 | 备注 | 操作(编辑/删除)
+            4. 待人工判断表格 — 提及名称 | 系统标注 | 操作(填写代码/跳过/删除)
+            5. 已跳过表格（可折叠）— 提及名称 | 系统标注 | 操作(恢复)
             6. 底部提示 — 内置识别列表
         """
         count = data["count"]
@@ -122,8 +121,8 @@ class AssetAliasCard(Card):
   <td style="font-weight:500">{a["ticker"]}</td>
   <td style="font-size:11px;color:var(--text-secondary)">{a.get("type","")}</td>
   <td style="text-align:right">
-    <button class="btn" style="font-size:10px;padding:1px 6px" onclick="editAliasRow('{_esc_js(a["alias"])}','{_esc_js(a["ticker"])}','{_esc_js(a.get("type",""))}')">编辑</button>
-    <button class="btn btn-danger" style="font-size:10px;padding:1px 6px" onclick="deleteAlias('{_esc_js(a["alias"])}')">删除</button>
+    <button class="btn" style="font-size:10px;padding:1px 6px" data-action="edit-alias" data-alias="{_attr(a["alias"])}" data-ticker="{_attr(a["ticker"])}" data-notes="{_attr(a.get("type",""))}">编辑</button>
+    <button class="btn btn-danger" style="font-size:10px;padding:1px 6px" data-action="delete-alias" data-alias="{_attr(a["alias"])}">删除</button>
   </td></tr>'''
                 for a in confirmed[:50]
             )
@@ -138,9 +137,9 @@ class AssetAliasCard(Card):
   <td style="font-size:11px;font-weight:500">{a["alias"]}</td>
   <td style="font-size:11px;color:var(--text-secondary)">{a.get("type","")}</td>
   <td style="text-align:right">
-    <button class="btn" style="font-size:10px;padding:1px 6px" onclick="fillAliasForm('{_esc_js(a["alias"])}','{_esc_js(a.get("type",""))}')">填代码</button>
-    <button class="btn" style="font-size:10px;padding:1px 6px;border-color:var(--text-tertiary);color:var(--text-tertiary)" onclick="skipAlias('{_esc_js(a["alias"])}')">跳过</button>
-    <button class="btn btn-danger" style="font-size:10px;padding:1px 6px" onclick="deleteAlias('{_esc_js(a["alias"])}')">删除</button>
+    <button class="btn" style="font-size:10px;padding:1px 6px" data-action="fill-alias" data-alias="{_attr(a["alias"])}" data-notes="{_attr(a.get("type",""))}">填写代码</button>
+    <button class="btn" style="font-size:10px;padding:1px 6px;border-color:var(--text-tertiary);color:var(--text-tertiary)" data-action="skip-alias" data-alias="{_attr(a["alias"])}">跳过</button>
+    <button class="btn btn-danger" style="font-size:10px;padding:1px 6px" data-action="delete-alias" data-alias="{_attr(a["alias"])}">删除</button>
   </td></tr>'''
                 for a in pending[:30]
             )
@@ -156,40 +155,40 @@ class AssetAliasCard(Card):
   <td style="font-size:11px">{a["alias"]}</td>
   <td style="font-size:11px;color:var(--text-secondary)">{a.get("type","").replace("SKIP|","",1) if a.get("type","").startswith("SKIP|") else a.get("type","")}</td>
   <td style="text-align:right">
-    <button class="btn" style="font-size:10px;padding:1px 6px" onclick="unskipAlias('{_esc_js(a["alias"])}')">恢复</button>
+    <button class="btn" style="font-size:10px;padding:1px 6px" data-action="unskip-alias" data-alias="{_attr(a["alias"])}">恢复</button>
   </td></tr>'''
                 for a in skipped[:30]
             )
 
         crypto_str = ", ".join(data.get("known_crypto", []))
-        return f'''<div class="card-title">资产代码库</div>
+        return f'''<div class="card-title">标的代码映射</div>
 <div class="grid grid-4 mb-sm">
   <div class="metric"><div class="metric-label">总映射</div><div class="metric-value">{count}</div><div class="metric-sub">条</div></div>
-  <div class="metric"><div class="metric-label">已确认</div><div class="metric-value" style="color:var(--text-success)">{data["n_confirmed"]}</div><div class="metric-sub">ticker 明确</div></div>
+  <div class="metric"><div class="metric-label">已确认</div><div class="metric-value" style="color:var(--text-success)">{data["n_confirmed"]}</div><div class="metric-sub">代码明确</div></div>
   <div class="metric"><div class="metric-label">待判断</div><div class="metric-value" style="color:var(--text-warning)">{data["n_pending"]}</div><div class="metric-sub">需人工</div></div>
   <div class="metric"><div class="metric-label">已跳过</div><div class="metric-value" style="color:var(--text-tertiary)">{data["n_skipped"]}</div><div class="metric-sub">暂不处理</div></div>
 </div>
 
 <!-- 添加 / 编辑表单 -->
-<div class="flex mb-sm" style="gap:4px;flex-wrap:wrap">
-  <input id="aa_alias" placeholder="别名" style="flex:1;min-width:80px;font-size:11px;padding:4px 6px" />
-  <input id="aa_ticker" placeholder="代码" style="flex:1;min-width:60px;font-size:11px;padding:4px 6px" />
-  <input id="aa_notes" placeholder="备注" style="flex:1;min-width:60px;font-size:11px;padding:4px 6px" />
-  <button class="btn btn-primary" onclick="addAlias()" style="font-size:11px;padding:4px 10px" id="btn_aa_submit">添加</button>
+<div class="flex mb-sm" style="gap:4px;flex-wrap:wrap" data-card-context="asset_alias">
+  <input id="asset_alias-aa_alias" placeholder="提及名称" style="flex:1;min-width:80px;font-size:11px;padding:4px 6px" />
+  <input id="asset_alias-aa_ticker" placeholder="标的代码" style="flex:1;min-width:60px;font-size:11px;padding:4px 6px" />
+  <input id="asset_alias-aa_notes" placeholder="备注" style="flex:1;min-width:60px;font-size:11px;padding:4px 6px" />
+  <button class="btn btn-primary" data-action="add-alias" data-card="asset_alias" style="font-size:11px;padding:4px 10px" id="asset_alias-btn_aa_submit">添加</button>
 </div>
-<input type="hidden" id="aa_old_alias" value="" />
-<span id="aa_status" class="text-secondary" style="font-size:10px"></span>
+<input type="hidden" id="asset_alias-aa_old_alias" value="" />
+<span id="asset_alias-aa_status" class="text-secondary" style="font-size:10px"></span>
 
 <!-- 已确认映射 -->
 <div class="mt-md mb-sm"><span style="font-size:12px;font-weight:500">已确认映射 ({data["n_confirmed"]}条)</span></div>
-<table class="data" style="margin-bottom:0"><tr><th>别名</th><th>Ticker</th><th>备注</th><th style="text-align:right">操作</th></tr>{confirmed_rows}</table>
+<table class="data" style="margin-bottom:0"><tr><th>提及名称</th><th>标的代码</th><th>备注</th><th style="text-align:right">操作</th></tr>{confirmed_rows}</table>
 
 <!-- 待人工判断 -->
 <div class="mt-md mb-sm"><span style="font-size:12px;font-weight:500;color:var(--text-warning)">⚠ 待人工判断 ({data["n_pending"]}条)</span></div>
-<table class="data"><tr><th>别名</th><th>系统标注</th><th style="text-align:right">操作</th></tr>{pending_rows}</table>
+<table class="data"><tr><th>提及名称</th><th>系统标注</th><th style="text-align:right">操作</th></tr>{pending_rows}</table>
 <!-- 已跳过 -->
-{skipped_rows and f'<div class="mt-md mb-sm"><span style="font-size:12px;font-weight:500;color:var(--text-tertiary)">⊘ 已跳过 ({data["n_skipped"]}条)</span></div><table class="data"><tr><th>别名</th><th>系统标注</th><th style="text-align:right">操作</th></tr>' + skipped_rows + '</table>'}
-<div class="text-secondary mt-sm" style="font-size:10px">提示：点"填代码"自动回填表单，输入 ticker 后提交即可移入已确认列表。跳过则暂不处理。内置识别: {crypto_str}</div>'''
+{skipped_rows and f'<div class="mt-md mb-sm"><span style="font-size:12px;font-weight:500;color:var(--text-tertiary)">⊘ 已跳过 ({data["n_skipped"]}条)</span></div><table class="data"><tr><th>提及名称</th><th>系统标注</th><th style="text-align:right">操作</th></tr>' + skipped_rows + '</table>'}
+<div class="text-secondary mt-sm" style="font-size:10px">提示：点"填写代码"自动回填表单，输入标的代码后提交即可移入已确认列表。跳过则暂不处理。内置识别: {crypto_str}</div>'''
 
 
 @register
@@ -204,13 +203,13 @@ class CryptoCard(Card):
         tab="insights"           — 属于分析洞察标签页
         endpoint="/api/crypto"   — API 路由
         refresh=300              — 每 5 分钟自动刷新
-        template="crypto.html"   — 使用 Jinja2 模板渲染
+        template=None            — 使用 _render_html() 渲染（包含提及信号列）
     """
     name = "crypto"
     tab = "insights"
     endpoint = "/api/crypto"
     refresh = 300
-    template = "crypto.html"
+    # template removed — uses _render_html() which includes mentions/signal column (规则二)
 
     def get_data(self, **params) -> dict:
         """
@@ -343,7 +342,7 @@ class ScriptRunnerCard(Card):
         - 基本面快照: fetch_fundamentals.py → PE/ROE/营收增速
         - 分析清洗: clean_analysis.py       → 股票/币种代码校准
     """
-
+    name = "script_runner"
     def get_data(self, **params) -> dict:
         scripts = {
             "信号量化": {"file": "compute_signals.py", "desc": "生成 0-100 分信号（需 analyzed_cleaned.json）", "group": "signal"},
@@ -386,7 +385,7 @@ class TimelineCard(Card):
             }
         }
     """
-
+    name = "timeline"
     def get_data(self, **params) -> dict:
         charts = {}
         for fp in Path("data/timeline").glob("*.html"):
