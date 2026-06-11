@@ -1,0 +1,21 @@
+<div class="card-title">信号质量门禁</div>
+{% if empty %}
+<div class="text-secondary" style="padding: 12px 0;">
+  暂无信号质量数据。当采集和分析管线产出信号后，质量门禁将在此展示证据完整性检查结果。
+</div>
+{% else %}
+<div class="flex" style="gap: 16px; padding: 8px 0;">
+  <span class="text-success">通过: {{ passed }}</span>
+  <span style="color: var(--text-warning);">警告: {{ warned }}</span>
+  <span class="text-danger">阻断: {{ blocked }}</span>
+</div>
+{% if checks %}
+<ul style="font-size: 12px; padding-left: 16px;">
+{% for c in checks %}
+<li style="margin-bottom: 4px;">
+  <span class="text-{{ 'danger' if c.severity == 'critical' else 'warning' if c.severity == 'warning' else 'secondary' }}">[{{ c.code }}]</span> {{ c.message }}
+</li>
+{% endfor %}
+</ul>
+{% endif %}
+{% endif %}

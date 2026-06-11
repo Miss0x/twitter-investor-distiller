@@ -124,3 +124,4 @@ from . import pipeline_control   # noqa: E402, F401  — API 采集状态面板
 from . import tool_cards     # noqa: E402, F401   — 工具卡片组（拉取控制/画像浏览）
 from . import functional_cards  # noqa: E402, F401  — 功能卡片组（资产别名/加密货币/脚本/时间线）
 from . import pipeline_execute  # noqa: E402, F401  — 流水线执行面板 + 画像生成
+from . import governance_cards  # noqa: E402, F401  — 信号治理卡片组（质量门禁/风险提示/多角色评审/发布审核）

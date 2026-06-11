@@ -134,3 +134,26 @@ CARD_DISPLAY: dict[str, tuple[str, str]] = {
     "telegram":        ("推送通知",       "配置 Telegram 机器人，把重要信号推送到你的手机"),
     "script_runner":   ("高级工具",       "手动触发后台脚本，供调试、维护与批量生成信号使用"),
 }
+
+# ═══════════════════════════════════════════════════════
+# 信号治理卡片扩展
+# ═══════════════════════════════════════════════════════
+
+GOVERNANCE_CARD_CONFIG: dict[str, tuple[str, str, int, int, bool, bool, str | None, int]] = {
+    "quality_gate":    ("signals",   "今日信号",   1, 0, False, False, "quality_gate",    300),
+    "risk_alerts":     ("signals",   "今日信号",   1, 1, False, False, "risk_alerts",     300),
+    "panel_review":    ("decisions", "投资决策",   2, 0, False, True,  "panel_review",      0),
+    "publish_review":  ("data",      "数据管理",   4, 0, False, False, "publish_review",    0),
+}
+
+GOVERNANCE_CARD_DISPLAY: dict[str, tuple[str, str]] = {
+    "quality_gate":    ("信号质量门禁", "今日信号的证据完整性、数据新鲜度与来源可靠性检查"),
+    "risk_alerts":     ("风险提示",     "异常推广、群荐股、杀猪盘、话术诱导等风险信号扫描"),
+    "panel_review":    ("多角色评审",   "价值/成长/宏观/趋势/游资/风控/信源/AI瓶颈 8 大流派对信号的结构化评审"),
+    "publish_review":  ("发布审核",     "信号发布前的最终阻断检查：证据缺口、风险等级、评审分歧"),
+}
+
+
+# 扩充到主配置
+CARD_CONFIG.update(GOVERNANCE_CARD_CONFIG)
+CARD_DISPLAY.update(GOVERNANCE_CARD_DISPLAY)

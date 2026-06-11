@@ -1,0 +1,28 @@
+<div class="card-title">多角色评审</div>
+{% if empty %}
+<div class="text-secondary" style="padding: 12px 0;">
+  暂无评审数据。当信号通过质量门禁后，8 大流派将对信号进行结构化评审。
+</div>
+{% else %}
+<div style="padding: 8px 0;">
+  <span style="font-weight: 600;">综合立场: </span>
+  <span class="text-{{ 'success' if aggregate_stance == 'bullish' else 'danger' if aggregate_stance == 'bearish' else 'secondary' }}">{{ aggregate_stance }}</span>
+  <span class="text-secondary" style="margin-left: 12px;">均分: {{ aggregate_score }}</span>
+</div>
+<div class="flex" style="gap: 12px; font-size: 12px; padding: 4px 0;">
+  <span class="text-success">看多: {{ bullish_count }}</span>
+  <span class="text-danger">看空: {{ bearish_count }}</span>
+  <span class="text-secondary">中立: {{ neutral_count }}</span>
+  <span class="text-secondary">数据不足: {{ insufficient_data_count }}</span>
+</div>
+{% if reviews %}
+<div style="max-height: 200px; overflow-y: auto; font-size: 11px;">
+{% for r in reviews[:6] %}
+<div style="padding: 4px 0; border-bottom: 1px solid var(--border-secondary);">
+  <span style="font-weight: 600;">{{ r.persona_label }}</span>
+  <span class="text-{{ 'success' if r.stance == 'bullish' else 'danger' if r.stance == 'bearish' else 'secondary' }}" style="margin-left: 8px;">{{ r.stance }}</span>
+</div>
+{% endfor %}
+</div>
+{% endif %}
+{% endif %}

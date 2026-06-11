@@ -1,0 +1,19 @@
+<div class="card-title">风险提示</div>
+{% if empty %}
+<div class="text-secondary" style="padding: 12px 0;">
+  暂无风险数据。风险扫描将在信号产出后运行，检测异常推广、群荐股、杀猪盘等高风险模式。
+</div>
+{% else %}
+<div style="padding: 8px 0;">
+  <span style="font-weight: 600;">风险等级: </span>
+  <span class="text-{{ 'danger' if risk_level == 'high_risk' else 'warning' if risk_level == 'caution' else 'success' }}">{{ risk_level }}</span>
+  <span class="text-secondary" style="margin-left: 12px;">得分: {{ total_score }}</span>
+</div>
+{% if triggers %}
+<ul style="font-size: 12px; padding-left: 16px;">
+{% for t in triggers %}
+<li>[{{ t.dimension }}] {{ t.description }} ({{ t.keyword }})</li>
+{% endfor %}
+</ul>
+{% endif %}
+{% endif %}

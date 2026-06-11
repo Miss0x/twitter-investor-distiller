@@ -1,0 +1,20 @@
+<div class="card-title">发布审核</div>
+{% if empty %}
+<div class="text-secondary" style="padding: 12px 0;">
+  暂无审核记录。当信号通过全部治理管线后，发布审核将汇总质量、风险、评审结果做出最终判断。
+</div>
+{% else %}
+<div style="padding: 8px 0;">
+  <span style="font-weight: 600;">审核结果: </span>
+  <span class="text-{{ 'success' if status == 'pass' else 'danger' if status == 'block' else 'warning' }}">{{ status }}</span>
+</div>
+{% if issues %}
+<ul style="font-size: 12px; padding-left: 16px;">
+{% for i in issues %}
+<li style="margin-bottom: 4px;">
+  <span class="text-{{ 'danger' if i.severity == 'critical' else 'warning' }}">[{{ i.code }}]</span> {{ i.message }}
+</li>
+{% endfor %}
+</ul>
+{% endif %}
+{% endif %}
