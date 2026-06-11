@@ -1,0 +1,41 @@
+{
+  "signal_id": "NVDA-20260612-001",
+  "ticker": "NVDA",
+  "asset_name": "NVIDIA Corporation",
+  "generated_at": "2026-06-12T00:00:00",
+  "source_tweet_ids": ["tweet_001", "tweet_002"],
+  "source_usernames": ["TJ_Research", "dearbaibabybus"],
+  "stance": "bullish",
+  "signal_score": 0.78,
+  "confidence": "moderate",
+  "evidence": [
+    {
+      "source_type": "tweet",
+      "source_id": "tweet_001",
+      "url": "https://x.com/TJ_Research/status/001",
+      "title": "TJ_Research on NVDA demand",
+      "excerpt": "NVDA H200 demand still very strong across hyperscalers",
+      "timestamp": "2026-06-11T12:00:00",
+      "reliability": 0.75
+    },
+    {
+      "source_type": "tweet",
+      "source_id": "tweet_002",
+      "url": "https://x.com/dearbaibabybus/status/002",
+      "title": "dearbaibabybus NVDA price target",
+      "excerpt": "NVDA 12-month outlook remains constructive at current levels",
+      "timestamp": "2026-06-11T14:00:00",
+      "reliability": 0.70
+    },
+    {
+      "source_type": "price",
+      "source_id": "price_NVDA_20260611",
+      "url": null,
+      "title": "NVDA closing price 2026-06-11",
+      "excerpt": "Close: 995.50",
+      "timestamp": "2026-06-11T16:00:00",
+      "reliability": 0.95
+    }
+  ],
+  "raw_payload": {}
+}

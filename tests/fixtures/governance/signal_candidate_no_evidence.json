@@ -1,0 +1,13 @@
+{
+  "signal_id": "NVDA-20260612-003",
+  "ticker": "NVDA",
+  "asset_name": "NVIDIA Corporation",
+  "generated_at": "2026-06-12T00:00:00",
+  "source_tweet_ids": [],
+  "source_usernames": [],
+  "stance": null,
+  "signal_score": null,
+  "confidence": null,
+  "evidence": [],
+  "raw_payload": {}
+}

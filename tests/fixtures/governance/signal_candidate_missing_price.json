@@ -1,0 +1,23 @@
+{
+  "signal_id": "NVDA-20260612-002",
+  "ticker": "NVDA",
+  "asset_name": "NVIDIA Corporation",
+  "generated_at": "2026-06-12T00:00:00",
+  "source_tweet_ids": ["tweet_003"],
+  "source_usernames": ["TJ_Research"],
+  "stance": "bullish",
+  "signal_score": 0.72,
+  "confidence": "low",
+  "evidence": [
+    {
+      "source_type": "tweet",
+      "source_id": "tweet_003",
+      "url": "https://x.com/TJ_Research/status/003",
+      "title": "TJ_Research NVDA outlook",
+      "excerpt": "NVDA continues to execute well, but no price data available",
+      "timestamp": "2026-06-11T18:00:00",
+      "reliability": 0.65
+    }
+  ],
+  "raw_payload": {}
+}

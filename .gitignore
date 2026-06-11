@@ -26,6 +26,7 @@ data/processed/
 data/media/
 data/diagnostics/
 data/vector_db/
+data/governance/
 data/*.db-shm
 data/*.db-wal
 data/*.bak*
