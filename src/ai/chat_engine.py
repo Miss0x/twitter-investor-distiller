@@ -20,7 +20,7 @@ from src.ai.prompts import DISTILL_SYSTEM_PROMPT, USER_PROMPT
 from src.utils.env import load_project_env
 from src.vectorization.retriever import TweetRetriever
 
-# ── 加载 .env 环境变量（OPENAI_API_KEY 等）──
+# ── 加载 .env 环境变量（LLM_API_KEY / LLM_BASE_URL / CHAT_MODEL 等）──
 load_project_env()
 
 
@@ -28,7 +28,7 @@ class ChatEngine:
     """
     RAG 对话引擎。
     
-    组合了向量检索（TweetRetriever）+ LLM 对话（OpenAI），
+    组合了向量检索（TweetRetriever）+ OpenAI-compatible LLM 对话，
     用"检索到的推文"作为对话上下文，让 AI 的回答有据可依。
     
     Usage:
@@ -40,11 +40,13 @@ class ChatEngine:
         """
         Args:
             retriever: 推文检索器实例，不传则自动创建（连接 Chroma 向量库）
-            model: OpenAI 模型名，不传则从环境变量 OPENAI_MODEL 读取
+            model: 聊天模型名，不传则优先读取 CHAT_MODEL，兼容 OPENAI_MODEL
         """
         self.retriever = retriever or TweetRetriever()
-        self.model = model or os.getenv("OPENAI_MODEL", "gpt-4-turbo-preview")
-        self.client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+        self.model = model or os.getenv("CHAT_MODEL") or os.getenv("OPENAI_MODEL") or "gpt-4-turbo-preview"
+        self.api_key = os.getenv("LLM_API_KEY") or os.getenv("OPENAI_API_KEY")
+        self.base_url = os.getenv("LLM_BASE_URL") or os.getenv("OPENAI_BASE_URL") or "https://api.openai.com/v1"
+        self.client = OpenAI(api_key=self.api_key, base_url=self.base_url)
 
     def answer(self, question: str, top_k: int = 5) -> str:
         """

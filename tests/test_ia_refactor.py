@@ -103,6 +103,50 @@ def test_pipeline_retry_and_skip_use_api_fetch():
     assert "apiFetch('/pipeline/tasks/' + id + '/skip'" in text
 
 
+def test_chat_ui_preserves_state_and_ignores_stale_answers():
+    text = Path("src/templates/base.html").read_text(encoding="utf-8")
+
+    assert "var CHAT_STATE =" in text
+    assert "hydrateChatState();" in text
+    assert "CHAT_STATE.requestId += 1" in text
+    assert "if (requestId !== CHAT_STATE.requestId) return;" in text
+    assert "CHAT_STATE.answerHtml" in text
+
+
+def test_chat_action_clamps_top_k_and_handles_invalid_values():
+    text = Path("src/interfaces/web_api.py").read_text(encoding="utf-8")
+
+    assert "def _normalize_chat_top_k" in text
+    assert "return max(1, min(value, 20))" in text
+    assert "top_k = _normalize_chat_top_k(payload.get(\"top_k\", 5))" in text
+
+
+def test_ai_html_results_are_sanitized_before_rendering():
+    text = Path("src/templates/base.html").read_text(encoding="utf-8")
+
+    assert "function sanitizeTrustedHtml" in text
+    assert "sanitizeTrustedHtml(result.html)" in text
+    assert "rp_result').innerHTML = result && result.ok ? result.html" not in text
+    assert "pf_result').innerHTML = result && result.ok ? result.html" not in text
+
+
+def test_pytest_is_available_in_project_requirements():
+    text = Path("requirements.txt").read_text(encoding="utf-8")
+
+    assert "pytest" in text
+
+
+def test_chat_engine_uses_generic_openai_compatible_llm_config():
+    text = Path("src/ai/chat_engine.py").read_text(encoding="utf-8")
+
+    assert 'os.getenv("CHAT_MODEL")' in text
+    assert 'os.getenv("LLM_API_KEY")' in text
+    assert 'os.getenv("LLM_BASE_URL")' in text
+    assert 'base_url=self.base_url' in text
+    assert 'os.getenv("OPENAI_API_KEY")' in text
+    assert 'os.getenv("OPENAI_MODEL")' in text
+
+
 def test_card_config_comments_use_current_information_architecture():
     text = Path("src/cards/cards_config.py").read_text(encoding="utf-8")
     header = text.split("\nCARD_CONFIG", 1)[0]

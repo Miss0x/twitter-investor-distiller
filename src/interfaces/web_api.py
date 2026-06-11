@@ -41,6 +41,15 @@ def _get_chat_engine():
     return _chat_engine
 
 
+def _normalize_chat_top_k(raw_value, default: int = 5) -> int:
+    """规范化智能问答检索条数，避免非法值或过量检索。"""
+    try:
+        value = int(raw_value)
+    except (TypeError, ValueError):
+        value = default
+    return max(1, min(value, 20))
+
+
 # ── FastAPI 应用实例 ──
 app = FastAPI(title="Twitter 用户蒸馏 AI 助手")
 
@@ -954,7 +963,7 @@ async def card_action(name: str, payload: dict = None):
             question = (payload.get("question") or "").strip()
             if not question:
                 return {"ok": False, "error": "问题不能为空"}
-            top_k = int(payload.get("top_k", 5))
+            top_k = _normalize_chat_top_k(payload.get("top_k", 5))
             answer = _get_chat_engine().answer(question, top_k=top_k)
             return {"ok": True, "answer": answer}
         except Exception as e:

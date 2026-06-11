@@ -338,6 +338,7 @@ var CARD_META = {};
 var CACHE = {};
 var LAST_FETCH = {};
 var REFRESH_MAP = {};
+var CHAT_STATE = { question: '', answerHtml: '等待提问...', requestId: 0, loading: false };
 
 async function apiFetch(url, options) {
   try {
@@ -509,6 +510,7 @@ function postRender(container, cards) {
         titleEl.insertAdjacentElement('afterend', sub);
       }
     }
+    if (c.name === 'chat') hydrateChatState();
   });
 }
 
@@ -517,27 +519,54 @@ function cardEl(cardName, selector) {
   return container ? container.querySelector(selector) : null;
 }
 
+function escapeHtml(value) {
+  return String(value || '').replace(/[&<>"]/g, function(ch) {
+    return ({'&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;'})[ch];
+  });
+}
+
+function hydrateChatState() {
+  var input = cardEl('chat', '#chat-question');
+  var answer = cardEl('chat', '#chat-answer');
+  if (input) input.value = CHAT_STATE.question || '';
+  if (answer) answer.innerHTML = CHAT_STATE.answerHtml || '等待提问...';
+}
+
+function setChatAnswerHtml(html) {
+  CHAT_STATE.answerHtml = html;
+  var answer = cardEl('chat', '#chat-answer');
+  if (answer) answer.innerHTML = html;
+}
+
 function fillChatQuestion(question) {
   var input = cardEl('chat', '#chat-question');
-  if (input && question) input.value = question;
+  if (input && question) {
+    input.value = question;
+    CHAT_STATE.question = question;
+  }
 }
 
 async function askChat() {
   var input = cardEl('chat', '#chat-question');
-  var answer = cardEl('chat', '#chat-answer');
-  if (!input || !answer) return;
+  if (!input) return;
   var question = input.value.trim();
-  if (!question) { answer.innerText = '请先输入问题'; return; }
-  answer.innerHTML = '<div class="flex"><div class="spinner"></div><span class="text-secondary">正在检索历史观点...</span></div>';
+  CHAT_STATE.question = question;
+  if (!question) { setChatAnswerHtml('请先输入问题'); return; }
+  CHAT_STATE.requestId += 1;
+  CHAT_STATE.loading = true;
+  var requestId = CHAT_STATE.requestId;
+  setChatAnswerHtml('<div class="flex"><div class="spinner"></div><span class="text-secondary">正在检索历史观点...</span></div>');
   var result = await apiFetch('/cards/chat/action', {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({action: 'ask', question: question, top_k: 5})
   });
+  if (requestId !== CHAT_STATE.requestId) return;
+  CHAT_STATE.loading = false;
   if (result && result.ok) {
-    answer.innerText = result.answer || '未生成回答';
+    setChatAnswerHtml(escapeHtml(result.answer || '未生成回答'));
   } else {
-    answer.innerText = '问答失败: ' + ((result && result.error) || '未知错误');
+    setChatAnswerHtml('问答失败: ' + escapeHtml((result && result.error) || '未知错误'));
   }
 }
 
@@ -823,11 +852,24 @@ function updatePool() {
   var data = JSON.parse(el.textContent), t = data[s] || [];
   document.getElementById('rp_pool').innerText = '池内: ' + t.join(', ');
 }
+function sanitizeTrustedHtml(html) {
+  var template = document.createElement('template');
+  template.innerHTML = String(html || '');
+  template.content.querySelectorAll('script, iframe, object, embed, link, meta').forEach(function(el) { el.remove(); });
+  template.content.querySelectorAll('*').forEach(function(el) {
+    Array.from(el.attributes).forEach(function(attr) {
+      var name = attr.name.toLowerCase();
+      var value = attr.value || '';
+      if (name.indexOf('on') === 0 || value.toLowerCase().indexOf('javascript:') === 0) el.removeAttribute(attr.name);
+    });
+  });
+  return template.innerHTML;
+}
 async function generatePick() {
   var btn = event.target; btn.disabled = true; btn.innerText = '生成中...';
   document.getElementById('rp_result').innerHTML = '<div class="flex"><div class="spinner"></div><span class="text-secondary">AI 思考中...</span></div>';
   var result = await apiFetch('/cards/role_picker/action', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({analyst:document.getElementById('rp_analyst').value, sector:document.getElementById('rp_sector').value, custom:document.getElementById('rp_custom').value}) });
-  document.getElementById('rp_result').innerHTML = result && result.ok ? result.html : '<div class="text-secondary">错误: ' + (result ? result.error : '网络错误') + '</div>';
+  document.getElementById('rp_result').innerHTML = result && result.ok ? sanitizeTrustedHtml(result.html) : '<div class="text-secondary">错误: ' + escapeHtml(result ? result.error : '网络错误') + '</div>';
   btn.disabled = false; btn.innerText = '生成方案';
 }
 async function analyzePortfolio() {
@@ -836,7 +878,7 @@ async function analyzePortfolio() {
   var btn = event.target; btn.disabled = true; btn.innerText = '分析中...';
   document.getElementById('pf_result').innerHTML = '<div class="flex"><div class="spinner"></div><span class="text-secondary">AI 分析中...</span></div>';
   var result = await apiFetch('/cards/portfolio/action', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({text:v}) });
-  document.getElementById('pf_result').innerHTML = result && result.ok ? result.html : '<div class="text-secondary">错误: ' + (result ? result.error : '网络错误') + '</div>';
+  document.getElementById('pf_result').innerHTML = result && result.ok ? sanitizeTrustedHtml(result.html) : '<div class="text-secondary">错误: ' + escapeHtml(result ? result.error : '网络错误') + '</div>';
   btn.disabled = false; btn.innerText = '分析持仓';
 }
 async function fetchManually() {
