@@ -1,0 +1,83 @@
+# Signal Governance — Role Config for Panel Review
+# Version: 2026-06-12
+# Inspired by UZI-Skill 9-cell A-I framework, adapted for Twitter investor distillation.
+
+version: "2026-06-12"
+
+role_groups:
+  value_quality:
+    label: "价值质量派"
+    objective: "检查商业质量、估值纪律、安全边际和长期可持续性"
+    personas:
+      - id: "buffett_style"
+        label: "巴菲特式质量视角"
+        stance_bias: "quality_first"
+        required_evidence: ["business_quality", "valuation", "cash_flow"]
+        scoring_rubric:
+          valuation: 0.25
+          moat: 0.30
+          management: 0.15
+          downside: 0.30
+
+  growth_tech:
+    label: "成长科技派"
+    objective: "检查 TAM、技术平台、产品周期和增长持续性"
+    personas:
+      - id: "cathie_wood_style"
+        label: "ARK 式颠覆创新视角"
+        stance_bias: "disruption_optimism"
+        required_evidence: ["tam_growth", "platform_lock", "innovation_cycle"]
+
+  macro_liquidity:
+    label: "宏观流动性派"
+    objective: "检查利率、美元、周期、风险偏好和系统性压力"
+    personas:
+      - id: "macro_pragmatist"
+        label: "宏观务实派"
+        stance_bias: "cycle_aware"
+        required_evidence: ["rate_environment", "dollar_trend", "risk_appetite"]
+
+  trend_momentum:
+    label: "趋势动量派"
+    objective: "检查趋势、突破、拥挤度、回撤和交易纪律"
+    personas:
+      - id: "trend_follower"
+        label: "趋势交易者"
+        stance_bias: "trend_biased"
+        required_evidence: ["price_action", "volume", "momentum_signals"]
+
+  hot_money_sentiment:
+    label: "游资情绪派"
+    objective: "检查题材、情绪、资金接力和短线一致预期"
+    personas:
+      - id: "hot_money_scout"
+        label: "游资情绪侦察员"
+        stance_bias: "sentiment_driven"
+        required_evidence: ["retail_sentiment", "capital_flow", "narrative_strength"]
+
+  risk_control:
+    label: "风控反方派"
+    objective: "主动寻找证据缺口、估值泡沫、叙事过热和反向风险"
+    personas:
+      - id: "devils_advocate"
+        label: "魔鬼代言人"
+        stance_bias: "risk_seeking"
+        required_evidence: ["bear_case", "valuation_risk", "concentration_risk"]
+
+  source_forensics:
+    label: "信源审查派"
+    objective: "检查观点来源、传播路径、历史可靠性和异常推广痕迹"
+    personas:
+      - id: "source_inspector"
+        label: "信源审查员"
+        stance_bias: "skeptical"
+        required_evidence: ["source_reliability", "account_history", "promotion_pattern"]
+
+  ai_chokepoint:
+    label: "AI瓶颈猎手"
+    objective: "检查 AI 产业链卡位、供给瓶颈、不可替代性和周期风险"
+    personas:
+      - id: "chokepoint_hunter"
+        label: "AI瓶颈猎手"
+        stance_bias: "supply_chain_focused"
+        required_evidence: ["supply_concentration", "capital_intensity", "substitutability"]
