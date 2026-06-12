@@ -12,7 +12,7 @@ from pathlib import Path
 
 DEFAULT_CONFIG = {
     "llm": {"base_url": "", "api_key": "", "model": ""},
-    "twitter": {"api_key": "", "api_secret": "", "access_token": "", "access_secret": ""},
+    "twitter": {"provider": "official", "api_key": "", "api_secret": "", "access_token": "", "access_secret": "", "base_url": ""},
     "telegram": {"bot_token": "", "chat_id": ""},
     "observations": [],
 }

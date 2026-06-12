@@ -958,15 +958,17 @@ async def save_llm_config(payload: dict):
 
 @app.post("/api/config/twitter")
 async def save_twitter_config(payload: dict):
-    """保存 Twitter API 配置。"""
+    """保存 Twitter API 配置（支持官方 API 和第三方 twitterapi.io）。"""
     try:
         from src.config_center import ConfigManager
         mgr = ConfigManager()
         mgr.save_section("twitter", {
+            "provider": str(payload.get("provider") or "official"),
             "api_key": str(payload.get("api_key") or ""),
             "api_secret": str(payload.get("api_secret") or ""),
             "access_token": str(payload.get("access_token") or ""),
             "access_secret": str(payload.get("access_secret") or ""),
+            "base_url": str(payload.get("base_url") or ""),
         })
         return {"ok": True, "config": mgr.load_masked()["twitter"]}
     except Exception as e:

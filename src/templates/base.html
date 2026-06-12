@@ -715,6 +715,7 @@ function _dispatchAction(el) {
     case 'save-config-telegram': saveConfigTelegram(); break;
     case 'add-observation': addObservation(); break;
     case 'remove-observation': removeObservation(el); break;
+    case 'switch-tw-provider': switchTwProvider(el.getAttribute('data-tw-provider')); break;
   }
 }
 
@@ -786,16 +787,42 @@ async function saveConfigLLM() {
 }
 
 async function saveConfigTwitter() {
-  var result = await apiFetch('/api/config/twitter', {
-    method: 'POST', headers:{'Content-Type':'application/json'},
-    body: JSON.stringify({
-      api_key: document.getElementById('config_center-tw_key').value.trim(),
-      api_secret: document.getElementById('config_center-tw_secret').value.trim(),
-      access_token: document.getElementById('config_center-tw_token').value.trim(),
-      access_secret: document.getElementById('config_center-tw_asecret').value.trim()
-    })
+  var provider = document.querySelector('.tw-provider-tab.active') ? document.querySelector('.tw-provider-tab.active').getAttribute('data-tw-provider') : 'official';
+  if (provider === 'twitterapi_io') {
+    var api_key = document.getElementById('config_center-tw_3rd_key').value.trim();
+    if (!api_key) { showToast('请填写 twitterapi.io 的 API Key'); return; }
+    var result = await apiFetch('/api/config/twitter', {
+      method: 'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({provider: 'twitterapi_io', api_key: api_key, base_url: 'https://api.twitterapi.io'})
+    });
+    showToast(result && result.ok ? 'twitterapi.io 配置已保存' : ('保存失败: ' + ((result && result.error) || '未知')));
+  } else {
+    var result = await apiFetch('/api/config/twitter', {
+      method: 'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({
+        provider: 'official',
+        api_key: document.getElementById('config_center-tw_key').value.trim(),
+        api_secret: document.getElementById('config_center-tw_secret').value.trim(),
+        access_token: document.getElementById('config_center-tw_token').value.trim(),
+        access_secret: document.getElementById('config_center-tw_asecret').value.trim()
+      })
+    });
+    showToast(result && result.ok ? 'Twitter 配置已保存' : ('保存失败: ' + ((result && result.error) || '未知')));
+  }
+}
+
+function switchTwProvider(provider) {
+  document.querySelectorAll('.tw-provider-tab').forEach(function(t) {
+    var active = t.getAttribute('data-tw-provider') === provider;
+    t.classList.toggle('active', active);
+    t.style.background = active ? 'var(--secondary)' : 'transparent';
+    t.style.color = active ? 'var(--text)' : 'var(--muted)';
+    t.style.fontWeight = active ? '600' : '400';
   });
-  showToast(result && result.ok ? 'Twitter 配置已保存' : ('保存失败: ' + ((result && result.error) || '未知')));
+  document.getElementById('config_center-tw_form_official').style.display = provider === 'official' ? 'grid' : 'none';
+  document.getElementById('config_center-tw_form_twitterapi').style.display = provider === 'twitterapi_io' ? 'block' : 'none';
+  document.getElementById('config_center-tw_desc_official').style.display = provider === 'official' ? 'inline' : 'none';
+  document.getElementById('config_center-tw_desc_twitterapi').style.display = provider === 'twitterapi_io' ? 'inline' : 'none';
 }
 
 async function saveConfigTelegram() {

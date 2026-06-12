@@ -33,7 +33,25 @@
 <!-- ════ Twitter API ════ -->
 <fieldset style="border:1px solid var(--border);border-radius:var(--radius-md);padding:14px;margin-bottom:14px;">
   <legend style="font-weight:600;font-size:13px;padding:0 8px;">🐦 Twitter API 配置</legend>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+
+  <!-- 供应商切换 -->
+  <div style="display:flex;gap:0;margin-bottom:14px;border:1px solid var(--border);border-radius:var(--radius-sm);overflow:hidden;width:fit-content;">
+    <div id="config_center-tw_tab_official" class="tw-provider-tab active" data-action="switch-tw-provider" data-tw-provider="official"
+         style="padding:6px 16px;font-size:12px;cursor:pointer;{% if twitter.provider == 'twitterapi_io' %}background:transparent;color:var(--muted);font-weight:400;{% else %}background:var(--secondary);color:var(--text);font-weight:600;{% endif %}transition:all .15s;border-right:1px solid var(--border);user-select:none;">
+      X 官方 API
+    </div>
+    <div id="config_center-tw_tab_twitterapi" class="tw-provider-tab" data-action="switch-tw-provider" data-tw-provider="twitterapi_io"
+         style="padding:6px 16px;font-size:12px;cursor:pointer;{% if twitter.provider == 'twitterapi_io' %}background:var(--secondary);color:var(--text);font-weight:600;{% else %}background:transparent;color:var(--muted);font-weight:400;{% endif %}transition:all .15s;user-select:none;">
+      twitterapi.io
+    </div>
+  </div>
+  <div style="font-size:11px;color:var(--dim);margin:-8px 0 12px;">
+    <span id="config_center-tw_desc_official" {% if twitter.provider == 'twitterapi_io' %}style="display:none;"{% endif %}>X 官方开发者 API，需要申请 OAuth 1.0a 四件套</span>
+    <span id="config_center-tw_desc_twitterapi" {% if twitter.provider != 'twitterapi_io' %}style="display:none;"{% endif %}>第三方服务 <a href="https://twitterapi.io" target="_blank" style="color:var(--accent);">twitterapi.io</a>，注册即得一个 API Key，无需 OAuth</span>
+  </div>
+
+  <!-- 官方 API 表单 -->
+  <div id="config_center-tw_form_official" style="display:{% if twitter.provider == 'twitterapi_io' %}none{% else %}grid{% endif %};grid-template-columns:1fr 1fr;gap:10px;">
     <div>
       <label style="font-size:11px;color:var(--muted);display:block;margin-bottom:4px;">API Key</label>
       <input id="config_center-tw_key" value="{{ twitter.api_key }}" type="password" style="width:100%;">
@@ -51,6 +69,17 @@
       <input id="config_center-tw_asecret" value="{{ twitter.access_secret }}" type="password" style="width:100%;">
     </div>
   </div>
+
+  <!-- twitterapi.io 表单 -->
+  <div id="config_center-tw_form_twitterapi" style="display:{% if twitter.provider == 'twitterapi_io' %}block{% else %}none{% endif %};">
+    <div>
+      <label style="font-size:11px;color:var(--muted);display:block;margin-bottom:4px;">API Key</label>
+      <input id="config_center-tw_3rd_key" value="{{ twitter.api_key if twitter.provider == 'twitterapi_io' }}" type="password" placeholder="在 twitterapi.io/dashboard 获取" style="width:100%;max-width:420px;">
+      <div style="font-size:10px;color:var(--dim);margin-top:2px;">注册地址：<a href="https://twitterapi.io/dashboard" target="_blank" style="color:var(--accent);">twitterapi.io/dashboard</a>，免费试用额度</div>
+    </div>
+    <input type="hidden" id="config_center-tw_3rd_url" value="https://api.twitterapi.io">
+  </div>
+
   <button class="btn btn-accent" data-action="save-config-twitter" style="margin-top:10px;">保存 Twitter 配置</button>
 </fieldset>
 
