@@ -36,10 +36,7 @@ def create_access_token(data: dict, expires_delta: timedelta | None = None) -> s
     return jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
 
 
-def get_current_user(
-    request: Request,
-    db: Session = Depends(lambda: None),
-) -> User | None:
+def get_current_user(request: Request) -> User | None:
     """Try to get current user from JWT. Returns None if no valid token (public mode)."""
     token = request.cookies.get("access_token") or request.headers.get("Authorization", "").removeprefix("Bearer ").strip()
     if not token:

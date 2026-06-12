@@ -933,6 +933,88 @@ async def revoke_governance_gap(payload: dict):
 
 
 # ═══════════════════════════════════════════════════════
+# 认证 API — 注册/登录/登出
+# ═══════════════════════════════════════════════════════
+
+@app.post("/auth/register")
+async def auth_register(payload: dict):
+    """用户注册。"""
+    from src.admin.auth import hash_password
+    from src.admin.auth_models import User
+    from src.storage.database import db
+    email = str(payload.get("email") or "").strip()
+    username = str(payload.get("username") or "").strip()
+    password = str(payload.get("password") or "")
+    if not email or not username or not password:
+        return {"ok": False, "error": "请填写邮箱、用户名和密码"}
+    if len(password) < 6:
+        return {"ok": False, "error": "密码至少 6 位"}
+    session = db.get_session()
+    try:
+        if session.query(User).filter(User.email == email).first():
+            return {"ok": False, "error": "邮箱已注册"}
+        if session.query(User).filter(User.username == username).first():
+            return {"ok": False, "error": "用户名已存在"}
+        user = User(email=email, username=username, hashed_password=hash_password(password))
+        session.add(user)
+        session.commit()
+        return {"ok": True, "user_id": user.id, "username": user.username}
+    finally:
+        session.close()
+
+
+@app.post("/auth/login")
+async def auth_login(payload: dict, response: Response):
+    """用户登录。"""
+    from src.admin.auth import create_access_token, verify_password
+    from src.admin.auth_models import User
+    from src.storage.database import db
+    email = str(payload.get("email") or "").strip()
+    password = str(payload.get("password") or "")
+    if not email or not password:
+        return {"ok": False, "error": "请填写邮箱和密码"}
+    session = db.get_session()
+    try:
+        user = session.query(User).filter(User.email == email).first()
+        if not user or not verify_password(password, user.hashed_password):
+            return {"ok": False, "error": "邮箱或密码错误"}
+        if not user.is_active:
+            return {"ok": False, "error": "账号已被停用"}
+        token = create_access_token({"sub": user.id, "email": user.email})
+        response.set_cookie(
+            key="access_token", value=token, httponly=True, samesite="lax",
+            max_age=1800, secure=False,
+        )
+        return {
+            "ok": True, "user_id": user.id, "username": user.username,
+            "is_superuser": user.is_superuser,
+        }
+    finally:
+        session.close()
+
+
+@app.post("/auth/logout")
+async def auth_logout(response: Response):
+    """登出。"""
+    response.delete_cookie("access_token")
+    return {"ok": True}
+
+
+@app.get("/auth/me")
+async def auth_me(request: Request):
+    """获取当前登录用户信息。"""
+    from src.admin.auth import get_current_user
+    user = await get_current_user(request)
+    if user is None:
+        return {"ok": False, "logged_in": False}
+    return {
+        "ok": True, "logged_in": True,
+        "user_id": user.id, "username": user.username,
+        "is_superuser": user.is_superuser,
+    }
+
+
+# ═══════════════════════════════════════════════════════
 # 用户配置中心 API
 # ═══════════════════════════════════════════════════════
 
@@ -1228,19 +1310,12 @@ async def serve_landing():
 
 
 @app.get("/dashboard", response_class=HTMLResponse)
-async def serve_dashboard():
-    """服务模块化仪表盘主页。
-
-    请求格式:
-        GET /dashboard
-
-    Returns:
-        HTMLResponse: 完整的仪表盘 HTML 页面（包含所有卡片占位符）
-
-    实现:
-        读取 templates/base.html 并返回，前端 JS 通过 /cards/meta
-        和 /cards/{name} 动态加载卡片内容
-    """
+async def serve_dashboard(request: Request):
+    """仪表盘主页（需要登录）。未登录重定向到首页。"""
+    from src.admin.auth import get_current_user
+    user = get_current_user(request)
+    if user is None:
+        return RedirectResponse("/", status_code=302)
     base = TEMPLATE_DIR / "base.html"
     return HTMLResponse(
         content=base.read_text(encoding="utf-8"),

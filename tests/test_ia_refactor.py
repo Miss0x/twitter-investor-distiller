@@ -160,11 +160,12 @@ def test_card_config_comments_use_current_information_architecture():
 def test_landing_page_matches_new_information_architecture():
     text = Path("src/templates/landing.html").read_text(encoding="utf-8")
 
-    assert "进入信号台" in text
+    assert "免费开始使用" in text
     assert "https://github.com" not in text
-    for label in ["今日信号", "投资决策", "深度研究", "数据管理", "通知与设置"]:
+    for label in ["智能信号采集", "AI 多维度分析", "信号治理门禁", "投资决策辅助", "深度研究工具", "实时推送通知"]:
         assert label in text
     assert "系统运维" not in text
+    assert "登录" in text  # 登录入口存在
 
 
 def test_dashboard_app_import_does_not_require_chromadb_at_startup():
