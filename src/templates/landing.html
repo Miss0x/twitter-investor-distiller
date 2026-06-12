@@ -3,128 +3,132 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Twitter Investor Distiller</title>
+<title>投资信号蒸馏台</title>
 <style>
-  /* ═══════════════════════════════════════════════════════
-     暗色主题配色 — 登录页，与 base.html 控制台一致
-     ═══════════════════════════════════════════════════════ */
   :root {
-    --bg:       hsl(0 0% 7.3%);      /* #121212 */
-    --card:     hsl(0 0% 11.8%);     /* #1d1d1d */
-    --border:   hsl(0 0% 100% / .09);
-    --text:     hsl(0 0% 95.4%);     /* #f3f3f3 */
-    --muted:    hsl(0 0% 69.4%);     /* #b0b0b0 */
-    --accent:   hsl(219.7 100% 44.9%); /* #004de5 */
-    --green:    hsl(160.3 100% 36.8%); /* #00bb7d */
-    --amber:    hsl(35.9 100% 50%);    /* #ff9800 */
-    --red:      hsl(359.2 100% 69.7%); /* #ff6466 */
+    --bg:       hsl(0 0% 7.3%);      --card:     hsl(0 0% 11.8%);
+    --border:   hsl(0 0% 100% / .09); --text:     hsl(0 0% 95.4%);
+    --muted:    hsl(0 0% 69.4%);      --dim:      hsl(0 0% 45%);
+    --accent:   hsl(219.7 100% 44.9%);--green:    hsl(160.3 100% 36.8%);
+    --amber:    hsl(35.9 100% 50%);    --red:      hsl(359.2 100% 69.7%);
     --radius: 12px; --font: system-ui, -apple-system, sans-serif;
+    --ease-out: cubic-bezier(.16, 1, .3, 1);
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: var(--font); font-size: 15px; color: var(--text); background: var(--bg); line-height: 1.6; }
+  ::-webkit-scrollbar { width: 6px; } ::-webkit-scrollbar-thumb { background: hsl(0 0% 100% / .12); border-radius: 3px; }
 
-  /* ── 导航 ── */
   nav { display: flex; justify-content: space-between; align-items: center; padding: 16px 24px; max-width: 1100px; margin: 0 auto; }
-  nav .logo { font-size: 15px; font-weight: 600; color: var(--text); text-decoration: none; letter-spacing: -0.01em; }
-  nav .nav-btn { padding: 6px 18px; border-radius: 8px; background: var(--text); color: hsl(0 0% 3.9%); font-size: 13px; font-weight: 600; text-decoration: none; transition: opacity .15s; }
-  nav .nav-btn:hover { opacity: 0.85; }
+  nav .logo { font-size: 15px; font-weight: 600; color: var(--text); text-decoration: none; letter-spacing: -0.01em; display: flex; align-items: center; gap: 8px; }
+  nav .logo .mark { width: 22px; height: 22px; border-radius: 6px; background: linear-gradient(135deg, var(--accent), hsl(265.7 100% 65.5%)); display: inline-flex; align-items: center; justify-content: center; font-size: 11px; color: #fff; font-weight: 700; }
+  nav .nav-btn { padding: 7px 20px; border-radius: 8px; background: var(--text); color: hsl(0 0% 3.9%); font-size: 13px; font-weight: 600; text-decoration: none; transition: opacity .15s, transform .1s var(--ease-out); }
+  nav .nav-btn:hover { opacity: 0.85; transform: translateY(-1px); }
+  nav .nav-btn:focus-visible { outline: none; box-shadow: 0 0 0 3px hsla(219.7 100% 44.9% / .35); }
 
-  /* ── Hero ── */
-  .hero { text-align: center; padding: 64px 24px 48px; max-width: 700px; margin: 0 auto; }
-  .hero .badge { display: inline-block; padding: 4px 12px; border-radius: 20px; background: hsla(219.7 100% 44.9% / .15); color: var(--accent); font-size: 12px; font-weight: 500; margin-bottom: 20px; }
-  .hero h1 { font-size: 40px; font-weight: 700; letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 16px; }
-  .hero h1 span { color: var(--accent); }
-  .hero p { font-size: 17px; color: var(--muted); max-width: 520px; margin: 0 auto 32px; line-height: 1.6; }
-  .hero .actions { display: flex; gap: 12px; justify-content: center; }
-  .hero .btn-primary { padding: 12px 28px; border-radius: 10px; background: var(--text); color: hsl(0 0% 3.9%); font-size: 14px; font-weight: 600; text-decoration: none; transition: all .2s; }
-  .hero .btn-primary:hover { background: hsl(0 0% 85%); transform: translateY(-1px); }
-  .hero .btn-secondary { padding: 12px 28px; border-radius: 10px; border: 1.5px solid var(--border); background: var(--card); color: var(--text); font-size: 14px; font-weight: 500; text-decoration: none; transition: all .2s; }
-  .hero .btn-secondary:hover { border-color: hsl(0 0% 100% / .15); background: hsl(0 0% 16.5%); }
+  .hero { text-align: center; padding: 80px 24px 56px; max-width: 700px; margin: 0 auto; }
+  .hero .badge { display: inline-block; padding: 4px 14px; border-radius: 20px; background: hsla(219.7 100% 44.9% / .15); color: var(--accent); font-size: 12px; font-weight: 500; margin-bottom: 24px; letter-spacing: .02em; }
+  .hero h1 { font-size: 44px; font-weight: 700; letter-spacing: -0.03em; line-height: 1.12; margin-bottom: 18px; }
+  .hero h1 span { background: linear-gradient(135deg, var(--accent), hsl(265.7 100% 65.5%)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .hero p { font-size: 17px; color: var(--muted); max-width: 540px; margin: 0 auto 36px; line-height: 1.6; }
+  .hero .actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .hero .btn-primary { padding: 13px 32px; border-radius: 10px; background: var(--text); color: hsl(0 0% 3.9%); font-size: 14px; font-weight: 600; text-decoration: none; transition: all .2s var(--ease-out); }
+  .hero .btn-primary:hover { background: hsl(0 0% 85%); transform: translateY(-2px); box-shadow: 0 4px 20px rgba(255,255,255,.1); }
+  .hero .btn-primary:focus-visible { outline: none; box-shadow: 0 0 0 3px hsla(219.7 100% 44.9% / .35); }
+  .hero .btn-secondary { padding: 13px 32px; border-radius: 10px; border: 1.5px solid var(--border); background: var(--card); color: var(--text); font-size: 14px; font-weight: 500; text-decoration: none; transition: all .2s var(--ease-out); }
+  .hero .btn-secondary:hover { border-color: hsl(0 0% 100% / .15); background: hsl(0 0% 16.5%); transform: translateY(-1px); }
 
-  /* ── Pipeline flow ── */
-  .pipeline { max-width: 800px; margin: 0 auto 64px; padding: 0 24px; }
+  .pipeline { max-width: 860px; margin: 0 auto 72px; padding: 0 24px; }
   .pipeline .flow { display: flex; align-items: center; justify-content: center; gap: 6px; flex-wrap: wrap; }
   .pipeline .step { padding: 10px 18px; border-radius: 10px; background: var(--card); border: 1px solid var(--border); font-size: 13px; font-weight: 500; color: var(--muted); }
   .pipeline .step.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .pipeline .step.governance { background: hsla(265.7 100% 65.5% / .2); color: hsl(265.7 100% 80%); border-color: hsla(265.7 100% 65.5% / .3); }
   .pipeline .arrow { color: var(--dim); font-size: 16px; padding: 0 2px; }
 
-  /* ── Features ── */
-  .features { max-width: 960px; margin: 0 auto 72px; padding: 0 24px; }
-  .features h2 { text-align: center; font-size: 22px; font-weight: 600; margin-bottom: 36px; }
-  .features .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
-  .features .card { padding: 28px 22px; border-radius: var(--radius); background: var(--card); border: 1px solid var(--border); transition: border-color .15s, box-shadow .15s; }
-  .features .card:hover { border-color: hsl(0 0% 100% / .14); box-shadow: 0 4px 16px rgba(0,0,0,.3); transform: translateY(-2px); }
-  .features .card .icon { font-size: 28px; margin-bottom: 12px; }
-  .features .card h3 { font-size: 15px; font-weight: 600; margin-bottom: 6px; }
+  .features { max-width: 1000px; margin: 0 auto 72px; padding: 0 24px; }
+  .features h2 { text-align: center; font-size: 24px; font-weight: 600; margin-bottom: 40px; }
+  .features .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; }
+  .features .card { padding: 32px 24px; border-radius: var(--radius); background: var(--card); border: 1px solid var(--border); transition: border-color .2s var(--ease-out), transform .2s var(--ease-out), box-shadow .2s var(--ease-out); position: relative; }
+  .features .card::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 1px; border-radius: var(--radius) var(--radius) 0 0; background: linear-gradient(90deg, transparent, hsl(0 0% 100% / .06) 50%, transparent); pointer-events: none; }
+  .features .card:hover { border-color: hsl(0 0% 100% / .14); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.35); }
+  .features .card .icon { font-size: 30px; margin-bottom: 14px; display: block; }
+  .features .card h3 { font-size: 15px; font-weight: 600; margin-bottom: 8px; }
   .features .card p { font-size: 13px; color: var(--muted); line-height: 1.5; }
 
-  /* ── Footer ── */
-  footer { text-align: center; padding: 32px 24px; color: var(--muted); font-size: 12px; max-width: 700px; margin: 0 auto; }
+  footer { text-align: center; padding: 36px 24px; color: var(--dim); font-size: 12px; max-width: 700px; margin: 0 auto; border-top: 1px solid hsl(0 0% 100% / .04); }
+
+  @media (max-width: 768px) { .hero h1 { font-size: 32px; } .hero p { font-size: 15px; } }
 </style>
 </head>
 <body>
-<nav>
-  <a href="/" class="logo">Twitter Investor Distiller</a>
-  <a href="/dashboard" class="nav-btn">进入控制台</a>
+<nav aria-label="主导航">
+  <a href="/" class="logo"><span class="mark">蒸</span>投资信号蒸馏台</a>
+  <a href="/dashboard" class="nav-btn" aria-label="进入控制台">进入控制台</a>
 </nav>
 
+<main>
 <section class="hero">
-  <div class="badge">AI 驱动的投资研究</div>
+  <div class="badge">AI 驱动的投资研究 · Signal Governance</div>
   <h1>把 Twitter 分析师<br>蒸馏成你的<span>投资信号</span></h1>
-  <p>自动采集精选投资者的推文，通过 AI 多维度分析，量化信号、识别共识、挖掘板块轮动。不是信息聚合，是信息蒸馏。</p>
+  <p>自动采集精选投资者的推文，AI 多维度分析，量化信号、识別共识、挖掘板块轮动。<br>通过信号治理门禁，只让有充分证据的判断进入你的视线。</p>
   <div class="actions">
     <a href="/dashboard" class="btn-primary">进入信号台</a>
-    <a href="/dashboard" class="btn-secondary">查看今日信号</a>
+    <a href="/dashboard#signals" class="btn-secondary">查看今日信号</a>
   </div>
 </section>
 
-<section class="pipeline">
+<section class="pipeline" aria-label="处理流程">
   <div class="flow">
-    <div class="step active">抓取推文</div>
-    <div class="arrow">→</div>
-    <div class="step">AI 过滤</div>
-    <div class="arrow">→</div>
-    <div class="step">深度分析</div>
-    <div class="arrow">→</div>
+    <div class="step active">采集推文</div>
+    <span class="arrow">→</span>
+    <div class="step">AI 分析</div>
+    <span class="arrow">→</span>
     <div class="step">量化信号</div>
-    <div class="arrow">→</div>
+    <span class="arrow">→</span>
+    <div class="step governance">信号治理</div>
+    <span class="arrow">→</span>
     <div class="step">生成决策</div>
   </div>
 </section>
 
-<section class="features">
-  <h2>五大核心能力</h2>
+<section class="features" aria-label="功能列表">
+  <h2>六大核心能力</h2>
   <div class="grid">
     <div class="card">
-      <div class="icon">📡</div>
+      <span class="icon">📡</span>
       <h3>今日信号</h3>
-      <p>共识标的、观点异动、热门板块与加密资产信号 — 10 秒扫描今日重点</p>
+      <p>共识标的、观点异动、热门板块与加密资产 — 10 秒扫描今日重点</p>
     </div>
     <div class="card">
-      <div class="icon">🎯</div>
+      <span class="icon">🎯</span>
       <h3>投资决策</h3>
-      <p>分析师模拟选股、我的持仓诊断、历史胜率 — 用数据辅助行动判断</p>
+      <p>角色代入选股、持仓诊断、智能问答、多角色评审与多空辩论</p>
     </div>
     <div class="card">
-      <div class="icon">🔍</div>
+      <span class="icon">🛡️</span>
+      <h3>信号治理</h3>
+      <p>数据缺口检查、风险扫描、发布门禁 — 只让靠谱的信号进入你的决策</p>
+    </div>
+    <div class="card">
+      <span class="icon">🔍</span>
       <h3>深度研究</h3>
-      <p>观点时间线、信息源关系、分析师画像 — 解释信号来源与历史脉络</p>
+      <p>观点时间线、信息源关系、分析师画像 — 理解每个信号的来龙去脉</p>
     </div>
     <div class="card">
-      <div class="icon">🗄️</div>
+      <span class="icon">🗄️</span>
       <h3>数据管理</h3>
-      <p>监控账号、手动采集、处理队列、标的代码映射 — 保证数据新鲜可用</p>
+      <p>监控账号、手动采集、处理队列、标的映射 — 保证数据新鲜可用</p>
     </div>
     <div class="card">
-      <div class="icon">⚙️</div>
+      <span class="icon">⚙️</span>
       <h3>通知与设置</h3>
-      <p>自动采集、推送通知、高级工具 — 把重要信号及时送到手机</p>
+      <p>自动采集、推送通知、高级工具 — 把重要信号及时送到你手边</p>
     </div>
   </div>
 </section>
+</main>
 
 <footer>
-  Twitter Investor Distiller · 自用 AI 投资研究工具 · 采集精选分析师推文 · 蒸馏为可操作的投资信号
+  投资信号蒸馏台 · 自用 AI 投资研究工具 · 采集精选分析师推文 · 蒸馏为可操作的投资信号
 </footer>
 </body>
 </html>

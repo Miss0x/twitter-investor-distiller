@@ -125,3 +125,4 @@ from . import tool_cards     # noqa: E402, F401   — 工具卡片组（拉取�
 from . import functional_cards  # noqa: E402, F401  — 功能卡片组（资产别名/加密货币/脚本/时间线）
 from . import pipeline_execute  # noqa: E402, F401  — 流水线执行面板 + 画像生成
 from . import governance_cards  # noqa: E402, F401  — 信号治理卡片组（质量门禁/风险提示/多角色评审/发布审核）
+from . import config_center_card  # noqa: E402, F401  — 用户配置中心（LLM / Twitter / Telegram / 观察对象）

@@ -928,6 +928,96 @@ async def revoke_governance_gap(payload: dict):
         return {"ok": False, "error": str(e) or "操作没有保存成功"}
 
 
+# ═══════════════════════════════════════════════════════
+# 用户配置中心 API
+# ═══════════════════════════════════════════════════════
+
+@app.get("/api/config")
+async def get_full_config():
+    """返回完整用户配置（敏感字段已脱敏）。"""
+    from src.config_center import ConfigManager
+    return ConfigManager().load_masked()
+
+
+@app.post("/api/config/llm")
+async def save_llm_config(payload: dict):
+    """保存 LLM 配置并在当前进程生效。"""
+    try:
+        from src.config_center import ConfigManager
+        mgr = ConfigManager()
+        mgr.save_section("llm", {
+            "base_url": str(payload.get("base_url") or ""),
+            "api_key": str(payload.get("api_key") or ""),
+            "model": str(payload.get("model") or ""),
+        })
+        mgr.apply_llm_config()
+        return {"ok": True, "config": mgr.load_masked()["llm"]}
+    except Exception as e:
+        return {"ok": False, "error": str(e)}
+
+
+@app.post("/api/config/twitter")
+async def save_twitter_config(payload: dict):
+    """保存 Twitter API 配置。"""
+    try:
+        from src.config_center import ConfigManager
+        mgr = ConfigManager()
+        mgr.save_section("twitter", {
+            "api_key": str(payload.get("api_key") or ""),
+            "api_secret": str(payload.get("api_secret") or ""),
+            "access_token": str(payload.get("access_token") or ""),
+            "access_secret": str(payload.get("access_secret") or ""),
+        })
+        return {"ok": True, "config": mgr.load_masked()["twitter"]}
+    except Exception as e:
+        return {"ok": False, "error": str(e)}
+
+
+@app.post("/api/config/telegram")
+async def save_telegram_config(payload: dict):
+    """保存 Telegram Bot 配置。"""
+    try:
+        from src.config_center import ConfigManager
+        mgr = ConfigManager()
+        mgr.save_section("telegram", {
+            "bot_token": str(payload.get("bot_token") or ""),
+            "chat_id": str(payload.get("chat_id") or ""),
+        })
+        return {"ok": True, "config": mgr.load_masked()["telegram"]}
+    except Exception as e:
+        return {"ok": False, "error": str(e)}
+
+
+@app.post("/api/config/observations/add")
+async def add_observation(payload: dict):
+    """添加观察对象。"""
+    try:
+        username = str(payload.get("username") or "").strip().lstrip("@")
+        if not username:
+            return {"ok": False, "error": "请输入用户名"}
+        from src.config_center import ConfigManager
+        mgr = ConfigManager()
+        config = mgr.add_observation(username)
+        return {"ok": True, "observations": config["observations"]}
+    except Exception as e:
+        return {"ok": False, "error": str(e)}
+
+
+@app.post("/api/config/observations/remove")
+async def remove_observation(payload: dict):
+    """移除观察对象。"""
+    try:
+        username = str(payload.get("username") or "").strip()
+        if not username:
+            return {"ok": False, "error": "请指定用户名"}
+        from src.config_center import ConfigManager
+        mgr = ConfigManager()
+        config = mgr.remove_observation(username)
+        return {"ok": True, "observations": config["observations"]}
+    except Exception as e:
+        return {"ok": False, "error": str(e)}
+
+
 @app.post("/cards/{name}/action")
 async def card_action(name: str, payload: dict = None):
     """处理卡片交互动作（统一分发入口）。

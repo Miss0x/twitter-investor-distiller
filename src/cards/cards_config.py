@@ -57,6 +57,7 @@ CARD_CONFIG: dict[str, tuple[str, str, int, int, bool, bool, str | None, int]] =
     "daemon":          ("settings",  "通知与设置", 5, 1, False, False, "daemon",           5),
     "telegram":        ("settings",  "通知与设置", 5, 2, False, False, "telegram",         0),
     "script_runner":   ("settings",  "通知与设置", 5, 3, False, False, "script_runner",    0),
+    "config_center":   ("settings",  "通知与设置", 5, 0, False, True,  "config_center",    0),
 }
 
 
@@ -133,6 +134,7 @@ CARD_DISPLAY: dict[str, tuple[str, str]] = {
     "daemon":          ("自动采集",       "启停后台自动采集进程，开启后定时抓取新推文"),
     "telegram":        ("推送通知",       "配置 Telegram 机器人，把重要信号推送到你的手机"),
     "script_runner":   ("高级工具",       "手动触发后台脚本，供调试、维护与批量生成信号使用"),
+    "config_center":   ("用户配置",       "集中管理 LLM、Twitter API、Telegram Bot 和观察对象"),
 }
 
 # ═══════════════════════════════════════════════════════

@@ -1,0 +1,93 @@
+<div class="card-title" style="display:flex;justify-content:space-between;align-items:center;">
+  <span>用户配置中心</span>
+  <span id="config_center-status" style="font-size:11px;font-weight:400;"></span>
+</div>
+<div class="card-subtitle">管理 LLM、Twitter API、Telegram Bot 和观察对象。所有配置本地保存，不会上传。</div>
+
+{% if empty %}
+<div class="text-secondary" style="padding: 12px 0;">配置中心加载中...</div>
+{% else %}
+<!-- ════ LLM 配置 ════ -->
+<fieldset style="border:1px solid var(--border);border-radius:var(--radius-md);padding:14px;margin-bottom:14px;">
+  <legend style="font-weight:600;font-size:13px;padding:0 8px;">🤖 大模型配置</legend>
+  <div style="display:grid;gap:10px;">
+    <div>
+      <label style="font-size:11px;color:var(--muted);display:block;margin-bottom:4px;">接口地址 (Base URL)</label>
+      <input id="config_center-llm_url" value="{{ llm.base_url }}" placeholder="https://api.openai.com/v1" style="width:100%;">
+      <div style="font-size:10px;color:var(--dim);margin-top:2px;">支持 OpenAI / DeepSeek / GLM 等兼容接口</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+      <div>
+        <label style="font-size:11px;color:var(--muted);display:block;margin-bottom:4px;">API Key</label>
+        <input id="config_center-llm_key" value="{{ llm.api_key }}" type="password" placeholder="sk-..." style="width:100%;">
+      </div>
+      <div>
+        <label style="font-size:11px;color:var(--muted);display:block;margin-bottom:4px;">模型名称</label>
+        <input id="config_center-llm_model" value="{{ llm.model }}" placeholder="gpt-4-turbo-preview / deepseek-chat" style="width:100%;">
+      </div>
+    </div>
+    <button class="btn btn-accent" data-action="save-config-llm" style="align-self:flex-start;">保存大模型配置</button>
+  </div>
+</fieldset>
+
+<!-- ════ Twitter API ════ -->
+<fieldset style="border:1px solid var(--border);border-radius:var(--radius-md);padding:14px;margin-bottom:14px;">
+  <legend style="font-weight:600;font-size:13px;padding:0 8px;">🐦 Twitter API 配置</legend>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+    <div>
+      <label style="font-size:11px;color:var(--muted);display:block;margin-bottom:4px;">API Key</label>
+      <input id="config_center-tw_key" value="{{ twitter.api_key }}" type="password" style="width:100%;">
+    </div>
+    <div>
+      <label style="font-size:11px;color:var(--muted);display:block;margin-bottom:4px;">API Secret</label>
+      <input id="config_center-tw_secret" value="{{ twitter.api_secret }}" type="password" style="width:100%;">
+    </div>
+    <div>
+      <label style="font-size:11px;color:var(--muted);display:block;margin-bottom:4px;">Access Token</label>
+      <input id="config_center-tw_token" value="{{ twitter.access_token }}" type="password" style="width:100%;">
+    </div>
+    <div>
+      <label style="font-size:11px;color:var(--muted);display:block;margin-bottom:4px;">Access Secret</label>
+      <input id="config_center-tw_asecret" value="{{ twitter.access_secret }}" type="password" style="width:100%;">
+    </div>
+  </div>
+  <button class="btn btn-accent" data-action="save-config-twitter" style="margin-top:10px;">保存 Twitter 配置</button>
+</fieldset>
+
+<!-- ════ Telegram ════ -->
+<fieldset style="border:1px solid var(--border);border-radius:var(--radius-md);padding:14px;margin-bottom:14px;">
+  <legend style="font-weight:600;font-size:13px;padding:0 8px;">📨 Telegram Bot 配置</legend>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+    <div>
+      <label style="font-size:11px;color:var(--muted);display:block;margin-bottom:4px;">Bot Token</label>
+      <input id="config_center-tg_token" value="{{ telegram.bot_token }}" type="password" style="width:100%;">
+    </div>
+    <div>
+      <label style="font-size:11px;color:var(--muted);display:block;margin-bottom:4px;">Chat ID</label>
+      <input id="config_center-tg_chat" value="{{ telegram.chat_id }}" style="width:100%;">
+    </div>
+  </div>
+  <button class="btn btn-accent" data-action="save-config-telegram" style="margin-top:10px;">保存 Telegram 配置</button>
+</fieldset>
+
+<!-- ════ 观察对象 ════ -->
+<fieldset style="border:1px solid var(--border);border-radius:var(--radius-md);padding:14px;">
+  <legend style="font-weight:600;font-size:13px;padding:0 8px;">👥 观察对象</legend>
+  <div class="flex" style="margin-bottom:10px;">
+    <input id="config_center-obs_input" placeholder="输入 Twitter 用户名（不含 @）" style="flex:1;">
+    <button class="btn btn-accent" data-action="add-observation">添加</button>
+  </div>
+  <div id="config_center-obs_list">
+    {% if observations %}
+    {% for u in observations %}
+    <div class="flex-between" style="padding:6px 10px;margin-bottom:4px;border-radius:var(--radius-sm);background:var(--bg-tertiary);font-size:13px;">
+      <span>@{{ u }}</span>
+      <button class="btn btn-danger" data-action="remove-observation" data-username="{{ u }}" style="font-size:10px;padding:2px 8px;">移除</button>
+    </div>
+    {% endfor %}
+    {% else %}
+    <div class="text-secondary" style="padding:8px 0;font-size:12px;">还没有添加观察对象，在上方输入用户名添加。</div>
+    {% endif %}
+  </div>
+</fieldset>
+{% endif %}
