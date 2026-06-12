@@ -126,4 +126,3 @@ from . import functional_cards  # noqa: E402, F401  — 功能卡片组（资产
 from . import pipeline_execute  # noqa: E402, F401  — 流水线执行面板 + 画像生成
 from . import governance_cards  # noqa: E402, F401  — 信号治理卡片组（质量门禁/风险提示/多角色评审/发布审核）
 from . import config_center_card  # noqa: E402, F401  — 用户配置中心（LLM / Twitter / Telegram / 观察对象）
-from . import admin_monitor_card  # noqa: E402, F401  — 系统监控面板（活动统计/操作分布/每日趋势）
