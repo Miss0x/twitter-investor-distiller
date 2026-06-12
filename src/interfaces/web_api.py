@@ -1050,6 +1050,33 @@ async def admin_activity(
     )
 
 
+# ── 访问控制 API ──
+
+@app.post("/admin/suspend")
+async def admin_suspend(payload: dict):
+    from src.admin.access_control import AccessControl
+    ac = AccessControl()
+    identifier = str(payload.get("identifier") or "").strip()
+    if not identifier:
+        return {"ok": False, "error": "请提供用户名或 IP 前缀"}
+    return ac.suspend(identifier, str(payload.get("reason") or "管理员手动封禁"))
+
+
+@app.post("/admin/unsuspend")
+async def admin_unsuspend(payload: dict):
+    from src.admin.access_control import AccessControl
+    identifier = str(payload.get("identifier") or "").strip()
+    if not identifier:
+        return {"ok": False, "error": "请提供用户名或 IP 前缀"}
+    return AccessControl().unsuspend(identifier)
+
+
+@app.get("/admin/suspended")
+async def admin_list_suspended():
+    from src.admin.access_control import AccessControl
+    return AccessControl().list_suspended()
+
+
 # ── 活动追踪中间件：自动记录 API 请求 ──
 
 @app.middleware("http")
