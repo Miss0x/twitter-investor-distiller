@@ -102,8 +102,8 @@ async def rate_limit_middleware(request: Request, call_next):
         # 清理 60 秒之前的旧记录（滑动窗口）
         bucket[:] = [t for t in bucket if now - t < 60]
 
-        # 窗口内请求数超过阈值 → 返回 429 Too Many Requests
-        if len(bucket) >= max(config.rate_limit_per_minute, 120):
+        # 窗口内请求数超过配置阈值 → 返回 429 Too Many Requests
+        if len(bucket) >= config.rate_limit_per_minute:
             from fastapi.responses import JSONResponse
             return JSONResponse(status_code=429, content={"error": "rate limit exceeded"})
 
@@ -1211,25 +1211,21 @@ async def card_action(name: str, payload: dict = None):
     # ── Telegram 配置 ──
     if name == "telegram" and payload:
         try:
-            import json as _json
-            from pathlib import Path as _Path
+            from src.admin.auth import get_current_user
+            from src.multi_tenant.config import PerUserConfig
+            user = get_current_user(request)
+            tenant_id = str(user.id) if user else "default"
             token = payload.get("token", "")
             chat_id = payload.get("chat_id", "")
-
-            # 保存配置到本地文件
-            _Path("data/telegram_config.json").write_text(_json.dumps({
-                "bot_token": token,
-                "chat_id": chat_id
-            }, ensure_ascii=False, indent=2), encoding="utf-8")
-
+            cfg = PerUserConfig(tenant_id)
+            cfg.save_section("telegram", {"bot_token": token, "chat_id": chat_id})
             _card_cache.pop("telegram", None)
 
-            # 如果是测试消息，发送验证消息到 Telegram
             if payload.get("action") == "test":
                 import requests as _req
                 _req.post(f"https://api.telegram.org/bot{token}/sendMessage",
                           json={"chat_id": chat_id,
-                                "text": "✅ Twitter Investor Distiller 测试消息成功！"})
+                                "text": "✅ 投资信号蒸馏台测试消息成功！"})
             return {"ok": True}
         except Exception as e:
             return {"ok": False, "error": str(e)}

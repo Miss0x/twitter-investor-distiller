@@ -38,16 +38,19 @@ class ChatEngine:
     """
 
     def __init__(self, retriever: TweetRetriever | None = None, model: str | None = None) -> None:
-        """
-        Args:
-            retriever: 推文检索器实例，不传则自动创建（连接 Chroma 向量库）
-            model: 聊天模型名，不传则优先读取 CHAT_MODEL，兼容 OPENAI_MODEL
-        """
         self.retriever = retriever or TweetRetriever()
+        self._load_config(model)
+
+    def _load_config(self, model: str | None = None) -> None:
+        """读取环境变量重建 LLM 客户端。每次调用都会重读最新值。"""
         self.model = model or os.getenv("CHAT_MODEL") or os.getenv("OPENAI_MODEL") or "gpt-4-turbo-preview"
-        self.api_key = os.getenv("LLM_API_KEY") or os.getenv("OPENAI_API_KEY")
+        self.api_key = os.getenv("LLM_API_KEY") or os.getenv("OPENAI_API_KEY") or ""
         self.base_url = os.getenv("LLM_BASE_URL") or os.getenv("OPENAI_BASE_URL") or "https://api.openai.com/v1"
         self.client = OpenAI(api_key=self.api_key, base_url=self.base_url)
+
+    def reload_config(self) -> None:
+        """重新读取环境变量并重建客户端。用户在配置中心保存新设置后调用。"""
+        self._load_config()
 
     def answer(self, question: str, top_k: int = 5) -> str:
         """

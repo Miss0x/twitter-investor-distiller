@@ -115,7 +115,7 @@ class PerUserConfig:
         return masked
 
     def apply_llm_config(self) -> dict:
-        """Apply LLM config to runtime environment."""
+        """Apply LLM config to runtime environment and reload chat engine."""
         import os
         config = self.load()
         llm = config.get("llm", {})
@@ -124,4 +124,15 @@ class PerUserConfig:
         model = llm.get("model") or os.getenv("CHAT_MODEL") or "gpt-4-turbo-preview"
         if api_key:
             os.environ["LLM_API_KEY"] = api_key
+        if base_url:
+            os.environ["LLM_BASE_URL"] = base_url
+        if model:
+            os.environ["CHAT_MODEL"] = model
+        # Reload global chat engine singleton if loaded
+        try:
+            from src.interfaces.web_api import _chat_engine
+            if _chat_engine is not None:
+                _chat_engine.reload_config()
+        except ImportError:
+            pass
         return {"base_url": base_url, "api_key": api_key, "model": model}
