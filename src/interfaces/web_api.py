@@ -20,7 +20,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import Literal
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request, Response
 from pydantic import BaseModel, Field
 from sqlalchemy import text
 
@@ -820,6 +820,121 @@ def _set_cached_card_html(name: str, html: str, data: dict) -> None:
         data: get_data() 返回的结构化数据
     """
     _card_cache[name] = ((html, data), _time.time() + _CACHE_TTL)
+
+
+# ═══════════════════════════════════════════════════════
+# 认证与用户管理 API — 登录/注册/权限管理
+# ═══════════════════════════════════════════════════════
+
+@app.post("/auth/register")
+async def auth_register(payload: dict):
+    """注册新用户。"""
+    try:
+        from src.admin.auth import hash_password
+        from src.admin.auth_models import User
+        from src.storage.database import db
+        email = str(payload.get("email") or "").strip()
+        username = str(payload.get("username") or "").strip()
+        password = str(payload.get("password") or "")
+        if not email or not username or not password:
+            return {"ok": False, "error": "请填写邮箱、用户名和密码"}
+        if len(password) < 6:
+            return {"ok": False, "error": "密码至少 6 位"}
+        session = db.get_session()
+        try:
+            if session.query(User).filter(User.email == email).first():
+                return {"ok": False, "error": "邮箱已注册"}
+            if session.query(User).filter(User.username == username).first():
+                return {"ok": False, "error": "用户名已存在"}
+            user = User(email=email, username=username, hashed_password=hash_password(password))
+            session.add(user)
+            session.commit()
+            return {"ok": True, "user_id": user.id, "username": user.username}
+        finally:
+            session.close()
+    except Exception as e:
+        return {"ok": False, "error": str(e)}
+
+
+@app.post("/auth/login")
+async def auth_login(payload: dict, response: Response):
+    """用户登录，返回 JWT + 设置 HttpOnly Cookie。"""
+    try:
+        from src.admin.auth import create_access_token, verify_password
+        from src.admin.auth_models import User
+        from src.storage.database import db
+        email = str(payload.get("email") or "").strip()
+        password = str(payload.get("password") or "")
+        if not email or not password:
+            return {"ok": False, "error": "请填写邮箱和密码"}
+        session = db.get_session()
+        try:
+            user = session.query(User).filter(User.email == email).first()
+            if not user or not verify_password(password, user.hashed_password):
+                return {"ok": False, "error": "邮箱或密码错误"}
+            if not user.is_active:
+                return {"ok": False, "error": "账号已被停用，请联系管理员"}
+            token = create_access_token({"sub": user.id, "email": user.email})
+            response.set_cookie(
+                key="access_token", value=token, httponly=True, samesite="lax",
+                max_age=1800, secure=False,
+            )
+            return {"ok": True, "user_id": user.id, "username": user.username, "is_superuser": user.is_superuser}
+        finally:
+            session.close()
+    except Exception as e:
+        return {"ok": False, "error": str(e)}
+
+
+@app.post("/auth/logout")
+async def auth_logout(response: Response):
+    """登出，清除 Cookie。"""
+    response.delete_cookie("access_token")
+    return {"ok": True}
+
+
+@app.get("/auth/me")
+async def auth_me(request: Request):
+    """获取当前登录用户信息。"""
+    from src.admin.auth import get_current_user
+    user = await get_current_user(request)
+    if user is None:
+        return {"ok": False, "logged_in": False}
+    return {"ok": True, "logged_in": True, "user_id": user.id, "username": user.username, "is_superuser": user.is_superuser}
+
+
+@app.get("/admin/users")
+async def admin_list_users():
+    """管理员：列出所有用户。"""
+    from src.admin.auth_models import User
+    from src.storage.database import db
+    session = db.get_session()
+    try:
+        users = session.query(User).all()
+        return [{"id": u.id, "email": u.email[:3] + "****", "username": u.username, "is_active": u.is_active, "is_superuser": u.is_superuser} for u in users]
+    finally:
+        session.close()
+
+
+@app.post("/admin/users/toggle")
+async def admin_toggle_user(payload: dict):
+    """管理员：启用/停用用户。"""
+    try:
+        from src.admin.auth_models import User
+        from src.storage.database import db
+        user_id = int(payload.get("user_id") or 0)
+        session = db.get_session()
+        try:
+            user = session.query(User).filter(User.id == user_id).first()
+            if not user:
+                return {"ok": False, "error": "用户不存在"}
+            user.is_active = not user.is_active
+            session.commit()
+            return {"ok": True, "is_active": user.is_active}
+        finally:
+            session.close()
+    except Exception as e:
+        return {"ok": False, "error": str(e)}
 
 
 @app.get("/cards/meta")

@@ -710,6 +710,8 @@ function _dispatchAction(el) {
     case 'acknowledge-governance-gap': acknowledgeGovernanceGap(el); break;
     case 'revoke-governance-gap': revokeGovernanceGap(el); break;
     case 'update-pool': updatePool(); break;
+    case 'refresh-admin-users': refreshAdminUsers(); break;
+    case 'toggle-user-active': toggleUserActive(el); break;
     case 'save-config-llm': saveConfigLLM(); break;
     case 'save-config-twitter': saveConfigTwitter(); break;
     case 'save-config-telegram': saveConfigTelegram(); break;
@@ -867,6 +869,42 @@ async function removeObservation(el) {
   } else {
     showToast((result && result.error) || '移除失败');
   }
+}
+
+// ═══════════════════════════════════════════════════════════
+// 管理后台 — 用户管理
+// ═══════════════════════════════════════════════════════════
+async function refreshAdminUsers() {
+  var list = document.getElementById('admin_user_list');
+  if (!list) return;
+  list.innerHTML = '<div class="flex"><div class="spinner"></div><span class="text-secondary">加载中...</span></div>';
+  var result = await apiFetch('/admin/users');
+  if (!result || !Array.isArray(result)) {
+    list.innerHTML = '<span class="text-secondary">加载失败</span>';
+    return;
+  }
+  if (!result.length) { list.innerHTML = '<span class="text-secondary">暂无用户</span>'; return; }
+  list.innerHTML = result.map(function(u) {
+    return '<div class="flex-between" style="padding:6px 0;border-bottom:1px solid var(--border-light);">'
+      + '<span>' + escapeHtml(u.username) + ' <span style="color:var(--dim);font-size:10px;">' + escapeHtml(u.email) + '</span></span>'
+      + '<span style="display:flex;gap:6px;align-items:center;">'
+      + (u.is_superuser ? '<span class="tag tag-info" style="font-size:10px;">管理员</span>' : '')
+      + (u.is_active
+        ? '<button class="btn btn-danger" data-action="toggle-user-active" data-user-id="' + u.id + '" style="font-size:10px;padding:2px 8px;">停用</button>'
+        : '<button class="btn" data-action="toggle-user-active" data-user-id="' + u.id + '" style="font-size:10px;padding:2px 8px;">启用</button>')
+      + '</span></div>';
+  }).join('');
+}
+
+async function toggleUserActive(el) {
+  var userId = parseInt(el.getAttribute('data-user-id'));
+  if (!userId) return;
+  var result = await apiFetch('/admin/users/toggle', {
+    method: 'POST', headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({user_id: userId})
+  });
+  if (result && result.ok) { showToast(result.is_active ? '账号已启用' : '账号已停用'); await refreshAdminUsers(); }
+  else { showToast('操作失败'); }
 }
 
 // ═══════════════════════════════════════════════════════════
