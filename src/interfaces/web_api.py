@@ -842,23 +842,18 @@ async def cards_meta():
 
 
 @app.get("/cards/{name}")
-async def card_data(name: str):
-    """返回单个卡片渲染结果，信封模式 {html, data, error}。
+async def card_data(name: str, request: Request):
+    """返回单个卡片渲染结果，信封模式 {html, data, error}。"""
+    # 设置当前请求上下文，供卡片 get_data() 读取用户信息
+    from src.cards.config_center_card import _current_request
+    _current_request.set(request)
+    try:
+        return await _render_card_data(name)
+    finally:
+        _current_request.set(None)
 
-    请求格式:
-        GET /cards/consensus
 
-    返回格式（规则一——Stripe Envelope Pattern）:
-        {
-            "html": "<div class='card'>...</div>",
-            "data": {...},
-            "error": null
-        }
-
-    缓存策略:
-        - 2 秒内的重复请求直接返回缓存（html + data 一起缓存）
-        - 超过 2 秒重新调用 card.get_data() + card.render()
-    """
+async def _render_card_data(name: str):
     # 尝试从缓存读取
     cached = _get_cached_card_html(name)
     if cached is not None:
@@ -1004,7 +999,7 @@ async def auth_logout(response: Response):
 async def auth_me(request: Request):
     """获取当前登录用户信息。"""
     from src.admin.auth import get_current_user
-    user = await get_current_user(request)
+    user = get_current_user(request)
     if user is None:
         return {"ok": False, "logged_in": False}
     return {

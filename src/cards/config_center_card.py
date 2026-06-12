@@ -4,7 +4,6 @@ from __future__ import annotations
 
 from src.cards.base import Card
 from src.cards import register
-from src.config_center import ConfigManager
 
 
 @register
@@ -17,14 +16,34 @@ class ConfigCenterCard(Card):
 
     def get_data(self) -> dict:
         try:
-            mgr = ConfigManager()
-            masked = mgr.load_masked()
-            return {
-                "empty": False,
-                "llm": masked.get("llm", {}),
-                "twitter": masked.get("twitter", {}),
-                "telegram": masked.get("telegram", {}),
-                "observations": masked.get("observations", []),
-            }
+            # 优先使用多用户加密配置，回退到旧全局配置
+            from src.admin.auth import get_current_user
+            from fastapi import Request
+            import contextvars
+            req = _current_request.get()
+            tenant_id = "default"
+            if req is not None:
+                user = get_current_user(req)
+                if user:
+                    tenant_id = str(user.id)
+            from src.multi_tenant.config import PerUserConfig
+            masked = PerUserConfig(tenant_id).load_masked()
         except Exception:
-            return {"empty": True}
+            try:
+                from src.config_center import ConfigManager
+                masked = ConfigManager().load_masked()
+            except Exception:
+                return {"empty": True}
+
+        return {
+            "empty": False,
+            "llm": masked.get("llm", {}),
+            "twitter": masked.get("twitter", {}),
+            "telegram": masked.get("telegram", {}),
+            "observations": masked.get("observations", []),
+        }
+
+
+# Thread-safe request context for card rendering
+import contextvars
+_current_request: contextvars.ContextVar = contextvars.ContextVar("current_request", default=None)
