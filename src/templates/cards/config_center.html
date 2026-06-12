@@ -10,7 +10,7 @@
 <!-- ════ LLM 配置 ════ -->
 <fieldset style="border:1px solid var(--border);border-radius:var(--radius-md);padding:14px;margin-bottom:14px;">
   <legend style="font-weight:600;font-size:13px;padding:0 8px;">🤖 大模型配置</legend>
-  <div style="display:grid;gap:10px;">
+  <div style="min-height:126px;">
     <div>
       <label style="font-size:11px;color:var(--muted);display:block;margin-bottom:4px;">接口地址 (Base URL)</label>
       <input id="config_center-llm_url" value="{{ llm.base_url }}" placeholder="https://api.openai.com/v1" style="width:100%;">
@@ -50,6 +50,9 @@
     <span id="config_center-tw_desc_twitterapi" {% if twitter.provider != 'twitterapi_io' %}style="display:none;"{% endif %}>第三方服务 <a href="https://twitterapi.io" target="_blank" style="color:var(--accent);">twitterapi.io</a>，注册即得一个 API Key，无需 OAuth</span>
   </div>
 
+  <!-- 表单容器：固定高度，切换时不跳动 -->
+  <div style="min-height:130px;">
+
   <!-- 官方 API 表单 -->
   <div id="config_center-tw_form_official" style="display:{% if twitter.provider == 'twitterapi_io' %}none{% else %}grid{% endif %};grid-template-columns:1fr 1fr;gap:10px;">
     <div>
@@ -80,13 +83,15 @@
     <input type="hidden" id="config_center-tw_3rd_url" value="https://api.twitterapi.io">
   </div>
 
+  </div><!-- 表单容器结束 -->
+
   <button class="btn btn-accent" data-action="save-config-twitter" style="margin-top:10px;">保存 Twitter 配置</button>
 </fieldset>
 
 <!-- ════ Telegram ════ -->
 <fieldset style="border:1px solid var(--border);border-radius:var(--radius-md);padding:14px;margin-bottom:14px;">
   <legend style="font-weight:600;font-size:13px;padding:0 8px;">📨 Telegram Bot 配置</legend>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+  <div style="min-height:98px;">
     <div>
       <label style="font-size:11px;color:var(--muted);display:block;margin-bottom:4px;">Bot Token</label>
       <input id="config_center-tg_token" value="{{ telegram.bot_token }}" type="password" style="width:100%;">
