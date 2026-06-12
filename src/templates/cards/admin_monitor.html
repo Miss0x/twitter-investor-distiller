@@ -1,0 +1,82 @@
+<div class="card-title">系统监控面板</div>
+<div class="card-subtitle">用户活动统计与使用分析。所有数据经过隐私处理，不收集密码、密钥或个人身份信息。</div>
+
+<!-- ════ 统计概览 ════ -->
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px;">
+  <div class="metric">
+    <div class="metric-label">今日操作</div>
+    <div class="metric-value" id="admin-total">{{ total_events }}</div>
+  </div>
+  <div class="metric">
+    <div class="metric-label">活跃来源</div>
+    <div class="metric-value">{{ unique_ip_prefixes }}</div>
+    <div class="metric-sub">独立网络前缀</div>
+  </div>
+  <div class="metric">
+    <div class="metric-label">标签页浏览</div>
+    <div class="metric-value">{{ top_tab_count }}</div>
+    <div class="metric-sub">{{ top_tab_label }}</div>
+  </div>
+  <div class="metric">
+    <div class="metric-label">高峰时段</div>
+    <div class="metric-value">{{ peak_hour }}</div>
+    <div class="metric-sub">UTC 时间</div>
+  </div>
+</div>
+
+<!-- ════ 操作分布 ── 简易横向柱状图 ════ -->
+<div style="margin-bottom:16px;">
+  <div style="font-weight:600;font-size:12px;margin-bottom:8px;">操作类型分布</div>
+  <div style="display:grid;gap:6px;">
+    {% for item in top_actions %}
+    <div style="display:flex;align-items:center;gap:8px;">
+      <span style="font-size:11px;color:var(--muted);width:100px;text-align:right;flex-shrink:0;">{{ item.label }}</span>
+      <div style="flex:1;height:18px;background:var(--bg-tertiary);border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:{{ item.pct }}%;background:var(--accent);border-radius:4px;transition:width .3s var(--ease-out);"></div>
+      </div>
+      <span style="font-size:11px;color:var(--dim);width:36px;text-align:left;">{{ item.count }}</span>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<!-- ════ 每日趋势 ── 简易折线 ════ -->
+<div style="margin-bottom:16px;">
+  <div style="font-weight:600;font-size:12px;margin-bottom:8px;">每日活跃趋势（近 7 天）</div>
+  <div style="display:flex;align-items:flex-end;gap:6px;height:80px;padding:0 4px;">
+    {% set max_val = daily_max or 1 %}
+    {% for day in daily_bars %}
+    <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
+      <span style="font-size:10px;color:var(--dim);">{{ day.count }}</span>
+      <div style="width:100%;height:{{ day.pct }}%;background:var(--accent);border-radius:4px 4px 2px 2px;min-height:2px;transition:height .3s var(--ease-out);"></div>
+      <span style="font-size:10px;color:var(--muted);">{{ day.label }}</span>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<!-- ════ 最近活动 ════ -->
+<div>
+  <div style="font-weight:600;font-size:12px;margin-bottom:8px;">最近活动记录</div>
+  <div style="max-height:180px;overflow-y:auto;font-size:11px;">
+    {% if recent_events %}
+    {% for e in recent_events %}
+    <div class="flex-between" style="padding:3px 0;border-bottom:1px solid var(--border-light);">
+      <span>
+        <span class="tag tag-info" style="font-size:10px;">{{ e.action_label }}</span>
+        {% if e.path %}<span style="color:var(--dim);margin-left:4px;">{{ e.path }}</span>{% endif %}
+        {% if e.tab %}<span style="color:var(--dim);margin-left:4px;">[{{ e.tab }}]</span>{% endif %}
+      </span>
+      <span style="color:var(--dim);font-size:10px;">{{ e.time_short }}</span>
+    </div>
+    {% endfor %}
+    {% else %}
+    <div class="text-secondary">暂无活动记录</div>
+    {% endif %}
+  </div>
+</div>
+
+<!-- ════ 隐私说明 ════ -->
+<div style="margin-top:16px;padding:10px;border-radius:var(--radius-sm);background:var(--bg-tertiary);font-size:10px;color:var(--dim);line-height:1.5;">
+  本面板不收集密码、API 密钥、个人身份信息或完整 IP 地址。IP 仅保留前两段网络前缀用于统计独立来源，请求路径和操作类型用于功能使用分析。
+</div>

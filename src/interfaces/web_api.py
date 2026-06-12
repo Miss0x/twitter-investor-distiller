@@ -1020,6 +1020,73 @@ async def remove_observation(payload: dict):
         return {"ok": False, "error": str(e)}
 
 
+# ═══════════════════════════════════════════════════════
+# 管理后台 API — 用户活动监控与权限管理
+# ═══════════════════════════════════════════════════════
+
+@app.get("/admin/stats")
+async def admin_stats(days: int = 7):
+    """返回最近 N 天的系统使用统计数据（无 PII）。"""
+    from src.admin.activity import ActivityTracker
+    return ActivityTracker().stats(days=days)
+
+
+@app.get("/admin/activity")
+async def admin_activity(
+    start_date: str | None = None,
+    end_date: str | None = None,
+    action: str | None = None,
+    tab: str | None = None,
+    limit: int = 200,
+):
+    """查询用户活动日志（无 PII），支持按时间、操作类型、标签页筛选。"""
+    from src.admin.activity import ActivityTracker
+    return ActivityTracker().query(
+        start_date=start_date,
+        end_date=end_date,
+        action=action,
+        tab=tab,
+        limit=min(limit, 1000),
+    )
+
+
+# ── 活动追踪中间件：自动记录 API 请求 ──
+
+@app.middleware("http")
+async def activity_tracking_middleware(request: Request, call_next):
+    """记录每次 API 请求的用户活动（无 PII），在限流中间件之后运行。"""
+    from src.admin.activity import ActivityTracker
+
+    response = await call_next(request)
+    path = request.url.path
+
+    action_map = {
+        "/api/config/llm": ("config_change", "llm"),
+        "/api/config/twitter": ("config_change", "twitter"),
+        "/api/config/telegram": ("config_change", "telegram"),
+        "/api/config/observations/add": ("observation_add", ""),
+        "/api/config/observations/remove": ("observation_remove", ""),
+        "/pipeline/tasks/execute": ("task_execute", ""),
+        "/pipeline/tasks/seed": ("task_seed", ""),
+        "/api/governance/gaps/acknowledge": ("governance_acknowledge", ""),
+        "/api/governance/gaps/revoke": ("governance_revoke", ""),
+        "/cards/chat/action": ("chat_query", ""),
+    }
+
+    if path in action_map:
+        action, note = action_map[path]
+        ActivityTracker().log(
+            action,
+            ip_address=request.client.host if request.client else "",
+            user_agent=request.headers.get("user-agent", ""),
+            path=path,
+        )
+    elif path.startswith("/pipeline/tasks/") and response.status_code < 400:
+        pass
+
+    return response
+
+
 @app.post("/cards/{name}/action")
 async def card_action(name: str, payload: dict = None):
     """处理卡片交互动作（统一分发入口）。
