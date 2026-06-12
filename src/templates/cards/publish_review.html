@@ -1,20 +1,45 @@
 <div class="card-title">发布审核</div>
 {% if empty %}
 <div class="text-secondary" style="padding: 12px 0;">
-  暂无审核记录。当信号通过全部治理管线后，发布审核将汇总质量、风险、评审结果做出最终判断。
+  暂无审核结果。当信号走完质量检查、风险扫描和多角色评审后，这里会显示最终判断。
 </div>
 {% else %}
 <div style="padding: 8px 0;">
-  <span style="font-weight: 600;">审核结果: </span>
-  <span class="text-{{ 'success' if status == 'pass' else 'danger' if status == 'block' else 'warning' }}">{{ status }}</span>
+  <span style="font-weight: 600;">最终判断：</span>
+  {% if status == 'pass' %}
+  <span class="text-success">通过 · 可发布为正式信号</span>
+  {% elif status == 'warn' %}
+  <span class="text-warning">警告通过 · 可继续观察但不宜作为强结论</span>
+  {% elif status == 'block' %}
+  <span class="text-danger">暂不通过 · 当前证据或条件不足以形成正式信号</span>
+  {% elif status == 'failed' %}
+  <span class="text-danger">处理失败 · 请检查治理流水线</span>
+  {% else %}
+  <span class="text-secondary">待审核</span>
+  {% endif %}
 </div>
+
 {% if issues %}
-<ul style="font-size: 12px; padding-left: 16px;">
-{% for i in issues %}
-<li style="margin-bottom: 4px;">
-  <span class="text-{{ 'danger' if i.severity == 'critical' else 'warning' }}">[{{ i.code }}]</span> {{ i.message }}
-</li>
-{% endfor %}
-</ul>
+<div style="margin-top: 8px;">
+  <div style="font-weight: 600; font-size: 12px; margin-bottom: 4px;">审核中发现的问题：</div>
+  <ul style="font-size: 12px; padding-left: 16px; margin: 0;">
+  {% for i in issues %}
+  <li style="margin-bottom: 4px;">
+    {% if i.severity == 'critical' %}
+    <span class="text-danger">[需解决]</span>
+    {% else %}
+    <span class="text-warning">[建议关注]</span>
+    {% endif %}
+    {{ i.message or i.code }}
+  </li>
+  {% endfor %}
+  </ul>
+</div>
+{% endif %}
+
+{% if html_report_path %}
+<div style="margin-top: 12px; font-size: 11px; color: var(--text-secondary);">
+  已生成详细报告，可在数据目录中查看。
+</div>
 {% endif %}
 {% endif %}

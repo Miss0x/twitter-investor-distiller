@@ -669,6 +669,8 @@ function _dispatchAction(el) {
     case 'toggle-portrait': togglePortrait(el.getAttribute('data-id')); break;
     case 'run-script': runScript(el.getAttribute('data-script')); break;
     case 'retry-card': retryCard(cardName); break;
+    case 'acknowledge-governance-gap': acknowledgeGovernanceGap(el); break;
+    case 'revoke-governance-gap': revokeGovernanceGap(el); break;
     case 'update-pool': updatePool(); break;
   }
 }
@@ -684,6 +686,47 @@ document.addEventListener('change', function(e) {
   if (!el) return;
   _dispatchAction(el);
 });
+
+async function refreshGovernanceCards() {
+  var names = ['quality_gate', 'publish_review', 'risk_alerts', 'panel_review'];
+  for (var i = 0; i < names.length; i++) {
+    delete CACHE[names[i]];
+    await retryCard(names[i]);
+  }
+}
+
+async function acknowledgeGovernanceGap(btn) {
+  var signalId = btn.getAttribute('data-signal-id');
+  var gapCode = btn.getAttribute('data-gap-code');
+  var card = btn.closest('[data-card]');
+  var reasonEl = card ? card.querySelector('[data-gap-reason="' + gapCode + '"]') : null;
+  var expiresEl = card ? card.querySelector('[data-gap-expires="' + gapCode + '"]') : null;
+  var reason = reasonEl ? reasonEl.value.trim() : '';
+  if (!reason) { showToast('请简单说明为什么暂时接受这个风险'); return; }
+  btn.disabled = true;
+  var result = await apiFetch('/api/governance/gaps/acknowledge', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({signal_id: signalId, gap_code: gapCode, reason: reason, expires_in_hours: expiresEl ? expiresEl.value : 72})
+  });
+  btn.disabled = false;
+  if (result && result.ok) { showToast('已保存，系统会重新检查这条信号'); await refreshGovernanceCards(); }
+  else { showToast((result && result.error) || '操作没有保存成功'); }
+}
+
+async function revokeGovernanceGap(btn) {
+  var signalId = btn.getAttribute('data-signal-id');
+  var gapCode = btn.getAttribute('data-gap-code');
+  btn.disabled = true;
+  var result = await apiFetch('/api/governance/gaps/revoke', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({signal_id: signalId, gap_code: gapCode, reason: '用户决定不再接受这个风险'})
+  });
+  btn.disabled = false;
+  if (result && result.ok) { showToast('已重新检查这条信号'); await refreshGovernanceCards(); }
+  else { showToast((result && result.error) || '操作没有保存成功'); }
+}
 
 // ═══════════════════════════════════════════════════════════
 // Daemon 启停

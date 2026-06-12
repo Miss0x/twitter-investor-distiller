@@ -19,8 +19,8 @@ def load_json_fixture(name: str) -> dict:
 
 # ── tests ──
 
-def test_governance_task_types_are_recognized_in_dispatch():
-    """All 7 governance task types are recognized by the executor dispatch."""
+def test_governance_task_types_are_recognized_but_fail_closed_without_payload():
+    """All governance task types are recognized, but missing payload fails closed."""
     from src.pipeline.task_executor import _dispatch_governance_task
 
     known_types = [
@@ -31,11 +31,12 @@ def test_governance_task_types_are_recognized_in_dispatch():
         "governance_debate",
         "governance_publish",
         "governance_report",
+        "governance_run",
     ]
     for task_type in known_types:
         result = _dispatch_governance_task(task_type, {})
-        assert "error" not in result, f"{task_type} should be recognized"
-        assert "ack" in result, f"{task_type} should return ack"
+        assert "error" in result, f"{task_type} should fail closed without payload"
+        assert "未知治理任务类型" not in result["error"]
 
 
 def test_governance_full_pipeline_from_candidate_to_package():

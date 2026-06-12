@@ -24,13 +24,10 @@ def should_allow_strong_push(
     if risk_level == "high_risk":
         return False, "High-risk signal blocked from strong push"
 
-    if risk_level == "caution":
-        return True, "Caution risk — push with warning label"
-
-    if publish_status == "warn":
-        return True, "Warn status — push with warning label"
-
-    if publish_status == "pass" and risk_level in ("safe", "notice"):
+    allowed_states = {("pass", "safe"), ("pass", "notice"), ("warn", "safe"), ("warn", "notice")}
+    if (publish_status, risk_level) in allowed_states:
+        if publish_status == "warn":
+            return True, "Warn status — push with warning label"
         return True, "Clean signal — normal push"
 
-    return True, "Unknown state — push with caution"
+    return False, "Unknown or caution state blocked from strong push"

@@ -17,6 +17,7 @@ import os
 from openai import OpenAI
 
 from src.ai.prompts import DISTILL_SYSTEM_PROMPT, USER_PROMPT
+from src.governance.context_provider import build_governance_context, is_investment_judgment_question
 from src.utils.env import load_project_env
 from src.vectorization.retriever import TweetRetriever
 
@@ -67,9 +68,14 @@ class ChatEngine:
         # Step 1: 向量检索
         references = self.retriever.retrieve(question, top_k=top_k)
         # Step 2: 拼接上下文
-        context = "\n\n".join(
+        tweet_context = "\n\n".join(
             f"来源: {item['metadata']}\n内容: {item['text']}" for item in references
         )
+        if is_investment_judgment_question(question):
+            governance_context = build_governance_context(question)
+            context = f"治理信号上下文:\n{governance_context}\n\n原始推文上下文:\n{tweet_context}"
+        else:
+            context = tweet_context
         # Step 3: LLM 生成回答
         response = self.client.chat.completions.create(
             model=self.model,

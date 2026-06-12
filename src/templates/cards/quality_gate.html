@@ -1,21 +1,55 @@
-<div class="card-title">信号质量门禁</div>
+<div class="card-title">信号质量检查</div>
 {% if empty %}
 <div class="text-secondary" style="padding: 12px 0;">
-  暂无信号质量数据。当采集和分析管线产出信号后，质量门禁将在此展示证据完整性检查结果。
+  还没有可处理的信号，请先运行一次治理检查。
 </div>
 {% else %}
-<div class="flex" style="gap: 16px; padding: 8px 0;">
-  <span class="text-success">通过: {{ passed }}</span>
-  <span style="color: var(--text-warning);">警告: {{ warned }}</span>
-  <span class="text-danger">阻断: {{ blocked }}</span>
+<div style="display:flex;justify-content:space-between;gap:12px;align-items:flex-start;margin-bottom:14px;">
+  <div>
+    <div style="font-size:14px;font-weight:600;">{{ ticker }} 观察信号</div>
+    <div class="text-secondary" style="font-size:12px;">当前状态：{{ status }}</div>
+  </div>
+  <span class="tag {{ 'tag-danger' if status in ['block', 'failed'] else 'tag-warn' if status == 'warn' else 'tag-ok' }}">
+    {{ '暂不通过' if status in ['block', 'failed'] else '警告通过' if status == 'warn' else '可以继续' }}
+  </span>
 </div>
-{% if checks %}
-<ul style="font-size: 12px; padding-left: 16px;">
-{% for c in checks %}
-<li style="margin-bottom: 4px;">
-  <span class="text-{{ 'danger' if c.severity == 'critical' else 'warning' if c.severity == 'warning' else 'secondary' }}">[{{ c.code }}]</span> {{ c.message }}
-</li>
-{% endfor %}
-</ul>
-{% endif %}
+
+<div id="quality_gate-gap-list" style="display:grid;gap:10px;">
+  <div style="font-size:13px;font-weight:600;margin-bottom:2px;">缺少的数据</div>
+  {% if data_gaps %}
+    {% for gap in data_gaps %}
+    <div style="border:1px solid var(--border);border-radius:var(--radius);padding:12px;background:var(--secondary);">
+      <div style="display:flex;justify-content:space-between;gap:10px;align-items:flex-start;margin-bottom:6px;">
+        <div>
+          <div style="font-size:13px;font-weight:600;">{{ gap.title }}</div>
+          <div class="text-secondary" style="font-size:12px;margin-top:3px;">{{ gap.description }}</div>
+        </div>
+        <div style="text-align:right;min-width:86px;">
+          <div class="tag {{ 'tag-danger' if gap.severity == 'critical' else 'tag-warn' if gap.severity == 'warning' else 'tag-ok' }}">{{ gap.severity_label }}</div>
+          <div class="text-secondary" style="font-size:11px;margin-top:5px;">{{ gap.publish_impact_label }}</div>
+        </div>
+      </div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:8px;">状态：{{ gap.status_label }}</div>
+      {% if gap.reason %}
+      <div style="font-size:12px;color:var(--muted);margin-bottom:8px;">原因：{{ gap.reason }}</div>
+      {% endif %}
+      {% if gap.status == 'acknowledged' %}
+      <button class="btn btn-danger" data-action="revoke-governance-gap" data-signal-id="{{ signal_id }}" data-gap-code="{{ gap.code }}">{{ gap.revoke_label }}</button>
+      {% else %}
+      <div style="display:grid;grid-template-columns:minmax(0,1fr) 150px auto;gap:8px;align-items:center;">
+        <input id="quality_gate-reason-{{ loop.index }}" data-gap-reason="{{ gap.code }}" placeholder="{{ gap.reason_placeholder }}" aria-label="{{ gap.reason_label }}">
+        <select data-gap-expires="{{ gap.code }}" aria-label="{{ gap.expires_label }}">
+          <option value="24">24 小时后重新检查</option>
+          <option value="72" selected>3 天后重新检查</option>
+          <option value="168">7 天后重新检查</option>
+        </select>
+        <button class="btn btn-accent" data-action="acknowledge-governance-gap" data-signal-id="{{ signal_id }}" data-gap-code="{{ gap.code }}">{{ gap.action_label }}</button>
+      </div>
+      {% endif %}
+    </div>
+    {% endfor %}
+  {% else %}
+    <div class="text-secondary" style="padding:10px 0;">暂时没有发现需要处理的数据问题。</div>
+  {% endif %}
+</div>
 {% endif %}

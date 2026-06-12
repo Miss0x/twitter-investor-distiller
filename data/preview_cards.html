@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>治理卡片预览</title>
+<style>
+:root {
+  --text-primary: #f0f6fc; --text-secondary: #8b949e; --text-tertiary: #6e7681;
+  --text-success: #3fb950; --text-warning: #d29922; --text-danger: #f85149;
+  --text-info: #58a6ff; --bg-primary: #0d1117; --bg-secondary: #161b22;
+  --bg-tertiary: #21262d; --border-primary: #30363d; --radius-md: 6px;
+  --text-success-rgb: 63,185,80; --text-danger-rgb: 248,81,73; --text-warning-rgb: 210,153,34;
+}
+body { background: var(--bg-primary); color: var(--text-primary); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; padding: 24px; }
+.card-title { font-size: 15px; font-weight: 600; padding-bottom: 10px; border-bottom: 1px solid var(--border-primary); margin-bottom: 12px; }
+.text-secondary { color: var(--text-secondary) } .text-tertiary { color: var(--text-tertiary) }
+.text-success { color: var(--text-success) } .text-warning { color: var(--text-warning) }
+.text-danger { color: var(--text-danger) } .text-info { color: var(--text-info) }
+.tag-ok { display: inline-block; padding: 2px 10px; border-radius: 12px; background: rgba(63,185,80,.15); color: var(--text-success); font-size: 12px; }
+.box { background: var(--bg-secondary); border: 1px solid var(--border-primary); border-radius: var(--radius-md); padding: 16px; margin-bottom: 20px; max-width: 560px; }
+h2 { margin-bottom: 20px; font-size: 18px; }
+</style>
+</head>
+<body>
+<h2>治理卡片预览 - NVDA 观察信号</h2>
+<div class="box"><div class="card-title">信号质量检查</div>
+
+<div style="display:flex;justify-content:space-between;gap:12px;align-items:flex-start;margin-bottom:14px;">
+  <div>
+    <div style="font-size:14px;font-weight:600;">NVDA 观察信号</div>
+    <div class="text-secondary" style="font-size:12px;">当前状态：pass</div>
+  </div>
+  <span class="tag tag-ok">
+    可以继续
+  </span>
+</div>
+
+<div id="quality_gate-gap-list" style="display:grid;gap:10px;">
+  <div style="font-size:13px;font-weight:600;margin-bottom:2px;">缺少的数据</div>
+  
+    <div class="text-secondary" style="padding:10px 0;">暂时没有发现需要处理的数据问题。</div>
+  
+</div>
+</div>
+<div class="box"><div class="card-title">多角色评审</div>
+
+<div style="padding: 8px 0;">
+  <span style="font-weight: 600;">综合判断：</span>
+  
+  <span class="text-warning">证据不足，暂时无法判断</span>
+  
+  <span class="text-secondary" style="margin-left: 12px;">综合评分 0.1</span>
+</div>
+
+<div class="flex" style="gap: 12px; font-size: 12px; padding: 4px 0;">
+  <span class="text-success">支持 0</span>
+  <span class="text-danger">谨慎 0</span>
+  <span class="text-secondary">中性 0</span>
+  <span class="text-secondary">数据不足 8</span>
+</div>
+
+
+<div style="max-height: 280px; overflow-y: auto; font-size: 12px; margin-top: 8px;">
+
+<div class="review-card" style="padding: 8px; margin-bottom: 8px; border-radius: var(--radius-md); background: var(--bg-tertiary); border-left: 3px solid var(--border-secondary);">
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+    <span style="font-weight: 600;">巴菲特式质量视角</span>
+    <span style="font-size: 11px;">
+      
+      <span class="text-warning">证据不足</span>
+      
+      · 信心 10.0%
+      
+    </span>
+  </div>
+  
+  
+  
+</div>
+
+<div class="review-card" style="padding: 8px; margin-bottom: 8px; border-radius: var(--radius-md); background: var(--bg-tertiary); border-left: 3px solid var(--border-secondary);">
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+    <span style="font-weight: 600;">ARK 式颠覆创新视角</span>
+    <span style="font-size: 11px;">
+      
+      <span class="text-warning">证据不足</span>
+      
+      · 信心 10.0%
+      
+    </span>
+  </div>
+  
+  
+  
+</div>
+
+<div class="review-card" style="padding: 8px; margin-bottom: 8px; border-radius: var(--radius-md); background: var(--bg-tertiary); border-left: 3px solid var(--border-secondary);">
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+    <span style="font-weight: 600;">宏观务实派</span>
+    <span style="font-size: 11px;">
+      
+      <span class="text-warning">证据不足</span>
+      
+      · 信心 10.0%
+      
+    </span>
+  </div>
+  
+  
+  
+</div>
+
+<div class="review-card" style="padding: 8px; margin-bottom: 8px; border-radius: var(--radius-md); background: var(--bg-tertiary); border-left: 3px solid var(--border-secondary);">
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+    <span style="font-weight: 600;">趋势交易者</span>
+    <span style="font-size: 11px;">
+      
+      <span class="text-warning">证据不足</span>
+      
+      · 信心 10.0%
+      
+    </span>
+  </div>
+  
+  
+  
+</div>
+
+<div class="review-card" style="padding: 8px; margin-bottom: 8px; border-radius: var(--radius-md); background: var(--bg-tertiary); border-left: 3px solid var(--border-secondary);">
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+    <span style="font-weight: 600;">游资情绪侦察员</span>
+    <span style="font-size: 11px;">
+      
+      <span class="text-warning">证据不足</span>
+      
+      · 信心 10.0%
+      
+    </span>
+  </div>
+  
+  
+  
+</div>
+
+<div class="review-card" style="padding: 8px; margin-bottom: 8px; border-radius: var(--radius-md); background: var(--bg-tertiary); border-left: 3px solid var(--border-secondary);">
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+    <span style="font-weight: 600;">魔鬼代言人</span>
+    <span style="font-size: 11px;">
+      
+      <span class="text-warning">证据不足</span>
+      
+      · 信心 10.0%
+      
+    </span>
+  </div>
+  
+  
+  
+</div>
+
+<div class="review-card" style="padding: 8px; margin-bottom: 8px; border-radius: var(--radius-md); background: var(--bg-tertiary); border-left: 3px solid var(--border-secondary);">
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+    <span style="font-weight: 600;">信源审查员</span>
+    <span style="font-size: 11px;">
+      
+      <span class="text-warning">证据不足</span>
+      
+      · 信心 10.0%
+      
+    </span>
+  </div>
+  
+  
+  
+</div>
+
+<div class="review-card" style="padding: 8px; margin-bottom: 8px; border-radius: var(--radius-md); background: var(--bg-tertiary); border-left: 3px solid var(--border-secondary);">
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+    <span style="font-weight: 600;">AI瓶颈猎手</span>
+    <span style="font-size: 11px;">
+      
+      <span class="text-warning">证据不足</span>
+      
+      · 信心 10.0%
+      
+    </span>
+  </div>
+  
+  
+  
+</div>
+
+</div>
+
+
+
+<div style="margin-top: 12px; padding: 12px; border-radius: var(--radius-md); background: var(--bg-tertiary);">
+  <div style="font-weight: 600; margin-bottom: 8px;">多空辩论</div>
+  
+  <div style="margin-bottom: 8px; padding: 8px; border-radius: 6px; background: rgba(var(--text-success-rgb, 34, 197, 94), 0.08);">
+    <span class="text-success" style="font-weight: 600;">支持方</span>
+    <span style="font-size: 11px; color: var(--text-secondary); margin-left: 8px;">信心 0%</span>
+    <div style="font-size: 12px; margin-top: 2px; color: var(--text-secondary);">没有支持意见</div>
+  </div>
+
+  <div style="margin-bottom: 8px; padding: 8px; border-radius: 6px; background: rgba(var(--text-danger-rgb, 239, 68, 68), 0.08);">
+    <span class="text-danger" style="font-weight: 600;">谨慎方</span>
+    <span style="font-size: 11px; color: var(--text-secondary); margin-left: 8px;">信心 0%</span>
+    <div style="font-size: 12px; margin-top: 2px; color: var(--text-secondary);">没有谨慎意见</div>
+  </div>
+
+  <div style="margin-bottom: 8px; padding: 8px; border-radius: 6px; background: var(--bg-secondary);">
+    <span style="font-weight: 600;">辩论结论：</span>
+    
+    <span class="text-secondary">分歧较大，暂时无法定论</span>
+    
+    <div style="font-size: 11px; color: var(--text-secondary); margin-top: 2px;">没有明显支持或反对意见，先保持中性观察。</div>
+    
+    <div style="font-size: 11px; color: var(--text-tertiary); margin-top: 4px;">
+      
+      · 研究员意见偏中性或证据不足<br>
+      
+    </div>
+    
+  </div>
+
+  
+  <div style="padding: 8px; border-radius: 6px; background: rgba(var(--text-warning-rgb, 245, 158, 11), 0.08);">
+    <span class="text-warning" style="font-weight: 600;">需注意的风险：</span>
+    <div style="font-size: 11px; color: var(--text-secondary); margin-top: 4px;">
+      
+      · 巴菲特式质量视角：缺少 business_quality, valuation, cash_flow<br>
+      
+      · ARK 式颠覆创新视角：缺少 tam_growth, platform_lock, innovation_cycle<br>
+      
+      · 宏观务实派：缺少 rate_environment, dollar_trend, risk_appetite<br>
+      
+      · 趋势交易者：缺少 price_action, volume, momentum_signals<br>
+      
+      · 游资情绪侦察员：缺少 retail_sentiment, capital_flow, narrative_strength<br>
+      
+      · 魔鬼代言人：缺少 bear_case, valuation_risk, concentration_risk<br>
+      
+      · 信源审查员：缺少 source_reliability, account_history, promotion_pattern<br>
+      
+      · AI瓶颈猎手：缺少 supply_concentration, capital_intensity, substitutability<br>
+      
+    </div>
+  </div>
+  
+</div>
+
+</div>
+<div class="box"><div class="card-title">风险提示</div>
+
+<div style="padding: 8px 0;">
+  <span style="font-weight: 600;">风险等级：</span>
+  
+  <span class="text-success">暂无明显风险</span>
+  
+  <span class="text-secondary" style="margin-left: 12px;">风险得分 0.0</span>
+</div>
+
+</div>
+<div class="box"><div class="card-title">发布审核</div>
+
+<div style="padding: 8px 0;">
+  <span style="font-weight: 600;">最终判断：</span>
+  
+  <span class="text-success">通过 · 可发布为正式信号</span>
+  
+</div>
+
+
+
+
+<div style="margin-top: 12px; font-size: 11px; color: var(--text-secondary);">
+  已生成详细报告，可在数据目录中查看。
+</div>
+
+</div>
+</body></html>

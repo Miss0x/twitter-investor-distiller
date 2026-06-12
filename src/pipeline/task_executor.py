@@ -983,6 +983,7 @@ def _filter_tweets(payload: dict) -> dict:
 # ═══════════════════════════════════════════════════════════════════════
 
 _GOVERNANCE_TASKS = {
+    "governance_run",
     "governance_candidate",
     "governance_quality",
     "governance_risk",
@@ -994,16 +995,34 @@ _GOVERNANCE_TASKS = {
 
 
 def _dispatch_governance_task(task_type: str, payload: dict) -> dict:
-    """Dispatch governance task types to their stub implementations.
-
-    These tasks will be connected to real governance modules once the
-    full pipeline (candidate → analysis → governance) is online.
-    """
+    """Dispatch governance task types to the real governance runner."""
     if task_type not in _GOVERNANCE_TASKS:
         return {"error": f"未知治理任务类型: {task_type}"}
 
-    return {
-        "ack": task_type,
-        "signal_id": payload.get("signal_id", ""),
-        "message": f"治理任务 {task_type} 已入队（桩实现）",
-    }
+    try:
+        from src.governance.adapters import candidate_from_payload
+        from src.governance.repository import GovernanceRepository
+        from src.governance.runner import run_governance_for_candidate
+
+        repo = GovernanceRepository(base_dir=payload.get("repo_base_dir", "data/governance"))
+        candidate = candidate_from_payload(payload, repo=repo)
+        result = run_governance_for_candidate(
+            candidate,
+            repo=repo,
+            push_intent=payload.get("push_intent", "dashboard"),
+            acknowledged_gaps=payload.get("acknowledged_gaps") or [],
+            generate_report=bool(payload.get("generate_report", task_type == "governance_report")),
+        )
+        if result.error:
+            return {"error": result.error, "signal_id": result.signal_id, "publish_status": result.publish_status}
+        return {
+            "ok": True,
+            "signal_id": result.signal_id,
+            "status": result.status,
+            "publish_status": result.publish_status,
+            "package_path": result.package_path,
+            "report_path": result.report_path,
+            "message": f"治理任务 {task_type} 已完成",
+        }
+    except Exception as exc:
+        return {"error": str(exc), "signal_id": payload.get("signal_id", "")}

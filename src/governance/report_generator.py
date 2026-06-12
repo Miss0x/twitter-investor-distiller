@@ -9,7 +9,9 @@ This is a snapshot/archive output, NOT the main UI (Dashboard is the main UI).
 from __future__ import annotations
 
 from datetime import date
+from html import escape
 from pathlib import Path
+from urllib.parse import urlparse
 
 from src.governance.models import SignalPackage
 from src.governance.repository import GovernanceRepository
@@ -72,6 +74,15 @@ def _status_css(status: str) -> str:
     return {"pass": "pass", "warn": "warn"}.get(status, "block")
 
 
+def _safe_url(url: str | None) -> str:
+    if not url:
+        return ""
+    parsed = urlparse(url)
+    if parsed.scheme not in {"http", "https"}:
+        return ""
+    return escape(url, quote=True)
+
+
 def generate_html_report(package: SignalPackage) -> str | None:
     """Generate an HTML report from a SignalPackage.
 
@@ -85,14 +96,19 @@ def generate_html_report(package: SignalPackage) -> str | None:
 
     evidence_html = ""
     for e in package.evidence:
-        source_label = e.source_type or "unknown"
-        excerpt = e.excerpt or "(no excerpt)"
-        url = e.url or ""
+        source_label = escape(e.source_type or "unknown", quote=True)
+        excerpt = escape(e.excerpt or "(no excerpt)", quote=True)
+        url = _safe_url(e.url)
         evidence_html += (
             f'<div class="evidence">'
             f'<span class="label">[{source_label}]</span> '
             f'<span>{excerpt}</span>'
-            + (f' <a href="{url}" style="color:#60a5fa;font-size:11px;">source</a>' if url else "")
+            + (
+                f' <a href="{url}" target="_blank" rel="noopener noreferrer" '
+                f'style="color:#60a5fa;font-size:11px;">source</a>'
+                if url
+                else ""
+            )
             + "</div>\n"
         )
 
@@ -102,10 +118,10 @@ def generate_html_report(package: SignalPackage) -> str | None:
     status_css = _status_css(package.publish_status)
 
     return _HTML_TEMPLATE.format(
-        ticker=package.ticker,
-        signal_id=package.signal_id,
-        summary=package.summary or "No summary",
-        publish_status=package.publish_status,
+        ticker=escape(package.ticker, quote=True),
+        signal_id=escape(package.signal_id, quote=True),
+        summary=escape(package.summary or "No summary", quote=True),
+        publish_status=escape(package.publish_status, quote=True),
         status_css=status_css,
         evidence_count=len(package.evidence),
         evidence_html=evidence_html,

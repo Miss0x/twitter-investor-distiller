@@ -1,28 +1,121 @@
 <div class="card-title">多角色评审</div>
 {% if empty %}
 <div class="text-secondary" style="padding: 12px 0;">
-  暂无评审数据。当信号通过质量门禁后，8 大流派将对信号进行结构化评审。
+  暂无评审数据。当信号通过质量检查后，不同风格的研究员会对这条信号发表各自看法。
 </div>
 {% else %}
 <div style="padding: 8px 0;">
-  <span style="font-weight: 600;">综合立场: </span>
-  <span class="text-{{ 'success' if aggregate_stance == 'bullish' else 'danger' if aggregate_stance == 'bearish' else 'secondary' }}">{{ aggregate_stance }}</span>
-  <span class="text-secondary" style="margin-left: 12px;">均分: {{ aggregate_score }}</span>
+  <span style="font-weight: 600;">综合判断：</span>
+  {% if aggregate_stance == 'bullish' %}
+  <span class="text-success">偏支持</span>
+  {% elif aggregate_stance == 'bearish' %}
+  <span class="text-danger">偏谨慎</span>
+  {% elif aggregate_stance == 'avoid' %}
+  <span class="text-danger">建议回避</span>
+  {% elif aggregate_stance == 'insufficient_data' %}
+  <span class="text-warning">证据不足，暂时无法判断</span>
+  {% else %}
+  <span class="text-secondary">中性观察</span>
+  {% endif %}
+  <span class="text-secondary" style="margin-left: 12px;">综合评分 {{ aggregate_score }}</span>
 </div>
+
 <div class="flex" style="gap: 12px; font-size: 12px; padding: 4px 0;">
-  <span class="text-success">看多: {{ bullish_count }}</span>
-  <span class="text-danger">看空: {{ bearish_count }}</span>
-  <span class="text-secondary">中立: {{ neutral_count }}</span>
-  <span class="text-secondary">数据不足: {{ insufficient_data_count }}</span>
+  <span class="text-success">支持 {{ bullish_count }}</span>
+  <span class="text-danger">谨慎 {{ bearish_count }}</span>
+  <span class="text-secondary">中性 {{ neutral_count }}</span>
+  <span class="text-secondary">数据不足 {{ insufficient_data_count }}</span>
 </div>
+
 {% if reviews %}
-<div style="max-height: 200px; overflow-y: auto; font-size: 11px;">
-{% for r in reviews[:6] %}
-<div style="padding: 4px 0; border-bottom: 1px solid var(--border-secondary);">
-  <span style="font-weight: 600;">{{ r.persona_label }}</span>
-  <span class="text-{{ 'success' if r.stance == 'bullish' else 'danger' if r.stance == 'bearish' else 'secondary' }}" style="margin-left: 8px;">{{ r.stance }}</span>
+<div style="max-height: 280px; overflow-y: auto; font-size: 12px; margin-top: 8px;">
+{% for r in reviews %}
+<div class="review-card" style="padding: 8px; margin-bottom: 8px; border-radius: var(--radius-md); background: var(--bg-tertiary); border-left: 3px solid {% if r.stance == 'bullish' %}var(--text-success){% elif r.stance == 'bearish' %}var(--text-danger){% else %}var(--border-secondary){% endif %};">
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+    <span style="font-weight: 600;">{{ r.get('persona_label', '未知研究员') }}</span>
+    <span style="font-size: 11px;">
+      {% if r.stance == 'bullish' %}
+      <span class="text-success">支持</span>
+      {% elif r.stance == 'bearish' %}
+      <span class="text-danger">谨慎</span>
+      {% elif r.stance == 'insufficient_data' %}
+      <span class="text-warning">证据不足</span>
+      {% else %}
+      <span class="text-secondary">中性</span>
+      {% endif %}
+      · 信心 {{ r.get('confidence', r.get('score', 0) * 100) }}%
+      {% if r.get('valid') == False %}
+      <span class="text-danger" style="margin-left: 4px;">（观点不可采信）</span>
+      {% endif %}
+    </span>
+  </div>
+  {% if r.get('summary') %}
+  <div style="color: var(--text-secondary); margin-bottom: 4px;">{{ r.summary }}</div>
+  {% endif %}
+  {% if r.get('key_points') %}
+  <div style="font-size: 11px; color: var(--text-tertiary);">
+    {% for pt in r.key_points[:3] %}
+    <div>· {{ pt }}</div>
+    {% endfor %}
+  </div>
+  {% endif %}
+  {% if r.get('risk_flags') %}
+  <div style="font-size: 11px; margin-top: 4px; color: var(--text-warning);">
+    {% for flag in r.risk_flags %}
+    <span style="display: inline-block; padding: 1px 6px; margin-right: 4px; margin-bottom: 2px; border-radius: 10px; background: var(--text-warning); color: #000; font-size: 10px;">{{ flag }}</span>
+    {% endfor %}
+  </div>
+  {% endif %}
 </div>
 {% endfor %}
+</div>
+{% endif %}
+
+{% if debate and debate.debate_mode %}
+<div style="margin-top: 12px; padding: 12px; border-radius: var(--radius-md); background: var(--bg-tertiary);">
+  <div style="font-weight: 600; margin-bottom: 8px;">多空辩论</div>
+  
+  <div style="margin-bottom: 8px; padding: 8px; border-radius: 6px; background: rgba(var(--text-success-rgb, 34, 197, 94), 0.08);">
+    <span class="text-success" style="font-weight: 600;">支持方</span>
+    <span style="font-size: 11px; color: var(--text-secondary); margin-left: 8px;">信心 {{ (debate.bull.confidence * 100) | int }}%</span>
+    <div style="font-size: 12px; margin-top: 2px; color: var(--text-secondary);">{{ debate.bull.thesis }}</div>
+  </div>
+
+  <div style="margin-bottom: 8px; padding: 8px; border-radius: 6px; background: rgba(var(--text-danger-rgb, 239, 68, 68), 0.08);">
+    <span class="text-danger" style="font-weight: 600;">谨慎方</span>
+    <span style="font-size: 11px; color: var(--text-secondary); margin-left: 8px;">信心 {{ (debate.bear.confidence * 100) | int }}%</span>
+    <div style="font-size: 12px; margin-top: 2px; color: var(--text-secondary);">{{ debate.bear.thesis }}</div>
+  </div>
+
+  <div style="margin-bottom: 8px; padding: 8px; border-radius: 6px; background: var(--bg-secondary);">
+    <span style="font-weight: 600;">辩论结论：</span>
+    {% if debate.rebuttal.winner == 'bull' %}
+    <span class="text-success">支持方占优</span>
+    {% elif debate.rebuttal.winner == 'bear' %}
+    <span class="text-danger">谨慎方占优</span>
+    {% else %}
+    <span class="text-secondary">分歧较大，暂时无法定论</span>
+    {% endif %}
+    <div style="font-size: 11px; color: var(--text-secondary); margin-top: 2px;">{{ debate.rebuttal.why }}</div>
+    {% if debate.rebuttal.remaining_uncertainties %}
+    <div style="font-size: 11px; color: var(--text-tertiary); margin-top: 4px;">
+      {% for u in debate.rebuttal.remaining_uncertainties %}
+      · {{ u }}<br>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+
+  {% if debate.must_disclose_risks %}
+  <div style="padding: 8px; border-radius: 6px; background: rgba(var(--text-warning-rgb, 245, 158, 11), 0.08);">
+    <span class="text-warning" style="font-weight: 600;">需注意的风险：</span>
+    <div style="font-size: 11px; color: var(--text-secondary); margin-top: 4px;">
+      {% for risk in debate.must_disclose_risks %}
+      · {{ risk }}<br>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
 </div>
 {% endif %}
 {% endif %}

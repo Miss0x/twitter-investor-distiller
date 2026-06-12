@@ -26,6 +26,7 @@ from sqlalchemy import text
 
 from src.storage.database import db
 from src.storage.models import PipelineTask
+from src.pipeline.task_executor import execute_tasks, is_running
 
 # ── ChatEngine 单例 ──
 # 避免每次请求都重新初始化 LLM 客户端连接；同时避免 Dashboard 启动依赖 ChromaDB。
@@ -884,6 +885,47 @@ async def card_data(name: str):
             "data": {},
             "error": str(e),
         }
+
+
+@app.post("/api/governance/gaps/acknowledge")
+async def acknowledge_governance_gap(payload: dict):
+    """Temporarily accept a governance data issue and rerun checks."""
+    try:
+        from src.governance.gap_actions import acknowledge_gap_for_signal
+        from src.governance.repository import GovernanceRepository
+
+        result = acknowledge_gap_for_signal(
+            repo=GovernanceRepository(),
+            signal_id=str(payload.get("signal_id") or ""),
+            gap_code=str(payload.get("gap_code") or ""),
+            reason=str(payload.get("reason") or ""),
+            expires_in_hours=int(payload.get("expires_in_hours") or 72),
+        )
+        _card_cache.pop("quality_gate", None)
+        _card_cache.pop("publish_review", None)
+        return result
+    except Exception as e:
+        return {"ok": False, "error": str(e) or "操作没有保存成功"}
+
+
+@app.post("/api/governance/gaps/revoke")
+async def revoke_governance_gap(payload: dict):
+    """Stop accepting a governance data issue and rerun checks."""
+    try:
+        from src.governance.gap_actions import revoke_gap_acknowledgement
+        from src.governance.repository import GovernanceRepository
+
+        result = revoke_gap_acknowledgement(
+            repo=GovernanceRepository(),
+            signal_id=str(payload.get("signal_id") or ""),
+            gap_code=str(payload.get("gap_code") or ""),
+            reason=str(payload.get("reason") or "重新检查这个风险"),
+        )
+        _card_cache.pop("quality_gate", None)
+        _card_cache.pop("publish_review", None)
+        return result
+    except Exception as e:
+        return {"ok": False, "error": str(e) or "操作没有保存成功"}
 
 
 @app.post("/cards/{name}/action")

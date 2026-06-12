@@ -28,38 +28,46 @@ def test_governance_cards_have_correct_tabs():
     assert CARD_CONFIG["publish_review"][0] == "data"
 
 
-def test_quality_gate_card_returns_empty_state():
+def test_quality_gate_card_returns_empty_state(tmp_path, monkeypatch):
+    from src.governance.repository import GovernanceRepository
     from src.cards.governance_cards import QualityGateCard
 
-    card = QualityGateCard()
-    data = card.get_data()
+    repo = GovernanceRepository(base_dir=tmp_path / "governance")
+    monkeypatch.setattr("src.cards.governance_cards.GovernanceRepository", lambda: repo)
+    data = QualityGateCard().get_data()
     assert data["empty"] is True
     assert "passed" in data
 
 
-def test_risk_alerts_card_returns_empty_state():
+def test_risk_alerts_card_returns_empty_state(tmp_path, monkeypatch):
+    from src.governance.repository import GovernanceRepository
     from src.cards.governance_cards import RiskAlertsCard
 
-    card = RiskAlertsCard()
-    data = card.get_data()
+    repo = GovernanceRepository(base_dir=tmp_path / "governance")
+    monkeypatch.setattr("src.cards.governance_cards.GovernanceRepository", lambda: repo)
+    data = RiskAlertsCard().get_data()
     assert data["empty"] is True
     assert data["risk_level"] == "unknown"
 
 
-def test_panel_review_card_returns_empty_state():
+def test_panel_review_card_returns_empty_state(tmp_path, monkeypatch):
+    from src.governance.repository import GovernanceRepository
     from src.cards.governance_cards import PanelReviewCard
 
-    card = PanelReviewCard()
-    data = card.get_data()
+    repo = GovernanceRepository(base_dir=tmp_path / "governance")
+    monkeypatch.setattr("src.cards.governance_cards.GovernanceRepository", lambda: repo)
+    data = PanelReviewCard().get_data()
     assert data["empty"] is True
     assert data["reviews"] == []
 
 
-def test_publish_review_card_returns_empty_state():
+def test_publish_review_card_returns_empty_state(tmp_path, monkeypatch):
+    from src.governance.repository import GovernanceRepository
     from src.cards.governance_cards import PublishReviewCard
 
-    card = PublishReviewCard()
-    data = card.get_data()
+    repo = GovernanceRepository(base_dir=tmp_path / "governance")
+    monkeypatch.setattr("src.cards.governance_cards.GovernanceRepository", lambda: repo)
+    data = PublishReviewCard().get_data()
     assert data["empty"] is True
     assert data["status"] == "unknown"
 
