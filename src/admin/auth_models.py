@@ -2,11 +2,10 @@
 
 from __future__ import annotations
 
-from sqlalchemy import Boolean, Column, DateTime, ForeignKey, Integer, String, Table
+from sqlalchemy import Boolean, Column, DateTime, ForeignKey, Integer, String, Table, func
 from sqlalchemy.orm import relationship
 
 from src.storage.database import Base
-from src.storage.models import TimestampMixin
 
 
 user_role = Table(
@@ -22,7 +21,7 @@ role_permission = Table(
 )
 
 
-class User(Base, TimestampMixin):
+class User(Base):
     __tablename__ = "users"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
@@ -32,6 +31,8 @@ class User(Base, TimestampMixin):
     is_active = Column(Boolean, default=True)
     is_superuser = Column(Boolean, default=False)
     avatar_url = Column(String, nullable=True)
+    created_at = Column(DateTime, server_default=func.now())
+    updated_at = Column(DateTime, server_default=func.now(), onupdate=func.now())
 
     roles = relationship("Role", secondary=user_role, back_populates="users")
 
