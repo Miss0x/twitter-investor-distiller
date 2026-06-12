@@ -6,33 +6,92 @@
 
 from __future__ import annotations
 
+import html
 import hashlib
-import random
+import os
+import secrets
 import sys
+import time
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from fastapi import FastAPI, Request, Response
+from fastapi import FastAPI, HTTPException, Request, Response
 from fastapi.responses import HTMLResponse, RedirectResponse
 
 app = FastAPI(title="", docs_url=None, redoc_url=None, openapi_url=None)
 
 # ═══════════════════════════════════════════════════
-# 简易会话管理（单管理员场景）
+# 会话与认证
 # ═══════════════════════════════════════════════════
 
-ADMIN_CREDENTIALS = {"admin": "admin123"}  # 第一版写死，后续改为数据库
-_sessions: dict[str, str] = {}
+_ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD", "admin123")
+_PASSWORD_SALT = secrets.token_hex(16)
+
+
+def _hash_password(pw: str) -> str:
+    return hashlib.sha256((_PASSWORD_SALT + pw).encode()).hexdigest()
+
+
+def _verify_password(pw: str, stored: str) -> bool:
+    return secrets.compare_digest(_hash_password(pw), stored)
+
+
+_ADMIN_HASH = _hash_password(_ADMIN_PASSWORD)
+
+_sessions: dict[str, tuple[str, float]] = {}  # token → (username, last_seen_ts)
+_captchas: dict[str, tuple[str, float]] = {}   # token → (answer, created_ts)
+_failures: dict[str, list[float]] = {}          # ip → [fail_timestamps]
+
+SESSION_MAX_AGE = 7200  # 2 小时
+CAPTCHA_MAX_AGE = 300   # 5 分钟
+MAX_FAILURES = 5        # 5 次失败锁 15 分钟
+FAILURE_WINDOW = 900    # 15 分钟窗口
 
 
 def _session_id() -> str:
-    return hashlib.sha256(str(random.getrandbits(256)).encode()).hexdigest()[:32]
+    return secrets.token_hex(32)
 
 
 def _check_login(request: Request) -> str | None:
+    """验证登录状态，返回用户名或 None。同时清理过期 token。"""
     token = request.cookies.get("admin_token", "")
-    return _sessions.get(token)
+    entry = _sessions.get(token)
+    if entry is None:
+        return None
+    username, last_seen = entry
+    if time.time() - last_seen > SESSION_MAX_AGE:
+        _sessions.pop(token, None)
+        return None
+    _sessions[token] = (username, time.time())  # 刷新 last_seen
+    # 清理过期 session
+    now = time.time()
+    expired = [t for t, (_, ts) in _sessions.items() if now - ts > SESSION_MAX_AGE]
+    for t in expired:
+        _sessions.pop(t, None)
+    return username
+
+
+def _check_login_or_401(request: Request) -> str:
+    """验证登录，未登录返回 401。"""
+    username = _check_login(request)
+    if username is None:
+        raise HTTPException(status_code=401, detail="请先登录")
+    return username
+
+
+def _check_rate_limit(ip: str) -> str | None:
+    """检查登录频率限制，返回错误信息或 None。"""
+    now = time.time()
+    stamps = [t for t in _failures.get(ip, []) if now - t < FAILURE_WINDOW]
+    _failures[ip] = stamps
+    if len(stamps) >= MAX_FAILURES:
+        return f"登录失败次数过多，请 {int((FAILURE_WINDOW - (now - stamps[0])) / 60)} 分钟后再试"
+    return None
+
+
+def _escape(text: str) -> str:
+    return html.escape(str(text))
 
 
 # ═══════════════════════════════════════════════════
@@ -137,7 +196,7 @@ def _base(section: str, title: str, body: str) -> str:
     return f"""<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>管理后台 · {title}</title><style>{CSS}</style></head><body>
 <div class="layout">
 <aside class="sidebar"><div class="brand"><span class="dot"></span>管理后台</div><nav>{nav_html}</nav></aside>
-<div class="main"><div class="topbar"><span class="title">{title}</span><div class="user"><span class="avatar">A</span><span>admin</span><a class="logout" href="/logout">登出</a></div></div><div class="content">{body}</div></div></div></body></html>"""
+<div class="main"><div class="topbar"><span class="title">{title}</span><div class="user"><span class="avatar">A</span><span>admin</span><form method="post" action="/logout" style="display:inline"><button class="logout" type="submit">登出</button></form></div></div><div class="content">{body}</div></div></div></body></html>"""
 
 
 # ═══════════════════════════════════════════════════
@@ -152,10 +211,16 @@ async def index(request: Request):
 
 
 def _login_page(error: str = "") -> HTMLResponse:
-    a, b = random.randint(1, 20), random.randint(1, 20)
+    # 清理过期 captcha
+    now = time.time()
+    expired = [t for t, (_, ts) in _captchas.items() if now - ts > CAPTCHA_MAX_AGE]
+    for t in expired:
+        _captchas.pop(t, None)
+
+    a, b = secrets.randbelow(20) + 1, secrets.randbelow(20) + 1
     captcha_answer = str(a + b)
-    captcha_token = hashlib.sha256(captcha_answer.encode()).hexdigest()[:16]
-    _sessions[f"captcha_{captcha_token}"] = captcha_answer
+    captcha_token = secrets.token_hex(16)
+    _captchas[captcha_token] = (captcha_answer, now)
 
     error_html = f'<div class="error">{error}</div>' if error else ""
     return HTMLResponse(f"""<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>管理后台 · 登录</title><style>{CSS}</style></head><body>
@@ -173,31 +238,43 @@ def _login_page(error: str = "") -> HTMLResponse:
 
 @app.post("/login")
 async def login(request: Request, response: Response):
+    client_ip = request.client.host if request.client else "unknown"
+
+    # 频率检查
+    rate_error = _check_rate_limit(client_ip)
+    if rate_error:
+        return _login_page(rate_error)
+
     form = await request.form()
     username = form.get("username", "")
     password = form.get("password", "")
     captcha_input = form.get("captcha", "")
     captcha_token = form.get("captcha_token", "")
 
-    expected = _sessions.pop(f"captcha_{captcha_token}", None)
-    if expected is None or captcha_input.strip() != expected:
+    # 验证验证码
+    expected_entry = _captchas.pop(captcha_token, None)
+    if expected_entry is None or captcha_input.strip() != expected_entry[0]:
         return _login_page("验证码错误，请重新计算")
 
-    if username not in ADMIN_CREDENTIALS or ADMIN_CREDENTIALS[username] != password:
+    # 验证密码（恒定时间比较，防时序攻击）
+    if username != "admin" or not _verify_password(password, _ADMIN_HASH):
+        stamps = _failures.get(client_ip, [])
+        stamps.append(time.time())
+        _failures[client_ip] = stamps
         return _login_page("账号或密码错误")
 
     token = _session_id()
-    _sessions[token] = username
+    _sessions[token] = (username, time.time())
     response = RedirectResponse("/dashboard", status_code=303)
-    response.set_cookie("admin_token", token, httponly=True, samesite="lax", max_age=7200)
+    response.set_cookie("admin_token", token, httponly=True, samesite="strict", max_age=SESSION_MAX_AGE)
     return response
 
 
-@app.get("/logout")
+@app.post("/logout")
 async def logout(request: Request, response: Response):
     token = request.cookies.get("admin_token", "")
     _sessions.pop(token, None)
-    response = RedirectResponse("/")
+    response = RedirectResponse("/", status_code=303)
     response.delete_cookie("admin_token")
     return response
 
@@ -206,97 +283,108 @@ async def logout(request: Request, response: Response):
 
 @app.get("/dashboard", response_class=HTMLResponse)
 async def dashboard(request: Request):
-    if not _check_login(request):
-        return _login_page()
-    from src.admin.activity import ActivityTracker
-    stats = ActivityTracker().stats(days=7)
-    total = stats.get("total_events", 0) or 1
-    hourly = stats.get("hourly_activity", {})
-    peak_hour = max(hourly.items(), key=lambda x: x[1]) if hourly else ("-", 0)
+    _check_login_or_401(request)
+    try:
+        from src.admin.activity import ActivityTracker
+        stats = ActivityTracker().stats(days=7)
+        total = stats.get("total_events", 0) or 1
+        hourly = stats.get("hourly_activity", {})
+        peak_hour = max(hourly.items(), key=lambda x: x[1]) if hourly else ("-", 0)
 
-    action_labels = {
-        "page_view": "浏览", "config_change": "修改配置", "task_execute": "执行任务",
-        "task_seed": "扫描任务", "chat_query": "AI 问答",
-        "observation_add": "添加观察", "observation_remove": "移除观察",
-    }
-    bars = ""
-    for k, v in sorted(stats["actions_by_type"].items(), key=lambda x: -x[1])[:6]:
-        pct = min(round(v / total * 100, 1), 100)
-        bars += f"<div style='display:flex;align-items:center;gap:8px;margin-bottom:6px'><span style='font-size:12px;color:var(--muted);width:66px;text-align:right'>{action_labels.get(k,k)}</span><div style='flex:1' class='bar-track'><div class='bar-fill' style='width:{pct}%'></div></div><span style='font-size:11px;color:var(--muted);width:40px'>{v}</span></div>"
+        action_labels = {
+            "page_view": "浏览", "config_change": "修改配置", "task_execute": "执行任务",
+            "task_seed": "扫描任务", "chat_query": "AI 问答",
+            "observation_add": "添加观察", "observation_remove": "移除观察",
+        }
+        bars = ""
+        for k, v in sorted(stats["actions_by_type"].items(), key=lambda x: -x[1])[:6]:
+            pct = min(round(v / total * 100, 1), 100)
+            bars += f"<div style='display:flex;align-items:center;gap:8px;margin-bottom:6px'><span style='font-size:12px;color:var(--muted);width:66px;text-align:right'>{_escape(action_labels.get(k,k))}</span><div style='flex:1' class='bar-track'><div class='bar-fill' style='width:{pct}%'></div></div><span style='font-size:11px;color:var(--muted);width:40px'>{v}</span></div>"
 
-    events = ""
-    for e in ActivityTracker().query(limit=8):
-        al = action_labels.get(e.get("action", ""), e.get("action", ""))
-        ts = e.get("timestamp", "")[-8:] or ""
-        events += f"<tr><td>{al}</td><td style='color:var(--muted)'>{e.get('path','')}</td><td>{e.get('ip_prefix','')}</td><td style='color:var(--muted)'>{ts}</td></tr>"
+        events = ""
+        for e in ActivityTracker().query(limit=8):
+            al = action_labels.get(e.get("action", ""), e.get("action", ""))
+            ts = e.get("timestamp", "")[-8:] or ""
+            events += f"<tr><td>{_escape(al)}</td><td style='color:var(--muted)'>{_escape(e.get('path',''))}</td><td>{_escape(e.get('ip_prefix',''))}</td><td style='color:var(--muted)'>{_escape(ts)}</td></tr>"
 
-    return HTMLResponse(_base("dashboard", "系统概览", f"""
+        return HTMLResponse(_base("dashboard", "系统概览", f"""
 <div class="grid4">
 <div class="stat"><div class="label">今日操作</div><div class="value">{total}</div><div class="sub">过去 7 天累计</div></div>
 <div class="stat"><div class="label">活跃来源</div><div class="value">{stats['unique_ip_prefixes']}</div><div class="sub">独立网络前缀</div></div>
-<div class="stat"><div class="label">高峰时段</div><div class="value" style="font-size:22px">{peak_hour[0]}:00</div><div class="sub">UTC 时间</div></div>
+<div class="stat"><div class="label">高峰时段</div><div class="value" style="font-size:22px">{_escape(peak_hour[0])}:00</div><div class="sub">UTC 时间</div></div>
 <div class="stat"><div class="label">数据窗口</div><div class="value" style="font-size:22px">7 天</div><div class="sub">最近统计区间</div></div>
 </div>
 <div class="grid2">
 <div class="card"><h2>操作类型分布</h2>{bars or '<span class="text-muted">暂无数据</span>'}</div>
 <div class="card"><h2>最近活动记录</h2><table><thead><tr><th>操作</th><th>路径</th><th>来源</th><th>时间</th></tr></thead><tbody>{events or '<tr><td colspan="4" class="text-muted">暂无记录</td></tr>'}</tbody></table></div>
 </div>"""))
+    except Exception as exc:
+        return HTMLResponse(_base("dashboard", "系统概览", f'<div class="card"><span class="text-muted">加载统计数据失败: {_escape(str(exc))}</span></div>'))
 
 
 # ── 用户管理 ──
 
 @app.get("/users", response_class=HTMLResponse)
 async def users_page(request: Request):
-    if not _check_login(request):
-        return _login_page()
-    from src.admin.auth_models import User
-    from src.storage.database import db
-    session = db.get_session()
-    users = session.query(User).order_by(User.id.desc()).all()
-    session.close()
-    rows = ""
-    for u in users:
-        rows += f"""<tr>
-<td>{u.id}</td><td><b>{u.username}</b></td><td style="color:var(--muted)">{u.email[:3] + "****"}</td>
+    _check_login_or_401(request)
+    try:
+        from src.admin.auth_models import User
+        from src.storage.database import db
+        session = db.get_session()
+        users = session.query(User).order_by(User.id.desc()).all()
+        session.close()
+        rows = ""
+        for u in users:
+            rows += f"""<tr>
+<td>{u.id}</td><td><b>{_escape(u.username)}</b></td><td style="color:var(--muted)">{_escape(u.email[:3])}****</td>
 <td>{'<span class="badge badge-info">管理员</span>' if u.is_superuser else ''}</td>
 <td><span class="badge {'badge-success' if u.is_active else 'badge-danger'}">{'正常' if u.is_active else '已停用'}</span></td>
 <td><button class="btn {'btn-danger' if u.is_active else 'btn-primary'}" onclick="toggleUser({u.id})">{'停用' if u.is_active else '启用'}</button></td>
 </tr>"""
-    return HTMLResponse(_base("users", "用户管理", f"""<div class="card"><div class="flex-between mb"><h2 style="margin:0">用户列表</h2></div>
+        return HTMLResponse(_base("users", "用户管理", f"""<div class="card"><div class="flex-between mb"><h2 style="margin:0">用户列表</h2></div>
 <table><thead><tr><th>ID</th><th>用户名</th><th>邮箱</th><th>角色</th><th>状态</th><th>操作</th></tr></thead><tbody>{rows or '<tr><td colspan="6" class="text-muted">暂无用户</td></tr>'}</tbody></table></div>
 <script>async function toggleUser(id){{var r=await fetch('/users/toggle',{{method:'POST',headers:{{'Content-Type':'application/json'}},body:JSON.stringify({{user_id:id}})}});if(r.ok)location.reload()}}</script>"""))
+    except Exception as exc:
+        return HTMLResponse(_base("users", "用户管理", f'<div class="card"><span class="text-muted">加载失败: {_escape(str(exc))}</span></div>'))
 
 
 # ── 活动日志 ──
 
 @app.get("/activity", response_class=HTMLResponse)
 async def activity_page(request: Request):
-    if not _check_login(request):
-        return _login_page()
-    from src.admin.activity import ActivityTracker
-    action_labels = {"page_view":"浏览","config_change":"修改配置","task_execute":"执行任务","task_seed":"扫描任务","chat_query":"AI 问答","observation_add":"添加观察","observation_remove":"移除观察","governance_acknowledge":"接受风险","governance_revoke":"撤销接受"}
-    rows = ""
-    for e in ActivityTracker().query(limit=100):
-        al = action_labels.get(e.get("action",""), e.get("action",""))
-        ts = e.get("timestamp","") or ""
-        rows += f"<tr><td><span class='badge badge-info'>{al}</span></td><td style='color:var(--muted)'>{e.get('path','')}</td><td>{e.get('ip_prefix','')}</td><td style='color:var(--muted);font-size:12px'>{ts}</td></tr>"
-    return HTMLResponse(_base("activity", "活动日志", f"""<div class="card"><h2>用户操作记录</h2><table><thead><tr><th>操作</th><th>路径</th><th>来源 IP 前缀</th><th>时间</th></tr></thead><tbody>{rows or '<tr><td colspan="4" class="text-muted">暂无记录</td></tr>'}</tbody></table></div>"""))
+    _check_login_or_401(request)
+    try:
+        from src.admin.activity import ActivityTracker
+        action_labels = {"page_view":"浏览","config_change":"修改配置","task_execute":"执行任务","task_seed":"扫描任务","chat_query":"AI 问答","observation_add":"添加观察","observation_remove":"移除观察","governance_acknowledge":"接受风险","governance_revoke":"撤销接受"}
+        rows = ""
+        for e in ActivityTracker().query(limit=100):
+            al = action_labels.get(e.get("action",""), e.get("action",""))
+            ts = e.get("timestamp","") or ""
+            rows += f"<tr><td><span class='badge badge-info'>{_escape(al)}</span></td><td style='color:var(--muted)'>{_escape(e.get('path',''))}</td><td>{_escape(e.get('ip_prefix',''))}</td><td style='color:var(--muted);font-size:12px'>{_escape(ts)}</td></tr>"
+        return HTMLResponse(_base("activity", "活动日志", f"""<div class="card"><h2>用户操作记录</h2><table><thead><tr><th>操作</th><th>路径</th><th>来源 IP 前缀</th><th>时间</th></tr></thead><tbody>{rows or '<tr><td colspan="4" class="text-muted">暂无记录</td></tr>'}</tbody></table></div>"""))
+    except Exception as exc:
+        return HTMLResponse(_base("activity", "活动日志", f'<div class="card"><span class="text-muted">加载失败: {_escape(str(exc))}</span></div>'))
+
+
 
 
 # ── 封禁管理 ──
 
 @app.get("/bans", response_class=HTMLResponse)
 async def bans_page(request: Request):
-    if not _check_login(request):
-        return _login_page()
-    from src.admin.access_control import AccessControl
-    ac = AccessControl()
-    suspended = ac.list_suspended()
-    rows = ""
-    for s in suspended:
-        rows += f"""<tr><td>{s.get('identifier','')}</td><td style="color:var(--muted)">{s.get('reason','')}</td><td style="font-size:12px;color:var(--muted)">{s.get('suspended_at','')[:16]}</td>
-<td><button class="btn btn-primary" onclick="unsuspend('{s.get('identifier','')}')">解除</button></td></tr>"""
-    return HTMLResponse(_base("bans", "封禁管理", f"""<div class="card"><div class="flex-between mb"><h2 style="margin:0">封禁列表</h2></div>
+    _check_login_or_401(request)
+    try:
+        from src.admin.access_control import AccessControl
+        ac = AccessControl()
+        suspended = ac.list_suspended()
+        rows = ""
+        for s in suspended:
+            ident = _escape(s.get('identifier',''))
+            reason = _escape(s.get('reason',''))
+            ts = _escape((s.get('suspended_at','') or '')[:16])
+            rows += f"""<tr><td>{ident}</td><td style="color:var(--muted)">{reason}</td><td style="font-size:12px;color:var(--muted)">{ts}</td>
+<td><button class="btn btn-primary" onclick="unsuspend('{ident}')">解除</button></td></tr>"""
+        return HTMLResponse(_base("bans", "封禁管理", f"""<div class="card"><div class="flex-between mb"><h2 style="margin:0">封禁列表</h2></div>
 <table><thead><tr><th>用户名/IP 前缀</th><th>原因</th><th>封禁时间</th><th>操作</th></tr></thead><tbody>{rows or '<tr><td colspan="4" class="text-muted">暂无封禁记录</td></tr>'}</tbody></table></div>
 <div class="card mt"><h2>新增封禁</h2>
 <div style="display:flex;gap:10px"><input id="ban-ident" placeholder="用户名或 IP 前缀 (如 192.168)" style="flex:1;padding:10px;border:1px solid var(--border);border-radius:var(--radius);font-size:14px"><input id="ban-reason" placeholder="封禁原因" style="flex:1;padding:10px;border:1px solid var(--border);border-radius:var(--radius);font-size:14px"><button class="btn btn-danger" onclick="doSuspend()">封禁</button></div></div>
@@ -304,20 +392,24 @@ async def bans_page(request: Request):
 async function doSuspend(){{var i=document.getElementById('ban-ident').value.trim();var r=document.getElementById('ban-reason').value.trim();if(!i)return;await fetch('/suspend',{{method:'POST',headers:{{'Content-Type':'application/json'}},body:JSON.stringify({{identifier:i,reason:r}})}});location.reload()}}
 async function unsuspend(id){{await fetch('/unsuspend',{{method:'POST',headers:{{'Content-Type':'application/json'}},body:JSON.stringify({{identifier:id}})}});location.reload()}}
 </script>"""))
+    except Exception as exc:
+        return HTMLResponse(_base("bans", "封禁管理", f'<div class="card"><span class="text-muted">加载失败: {_escape(str(exc))}</span></div>'))
 
 
 # ═══════════════════════════════════════════════════
-# API 端点
+# API 端点（全部需要登录）
 # ═══════════════════════════════════════════════════
 
 @app.get("/stats")
-async def stats_api(days: int = 7):
+async def stats_api(request: Request, days: int = 7):
+    _check_login_or_401(request)
     from src.admin.activity import ActivityTracker
     return ActivityTracker().stats(days=days)
 
 
 @app.post("/users/toggle")
-async def toggle_user(payload: dict):
+async def toggle_user(request: Request, payload: dict):
+    _check_login_or_401(request)
     from src.admin.auth_models import User
     from src.storage.database import db
     uid = int(payload.get("user_id") or 0)
@@ -333,13 +425,15 @@ async def toggle_user(payload: dict):
 
 
 @app.post("/suspend")
-async def suspend(payload: dict):
+async def suspend(request: Request, payload: dict):
+    _check_login_or_401(request)
     from src.admin.access_control import AccessControl
     return AccessControl().suspend(str(payload.get("identifier","")), str(payload.get("reason","")))
 
 
 @app.post("/unsuspend")
-async def unsuspend(payload: dict):
+async def unsuspend(request: Request, payload: dict):
+    _check_login_or_401(request)
     from src.admin.access_control import AccessControl
     return AccessControl().unsuspend(str(payload.get("identifier","")))
 

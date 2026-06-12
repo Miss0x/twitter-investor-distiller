@@ -1,0 +1,11 @@
+{
+  "suspended": [
+    {
+      "identifier": "test",
+      "reason": "test",
+      "suspended_by": "admin",
+      "suspended_at": "2026-06-12T16:24:27.929600+00:00"
+    }
+  ],
+  "blocked_ips": []
+}
