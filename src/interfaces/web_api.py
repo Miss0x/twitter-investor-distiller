@@ -960,9 +960,10 @@ async def auth_register(payload: dict):
 
 @app.post("/auth/login")
 async def auth_login(payload: dict, response: Response):
-    """用户登录。"""
+    """用户登录。返回 Access Token (Cookie) + Refresh Token (Cookie)。"""
     from src.admin.auth import create_access_token, verify_password
     from src.admin.auth_models import User
+    from src.admin.refresh_token import create_refresh_family
     from src.storage.database import db
     email = str(payload.get("email") or "").strip()
     password = str(payload.get("password") or "")
@@ -975,14 +976,65 @@ async def auth_login(payload: dict, response: Response):
             return {"ok": False, "error": "邮箱或密码错误"}
         if not user.is_active:
             return {"ok": False, "error": "账号已被停用"}
-        token = create_access_token({"sub": user.id, "email": user.email})
+        access_token = create_access_token({"sub": user.id, "email": user.email})
+        raw_refresh, _ = create_refresh_family(session, user.id, days=7)
         response.set_cookie(
-            key="access_token", value=token, httponly=True, samesite="lax",
-            max_age=1800, secure=False,
+            key="access_token", value=access_token, httponly=True, samesite="lax",
+            max_age=1800, secure=False, path="/",
+        )
+        response.set_cookie(
+            key="refresh_token", value=raw_refresh, httponly=True, samesite="strict",
+            max_age=7*86400, secure=False, path="/auth/refresh",
         )
         return {
             "ok": True, "user_id": user.id, "username": user.username,
             "is_superuser": user.is_superuser,
+        }
+    finally:
+        session.close()
+
+
+@app.post("/auth/refresh")
+async def auth_refresh(request: Request, response: Response):
+    """刷新 Access Token。使用 Refresh Token 轮换机制。"""
+    from src.admin.auth import create_access_token
+    from src.admin.refresh_token import rotate_refresh_token
+    from src.storage.database import db
+    raw_refresh = request.cookies.get("refresh_token", "")
+    if not raw_refresh:
+        return {"ok": False, "error": "无 Refresh Token"}
+    session = db.get_session()
+    try:
+        result = rotate_refresh_token(session, raw_refresh)
+        if result is None:
+            return {"ok": False, "error": "Token 无效或已过期，请重新登录"}
+        new_raw, _ = result
+        # 从旧 refresh token 中获取 user_id（通过 hash 查记录）
+        from src.admin.refresh_token import _hash_token
+        from src.admin.refresh_token import RefreshToken
+        record = session.query(RefreshToken).filter(
+            RefreshToken.used == False,
+            RefreshToken.family.in_(
+                session.query(RefreshToken.family).filter(
+                    RefreshToken.token_hash == _hash_token(raw_refresh)
+                ).subquery()
+            )
+        ).order_by(RefreshToken.created_at.desc()).first()
+        user_id = record.user_id if record else None
+        if user_id is None:
+            return {"ok": False, "error": "会话已失效"}
+        access_token = create_access_token({"sub": user_id, "email": ""})
+        response.set_cookie(
+            key="access_token", value=access_token, httponly=True, samesite="lax",
+            max_age=1800, secure=False, path="/",
+        )
+        response.set_cookie(
+            key="refresh_token", value=new_raw, httponly=True, samesite="strict",
+            max_age=7*86400, secure=False, path="/auth/refresh",
+        )
+        return {"ok": True}
+    finally:
+        session.close()
         }
     finally:
         session.close()

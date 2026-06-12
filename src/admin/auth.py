@@ -2,13 +2,14 @@
 
 from __future__ import annotations
 
+import hashlib
 import os
+import secrets as _secrets
 from datetime import datetime, timedelta, timezone
 
 from fastapi import Depends, HTTPException, Request, status
 from fastapi.security import OAuth2PasswordBearer
 from jose import JWTError, jwt
-from passlib.context import CryptContext
 from sqlalchemy.orm import Session
 
 from src.admin.auth_models import User
@@ -17,16 +18,17 @@ SECRET_KEY = os.getenv("JWT_SECRET_KEY", "dev-secret-change-in-production")
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+_PASSWORD_SALT = _secrets.token_hex(16)
+
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/login", auto_error=False)
 
 
 def verify_password(plain: str, hashed: str) -> bool:
-    return pwd_context.verify(plain, hashed)
+    return _secrets.compare_digest(hash_password(plain), hashed)
 
 
 def hash_password(plain: str) -> str:
-    return pwd_context.hash(plain)
+    return hashlib.sha256((_PASSWORD_SALT + plain).encode()).hexdigest()
 
 
 def create_access_token(data: dict, expires_delta: timedelta | None = None) -> str:
