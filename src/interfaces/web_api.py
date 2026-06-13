@@ -74,7 +74,7 @@ from fastapi.responses import JSONResponse, RedirectResponse  # noqa: E402
 # ── 环境自适应 ──
 def _cookie_secure() -> bool:
     """开发环境 HTTP 用 False, 生产环境 HTTPS 用 True."""
-    return os.getenv("ENV", "dev") == "production"
+    return _os.getenv("ENV", "dev") == "production"
 
 
 def _is_valid_email(email: str) -> bool:
