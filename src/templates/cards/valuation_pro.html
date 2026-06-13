@@ -1,0 +1,72 @@
+<!-- ════ 估值工具卡片 ════ -->
+<div class="card" data-card="valuation_pro">
+  <div style="font-size:14px;font-weight:600;margin-bottom:12px;">估值工具</div>
+
+  {% if not ticker %}
+  <div class="text-secondary">请先选择一个标的进行分析</div>
+  <div style="margin-top:12px;">
+    <input id="val-ticker" placeholder="输入代码，如 NVDA" style="padding:8px 12px;border:1px solid var(--border);border-radius:var(--radius);width:160px;font-size:13px;">
+    <button class="btn" data-action="valuation-run" style="margin-left:6px;">分析</button>
+  </div>
+  {% endif %}
+
+  {% if ticker %}
+  <div style="display:flex;gap:12px;align-items:center;margin-bottom:12px;">
+    <span style="font-weight:600;font-size:16px;">{{ ticker }}</span>
+    <span style="color:var(--muted);font-size:12px;">当前价 ${{ price }}</span>
+  </div>
+
+  <!-- DCF 结果 -->
+  <div style="background:var(--bg-tertiary);border-radius:var(--radius);padding:12px;margin-bottom:12px;">
+    <div style="font-size:11px;color:var(--muted);margin-bottom:4px;">DCF 内在价值</div>
+    <div style="display:flex;align-items:baseline;gap:8px;">
+      <span style="font-size:22px;font-weight:700;">${{ dcf_value }}</span>
+      <span style="font-size:13px;color:{{ 'var(--green)' if upside_pct and upside_pct > 0 else 'var(--red)' }};">
+        {{ '+' if upside_pct and upside_pct > 0 else '' }}{{ upside_pct }}%
+      </span>
+    </div>
+    <div style="font-size:10px;color:var(--dim);margin-top:4px;">
+      FCF {{ fcf_str }} · 增长 {{ growth_5y }}% · WACC {{ wacc }}% · 终值 {{ terminal_growth }}%
+    </div>
+  </div>
+
+  <!-- 参数调整区 -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">
+    <div>
+      <label style="font-size:11px;color:var(--muted);">WACC (%)</label>
+      <input id="val-wacc" type="number" step="0.5" value="{{ wacc|default(10) }}" style="width:100%;padding:6px 8px;border:1px solid var(--border);border-radius:4px;font-size:13px;">
+    </div>
+    <div>
+      <label style="font-size:11px;color:var(--muted);">5年增长 (%)</label>
+      <input id="val-growth" type="number" step="0.5" value="{{ growth_5y|default(15) }}" style="width:100%;padding:6px 8px;border:1px solid var(--border);border-radius:4px;font-size:13px;">
+    </div>
+    <div>
+      <label style="font-size:11px;color:var(--muted);">终值增长 (%)</label>
+      <input id="val-terminal" type="number" step="0.1" value="{{ terminal_growth|default(2.5) }}" style="width:100%;padding:6px 8px;border:1px solid var(--border);border-radius:4px;font-size:13px;">
+    </div>
+    <div style="display:flex;align-items:end;">
+      <button class="btn btn-primary" data-action="valuation-recalc" data-ticker="{{ ticker }}" style="width:100%;font-size:12px;">重新计算</button>
+    </div>
+  </div>
+
+  <!-- Comps 同行对比 -->
+  {% if peers %}
+  <div style="margin-top:8px;">
+    <div style="font-size:11px;color:var(--muted);margin-bottom:6px;">同行估值对比</div>
+    <table style="font-size:11px;">
+      <tr><th>标的</th><th>PE</th><th>PB</th></tr>
+      <tr style="font-weight:600;"><td>{{ ticker }}</td><td>{{ pe_current }}</td><td>{{ pb_current }}</td></tr>
+      {% for p in peers %}
+      <tr><td>{{ p.ticker }}</td><td>{{ p.pe }}</td><td>{{ p.pb }}</td></tr>
+      {% endfor %}
+    </table>
+  </div>
+  {% endif %}
+
+  <!-- DD 尽调清单 -->
+  <div style="margin-top:12px;">
+    <button class="btn" data-action="valuation-dd" data-ticker="{{ ticker }}" style="font-size:12px;">生成尽调清单</button>
+    <div id="val-dd-list" style="margin-top:8px;font-size:12px;"></div>
+  </div>
+  {% endif %}
+</div>

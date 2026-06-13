@@ -1423,6 +1423,74 @@ async def serve_timeline(path: str):
 # ═══════════════════════════════════════════════════════
 # 主入口
 # ═══════════════════════════════════════════════════════
+# 估值工具 API — DCF/Comps/DD
+# ═══════════════════════════════════════════════════════
+
+@app.get("/api/valuation/dcf")
+async def valuation_dcf(ticker: str, wacc: float | None = None, growth: float | None = None, terminal: float | None = None):
+    from src.data.valuation_tools import ValuationTools
+    result = ValuationTools().recalculate_dcf(
+        ticker.upper(), wacc=wacc, growth_5y=growth, terminal_growth=terminal)
+    return {
+        "ticker": result.ticker, "intrinsic_value": result.intrinsic_value,
+        "current_price": result.current_price, "upside_pct": result.upside_pct,
+        "wacc": result.wacc, "growth_5y": result.growth_rate_5y,
+        "terminal_growth": result.terminal_growth, "fcf": result.free_cash_flow,
+        "confidence": result.confidence,
+    }
+
+
+@app.get("/api/valuation/dd")
+async def valuation_dd(ticker: str):
+    from src.data.valuation_tools import ValuationTools
+    items = ValuationTools().generate_dd_checklist(ticker.upper())
+    return [{"category": i.category, "question": i.question, "status": i.status, "evidence": i.evidence} for i in items]
+
+
+# ═══════════════════════════════════════════════════════
+# 股票自选 Watchlist API
+# ═══════════════════════════════════════════════════════
+
+@app.get("/api/watchlist")
+async def get_watchlist(request: Request):
+    from src.admin.auth import get_current_user
+    from src.multi_tenant.config import PerUserConfig
+    user = get_current_user(request)
+    tenant_id = str(user.id) if user else "default"
+    cfg = PerUserConfig(tenant_id)
+    return cfg.load().get("watchlist", [])
+
+
+@app.post("/api/watchlist/add")
+async def add_watchlist(request: Request, payload: dict):
+    ticker = str(payload.get("ticker") or "").strip().upper()
+    if not ticker: return {"ok": False, "error": "请输入股票代码"}
+    from src.admin.auth import get_current_user
+    from src.multi_tenant.config import PerUserConfig
+    user = get_current_user(request)
+    tenant_id = str(user.id) if user else "default"
+    cfg = PerUserConfig(tenant_id)
+    config = cfg.load()
+    wl = config.setdefault("watchlist", [])
+    if ticker not in wl: wl.append(ticker)
+    cfg.save_section("watchlist", wl)
+    return {"ok": True, "watchlist": wl}
+
+
+@app.post("/api/watchlist/remove")
+async def remove_watchlist(request: Request, payload: dict):
+    ticker = str(payload.get("ticker") or "").strip().upper()
+    from src.admin.auth import get_current_user
+    from src.multi_tenant.config import PerUserConfig
+    user = get_current_user(request)
+    tenant_id = str(user.id) if user else "default"
+    cfg = PerUserConfig(tenant_id)
+    config = cfg.load()
+    wl = config.get("watchlist", [])
+    if ticker in wl: wl.remove(ticker)
+    cfg.save_section("watchlist", wl)
+    return {"ok": True, "watchlist": wl}
+
 
 if __name__ == "__main__":
     import uvicorn

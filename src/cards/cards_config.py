@@ -58,6 +58,7 @@ CARD_CONFIG: dict[str, tuple[str, str, int, int, bool, bool, str | None, int]] =
     "telegram":        ("settings",  "通知与设置", 5, 2, False, False, "telegram",         0),
     "script_runner":   ("settings",  "通知与设置", 5, 3, False, False, "script_runner",    0),
     "config_center":   ("settings",  "通知与设置", 5, 0, False, True,  "config_center",    0),
+    "valuation_pro":   ("decisions", "投资决策", 1, 3, False, True,  "valuation_pro",    0),
 }
 
 
@@ -135,6 +136,7 @@ CARD_DISPLAY: dict[str, tuple[str, str]] = {
     "telegram":        ("推送通知",       "配置 Telegram 机器人，把重要信号推送到你的手机"),
     "script_runner":   ("高级工具",       "手动触发后台脚本，供调试、维护与批量生成信号使用"),
     "config_center":   ("用户配置",       "集中管理 LLM、Twitter API、Telegram Bot 和观察对象"),
+    "valuation_pro":   ("估值工具",       "DCF 估值、同行 PE/PB 对标、结构化尽调清单，参数可手动调整"),
 }
 
 # ═══════════════════════════════════════════════════════

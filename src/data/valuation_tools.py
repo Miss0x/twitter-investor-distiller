@@ -67,8 +67,15 @@ class ValuationTools:
     """Valuation and deal analysis methods."""
 
     @staticmethod
-    def dcf_skeleton(ticker: str) -> DCFResult:
-        """Generate DCF skeleton from available data. LLM fills assumptions."""
+    def dcf_skeleton(ticker: str, wacc_override: float | None = None, growth_override: float | None = None, terminal_override: float | None = None) -> DCFResult:
+        """Generate DCF skeleton with optional manual parameter overrides.
+
+        Args:
+            ticker: Ticker symbol
+            wacc_override: If set, use this WACC instead of auto-estimated
+            growth_override: If set, use this 5y growth rate instead of default
+            terminal_override: If set, use this terminal growth instead of 2.5%
+        """
         from src.data.financial import FinancialData
         fd = FinancialData()
         info = fd.get_fundamentals(ticker)
@@ -96,11 +103,38 @@ class ValuationTools:
         if result.growth_rate_5y is None:
             needs.append("growth_rate_5y")
 
+        # ── Apply user overrides ──
+        if wacc_override is not None:
+            result.wacc = wacc_override
+        if growth_override is not None:
+            result.growth_rate_5y = growth_override
+        if terminal_override is not None:
+            result.terminal_growth = terminal_override
+
+        # ── Recalculate DCF if we have all inputs ──
+        if (
+            result.free_cash_flow and result.wacc and result.growth_rate_5y
+            and result.shares_outstanding and result.current_price
+        ):
+            result = _compute_dcf(result)
+
         result.assumptions_needed = needs
         result.confidence = "high" if len(needs) == 0 else (
             "medium" if len(needs) <= 2 else "low"
         )
         return result
+
+    @staticmethod
+    def recalculate_dcf(ticker: str, wacc: float | None = None,
+                        growth_5y: float | None = None,
+                        terminal_growth: float | None = None) -> DCFResult:
+        """快捷入口：用自定义参数重新计算 DCF。未传则使用自动估算值。"""
+        return ValuationTools.dcf_skeleton(
+            ticker,
+            wacc_override=wacc,
+            growth_override=growth_5y,
+            terminal_override=terminal_growth,
+        )
 
     @staticmethod
     def comps_summary(ticker: str, peers: list[str] | None = None) -> CompsResult:
@@ -170,7 +204,32 @@ class ValuationTools:
         ]
 
 
-def _estimate_fcf(info: dict) -> float | None:
+def _compute_dcf(result: DCFResult) -> DCFResult:
+    """Run two-stage DCF: 5y growth → terminal value → per-share value."""
+    fcf = result.free_cash_flow
+    growth = result.growth_rate_5y
+    wacc = result.wacc
+    terminal_g = result.terminal_growth
+    shares = result.shares_outstanding
+    net_debt = result.net_debt or 0
+
+    # Stage 1: 5-year projection
+    pv_fcf = 0
+    for yr in range(1, 6):
+        projected_fcf = fcf * ((1 + growth) ** yr)
+        pv_fcf += projected_fcf / ((1 + wacc) ** yr)
+
+    # Stage 2: Terminal value (Gordon Growth)
+    terminal_fcf = fcf * ((1 + growth) ** 5) * (1 + terminal_g)
+    terminal_value = terminal_fcf / (wacc - terminal_g) if wacc > terminal_g else terminal_fcf / 0.05
+    pv_terminal = terminal_value / ((1 + wacc) ** 5)
+
+    enterprise_value = pv_fcf + pv_terminal - net_debt
+    per_share = enterprise_value / shares
+
+    result.intrinsic_value = round(per_share, 2)
+    result.upside_pct = round((per_share / result.current_price - 1) * 100, 1) if result.current_price else None
+    return result
     """Estimate free cash flow from available fundamentals."""
     # Approximation: FCF ≈ Operating Cash Flow - CapEx
     # When only net income available, use rough proxy
