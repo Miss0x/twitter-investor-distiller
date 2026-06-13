@@ -39,6 +39,9 @@ def create_access_token(data: dict, expires_delta: timedelta | None = None) -> s
     to_encode = data.copy()
     expire = datetime.now(timezone.utc) + (expires_delta or timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES))
     to_encode.update({"exp": expire})
+    # JWT sub MUST be string per RFC 7519
+    if "sub" in to_encode:
+        to_encode["sub"] = str(to_encode["sub"])
     return jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
 
 
@@ -50,10 +53,11 @@ def get_current_user(request: Request) -> AuthUser | None:
 
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
-        user_id: int | None = payload.get("sub")
-        if user_id is None:
+        sub = payload.get("sub")
+        if sub is None:
             return None
-    except JWTError:
+        user_id = int(sub)
+    except (JWTError, ValueError):
         return None
 
     from src.storage.database import db as database
