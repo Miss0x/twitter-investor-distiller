@@ -1,14 +1,62 @@
 version: "3.9"
 
 services:
-  app:
-    image: python:3.11-slim
-    working_dir: /app
+  # ── Nginx 反向代理 ──
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "8080:80"
     volumes:
-      - ./:/app
-    env_file:
-      - ./config/.env
-    command: bash -lc "pip install -r requirements.txt && python -m uvicorn src.interfaces.web_api:app --host 0.0.0.0 --port 8000"
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./src/templates:/usr/share/nginx/html/templates:ro
+    depends_on:
+      - dashboard
+      - admin
+    restart: unless-stopped
+
+  # ── 公网 Dashboard (8000) ──
+  dashboard:
+    build: .
     ports:
       - "8000:8000"
+    volumes:
+      - ./data:/app/data
+      - ./src:/app/src:ro
+      - ./config:/app/config:ro
+      - ./scripts:/app/scripts:ro
+    env_file:
+      - .env
+    environment:
+      - DB_PATH=sqlite:///app/data/twitter_data.db
+      - ENCRYPTION_KEY=${ENCRYPTION_KEY:-}
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY:-dev-secret}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin123}
+    command: python -m src.interfaces.web_api
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  # ── 管理后台 (8001) ──
+  admin:
+    build: .
+    ports:
+      - "8001:8001"
+    volumes:
+      - ./data:/app/data
+      - ./src:/app/src:ro
+      - ./config:/app/config:ro
+    env_file:
+      - .env
+    environment:
+      - DB_PATH=sqlite:///app/data/twitter_data.db
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin123}
+    command: python -m src.admin.app
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8001/"]
+      interval: 30s
+      timeout: 5s
+      retries: 3

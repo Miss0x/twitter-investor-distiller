@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+.workbuddy/
+data/pipeline/
+data/.master_key
+.env.local
+.git/
+legacy/
+docs/
+*.md
+!requirements.txt
