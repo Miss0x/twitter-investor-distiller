@@ -4,3 +4,7 @@
 {"action": "config_change", "timestamp": "2026-06-13T15:58:15.480609+00:00", "ip_prefix": "127.0", "user_agent_short": "python-requests/2.34.2", "path": "/api/config/llm"}
 {"action": "config_change", "timestamp": "2026-06-13T15:58:15.486638+00:00", "ip_prefix": "127.0", "user_agent_short": "python-requests/2.34.2", "path": "/api/config/twitter"}
 {"action": "observation_add", "timestamp": "2026-06-13T15:58:15.492160+00:00", "ip_prefix": "127.0", "user_agent_short": "python-requests/2.34.2", "path": "/api/config/observations/add"}
+{"action": "task_seed", "timestamp": "2026-06-13T20:01:52.971564+00:00", "ip_prefix": "127.0", "user_agent_short": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Saf", "path": "/pipeline/tasks/seed"}
+{"action": "task_seed", "timestamp": "2026-06-13T20:02:04.131495+00:00", "ip_prefix": "127.0", "user_agent_short": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Saf", "path": "/pipeline/tasks/seed"}
+{"action": "task_seed", "timestamp": "2026-06-13T20:02:22.862935+00:00", "ip_prefix": "127.0", "user_agent_short": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Saf", "path": "/pipeline/tasks/seed"}
+{"action": "chat_query", "timestamp": "2026-06-13T20:02:41.639412+00:00", "ip_prefix": "127.0", "user_agent_short": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Saf", "path": "/cards/chat/action"}
