@@ -54,9 +54,30 @@ def _normalize_chat_top_k(raw_value, default: int = 5) -> int:
 # ── FastAPI 应用实例 ──
 app = FastAPI(title="Twitter 用户蒸馏 AI 助手")
 
+# ── CORS 安全策略 ──
+from fastapi.middleware.cors import CORSMiddleware  # noqa: E402
+import os as _os  # noqa: E402
+_allowed_origins = _os.getenv("CORS_ORIGINS", "http://localhost:8080,http://localhost:8000").split(",")
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[o.strip() for o in _allowed_origins if o.strip()],
+    allow_credentials=True,
+    allow_methods=["GET", "POST"],
+    allow_headers=["Content-Type", "Authorization"],
+)
+
 from src.config import config  # noqa: E402
 import time as _time  # noqa: E402
 from fastapi import Request  # noqa: E402
+
+# ── 全局异常处理器 ──
+from fastapi.responses import JSONResponse  # noqa: E402
+@app.exception_handler(Exception)
+async def global_exception_handler(request: Request, exc: Exception):
+    import traceback, sys
+    traceback.print_exc(file=sys.stderr)
+    return JSONResponse(status_code=500, content={"ok": False, "error": "internal_error"})
+
 from fastapi.responses import RedirectResponse, JSONResponse  # noqa: E402
 
 

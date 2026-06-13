@@ -14,7 +14,11 @@ from sqlalchemy.orm import Session
 
 from src.admin.auth_models import AuthUser
 
-SECRET_KEY = os.getenv("JWT_SECRET_KEY", "dev-secret-change-in-production")
+SECRET_KEY = os.getenv("JWT_SECRET_KEY", "")
+if not SECRET_KEY or SECRET_KEY == "dev-secret-change-in-production":
+    import sys
+    print("⚠️  警告: JWT_SECRET_KEY 未设置或使用默认值, 生产环境请设置环境变量 JWT_SECRET_KEY", file=sys.stderr)
+    SECRET_KEY = SECRET_KEY or "dev-secret-change-in-production"
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
