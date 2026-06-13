@@ -57,6 +57,7 @@ app = FastAPI(title="Twitter 用户蒸馏 AI 助手")
 from src.config import config  # noqa: E402
 import time as _time  # noqa: E402
 from fastapi import Request  # noqa: E402
+from fastapi.responses import RedirectResponse, JSONResponse  # noqa: E402
 
 
 # ═══════════════════════════════════════════════════════
@@ -935,7 +936,7 @@ async def revoke_governance_gap(payload: dict):
 async def auth_register(payload: dict):
     """用户注册。"""
     from src.admin.auth import hash_password
-    from src.admin.auth_models import User
+    from src.admin.auth_models import AuthUser
     from src.storage.database import db
     email = str(payload.get("email") or "").strip()
     username = str(payload.get("username") or "").strip()
@@ -946,11 +947,11 @@ async def auth_register(payload: dict):
         return {"ok": False, "error": "密码至少 6 位"}
     session = db.get_session()
     try:
-        if session.query(User).filter(User.email == email).first():
+        if session.query(AuthUser).filter(AuthUser.email == email).first():
             return {"ok": False, "error": "邮箱已注册"}
-        if session.query(User).filter(User.username == username).first():
+        if session.query(AuthUser).filter(AuthUser.username == username).first():
             return {"ok": False, "error": "用户名已存在"}
-        user = User(email=email, username=username, hashed_password=hash_password(password))
+        user = AuthUser(email=email, username=username, hashed_password=hash_password(password))
         session.add(user)
         session.commit()
         return {"ok": True, "user_id": user.id, "username": user.username}
@@ -962,7 +963,7 @@ async def auth_register(payload: dict):
 async def auth_login(payload: dict, response: Response):
     """用户登录。返回 Access Token (Cookie) + Refresh Token (Cookie)。"""
     from src.admin.auth import create_access_token, verify_password
-    from src.admin.auth_models import User
+    from src.admin.auth_models import AuthUser
     from src.admin.refresh_token import create_refresh_family
     from src.storage.database import db
     email = str(payload.get("email") or "").strip()
@@ -971,7 +972,7 @@ async def auth_login(payload: dict, response: Response):
         return {"ok": False, "error": "请填写邮箱和密码"}
     session = db.get_session()
     try:
-        user = session.query(User).filter(User.email == email).first()
+        user = session.query(AuthUser).filter(AuthUser.email == email).first()
         if not user or not verify_password(password, user.hashed_password):
             return {"ok": False, "error": "邮箱或密码错误"}
         if not user.is_active:
@@ -1033,9 +1034,6 @@ async def auth_refresh(request: Request, response: Response):
             max_age=7*86400, secure=False, path="/auth/refresh",
         )
         return {"ok": True}
-    finally:
-        session.close()
-        }
     finally:
         session.close()
 
@@ -1480,7 +1478,8 @@ async def add_price_alert(request: Request, payload: dict):
     config = cfg.load()
     alerts = config.setdefault("price_alerts", [])
     alerts.append({"ticker": ticker, "direction": direction, "price": price})
-    cfg.save_section("price_alerts", alerts)
+    config["price_alerts"] = alerts
+    cfg._save_encrypted(config)
     return {"ok": True, "alerts": alerts}
 
 
@@ -1496,7 +1495,8 @@ async def remove_price_alert(request: Request, payload: dict):
     alerts = config.get("price_alerts", [])
     if 0 <= idx < len(alerts):
         alerts.pop(idx)
-        cfg.save_section("price_alerts", alerts)
+        config["price_alerts"] = alerts
+        cfg._save_encrypted(config)
     return {"ok": True, "alerts": alerts}
 
 
@@ -1614,7 +1614,10 @@ async def add_watchlist(request: Request, payload: dict):
     config = cfg.load()
     wl = config.setdefault("watchlist", [])
     if ticker not in wl: wl.append(ticker)
-    cfg.save_section("watchlist", wl)
+    config["watchlist"] = wl
+    cfg._save_encrypted(config)
+    from src.multi_tenant.config import _cache_set
+    _cache_set(f"config:{tenant_id}", config)
     return {"ok": True, "watchlist": wl}
 
 
@@ -1629,7 +1632,10 @@ async def remove_watchlist(request: Request, payload: dict):
     config = cfg.load()
     wl = config.get("watchlist", [])
     if ticker in wl: wl.remove(ticker)
-    cfg.save_section("watchlist", wl)
+    config["watchlist"] = wl
+    cfg._save_encrypted(config)
+    from src.multi_tenant.config import _cache_set
+    _cache_set(f"config:{tenant_id}", config)
     return {"ok": True, "watchlist": wl}
 
 

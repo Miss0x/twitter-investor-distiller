@@ -21,7 +21,8 @@ role_permission = Table(
 )
 
 
-class User(Base):
+class AuthUser(Base):
+    """User account for multi-tenant auth system (separate from older `users` table)."""
     __tablename__ = "auth_users"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
@@ -44,7 +45,7 @@ class Role(Base):
     name = Column(String, unique=True, nullable=False, index=True)
     description = Column(String, nullable=True)
 
-    users = relationship("User", secondary=user_role, back_populates="roles")
+    users = relationship("AuthUser", secondary=user_role, back_populates="roles")
     permissions = relationship("Permission", secondary=role_permission, back_populates="roles")
 
 

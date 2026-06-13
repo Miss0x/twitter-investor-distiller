@@ -12,7 +12,7 @@ from fastapi.security import OAuth2PasswordBearer
 from jose import JWTError, jwt
 from sqlalchemy.orm import Session
 
-from src.admin.auth_models import User
+from src.admin.auth_models import AuthUser
 
 SECRET_KEY = os.getenv("JWT_SECRET_KEY", "dev-secret-change-in-production")
 ALGORITHM = "HS256"
@@ -38,7 +38,7 @@ def create_access_token(data: dict, expires_delta: timedelta | None = None) -> s
     return jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
 
 
-def get_current_user(request: Request) -> User | None:
+def get_current_user(request: Request) -> AuthUser | None:
     """Try to get current user from JWT. Returns None if no valid token (public mode)."""
     token = request.cookies.get("access_token") or request.headers.get("Authorization", "").removeprefix("Bearer ").strip()
     if not token:
@@ -56,12 +56,12 @@ def get_current_user(request: Request) -> User | None:
 
     session = database.get_session()
     try:
-        return session.query(User).filter(User.id == user_id).first()
+        return session.query(AuthUser).filter(AuthUser.id == user_id).first()
     finally:
         session.close()
 
 
-def require_admin(user: User | None = Depends(get_current_user)) -> User:
+def require_admin(user: AuthUser | None = Depends(get_current_user)) -> AuthUser:
     """Require authenticated admin/superuser."""
     if user is None:
         raise HTTPException(status_code=401, detail="请先登录")
@@ -73,7 +73,7 @@ def require_admin(user: User | None = Depends(get_current_user)) -> User:
 def check_permission(permission_name: str):
     """FastAPI dependency factory: require specific permission."""
 
-    def _check(user: User | None = Depends(get_current_user)) -> User:
+    def _check(user: AuthUser | None = Depends(get_current_user)) -> AuthUser:
         if user is None:
             raise HTTPException(status_code=401, detail="请先登录")
         if user.is_superuser:

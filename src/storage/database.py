@@ -90,7 +90,9 @@ class Database:
         )
 
         Base.metadata.create_all(bind=self.engine)
-        logger.info(f"数据库初始化完成: {self.is_postgres and 'PostgreSQL' or 'SQLite'}")
+        from src.admin.refresh_token import _RTBase
+        _RTBase.metadata.create_all(bind=self.engine, checkfirst=True)
+        logger.info(f"数据库初始化完成: {'PostgreSQL' if self.is_postgres else 'SQLite'}")
 
     def get_session(self) -> Session:
         """
