@@ -69,16 +69,24 @@ app.add_middleware(
 from src.config import config  # noqa: E402
 import time as _time  # noqa: E402
 from fastapi import Request  # noqa: E402
+from fastapi.responses import JSONResponse, RedirectResponse  # noqa: E402
+
+# ── 环境自适应 ──
+def _cookie_secure() -> bool:
+    """开发环境 HTTP 用 False, 生产环境 HTTPS 用 True."""
+    return os.getenv("ENV", "dev") == "production"
+
+
+def _is_valid_email(email: str) -> bool:
+    """基础邮箱格式验证."""
+    return "@" in email and "." in email.split("@")[-1] and len(email) < 256
 
 # ── 全局异常处理器 ──
-from fastapi.responses import JSONResponse  # noqa: E402
 @app.exception_handler(Exception)
 async def global_exception_handler(request: Request, exc: Exception):
     import traceback, sys
     traceback.print_exc(file=sys.stderr)
     return JSONResponse(status_code=500, content={"ok": False, "error": "internal_error"})
-
-from fastapi.responses import RedirectResponse, JSONResponse  # noqa: E402
 
 
 # ═══════════════════════════════════════════════════════
@@ -813,7 +821,7 @@ from fastapi.responses import HTMLResponse  # noqa: E402
 
 # 卡片缓存：{name: ((html, data), expire_timestamp)}
 _card_cache: dict[str, tuple[tuple[str, dict], float]] = {}
-_CACHE_TTL = 2  # 缓存生存时间（秒）
+_CACHE_TTL = 10  # 卡片缓存 TTL (秒), 减少重复 Jinja2 渲染
 
 
 def _get_cached_card_html(name: str) -> tuple[str, dict] | None:
@@ -964,6 +972,8 @@ async def auth_register(payload: dict):
     password = str(payload.get("password") or "")
     if not email or not username or not password:
         return {"ok": False, "error": "请填写邮箱、用户名和密码"}
+    if not _is_valid_email(email):
+        return {"ok": False, "error": "邮箱格式不正确"}
     if len(password) < 6:
         return {"ok": False, "error": "密码至少 6 位"}
     session = db.get_session()
@@ -1002,11 +1012,11 @@ async def auth_login(payload: dict, response: Response):
         raw_refresh, _ = create_refresh_family(session, user.id, days=7)
         response.set_cookie(
             key="access_token", value=access_token, httponly=True, samesite="lax",
-            max_age=1800, secure=False, path="/",
+            max_age=1800, secure=_cookie_secure(), path="/",
         )
         response.set_cookie(
             key="refresh_token", value=raw_refresh, httponly=True, samesite="strict",
-            max_age=7*86400, secure=False, path="/auth/refresh",
+            max_age=7*86400, secure=_cookie_secure(), path="/auth/refresh",
         )
         return {
             "ok": True, "user_id": user.id, "username": user.username,
@@ -1048,11 +1058,11 @@ async def auth_refresh(request: Request, response: Response):
         access_token = create_access_token({"sub": user_id, "email": ""})
         response.set_cookie(
             key="access_token", value=access_token, httponly=True, samesite="lax",
-            max_age=1800, secure=False, path="/",
+            max_age=1800, secure=_cookie_secure(), path="/",
         )
         response.set_cookie(
             key="refresh_token", value=new_raw, httponly=True, samesite="strict",
-            max_age=7*86400, secure=False, path="/auth/refresh",
+            max_age=7*86400, secure=_cookie_secure(), path="/auth/refresh",
         )
         return {"ok": True}
     finally:
