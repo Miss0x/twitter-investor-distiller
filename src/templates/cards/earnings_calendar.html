@@ -1,0 +1,34 @@
+<!-- ════ 财报日历卡片 ════ -->
+<div class="card" data-card="earnings_calendar">
+  <div style="font-size:14px;font-weight:600;margin-bottom:12px;">财报日历</div>
+
+  {% if not tickers %}
+  <div class="text-secondary">请在自选股中添加标的</div>
+  <button class="btn" data-action="add-watchlist-prompt" style="margin-top:8px;font-size:12px;">添加自选股</button>
+  {% else %}
+  <table style="font-size:12px;">
+    <thead><tr><th>标的</th><th>财报日期</th><th>预期 EPS</th><th>操作</th></tr></thead>
+    <tbody>
+    {% for e in earnings %}
+    <tr>
+      <td><b>{{ e.ticker }}</b></td>
+      <td>{{ e.date }}</td>
+      <td>{{ e.expected_eps }}</td>
+      <td>
+        <button class="btn" data-action="earnings-preview" data-ticker="{{ e.ticker }}" style="font-size:10px;padding:2px 8px;">预览</button>
+      </td>
+    </tr>
+    {% endfor %}
+    {% if not earnings %}
+    <tr><td colspan="4" class="text-secondary">近期无重要财报</td></tr>
+    {% endif %}
+    </tbody>
+  </table>
+
+  <!-- 情景分析区 -->
+  <div id="earnings-scenario" style="margin-top:12px;padding:12px;background:var(--bg-tertiary);border-radius:var(--radius);font-size:12px;display:none;">
+    <div style="font-weight:600;margin-bottom:6px;" id="scenario-title"></div>
+    <div id="scenario-content"></div>
+  </div>
+  {% endif %}
+</div>

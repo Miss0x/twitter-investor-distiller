@@ -1461,6 +1461,147 @@ async def get_watchlist(request: Request):
     return cfg.load().get("watchlist", [])
 
 
+# ═══════════════════════════════════════════════════════
+# 价格预警 + Telegram 推送 API
+# ═══════════════════════════════════════════════════════
+
+@app.post("/api/alerts/add")
+async def add_price_alert(request: Request, payload: dict):
+    ticker = str(payload.get("ticker") or "").strip().upper()
+    direction = payload.get("direction", "above")
+    price = float(payload.get("price") or 0)
+    if not ticker or price <= 0:
+        return {"ok": False, "error": "请填写完整的预警信息"}
+    from src.admin.auth import get_current_user
+    from src.multi_tenant.config import PerUserConfig
+    user = get_current_user(request)
+    tenant_id = str(user.id) if user else "default"
+    cfg = PerUserConfig(tenant_id)
+    config = cfg.load()
+    alerts = config.setdefault("price_alerts", [])
+    alerts.append({"ticker": ticker, "direction": direction, "price": price})
+    cfg.save_section("price_alerts", alerts)
+    return {"ok": True, "alerts": alerts}
+
+
+@app.post("/api/alerts/remove")
+async def remove_price_alert(request: Request, payload: dict):
+    idx = int(payload.get("alert_id") or -1)
+    from src.admin.auth import get_current_user
+    from src.multi_tenant.config import PerUserConfig
+    user = get_current_user(request)
+    tenant_id = str(user.id) if user else "default"
+    cfg = PerUserConfig(tenant_id)
+    config = cfg.load()
+    alerts = config.get("price_alerts", [])
+    if 0 <= idx < len(alerts):
+        alerts.pop(idx)
+        cfg.save_section("price_alerts", alerts)
+    return {"ok": True, "alerts": alerts}
+
+
+@app.post("/api/alerts/check")
+async def check_price_alerts():
+    """检查所有用户的价格预警并推送 Telegram。由定时任务调用。"""
+    from pathlib import Path
+    import json as _json
+    results = []
+    tenants_dir = Path("data/tenants")
+    if not tenants_dir.exists():
+        return {"checked": 0, "triggered": 0}
+
+    from src.data.financial import FinancialData
+    fd = FinancialData()
+    triggered_count = 0
+
+    for tenant_dir in tenants_dir.iterdir():
+        cfg_file = tenant_dir / "config.json"
+        if not cfg_file.exists():
+            continue
+        # Only check tenants with Telegram configured
+        try:
+            from src.multi_tenant.config import PerUserConfig
+            tenant_id = tenant_dir.name
+            cfg = PerUserConfig(tenant_id)
+            config = cfg.load()
+            alerts = config.get("price_alerts", [])
+            tg = config.get("telegram", {})
+            bot_token = tg.get("bot_token", "")
+            chat_id = tg.get("chat_id", "")
+            if not alerts or not bot_token:
+                continue
+
+            for alert in alerts:
+                ticker = alert["ticker"]
+                target = float(alert["price"])
+                direction = alert["direction"]
+                price_data = fd.get_price(ticker)
+                if not price_data:
+                    continue
+                current = price_data["price"]
+                triggered = (direction == "above" and current > target) or (direction == "below" and current < target)
+                if triggered:
+                    import requests as _req
+                    emoji = "📈" if direction == "above" else "📉"
+                    msg = f"{emoji} 价格预警触发\n{ticker} 已{direction == 'above' and '涨破' or '跌破'} ${target}\n当前价: ${current}"
+                    try:
+                        _req.post(f"https://api.telegram.org/bot{bot_token}/sendMessage",
+                                  json={"chat_id": chat_id, "text": msg})
+                        triggered_count += 1
+                        results.append({"ticker": ticker, "triggered": True, "price": current})
+                    except Exception:
+                        pass
+        except Exception:
+            continue
+
+    return {"checked": len(list(tenants_dir.iterdir())), "triggered": triggered_count, "results": results}
+
+
+# ═══════════════════════════════════════════════════════
+# 信号质量报告导出 + 团队共享池 API
+# ═══════════════════════════════════════════════════════
+
+@app.get("/api/team/shared-pool")
+async def get_shared_pool(request: Request):
+    """获取团队共享观察池（管理员配置）。"""
+    from pathlib import Path
+    import json as _json
+    pool_file = Path("data/team_shared_pool.json")
+    if not pool_file.exists():
+        return {"observations": []}
+    return _json.loads(pool_file.read_text(encoding="utf-8"))
+
+
+@app.post("/api/team/shared-pool/update")
+async def update_shared_pool(request: Request, payload: dict):
+    """更新团队共享观察池（管理员操作）。"""
+    from pathlib import Path
+    import json as _json
+    observations = payload.get("observations", [])
+    pool_file = Path("data/team_shared_pool.json")
+    pool_file.parent.mkdir(parents=True, exist_ok=True)
+    pool_file.write_text(_json.dumps({"observations": observations}, ensure_ascii=False, indent=2), encoding="utf-8")
+    return {"ok": True, "observations": observations}
+
+
+@app.get("/api/reports/signal-quality")
+async def signal_quality_report(days: int = 7):
+    """导出信号质量报告（JSON 格式）。"""
+    from src.governance.audit import GovernanceAuditor
+    auditor = GovernanceAuditor()
+    metrics = auditor.get_quality_metrics(days=days)
+    return {
+        "period_days": days,
+        "total_signals": metrics.get("total", 0),
+        "passed_gate": metrics.get("passed", 0),
+        "pass_rate": round(metrics.get("passed", 0) / max(metrics.get("total", 1), 1) * 100, 1),
+        "avg_confidence": metrics.get("avg_confidence", 0),
+        "risk_flags": metrics.get("risk_flags", 0),
+        "panel_consensus": metrics.get("consensus", {}),
+        "generated_at": str(__import__("datetime").datetime.now()),
+    }
+
+
 @app.post("/api/watchlist/add")
 async def add_watchlist(request: Request, payload: dict):
     ticker = str(payload.get("ticker") or "").strip().upper()

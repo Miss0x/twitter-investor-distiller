@@ -1,0 +1,28 @@
+<!-- ════ 价格预警卡片 ════ -->
+<div class="card" data-card="price_alerts">
+  <div style="font-size:14px;font-weight:600;margin-bottom:12px;">价格预警</div>
+
+  <!-- 添加预警 -->
+  <div style="display:flex;gap:8px;margin-bottom:12px;">
+    <input id="alert-ticker" placeholder="代码 NVDA" style="width:80px;padding:6px 8px;border:1px solid var(--border);border-radius:4px;font-size:12px;">
+    <select id="alert-direction" style="padding:6px 8px;border:1px solid var(--border);border-radius:4px;font-size:12px;">
+      <option value="above">涨破</option>
+      <option value="below">跌破</option>
+    </select>
+    <input id="alert-price" type="number" step="0.01" placeholder="价格" style="width:80px;padding:6px 8px;border:1px solid var(--border);border-radius:4px;font-size:12px;">
+    <button class="btn btn-primary" data-action="price-alert-add" style="font-size:12px;">添加</button>
+  </div>
+
+  <!-- 活跃预警列表 -->
+  <div id="alerts-list" style="font-size:12px;">
+    {% for alert in alerts %}
+    <div class="flex-between" style="padding:6px 0;border-bottom:1px solid var(--border);">
+      <span><b>{{ alert.ticker }}</b> {{ '涨破' if alert.direction == 'above' else '跌破' }} ${{ alert.price }}</span>
+      <button class="btn btn-danger" data-action="price-alert-remove" data-alert-id="{{ loop.index0 }}" style="font-size:10px;padding:2px 8px;">删除</button>
+    </div>
+    {% endfor %}
+    {% if not alerts %}
+    <span class="text-secondary">暂无预警，添加一个试试</span>
+    {% endif %}
+  </div>
+</div>

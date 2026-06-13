@@ -5,10 +5,10 @@ from pathlib import Path
 def test_card_config_uses_investment_signal_information_architecture():
     from src.cards.cards_config import CARD_CONFIG, CARD_DISPLAY
 
-    assert len(CARD_CONFIG) == 26
+    assert len(CARD_CONFIG) == 28
     assert Counter(value[0] for value in CARD_CONFIG.values()) == {
         "signals": 7,
-        "decisions": 6,
+        "decisions": 8,
         "research": 4,
         "data": 5,
         "settings": 4,

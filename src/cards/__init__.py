@@ -127,3 +127,4 @@ from . import pipeline_execute  # noqa: E402, F401  — 流水线执行面板 + 
 from . import governance_cards  # noqa: E402, F401  — 信号治理卡片组（质量门禁/风险提示/多角色评审/发布审核）
 from . import config_center_card  # noqa: E402, F401  — 用户配置中心（LLM / Twitter / Telegram / 观察对象）
 from . import valuation_card  # noqa: E402, F401  — 估值工具（DCF/Comps/尽调清单）
+from . import financial_cards  # noqa: E402, F401  — 财报日历 + 价格预警
