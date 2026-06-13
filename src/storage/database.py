@@ -49,55 +49,48 @@ class Database:
         self.engine = None  # 引擎实例，在 init_db() 中赋值
         self.SessionLocal = None  # 会话工厂，在 init_db() 中赋值
 
+    @property
+    def is_postgres(self) -> bool:
+        return self.database_url.startswith("postgresql")
+
     def init_db(self):
         """
         初始化数据库引擎和会话工厂，并创建所有表。
 
-        执行流程：
-          1. SQLite 模式下自动创建数据库文件所在目录
-          2. 创建 SQLAlchemy 引擎（配置连接池和线程安全参数）
-          3. SQLite 模式下启用 WAL 日志模式
-          4. 创建会话工厂
-          5. 根据 ORM 模型自动建表（不存在则创建，已存在则跳过）
-
-        Raises:
-            RuntimeError: 若数据库连接失败则向上抛出异常
+        Supports: SQLite (default) and PostgreSQL (via DATABASE_URL env var).
         """
-        # 确保 SQLite 数据库文件所在目录存在
-        if self.database_url.startswith("sqlite"):
+        is_sqlite = self.database_url.startswith("sqlite")
+        is_postgres = self.database_url.startswith("postgresql")
+
+        if is_sqlite:
             db_path = self.database_url.replace("sqlite:///", "")
             Path(db_path).parent.mkdir(parents=True, exist_ok=True)
 
-        # 创建数据库引擎
-        # - echo=False: 不打印 SQL 调试日志
-        # - pool_pre_ping=True: 每次从连接池取出连接前先 ping 验证有效性
-        # - check_same_thread=False: SQLite 专属，允许多线程使用同一连接
-        self.engine = create_engine(
-            self.database_url,
-            echo=False,
-            pool_pre_ping=True,
-            connect_args={"check_same_thread": False} if self.database_url.startswith("sqlite") else {},
-        )
+        engine_kwargs = {
+            "echo": False,
+            "pool_pre_ping": True,
+        }
+        if is_sqlite:
+            engine_kwargs["connect_args"] = {"check_same_thread": False}
+        elif is_postgres:
+            engine_kwargs["pool_size"] = int(os.getenv("DB_POOL_SIZE", "10"))
+            engine_kwargs["max_overflow"] = int(os.getenv("DB_MAX_OVERFLOW", "20"))
+            engine_kwargs["pool_recycle"] = 3600
 
-        # SQLite WAL 模式：将写操作写入单独的 WAL 文件，允许读操作与写操作并发执行
-        # 相比默认的 DELETE 模式，显著提升并发读写性能
-        if self.database_url.startswith("sqlite"):
+        self.engine = create_engine(self.database_url, **engine_kwargs)
+
+        if is_sqlite:
             with self.engine.connect() as conn:
                 conn.execute(text("PRAGMA journal_mode=WAL"))
+                conn.execute(text("PRAGMA foreign_keys=ON"))
                 conn.commit()
 
-        # 创建线程安全的会话工厂
-        # - autocommit=False: 禁止自动提交，由应用显式控制事务
-        # - autoflush=False: 禁止自动 flush，避免在查询前意外触发写操作
         self.SessionLocal = sessionmaker(
-            autocommit=False,
-            autoflush=False,
-            bind=self.engine,
+            autocommit=False, autoflush=False, bind=self.engine,
         )
 
-        # 根据 ORM 模型自动创建所有未存在的表
         Base.metadata.create_all(bind=self.engine)
-        logger.info(f"数据库初始化完成: {self.database_url}")
+        logger.info(f"数据库初始化完成: {self.is_postgres and 'PostgreSQL' or 'SQLite'}")
 
     def get_session(self) -> Session:
         """
