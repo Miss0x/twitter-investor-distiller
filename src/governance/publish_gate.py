@@ -19,6 +19,7 @@ def run_publish_gate(
     risk: dict,
     data_gaps: list[DataGap],
     acknowledged_gaps: list[AcknowledgedGap],
+    now=None,
 ) -> dict:
     """Aggregate all gate results into a final publish decision.
 
@@ -48,7 +49,7 @@ def run_publish_gate(
         warnings += 1
 
     # 2. Unacknowledged required data gaps
-    if has_blocking_gaps(data_gaps, acknowledged_gaps):
+    if has_blocking_gaps(data_gaps, acknowledged_gaps, now=now):
         issues.append(
             {
                 "code": "blocking_data_gaps",

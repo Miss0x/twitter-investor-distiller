@@ -8,7 +8,8 @@
   3. RolePickerCard — 角色代入选股面板（选择分析师并生成投资方案）
   4. PortfolioCard  — 持股顾问面板（输入持仓获取建议）
 """
-import json, time
+import json
+import time
 from pathlib import Path
 from collections import defaultdict
 from src.cards.base import Card
@@ -56,7 +57,8 @@ class DaemonCard(Card):
             db.init_db(); s = db.get_session()
             cnt = s.query(PipelineTask).filter(PipelineTask.task_type == "analyze", PipelineTask.created_at >= time.strftime("%Y-%m-%d")).count()
             s.close()
-        except: cnt = 0
+        except Exception:
+            cnt = 0
         return {"running": running, "last_id": last_id, "today": cnt, "budget": 20}
 
 

@@ -37,10 +37,18 @@ def run_governance_for_candidate(
     acknowledged_gaps: list[AcknowledgedGap] | None = None,
     generate_report: bool = False,
     extra_data_gaps: list | None = None,
+    now: datetime | None = None,
 ) -> GovernanceRunResult:
-    """Run the full deterministic governance chain for one SignalCandidate."""
+    """Run the full deterministic governance chain for one SignalCandidate.
+
+    Args:
+        now: Optional reference time used for ack-active checks. Defaults to
+            ``datetime.now(timezone.utc)``. Tests should pass a fixed ``now``
+            so that acknowledgements are evaluated deterministically.
+    """
     repo = repo or GovernanceRepository()
     acknowledged_gaps = acknowledged_gaps or []
+    now = now or datetime.now(timezone.utc)
 
     run_id = f"{datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')}-{candidate.signal_id}"
     steps: list[dict] = []
@@ -78,6 +86,7 @@ def run_governance_for_candidate(
             risk=risk,
             data_gaps=data_gaps,
             acknowledged_gaps=acknowledged_gaps,
+            now=now,
         )
 
         publish_path = repo.save_artifact("publish", candidate.signal_id, publish)

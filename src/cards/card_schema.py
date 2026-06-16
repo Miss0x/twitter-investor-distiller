@@ -19,7 +19,6 @@
 from __future__ import annotations
 
 from dataclasses import MISSING, dataclass, fields, is_dataclass
-from typing import Any, get_type_hints
 import logging
 
 _log = logging.getLogger(__name__)
@@ -166,7 +165,6 @@ def validate_card_data(name: str, data: dict) -> tuple[dict, str | None]:
     if not is_dataclass(schema_cls):
         return data, None
 
-    hints = get_type_hints(schema_cls)
     warnings = []
 
     for f in fields(schema_cls):

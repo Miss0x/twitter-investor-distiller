@@ -39,7 +39,7 @@ docker-compose -f docker-compose.prod.yml up -d
 
 | 文档 | 说明 |
 |------|------|
-| [10 用户场景](docs/product/10-user-scenarios-code-mapping.md) | 完整用户旅程 + 代码映射 |
+| [10 用户场景](docs/product/10-user-scenarios.md) | 完整用户旅程 + 代码映射 |
 | [UZI-Skill 对比](docs/uzi-comparison.md) | 与对标项目 22 维 × 17 模型的终局对标 |
 | [架构审计](docs/architecture-audit.md) | 安全/性能/并发/优化建议 |
 | [Phase 18 迁移](docs/phase18-migration-guide.md) | PostgreSQL + Redis + Celery 迁移指南 |

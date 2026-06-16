@@ -18,7 +18,6 @@ All methods return structured data suitable for LLM enrichment or card rendering
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import Any
 
 
 @dataclass
@@ -154,7 +153,7 @@ class ValuationTools:
             result.pb_current = info.get("pb_ratio")
 
         # Get peer metrics
-        peer_pes, peer_pbs, peer_evs = [], [], []
+        peer_pes, peer_pbs = [], []
         for peer in peers[:5]:
             pi = fd.get_fundamentals(peer)
             if pi:
@@ -230,6 +229,9 @@ def _compute_dcf(result: DCFResult) -> DCFResult:
     result.intrinsic_value = round(per_share, 2)
     result.upside_pct = round((per_share / result.current_price - 1) * 100, 1) if result.current_price else None
     return result
+
+
+def _estimate_fcf(info: dict) -> float | None:
     """Estimate free cash flow from available fundamentals."""
     # Approximation: FCF ≈ Operating Cash Flow - CapEx
     # When only net income available, use rough proxy
@@ -303,9 +305,7 @@ class DealsTools:
     def acquisition_summary(acquirer: str, target: str) -> AcquisitionSummary:
         """Generate M&A deal analysis skeleton."""
         from src.data.financial import FinancialData
-        fd = FinancialData()
-        a_info = fd.get_fundamentals(acquirer) or {}
-        t_info = fd.get_fundamentals(target) or {}
+        FinancialData()  # 触发模块初始化
 
         return AcquisitionSummary(
             acquirer=acquirer,

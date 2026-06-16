@@ -90,6 +90,7 @@ def acknowledge_gap_for_signal(
         repo=repo,
         acknowledged_gaps=existing,
         extra_data_gaps=package.data_gaps,
+        now=now,
     )
     if result.error:
         raise ValueError("操作没有保存成功")
@@ -117,6 +118,7 @@ def revoke_gap_acknowledgement(
         repo=repo,
         acknowledged_gaps=remaining,
         extra_data_gaps=package.data_gaps,
+        now=now,
     )
     if result.error:
         raise ValueError("操作没有保存成功")

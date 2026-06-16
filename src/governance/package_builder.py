@@ -11,7 +11,6 @@ from datetime import datetime, timezone
 from src.governance.models import (
     AcknowledgedGap,
     DataGap,
-    EvidenceRef,
     SignalCandidate,
     SignalPackage,
 )

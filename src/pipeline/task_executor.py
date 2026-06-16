@@ -113,7 +113,6 @@ def _clean_analysis() -> dict:
     Returns:
         dict: {"ok": True, "cleaned": 清洗的记录数}
     """
-    import re as _re
     alias = _load_alias()
     cleaned = 0
     # 按文件名排序，保证处理顺序可预测
@@ -417,7 +416,7 @@ def _enrich_price_context(stocks: list[str], created_at: str) -> list[dict]:
         try:
             from datetime import datetime
             tweet_ts = int(datetime.strptime(created_at[:19], "%Y-%m-%d %H:%M:%S").timestamp())
-        except:
+        except Exception:
             pass
 
     for ticker in stocks[:10]:  # 最多处理 10 只股票，防止上下文过长
@@ -510,8 +509,7 @@ def _analyze_tweet(payload: dict) -> dict:
     Returns:
         dict: {"ok": True} 或 {"error": "错误详情"}
     """
-    from collections import Counter
-    import csv, re
+    import re
 
     from src.ai.llm_client import chat_vision
     from src.storage.models import Media

@@ -90,7 +90,7 @@ def rotate_refresh_token(session: Session, raw_old_refresh: str) -> tuple[str, s
 def revoke_user_tokens(session: Session, user_id: int) -> int:
     count = session.query(RefreshToken).filter(
         RefreshToken.user_id == user_id,
-        RefreshToken.used == False,
+        RefreshToken.used == False,  # noqa: E712
         RefreshToken.expires_at > _utcnow(),
     ).update({"used": True})
     session.commit()

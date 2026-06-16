@@ -96,7 +96,6 @@ def run_debate(panel_review: dict) -> dict:
     # ── Multi-round rebuttal ──
     rounds = []
     round_num = 1
-    max_rounds = 3
 
     if bull_count > 0 and bear_count > 0:
         # Round 1: bear challenges bull's evidence

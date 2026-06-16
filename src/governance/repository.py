@@ -8,9 +8,8 @@ layer decoupled from models and gate logic.
 from __future__ import annotations
 
 import json
-import os
 from dataclasses import asdict
-from datetime import date, datetime, timezone
+from datetime import date, datetime
 from pathlib import Path
 
 from src.governance.models import AcknowledgedGap, DataGap, EvidenceRef, SignalCandidate, SignalPackage

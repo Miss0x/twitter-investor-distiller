@@ -7,7 +7,6 @@ with configurable trigger words. High-risk signals block strong push (Telegram).
 
 from __future__ import annotations
 
-from typing import Literal
 
 from src.governance.models import RiskLevel, SignalCandidate
 

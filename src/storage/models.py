@@ -13,9 +13,8 @@
 表之间通过 ForeignKey 建立关联，配合 relationship 实现 ORM 级联操作。
 """
 from datetime import datetime
-from enum import StrEnum
 
-from sqlalchemy import Boolean, Column, DateTime, Float, ForeignKey, Index, Integer, JSON, String, Text
+from sqlalchemy import Boolean, Column, DateTime, ForeignKey, Index, Integer, JSON, String, Text
 from sqlalchemy.orm import declarative_base, relationship
 
 # SQLAlchemy 声明式基类，所有 ORM 模型必须继承自它

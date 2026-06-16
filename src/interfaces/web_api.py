@@ -16,17 +16,16 @@ Twitter 用户蒸馏 AI 助手的 Web 服务入口，提供服务:
 from __future__ import annotations
 
 import json
+import re
 from datetime import datetime
 from pathlib import Path
-from typing import Literal
 
 from fastapi import FastAPI, HTTPException, Request, Response
-from pydantic import BaseModel, Field
-from sqlalchemy import text
+from pydantic import BaseModel
 
 from src.storage.database import db
 from src.storage.models import PipelineTask
-from src.pipeline.task_executor import execute_tasks, is_running
+from src.pipeline.task_executor import execute_tasks, get_progress, is_running
 
 # ── ChatEngine 单例 ──
 # 避免每次请求都重新初始化 LLM 客户端连接；同时避免 Dashboard 启动依赖 ChromaDB。
@@ -68,7 +67,6 @@ app.add_middleware(
 
 from src.config import config  # noqa: E402
 import time as _time  # noqa: E402
-from fastapi import Request  # noqa: E402
 from fastapi.responses import JSONResponse, RedirectResponse  # noqa: E402
 
 # ── 环境自适应 ──
@@ -84,7 +82,8 @@ def _is_valid_email(email: str) -> bool:
 # ── 全局异常处理器 ──
 @app.exception_handler(Exception)
 async def global_exception_handler(request: Request, exc: Exception):
-    import traceback, sys
+    import traceback
+    import sys
     traceback.print_exc(file=sys.stderr)
     return JSONResponse(status_code=500, content={"ok": False, "error": "internal_error"})
 
@@ -168,6 +167,25 @@ class ChatResponse(BaseModel):
     answer: str
 
 
+class JobResponse(BaseModel):
+    """任务详细信息响应模型。
+
+    Attributes:
+        id: 任务 ID
+        task_type: 任务类型
+        status: 任务状态
+        payload: 任务参数
+        error_msg: 错误消息（无则为空）
+        created_at: 创建时间
+    """
+    id: int
+    task_type: str
+    status: str
+    payload: dict
+    error_msg: str | None = None
+    created_at: str | None = None
+
+
 class ActiveJobResponse(BaseModel):
     """活跃任务响应模型。
 
@@ -225,7 +243,6 @@ def list_tasks(task_type: str | None = None, status: str | None = None,
         if status:
             q = q.filter(PipelineTask.status == status)
 
-        total = q.count()
         tasks = q.order_by(PipelineTask.id.desc()).limit(limit).offset(offset).all()
 
         return {
@@ -503,9 +520,8 @@ def _is_known_stock_ticker(ticker: str) -> bool:
     Returns:
         True = 该代码在股票别名表中且已映射到有效目标
     """
-    import re as _re
     # 必须是 1-5 位大写字母
-    if not _re.match(r"^[A-Z]{1,5}$", ticker):
+    if not re.match(r"^[A-Z]{1,5}$", ticker):
         return False
     ap = Path("data/stock_alias.csv")
     if not ap.exists():
@@ -594,9 +610,8 @@ def seed_tasks() -> dict:
         # ── 辅助函数：从文件名解析用户名和月份 ──
         def _parse_stem(stem: str) -> tuple[str, str]:
             """从文件名 stem 提取 (username, month_label)"""
-            import re as _re
             # 格式: username_YYYY-MM_...
-            m = _re.match(r"(.+?)_(\d{4}-\d{2})_.*", stem)
+            m = re.match(r"(.+?)_(\d{4}-\d{2})_.*", stem)
             if m:
                 return m.group(1), m.group(2)
             parts = stem.split("_")
@@ -626,7 +641,7 @@ def seed_tasks() -> dict:
         # 遍历所有用户的所有推文，生成 filter 任务
         for u in session.query(DbUser).all():
             for tw in session.query(Tweet).filter(
-                Tweet.user_id == u.id, Tweet.text != None, Tweet.text != ""
+                Tweet.user_id == u.id, Tweet.text.isnot(None), Tweet.text != ""
             ).order_by(Tweet.id).all():
                 if tw.id not in filtered_ids and tw.tweet_id not in filtered_ids:
                     t = PipelineTask(task_type="filter", status="pending",
@@ -755,7 +770,6 @@ def seed_tasks() -> dict:
 
         # ══ 第五步: 用户画像生成任务 ══
         from datetime import datetime, timedelta
-        import re as _re
 
         # 预设时间窗口
         windows = {
@@ -1045,7 +1059,7 @@ async def auth_refresh(request: Request, response: Response):
         from src.admin.refresh_token import _hash_token
         from src.admin.refresh_token import RefreshToken
         record = session.query(RefreshToken).filter(
-            RefreshToken.used == False,
+            RefreshToken.used == False,  # noqa: E712
             RefreshToken.family.in_(
                 session.query(RefreshToken.family).filter(
                     RefreshToken.token_hash == _hash_token(raw_refresh)
@@ -1245,7 +1259,7 @@ async def activity_tracking_middleware(request: Request, call_next):
 
 
 @app.post("/cards/{name}/action")
-async def card_action(name: str, payload: dict = None):
+async def card_action(name: str, request: Request, payload: dict = None):
     """处理卡片交互动作（统一分发入口）。
 
     请求格式:
@@ -1270,7 +1284,8 @@ async def card_action(name: str, payload: dict = None):
     # ── 守护进程控制 ──
     if name == "daemon" and payload and payload.get("action") == "toggle":
         try:
-            import subprocess, sys
+            import subprocess
+            import sys
             from src.cards import get_card
             card = get_card("daemon")
             proc = getattr(card, "_proc", None)
@@ -1435,7 +1450,6 @@ async def serve_timeline(path: str):
         HTTPException(403): 路径不在允许范围内
         HTTPException(404): 文件不存在或不是 .html
     """
-    import os as _os
     fp = (Path("data/timeline") / path).resolve()
     allowed = Path("data/timeline").resolve()
 
@@ -1535,7 +1549,6 @@ async def remove_price_alert(request: Request, payload: dict):
 async def check_price_alerts():
     """检查所有用户的价格预警并推送 Telegram。由定时任务调用。"""
     from pathlib import Path
-    import json as _json
     results = []
     tenants_dir = Path("data/tenants")
     if not tenants_dir.exists():

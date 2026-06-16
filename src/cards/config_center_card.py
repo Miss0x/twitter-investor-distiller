@@ -18,8 +18,6 @@ class ConfigCenterCard(Card):
         try:
             # 优先使用多用户加密配置，回退到旧全局配置
             from src.admin.auth import get_current_user
-            from fastapi import Request
-            import contextvars
             req = _current_request.get()
             tenant_id = "default"
             if req is not None:

@@ -47,12 +47,8 @@ twitterapi.io 使用 cursor 实现分页：
 """
 from __future__ import annotations
 
-import json
-import time
 import requests
 from datetime import datetime
-from pathlib import Path
-from typing import Any
 
 from src.storage.database import db
 from src.storage.models import Tweet, User

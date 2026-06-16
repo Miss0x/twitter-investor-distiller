@@ -102,7 +102,8 @@ class PipelineExecuteCard(Card):
                             alias_stats["skipped"] += 1
                         else:
                             alias_stats["pending"] += 1
-            except: pass
+            except Exception:
+                pass
 
             return {
                 "groups": grouped,

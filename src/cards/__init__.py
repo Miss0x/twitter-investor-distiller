@@ -24,7 +24,7 @@ get_card(name)          按名称查找单个卡片
 from __future__ import annotations
 
 from .base import Card
-from .cards_config import CARD_CONFIG, apply_card_config
+from .cards_config import CARD_CONFIG, apply_card_config  # noqa: F401  (re-export)
 
 # ── 全局卡片注册表 ──
 # 存储所有已注册卡片实例的列表，Dashboard 遍历此列表进行路由挂载和页面渲染

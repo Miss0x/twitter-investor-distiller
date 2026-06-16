@@ -6,7 +6,9 @@
   1. FetchControlCard — 手动推文拉取控制面板（选择用户 + 时间范围）
   2. PortraitCard     — 分析师画像浏览面板（列出已生成的画像文件）
 """
-import json, re, html
+import json
+import re
+import html
 from pathlib import Path
 from src.cards.base import Card
 from src.cards import register

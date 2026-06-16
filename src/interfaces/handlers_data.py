@@ -191,7 +191,6 @@ def _handle_portrait_generate(payload: dict) -> dict:
         操作结果字典，ok=True 时包含 task_id
     """
     import json as _json
-    from pathlib import Path as _Path
     from src.storage.database import db
     from src.storage.models import PipelineTask
 

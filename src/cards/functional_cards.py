@@ -8,9 +8,10 @@
   3. ScriptRunnerCard  — 后台分析脚本触发器（信号/清洗/网络等）
   4. TimelineCard      — 情绪时间线图表浏览
 """
-import json, csv, time, html
+import json
+import csv
+import html
 from pathlib import Path
-from collections import Counter
 from src.cards.base import Card
 from src.cards import register
 
@@ -234,7 +235,6 @@ class CryptoCard(Card):
                 "total_coins": int       # 有价格数据的币种总数
             }
         """
-        import re as _re
         fp = Path("data/crypto_prices.json")
         prices = {}
         if fp.exists():
@@ -262,8 +262,10 @@ class CryptoCard(Card):
         except Exception:
             pass
         finally:
-            try: conn.close()
-            except: pass
+            try:
+                conn.close()
+            except Exception:
+                pass
 
         return {"coins": latest, "mentions": mentions, "total_coins": len(latest)}
 

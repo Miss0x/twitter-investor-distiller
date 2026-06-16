@@ -33,7 +33,7 @@ Dashboard 由多个独立"卡片"组成，每张卡片负责一个功能模块�
 """
 from __future__ import annotations
 
-from abc import ABC, abstractmethod
+from abc import ABC
 from pathlib import Path
 from typing import Any
 
