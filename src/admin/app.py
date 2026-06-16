@@ -416,7 +416,8 @@ async def toggle_user(request: Request, payload: dict):
     session = db.get_session()
     try:
         u = session.query(User).filter(User.id == uid).first()
-        if not u: return {"ok": False}
+        if not u:
+            return {"ok": False}
         u.is_active = not u.is_active
         session.commit()
         return {"ok": True}

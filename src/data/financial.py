@@ -52,7 +52,12 @@ class FinancialData:
         cache_file.write_text(json.dumps(data, ensure_ascii=False, default=str), encoding="utf-8")
 
     def get_price(self, symbol: str, market: str = "US") -> dict | None:
-        """Get latest price and 52-week range for a ticker."""
+        """Get latest price and 52-week range for a ticker.
+
+        Args:
+            symbol: 股票代码（必填）。
+            market: 市场标识（保留以兼容调用方签名，当前未在内部使用）。
+        """
         return self._try_yfinance_price(symbol)
 
     def get_fundamentals(self, symbol: str) -> dict | None:

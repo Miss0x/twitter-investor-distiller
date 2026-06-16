@@ -40,6 +40,15 @@ def apply_role_pre_filters(
 ) -> RolePreFilterResult:
     """评委前置过滤 — 三层评估。
 
+    Args:
+        persona: 角色人格配置（必填）。
+        signal_ticker: 当前评估的股票代码（保留为公共 API 契约参数，
+            内部预过滤仅依赖 persona 配置和持仓状态）。
+        signal_sector: 信号所属行业（可选，预留扩展点）。
+        signal_market: 信号所属市场（可选，预留扩展点）。
+    """
+    """评委前置过滤 — 三层评估。
+
     触发时机：panel_review 在每个角色开始分析信号之前调用。
 
     三层评估逻辑：

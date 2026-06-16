@@ -46,6 +46,8 @@ import urllib.request
 import urllib.error
 from pathlib import Path
 
+import yaml as _yaml
+
 from src.storage.database import db
 from src.storage.models import PipelineTask
 
@@ -277,7 +279,6 @@ def execute_tasks(task_ids: list[int]) -> None:
 # 配置加载
 # ═══════════════════════════════════════════════════════════════════════
 
-import yaml as _yaml
 with open(Path(__file__).parent.parent.parent / "config" / "pipeline.yaml", encoding="utf-8") as _f:
     _PIPELINE_CFG = _yaml.safe_load(_f) or {}
 POLYGON_KEY = _PIPELINE_CFG.get("api", {}).get("polygon_key", "")  # Polygon.io API 密钥
@@ -519,7 +520,7 @@ def _analyze_tweet(payload: dict) -> dict:
     img_paths = []
     try:
         for m in session.query(Media).filter(
-            Media.tweet_id == payload.get("tweet_id"), Media.downloaded == True
+            Media.tweet_id == payload.get("tweet_id"), Media.downloaded.is_(True)
         ).all():
             if m.local_path:
                 img_paths.append(m.local_path)

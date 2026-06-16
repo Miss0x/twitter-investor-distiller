@@ -170,11 +170,13 @@ class PipelineExecuteCard(Card):
                 if afp.exists():
                     reader = csv.reader(afp.read_text(encoding="utf-8").splitlines())
                     for row in reader:
-                        if not row or not row[0] or row[0].startswith("#"): continue
+                        if not row or not row[0] or row[0].startswith("#"):
+                            continue
                         a = row[0].strip()
                         tkr = row[1].strip() if len(row) >= 2 else ""
                         nts = row[2].strip() if len(row) >= 3 else ""
-                        if a: aliases_list.append({"alias": a, "ticker": tkr, "type": nts})
+                        if a:
+                            aliases_list.append({"alias": a, "ticker": tkr, "type": nts})
                 confirmed = [a for a in aliases_list if a["ticker"]]
                 pending = [a for a in aliases_list if not a["ticker"] and not a.get("type","").startswith("SKIP")]
                 skipped = [a for a in aliases_list if not a["ticker"] and a.get("type","").startswith("SKIP")]

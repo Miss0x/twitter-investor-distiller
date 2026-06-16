@@ -54,7 +54,8 @@ class DaemonCard(Card):
         try:
             from src.storage.database import db
             from src.storage.models import PipelineTask
-            db.init_db(); s = db.get_session()
+            db.init_db()
+            s = db.get_session()
             cnt = s.query(PipelineTask).filter(PipelineTask.task_type == "analyze", PipelineTask.created_at >= time.strftime("%Y-%m-%d")).count()
             s.close()
         except Exception:
@@ -132,7 +133,8 @@ class RolePickerCard(Card):
         按规模降序排列。用于角色代入选股时的股票池来源。
         """
         fp = Path("data/sector_map.json")
-        if not fp.exists(): return {}
+        if not fp.exists():
+            return {}
         raw = json.loads(fp.read_text(encoding="utf-8"))
         groups: dict = defaultdict(list)
         for ticker, v in raw.items():
@@ -197,7 +199,8 @@ class PortfolioCard(Card):
             u = fp.stem.replace("_accuracy", "")
             d = json.loads(fp.read_text(encoding="utf-8"))
             wr = d.get("returns_30d", {}).get("win_rate")
-            if wr is not None: acc[u] = round(wr * 100)
+            if wr is not None:
+                acc[u] = round(wr * 100)
         return {"analysts": acc}
 
     def _render_html(self, data: dict) -> str:

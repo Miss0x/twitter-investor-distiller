@@ -26,6 +26,9 @@ from pydantic import BaseModel
 from src.storage.database import db
 from src.storage.models import PipelineTask
 from src.pipeline.task_executor import execute_tasks, get_progress, is_running
+from src.interfaces.handlers_insights import _handle_role_picker, _handle_portfolio_analysis
+from src.interfaces.handlers_exec import _handle_fetch_control, _handle_pipeline_action, _handle_script_run
+from src.interfaces.handlers_data import _handle_asset_alias, _handle_portrait_generate, _handle_user_manage
 
 # ── ChatEngine 单例 ──
 # 避免每次请求都重新初始化 LLM 客户端连接；同时避免 Dashboard 启动依赖 ChromaDB。
@@ -1386,17 +1389,6 @@ async def card_action(name: str, request: Request, payload: dict = None):
 
 
 # ═══════════════════════════════════════════════════════
-# 跨模块 Handler 导入
-# ═══════════════════════════════════════════════════════
-# 这些函数被上面的 card_action 分发器调用，
-# 单独提取到独立文件以保持 web_api.py 简洁
-
-from src.interfaces.handlers_insights import _handle_role_picker, _handle_portfolio_analysis
-from src.interfaces.handlers_exec import _handle_fetch_control, _handle_pipeline_action, _handle_script_run
-from src.interfaces.handlers_data import _handle_asset_alias, _handle_portrait_generate, _handle_user_manage
-
-
-# ═══════════════════════════════════════════════════════
 # 静态页面路由
 # ═══════════════════════════════════════════════════════
 
@@ -1649,7 +1641,8 @@ async def signal_quality_report(days: int = 7):
 @app.post("/api/watchlist/add")
 async def add_watchlist(request: Request, payload: dict):
     ticker = str(payload.get("ticker") or "").strip().upper()
-    if not ticker: return {"ok": False, "error": "请输入股票代码"}
+    if not ticker:
+        return {"ok": False, "error": "请输入股票代码"}
     from src.admin.auth import get_current_user
     from src.multi_tenant.config import PerUserConfig
     user = get_current_user(request)
@@ -1657,7 +1650,8 @@ async def add_watchlist(request: Request, payload: dict):
     cfg = PerUserConfig(tenant_id)
     config = cfg.load()
     wl = config.setdefault("watchlist", [])
-    if ticker not in wl: wl.append(ticker)
+    if ticker not in wl:
+        wl.append(ticker)
     config["watchlist"] = wl
     cfg._save_encrypted(config)
     from src.multi_tenant.config import _cache_set
@@ -1675,7 +1669,8 @@ async def remove_watchlist(request: Request, payload: dict):
     cfg = PerUserConfig(tenant_id)
     config = cfg.load()
     wl = config.get("watchlist", [])
-    if ticker in wl: wl.remove(ticker)
+    if ticker in wl:
+        wl.remove(ticker)
     config["watchlist"] = wl
     cfg._save_encrypted(config)
     from src.multi_tenant.config import _cache_set

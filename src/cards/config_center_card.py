@@ -43,5 +43,7 @@ class ConfigCenterCard(Card):
 
 
 # Thread-safe request context for card rendering
-import contextvars
+# E402: 此处 import 必须在 @register 装饰器执行后导入，
+# 避免循环依赖（cards → contextvars → ... → cards）
+import contextvars  # noqa: E402
 _current_request: contextvars.ContextVar = contextvars.ContextVar("current_request", default=None)

@@ -19,7 +19,8 @@ class EarningsCalendarCard(Card):
             tenant_id = "default"
             if req is not None:
                 user = get_current_user(req)
-                if user: tenant_id = str(user.id)
+                if user:
+                    tenant_id = str(user.id)
             cfg = PerUserConfig(tenant_id)
             watchlist = cfg.load().get("watchlist", [])
             if not watchlist:
@@ -60,7 +61,8 @@ class PriceAlertsCard(Card):
             tenant_id = "default"
             if req is not None:
                 user = get_current_user(req)
-                if user: tenant_id = str(user.id)
+                if user:
+                    tenant_id = str(user.id)
             cfg = PerUserConfig(tenant_id)
             return {"alerts": cfg.load().get("price_alerts", [])}
         except Exception:

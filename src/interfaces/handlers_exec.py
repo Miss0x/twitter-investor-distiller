@@ -107,8 +107,6 @@ def _handle_pipeline_action(payload: dict) -> dict:
             from src.pipeline.task_executor import execute_tasks
             result = execute_tasks(action, limit=20)  # 每次最多执行 20 条
             return {"ok": True, "result": str(result)}
-
-        return {"ok": True}
     except Exception as e:
         return {"ok": False, "error": str(e)}
 
