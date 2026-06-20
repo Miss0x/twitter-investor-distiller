@@ -19,7 +19,7 @@ services:
     environment:
       POSTGRES_DB: twitter_distiller
       POSTGRES_USER: distiller
-      POSTGRES_PASSWORD: ${DB_PASSWORD:-change-me}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?DB_PASSWORD 必须设置}
     volumes:
       - pgdata:/var/lib/postgresql/data
     ports:
@@ -59,13 +59,13 @@ services:
     env_file:
       - .env
     environment:
-      - DATABASE_URL=postgresql://distiller:${DB_PASSWORD:-change-me}@postgres:5432/twitter_distiller
+      - DATABASE_URL=postgresql://distiller:${DB_PASSWORD:?DB_PASSWORD 必须设置}@postgres:5432/twitter_distiller
       - REDIS_URL=redis://redis:6379/0
       - DB_POOL_SIZE=10
       - DB_MAX_OVERFLOW=20
       - ENV=${ENV:-production}
-      - ENCRYPTION_KEY=${ENCRYPTION_KEY:-}
-      - JWT_SECRET_KEY=${JWT_SECRET_KEY:-}
+      - ENCRYPTION_KEY=${ENCRYPTION_KEY:?ENCRYPTION_KEY 必须设置}
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY:?JWT_SECRET_KEY 必须设置}
       - CORS_ORIGINS=${CORS_ORIGINS:-http://localhost:8080}
     command: python -m src.interfaces.web_api
     depends_on:
@@ -115,12 +115,12 @@ services:
     env_file:
       - .env
     environment:
-      - DATABASE_URL=postgresql://distiller:${DB_PASSWORD:-change-me}@postgres:5432/twitter_distiller
+      - DATABASE_URL=postgresql://distiller:${DB_PASSWORD:?DB_PASSWORD 必须设置}@postgres:5432/twitter_distiller
       - REDIS_URL=redis://redis:6379/0
       - CELERY_BROKER_URL=redis://redis:6379/1
       - CELERY_RESULT_BACKEND=redis://redis:6379/2
-      - ENCRYPTION_KEY=${ENCRYPTION_KEY:-}
-      - JWT_SECRET_KEY=${JWT_SECRET_KEY:-}
+      - ENCRYPTION_KEY=${ENCRYPTION_KEY:?ENCRYPTION_KEY 必须设置}
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY:?JWT_SECRET_KEY 必须设置}
     command: celery -A src.pipeline.celery_app worker --loglevel=info --concurrency=4
     depends_on:
       postgres:
@@ -139,7 +139,7 @@ services:
     env_file:
       - .env
     environment:
-      - DATABASE_URL=postgresql://distiller:${DB_PASSWORD:-change-me}@postgres:5432/twitter_distiller
+      - DATABASE_URL=postgresql://distiller:${DB_PASSWORD:?DB_PASSWORD 必须设置}@postgres:5432/twitter_distiller
       - REDIS_URL=redis://redis:6379/0
       - CELERY_BROKER_URL=redis://redis:6379/1
       - CELERY_RESULT_BACKEND=redis://redis:6379/2

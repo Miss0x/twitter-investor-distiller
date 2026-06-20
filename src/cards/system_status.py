@@ -45,8 +45,10 @@ class SystemStatusCard(Card):
         from src.storage.models import Tweet
         db.init_db()
         s = db.get_session()
-        tweets = s.query(Tweet).count()
-        s.close()
+        try:
+            tweets = s.query(Tweet).count()
+        finally:
+            s.close()
         analyzed_files = list(Path("data/pipeline").glob("*_analyzed_cleaned.json"))
         pipeline = len(analyzed_files)
         portraits = len(list(Path("data/pipeline").glob("*portrait.md")))

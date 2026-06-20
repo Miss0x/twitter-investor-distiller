@@ -49,15 +49,18 @@ class DaemonCard(Card):
             }
         """
         state = Path("data/auto_scheduler_state.json")
-        running = json.loads(state.read_text()).get("running", False) if state.exists() else False
-        last_id = json.loads(state.read_text()).get("last_id", 0) if state.exists() else 0
+        raw = json.loads(state.read_text()) if state.exists() else {}
+        running = raw.get("running", False)
+        last_id = raw.get("last_id", 0)
         try:
             from src.storage.database import db
             from src.storage.models import PipelineTask
             db.init_db()
             s = db.get_session()
-            cnt = s.query(PipelineTask).filter(PipelineTask.task_type == "analyze", PipelineTask.created_at >= time.strftime("%Y-%m-%d")).count()
-            s.close()
+            try:
+                cnt = s.query(PipelineTask).filter(PipelineTask.task_type == "analyze", PipelineTask.created_at >= time.strftime("%Y-%m-%d")).count()
+            finally:
+                s.close()
         except Exception:
             cnt = 0
         return {"running": running, "last_id": last_id, "today": cnt, "budget": 20}

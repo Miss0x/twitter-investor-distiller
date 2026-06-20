@@ -16,6 +16,7 @@ from sqlalchemy import create_engine, text
 from sqlalchemy.orm import Session, sessionmaker
 
 from src.storage.models import Base, User
+
 from src.utils.env import load_project_env
 from src.utils.logger import logger
 

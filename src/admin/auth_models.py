@@ -57,3 +57,16 @@ class Permission(Base):
     description = Column(String, nullable=True)
 
     roles = relationship("Role", secondary=role_permission, back_populates="permissions")
+
+
+class InvitationCode(Base):
+    """邀请码：一次性使用，注册后销毁。"""
+    __tablename__ = "invitation_codes"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    code = Column(String, unique=True, nullable=False, index=True)
+    created_by = Column(Integer, ForeignKey("auth_users.id"), nullable=True)
+    created_at = Column(DateTime, server_default=func.now())
+    used_at = Column(DateTime, nullable=True)
+    used_by = Column(Integer, ForeignKey("auth_users.id"), nullable=True)
+    is_used = Column(Boolean, default=False)

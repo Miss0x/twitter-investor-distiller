@@ -1,23 +1,18 @@
 """
-流水线执行面板 + 画像生成卡片
-================================
+流水线执行面板卡片
+====================
 
-包含两个核心卡片：
+只有一个卡片：
   1. PipelineExecuteCard — 流水线任务管理面板
      - 展示所有流水线任务（filter/analyze/fetch_price/fetch_crypto/portrait/clean）
      - 支持按类型分组查看、全选/取消、执行选中任务、重试/跳过失败任务
      - 内嵌"数据清洗"tab 用于管理资产代码别名映射
      - refresh=15s 高频刷新以实时追踪任务进度
 
-  2. PortraitGenerateCard — 分析师画像生成卡片
-     - 选择用户、时间窗口（1个月~全量）、自定义日期范围
-     - 一键生成画像并追踪生成状态
-     - refresh=0（手动触发，不自动刷新）
+PortraitGenerateCard 已移到 portrait_generate.py。
 """
-import csv
 import html
 import json
-from pathlib import Path
 from src.cards.base import Card
 from src.cards import register
 
@@ -70,38 +65,36 @@ class PipelineExecuteCard(Card):
             from src.storage.models import PipelineTask
             db.init_db()
             s = db.get_session()
-            tasks = s.query(PipelineTask).order_by(PipelineTask.id.desc()).limit(200).all()
-            grouped = {}
-            for t in tasks:
-                p = json.loads(t.payload) if t.payload else {}
-                item = {"id": t.id, "task_type": t.task_type, "status": t.status,
-                        "payload": p, "error_msg": t.error_msg,
-                        "created_at": str(t.created_at)[:16] if t.created_at else ""}
-                grouped.setdefault(t.task_type, []).append(item)
-            s.close()
+            try:
+                tasks = s.query(PipelineTask).order_by(PipelineTask.id.desc()).limit(200).all()
+                grouped = {}
+                for t in tasks:
+                    p = json.loads(t.payload) if t.payload else {}
+                    item = {"id": t.id, "task_type": t.task_type, "status": t.status,
+                            "payload": p, "error_msg": t.error_msg,
+                            "created_at": str(t.created_at)[:16] if t.created_at else ""}
+                    grouped.setdefault(t.task_type, []).append(item)
+            finally:
+                s.close()
             from src.pipeline.task_executor import is_running, get_progress
             from collections import Counter
             type_counts = Counter(t.task_type for t in tasks)
 
-            # ── 数据清洗：加载别名统计 ──
+            # ── 数据清洗：加载别名统计 + 完整别名列表示例 ══
             alias_stats = {"confirmed": 0, "pending": 0, "skipped": 0, "total": 0}
+            aliases_list = []
             try:
-                import csv
-                alias_fp = Path("data/stock_alias.csv")
-                if alias_fp.exists():
-                    reader = csv.reader(alias_fp.read_text(encoding="utf-8").splitlines())
-                    for row in reader:
-                        if not row or not row[0] or row[0].startswith("#"):
-                            continue
-                        alias_stats["total"] += 1
-                        ticker = row[1].strip() if len(row) >= 2 else ""
-                        notes = row[2].strip() if len(row) >= 3 else ""
-                        if ticker:
-                            alias_stats["confirmed"] += 1
-                        elif notes.startswith("SKIP"):
-                            alias_stats["skipped"] += 1
-                        else:
-                            alias_stats["pending"] += 1
+                from src.storage.alias_repository import AliasRepository
+                for a in AliasRepository.get_all():
+                    alias_stats["total"] += 1
+                    if a.ticker:
+                        alias_stats["confirmed"] += 1
+                    elif a.notes.startswith("SKIP"):
+                        alias_stats["skipped"] += 1
+                    else:
+                        alias_stats["pending"] += 1
+                    if a.alias:
+                        aliases_list.append({"alias": a.alias, "ticker": a.ticker, "type": a.notes})
             except Exception:
                 pass
 
@@ -112,9 +105,10 @@ class PipelineExecuteCard(Card):
                 "type_counts": dict(type_counts),
                 "types": ["filter", "analyze", "fetch_price", "fetch_crypto", "portrait", "clean"],
                 "alias_stats": alias_stats,
+                "aliases_list": aliases_list,
             }
         except Exception:
-            return {"groups": {}, "running": False, "progress": {}, "types": [], "alias_stats": {}}
+            return {"groups": {}, "running": False, "progress": {}, "types": [], "alias_stats": [], "aliases_list": []}
 
     def _render_html(self, data: dict) -> str:
         """
@@ -164,19 +158,8 @@ class PipelineExecuteCard(Card):
         for t in all_ts:
             items = groups.get(t, [])
             if t == "clean":
-                # ── 校准标的：标的代码映射（完整表格 + 修正按钮） ──
-                aliases_list = []
-                afp = Path("data/stock_alias.csv")
-                if afp.exists():
-                    reader = csv.reader(afp.read_text(encoding="utf-8").splitlines())
-                    for row in reader:
-                        if not row or not row[0] or row[0].startswith("#"):
-                            continue
-                        a = row[0].strip()
-                        tkr = row[1].strip() if len(row) >= 2 else ""
-                        nts = row[2].strip() if len(row) >= 3 else ""
-                        if a:
-                            aliases_list.append({"alias": a, "ticker": tkr, "type": nts})
+                # ── 校准标的：从 data（get_data 已解析）读取别名映射 ──
+                aliases_list = data.get("aliases_list", [])
                 confirmed = [a for a in aliases_list if a["ticker"]]
                 pending = [a for a in aliases_list if not a["ticker"] and not a.get("type","").startswith("SKIP")]
                 skipped = [a for a in aliases_list if not a["ticker"] and a.get("type","").startswith("SKIP")]
@@ -300,22 +283,18 @@ def _enrich_tweet_texts(groups: dict) -> None:
 
     # 批量 DB 查询（使用绝对路径和 WAL 模式，避免路径/锁问题）
     try:
-        import sqlite3
-        from pathlib import Path
-        db_path = str(Path("data/twitter_data.db").resolve())
-        conn = sqlite3.connect(f"file:{db_path}?mode=ro", uri=True)
-        conn.execute("PRAGMA journal_mode=WAL")
-        tweet_ids_list = list(tweet_ids)
-        text_map = {}
-        for start in range(0, len(tweet_ids_list), 900):
-            chunk = tweet_ids_list[start:start+900]
-            placeholders = ",".join(["?"] * len(chunk))
-            rows = conn.execute(
-                f"SELECT id, COALESCE(text,'') as text, COALESCE(user_id,'') as user_id FROM tweets WHERE id IN ({placeholders})",
-                tuple(chunk)
-            ).fetchall()
-            text_map.update({row[0]: {"text": row[1], "user_id": row[2]} for row in rows})
-        conn.close()
+        from src.storage.database import db
+        from src.storage.models import Tweet
+        s = db.get_session()
+        try:
+            tweet_ids_list = list(tweet_ids)
+            text_map = {}
+            for start in range(0, len(tweet_ids_list), 900):
+                chunk = tweet_ids_list[start:start+900]
+                for tw in s.query(Tweet).filter(Tweet.id.in_(chunk)).all():
+                    text_map[tw.id] = {"text": tw.text or "", "user_id": str(tw.user_id)}
+        finally:
+            s.close()
     except Exception as e:
         import logging
         logging.getLogger("pipeline_execute").warning(f"_enrich_tweet_texts DB 查询失败: {e}")
@@ -399,135 +378,3 @@ def _format_label(task_type: str, payload: dict) -> str:
         return html.escape(txt[:50])
     return "任务"
 
-
-# ────────────────────────────────────────────────────────────
-# 画像生成卡片
-# ────────────────────────────────────────────────────────────
-
-@register
-class PortraitGenerateCard(Card):
-    """
-    分析师画像生成卡片。
-
-    属性:
-        name="portrait_generate"  — 唯一标识
-        tab="portraits"           — 属于画像标签页
-        endpoint="/api/portrait_generate" — API 路由
-        refresh=0                 — 不自动刷新（手动触发画像生成）
-
-    用户可选择:
-      - 目标用户（从 data/users.json 加载或使用纯文本列表）
-      - 时间窗口: 1个月/3个月/6个月/1年/全量（WINDOWS 常量）
-      - 自定义日期范围（开始/结束日期）
-      - 画像标签（可选）
-    """
-    name = "portrait_generate"
-    tab = "portraits"
-    endpoint = "/api/portrait_generate"
-    refresh = 0
-
-    # 预定义时间窗口: (显示名, 天数, 描述)
-    WINDOWS = [
-        ("1个月", 30, "近一月"),
-        ("3个月", 90, "近三月"),
-        ("6个月", 180, "近半年"),
-        ("1年", 365, "近一年"),
-        ("全量", 9999, "全部历史"),
-    ]
-
-    def get_data(self, **params) -> dict:
-        """
-        获取最近 20 条 portrait 类型任务及用户列表。
-
-        数据来源:
-            - PipelineTask 表（task_type="portrait"）
-            - data/users.json（用户列表）
-
-        返回结构:
-            {
-                "tasks": [
-                    {id: int, status: str, payload: dict, created_at: str},
-                    ...
-                ],
-                "users": ["TJ_Research", ...]   # 监控用户列表
-            }
-        """
-        try:
-            from src.storage.database import db
-            from src.storage.models import PipelineTask
-            db.init_db()
-            s = db.get_session()
-            portrait_tasks = s.query(PipelineTask).filter(
-                PipelineTask.task_type == "portrait"
-            ).order_by(PipelineTask.id.desc()).limit(20).all()
-            items = [{"id": t.id, "status": t.status,
-                      "payload": json.loads(t.payload) if t.payload else {},
-                      "created_at": str(t.created_at)[:16] if t.created_at else ""}
-                     for t in portrait_tasks]
-            s.close()
-        except Exception:
-            items = []
-        return {"tasks": items, "users": _load_users_config()}
-
-    def _render_html(self, data: dict) -> str:
-        """
-        生成画像生成界面的 HTML。
-
-        HTML 结构概览:
-            1. 标题栏 — "画像生成" + 已完成/待处理统计
-            2. 用户选择器 — <select> 下拉框
-            3. 时间窗口按钮组 — 1个月/3个月/6个月/1年/全量
-            4. 自定义日期范围 — 开始/结束日期输入
-            5. 画像标签输入 + "生成画像"按钮
-        """
-        users = data.get("users", [])
-        pending = [t for t in data.get("tasks", []) if t["status"] == "pending"]
-        done = [t for t in data.get("tasks", []) if t["status"] == "done"]
-        user_opts = "".join(f'<option value="{u}">{u}</option>' for u in users)
-        window_btns = "".join(
-            f'<button class="btn pg-win-btn" data-action="select-window" data-label="{label}" id="pg_win_{label}" style="font-size:10px;padding:3px 8px">{label}({desc})</button>'
-            for label, days, desc in self.WINDOWS
-        )
-        return f'''<div class="card-title">画像生成</div>
-<div class="mb-sm"><span class="tag tag-ok">已完成: {len(done)}</span> <span class="tag tag-warn">待处理: {len(pending)}</span></div>
-
-<div class="flex mb-sm" style="gap:6px">
-  <select id="pg_user" style="flex:1">{user_opts}</select>
-</div>
-
-<div class="mb-sm"><span class="text-secondary" style="font-size:11px">时间窗口</span></div>
-<div class="flex mb-sm" style="gap:4px;flex-wrap:wrap" id="pg_windows">{window_btns}</div>
-
-<div class="flex mb-sm" style="gap:6px">
-  <input id="pg_from" type="date" style="flex:1;font-size:11px;padding:4px 6px" placeholder="开始日期" />
-  <input id="pg_to" type="date" style="flex:1;font-size:11px;padding:4px 6px" placeholder="结束日期" />
-</div>
-
-<div class="flex mb-sm" style="gap:6px">
-  <input id="pg_label" placeholder="画像标签（可选）" style="flex:1;font-size:11px;padding:4px 6px" />
-  <button class="btn btn-primary" data-action="gen-portrait" data-card="portrait_generate" style="font-size:11px;padding:4px 12px">生成画像</button>
-</div>
-<input type="hidden" id="pg_window" value="" />
-<span id="pg_status" class="text-secondary" style="font-size:10px"></span>
-
-<style>
-.pg-win-btn {{ border:0.5px solid var(--border-secondary); }}
-.pg-win-btn.selected {{ border-color: var(--text-primary); font-weight:500; }}
-</style>'''
-
-
-def _load_users_config():
-    """
-    从 data/users.json 读取监控用户列表。
-
-    该列表定义 Dashboard 关注的所有 Twitter 分析师用户名。
-
-    返回:
-        list[str]: 用户名列表，文件不存在时返回默认列表
-    """
-    import json as _j
-    from pathlib import Path as _P
-    fp = _P("data/users.json")
-    if fp.exists():
-        return _j.loads(fp.read_text(encoding="utf-8"))
-    return ["TJ_Research", "dearbaibabybus"]

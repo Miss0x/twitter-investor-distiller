@@ -52,13 +52,15 @@ class ApiStatusCard(Card):
             from src.storage.database import db
             db.init_db()
             s = db.get_session()
-            placeholders = ",".join(["?"] * len(users))
-            rows = s.execute(
-                f"SELECT u.username, COUNT(*) FROM tweets t JOIN users u ON t.user_id=u.id WHERE u.username IN ({placeholders}) GROUP BY u.username",
-                tuple(users)
-            ).fetchall()
-            user_counts = {row[0]: row[1] for row in rows}
-            s.close()
+            try:
+                placeholders = ",".join(["?"] * len(users))
+                rows = s.execute(
+                    f"SELECT u.username, COUNT(*) FROM tweets t JOIN users u ON t.user_id=u.id WHERE u.username IN ({placeholders}) GROUP BY u.username",
+                    tuple(users)
+                ).fetchall()
+                user_counts = {row[0]: row[1] for row in rows}
+            finally:
+                s.close()
         except Exception:
             pass
         return {

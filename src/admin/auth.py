@@ -7,6 +7,8 @@ import os
 import secrets as _secrets
 from datetime import datetime, timedelta, timezone
 
+import bcrypt
+
 from fastapi import Depends, HTTPException, Request
 from fastapi.security import OAuth2PasswordBearer
 from jose import JWTError, jwt
@@ -21,24 +23,32 @@ if not SECRET_KEY or SECRET_KEY == "dev-secret-change-in-production":
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
-_PASSWORD_SALT = _secrets.token_hex(16)
-
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/login", auto_error=False)
 
 
 def verify_password(plain: str, hashed: str) -> bool:
-    return _secrets.compare_digest(hash_password(plain), hashed)
+    """验证密码。兼容旧 SHA-256 哈希和新 bcrypt 哈希。
+
+    旧格式：40 字符 hex（SHA-256）
+    新格式：以 $2b$ 开头（bcrypt）
+    """
+    if hashed.startswith("$2b$"):
+        return bcrypt.checkpw(plain.encode("utf-8"), hashed.encode("utf-8"))
+    # 旧 SHA-256 格式验证（兼容迁移期）
+    old_salt = os.getenv("OLD_PASSWORD_SALT", "")
+    old_hash = hashlib.sha256((old_salt + plain).encode()).hexdigest()
+    return _secrets.compare_digest(old_hash, hashed)
 
 
 def hash_password(plain: str) -> str:
-    return hashlib.sha256((_PASSWORD_SALT + plain).encode()).hexdigest()
+    """使用 bcrypt 哈希密码（work_factor=12）。"""
+    return bcrypt.hashpw(plain.encode("utf-8"), bcrypt.gensalt(rounds=12)).decode("utf-8")
 
 
 def create_access_token(data: dict, expires_delta: timedelta | None = None) -> str:
     to_encode = data.copy()
     expire = datetime.now(timezone.utc) + (expires_delta or timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES))
     to_encode.update({"exp": expire})
-    # JWT sub MUST be string per RFC 7519
     if "sub" in to_encode:
         to_encode["sub"] = str(to_encode["sub"])
     return jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)

@@ -33,8 +33,8 @@ def _handle_asset_alias(payload: dict) -> dict:
     Returns:
         操作结果字典，ok=True 表示成功
     """
-    from pathlib import Path as _Path
-    fp = _Path("data/stock_alias.csv")
+    from src.storage.alias_repository import _PATH as _alias_path
+    fp = _alias_path
     if not fp.exists():
         return {"ok": False, "error": "stock_alias.csv not found"}
 
@@ -49,35 +49,42 @@ def _handle_asset_alias(payload: dict) -> dict:
         if not alias:
             return {"ok": False, "error": "别名不能为空"}
 
-        # 去重检查：遍历现有行检查是否已存在同名 alias
-        existing = fp.read_text(encoding="utf-8")
-        for line in existing.split("\n"):
-            if line.startswith("#"):
-                continue  # 跳过注释行
-            parts = line.split(",", 2)  # 最多分 3 部分：alias,ticker,notes
-            if len(parts) >= 1 and parts[0].strip() == alias:
-                return {"ok": False, "error": f"别名 '{alias}' 已存在"}
+        # 去重检查：使用 csv.reader 正确解析（兼容含逗号的备注字段）
+        import csv as _csv  # noqa: PLC0415
+        with open(fp, "r", encoding="utf-8", newline="") as f:
+            reader = _csv.reader(f)
+            for row in reader:
+                if not row or row[0].startswith("#"):
+                    continue
+                if row[0].strip() == alias:
+                    return {"ok": False, "error": f"别名 '{alias}' 已存在"}
 
-        # 追加新行到文件末尾
-        with open(fp, "a", encoding="utf-8", newline="\n") as f:
-            f.write(f"{alias},{ticker if ticker else ''},{notes}\n")
+        # 追加新行到文件末尾（用 csv.writer 自动处理逗号/换行转义）
+        with open(fp, "a", encoding="utf-8", newline="") as f:
+            writer = _csv.writer(f)
+            writer.writerow([alias, ticker, notes])
         return {"ok": True}
 
     elif action == "delete":
         # ── 删除别名映射 ──
         if not alias:
             return {"ok": False, "error": "别名不能为空"}
-        lines = fp.read_text(encoding="utf-8").split("\n")
-        new_lines = []
+        import csv as _csv  # noqa: PLC0415
         deleted = False
-        for line in lines:
-            # 保留注释行和空行
-            if line.startswith("#") or not line.strip():
+        new_lines: list[str] = []
+        # 保留原始文件结构（含注释行/空行），仅改写数据行
+        with open(fp, "r", encoding="utf-8", newline="") as f:
+            content = f.read()
+        for line in content.split("\n"):
+            stripped = line.strip()
+            # 注释行和空行：原样保留（避免破坏 # 注释 / 末尾换行）
+            if not stripped or stripped.startswith("#"):
                 new_lines.append(line)
                 continue
-            parts = line.split(",", 2)
+            # 数据行：用 csv.reader 正确解析单行（避免含逗号备注误判）
+            parts = next(_csv.reader([line]), [])
             if len(parts) >= 1 and parts[0].strip() == alias:
-                deleted = True  # 找到匹配行，跳过（不写入）
+                deleted = True  # 找到匹配行，跳过
                 continue
             new_lines.append(line)
         if deleted:
@@ -91,22 +98,25 @@ def _handle_asset_alias(payload: dict) -> dict:
             return {"ok": False, "error": "别名不能为空"}
         old_alias = payload.get("old_alias", "").strip()
         target = old_alias or alias  # 用 old_alias 定位要修改的行
-        lines = fp.read_text(encoding="utf-8").split("\n")
-        new_lines = []
+        import csv as _csv  # noqa: PLC0415
         found = False
-        for line in lines:
-            if line.startswith("#") or not line.strip():
-                new_lines.append(line)
+        new_lines2: list[str] = []
+        with open(fp, "r", encoding="utf-8", newline="") as f:
+            content = f.read()
+        for line in content.split("\n"):
+            stripped = line.strip()
+            if not stripped or stripped.startswith("#"):
+                new_lines2.append(line)
                 continue
-            parts = line.split(",", 2)
+            parts = next(_csv.reader([line]), [])
             if len(parts) >= 1 and parts[0].strip() == target:
-                # 替换为新数据
-                new_lines.append(f"{alias},{ticker if ticker else ''},{notes}")
+                new_lines2.append(_serialize_csv_row([alias, ticker if ticker else "", notes]))
                 found = True
                 continue
-            new_lines.append(line)
+
+            new_lines2.append(line)
         if found:
-            fp.write_text("\n".join(new_lines).rstrip("\n") + "\n", encoding="utf-8")
+            fp.write_text("\n".join(new_lines2).rstrip("\n") + "\n", encoding="utf-8")
             return {"ok": True}
         return {"ok": False, "error": f"别名 '{target}' 未找到"}
 
@@ -120,7 +130,19 @@ def _handle_asset_alias(payload: dict) -> dict:
     return {"ok": False, "error": "unknown action"}
 
 
+def _serialize_csv_row(row: list[str]) -> str:
+    """序列化单行 CSV，供保留原始文件结构的局部改写使用。"""
+    import csv as _csv  # noqa: PLC0415
+    import io as _io  # noqa: PLC0415
+
+    buffer = _io.StringIO()
+    writer = _csv.writer(buffer, lineterminator="")
+    writer.writerow(row)
+    return buffer.getvalue()
+
+
 def _set_notes(fp, alias: str, notes_val: str) -> dict:
+
     """修改别名行中的备注字段（内部辅助函数，用于 skip/unskip 操作）。
 
     业务逻辑:
@@ -135,35 +157,42 @@ def _set_notes(fp, alias: str, notes_val: str) -> dict:
     Returns:
         操作结果字典，ok=True 表示成功
     """
-    lines = fp.read_text(encoding="utf-8").split("\n")
-    new_lines = []
-    found = False
-    for line in lines:
-        # 注释行和空行保留不动
-        if line.startswith("#") or not line.strip():
-            new_lines.append(line)
-            continue
-        parts = line.split(",", 2)  # alias,ticker,notes
-        if len(parts) >= 1 and parts[0].strip() == alias:
-            found = True
-            ticker = parts[1].strip() if len(parts) >= 2 else ""
-            old_notes = parts[2].strip() if len(parts) >= 3 else ""
+    import csv as _csv  # noqa: PLC0415
 
-            if notes_val == "SKIP":
-                # 标记跳过：保留原始备注上下文 "SKIP|原备注"
-                new_notes = "SKIP|" + old_notes if old_notes else "SKIP"
-            else:
-                # 取消跳过：去掉 "SKIP|" 前缀
-                new_notes = old_notes.replace("SKIP|", "", 1) if old_notes.startswith("SKIP|") else ""
+    # 用 csv.reader 读取全部数据行；保留原注释/空行结构
+    raw_lines = fp.read_text(encoding="utf-8").split("\n")
+    pre_lines: list[str] = []  # 注释/空行原样保留
+    data_rows: list[list[str]] = []
+    for line in raw_lines:
+        stripped = line.strip()
+        if not stripped or stripped.startswith("#"):
+            pre_lines.append(line)
+        else:
+            data_rows.append(next(_csv.reader([line]), []))
 
-            new_lines.append(f"{alias},{ticker},{new_notes}")
-            continue
-        new_lines.append(line)
+    target_idx: int | None = None
+    for idx, row in enumerate(data_rows):
+        if row and row[0].strip() == alias:
+            target_idx = idx
+            break
+    if target_idx is None:
+        return {"ok": False, "error": f"别名 '{alias}' 未找到"}
 
-    if found:
-        fp.write_text("\n".join(new_lines).rstrip("\n") + "\n", encoding="utf-8")
-        return {"ok": True}
-    return {"ok": False, "error": f"别名 '{alias}' 未找到"}
+    ticker = data_rows[target_idx][1].strip() if len(data_rows[target_idx]) >= 2 else ""
+    old_notes = data_rows[target_idx][2].strip() if len(data_rows[target_idx]) >= 3 else ""
+    if notes_val == "SKIP":
+        new_notes = "SKIP|" + old_notes if old_notes else "SKIP"
+    else:
+        new_notes = old_notes.replace("SKIP|", "", 1) if old_notes.startswith("SKIP|") else ""
+    data_rows[target_idx] = [alias, ticker, new_notes]
+
+    # 用 csv.writer 写回，自动转义 new_notes 中的逗号/引号/换行
+    with open(fp, "w", encoding="utf-8", newline="") as wf:
+        wf.write("\n".join(pre_lines).rstrip("\n") + "\n" if pre_lines and any(p.strip() for p in pre_lines) else "")
+        writer = _csv.writer(wf)
+        for row in data_rows:
+            writer.writerow(row)
+    return {"ok": True}
 
 
 def _handle_portrait_generate(payload: dict) -> dict:
@@ -226,14 +255,16 @@ def _handle_portrait_generate(payload: dict) -> dict:
     try:
         db.init_db()
         s = db.get_session()
-        task = PipelineTask(
-            task_type="portrait",
-            status="pending",
-            payload=_json.dumps(payload_dict, ensure_ascii=False),
-        )
-        s.add(task)
-        s.commit()
-        s.close()
+        try:
+            task = PipelineTask(
+                task_type="portrait",
+                status="pending",
+                payload=_json.dumps(payload_dict, ensure_ascii=False),
+            )
+            s.add(task)
+            s.commit()
+        finally:
+            s.close()
         return {"ok": True, "task_id": task.id}
     except Exception as e:
         return {"ok": False, "error": str(e)}

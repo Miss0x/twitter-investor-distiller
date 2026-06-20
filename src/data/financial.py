@@ -121,7 +121,9 @@ class FinancialData:
             }
             self._cache_set(key, result)
             return result
-        except Exception:
+        except Exception as e:
+            import logging
+            logging.warning(f"financial.get_price_and_stats({symbol}) 失败: {e}", exc_info=True)
             return None
 
     def get_analyst_ratings(self, symbol: str) -> dict | None:
@@ -154,7 +156,9 @@ class FinancialData:
                 )
             self._cache_set(key, result)
             return result
-        except Exception:
+        except Exception as e:
+            import logging
+            logging.warning(f"financial.get_analyst_ratings({symbol}) 失败: {e}", exc_info=True)
             return None
 
     def get_news_sentiment(self, symbol: str) -> dict | None:
@@ -181,7 +185,9 @@ class FinancialData:
             }
             self._cache_set(key, result)
             return result
-        except Exception:
+        except Exception as e:
+            import logging
+            logging.warning(f"financial.get_news_sentiment({symbol}) 失败: {e}", exc_info=True)
             return None
 
     def get_all_dimensions(self, symbol: str, depth: str = "standard") -> dict:
@@ -253,7 +259,9 @@ class FinancialData:
             }
             self._cache_set(key, result)
             return result
-        except Exception:
+        except Exception as e:
+            import logging
+            logging.warning(f"financial._get_returns({symbol}) 失败: {e}", exc_info=True)
             return None
 
     def _try_yfinance_info(self, symbol: str) -> dict | None:
@@ -289,7 +297,9 @@ class FinancialData:
             }
             self._cache_set(key, result)
             return result
-        except Exception:
+        except Exception as e:
+            import logging
+            logging.warning(f"financial._try_yfinance_info({symbol}) 失败: {e}", exc_info=True)
             return None
 
     def _try_yfinance_sector(self, symbol: str) -> dict | None:
@@ -321,5 +331,7 @@ class FinancialData:
                     dates.append({"date": str(val), "type": "earnings"})
             self._cache_set(key, {"dates": dates})
             return dates
-        except Exception:
+        except Exception as e:
+            import logging
+            logging.warning(f"financial.get_earnings_calendar({symbol}) 失败: {e}", exc_info=True)
             return []

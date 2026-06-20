@@ -128,3 +128,5 @@ from . import governance_cards  # noqa: E402, F401  — 信号治理卡片组（
 from . import config_center_card  # noqa: E402, F401  — 用户配置中心（LLM / Twitter / Telegram / 观察对象）
 from . import valuation_card  # noqa: E402, F401  — 估值工具（DCF/Comps/尽调清单）
 from . import financial_cards  # noqa: E402, F401  — 财报日历 + 价格预警
+from . import admin_monitor_card  # noqa: E402, F401  — 管理监控面板
+from . import portrait_generate  # noqa: E402, F401  — 分析师画像生成（从 pipeline_execute 抽出）

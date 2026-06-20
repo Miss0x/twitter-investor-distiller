@@ -5,13 +5,13 @@ from pathlib import Path
 def test_card_config_uses_investment_signal_information_architecture():
     from src.cards.cards_config import CARD_CONFIG, CARD_DISPLAY
 
-    assert len(CARD_CONFIG) == 28
+    assert len(CARD_CONFIG) == 29
     assert Counter(value[0] for value in CARD_CONFIG.values()) == {
         "signals": 7,
         "decisions": 8,
         "research": 4,
         "data": 5,
-        "settings": 4,
+        "settings": 5,
     }
 
     assert CARD_CONFIG["consensus"][:4] == ("signals", "今日信号", 1, 1)
@@ -114,11 +114,13 @@ def test_chat_ui_preserves_state_and_ignores_stale_answers():
 
 
 def test_chat_action_clamps_top_k_and_handles_invalid_values():
-    text = Path("src/interfaces/web_api.py").read_text(encoding="utf-8")
+    text = Path("src/interfaces/chat_utils.py").read_text(encoding="utf-8")
 
-    assert "def _normalize_chat_top_k" in text
+    assert "def normalize_chat_top_k" in text
     assert "return max(1, min(value, 20))" in text
-    assert "top_k = _normalize_chat_top_k(payload.get(\"top_k\", 5))" in text
+    # call site in routers/cards.py after router split
+    cards_text = Path("src/interfaces/routers/cards.py").read_text(encoding="utf-8")
+    assert "top_k = normalize_chat_top_k(payload.get(\"top_k\", 5))" in cards_text
 
 
 def test_ai_html_results_are_sanitized_before_rendering():
@@ -160,7 +162,7 @@ def test_card_config_comments_use_current_information_architecture():
 def test_landing_page_matches_new_information_architecture():
     text = Path("src/templates/landing.html").read_text(encoding="utf-8")
 
-    assert "免费开始使用" in text
+    assert "申请邀请码" in text
     assert "https://github.com" not in text
     for label in ["智能信号采集", "AI 多维度分析", "信号治理门禁", "投资决策辅助", "深度研究工具", "实时推送通知"]:
         assert label in text
@@ -176,4 +178,6 @@ def test_dashboard_app_import_does_not_require_chromadb_at_startup():
         if line.startswith("from ") or line.startswith("import ")
     )
     assert "from src.ai.chat_engine import ChatEngine" not in top_level_imports
-    assert "        from src.ai.chat_engine import ChatEngine" in text
+    # ChatEngine 懒初始化已移至 src/interfaces/chat_utils.py
+    chat_text = Path("src/interfaces/chat_utils.py").read_text(encoding="utf-8")
+    assert "        from src.ai.chat_engine import ChatEngine" in chat_text

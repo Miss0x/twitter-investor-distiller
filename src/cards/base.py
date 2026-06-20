@@ -140,8 +140,9 @@ class Card(ABC):
                 env = jinja2.Environment(loader=jinja2.FileSystemLoader(str(tpl_dir)))
                 tpl = env.get_template(self.template)
                 return tpl.render(**data)
-            except Exception:
-                pass  # 模板加载失败时降级到 _render_html
+            except Exception as e:
+                import logging
+                logging.warning(f"卡片 {self.template} 模板渲染失败，降级为 _render_html: {e}", exc_info=True)
         return self._render_html(data)
 
     @staticmethod

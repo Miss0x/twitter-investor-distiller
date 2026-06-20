@@ -25,7 +25,10 @@ app = FastAPI(title="", docs_url=None, redoc_url=None, openapi_url=None)
 # 会话与认证
 # ═══════════════════════════════════════════════════
 
-_ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD", "admin123")
+_ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD", "")
+if not _ADMIN_PASSWORD:
+    import sys as _sys
+    print("⚠️  环境变量 ADMIN_PASSWORD 未设置，管理后台登录将全部失败。请设置 ADMIN_PASSWORD。", file=_sys.stderr)
 _PASSWORD_SALT = secrets.token_hex(16)
 
 
@@ -331,8 +334,10 @@ async def users_page(request: Request):
         from src.admin.auth_models import User
         from src.storage.database import db
         session = db.get_session()
-        users = session.query(User).order_by(User.id.desc()).all()
-        session.close()
+        try:
+            users = session.query(User).order_by(User.id.desc()).all()
+        finally:
+            session.close()
         rows = ""
         for u in users:
             rows += f"""<tr>

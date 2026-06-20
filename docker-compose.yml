@@ -9,10 +9,17 @@ services:
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
       - ./src/templates:/usr/share/nginx/html/templates:ro
+      - ./src/static:/usr/share/nginx/html/static:ro
     depends_on:
       - dashboard
       - admin
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost/"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
 
   # ── 公网 Dashboard (8000) ──
   dashboard:
@@ -28,9 +35,10 @@ services:
       - .env
     environment:
       - DB_PATH=sqlite:///app/data/twitter_data.db
-      - ENCRYPTION_KEY=${ENCRYPTION_KEY:-}
-      - JWT_SECRET_KEY=${JWT_SECRET_KEY:-dev-secret}
-      - ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin123}
+      - ENCRYPTION_KEY=${ENCRYPTION_KEY:?ENCRYPTION_KEY 必须设置}
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY:?JWT_SECRET_KEY 必须设置}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD:?ADMIN_PASSWORD 必须设置}
+      - DASHBOARD_TOKEN=${DASHBOARD_TOKEN:-}
     command: python -m src.interfaces.web_api
     restart: unless-stopped
     healthcheck:
@@ -52,7 +60,7 @@ services:
       - .env
     environment:
       - DB_PATH=sqlite:///app/data/twitter_data.db
-      - ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin123}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD:?ADMIN_PASSWORD 必须设置}
     command: python -m src.admin.app
     restart: unless-stopped
     healthcheck:

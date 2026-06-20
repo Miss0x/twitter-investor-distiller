@@ -135,6 +135,8 @@ class Tweet(Base):
     # 加速按用户+发布时间查询推文的场景（最常见的查询模式）
     __table_args__ = (
         Index("ix_tweets_user_created", "user_id", "created_at_twitter"),
+        # 向量化批处理：WHERE is_vectorized = false ORDER BY created_at_twitter
+        Index("ix_tweets_vec_pending", "is_vectorized", "created_at_twitter"),
     )
 
     def __repr__(self):
@@ -169,6 +171,12 @@ class Media(Base):
     # ---- 下载状态 ----
     downloaded = Column(Boolean, default=False)  # 是否已成功下载
     download_error = Column(Text)  # 下载失败时的错误信息
+
+    # ---- 索引 ----
+    # 加速媒体下载 worker 的扫描：WHERE downloaded = false
+    __table_args__ = (
+        Index("ix_media_downloaded", "downloaded"),
+    )
 
     # ---- 时间戳 ----
     created_at = Column(DateTime, default=datetime.now)  # 记录创建时间
@@ -276,6 +284,12 @@ class PipelineTask(Base):
     # ---- 时间戳 ----
     created_at = Column(DateTime, default=datetime.now)  # 任务创建时间
     updated_at = Column(DateTime, default=datetime.now, onupdate=datetime.now)  # 状态更新时间
+
+    # ---- 联合索引 ----
+    # 加速 Pipeline API 筛选：WHERE task_type = ? AND status = ?，并支持 ORDER BY id DESC
+    __table_args__ = (
+        Index("ix_pipeline_tasks_type_status", "task_type", "status"),
+    )
 
     def __repr__(self):
         return f"<PipelineTask(id={self.id}, type='{self.task_type}', status='{self.status}')>"

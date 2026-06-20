@@ -22,6 +22,9 @@ data/cookies.json
 data/.master_key
 data/tenants/
 data/pipeline/
+data/activity/
+data/finance/
+data/team_shared_pool.json
 
 # 数据 — 保留 DB 和流水线结果，排除媒体和临时
 data/raw/
@@ -77,3 +80,19 @@ docker-compose.override.yml
 # 本地工具会话状态
 .codebuddy/
 .playwright-cli/
+
+# 开发日志/截图
+logs/*.txt
+logs/*.log
+logs/*.png
+logs/e2e_shots/
+
+*.pyc
+__pycache__/
+
+# CodeBuddy 插件缓存
+playwright-cli.json
+
+# 一次性整理/迁移草稿
+stock_alias.csv
+docs/archive/dev-scratch-*/

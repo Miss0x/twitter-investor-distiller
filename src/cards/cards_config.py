@@ -33,7 +33,7 @@ CARD_CONFIG: dict[str, tuple[str, str, int, int, bool, bool, str | None, int]] =
     "anomaly":         ("signals",   "今日信号",   1, 2, False, False, "anomaly",          600),
     "rotation":        ("signals",   "今日信号",   1, 3, False, False, "rotation",        600),
     "crypto":          ("signals",   "今日信号",   1, 4, False, False, None,              300),
-    "system_status":   ("signals",   "今日信号",   1, 5, False, False, "system_status",    60),
+    "system_status":   ("signals",   "今日信号",   1, 5, False, False, "system_status",    300),
 
     # ── 投资决策（该买什么？该卖什么？） ──
     "chat":            ("decisions", "投资决策",   2, 1, False, True,  None,                0),
@@ -54,13 +54,16 @@ CARD_CONFIG: dict[str, tuple[str, str, int, int, bool, bool, str | None, int]] =
     "asset_alias":     ("data",      "数据管理",   4, 4, False, False, None,             300),
 
     # ── 通知与设置（自动化、推送、高级工具） ──
-    "daemon":          ("settings",  "通知与设置", 5, 1, False, False, "daemon",           5),
+    "daemon":          ("settings",  "通知与设置", 5, 1, False, False, "daemon",           15),
     "telegram":        ("settings",  "通知与设置", 5, 2, False, False, "telegram",         0),
     "script_runner":   ("settings",  "通知与设置", 5, 3, False, False, "script_runner",    0),
     "config_center":   ("settings",  "通知与设置", 5, 0, False, True,  "config_center",    0),
     "valuation_pro":      ("decisions", "投资决策", 1, 3, False, True,  "valuation_pro",     0),
     "earnings_calendar":  ("decisions", "投资决策", 1, 4, False, True,  "earnings_calendar",  0),
     "price_alerts":       ("decisions", "投资决策", 1, 5, False, True,  "price_alerts",       0),
+
+    # ── 管理监控（活动审计、系统概览） ──
+    "admin_monitor":      ("settings",  "通知与设置", 5, 10, False, True,  "admin_monitor",   30),
 }
 
 CARD_DISPLAY = {
@@ -91,6 +94,7 @@ CARD_DISPLAY = {
     "valuation_pro":    ("估值工具",       "DCF 估值、同行 PE/PB 对标、结构化尽调清单"),
     "earnings_calendar":("财报日历",       "自选股财报日期、预期 EPS、情景分析"),
     "price_alerts":     ("价格预警",       "设置涨破/跌破预警，触发后 Telegram 推送"),
+    "admin_monitor":    ("系统监控",       "系统监控面板 — 活动统计、操作分布、每日趋势"),
 }
 
 

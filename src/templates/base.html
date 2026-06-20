@@ -5,315 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <title>Twitter Investor Distiller</title>
-<style>
-  /* ═══════════════════════════════════════════════════════
-     暗色主题配色 — 对齐参考网站 (api.tevxzen.dpdns.org)
-     LAB 颜色空间精确转换到 HSL，保证暗色感知一致性
-     ═══════════════════════════════════════════════════════ */
-  :root {
-    /* 基础色 — 参考网站暗色主题 LAB→HSL 精确转换 */
-    --bg:               hsl(0 0% 7.3%);       /* #121212, --background */
-    --card:             hsl(0 0% 11.8%);      /* #1d1d1d, --card */
-    --border:           hsl(0 0% 100% / .09); /* white-9%, --border */
-    --border-light:     hsl(0 0% 100% / .05); /* white-5%, 更淡分割 */
-    --text:             hsl(0 0% 95.4%);      /* #f3f3f3, --foreground */
-    --muted:            hsl(0 0% 69.4%);      /* #b0b0b0, --muted-foreground */
-    --dim:              hsl(0 0% 45%);        /* 比 muted 更暗淡 */
-    /* 语义色 */
-    --accent:           hsl(219.7 100% 44.9%);/* #004de5, chart-1 蓝 */
-    --accent-light:     hsla(219.7 100% 44.9% / .15);
-    --success:          hsl(160.3 100% 36.8%);/* #00bb7d, chart-2 绿 */
-    --warning:          hsl(35.9 100% 50%);   /* #ff9800, chart-3 橙 */
-    --danger:           hsl(359.2 100% 69.7%);/* #ff6466, --destructive 红 */
-    /* 辅助色 (shadcn/ui 命名对齐) */
-    --primary:          hsl(0 0% 95.4%);      /* #f3f3f3, 白色主色 */
-    --primary-fg:       hsl(0 0% 3.9%);       /* #0a0a0a, 白色上的深色文字 */
-    --secondary:        hsl(0 0% 16.5%);      /* #292929, 次要背景 */
-    --ring:             hsl(0 0% 59.6%);      /* #989898, focus ring */
-    /* 图表色 */
-    --chart-1:          hsl(219.7 100% 44.9%);/* #004de5 蓝 */
-    --chart-2:          hsl(160.3 100% 36.8%);/* #00bb7d 绿 */
-    --chart-3:          hsl(35.9 100% 50%);   /* #ff9800 橙 */
-    --chart-4:          hsl(265.7 100% 65.5%);/* #9a4fff 紫 */
-    --chart-5:          hsl(346.4 100% 56.9%);/* #ff2355 粉红 */
-    --info:             hsl(199 100% 47.5%);  /* #00a5f2 信息蓝 */
-    /* 侧边栏专用 */
-    --sidebar-bg:       hsl(0 0% 2%);         /* #050505, --sidebar */
-    --sidebar-fg:       hsl(0 0% 93.4%);      /* #eeeeee */
-    --sidebar-accent:   hsl(0 0% 18.9%);      /* #303030 */
-    --sidebar-border:   hsl(0 0% 100% / .1);
-    /* 圆角 / 字体 */
-    --radius-sm: 6px; --radius: 0.5rem; --radius-md: 10px; --radius-lg: 14px;
-    --font: system-ui, -apple-system, sans-serif;
-    --font-mono: 'SF Mono', 'JetBrains Mono', ui-monospace, 'Cascadia Code', Menlo, monospace;
-    --sidebar-w: 232px;
-
-    /* ═══════════════════════════════════════════════════════
-       语义化别名（兼容层）—— 修复全站 40+ 处坏引用
-       此前 consensus/rotation/anomaly 等模板引用了 --text-warning
-       /--border-tertiary 等不存在的变量名，导致颜色全部失效、
-       页面发灰无层次。这里统一映射到上方真实颜色，一处补全、全站生效。
-       ═══════════════════════════════════════════════════════ */
-    --text-primary:      var(--text);       /* 主文字（白） */
-    --text-secondary:    var(--muted);      /* 次要文字（灰） */
-    --text-tertiary:     var(--dim);        /* 最弱文字（暗灰） */
-    --text-success:      var(--success);    /* 成功/看多 绿 */
-    --text-warning:      var(--warning);    /* 警告/强信号 橙 */
-    --text-danger:       var(--danger);     /* 危险/看空 红 */
-    --text-info:         var(--info);       /* 信息 蓝 */
-    --bg-secondary:      var(--secondary);  /* 次级背景面 */
-    --bg-tertiary:       hsl(0 0% 14.5%);   /* 三级背景（表头等） */
-    --border-primary:    hsl(0 0% 100% / .18);
-    --border-secondary:  hsl(0 0% 100% / .12);
-    --border-tertiary:   var(--border);     /* 默认边框 */
-
-    /* ── 现代科技感：发光/阴影/层次令牌（美化用） ── */
-    --glow-accent:  0 0 0 1px hsla(219.7 100% 44.9% / .35), 0 4px 20px hsla(219.7 100% 44.9% / .12);
-    --glow-success: 0 0 0 1px hsla(160.3 100% 36.8% / .3),  0 4px 18px hsla(160.3 100% 36.8% / .1);
-    --shadow-card:  0 1px 2px rgba(0,0,0,.3), 0 8px 24px -8px rgba(0,0,0,.45);
-    --ease-out:     cubic-bezier(.16, 1, .3, 1);
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: var(--font); font-size: 13px; color: var(--text); background: var(--bg); line-height: 1.6; }
-
-  /* ── 暗色滚动条 ── */
-  ::-webkit-scrollbar { width: 6px; height: 6px; }
-  ::-webkit-scrollbar-track { background: transparent; }
-  ::-webkit-scrollbar-thumb { background: hsl(0 0% 100% / .12); border-radius: 3px; }
-  ::-webkit-scrollbar-thumb:hover { background: hsl(0 0% 100% / .22); }
-
-  /* ── 全局 Toast：底部居中，滑入/滑出动画 ── */
-  #global-toast {
-    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(100px);
-    padding: 10px 24px; border-radius: var(--radius);
-    background: var(--primary); color: var(--primary-fg);
-    font-size: 13px; z-index: 9999; font-weight: 500;
-    opacity: 0; pointer-events: none;
-    transition: transform .3s var(--ease-out), opacity .25s;
-    box-shadow: 0 4px 24px rgba(0,0,0,.5);
-    white-space: nowrap; max-width: 90vw; overflow: hidden; text-overflow: ellipsis;
-  }
-  #global-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-  /* 移动端 toast 贴在底部安全区 */
-  @media (max-width: 768px) {
-    #global-toast { bottom: 12px; left: 12px; right: 12px; transform: translateY(100px); max-width: none; }
-    #global-toast.show { transform: translateY(0); }
-  }
-
-  /* ── Layout ── */
-  .layout { display: flex; min-height: 100vh; }
-
-  /* ── Sidebar ── */
-  .sidebar {
-    width: var(--sidebar-w);
-    background: var(--sidebar-bg);
-    border-right: 1px solid var(--sidebar-border);
-    display: flex; flex-direction: column;
-    position: fixed; top: 0; left: 0; bottom: 0; z-index: 10;
-    overflow-y: auto;
-  }
-  .sidebar .brand {
-    padding: 18px 20px 14px;
-    font-size: 14px; font-weight: 600; color: var(--text);
-    letter-spacing: -0.01em;
-    border-bottom: 1px solid hsl(0 0% 100% / .06);
-    display: flex; align-items: center; gap: 9px;
-  }
-  .sidebar .brand .logo-mark {
-    width: 22px; height: 22px; border-radius: 6px; flex-shrink: 0;
-    background: linear-gradient(135deg, var(--accent), hsl(265.7 100% 65.5%));
-    display: inline-flex; align-items: center; justify-content: center;
-    font-size: 12px; color: #fff; font-weight: 700;
-  }
-  .sidebar .brand a { color: inherit; text-decoration: none; display: flex; align-items: center; gap: 9px; }
-  .sidebar .nav { flex: 1; padding: 8px; }
-  .sidebar .nav-item {
-    display: flex; align-items: center; gap: 10px;
-    padding: 9px 12px; margin-bottom: 2px;
-    border-radius: var(--radius-sm);
-    font-size: 13px; color: var(--muted);
-    cursor: pointer; transition: color .15s, background .15s;
-    user-select: none; position: relative;
-  }
-  .sidebar .nav-item:hover { color: var(--text); background: hsl(0 0% 100% / .05); }
-  .sidebar .nav-item:focus-visible { outline: none; box-shadow: inset 0 0 0 2px var(--accent); border-radius: var(--radius-sm); }
-  .sidebar .nav-item.active { color: var(--text); background: hsl(0 0% 100% / .08); font-weight: 500; }
-  /* 激活项左侧电光蓝强调条 */
-  .sidebar .nav-item.active::before {
-    content: ""; position: absolute; left: 0; top: 50%; transform: translateY(-50%);
-    width: 3px; height: 16px; border-radius: 0 3px 3px 0; background: var(--accent);
-    transition: height .2s var(--ease-out);
-  }
-  .sidebar .nav-item.active:hover::before { height: 20px; }
-  .sidebar .nav-item .icon { font-size: 15px; width: 20px; text-align: center; flex-shrink: 0; transition: transform .15s var(--ease-out); }
-  .sidebar .nav-item:hover .icon { transform: scale(1.1); }
-  .sidebar .footer { padding: 12px 20px; border-top: 1px solid hsl(0 0% 100% / .06); font-size: 11px; color: var(--dim); }
-
-  /* ── Main ── */
-  .main { margin-left: var(--sidebar-w); flex: 1; min-width: 0; }
-
-  /* ── Top bar ── */
-  .topbar {
-    display: flex; align-items: center; gap: 16px;
-    padding: 12px 24px;
-    background: var(--card); border-bottom: 1px solid var(--border);
-    position: sticky; top: 0; z-index: 5;
-  }
-  .topbar .title { font-size: 14px; font-weight: 600; }
-  .topbar .pulse { display: inline-block; width: 7px; height: 7px; border-radius: 50%; }
-  .topbar .pulse.on { background: var(--success); animation: softPulse 2s infinite; }
-  .topbar .pulse.off { background: var(--dim); }
-  @keyframes softPulse { 0%,100%{opacity:1} 50%{opacity:.35} }
-  .topbar .status-text { font-size: 12px; color: var(--muted); }
-  .topbar .sep { width: 1px; height: 18px; background: var(--border); }
-  .topbar .spacer { flex: 1; }
-
-  /* ── Content ── */
-  .content { padding: 24px; max-width: 1320px; }
-  .tab-content { display: none; }
-  /* 响应式 bento 网格：卡片自动排布，span_full 卡片占满整行 */
-  .tab-content.active {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 16px;
-    align-items: start;
-    animation: fadeIn .3s var(--ease-out);
-  }
-  .tab-content.active > .card { margin-bottom: 0; }
-  @media (max-width: 900px) {
-    .tab-content.active { grid-template-columns: 1fr; }
-  }
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-
-  /* ── 网格 ── */
-  .grid { display: grid; gap: 16px; }
-  .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-
-  /* ── 卡片：现代科技感 —— 微妙边框 + 层次阴影 + hover 物理位移 ── */
-  .card {
-    background: var(--card); border: 1px solid var(--border);
-    border-radius: var(--radius-lg); padding: 20px 22px; margin-bottom: 16px;
-    box-shadow: var(--shadow-card);
-    position: relative;
-    transition: border-color .2s var(--ease-out), box-shadow .2s var(--ease-out), transform .2s var(--ease-out), opacity .2s var(--ease-out);
-  }
-  /* 顶部 1px 高光线，模拟物理边缘折射（克制，无霓虹） */
-  .card::before {
-    content: ""; position: absolute; inset: 0 0 auto 0; height: 1px;
-    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-    background: linear-gradient(90deg, transparent, hsl(0 0% 100% / .08) 50%, transparent);
-    pointer-events: none;
-  }
-  @media (min-width: 641px) {
-    .card:hover { border-color: var(--border-secondary); transform: translateY(-2px); box-shadow: 0 2px 4px rgba(0,0,0,.3), 0 12px 32px -10px rgba(0,0,0,.5); }
-  }
-  /* 卡片内容刷新微闪：自动刷新时卡片短暂高亮 */
-  .card.card-flash { animation: cardFlash .6s var(--ease-out); }
-  @keyframes cardFlash { 0% { background: hsla(219.7 100% 44.9% / .06); } 100% { background: var(--card); } }
-  /* 焦点态：交互卡片聚焦时显示蓝色光环 */
-  .card:focus-within { border-color: hsla(219.7 100% 44.9% / .3); }
-  .card-headline { border-color: hsla(35.9 100% 50% / .28); background: linear-gradient(180deg, hsla(35.9 100% 50% / .07), var(--card) 60%); }
-  .card-headline:hover { border-color: hsla(35.9 100% 50% / .4); }
-  .card-headline .card-title { color: var(--warning); font-size: 14px; }
-  .card-title { font-size: 13px; font-weight: 600; margin-bottom: 12px; color: var(--text); letter-spacing: -.01em; display: flex; align-items: center; gap: 7px; }
-  /* 卡片副标题：一句话功能说明 */
-  .card-subtitle { font-size: 11px; color: var(--dim); font-weight: 400; margin: -8px 0 14px; line-height: 1.5; }
-  .card-error { border-color: hsla(359.2 100% 69.7% / .25); background: hsla(359.2 100% 69.7% / .06); }
-
-  /* ── 指标：等宽数字 + 强调底纹 ── */
-  .metric { background: var(--secondary); border-radius: var(--radius); padding: 16px; border: 1px solid hsl(0 0% 100% / .04); transition: border-color .15s; }
-  .metric:hover { border-color: hsl(0 0% 100% / .1); }
-  .metric-label { font-size: 11px; color: var(--muted); letter-spacing: .02em; }
-  .metric-value { font-size: 24px; font-weight: 600; margin-top: 4px; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; font-family: var(--font-mono); }
-  .metric-sub { font-size: 11px; color: var(--dim); margin-top: 2px; }
-
-  /* ── 表格 ── */
-  table.data { width: 100%; border-collapse: collapse; font-size: 12px; font-variant-numeric: tabular-nums; }
-  table.data th, table.data td { padding: 8px 12px; text-align: left; }
-  table.data th { background: var(--bg-tertiary); color: var(--muted); font-weight: 500; font-size: 11px; border-bottom: 1px solid var(--border); letter-spacing: .02em; position: sticky; top: 0; }
-  table.data td { border-bottom: 1px solid hsl(0 0% 100% / .04); }
-  /* 数字列自动等宽对齐 */
-  table.data td[style*="text-align:right"], table.data td[style*="text-align: right"] { font-family: var(--font-mono); }
-  table.data tr { transition: background-color .12s; }
-  table.data tbody tr:hover { background: hsl(0 0% 100% / .04); }
-  table.data tr:last-child td { border-bottom: none; }
-
-  @keyframes tableEnter { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
-  table.data tbody tr { animation: .2s cubic-bezier(.33,1,.68,1) tableEnter; }
-  table.data tbody tr:nth-child(2) { animation-delay: .02s; }
-  table.data tbody tr:nth-child(3) { animation-delay: .04s; }
-  table.data tbody tr:nth-child(4) { animation-delay: .06s; }
-  table.data tbody tr:nth-child(5) { animation-delay: .08s; }
-
-  /* ── 按钮：触觉反馈 + 主按钮微光 ── */
-  .btn { font-size: 12px; padding: 6px 14px; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--card); cursor: pointer; font-family: var(--font); transition: background .15s, border-color .15s, transform .08s var(--ease-out), box-shadow .15s; color: var(--text); font-weight: 500; }
-  .btn:hover { background: var(--secondary); border-color: var(--border-secondary); }
-  .btn:active { transform: scale(.96); }
-  .btn:focus-visible { outline: none; box-shadow: 0 0 0 3px hsla(219.7 100% 44.9% / .35); }
-  .btn-primary { background: var(--primary); color: var(--primary-fg); border-color: var(--primary); }
-  .btn-primary:hover { background: hsl(0 0% 90%); border-color: hsl(0 0% 90%); }
-  .btn-accent { background: var(--accent); color: #fff; border-color: var(--accent); }
-  .btn-accent:hover { background: hsl(219.7 100% 50%); box-shadow: var(--glow-accent); }
-  .btn-danger { border-color: hsla(359.2 100% 69.7% / .25); color: var(--danger); }
-  .btn-danger:hover { background: hsla(359.2 100% 69.7% / .1); border-color: hsla(359.2 100% 69.7% / .35); }
-
-  /* ── 表单 ── */
-  input, select, textarea { font-size: 13px; padding: 7px 10px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-family: var(--font); background: var(--card); color: var(--text); transition: border-color .15s, box-shadow .15s; }
-  input:focus, select:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px hsla(219.7 100% 44.9% / .2); }
-  select { width: 100%; }
-  select option { background: #1a1a1a; color: var(--text); }
-
-  /* ── 组件 ── */
-  .status-dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; margin-right: 6px; }
-  .status-dot.ok { background: var(--success); }
-  .status-dot.warn { background: var(--warning); }
-  .status-dot.err { background: var(--danger); }
-  .spinner { width: 14px; height: 14px; border: 2px solid hsl(0 0% 100% / .1); border-top-color: var(--accent); border-radius: 50%; animation: spin .6s linear infinite; margin-right: 6px; }
-  @keyframes spin { to { transform: rotate(360deg); } }
-  .tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 500; }
-  .tag-ok { background: hsla(160.3 100% 36.8% / .15); color: var(--success); }
-  .tag-warn { background: hsla(35.9 100% 50% / .15); color: var(--warning); }
-  .tag-danger { background: hsla(359.2 100% 69.7% / .12); color: var(--danger); }
-  .tag-info { background: hsla(199 100% 47.5% / .12); color: var(--info); }
-
-  /* ── 治理卡片专用样式 ── */
-  .review-card { transition: border-color .15s var(--ease-out), background .15s var(--ease-out); }
-  .review-card:hover { background: hsla(219.7 100% 44.9% / .04); }
-  .debate-section { transition: border-color .15s var(--ease-out); }
-  .debate-section:hover { border-color: hsl(0 0% 100% / .08); }
-
-  /* ── 布局工具 ── */
-  .flex { display: flex; align-items: center; gap: 8px; }
-  .flex-between { display: flex; justify-content: space-between; align-items: center; }
-  .text-secondary { color: var(--muted); font-size: 12px; }
-  .mt-sm { margin-top: 8px; } .mt-md { margin-top: 16px; }
-  .mb-sm { margin-bottom: 8px; } .mb-md { margin-bottom: 16px; }
-
-  /* ── 骨架屏 (暗色) ── */
-  .skeleton { background: linear-gradient(90deg, hsl(0 0% 16%) 25%, hsl(0 0% 20%) 50%, hsl(0 0% 16%) 75%); background-size: 200% 100%; animation: shimmer 1.8s ease-in-out infinite; border-radius: var(--radius-sm); height: 14px; margin-bottom: 6px; }
-  @keyframes shimmer { 0%{background-position:200% 0} to{background-position:-200% 0} }
-
-  /* ── 响应式 ── */
-  @media (max-width: 768px) {
-    .sidebar { width: 56px; }
-    .sidebar .brand { font-size: 0; padding: 16px 12px; }
-    .sidebar .nav-item { justify-content: center; padding: 10px; }
-    .sidebar .nav-item .icon { margin: 0; }
-    .sidebar .nav-item .label { display: none; }
-    .sidebar .footer { display: none; }
-    .main { margin-left: 56px; }
-    .content { padding: 16px; }
-    :root { --sidebar-w: 56px; }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .tab-content.active { animation: none; }
-    table.data tbody tr { animation: none; }
-    .skeleton { animation: none; background: hsl(0 0% 16%); }
-  }
-</style>
+  <link rel="stylesheet" href="/static/style.css">
+  <style>
+    /* 紧急内联补丁：页面首次加载时的骨架屏撑满 */
+    .skeleton-card { min-height: 120px; }
+    .skeleton-card .skeleton:last-child { width: 45%; }
+  </style>
 </head>
 <body>
+<div id="offline-banner" style="display:none">⚠️ 网络已断开，部分功能不可用</div>
 
 <!-- ════ 全局 Toast ──── -->
 <div id="global-toast"></div>
@@ -363,6 +63,21 @@ var CACHE = {};
 var LAST_FETCH = {};
 var REFRESH_MAP = {};
 var CHAT_STATE = { question: '', answerHtml: '等待提问...', requestId: 0, loading: false };
+var _pageVisible = true;  // 页面前台可见性
+
+// ── 页面可见性：标签页后台时不刷新 ──
+document.addEventListener('visibilitychange', function() {
+  _pageVisible = document.visibilityState === 'visible';
+});
+
+// ── 网络状态监听 ──
+window.addEventListener('offline', function() {
+  document.getElementById('offline-banner').style.display = 'block';
+});
+window.addEventListener('online', function() {
+  document.getElementById('offline-banner').style.display = 'none';
+  showToast('网络已恢复');
+});
 
 async function apiFetch(url, options) {
   try {
@@ -470,8 +185,49 @@ function switchTab(tabKey) {
 }
 
 // ═══════════════════════════════════════════════════════════
-// 卡片加载
+// 卡片加载 + 骨架屏 + 自动重试 + 新鲜度
 // ═══════════════════════════════════════════════════════════
+function _skeletonHtml(c) {
+  var title = CARD_META[c.name] ? (CARD_META[c.name].display_title || c.name) : c.name;
+  return '<div id="card-' + c.name + '" class="card skeleton-card" data-card="' + c.name + '">'
+    + '<div class="card-title">' + escapeHtml(title) + '</div>'
+    + '<div class="skeleton" style="width:40%;height:16px;margin-bottom:10px"></div>'
+    + '<div class="skeleton" style="width:85%"></div>'
+    + '<div class="skeleton" style="width:65%"></div>'
+    + '<div class="skeleton" style="width:50%"></div>'
+    + '</div>';
+}
+function _errorHtml(c, msg) {
+  return '<div class="flex flex-wrap" style="gap:8px"><div class="status-dot err"></div><span class="text-secondary">' + escapeHtml(msg || '加载失败') + '</span><button class="btn" style="font-size:10px" data-action="retry-card" data-card="' + c.name + '">重试</button></div>';
+}
+function _formatFreshness(ts) {
+  if (!ts) return '';
+  var sec = Math.floor((Date.now() - ts) / 1000);
+  if (sec < 10) return '刚刚';
+  if (sec < 60) return sec + '秒前';
+  var min = Math.floor(sec / 60);
+  if (min < 60) return min + '分钟前';
+  var h = Math.floor(min / 60);
+  return h + '小时前';
+}
+function _updateFreshness() {
+  document.querySelectorAll('.freshness-badge').forEach(function(el) {
+    var name = el.getAttribute('data-card');
+    if (name && LAST_FETCH[name]) el.textContent = _formatFreshness(LAST_FETCH[name]);
+  });
+}
+
+function _injectFreshness(el, name) {
+  if (!el || el.querySelector('.freshness-badge')) return;
+  var titleEl = el.querySelector('.card-title');
+  if (!titleEl) return;
+  var badge = document.createElement('span');
+  badge.className = 'freshness-badge';
+  badge.setAttribute('data-card', name);
+  badge.textContent = _formatFreshness(LAST_FETCH[name]);
+  titleEl.appendChild(badge);
+}
+
 async function loadCards(tabKey) {
   var container = document.getElementById('tab-' + tabKey);
   if (!container) {
@@ -489,12 +245,15 @@ async function loadCards(tabKey) {
     container.innerHTML = cards.map(function(c) { return CACHE[c.name].html; }).join('');
     postRender(container, cards);
     container.classList.add('active');
+    cards.forEach(function(c) { _injectFreshness(document.getElementById('card-' + c.name), c.name); });
+    _updateFreshness();
     return;
   }
 
+  // 骨架屏占位
   container.innerHTML = cards.map(function(c) {
     if (CACHE[c.name]) return CACHE[c.name].html;
-    return '<div id="card-' + c.name + '" class="card" data-card="' + c.name + '"><div class="flex"><div class="spinner"></div><span class="text-secondary">加载中...</span></div></div>';
+    return _skeletonHtml(c);
   }).join('');
   container.classList.add('active');
 
@@ -502,26 +261,43 @@ async function loadCards(tabKey) {
     if (CACHE[c.name]) {
       var el = document.getElementById('card-' + c.name);
       if (el) { el.innerHTML = CACHE[c.name].html; el.setAttribute('data-card', c.name); }
+      _injectFreshness(document.getElementById('card-' + c.name), c.name);
       return;
     }
     var result = await apiFetch('/cards/' + c.name);
+    // 失败后自动重试一次（显示"重试中"提示）
     if (!result || result.error) {
-      CACHE[c.name] = { html: '<div class="flex"><div class="status-dot err"></div><span class="text-secondary">加载失败</span><button class="btn" style="margin-left:8px;font-size:10px" data-action="retry-card" data-card="' + c.name + '">重试</button></div>', data: {} };
+      var retryEl = document.getElementById('card-' + c.name);
+      if (retryEl) retryEl.innerHTML = '<div class="flex"><div class="spinner"></div><span class="text-secondary">连接失败，正在重试...</span></div>';
+      await new Promise(function(r) { setTimeout(r, 2000); });
+      if (!_pageVisible) {
+        // 切走后不继续重试，但标记为待重试（切回来时 autoRefresh 会刷）
+        if (retryEl) retryEl.innerHTML = _errorHtml(c, '页面在后台，请切回后刷新');
+        return;
+      }
+      result = await apiFetch('/cards/' + c.name);
+    }
+    if (!result || result.error) {
+      CACHE[c.name] = { html: _errorHtml(c, result ? result.error || result.message || '加载失败' : '网络错误'), data: {} };
     } else {
-      CACHE[c.name] = { html: result.html, data: result.data || {} };
       LAST_FETCH[c.name] = Date.now();
+      CACHE[c.name] = { html: result.html, data: result.data || {} };
     }
     var el = document.getElementById('card-' + c.name);
     if (el) { el.innerHTML = CACHE[c.name].html; el.setAttribute('data-card', c.name); }
+    _injectFreshness(el, c.name);
   });
   await Promise.all(promises);
   postRender(container, cards);
 }
 
+// 每 30 秒更新一次新鲜度显示
+setInterval(_updateFreshness, 30000);
+
 function retryCard(name) {
   delete CACHE[name];
   var el = document.getElementById('card-' + name);
-  if (el) el.innerHTML = '<div class="flex"><div class="spinner"></div><span class="text-secondary">重新加载...</span></div>';
+  if (el) el.innerHTML = _skeletonHtml({name: name});
   for (var t in TAB_CARDS) {
     for (var i = 0; i < TAB_CARDS[t].length; i++) {
       if (TAB_CARDS[t][i].name === name) { loadCards(t); return; }
@@ -612,6 +388,7 @@ async function askChat() {
 // 自动刷新
 // ═══════════════════════════════════════════════════════════
 async function autoRefresh() {
+  if (!_pageVisible) return;  // 后台标签页不刷新
   var active = document.querySelector('.tab-content.active');
   if (!active) return;
   var tabKey = active.id.replace('tab-', '');
@@ -629,7 +406,12 @@ async function autoRefresh() {
     CACHE[name] = { html: newHtml, data: result.data || {} };
     LAST_FETCH[name] = Date.now();
     var el = document.getElementById('card-' + name);
-    if (el) { el.innerHTML = newHtml; el.classList.add('card-flash'); setTimeout(function() { el.classList.remove('card-flash'); }, 600); }
+    if (el) {
+      el.innerHTML = newHtml;
+      _injectFreshness(el, name);
+      el.classList.add('card-flash');
+      setTimeout(function() { el.classList.remove('card-flash'); }, 600);
+    }
     el && el.dispatchEvent(new CustomEvent('cardRefreshed', { bubbles: true }));
   }
   updateStatusBar();

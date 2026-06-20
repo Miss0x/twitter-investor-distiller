@@ -9,7 +9,6 @@
   4. TimelineCard      — 情绪时间线图表浏览
 """
 import json
-import csv
 import html
 from pathlib import Path
 from src.cards.base import Card
@@ -75,17 +74,13 @@ class AssetAliasCard(Card):
             }
         """
         aliases = []
-        fp = Path("data/stock_alias.csv")
-        if fp.exists():
-            reader = csv.reader(fp.read_text(encoding="utf-8").splitlines())
-            for row in reader:
-                if not row or not row[0] or row[0].startswith("#"):
-                    continue
-                alias = row[0].strip() if len(row) >= 1 else ""
-                ticker = row[1].strip() if len(row) >= 2 else ""
-                notes = row[2].strip() if len(row) >= 3 else ""
-                if alias:
-                    aliases.append({"alias": alias, "ticker": ticker, "type": notes})
+        try:
+            from src.storage.alias_repository import AliasRepository
+            raw = AliasRepository.get_all()
+            # NamedTuple → dict（模板使用 dict 访问语法）
+            aliases = [{"alias": a.alias, "ticker": a.ticker, "type": a.notes} for a in raw]
+        except Exception:
+            pass
         # 拆分：已确认(ticker非空) vs 待判断(ticker为空且notes非SKIP) vs 已跳过(notes=SKIP)
         confirmed = [a for a in aliases if a["ticker"]]
         pending = [a for a in aliases if not a["ticker"] and not a.get("type","").startswith("SKIP")]
@@ -246,26 +241,22 @@ class CryptoCard(Card):
             if results:
                 latest[ticker] = {"price": results[-1].get("c", 0), "time": results[-1].get("t", 0)}
 
-        # 查询推文提及次数（信号强度代理指标）
+        # 查询推文提及次数（ORM 循环，数据量小时等价于单 SQL）
         mentions = {}
         coins = list(latest.keys()) or ["BTC", "ETH", "XRP", "SOL", "DOGE"]
         try:
-            import sqlite3
-            conn = sqlite3.connect("data/twitter_data.db")
-            for coin in coins:
-                pattern = f"%${coin}%"
-                cnt = conn.execute(
-                    "SELECT COUNT(*) FROM tweets WHERE text LIKE ?", (pattern,)
-                ).fetchone()[0]
-                if cnt > 0:
-                    mentions[coin] = cnt
+            from src.storage.database import db
+            from src.storage.models import Tweet
+            s = db.get_session()
+            try:
+                for coin in coins:
+                    cnt = s.query(Tweet).filter(Tweet.text.like(f"%${coin}%")).count()
+                    if cnt > 0:
+                        mentions[coin] = cnt
+            finally:
+                s.close()
         except Exception:
             pass
-        finally:
-            try:
-                conn.close()
-            except Exception:
-                pass
 
         return {"coins": latest, "mentions": mentions, "total_coins": len(latest)}
 

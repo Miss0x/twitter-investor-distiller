@@ -85,8 +85,9 @@ class Config:
         self.telegram_bot_token: str = os.getenv("TELEGRAM_BOT_TOKEN", "")  # Telegram Bot Token
 
         # ── Dashboard 认证 ──
-        # 默认令牌用于本地开发，生产环境应通过环境变量覆盖
-        self.dashboard_token: str = os.getenv("DASHBOARD_TOKEN", "twitter-distiller-2026")
+        # 生产环境必须通过环境变量设置 DASHBOARD_TOKEN
+        # 空 token 时 dashboard 登录检查自动放行（开发模式）
+        self.dashboard_token: str = os.getenv("DASHBOARD_TOKEN", "")
 
         # ── LLM 模型与参数配置 ──
         self.filter_model: str = os.getenv("FILTER_MODEL", "gpt-4o-mini")    # 过滤阶段用轻量模型
